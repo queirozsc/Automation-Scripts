@@ -52,7 +52,12 @@ def close_browser():
     # clean exit
     browser.close()
 
-login('https://csi.requestia.com/', 'sergio.queiroz', 'DT1ZC7YqD1Sx')
+import credentials
+
+username = credentials.requestia['username']
+password = credentials.requestia['password']
+
+login('https://csi.requestia.com/', username, password)
 make_search('Tecnologia da Informação')
 delete_data('C:/Users/sergio.queiroz/Downloads/Caixa_de_Entrada.xlsx')
 export_data()
