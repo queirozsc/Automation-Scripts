@@ -1,14 +1,13 @@
-###
-# Objetivo:
-#   Este script conecta ao servico do Office 365, a partir de credenciais armazenadas em arquivo
-#   Deve ser executado no inicio de todos os scripts que manipulam o O365
-# Exemplo:
-#   .\Connect-O365.ps1
-# Criado por:
-#   Sergio Queiroz
-# Histórico de revisões:
-#   13/07/2019 - Codigo inicial
-###
+<#
+ .SYNOPSIS
+    Conecta ao serviço do Office 365
+
+ .DESCRIPTION
+    Este script conecta ao servico do Office 365, a partir de credenciais armazenadas em arquivo
+    Deve ser executado no inicio de todos os scripts que manipulam o O365
+ .EXAMPLE
+    .\Connect-O365.ps1
+#>
 
 $CredentialsFilePath = "$PSScriptRoot\credentials.xml"
 
