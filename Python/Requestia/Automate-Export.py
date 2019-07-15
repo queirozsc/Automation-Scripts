@@ -9,9 +9,13 @@ Histórico de revisões:
 """
 
 import credentials
+import os
+import sentry_sdk
 from time import sleep
 from selenium import webdriver
-import os
+
+# Inicializa a captura de erros do Sentry.io
+sentry_sdk.init("https://e6900d2c0abc49758e7b87a3ef7590ab@sentry.io/1505496")
 
 # Inicia o Selenium
 browser = webdriver.Chrome(
