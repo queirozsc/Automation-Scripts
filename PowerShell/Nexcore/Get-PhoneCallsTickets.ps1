@@ -9,107 +9,81 @@
     .\Get-PhoneCallsTickets.ps1
 #>
 
-function Connect-FTPServer {
-    # Conecta ao servidor FTP utilizando a biblioteca do WinSCP
-    # Requer a biblioteca do WinSCP
-    try {
-        Add-Type -Path "C:\Program Files (x86)\WinSCP\WinSCPnet.dll"
-        # Exemplo do arquivo SessionProperties.ps1
-        #
-        # @{
-        #   Protocol = [WinSCP.Protocol]::Ftp
-        #   HostName = "ip_servidor"
-        #   UserName = "meu_usuario"
-        #   Password = 'minha_senha'
-        # }
-        $SessionProperties = (Get-Content $PSScriptRoot\SessionProperties.ps1 | Out-String)
-        $SessionOptions = New-Object WinSCP.SessionOptions -Property (Invoke-Expression $SessionProperties)
+function Connect-FTPServer { # Conecta ao servidor FTP utilizando a biblioteca do WinSCP. Requer a biblioteca do WinSCP
+    Param(
+        [System.IO.FileInfo] $WinSCPNet,
+        [System.IO.FileInfo] $SessionDefinitions
+    )
+    Try {
+        Add-Type -Path $WinSCPNet
+        $SessionProperties = (Get-Content $SessionDefinitions | Out-String)
+        $SessionProps = Invoke-Expression $SessionProperties
+        $SessionOptions = New-Object WinSCP.SessionOptions -Property $SessionProps
     }
-    catch {
-        Write-Host "Error: $($_.Exception.Message)"
+    Catch {
+        Throw "Error: $($_.Exception.Message)"
         exit 1
     }
     Return $SessionOptions
 }
 
-try
-{
-    $localPath = "C:\Nexcore"
-    $destinationPath = "C:\Nexcore\Atualizado"
-    Remove-Item C:\Nexcore\Atualizado\*.*
-
-    Connect-FTPServer
-    $partialFileNames = @("BilheteLigacoes", "AgentesPorHora", "AgentesPorDia", "FilasPorHora")
-
-    foreach ($partialFileName in $partialFileNames) {
-        Write-Host "Vou processar $partialFileName"
-        $session = New-Object WinSCP.Session
-        Get-NexcoreFiles  $sessionOptions  $localPath  $session $partialFileName
-        Move-LastNexcoreFile $localPath  $destinationPath $partialFileName
-    }
-
-
-}
-catch
-{
-    Write-Host "Error: $($_.Exception.Message)"
-    exit 1
-}
-
-# Load WinSCP .NET assembly
-function Get-NexcoreFiles {
+function Delete-PreviousFiles { # Apaga os arquivos anteriores
     param (
-        $sessionOptions,
-        $localPath,
-        $session,
-        $partialFileName
+        [System.IO.FileInfo] $DownloadPath
+    )
+    Remove-Item ($DownloadPath.FullName + '\*.*') -Recurse
+}
+
+function Get-FTPFiles { # Faz o download do arquivo do dia anterior
+    param (
+        [WinSCP.Session] $FTPSession,
+        [WinSCP.SessionOptions] $SessionOptions,
+        [String] $RemotePath,
+        [String] $RemoteMask,
+        [System.IO.FileInfo] $LocalPath,
+        [String] $FileGroup
     )
     try {
-        # Connect
-        $session.Open($sessionOptions)
+        # Conecta ao servidor FTP
+        $FTPSession.Open($SessionOptions)
 
-        # Recuperar todos os diretorios a partir do root
-        # $localPath = "C:\Nexcore\Atualizado\"
-        $remotePath = "/"
-        $mask = "*.csv"
-
-        # Enumerate files and directories to download
+        # Lista os arquivos e diretorios do servidor FTP
         $fileInfos =
-            $session.EnumerateRemoteFiles(
-                $remotePath, "*$($partialFileName)*",
+            $FTPSession.EnumerateRemoteFiles(
+                $RemotePath, "*$($FileGroup)*",
                 ([WinSCP.EnumerationOptions]::EnumerateDirectories -bor
                     [WinSCP.EnumerationOptions]::AllDirectories))
 
-        # Iterate over directories
+        # Percorre as pastas do servidor FTP
         foreach ($fileInfo in $fileInfos)
         {
             $localFilePath =
                 [WinSCP.RemotePath]::TranslateRemotePathToLocal(
-                    $fileInfo.FullName, $remotePath, $localPath)
+                    $fileInfo.FullName, $RemotePath, $LocalPath)
 
             if ($fileInfo.IsDirectory)
             {
-                # Create local subdirectory, if it does not exist yet
+                # Cria a pasta local
                 if (!(Test-Path $localFilePath))
                 {
                     New-Item $localFilePath -ItemType directory | Out-Null
                 }
             }
 
-            Write-Host "Checking file $($fileInfo.FullName)..."
-            if ( ($fileInfo.LastWriteTime -ge $(Get-Date -Hour 0 -Minute 0 -Second 0)) -and ($fileInfo.FullName -like "*$($partialFileName)*" ))
+            Write-Host "Arquivo $($fileInfo.FullName)..."
+            if ( ($fileInfo.LastWriteTime -ge $(Get-Date -Hour 0 -Minute 0 -Second 0)) -and ($fileInfo.FullName -like "*$($FileGroup)*" ))
             {
-                Write-Host "Downloading file $($fileInfo.FullName)..."
-                # Download file
+                Write-Host "Baixando o arquivo $($fileInfo.FullName)..."
+                # Transfere o arquivo
                 $remoteFilePath = [WinSCP.RemotePath]::EscapeFileMask($fileInfo.FullName)
-                $transferResult = $session.GetFiles($remoteFilePath, $localFilePath)
+                $transferResult = $FTPSession.GetFiles($remoteFilePath, $localFilePath)
 
-                # Did the download succeeded?
+                # Falha no download?
                 if (!$transferResult.IsSuccess)
                 {
-                    # Print error (but continue with other files)
+                    # Exibe o erro e passa para o proximo arquivo
                     Write-Host (
-                        "Error downloading file $($fileInfo.FullName): " +
+                        "Erro ao baixar arquivo $($fileInfo.FullName): " +
                         "$($transferResult.Failures[0].Message)")
                 }
             }
@@ -121,22 +95,58 @@ function Get-NexcoreFiles {
        Write-Output "1"
     }
     finally {
-        # Disconnect, clean up
-        $session.Dispose()
+        # Disconecta
+        #$session.Dispose()
+    }
+}
+function Move-TodayFiles { # Move o arquivo do dia para o diretorio de consolidacao, especificado no Azure DataFactory
+    param (
+        [System.IO.FileInfo] $StagePath,
+        [System.IO.FileInfo] $FinalPath,
+        [String] $FileGroup
+    )
+    # Cria a pasta local
+    if (!(Test-Path $FinalPath))
+    {
+        New-Item $FinalPath -ItemType Directory | Out-Null
+    }
+    $FilePattern = ($StagePath.FullName + "\*" + $FileGroup + "*.csv")
+    Get-ChildItem -Path $FilePattern -File -Recurse |
+        Where-Object {$_.LastWriteTime -ge $(Get-Date -Hour 0 -Minute 0 -Second 0)} |
+            ForEach-Object { Move-Item -Path $_.FullName -Destination ($FinalPath.FullName + "\$($FileGroup)" + $(Split-Path -Path $_.DirectoryName -Leaf) + ".csv")}
+}
+
+function Get-PhoneCallsTickets {
+    param (
+        [System.IO.FileInfo] $StagePath,
+        [System.IO.FileInfo] $FinalPath
+    )
+    Try
+    {
+        # Exemplo do arquivo SessionProperties.ps1
+        #
+        # @{
+        #   Protocol = [WinSCP.Protocol]::Ftp
+        #   HostName = "ip_servidor"
+        #   UserName = "meu_usuario"
+        #   Password = 'minha_senha'
+        # }
+        Delete-PreviousFiles $FinalPath
+
+        $TicketGroups = @("BilheteLigacoes", "AgentesPorHora", "AgentesPorDia", "FilasPorHora")
+        ForEach ($TicketGroup in $TicketGroups) {
+            $SessionOptions = Connect-FTPServer -WinSCPNet 'C:\Program Files (x86)\WinSCP\WinSCPnet.dll' -SessionDefinitions $PSScriptRoot\SessionProperties.ps1
+            $FTPSession = New-Object WinSCP.Session
+            Write-Host "Processando $TicketGroup"
+            Get-FTPFiles -FtpSession $FTPSession -SessionOptions $SessionOptions -RemotePath '/' -RemoteMask '.csv' -LocalPath $StagePath -FileGroup $TicketGroup
+            Move-TodayFiles -StagePath $StagePath -FinalPath $FinalPath -FileGroup $TicketGroup
+        }
+    }
+    Catch
+    {
+        Throw "Error: $($_.Exception.Message)"
+        exit 1
     }
 }
 
-function Move-LastNexcoreFile {
-    param (
-        $localPath,
-        $destinationPath,
-        $partialFileName
-    )
-    $filePattern = ($localPath + "\*" + $partialFileName + "*.csv")
-    Get-ChildItem -Path $filePattern -File -Recurse |
-    Where-Object {$_.LastWriteTime -ge $(Get-Date -Hour 0 -Minute 0 -Second 0)} |
-    ForEach-Object { Move-Item -Path $_.FullName -Destination ($destinationPath + "\$($partialFileName)" + $(Split-Path -Path $_.DirectoryName -Leaf) + ".csv")}
-    # ForEach-Object {  }
-}
-
-
+Get-PhoneCallsTickets -StagePath 'C:\Power BI Gateway Files\Nexcore' -FinalPath 'C:\Power BI Gateway Files\Nexcore\Consolidado'
