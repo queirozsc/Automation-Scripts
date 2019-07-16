@@ -8,6 +8,12 @@ Histórico de revisões:
     13/07/2019 - Ofusca as credenciais e formata o código
 """
 
+# Exemplo do arquivo credentials.py
+#
+# requestia = {
+#    'username' : 'meu_usuario',
+#    'password' : 'minha_senha'
+# }
 import credentials
 import os
 import sentry_sdk
@@ -68,7 +74,7 @@ def export_data():
 
 
 def close_browser():
-    # Ajuste em função da velocidade de conexão
+    # Ajuste, em função da velocidade de conexão
     sleep(10)
     browser.close()
 
