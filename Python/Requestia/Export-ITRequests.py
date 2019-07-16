@@ -1,6 +1,6 @@
 """
 Objetivo:
-    Este script automatiza a tarefa de exportar a lista de chamados do Requestia, usando o Selenium
+    Automatiza a tarefa de exportar a lista de chamados de TI do Requestia, usando o Selenium
 Criado por:
     Sergio Queiroz
 Histórico de revisões:
