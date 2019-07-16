@@ -99,6 +99,17 @@ function Get-FTPFiles { # Faz o download do arquivo do dia anterior
         #$session.Dispose()
     }
 }
+function Include-Enterprise { # Inclui o nome da empresa no conteudo do arquivo
+    param (
+        [System.IO.FileInfo] $FileName
+    )
+    Write-Host "Incluindo marca em $($FileName.FullName)"
+    Import-CSV $FileName.FullName |
+        Select-Object *,@{Name='Marca';Expression={$(Split-Path -Path $FileName.DirectoryName -Leaf)}} |
+            Export-CSV $($FileName.FullName + ".tmp") -NoTypeInformation
+    Remove-Item -Path $FileName.FullName
+    Move-Item -Path $($FileName.FullName + ".tmp") -Destination $FileName.FullName
+}
 function Move-TodayFiles { # Move o arquivo do dia para o diretorio de consolidacao, especificado no Azure DataFactory
     param (
         [System.IO.FileInfo] $StagePath,
@@ -113,7 +124,7 @@ function Move-TodayFiles { # Move o arquivo do dia para o diretorio de consolida
     $FilePattern = ($StagePath.FullName + "\*" + $FileGroup + "*.csv")
     Get-ChildItem -Path $FilePattern -File -Recurse |
         Where-Object {$_.LastWriteTime -ge $(Get-Date -Hour 0 -Minute 0 -Second 0)} |
-            ForEach-Object { Move-Item -Path $_.FullName -Destination ($FinalPath.FullName + "\$($FileGroup)" + $(Split-Path -Path $_.DirectoryName -Leaf) + ".csv")}
+            ForEach-Object { Include-Enterprise $_.FullName ; Move-Item -Path $_.FullName -Destination ($FinalPath.FullName + "\$($FileGroup)" + $(Split-Path -Path $_.DirectoryName -Leaf) + ".csv")}
 }
 
 function Get-PhoneCallsTickets {
