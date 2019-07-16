@@ -104,9 +104,13 @@ function Include-Enterprise { # Inclui o nome da empresa no conteudo do arquivo
         [System.IO.FileInfo] $FileName
     )
     Write-Host "Incluindo marca em $($FileName.FullName)"
+    # Adiciona o nome da pasta (i.e., nome da empresa)
     Import-CSV $FileName.FullName |
         Select-Object *,@{Name='Marca';Expression={$(Split-Path -Path $FileName.DirectoryName -Leaf)}} |
-            Export-CSV $($FileName.FullName + ".tmp") -NoTypeInformation
+            Export-CSV $($FileName.FullName + ".tmp") -NoTypeInformation -Delimiter ';' -Encoding UTF8
+    # Remove as aspas duplas do conteudo do arquivo
+    (Get-Content $($FileName.FullName + ".tmp")) | % { $_ -replace '"', ""}  | Out-file $($FileName.FullName + ".tmp")
+    # Renomeia o arquivo para seu nome original
     Remove-Item -Path $FileName.FullName
     Move-Item -Path $($FileName.FullName + ".tmp") -Destination $FileName.FullName
 }
