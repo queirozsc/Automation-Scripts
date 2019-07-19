@@ -6,7 +6,7 @@
     Deve ser agendado para execução diária, após 07:30
     Este script faz parte do fluxo de dados que alimenta o Azure SQL Server a partir de pipeline no Azure Data Factory
  .EXAMPLE
-    .\Get-PhoneCallsTickets.ps1
+    .\Get-PhoneCallsTickets.ps1 ; Get-PhoneCallsTickets -StagePath 'C:\Power BI Gateway Files\Nexcore' -FinalPath 'C:\Power BI Gateway Files\Nexcore\Consolidado'
 #>
 
 function Connect-FTPServer { # Conecta ao servidor FTP utilizando a biblioteca do WinSCP. Requer a biblioteca do WinSCP
