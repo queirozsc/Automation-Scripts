@@ -2,3 +2,4 @@ Python/Requestia/credentials.py
 Python/Requestia/__pycache__/credentials.cpython-37.pyc
 PowerShell/Office365/credentials.xml
 PowerShell/Nexcore/SessionProperties.ps1
+PowerShell/Automation-Ftp-Download/SessionProperties.ps1
