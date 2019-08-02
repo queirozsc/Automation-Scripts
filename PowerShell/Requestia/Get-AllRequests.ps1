@@ -8,6 +8,15 @@ $localPath = "C:\Power BI Gateway Files\Requestia"
 
 try
 {
+    Write-Host "Apagando arquivos C:\Power BI Gateway Files\Requestia\*.zip"
+    Get-ChildItem * -Include *.zip -Recurse | Remove-Item -Force
+    Write-Host "Apagando arquivos C:\Power BI Gateway Files\Requestia\*.dat"
+    Get-ChildItem * -Include *.dat -Recurse | Remove-Item -Force
+    Write-Host "Apagando arquivos C:\Power BI Gateway Files\Requestia\*.csv"
+    Get-ChildItem * -Include *.csv -Recurse | Remove-Item -Force
+    Write-Host "Apagando arquivos C:\Power BI Gateway Files\Requestia\*.xml"
+    Get-ChildItem * -Include *.xml -Recurse | Remove-Item -Force
+
     # Load WinSCP .NET assembly
     Add-Type -Path "C:\Program Files (x86)\WinSCP\WinSCPnet.dll"
 
@@ -20,14 +29,13 @@ try
         PrivateKeyPassphrase = "sftpHO@20190411"
         SshHostKeyFingerprint = "ssh-rsa 1024 qx844DYjTRTN8gNCw2ykXmlCTecivZpmophsvHyZJCA="
     }
-    #$sessionOptions.ParseUrl($sessionUrl)
 
     $session = New-Object WinSCP.Session
 
     try
     {
         # Connect
-        Write-Host "Conectando ao servidor SFTP: sftpuser@34.197.80.109"
+        Write-Host "Conectando ao servidor SFTP $($sessionOptions.UserName)@$($sessionOptions.HostName)"
         $session.SessionLogPath = "C:\Power BI Gateway Files\Requestia\Get-RequestiaDBExport.log"
         $session.Open($sessionOptions)
 
@@ -54,7 +62,7 @@ try
             }
             else
             {
-                Write-Host "Downloading file $($fileInfo.FullName)..."
+                Write-Host "Baixando o arquivo $($fileInfo.FullName)..."
                 # Download file
                 $remoteFilePath = [WinSCP.RemotePath]::EscapeFileMask($fileInfo.FullName)
                 $transferResult = $session.GetFiles($remoteFilePath, $localFilePath)
@@ -81,8 +89,6 @@ try
     Expand-Archive -LiteralPath $localFilePath -DestinationPath "C:\Power BI Gateway Files\Requestia"
 
     # Rename to a format that Power BI can read
-    Write-Host "Apagando arquivos C:\Power BI Gateway Files\Requestia\*.csv"
-    Remove-Item -Path "C:\Power BI Gateway Files\Requestia" -Include *.csv -Recurse -Force
     Get-ChildItem -Filter "*dat" -Path "C:\Power BI Gateway Files\Requestia" -Recurse | Move-Item -Path {$_.FullName} -Destination "C:\Power BI Gateway Files\Requestia"
     Get-ChildItem -Filter "*dat" -Path "C:\Power BI Gateway Files\Requestia" -Recurse | Rename-Item -NewName {[IO.Path]::ChangeExtension($_.name, "csv")}
 
