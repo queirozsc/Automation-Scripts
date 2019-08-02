@@ -21,14 +21,10 @@ try
     Add-Type -Path "C:\Program Files (x86)\WinSCP\WinSCPnet.dll"
 
     # Setup session options from URL
-    $sessionOptions = New-Object WinSCP.SessionOptions -Property @{
-        Protocol = [WinSCP.Protocol]::Sftp
-        HostName = "34.197.80.109"
-        UserName = "sftpuser"
-        SshPrivateKeyPath = "C:\Power BI Gateway Files\Requestia\sftpuserPrivate.ppk"
-        PrivateKeyPassphrase = "sftpHO@20190411"
-        SshHostKeyFingerprint = "ssh-rsa 1024 qx844DYjTRTN8gNCw2ykXmlCTecivZpmophsvHyZJCA="
-    }
+    $SessionDefinitions = 'SessionProperties.ps1'
+    $SessionProperties = (Get-Content $SessionDefinitions | Out-String)
+    $SessionProps = Invoke-Expression $SessionProperties
+    $SessionOptions = New-Object WinSCP.SessionOptions -Property $SessionProps
 
     $session = New-Object WinSCP.Session
 
