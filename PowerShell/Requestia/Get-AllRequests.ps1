@@ -9,19 +9,19 @@ $localPath = "C:\Power BI Gateway Files\Requestia"
 try
 {
     Write-Host "Apagando arquivos C:\Power BI Gateway Files\Requestia\*.zip"
-    Get-ChildItem * -Include *.zip -Recurse | Remove-Item -Force
+    Get-ChildItem * -Path $localPath -Include *.zip -Recurse | Remove-Item -Force
     Write-Host "Apagando arquivos C:\Power BI Gateway Files\Requestia\*.dat"
-    Get-ChildItem * -Include *.dat -Recurse | Remove-Item -Force
+    Get-ChildItem * -Path $localPath -Include *.dat -Recurse | Remove-Item -Force
     Write-Host "Apagando arquivos C:\Power BI Gateway Files\Requestia\*.csv"
-    Get-ChildItem * -Include *.csv -Recurse | Remove-Item -Force
+    Get-ChildItem * -Path $localPath -Include *.csv -Recurse | Remove-Item -Force
     Write-Host "Apagando arquivos C:\Power BI Gateway Files\Requestia\*.xml"
-    Get-ChildItem * -Include *.xml -Recurse | Remove-Item -Force
+    Get-ChildItem * -Path $localPath -Include *.xml -Recurse | Remove-Item -Force
 
     # Load WinSCP .NET assembly
     Add-Type -Path "C:\Program Files (x86)\WinSCP\WinSCPnet.dll"
 
     # Setup session options from URL
-    $SessionDefinitions = 'SessionProperties.ps1'
+    $SessionDefinitions = $localPath + '\SessionProperties.ps1'
     $SessionProperties = (Get-Content $SessionDefinitions | Out-String)
     $SessionProps = Invoke-Expression $SessionProperties
     $SessionOptions = New-Object WinSCP.SessionOptions -Property $SessionProps
