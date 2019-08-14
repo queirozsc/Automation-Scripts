@@ -1,5 +1,5 @@
 {
-	"name": "CSV_Requests",
+	"name": "fileRequests",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "Folder_Requestia",
