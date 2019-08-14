@@ -1,0 +1,441 @@
+{
+	"name": "AZSQL_TB_Requests",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSQL_DB_Procedimentos",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Requestia"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "REQUEST",
+				"type": "varchar"
+			},
+			{
+				"name": "CLIENT",
+				"type": "varchar"
+			},
+			{
+				"name": "ORIGANAL",
+				"type": "varchar"
+			},
+			{
+				"name": "CURRANAL",
+				"type": "varchar"
+			},
+			{
+				"name": "GROUPANAL",
+				"type": "varchar"
+			},
+			{
+				"name": "LASTANAL",
+				"type": "varchar"
+			},
+			{
+				"name": "LASTANLGRP",
+				"type": "varchar"
+			},
+			{
+				"name": "ORIGGROUP",
+				"type": "varchar"
+			},
+			{
+				"name": "CURRGROUP",
+				"type": "varchar"
+			},
+			{
+				"name": "LASTGROUP",
+				"type": "varchar"
+			},
+			{
+				"name": "GRGROUP",
+				"type": "varchar"
+			},
+			{
+				"name": "CATEGORY",
+				"type": "varchar"
+			},
+			{
+				"name": "PRODUCT",
+				"type": "varchar"
+			},
+			{
+				"name": "PROCESS",
+				"type": "varchar"
+			},
+			{
+				"name": "PROBLEM",
+				"type": "varchar"
+			},
+			{
+				"name": "RSTATUS",
+				"type": "varchar"
+			},
+			{
+				"name": "RPRIORITY",
+				"type": "varchar"
+			},
+			{
+				"name": "REQTYPE",
+				"type": "varchar"
+			},
+			{
+				"name": "REQSOURCE",
+				"type": "varchar"
+			},
+			{
+				"name": "REQLOCATION",
+				"type": "varchar"
+			},
+			{
+				"name": "ORGUNIT",
+				"type": "varchar"
+			},
+			{
+				"name": "ORGUNIT_ROOT",
+				"type": "varchar"
+			},
+			{
+				"name": "CHARGE",
+				"type": "varchar"
+			},
+			{
+				"name": "SLEVEL",
+				"type": "varchar"
+			},
+			{
+				"name": "EQUIP",
+				"type": "varchar"
+			},
+			{
+				"name": "RESOURCEID",
+				"type": "varchar"
+			},
+			{
+				"name": "REQUESTOR",
+				"type": "varchar"
+			},
+			{
+				"name": "ABSTRACT",
+				"type": "varchar"
+			},
+			{
+				"name": "DESCRIPT",
+				"type": "varchar"
+			},
+			{
+				"name": "OPENDATE",
+				"type": "varchar"
+			},
+			{
+				"name": "CLOSEDATE",
+				"type": "varchar"
+			},
+			{
+				"name": "CLOSED",
+				"type": "varchar"
+			},
+			{
+				"name": "LASTACTION",
+				"type": "varchar"
+			},
+			{
+				"name": "LASTANALYST",
+				"type": "varchar"
+			},
+			{
+				"name": "LASTSTATUS",
+				"type": "varchar"
+			},
+			{
+				"name": "LASTPRIORITY",
+				"type": "varchar"
+			},
+			{
+				"name": "LASTREOPEN",
+				"type": "varchar"
+			},
+			{
+				"name": "LASTACTIONATEND",
+				"type": "varchar"
+			},
+			{
+				"name": "LASTACTTYPE",
+				"type": "varchar"
+			},
+			{
+				"name": "REFDATE",
+				"type": "varchar"
+			},
+			{
+				"name": "RESPDATE",
+				"type": "varchar"
+			},
+			{
+				"name": "RESPTIME",
+				"type": "varchar"
+			},
+			{
+				"name": "RESLTIME",
+				"type": "varchar"
+			},
+			{
+				"name": "RESPMINS",
+				"type": "varchar"
+			},
+			{
+				"name": "RESLMINS",
+				"type": "varchar"
+			},
+			{
+				"name": "RESPREMAINS",
+				"type": "varchar"
+			},
+			{
+				"name": "RESLREMAINS",
+				"type": "varchar"
+			},
+			{
+				"name": "RESPMODE",
+				"type": "varchar"
+			},
+			{
+				"name": "RESLMODE",
+				"type": "varchar"
+			},
+			{
+				"name": "NOCOMPUTE",
+				"type": "varchar"
+			},
+			{
+				"name": "RLOCKED",
+				"type": "varchar"
+			},
+			{
+				"name": "ESTIMCOST",
+				"type": "varchar"
+			},
+			{
+				"name": "TOTALCOST",
+				"type": "varchar"
+			},
+			{
+				"name": "APROVANLTYPE",
+				"type": "varchar"
+			},
+			{
+				"name": "APROVANALYST",
+				"type": "varchar"
+			},
+			{
+				"name": "APROVCLITYPE",
+				"type": "varchar"
+			},
+			{
+				"name": "APROVCLIEXACTOUNIT",
+				"type": "varchar"
+			},
+			{
+				"name": "MLEVELAPROV",
+				"type": "varchar"
+			},
+			{
+				"name": "OUNITAPROV",
+				"type": "varchar"
+			},
+			{
+				"name": "CLIENTAPROV",
+				"type": "varchar"
+			},
+			{
+				"name": "PACKAGE",
+				"type": "varchar"
+			},
+			{
+				"name": "PROJECT",
+				"type": "varchar"
+			},
+			{
+				"name": "REQPARENT",
+				"type": "varchar"
+			},
+			{
+				"name": "PAYMETHOD",
+				"type": "varchar"
+			},
+			{
+				"name": "WORKFLOW",
+				"type": "varchar"
+			},
+			{
+				"name": "CURRSEVENT",
+				"type": "varchar"
+			},
+			{
+				"name": "SEVENT",
+				"type": "varchar"
+			},
+			{
+				"name": "LASTSEVENT",
+				"type": "varchar"
+			},
+			{
+				"name": "REQWORKFLOW",
+				"type": "varchar"
+			},
+			{
+				"name": "ORIGCATEGORY",
+				"type": "varchar"
+			},
+			{
+				"name": "ORIGPRODUCT",
+				"type": "varchar"
+			},
+			{
+				"name": "ORIGPROCESS",
+				"type": "varchar"
+			},
+			{
+				"name": "ORIGPROBLEM",
+				"type": "varchar"
+			},
+			{
+				"name": "TIMEZONE",
+				"type": "varchar"
+			},
+			{
+				"name": "ID3PART",
+				"type": "varchar"
+			},
+			{
+				"name": "MQI_PROFILEID",
+				"type": "varchar"
+			},
+			{
+				"name": "MQI_VERIFIED",
+				"type": "varchar"
+			},
+			{
+				"name": "VIEWPROJECT",
+				"type": "varchar"
+			},
+			{
+				"name": "PROJSTARTED",
+				"type": "varchar"
+			},
+			{
+				"name": "TOTALATTACH",
+				"type": "varchar"
+			},
+			{
+				"name": "TOTALATTACHACT",
+				"type": "varchar"
+			},
+			{
+				"name": "INSERTDATE",
+				"type": "varchar"
+			},
+			{
+				"name": "UPDATEDATE",
+				"type": "varchar"
+			},
+			{
+				"name": "QFORM",
+				"type": "varchar"
+			},
+			{
+				"name": "QFORMSCRIPT",
+				"type": "varchar"
+			},
+			{
+				"name": "QSURVEY",
+				"type": "varchar"
+			},
+			{
+				"name": "QSESSIONFORM",
+				"type": "varchar"
+			},
+			{
+				"name": "QSESSIONSURVEY",
+				"type": "varchar"
+			},
+			{
+				"name": "REQUESTFLAGS",
+				"type": "varchar"
+			},
+			{
+				"name": "V_ASSOCIATION",
+				"type": "varchar"
+			},
+			{
+				"name": "V_ID_CONTRACT",
+				"type": "varchar"
+			},
+			{
+				"name": "V_ID_PROJECT",
+				"type": "varchar"
+			},
+			{
+				"name": "V_IS_PROJECT",
+				"type": "varchar"
+			},
+			{
+				"name": "V_HAS_PROJECT",
+				"type": "varchar"
+			},
+			{
+				"name": "V_HAS_APPROVER",
+				"type": "varchar"
+			},
+			{
+				"name": "LASTSEQUENCE",
+				"type": "varchar"
+			},
+			{
+				"name": "PRBPARENT",
+				"type": "varchar"
+			},
+			{
+				"name": "LASTRECALCDATE",
+				"type": "varchar"
+			},
+			{
+				"name": "LASTAPPROVCNTX",
+				"type": "varchar"
+			},
+			{
+				"name": "LASTAPPROVUSER",
+				"type": "varchar"
+			},
+			{
+				"name": "LASTAPPROVCODE",
+				"type": "varchar"
+			},
+			{
+				"name": "CURRAPPROVCODE",
+				"type": "varchar"
+			},
+			{
+				"name": "ORIGNOCOMPUTE",
+				"type": "varchar"
+			},
+			{
+				"name": "ORIGRSTATUS",
+				"type": "varchar"
+			},
+			{
+				"name": "ORIGRPRIORITY",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Requestia_REQUESTS"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

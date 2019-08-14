@@ -1,0 +1,808 @@
+{
+	"name": "Bilhete Ligacoes",
+	"properties": {
+		"activities": [
+			{
+				"name": "Bilhetes INOB",
+				"description": "Envia os dados do arquivo CSV para o Azure SQL Server",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "07.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "FileServerReadSettings",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Data",
+									"type": "DateTime",
+									"format": "dd/mm/yyyy",
+									"culture": "pt-br"
+								},
+								"sink": {
+									"name": "DATA",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Hora",
+									"type": "String"
+								},
+								"sink": {
+									"name": "HORA",
+									"type": "TimeSpan"
+								}
+							},
+							{
+								"source": {
+									"name": "Usu�rio",
+									"type": "String"
+								},
+								"sink": {
+									"name": "USUARIO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Tipo",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TIPO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Origem",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ORIGEM",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Destino",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DESTINO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Status",
+									"type": "String"
+								},
+								"sink": {
+									"name": "STATUS",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Centro de Custo",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CENTRO_DE_CUSTO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Tempo Tarifado",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "TEMPO_TARIFADO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Tempo Decorrido",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TEMPO_DECORRIDO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Campanha",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CAMPANHA",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Fila",
+									"type": "String"
+								},
+								"sink": {
+									"name": "FILA",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Unique ID",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "UNIQUE_ID",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "Linked ID",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "LINKED_ID",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "Marca",
+									"type": "String"
+								},
+								"sink": {
+									"name": "MARCA",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "INOB_CSV_NC_BilheteLigacoes",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AZSQL_TB_NC_BilheteLigacoes",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Bilhetes HOB",
+				"description": "Envia os dados do CSV para o Azure SQL Server",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "07.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "FileServerReadSettings",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Data",
+									"type": "DateTime",
+									"format": "dd/mm/yyyy",
+									"culture": "pt-br"
+								},
+								"sink": {
+									"name": "DATA",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Hora",
+									"type": "String"
+								},
+								"sink": {
+									"name": "HORA",
+									"type": "TimeSpan"
+								}
+							},
+							{
+								"source": {
+									"name": "Usu�rio",
+									"type": "String"
+								},
+								"sink": {
+									"name": "USUARIO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Tipo",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TIPO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Origem",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ORIGEM",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Destino",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DESTINO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Status",
+									"type": "String"
+								},
+								"sink": {
+									"name": "STATUS",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Centro de Custo",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CENTRO_DE_CUSTO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Tempo Tarifado",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "TEMPO_TARIFADO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Tempo Decorrido",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TEMPO_DECORRIDO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Campanha",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CAMPANHA",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Fila",
+									"type": "String"
+								},
+								"sink": {
+									"name": "FILA",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Unique ID",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "UNIQUE_ID",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "Linked ID",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "LINKED_ID",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "Marca",
+									"type": "String"
+								},
+								"sink": {
+									"name": "MARCA",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "HOB_CSV_NC_BilheteLigacoes",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AZSQL_TB_NC_BilheteLigacoes",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Bilhetes HOSL",
+				"description": "Envia os dados do arquivo CSV para o Azure SQL Server",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "07.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "FileServerReadSettings",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Data",
+									"type": "DateTime",
+									"format": "dd/mm/yyyy",
+									"culture": "pt-br"
+								},
+								"sink": {
+									"name": "DATA",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Hora",
+									"type": "String"
+								},
+								"sink": {
+									"name": "HORA",
+									"type": "TimeSpan"
+								}
+							},
+							{
+								"source": {
+									"name": "Usu�rio",
+									"type": "String"
+								},
+								"sink": {
+									"name": "USUARIO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Tipo",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TIPO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Origem",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ORIGEM",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Destino",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DESTINO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Status",
+									"type": "String"
+								},
+								"sink": {
+									"name": "STATUS",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Centro de Custo",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CENTRO_DE_CUSTO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Tempo Tarifado",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "TEMPO_TARIFADO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Tempo Decorrido",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TEMPO_DECORRIDO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Campanha",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CAMPANHA",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Fila",
+									"type": "String"
+								},
+								"sink": {
+									"name": "FILA",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Unique ID",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "UNIQUE_ID",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "Linked ID",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "LINKED_ID",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "Marca",
+									"type": "String"
+								},
+								"sink": {
+									"name": "MARCA",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "HOSL_CSV_NC_BilheteLigacoes",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AZSQL_TB_NC_BilheteLigacoes",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Bilhetes HOSAG",
+				"description": "Envia os dados do arquivo CSV para o Azure SQL Server",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "07.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "FileServerReadSettings",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Data",
+									"type": "DateTime",
+									"format": "dd/mm/yyyy",
+									"culture": "pt-br"
+								},
+								"sink": {
+									"name": "DATA",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Hora",
+									"type": "String"
+								},
+								"sink": {
+									"name": "HORA",
+									"type": "TimeSpan"
+								}
+							},
+							{
+								"source": {
+									"name": "Usu�rio",
+									"type": "String"
+								},
+								"sink": {
+									"name": "USUARIO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Tipo",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TIPO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Origem",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ORIGEM",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Destino",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DESTINO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Status",
+									"type": "String"
+								},
+								"sink": {
+									"name": "STATUS",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Centro de Custo",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CENTRO_DE_CUSTO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Tempo Tarifado",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "TEMPO_TARIFADO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Tempo Decorrido",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TEMPO_DECORRIDO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Campanha",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CAMPANHA",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Fila",
+									"type": "String"
+								},
+								"sink": {
+									"name": "FILA",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Unique ID",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "UNIQUE_ID",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "Linked ID",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "LINKED_ID",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "Marca",
+									"type": "String"
+								},
+								"sink": {
+									"name": "MARCA",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "HOSAG_CSV_NC_BilheteLigacoes",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AZSQL_TB_NC_BilheteLigacoes",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "Nexcore"
+		},
+		"annotations": []
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
