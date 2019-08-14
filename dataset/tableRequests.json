@@ -1,5 +1,5 @@
 {
-	"name": "AZSQL_TB_Requests",
+	"name": "tableRequests",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSQL_DB_Procedimentos",
