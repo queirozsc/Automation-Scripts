@@ -54,13 +54,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "CSV_Requests",
+						"referenceName": "FILE_REQUESTS",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "AZSQL_TB_Requests",
+						"referenceName": "TABLE_REQUESTS",
 						"type": "DatasetReference"
 					}
 				]

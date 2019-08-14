@@ -1,5 +1,5 @@
 {
-	"name": "fileRequests",
+	"name": "FILE_REQUESTS",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "Folder_Requestia",
