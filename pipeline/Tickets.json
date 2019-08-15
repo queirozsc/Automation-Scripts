@@ -318,6 +318,51 @@
 								"sink": {
 									"name": "DESCRIPT"
 								}
+							},
+							{
+								"source": {
+									"name": "LASTSTATUS",
+									"type": "String"
+								},
+								"sink": {
+									"name": "LASTSTATUS"
+								}
+							},
+							{
+								"source": {
+									"name": "LASTPRIORITY",
+									"type": "String"
+								},
+								"sink": {
+									"name": "LASTPRIORITY"
+								}
+							},
+							{
+								"source": {
+									"name": "LASTACTIONATEND",
+									"type": "String"
+								},
+								"sink": {
+									"name": "LASTACTIONATEND"
+								}
+							},
+							{
+								"source": {
+									"name": "RESPDATE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "RESPDATE"
+								}
+							},
+							{
+								"source": {
+									"name": "RESPTIME",
+									"type": "String"
+								},
+								"sink": {
+									"name": "RESPTIME"
+								}
 							}
 						]
 					}
