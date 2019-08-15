@@ -943,641 +943,82 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "REQUEST",
+									"name": "QSESSION",
 									"type": "String"
 								},
 								"sink": {
-									"name": "REQUEST",
+									"name": "QSESSION",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"name": "CLIENT",
+									"name": "QUESTION",
 									"type": "String"
 								},
 								"sink": {
-									"name": "CLIENT"
-								}
-							},
-							{
-								"source": {
-									"name": "OPENDATE",
-									"type": "String"
-								},
-								"sink": {
-									"name": "OPENDATE"
-								}
-							},
-							{
-								"source": {
-									"name": "CLOSEDATE",
-									"type": "String"
-								},
-								"sink": {
-									"name": "CLOSEDATE"
-								}
-							},
-							{
-								"source": {
-									"name": "LASTACTION",
-									"type": "String"
-								},
-								"sink": {
-									"name": "LASTACTION"
-								}
-							},
-							{
-								"source": {
-									"name": "LASTANALYST",
-									"type": "String"
-								},
-								"sink": {
-									"name": "LASTANALYST"
-								}
-							},
-							{
-								"source": {
-									"name": "LASTREOPEN",
-									"type": "String"
-								},
-								"sink": {
-									"name": "LASTREOPEN"
-								}
-							},
-							{
-								"source": {
-									"name": "RESLREMAINS",
-									"type": "String"
-								},
-								"sink": {
-									"name": "RESLREMAINS"
-								}
-							},
-							{
-								"source": {
-									"name": "RESPMINS",
-									"type": "String"
-								},
-								"sink": {
-									"name": "RESPMINS"
-								}
-							},
-							{
-								"source": {
-									"name": "RESLMINS",
-									"type": "String"
-								},
-								"sink": {
-									"name": "RESLMINS"
-								}
-							},
-							{
-								"source": {
-									"name": "CLOSED",
-									"type": "String"
-								},
-								"sink": {
-									"name": "CLOSED"
-								}
-							},
-							{
-								"source": {
-									"name": "ORIGANAL",
-									"type": "String"
-								},
-								"sink": {
-									"name": "ORIGANAL"
-								}
-							},
-							{
-								"source": {
-									"name": "CURRANAL",
-									"type": "String"
-								},
-								"sink": {
-									"name": "CURRANAL"
-								}
-							},
-							{
-								"source": {
-									"name": "GROUPANAL",
-									"type": "String"
-								},
-								"sink": {
-									"name": "GROUPANAL"
-								}
-							},
-							{
-								"source": {
-									"name": "LASTANAL",
-									"type": "String"
-								},
-								"sink": {
-									"name": "LASTANAL"
-								}
-							},
-							{
-								"source": {
-									"name": "LASTANLGRP",
-									"type": "String"
-								},
-								"sink": {
-									"name": "LASTANLGRP"
-								}
-							},
-							{
-								"source": {
-									"name": "ORIGGROUP",
-									"type": "String"
-								},
-								"sink": {
-									"name": "ORIGGROUP"
-								}
-							},
-							{
-								"source": {
-									"name": "CURRGROUP",
-									"type": "String"
-								},
-								"sink": {
-									"name": "CURRGROUP"
-								}
-							},
-							{
-								"source": {
-									"name": "LASTGROUP",
-									"type": "String"
-								},
-								"sink": {
-									"name": "LASTGROUP"
-								}
-							},
-							{
-								"source": {
-									"name": "CATEGORY",
-									"type": "String"
-								},
-								"sink": {
-									"name": "CATEGORY"
-								}
-							},
-							{
-								"source": {
-									"name": "PRODUCT",
-									"type": "String"
-								},
-								"sink": {
-									"name": "PRODUCT"
-								}
-							},
-							{
-								"source": {
-									"name": "PROCESS",
-									"type": "String"
-								},
-								"sink": {
-									"name": "PROCESS"
-								}
-							},
-							{
-								"source": {
-									"name": "RSTATUS",
-									"type": "String"
-								},
-								"sink": {
-									"name": "RSTATUS"
-								}
-							},
-							{
-								"source": {
-									"name": "RPRIORITY",
-									"type": "String"
-								},
-								"sink": {
-									"name": "RPRIORITY"
-								}
-							},
-							{
-								"source": {
-									"name": "REQTYPE",
-									"type": "String"
-								},
-								"sink": {
-									"name": "REQTYPE"
-								}
-							},
-							{
-								"source": {
-									"name": "REQSOURCE",
-									"type": "String"
-								},
-								"sink": {
-									"name": "REQSOURCE"
-								}
-							},
-							{
-								"source": {
-									"name": "LOCATION",
-									"type": "String"
-								},
-								"sink": {
-									"name": "REQLOCATION"
-								}
-							},
-							{
-								"source": {
-									"name": "ORGUNIT",
-									"type": "String"
-								},
-								"sink": {
-									"name": "ORGUNIT"
-								}
-							},
-							{
-								"source": {
-									"name": "ORGUNIT_ROOT",
-									"type": "String"
-								},
-								"sink": {
-									"name": "ORGUNIT_ROOT"
-								}
-							},
-							{
-								"source": {
-									"name": "ABSTRACT",
-									"type": "String"
-								},
-								"sink": {
-									"name": "ABSTRACT"
-								}
-							},
-							{
-								"source": {
-									"name": "DESCRIPT",
-									"type": "String"
-								},
-								"sink": {
-									"name": "DESCRIPT"
-								}
-							},
-							{
-								"source": {
-									"name": "LASTSTATUS",
-									"type": "String"
-								},
-								"sink": {
-									"name": "LASTSTATUS"
-								}
-							},
-							{
-								"source": {
-									"name": "LASTPRIORITY",
-									"type": "String"
-								},
-								"sink": {
-									"name": "LASTPRIORITY"
-								}
-							},
-							{
-								"source": {
-									"name": "LASTACTIONATEND",
-									"type": "String"
-								},
-								"sink": {
-									"name": "LASTACTIONATEND"
-								}
-							},
-							{
-								"source": {
-									"name": "RESPDATE",
-									"type": "String"
-								},
-								"sink": {
-									"name": "RESPDATE"
-								}
-							},
-							{
-								"source": {
-									"name": "RESPTIME",
-									"type": "String"
-								},
-								"sink": {
-									"name": "RESPTIME"
-								}
-							},
-							{
-								"source": {
-									"name": "RESLTIME",
-									"type": "String"
-								},
-								"sink": {
-									"name": "RESLTIME"
-								}
-							},
-							{
-								"source": {
-									"name": "RESPREMAINS"
-								},
-								"sink": {
-									"name": "RESPREMAINS"
-								}
-							},
-							{
-								"source": {
-									"name": "RESPMODE",
-									"type": "String"
-								},
-								"sink": {
-									"name": "RESPMODE"
-								}
-							},
-							{
-								"source": {
-									"name": "RESLMODE",
-									"type": "String"
-								},
-								"sink": {
-									"name": "RESLMODE"
-								}
-							},
-							{
-								"source": {
-									"name": "NOCOMPUTE",
-									"type": "String"
-								},
-								"sink": {
-									"name": "NOCOMPUTE"
-								}
-							},
-							{
-								"source": {
-									"name": "APROVANLTYPE",
-									"type": "String"
-								},
-								"sink": {
-									"name": "APROVANLTYPE"
-								}
-							},
-							{
-								"source": {
-									"name": "APROVCLITYPE",
-									"type": "String"
-								},
-								"sink": {
-									"name": "APROVCLITYPE"
-								}
-							},
-							{
-								"source": {
-									"name": "MLEVELAPROV",
-									"type": "String"
-								},
-								"sink": {
-									"name": "MLEVELAPROV"
-								}
-							},
-							{
-								"source": {
-									"name": "CLIENTAPROV",
-									"type": "String"
-								},
-								"sink": {
-									"name": "CLIENTAPROV"
-								}
-							},
-							{
-								"source": {
-									"name": "PACKAGE",
-									"type": "String"
-								},
-								"sink": {
-									"name": "PACKAGE"
-								}
-							},
-							{
-								"source": {
-									"name": "WORKFLOW",
-									"type": "String"
-								},
-								"sink": {
-									"name": "WORKFLOW"
-								}
-							},
-							{
-								"source": {
-									"name": "LASTSEVENT",
-									"type": "String"
-								},
-								"sink": {
-									"name": "LASTSEVENT"
-								}
-							},
-							{
-								"source": {
-									"name": "REQWORKFLOW",
-									"type": "String"
-								},
-								"sink": {
-									"name": "REQWORKFLOW"
-								}
-							},
-							{
-								"source": {
-									"name": "ORIGCATEGORY",
-									"type": "String"
-								},
-								"sink": {
-									"name": "ORIGCATEGORY"
-								}
-							},
-							{
-								"source": {
-									"name": "ORIGPRODUCT",
-									"type": "String"
-								},
-								"sink": {
-									"name": "ORIGPRODUCT"
-								}
-							},
-							{
-								"source": {
-									"name": "ORIGPROCESS",
-									"type": "String"
-								},
-								"sink": {
-									"name": "ORIGPROCESS"
-								}
-							},
-							{
-								"source": {
-									"name": "TOTALATTACH",
-									"type": "String"
-								},
-								"sink": {
-									"name": "TOTALATTACH"
-								}
-							},
-							{
-								"source": {
-									"name": "TOTALATTACHACT",
-									"type": "String"
-								},
-								"sink": {
-									"name": "TOTALATTACHACT"
-								}
-							},
-							{
-								"source": {
-									"name": "INSERTDATE",
-									"type": "String"
-								},
-								"sink": {
-									"name": "INSERTDATE"
-								}
-							},
-							{
-								"source": {
-									"name": "QFORM",
-									"type": "String"
-								},
-								"sink": {
-									"name": "QFORM"
-								}
-							},
-							{
-								"source": {
-									"name": "QSURVEY",
-									"type": "String"
-								},
-								"sink": {
-									"name": "QSURVEY"
-								}
-							},
-							{
-								"source": {
-									"name": "QSESSIONFORM",
-									"type": "String"
-								},
-								"sink": {
-									"name": "QSESSIONFORM"
-								}
-							},
-							{
-								"source": {
-									"name": "QSESSIONSURVEY",
+									"name": "QUESTION",
 									"type": "String"
-								},
-								"sink": {
-									"name": "QSESSIONSURVEY"
 								}
 							},
 							{
 								"source": {
-									"name": "REQUESTFLAGS",
+									"name": "QANSWER",
 									"type": "String"
 								},
 								"sink": {
-									"name": "REQUESTFLAGS"
-								}
-							},
-							{
-								"source": {
-									"name": "V_ASSOCIATION",
+									"name": "QANSWER",
 									"type": "String"
-								},
-								"sink": {
-									"name": "V_ASSOCIATION"
 								}
 							},
 							{
 								"source": {
-									"name": "V_HAS_APPROVER",
+									"name": "QANSWERED",
 									"type": "String"
 								},
 								"sink": {
-									"name": "V_HAS_APPROVER"
-								}
-							},
-							{
-								"source": {
-									"name": "LASTSEQUENCE",
+									"name": "QANSWERED",
 									"type": "String"
-								},
-								"sink": {
-									"name": "LASTSEQUENCE"
 								}
 							},
 							{
 								"source": {
-									"name": "LASTRECALCDATE",
+									"name": "QANSWERDATE",
 									"type": "String"
 								},
 								"sink": {
-									"name": "LASTRECALCDATE"
-								}
-							},
-							{
-								"source": {
-									"name": "LASTAPPROVCNTX",
+									"name": "QANSWERDATE",
 									"type": "String"
-								},
-								"sink": {
-									"name": "LASTAPPROVCNTX"
 								}
 							},
 							{
 								"source": {
-									"name": "LASTAPPROVUSER",
+									"name": "QSHOW",
 									"type": "String"
 								},
 								"sink": {
-									"name": "LASTAPPROVUSER"
-								}
-							},
-							{
-								"source": {
-									"name": "LASTAPPROVCODE",
+									"name": "QSHOW",
 									"type": "String"
-								},
-								"sink": {
-									"name": "LASTAPPROVCODE"
 								}
 							},
 							{
 								"source": {
-									"name": "CURRAPPROVCODE",
+									"name": "QORDER",
 									"type": "String"
 								},
 								"sink": {
-									"name": "CURRAPPROVCODE"
-								}
-							},
-							{
-								"source": {
-									"name": "ORIGNOCOMPUTE",
+									"name": "QORDER",
 									"type": "String"
-								},
-								"sink": {
-									"name": "ORIGNOCOMPUTE"
 								}
 							},
 							{
 								"source": {
-									"name": "ORIGRSTATUS",
+									"name": "QUPDATED",
 									"type": "String"
 								},
 								"sink": {
-									"name": "ORIGRSTATUS"
-								}
-							},
-							{
-								"source": {
-									"name": "ORIGRPRIORITY",
+									"name": "QUPDATED",
 									"type": "String"
-								},
-								"sink": {
-									"name": "ORIGRPRIORITY"
 								}
 							}
 						]
@@ -1585,13 +1026,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "FILE_REQUESTS",
+						"referenceName": "FILE_QANSWER",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "TABLE_REQUESTS",
+						"referenceName": "TABLE_QANSWER",
 						"type": "DatasetReference"
 					}
 				]
