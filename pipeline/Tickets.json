@@ -587,6 +587,96 @@
 								"sink": {
 									"name": "V_ASSOCIATION"
 								}
+							},
+							{
+								"source": {
+									"name": "V_HAS_APPROVER",
+									"type": "String"
+								},
+								"sink": {
+									"name": "V_HAS_APPROVER"
+								}
+							},
+							{
+								"source": {
+									"name": "LASTSEQUENCE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "LASTSEQUENCE"
+								}
+							},
+							{
+								"source": {
+									"name": "LASTRECALCDATE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "LASTRECALCDATE"
+								}
+							},
+							{
+								"source": {
+									"name": "LASTAPPROVCNTX",
+									"type": "String"
+								},
+								"sink": {
+									"name": "LASTAPPROVCNTX"
+								}
+							},
+							{
+								"source": {
+									"name": "LASTAPPROVUSER",
+									"type": "String"
+								},
+								"sink": {
+									"name": "LASTAPPROVUSER"
+								}
+							},
+							{
+								"source": {
+									"name": "LASTAPPROVCODE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "LASTAPPROVCODE"
+								}
+							},
+							{
+								"source": {
+									"name": "CURRAPPROVCODE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CURRAPPROVCODE"
+								}
+							},
+							{
+								"source": {
+									"name": "ORIGNOCOMPUTE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ORIGNOCOMPUTE"
+								}
+							},
+							{
+								"source": {
+									"name": "ORIGRSTATUS",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ORIGRSTATUS"
+								}
+							},
+							{
+								"source": {
+									"name": "ORIGRPRIORITY",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ORIGRPRIORITY"
+								}
 							}
 						]
 					}
