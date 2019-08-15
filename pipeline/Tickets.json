@@ -66,6 +66,42 @@
 								"sink": {
 									"name": "OPENDATE"
 								}
+							},
+							{
+								"source": {
+									"name": "CLOSEDATE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLOSEDATE"
+								}
+							},
+							{
+								"source": {
+									"name": "LASTACTION",
+									"type": "String"
+								},
+								"sink": {
+									"name": "LASTACTION"
+								}
+							},
+							{
+								"source": {
+									"name": "LASTANALYST",
+									"type": "String"
+								},
+								"sink": {
+									"name": "LASTANALYST"
+								}
+							},
+							{
+								"source": {
+									"name": "LASTREOPEN",
+									"type": "String"
+								},
+								"sink": {
+									"name": "LASTREOPEN"
+								}
 							}
 						]
 					}
@@ -123,7 +159,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"storedProcedureName": "[dbo].[spCALCULATEREQUESTS]"
+					"storedProcedureName": "[dbo].[sp_CALCULATEREQUESTS]"
 				},
 				"linkedServiceName": {
 					"referenceName": "AzureSQL_DB_Procedimentos",
