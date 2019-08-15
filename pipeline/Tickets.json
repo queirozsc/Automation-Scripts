@@ -416,15 +416,6 @@
 								"sink": {
 									"name": "NOCOMPUTE"
 								}
-							},
-							{
-								"source": {
-									"name": "APROVANLTYPE",
-									"type": "String"
-								},
-								"sink": {
-									"name": "APROVANLTYPE"
-								}
 							}
 						]
 					}
