@@ -348,15 +348,6 @@
 							},
 							{
 								"source": {
-									"name": "LASTACTTYPE",
-									"type": "String"
-								},
-								"sink": {
-									"name": "LASTACTTYPE"
-								}
-							},
-							{
-								"source": {
 									"name": "RESPDATE",
 									"type": "String"
 								},
