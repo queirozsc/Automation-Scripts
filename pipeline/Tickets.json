@@ -497,6 +497,96 @@
 								"sink": {
 									"name": "ORIGPRODUCT"
 								}
+							},
+							{
+								"source": {
+									"name": "ORIGPROCESS",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ORIGPROCESS"
+								}
+							},
+							{
+								"source": {
+									"name": "TOTALATTACH",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TOTALATTACH"
+								}
+							},
+							{
+								"source": {
+									"name": "TOTALATTACHACT",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TOTALATTACHACT"
+								}
+							},
+							{
+								"source": {
+									"name": "INSERTDATE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "INSERTDATE"
+								}
+							},
+							{
+								"source": {
+									"name": "QFORM",
+									"type": "String"
+								},
+								"sink": {
+									"name": "QFORM"
+								}
+							},
+							{
+								"source": {
+									"name": "QSURVEY",
+									"type": "String"
+								},
+								"sink": {
+									"name": "QSURVEY"
+								}
+							},
+							{
+								"source": {
+									"name": "QSESSIONFORM",
+									"type": "String"
+								},
+								"sink": {
+									"name": "QSESSIONFORM"
+								}
+							},
+							{
+								"source": {
+									"name": "QSESSIONSURVEY",
+									"type": "String"
+								},
+								"sink": {
+									"name": "QSESSIONSURVEY"
+								}
+							},
+							{
+								"source": {
+									"name": "REQUESTFLAGS",
+									"type": "String"
+								},
+								"sink": {
+									"name": "REQUESTFLAGS"
+								}
+							},
+							{
+								"source": {
+									"name": "V_ASSOCIATION",
+									"type": "String"
+								},
+								"sink": {
+									"name": "V_ASSOCIATION"
+								}
 							}
 						]
 					}
