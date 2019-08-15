@@ -947,8 +947,7 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "QANSWER",
-									"type": "String"
+									"name": "QANSWER"
 								}
 							}
 						]
