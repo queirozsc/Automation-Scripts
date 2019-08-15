@@ -1007,9 +1007,6 @@
 					"referenceName": "Folder_Requestia",
 					"type": "LinkedServiceReference"
 				},
-				"folder": {
-					"name": "Requestia"
-				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
