@@ -1,0 +1,519 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory Name",
+			"defaultValue": "OptyADF"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/AZ_Oracle_To_SQL')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Data_Zero_Faltas",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Truncate Table",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "select\nc.nr_sequencia as id_compromisso,\nc.cd_pessoa_fisica as id_cliente,\nobter_nome_pf(c.cd_pessoa_fisica) as NomePaciente,\npf.dt_nascimento as DtNascimento,\n'55' || substr(pf.nr_ddd_celular, -2) || substr(replace(replace(replace(replace(pf.nr_telefone_celular, '(', ''), ')', ''), ' ', ''), '-', ''), -9) AS CELULAR,\nobter_compl_pf(pf.cd_pessoa_fisica,1,'M') as email,\nc.cd_convenio idconvenio,\nobter_nome_convenio(c.cd_convenio) as convenio,\nc.cd_plano,\nobter_desc_plano(c.cd_convenio, c.cd_plano) ds_plano,\nc.dt_agenda as datacompromisso,\nc.hr_inicio as horacompromisso,\nc.ie_status_agenda as id_status,\nobter_status_agenda_paciente(c.nr_sequencia) as ds_status,\na.cd_agenda,\na.ds_agenda as agenda,\nc.cd_procedimento,\nobter_desc_procedimento(c.cd_procedimento, c.ie_origem_proced) as procedimento,\nobter_empresa_estab(a.cd_estabelecimento) as id_empresa,\nobter_nome_empresa(obter_empresa_estab(a.cd_estabelecimento)) as empresa,\na.cd_estabelecimento as id_unidade,\nobter_nome_estab(a.cd_estabelecimento)as unidade,\nc.ie_autorizacao,\nobter_valor_dominio(1227, c.ie_autorizacao) as autorizacao\nfrom agenda_paciente c,\nagenda a,\npessoa_fisica pf\nwhere c.cd_pessoa_fisica = pf.cd_pessoa_fisica\nand c.cd_agenda = a.cd_agenda\nand a.cd_pessoa_fisica is not null\nand trunc(c.dt_agenda) between inicio_dia(sysdate - 6) and fim_dia(sysdate - 1)\nAND c.IE_STATUS_AGENDA NOT IN ('C', 'N', 'F', 'I')\nand length('55' || substr(pf.nr_ddd_celular, -2) || substr(replace(replace(replace(replace(pf.nr_telefone_celular, '(', ''), ')', ''), ' ', ''), '-', ''), -9)) = 13\norder by 1",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "ID_COMPROMISSO"
+										},
+										"sink": {
+											"name": "id_compromisso",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ID_CLIENTE"
+										},
+										"sink": {
+											"name": "id_cliente",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "NOMEPACIENTE"
+										},
+										"sink": {
+											"name": "nomepaciente",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DTNASCIMENTO"
+										},
+										"sink": {
+											"name": "dtnascimento",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "CELULAR"
+										},
+										"sink": {
+											"name": "celular",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "EMAIL"
+										},
+										"sink": {
+											"name": "email",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "IDCONVENIO"
+										},
+										"sink": {
+											"name": "idconvenio",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "CONVENIO"
+										},
+										"sink": {
+											"name": "convenio",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CD_PLANO"
+										},
+										"sink": {
+											"name": "cd_plano",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_PLANO"
+										},
+										"sink": {
+											"name": "ds_plano",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DATACOMPROMISSO"
+										},
+										"sink": {
+											"name": "datacompromisso",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "HORACOMPROMISSO"
+										},
+										"sink": {
+											"name": "horacompromisso",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ID_STATUS"
+										},
+										"sink": {
+											"name": "id_status",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_STATUS"
+										},
+										"sink": {
+											"name": "ds_status",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CD_AGENDA"
+										},
+										"sink": {
+											"name": "cd_agenda",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "AGENDA"
+										},
+										"sink": {
+											"name": "agenda",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CD_PROCEDIMENTO"
+										},
+										"sink": {
+											"name": "cd_procedimento",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "PROCEDIMENTO"
+										},
+										"sink": {
+											"name": "procedimento",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ID_EMPRESA"
+										},
+										"sink": {
+											"name": "id_empresa",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "EMPRESA"
+										},
+										"sink": {
+											"name": "empresa",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ID_UNIDADE"
+										},
+										"sink": {
+											"name": "id_unidade",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "UNIDADE"
+										},
+										"sink": {
+											"name": "unidade",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "IE_AUTORIZACAO"
+										},
+										"sink": {
+											"name": "ie_autorizacao",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "AUTORIZACAO"
+										},
+										"sink": {
+											"name": "autorizacao",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "Oracle_Zero_Faltas",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AZSQL_TB_Zero_Faltas",
+								"type": "DatasetReference"
+							}
+						]
+					},
+					{
+						"name": "Truncate Table",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[sp_TRUNCATEZEROFALTAS]"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureSQL_DB_Procedimentos",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"folder": {
+					"name": "Projesi"
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Tickets')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy tickets",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Clear table",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "FileServerReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "REQUEST",
+											"type": "String"
+										},
+										"sink": {
+											"name": "REQUEST",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CLIENT",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CLIENT"
+										}
+									},
+									{
+										"source": {
+											"name": "OPENDATE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "OPENDATE"
+										}
+									},
+									{
+										"source": {
+											"name": "CLOSEDATE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CLOSEDATE"
+										}
+									},
+									{
+										"source": {
+											"name": "LASTACTION",
+											"type": "String"
+										},
+										"sink": {
+											"name": "LASTACTION"
+										}
+									},
+									{
+										"source": {
+											"name": "LASTANALYST",
+											"type": "String"
+										},
+										"sink": {
+											"name": "LASTANALYST"
+										}
+									},
+									{
+										"source": {
+											"name": "LASTREOPEN",
+											"type": "String"
+										},
+										"sink": {
+											"name": "LASTREOPEN"
+										}
+									},
+									{
+										"source": {
+											"name": "RESLREMAINS",
+											"type": "String"
+										},
+										"sink": {
+											"name": "RESLREMAINS"
+										}
+									},
+									{
+										"source": {
+											"name": "RESPMINS",
+											"type": "String"
+										},
+										"sink": {
+											"name": "RESPMINS"
+										}
+									},
+									{
+										"source": {
+											"name": "RESLMINS",
+											"type": "String"
+										},
+										"sink": {
+											"name": "RESLMINS"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "FILE_REQUESTS",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "TABLE_REQUESTS",
+								"type": "DatasetReference"
+							}
+						]
+					},
+					{
+						"name": "Clear table",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[sp_TRUNCATEREQUESTS]"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureSQL_DB_Procedimentos",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Calculate fields",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Copy tickets",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[sp_CALCULATEREQUESTS]"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureSQL_DB_Procedimentos",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"folder": {
+					"name": "Requestia"
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		}
+	]
+}
