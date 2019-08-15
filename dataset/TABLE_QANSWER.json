@@ -40,7 +40,7 @@
 				"type": "varchar"
 			},
 			{
-				"name": "QUPDATE",
+				"name": "QUPDATED",
 				"type": "varchar"
 			}
 		],
