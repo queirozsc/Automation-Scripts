@@ -129,6 +129,15 @@
 								"sink": {
 									"name": "RESLMINS"
 								}
+							},
+							{
+								"source": {
+									"name": "CLOSED",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLOSED"
+								}
 							}
 						]
 					}
