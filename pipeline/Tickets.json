@@ -282,6 +282,42 @@
 								"sink": {
 									"name": "REQLOCATION"
 								}
+							},
+							{
+								"source": {
+									"name": "ORGUNIT",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ORGUNIT"
+								}
+							},
+							{
+								"source": {
+									"name": "ORGUNIT_ROOT",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ORGUNIT_ROOT"
+								}
+							},
+							{
+								"source": {
+									"name": "ABSTRACT",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ABSTRACT"
+								}
+							},
+							{
+								"source": {
+									"name": "DESCRIPT",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DESCRIPT"
+								}
 							}
 						]
 					}
