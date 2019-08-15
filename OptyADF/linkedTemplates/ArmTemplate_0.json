@@ -1,0 +1,1802 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory Name",
+			"defaultValue": "OptyADF"
+		},
+		"AzureSQL_DB_Procedimentos_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSQL_DB_Procedimentos'"
+		},
+		"AzureSqlDatabase_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase'"
+		},
+		"CloudTasyProd_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'CloudTasyProd'"
+		},
+		"CloudTasyProd_NEW_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'CloudTasyProd_NEW'"
+		},
+		"Folder_Nexcore_Consolidado_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Folder_Nexcore_Consolidado'"
+		},
+		"Folder_Requestia_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Folder_Requestia'"
+		},
+		"SMARTProd_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SMARTProd'"
+		},
+		"SMART_HOSL_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SMART_HOSL'"
+		},
+		"SMART_HOSL_NEW_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SMART_HOSL_NEW'"
+		},
+		"SMART_INOB_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SMART_INOB'"
+		},
+		"Folder_Nexcore_Consolidado_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Consolidado"
+		},
+		"Folder_Nexcore_Consolidado_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "hobrasil\\sergio.queiroz"
+		},
+		"Folder_Requestia_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "C:\\Power BI Gateway Files\\Requestia"
+		},
+		"Folder_Requestia_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "hobrasil\\sergio.queiroz"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSQL_DB_Procedimentos')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSQL_DB_Procedimentos_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ServidorArquivosBI')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/integrationRuntime')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AZSQL_TB_NC_AgentesPorDia')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Nexcore/Azure"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Usuario",
+						"type": "varchar"
+					},
+					{
+						"name": "Intervalo",
+						"type": "time",
+						"scale": 7
+					},
+					{
+						"name": "Atendidas",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Recusas",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Recebidas",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Internas_Recebidas",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Transferencias",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Efetuadas",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Efetuadas_Tratados",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Taxa_de_Contato",
+						"type": "varchar"
+					},
+					{
+						"name": "Tempo_Atendidas",
+						"type": "varchar"
+					},
+					{
+						"name": "Tempo_Internas_Recebidas",
+						"type": "time",
+						"scale": 7
+					},
+					{
+						"name": "Tempo_Efetuadas",
+						"type": "time",
+						"scale": 7
+					},
+					{
+						"name": "Tempo_Medio_Falado",
+						"type": "time",
+						"scale": 7
+					},
+					{
+						"name": "Tempo_Total_Falado",
+						"type": "time",
+						"scale": 7
+					},
+					{
+						"name": "Tempo_Toque_Agente",
+						"type": "time",
+						"scale": 7
+					},
+					{
+						"name": "Tempo_Toque_Cliente",
+						"type": "time",
+						"scale": 7
+					},
+					{
+						"name": "Tempo_Pausa",
+						"type": "time",
+						"scale": 7
+					},
+					{
+						"name": "Tempo_Estouro",
+						"type": "time",
+						"scale": 7
+					},
+					{
+						"name": "Tempo_Disponivel",
+						"type": "time",
+						"scale": 7
+					},
+					{
+						"name": "Tempo_Indisponivel",
+						"type": "time",
+						"scale": 7
+					},
+					{
+						"name": "Tempo_Logado",
+						"type": "time",
+						"scale": 7
+					},
+					{
+						"name": "Tempo_Deslogado",
+						"type": "time",
+						"scale": 7
+					},
+					{
+						"name": "Falado_x_Logado",
+						"type": "time",
+						"scale": 7
+					}
+				],
+				"typeProperties": {
+					"tableName": "[[dbo].[Nexcore_AgentesPorDia]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AZSQL_TB_NC_AgentesPorHora')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Nexcore/Azure"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Usuario",
+						"type": "varchar"
+					},
+					{
+						"name": "Intervalo",
+						"type": "time",
+						"scale": 7
+					},
+					{
+						"name": "Atendidas",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Recusas",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Recebidas",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Internas_Recebidas",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Transferencias",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Efetuadas",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Efetuadas_Tratados",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Taxa_de_Contato",
+						"type": "varchar"
+					},
+					{
+						"name": "Tempo_Atendidas",
+						"type": "varchar"
+					},
+					{
+						"name": "Tempo_Internas_Recebidas",
+						"type": "time",
+						"scale": 7
+					},
+					{
+						"name": "Tempo_Efetuadas",
+						"type": "time",
+						"scale": 7
+					},
+					{
+						"name": "Tempo_Medio_Falado",
+						"type": "time",
+						"scale": 7
+					},
+					{
+						"name": "Tempo_Total_Falado",
+						"type": "time",
+						"scale": 7
+					},
+					{
+						"name": "Tempo_Toque_Agente",
+						"type": "time",
+						"scale": 7
+					},
+					{
+						"name": "Tempo_Toque_Cliente",
+						"type": "time",
+						"scale": 7
+					},
+					{
+						"name": "Tempo_Pausa",
+						"type": "time",
+						"scale": 7
+					},
+					{
+						"name": "Tempo_Estouro",
+						"type": "time",
+						"scale": 7
+					},
+					{
+						"name": "Tempo_Disponivel",
+						"type": "time",
+						"scale": 7
+					},
+					{
+						"name": "Tempo_Indisponivel",
+						"type": "time",
+						"scale": 7
+					},
+					{
+						"name": "Tempo_Logado",
+						"type": "time",
+						"scale": 7
+					},
+					{
+						"name": "Tempo_Deslogado",
+						"type": "time",
+						"scale": 7
+					},
+					{
+						"name": "Falado_x_Logado",
+						"type": "time",
+						"scale": 7
+					}
+				],
+				"typeProperties": {
+					"tableName": "[[dbo].[Nexcore_AgentesPorHora]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AZSQL_TB_NC_BilheteLigacoes')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Tabela Azure SQL Server Procedimentos.dbo.BilheteLigacoes",
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Nexcore/Azure"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "DATA",
+						"type": "date"
+					},
+					{
+						"name": "HORA",
+						"type": "time",
+						"scale": 7
+					},
+					{
+						"name": "USUARIO",
+						"type": "varchar"
+					},
+					{
+						"name": "TIPO",
+						"type": "varchar"
+					},
+					{
+						"name": "ORIGEM",
+						"type": "varchar"
+					},
+					{
+						"name": "DESTINO",
+						"type": "varchar"
+					},
+					{
+						"name": "STATUS",
+						"type": "varchar"
+					},
+					{
+						"name": "CENTRO_DE_CUSTO",
+						"type": "varchar"
+					},
+					{
+						"name": "TEMPO_TARIFADO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "TEMPO_DECORRIDO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CAMPANHA",
+						"type": "varchar"
+					},
+					{
+						"name": "FILA",
+						"type": "varchar"
+					},
+					{
+						"name": "UNIQUE_ID",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "LINKED_ID",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "MARCA",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"tableName": "[[dbo].[Nexcore_BilheteLigacoes]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AZSQL_TB_NC_FilasPorHoras')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Nexcore/Azure"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Fila",
+						"type": "varchar"
+					},
+					{
+						"name": "Intervalo",
+						"type": "varchar"
+					},
+					{
+						"name": "Atendidas_Ate_NS",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Atendidas_Apos_NS",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Atendidas",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Abandonos_Ate_NS",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Abandonos_Apos_NS",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Abandonos_Anuncio_Inicial",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Abandonos",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Roteamentos_Timeout",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Roteamentos_Fila_Cheia",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Roteamentos_Fila_Vazia",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Roteamentos_Fila_Sem_Ags_Disp",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Roteamentos_Caixa_Postal",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Roteamentos",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Fora_Horario_Antes",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Fora_Horario_Intervalo",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Fora_Horario_Depois",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Fora_Horario",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Total_Recebidas",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Callback_Tratados",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Callback_Nao_Tratados",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Callback",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Tempo_Toque",
+						"type": "varchar"
+					},
+					{
+						"name": "Tempo_Falado",
+						"type": "varchar"
+					},
+					{
+						"name": "Tempo_Medio_Falado",
+						"type": "varchar"
+					},
+					{
+						"name": "Tempo_Medio_Pausa_ACW",
+						"type": "varchar"
+					},
+					{
+						"name": "Tempo_Medio_Produtivo_AHT",
+						"type": "varchar"
+					},
+					{
+						"name": "Nivel_Servico",
+						"type": "varchar"
+					},
+					{
+						"name": "Taxa_Atendimento",
+						"type": "varchar"
+					},
+					{
+						"name": "Taxa_Abandono",
+						"type": "varchar"
+					},
+					{
+						"name": "Tempo_Medio_Espera",
+						"type": "varchar"
+					},
+					{
+						"name": "Tempo_Medio_para_Atender",
+						"type": "varchar"
+					},
+					{
+						"name": "Tempo_Total_para_Atender",
+						"type": "varchar"
+					},
+					{
+						"name": "Tempo_Medio_para_Abandono",
+						"type": "varchar"
+					},
+					{
+						"name": "Tempo_Total_para_Abandono",
+						"type": "varchar"
+					},
+					{
+						"name": "Tempo_Total_Espera",
+						"type": "varchar"
+					},
+					{
+						"name": "Agentes_Logados_Minimo",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Agentes_Logados_Maximo",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Chamadas_em_Espera_Minimo",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Chamadas_em_Espera_Medio",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Chamadas_em_Espera_Maximo",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"tableName": "[[dbo].[Nexcore_FilasPorHoras]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AZSQL_TB_Zero_Faltas')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Zero Faltas"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "id_compromisso",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "id_cliente",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "nomepaciente",
+						"type": "varchar"
+					},
+					{
+						"name": "dtnascimento",
+						"type": "date"
+					},
+					{
+						"name": "celular",
+						"type": "varchar"
+					},
+					{
+						"name": "email",
+						"type": "varchar"
+					},
+					{
+						"name": "idconvenio",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "convenio",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "cd_plano",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ds_plano",
+						"type": "varchar"
+					},
+					{
+						"name": "datacompromisso",
+						"type": "date"
+					},
+					{
+						"name": "horacompromisso",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "id_status",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ds_status",
+						"type": "varchar"
+					},
+					{
+						"name": "cd_agenda",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "agenda",
+						"type": "varchar"
+					},
+					{
+						"name": "cd_procedimento",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "procedimento",
+						"type": "varchar"
+					},
+					{
+						"name": "id_empresa",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "empresa",
+						"type": "varchar"
+					},
+					{
+						"name": "id_unidade",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "unidade",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Projesi_Zero_Faltas"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlProcedimentosTable')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Power BI"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "NR_REGISTRO_UNICO",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_MARCA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_MARCA",
+						"type": "varchar"
+					},
+					{
+						"name": "DT_ATUALIZACAO",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "DT_ENTRADA",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "NR_ATENDIMENTO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CD_ESTABELECIMENTO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_ESTABELECIMENTO",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_PESSOA_FISICA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DT_NASCIMENTO",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "NR_CPF",
+						"type": "varchar"
+					},
+					{
+						"name": "IE_SEXO",
+						"type": "char"
+					},
+					{
+						"name": "NR_CEP",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_CIDADE",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_PESSOA_FISICA",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_CONVENIO",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_CONVENIO",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_MEDICO_EXECUTOR",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_MEDICO_EXECUTOR",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_MEDICO_REQUISITANTE",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_MEDICO_REQUISITANTE",
+						"type": "varchar"
+					},
+					{
+						"name": "IE_ORIGEM_PROCED",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CD_PROCEDIMENTO",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_PROCEDIMENTO",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_PROCEDIMENTO_PRINCIPAL",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_PROCEDIMENTO_PRINCIPAL",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_PROCEDIMENTO_PRINCIPAL_FINAL",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_CATEGORIA_AUXILIAR",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_CATEGORIA_AUXILIAR",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_CATEGORIA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_CATEGORIA",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_CLASSE",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_CLASSE",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_CLASSIF_LIO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_CLASSIF_LIO",
+						"type": "varchar"
+					},
+					{
+						"name": "QT_PROCEDIMENTO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "QT_AJUSTADA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "VL_CONTA",
+						"type": "real",
+						"precision": 7
+					},
+					{
+						"name": "VL_PROCEDIMENTO",
+						"type": "real",
+						"precision": 7
+					},
+					{
+						"name": "IE_STATUS_ACERTO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_STATUS_CONTA",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_TUSS",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "TIPO_CONVENIO",
+						"type": "varchar"
+					},
+					{
+						"name": "CRM_EXECUTOR",
+						"type": "varchar"
+					},
+					{
+						"name": "MPE_EXECUTOR",
+						"type": "varchar"
+					},
+					{
+						"name": "INTERCOMPANY_EXECUTOR",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"tableName": "[[dbo].[Procedimentos]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTEMPTable')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Power BI"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "CD_MARCA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "MARCA",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_ESTABELECIMENTO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "NR_ATENDIMENTO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "NR_REGISTRO_UNICO",
+						"type": "varchar"
+					},
+					{
+						"name": "DT_ATUALIZACAO",
+						"type": "date"
+					},
+					{
+						"name": "DT_ENTRADA",
+						"type": "date"
+					},
+					{
+						"name": "NR_INTERNO_CONTA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_ESTABELECIMENTO",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_PESSOA_FISICA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DT_NASCIMENTO",
+						"type": "date"
+					},
+					{
+						"name": "NR_CPF",
+						"type": "varchar"
+					},
+					{
+						"name": "IE_SEXO",
+						"type": "varchar"
+					},
+					{
+						"name": "NR_CEP",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_CIDADE",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_PESSOA_FISICA",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_CONVENIO",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_CONVENIO",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_MEDICO_EXECUTOR",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_MEDICO_EXECUTOR",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_MEDICO_REQUISITANTE",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_MEDICO_REQUISITANTE",
+						"type": "varchar"
+					},
+					{
+						"name": "IE_ORIGEM_PROCED",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CD_PROCEDIMENTO",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_PROCEDIMENTO",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_CLASSIFICACAO",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_CLASSIF_PROCEDIMENTO",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_PROCED_PRINCIPAL",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_PROCED_PRINCIPAL",
+						"type": "varchar"
+					},
+					{
+						"name": "QT_PROCEDIMENTO",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "VL_CONTA",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "VL_PROCEDIMENTO",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "IE_STATUS_ACERTO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "STATUS_CONTA",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_TUSS",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_CLASSIF_LIO",
+						"type": "varchar"
+					},
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Processed",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_CLASSE",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_CLASSE",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_CLASSIF_LIO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "QT_AJUSTADA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_STATUS_CONTA",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_PROCEDIMENTO_PRINCIPAL_FINAL",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_CATEGORIA_AUXILIAR",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_CATEGORIA_AUXILIAR",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_CATEGORIA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_CATEGORIA",
+						"type": "varchar"
+					},
+					{
+						"name": "MEDICO_EXECUTOR_PARCEIRO",
+						"type": "varchar"
+					},
+					{
+						"name": "BASE",
+						"type": "varchar"
+					},
+					{
+						"name": "TIPO_CONVENIO",
+						"type": "varchar"
+					},
+					{
+						"name": "INTERCOMPANY",
+						"type": "varchar"
+					},
+					{
+						"name": "CRM",
+						"type": "varchar"
+					},
+					{
+						"name": "MPE",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"tableName": "[[dbo].[TEMPTASY]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/TABLE_REQUESTS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Requestia"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "REQUEST",
+						"type": "varchar"
+					},
+					{
+						"name": "CLIENT",
+						"type": "varchar"
+					},
+					{
+						"name": "ORIGANAL",
+						"type": "varchar"
+					},
+					{
+						"name": "CURRANAL",
+						"type": "varchar"
+					},
+					{
+						"name": "GROUPANAL",
+						"type": "varchar"
+					},
+					{
+						"name": "LASTANAL",
+						"type": "varchar"
+					},
+					{
+						"name": "LASTANLGRP",
+						"type": "varchar"
+					},
+					{
+						"name": "ORIGGROUP",
+						"type": "varchar"
+					},
+					{
+						"name": "CURRGROUP",
+						"type": "varchar"
+					},
+					{
+						"name": "LASTGROUP",
+						"type": "varchar"
+					},
+					{
+						"name": "CATEGORY",
+						"type": "varchar"
+					},
+					{
+						"name": "PRODUCT",
+						"type": "varchar"
+					},
+					{
+						"name": "PROCESS",
+						"type": "varchar"
+					},
+					{
+						"name": "RSTATUS",
+						"type": "varchar"
+					},
+					{
+						"name": "RPRIORITY",
+						"type": "varchar"
+					},
+					{
+						"name": "REQTYPE",
+						"type": "varchar"
+					},
+					{
+						"name": "REQSOURCE",
+						"type": "varchar"
+					},
+					{
+						"name": "REQLOCATION",
+						"type": "varchar"
+					},
+					{
+						"name": "ORGUNIT",
+						"type": "varchar"
+					},
+					{
+						"name": "ORGUNIT_ROOT",
+						"type": "varchar"
+					},
+					{
+						"name": "ABSTRACT",
+						"type": "varchar"
+					},
+					{
+						"name": "DESCRIPT",
+						"type": "varchar"
+					},
+					{
+						"name": "OPENDATE",
+						"type": "varchar"
+					},
+					{
+						"name": "CLOSEDATE",
+						"type": "varchar"
+					},
+					{
+						"name": "CLOSED",
+						"type": "varchar"
+					},
+					{
+						"name": "LASTACTION",
+						"type": "varchar"
+					},
+					{
+						"name": "LASTANALYST",
+						"type": "varchar"
+					},
+					{
+						"name": "LASTSTATUS",
+						"type": "varchar"
+					},
+					{
+						"name": "LASTPRIORITY",
+						"type": "varchar"
+					},
+					{
+						"name": "LASTREOPEN",
+						"type": "varchar"
+					},
+					{
+						"name": "LASTACTIONATEND",
+						"type": "varchar"
+					},
+					{
+						"name": "LASTACTTYPE",
+						"type": "varchar"
+					},
+					{
+						"name": "RESPDATE",
+						"type": "varchar"
+					},
+					{
+						"name": "RESPTIME",
+						"type": "varchar"
+					},
+					{
+						"name": "RESLTIME",
+						"type": "varchar"
+					},
+					{
+						"name": "RESPMINS",
+						"type": "varchar"
+					},
+					{
+						"name": "RESLMINS",
+						"type": "varchar"
+					},
+					{
+						"name": "RESPREMAINS",
+						"type": "varchar"
+					},
+					{
+						"name": "RESLREMAINS",
+						"type": "varchar"
+					},
+					{
+						"name": "RESPMODE",
+						"type": "varchar"
+					},
+					{
+						"name": "RESLMODE",
+						"type": "varchar"
+					},
+					{
+						"name": "NOCOMPUTE",
+						"type": "varchar"
+					},
+					{
+						"name": "APROVANLTYPE",
+						"type": "varchar"
+					},
+					{
+						"name": "APROVCLITYPE",
+						"type": "varchar"
+					},
+					{
+						"name": "MLEVELAPROV",
+						"type": "varchar"
+					},
+					{
+						"name": "CLIENTAPROV",
+						"type": "varchar"
+					},
+					{
+						"name": "PACKAGE",
+						"type": "varchar"
+					},
+					{
+						"name": "WORKFLOW",
+						"type": "varchar"
+					},
+					{
+						"name": "LASTSEVENT",
+						"type": "varchar"
+					},
+					{
+						"name": "REQWORKFLOW",
+						"type": "varchar"
+					},
+					{
+						"name": "ORIGCATEGORY",
+						"type": "varchar"
+					},
+					{
+						"name": "ORIGPRODUCT",
+						"type": "varchar"
+					},
+					{
+						"name": "ORIGPROCESS",
+						"type": "varchar"
+					},
+					{
+						"name": "TOTALATTACH",
+						"type": "varchar"
+					},
+					{
+						"name": "TOTALATTACHACT",
+						"type": "varchar"
+					},
+					{
+						"name": "INSERTDATE",
+						"type": "varchar"
+					},
+					{
+						"name": "QFORM",
+						"type": "varchar"
+					},
+					{
+						"name": "QSURVEY",
+						"type": "varchar"
+					},
+					{
+						"name": "QSESSIONFORM",
+						"type": "varchar"
+					},
+					{
+						"name": "QSESSIONSURVEY",
+						"type": "varchar"
+					},
+					{
+						"name": "REQUESTFLAGS",
+						"type": "varchar"
+					},
+					{
+						"name": "V_ASSOCIATION",
+						"type": "varchar"
+					},
+					{
+						"name": "V_HAS_APPROVER",
+						"type": "varchar"
+					},
+					{
+						"name": "LASTSEQUENCE",
+						"type": "varchar"
+					},
+					{
+						"name": "LASTRECALCDATE",
+						"type": "varchar"
+					},
+					{
+						"name": "LASTAPPROVCNTX",
+						"type": "varchar"
+					},
+					{
+						"name": "LASTAPPROVUSER",
+						"type": "varchar"
+					},
+					{
+						"name": "LASTAPPROVCODE",
+						"type": "varchar"
+					},
+					{
+						"name": "CURRAPPROVCODE",
+						"type": "varchar"
+					},
+					{
+						"name": "ORIGNOCOMPUTE",
+						"type": "varchar"
+					},
+					{
+						"name": "ORIGRSTATUS",
+						"type": "varchar"
+					},
+					{
+						"name": "ORIGRPRIORITY",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "REQUESTIA_REQUESTS"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CloudTasyProd')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "Oracle",
+				"typeProperties": {
+					"connectionString": "[parameters('CloudTasyProd_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CloudTasyProd_NEW')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "Oracle",
+				"typeProperties": {
+					"connectionString": "[parameters('CloudTasyProd_NEW_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "ServidorArquivosBI",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/ServidorArquivosBI')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Folder_Nexcore_Consolidado')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Folder onde são colocados os arquivos coletados do FTP Nexcore. Script agendado para execução diária no host 10.47.251.10",
+				"annotations": [],
+				"type": "FileServer",
+				"typeProperties": {
+					"host": "[parameters('Folder_Nexcore_Consolidado_properties_typeProperties_host')]",
+					"userId": "[parameters('Folder_Nexcore_Consolidado_properties_typeProperties_userId')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('Folder_Nexcore_Consolidado_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "ServidorArquivosBI",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/ServidorArquivosBI')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Folder_Requestia')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "FileServer",
+				"typeProperties": {
+					"host": "[parameters('Folder_Requestia_properties_typeProperties_host')]",
+					"userId": "[parameters('Folder_Requestia_properties_typeProperties_userId')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('Folder_Requestia_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "ServidorArquivosBI",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/ServidorArquivosBI')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SMARTProd')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('SMARTProd_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SMART_HOSL')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('SMART_HOSL_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SMART_HOSL_NEW')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('SMART_HOSL_NEW_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "ServidorArquivosBI",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/ServidorArquivosBI')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SMART_INOB')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('SMART_INOB_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime')]"
+			]
+		}
+	]
+}
