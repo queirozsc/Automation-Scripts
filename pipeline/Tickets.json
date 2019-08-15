@@ -105,7 +105,29 @@
 							},
 							{
 								"source": {
-									"name": ""
+									"name": "RESLREMAINS",
+									"type": "String"
+								},
+								"sink": {
+									"name": "RESLREMAINS"
+								}
+							},
+							{
+								"source": {
+									"name": "RESPMINS",
+									"type": "String"
+								},
+								"sink": {
+									"name": "RESPMINS"
+								}
+							},
+							{
+								"source": {
+									"name": "RESLMINS",
+									"type": "String"
+								},
+								"sink": {
+									"name": "RESLMINS"
 								}
 							}
 						]
