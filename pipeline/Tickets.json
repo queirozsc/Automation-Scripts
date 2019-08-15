@@ -348,6 +348,15 @@
 							},
 							{
 								"source": {
+									"name": "LASTACTTYPE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "LASTACTTYPE"
+								}
+							},
+							{
+								"source": {
 									"name": "RESPDATE",
 									"type": "String"
 								},
@@ -371,6 +380,50 @@
 								},
 								"sink": {
 									"name": "RESLTIME"
+								}
+							},
+							{
+								"source": {
+									"name": "RESPREMAINS"
+								},
+								"sink": {
+									"name": "RESPREMAINS"
+								}
+							},
+							{
+								"source": {
+									"name": "RESPMODE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "RESPMODE"
+								}
+							},
+							{
+								"source": {
+									"name": "RESLMODE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "RESLMODE"
+								}
+							},
+							{
+								"source": {
+									"name": "NOCOMPUTE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "NOCOMPUTE"
+								}
+							},
+							{
+								"source": {
+									"name": "APROVANLTYPE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "APROVANLTYPE"
 								}
 							}
 						]
