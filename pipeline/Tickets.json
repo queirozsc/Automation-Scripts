@@ -57,6 +57,15 @@
 								"sink": {
 									"name": "CLIENT"
 								}
+							},
+							{
+								"source": {
+									"name": "OPENDATE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "OPENDATE"
+								}
 							}
 						]
 					}
