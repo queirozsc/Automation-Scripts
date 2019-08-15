@@ -48,6 +48,15 @@
 									"name": "REQUEST",
 									"type": "String"
 								}
+							},
+							{
+								"source": {
+									"name": "CLIENT",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLIENT"
+								}
 							}
 						]
 					}
