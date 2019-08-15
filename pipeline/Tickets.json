@@ -201,6 +201,87 @@
 								"sink": {
 									"name": "CURRGROUP"
 								}
+							},
+							{
+								"source": {
+									"name": "LASTGROUP",
+									"type": "String"
+								},
+								"sink": {
+									"name": "LASTGROUP"
+								}
+							},
+							{
+								"source": {
+									"name": "CATEGORY",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CATEGORY"
+								}
+							},
+							{
+								"source": {
+									"name": "PRODUCT",
+									"type": "String"
+								},
+								"sink": {
+									"name": "PRODUCT"
+								}
+							},
+							{
+								"source": {
+									"name": "PROCESS",
+									"type": "String"
+								},
+								"sink": {
+									"name": "PROCESS"
+								}
+							},
+							{
+								"source": {
+									"name": "RSTATUS",
+									"type": "String"
+								},
+								"sink": {
+									"name": "RSTATUS"
+								}
+							},
+							{
+								"source": {
+									"name": "RPRIORITY",
+									"type": "String"
+								},
+								"sink": {
+									"name": "RPRIORITY"
+								}
+							},
+							{
+								"source": {
+									"name": "REQTYPE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "REQTYPE"
+								}
+							},
+							{
+								"source": {
+									"name": "REQSOURCE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "REQSOURCE"
+								}
+							},
+							{
+								"source": {
+									"name": "LOCATION",
+									"type": "String"
+								},
+								"sink": {
+									"name": "REQLOCATION"
+								}
 							}
 						]
 					}
