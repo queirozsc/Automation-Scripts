@@ -363,6 +363,15 @@
 								"sink": {
 									"name": "RESPTIME"
 								}
+							},
+							{
+								"source": {
+									"name": "RESLTIME",
+									"type": "String"
+								},
+								"sink": {
+									"name": "RESLTIME"
+								}
 							}
 						]
 					}
