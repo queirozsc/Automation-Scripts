@@ -102,6 +102,11 @@
 								"sink": {
 									"name": "LASTREOPEN"
 								}
+							},
+							{
+								"source": {
+									"name": ""
+								}
 							}
 						]
 					}
