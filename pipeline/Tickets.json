@@ -407,15 +407,6 @@
 								"sink": {
 									"name": "RESLMODE"
 								}
-							},
-							{
-								"source": {
-									"name": "NOCOMPUTE",
-									"type": "String"
-								},
-								"sink": {
-									"name": "NOCOMPUTE"
-								}
 							}
 						]
 					}
