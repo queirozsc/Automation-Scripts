@@ -7,6 +7,14 @@
 			"metadata": "Data Factory Name",
 			"defaultValue": "OptyADF"
 		},
+		"SMART_HOSL_NEW_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SMART_HOSL_NEW'"
+		},
+		"SMART_INOB_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SMART_INOB'"
+		},
 		"SMART_INOB_NEW_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'SMART_INOB_NEW'"
@@ -56,6 +64,40 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/SMART_HOSL_NEW')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('SMART_HOSL_NEW_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "ServidorArquivosBI",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SMART_INOB')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('SMART_INOB_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/SMART_INOB_NEW')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -957,7 +999,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/FILE_REQUESTS')]",
+			"name": "[concat(parameters('factoryName'), '/FILE_QANSWER')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -973,7 +1015,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "FileServerLocation",
-						"fileName": "request.csv"
+						"fileName": "qanswer.csv"
 					},
 					"columnDelimiter": ";",
 					"escapeChar": "\\",
@@ -982,335 +1024,76 @@
 				},
 				"schema": [
 					{
-						"name": "REQUEST",
+						"name": "QSESSION",
 						"type": "String"
 					},
 					{
-						"name": "CLIENT",
+						"name": "QUESTION",
 						"type": "String"
 					},
 					{
-						"name": "ORIGANAL",
+						"name": "QANSWER",
 						"type": "String"
 					},
 					{
-						"name": "CURRANAL",
+						"name": "QANSWERED",
 						"type": "String"
 					},
 					{
-						"name": "GROUPANAL",
+						"name": "QANSWERDATE",
 						"type": "String"
 					},
 					{
-						"name": "LASTANAL",
+						"name": "QSHOW",
 						"type": "String"
 					},
 					{
-						"name": "LASTANLGRP",
+						"name": "QORDER",
 						"type": "String"
 					},
 					{
-						"name": "ORIGGROUP",
+						"name": "QUPDATED",
 						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/FILE_QSESSION')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Folder_Requestia",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Requestia"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "FileServerLocation",
+						"fileName": "qsession.csv"
 					},
+					"columnDelimiter": ";",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
 					{
-						"name": "CURRGROUP",
+						"name": "QSESSION",
 						"type": "String"
 					},
 					{
-						"name": "LASTGROUP",
+						"name": "QSESSIONTITLE",
 						"type": "String"
 					},
 					{
-						"name": "GRGROUP",
-						"type": "String"
-					},
-					{
-						"name": "CATEGORY",
-						"type": "String"
-					},
-					{
-						"name": "PRODUCT",
-						"type": "String"
-					},
-					{
-						"name": "PROCESS",
-						"type": "String"
-					},
-					{
-						"name": "PROBLEM",
-						"type": "String"
-					},
-					{
-						"name": "RSTATUS",
-						"type": "String"
-					},
-					{
-						"name": "RPRIORITY",
-						"type": "String"
-					},
-					{
-						"name": "REQTYPE",
-						"type": "String"
-					},
-					{
-						"name": "REQSOURCE",
-						"type": "String"
-					},
-					{
-						"name": "LOCATION",
-						"type": "String"
-					},
-					{
-						"name": "ORGUNIT",
-						"type": "String"
-					},
-					{
-						"name": "ORGUNIT_ROOT",
-						"type": "String"
-					},
-					{
-						"name": "CHARGE",
-						"type": "String"
-					},
-					{
-						"name": "SLEVEL",
-						"type": "String"
-					},
-					{
-						"name": "EQUIP",
-						"type": "String"
-					},
-					{
-						"name": "RESOURCEID",
-						"type": "String"
-					},
-					{
-						"name": "REQUESTOR",
-						"type": "String"
-					},
-					{
-						"name": "ABSTRACT",
-						"type": "String"
-					},
-					{
-						"name": "DESCRIPT",
-						"type": "String"
-					},
-					{
-						"name": "OPENDATE",
-						"type": "String"
-					},
-					{
-						"name": "CLOSEDATE",
-						"type": "String"
-					},
-					{
-						"name": "CLOSED",
-						"type": "String"
-					},
-					{
-						"name": "LASTACTION",
-						"type": "String"
-					},
-					{
-						"name": "LASTANALYST",
-						"type": "String"
-					},
-					{
-						"name": "LASTSTATUS",
-						"type": "String"
-					},
-					{
-						"name": "LASTPRIORITY",
-						"type": "String"
-					},
-					{
-						"name": "LASTREOPEN",
-						"type": "String"
-					},
-					{
-						"name": "LASTACTIONATEND",
-						"type": "String"
-					},
-					{
-						"name": "LASTACTTYPE",
-						"type": "String"
-					},
-					{
-						"name": "REFDATE",
-						"type": "String"
-					},
-					{
-						"name": "RESPDATE",
-						"type": "String"
-					},
-					{
-						"name": "RESPTIME",
-						"type": "String"
-					},
-					{
-						"name": "RESLTIME",
-						"type": "String"
-					},
-					{
-						"name": "RESPMINS",
-						"type": "String"
-					},
-					{
-						"name": "RESLMINS",
-						"type": "String"
-					},
-					{
-						"name": "RESPREMAINS",
-						"type": "String"
-					},
-					{
-						"name": "RESLREMAINS",
-						"type": "String"
-					},
-					{
-						"name": "RESPMODE",
-						"type": "String"
-					},
-					{
-						"name": "RESLMODE",
-						"type": "String"
-					},
-					{
-						"name": "NOCOMPUTE",
-						"type": "String"
-					},
-					{
-						"name": "RLOCKED",
-						"type": "String"
-					},
-					{
-						"name": "ESTIMCOST",
-						"type": "String"
-					},
-					{
-						"name": "TOTALCOST",
-						"type": "String"
-					},
-					{
-						"name": "APROVANLTYPE",
-						"type": "String"
-					},
-					{
-						"name": "APROVANALYST",
-						"type": "String"
-					},
-					{
-						"name": "APROVCLITYPE",
-						"type": "String"
-					},
-					{
-						"name": "APROVCLIEXACTOUNIT",
-						"type": "String"
-					},
-					{
-						"name": "MLEVELAPROV",
-						"type": "String"
-					},
-					{
-						"name": "OUNITAPROV",
-						"type": "String"
-					},
-					{
-						"name": "CLIENTAPROV",
-						"type": "String"
-					},
-					{
-						"name": "PACKAGE",
-						"type": "String"
-					},
-					{
-						"name": "PROJECT",
-						"type": "String"
-					},
-					{
-						"name": "REQPARENT",
-						"type": "String"
-					},
-					{
-						"name": "PAYMETHOD",
-						"type": "String"
-					},
-					{
-						"name": "WORKFLOW",
-						"type": "String"
-					},
-					{
-						"name": "SEVENT",
-						"type": "String"
-					},
-					{
-						"name": "CURRSEVENT",
-						"type": "String"
-					},
-					{
-						"name": "LASTSEVENT",
-						"type": "String"
-					},
-					{
-						"name": "REQWORKFLOW",
-						"type": "String"
-					},
-					{
-						"name": "ORIGCATEGORY",
-						"type": "String"
-					},
-					{
-						"name": "ORIGPRODUCT",
-						"type": "String"
-					},
-					{
-						"name": "ORIGPROCESS",
-						"type": "String"
-					},
-					{
-						"name": "ORIGPROBLEM",
-						"type": "String"
-					},
-					{
-						"name": "TIMEZONE",
-						"type": "String"
-					},
-					{
-						"name": "ID3PART",
-						"type": "String"
-					},
-					{
-						"name": "MQI_PROFILEID",
-						"type": "String"
-					},
-					{
-						"name": "MQI_VERIFIED",
-						"type": "String"
-					},
-					{
-						"name": "VIEWPROJECT",
-						"type": "String"
-					},
-					{
-						"name": "PROJSTARTED",
-						"type": "String"
-					},
-					{
-						"name": "TOTALATTACH",
-						"type": "String"
-					},
-					{
-						"name": "TOTALATTACHACT",
-						"type": "String"
-					},
-					{
-						"name": "INSERTDATE",
-						"type": "String"
-					},
-					{
-						"name": "UPDATEDATE",
+						"name": "QCLIENT",
 						"type": "String"
 					},
 					{
@@ -1318,435 +1101,31 @@
 						"type": "String"
 					},
 					{
-						"name": "QFORMSCRIPT",
+						"name": "QVERSION",
 						"type": "String"
 					},
 					{
-						"name": "QSURVEY",
+						"name": "QSTATUS",
 						"type": "String"
 					},
 					{
-						"name": "QSESSIONFORM",
+						"name": "QANSWERDATE",
 						"type": "String"
 					},
 					{
-						"name": "QSESSIONSURVEY",
+						"name": "QEXPDATE",
 						"type": "String"
 					},
 					{
-						"name": "REQUESTFLAGS",
+						"name": "QAPPLICATION",
 						"type": "String"
 					},
 					{
-						"name": "V_ASSOCIATION",
+						"name": "QSURVEYTYPE",
 						"type": "String"
 					},
 					{
-						"name": "V_ID_CONTRACT",
-						"type": "String"
-					},
-					{
-						"name": "V_ID_PROJECT",
-						"type": "String"
-					},
-					{
-						"name": "V_IS_PROJECT",
-						"type": "String"
-					},
-					{
-						"name": "V_HAS_PROJECT",
-						"type": "String"
-					},
-					{
-						"name": "V_HAS_APPROVER",
-						"type": "String"
-					},
-					{
-						"name": "LASTSEQUENCE",
-						"type": "String"
-					},
-					{
-						"name": "PRBPARENT",
-						"type": "String"
-					},
-					{
-						"name": "LASTRECALCDATE",
-						"type": "String"
-					},
-					{
-						"name": "LASTAPPROVCNTX",
-						"type": "String"
-					},
-					{
-						"name": "LASTAPPROVUSER",
-						"type": "String"
-					},
-					{
-						"name": "LASTAPPROVCODE",
-						"type": "String"
-					},
-					{
-						"name": "CURRAPPROVCODE",
-						"type": "String"
-					},
-					{
-						"name": "ORIGNOCOMPUTE",
-						"type": "String"
-					},
-					{
-						"name": "ORIGRSTATUS",
-						"type": "String"
-					},
-					{
-						"name": "ORIGRPRIORITY",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/HOB_CSV_NC_AgentesPorDia')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Folder_Nexcore_Consolidado",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Nexcore/HOB"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "FileServerLocation",
-						"fileName": "AgentesPorDiaHOBL2.csv"
-					},
-					"columnDelimiter": ";",
-					"escapeChar": "",
-					"firstRowAsHeader": true,
-					"quoteChar": ""
-				},
-				"schema": [
-					{
-						"name": "Usuario",
-						"type": "String"
-					},
-					{
-						"name": "Intervalo",
-						"type": "String"
-					},
-					{
-						"name": "Atendidas",
-						"type": "String"
-					},
-					{
-						"name": "Recusas",
-						"type": "String"
-					},
-					{
-						"name": "Recebidas",
-						"type": "String"
-					},
-					{
-						"name": "Internas Recebidas",
-						"type": "String"
-					},
-					{
-						"name": "Transferencias",
-						"type": "String"
-					},
-					{
-						"name": "Efetuadas",
-						"type": "String"
-					},
-					{
-						"name": "Efetuadas Tratados",
-						"type": "String"
-					},
-					{
-						"name": "% Taxa de Contato",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Atendidas",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Internas Recebidas",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Efetuadas",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Medio Falado",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Total Falado",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Toque Agente",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Toque Cliente",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Pausa",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Estouro",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Dispon�vel",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Indispon�vel",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Logado",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Deslogado",
-						"type": "String"
-					},
-					{
-						"name": "% Falado x Logado",
-						"type": "String"
-					},
-					{
-						"name": "Marca",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/HOB_CSV_NC_AgentesPorHora')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Folder_Nexcore_Consolidado",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Nexcore/HOB"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "FileServerLocation",
-						"fileName": "AgentesPorHoraHOBL2.csv"
-					},
-					"columnDelimiter": ";",
-					"escapeChar": "",
-					"firstRowAsHeader": true,
-					"quoteChar": ""
-				},
-				"schema": [
-					{
-						"name": "Usuario",
-						"type": "String"
-					},
-					{
-						"name": "Intervalo",
-						"type": "String"
-					},
-					{
-						"name": "Atendidas",
-						"type": "String"
-					},
-					{
-						"name": "Recusas",
-						"type": "String"
-					},
-					{
-						"name": "Recebidas",
-						"type": "String"
-					},
-					{
-						"name": "Internas Recebidas",
-						"type": "String"
-					},
-					{
-						"name": "Transferencias",
-						"type": "String"
-					},
-					{
-						"name": "Efetuadas",
-						"type": "String"
-					},
-					{
-						"name": "Efetuadas Tratados",
-						"type": "String"
-					},
-					{
-						"name": "% Taxa de Contato",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Atendidas",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Internas Recebidas",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Efetuadas",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Medio Falado",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Total Falado",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Toque Agente",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Toque Cliente",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Pausa",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Estouro",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Dispon�vel",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Indispon�vel",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Logado",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Deslogado",
-						"type": "String"
-					},
-					{
-						"name": "% Falado x Logado",
-						"type": "String"
-					},
-					{
-						"name": "Marca",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/HOB_CSV_NC_BilheteLigacoes')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Arquivo Nexcore BilheteLigacoes.csv",
-				"linkedServiceName": {
-					"referenceName": "Folder_Nexcore_Consolidado",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Nexcore/HOB"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "FileServerLocation",
-						"fileName": "BilheteLigacoesHOBL2.csv"
-					},
-					"columnDelimiter": ";",
-					"escapeChar": "",
-					"firstRowAsHeader": true,
-					"quoteChar": ""
-				},
-				"schema": [
-					{
-						"name": "Data",
-						"type": "String"
-					},
-					{
-						"name": "Hora",
-						"type": "String"
-					},
-					{
-						"name": "Usu�rio",
-						"type": "String"
-					},
-					{
-						"name": "Tipo",
-						"type": "String"
-					},
-					{
-						"name": "Origem",
-						"type": "String"
-					},
-					{
-						"name": "Destino",
-						"type": "String"
-					},
-					{
-						"name": "Status",
-						"type": "String"
-					},
-					{
-						"name": "Centro de Custo",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Tarifado",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Decorrido",
-						"type": "String"
-					},
-					{
-						"name": "Campanha",
-						"type": "String"
-					},
-					{
-						"name": "Fila",
-						"type": "String"
-					},
-					{
-						"name": "Unique ID",
-						"type": "String"
-					},
-					{
-						"name": "Linked ID",
-						"type": "String"
-					},
-					{
-						"name": "Marca",
+						"name": "REQLOCATION",
 						"type": "String"
 					}
 				]
