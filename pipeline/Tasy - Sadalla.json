@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Sadalla_Tasy_CopyData",
+				"name": "Copy procedures",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select\n\n'Tasy Sadalla' as BASE,\n--x.nr_seq_proc_pacote,\n7 as cd_marca,\n'Hospital de Olhos Sadalla Amin Ghanem' as marca,\n17 as cd_estabelecimento,\nc.nr_atendimento,\n'7'||'17'||c.nr_atendimento as nr_registro_unico,\nx.dt_atualizacao,\nat.dt_entrada,\nc.nr_interno_conta,\nnull as ds_estabelecimento,\npf.cd_pessoa_fisica,\n\npf.dt_nascimento,\npf.nr_cpf,\npf.ie_sexo,\nobter_compl_pf(pf.cd_pessoa_fisica,1,'CEP') as nr_cep,\nobter_compl_pf(pf.cd_pessoa_fisica,1,'CI') as ds_cidade,\n--pf.cd_pessoa_fisica as cd_pessoa_fisica,\nobter_nome_pf(at.cd_pessoa_fisica) as ds_pessoa_fisica,\nc.cd_convenio_parametro as cd_convenio,\nobter_nome_convenio(c.cd_convenio_parametro) as ds_convenio,\nx.cd_medico_executor,\nobter_nome_pf(x.cd_medico_executor) as ds_medico_executor,\nx.cd_medico_req as cd_medico_requisitante,\nobter_nome_pf(x.cd_medico_req) as ds_medico_requisitante,\nx.ie_origem_proced,\nx.cd_procedimento,\nx.ds_procedimento as ds_procedimento,\nx.classif as ds_classificacao,\n\n(select r.ds_grupo_receita from grupo_receita r where r.nr_sequencia = x.nr_seq_grupo_rec) as ds_classif_procedimento,\n\ncase\nwhen (select r.nr_sequencia from grupo_receita r where r.nr_sequencia = x.nr_seq_grupo_rec) = 12 then x.cd_procedimento\nelse\n\n(select z.cd_procedimento as valor \n from procedimento_paciente z \n where z.nr_atendimento = c.nr_atendimento \n and z.nr_interno_conta = c.nr_interno_conta \n --and z.vl_medico = (select max(w.vl_medico) \n and z.nr_sequencia = (select min(w.nr_sequencia)\n                          from procedimento_paciente w \n                          where w.nr_atendimento = z.nr_atendimento \n                          and w.nr_interno_conta = z.nr_interno_conta\n                          and w.cd_motivo_exc_conta is null\n                          ) \n group by z.cd_procedimento) end cd_proced_principal,\n\ncase\nwhen (select r.nr_sequencia from grupo_receita r where r.nr_sequencia = x.nr_seq_grupo_rec) = 12 then obter_desc_procedimento(x.cd_procedimento, x.ie_origem_proced)\nelse\n\nobter_desc_procedimento(\n\n(select z.cd_procedimento as valor \n   from procedimento_paciente z \n   where z.nr_atendimento = c.nr_atendimento \n   and z.nr_interno_conta = c.nr_interno_conta \n   --and z.vl_medico = (select max(w.vl_medico) \n    and z.nr_sequencia = (select min(w.nr_sequencia)\n                            from procedimento_paciente w \n                            where w.nr_atendimento = z.nr_atendimento \n                            and w.nr_interno_conta = z.nr_interno_conta\n                            and w.cd_motivo_exc_conta is null\n                            ) \n                            group by z.cd_procedimento),\n\n(select min(z.ie_origem_proced) as ie_origem_proced \n   from procedimento_paciente z \n   where z.nr_atendimento = c.nr_atendimento \n   and z.nr_interno_conta = c.nr_interno_conta \n   --and z.vl_medico = (select max(w.vl_medico) \n    and z.nr_sequencia = (select min(w.nr_sequencia)\n                         from procedimento_paciente w \n                         where w.nr_atendimento = z.nr_atendimento \n                         and w.nr_interno_conta = z.nr_interno_conta\n                         and w.cd_motivo_exc_conta is null\n                         ) \n group by z.ie_origem_proced)\n\n)end ds_proced_principal,\n\nx.qt_procedimento,\nc.vl_conta,\nx.vl_procedimento,\nc.ie_status_acerto,\ndecode(c.ie_status_acerto, 1,'Provisorio' , 2 ,'Definitivo') as status_conta,\nx.tuss as cd_tuss,\n(select x.ds_estrutura from  mat_estrutura x, mat_estrutura_cadastro y where x.nr_sequencia = y.nr_seq_estrutura and y.cd_material = x.cd_procedimento) as ds_classif_lio\nfrom atendimento_paciente at,\nconta_paciente c,\npessoa_fisica pf,\n\n(select p.nr_interno_conta, \np.cd_procedimento, \nobter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced) as ds_procedimento, \nobter_valor_dominio(19,pr.ie_classificacao) as classif,\np.cd_medico_executor,\np.cd_medico_req,\np.ie_origem_proced,\np.qt_procedimento,\np.vl_procedimento,\np.vl_medico,\np.nr_sequencia,\np.cd_edicao_amb,\np.cd_convenio,\np.nr_atendimento,\np.cd_motivo_exc_conta,\np.nr_seq_proc_crit_repasse,\nobter_codigo_tuss(p.nr_seq_proc_interno) as tuss,\np.dt_atualizacao,\npr.nr_seq_grupo_rec\nfrom procedimento_paciente p,\n     procedimento pr\nwhere p.cd_procedimento = pr.cd_procedimento\nand p.ie_origem_proced = pr.ie_origem_proced\n\nunion all\nselect mp.nr_interno_conta, \nmp.cd_material as cd_procedimento, \nm.ds_material as ds_procedimento,\nobter_dados_material(m.cd_material,'GRU') as classif,\nobter_medico_resp_atend(mp.nr_atendimento,'C') as cd_medico_executor,\nobter_medico_resp_atend(mp.nr_atendimento,'C') as cd_medico_req,\n0 as ie_origem_proced,\nmp.qt_material,\nmp.vl_material,\n0 vl_medico,\nmp.nr_sequencia,\n'0' as cd_edicao_amb,\nmp.cd_convenio,\nmp.nr_atendimento,\nmp.cd_motivo_exc_conta,\n0 nr_seq_proc_crit_repasse,\n0 tuss,\nmp.dt_atualizacao,\n0 nr_seq_grupo_rec\nfrom material_atend_paciente mp,\n     material m\nwhere mp.cd_material = m.cd_material) x\n\nwhere at.nr_atendimento = c.nr_atendimento\nand c.nr_interno_conta = x.nr_interno_conta\nand at.cd_pessoa_fisica = pf.cd_pessoa_fisica\nand c.ie_cancelamento is null\nand x.cd_motivo_exc_conta is null\nand c.cd_estabelecimento = 1\nand at.dt_entrada BETWEEN sysdate -365 and sysdate\nand c.vl_conta > 0\ngroup by \nc.nr_atendimento,\nat.dt_entrada,\nc.nr_interno_conta,\nc.cd_estabelecimento,\nat.cd_pessoa_fisica,\nc.cd_convenio_parametro,\nc.vl_conta,\nx.nr_sequencia,\nx.vl_medico,\nx.vl_procedimento,\nx.ie_origem_proced,\nx.cd_procedimento,\nx.ds_procedimento,\nx.qt_procedimento,\nx.cd_edicao_amb,\nx.cd_medico_executor,\nc.ie_status_acerto,\nx.nr_atendimento,\nx.cd_convenio,\nat.ie_tipo_atendimento,\nx.nr_interno_conta,\npf.dt_nascimento,\npf.nr_cpf,\nx.cd_medico_req,\npf.ie_sexo,\npf.cd_pessoa_fisica,\nx.classif,\nx.tuss,\nx.nr_seq_grupo_rec,\nx.dt_atualizacao,\nat.nr_atendimento\n\norder by 5,3 desc",
+						"oracleReaderQuery": "select \n\n'Tasy Sadalla' as BASE,\n7 as cd_marca,\n'Hospital de Olhos Sadalla Amin Ghanem' as marca,\n17 as cd_estabelecimento,\np.nr_atendimento,\n'7'||'17'||p.nr_atendimento as nr_registro_unico,\np.dt_atualizacao,\nat.dt_entrada,\np.nr_interno_conta,\nobter_nome_estab(c.cd_estabelecimento) as ds_estabelecimento,\npf.cd_pessoa_fisica,\npf.dt_nascimento,\npf.nr_cpf,\npf.ie_sexo,\nobter_compl_pf(pf.cd_pessoa_fisica,1,'CEP') as nr_cep,\nobter_compl_pf(pf.cd_pessoa_fisica,1,'CI') as ds_cidade,\nobter_nome_pf(at.cd_pessoa_fisica) as ds_pessoa_fisica,\np.cd_convenio as cd_convenio,\nobter_nome_convenio(c.cd_convenio_parametro) as ds_convenio,\np.cd_medico_executor,\nobter_nome_pf(p.cd_medico_executor) as ds_medico_executor,\np.cd_medico_req as cd_medico_requisitante,\nobter_nome_pf(p.cd_medico_req) as ds_medico_requisitante,\np.ie_origem_proced,\np.cd_procedimento,\nobter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced) as ds_procedimento, \nobter_valor_dominio(19,pr.ie_classificacao) as ds_classificacao,\n'' as ds_classif_procedimento,\n0 as cd_proced_principal,\n'' ds_proced_principal,\np.qt_procedimento,\nc.vl_conta,\np.vl_procedimento,\nc.ie_status_acerto,\ndecode(c.ie_status_acerto, 1,'Provisorio' , 2 ,'Definitivo') as status_conta,\n'' as cd_tuss,\n'' as ds_classif_lio\nfrom procedimento_paciente p,\natendimento_paciente at,\npessoa_fisica pf,\nprocedimento pr,\nconta_paciente c\nwhere p.nr_atendimento = at.nr_atendimento\nand at.cd_pessoa_fisica = pf.cd_pessoa_fisica\nand p.cd_procedimento = pr.cd_procedimento\nand p.ie_origem_proced = pr.ie_origem_proced\nand p.nr_interno_conta = c.nr_interno_conta\nand at.dt_entrada >= '01/01/2018' ",
 						"partitionOption": "None"
 					},
 					"sink": {
@@ -336,15 +336,6 @@
 							},
 							{
 								"source": {
-									"name": "CD_TUSS"
-								},
-								"sink": {
-									"name": "CD_TUSS",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
 									"name": "DS_CLASSIF_LIO"
 								},
 								"sink": {
@@ -382,7 +373,13 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "Sadalla_Tasy_CopyData",
+						"activity": "Copy procedures",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Copy materials",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -938,6 +935,372 @@
 					"referenceName": "AzureSqlDatabase",
 					"type": "LinkedServiceReference"
 				}
+			},
+			{
+				"name": "Copy materials",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "select \n\n'Tasy Sadalla' as BASE,\n7 as cd_marca,\n'Hospital de Olhos Sadalla Amin Ghanem' as marca,\n17 as cd_estabelecimento,\np.nr_atendimento,\n'7'||'17'||p.nr_atendimento as nr_registro_unico,\np.dt_atualizacao,\nat.dt_entrada,\np.nr_interno_conta,\nobter_nome_estab(c.cd_estabelecimento) as ds_estabelecimento,\npf.cd_pessoa_fisica,\npf.dt_nascimento,\npf.nr_cpf,\npf.ie_sexo,\nobter_compl_pf(pf.cd_pessoa_fisica,1,'CEP') as nr_cep,\nobter_compl_pf(pf.cd_pessoa_fisica,1,'CI') as ds_cidade,\nobter_nome_pf(at.cd_pessoa_fisica) as ds_pessoa_fisica,\np.cd_convenio as cd_convenio,\nobter_nome_convenio(c.cd_convenio_parametro) as ds_convenio,\nci.cd_medico_cirurgiao as cd_medico_executor,\nobter_nome_pf(ci.cd_medico_cirurgiao) as ds_medico_executor,\nci.cd_medico_cirurgiao as cd_medico_requisitante,\nobter_nome_pf(ci.cd_medico_cirurgiao) as ds_medico_requisitante,\n'' as ie_origem_proced,\np.cd_material,\npr.ds_material as ds_procedimento, \n'Material' as ds_classificacao,\n'' as ds_classif_procedimento,\n0 as cd_proced_principal,\n'' ds_proced_principal,\np.qt_material as qt_procedimento,\nc.vl_conta,\np.vl_material as vl_procedimento,\nc.ie_status_acerto,\ndecode(c.ie_status_acerto, 1,'Provisorio' , 2 ,'Definitivo') as status_conta,\n0 as cd_tuss,\n(select x.ds_estrutura from  mat_estrutura x, mat_estrutura_cadastro y where x.nr_sequencia = y.nr_seq_estrutura and y.cd_material = p.cd_material) as ds_classif_lio\nfrom material_atend_paciente p,\natendimento_paciente at,\npessoa_fisica pf,\nmaterial pr,\nconta_paciente c,\ncirurgia ci\nwhere p.nr_atendimento = at.nr_atendimento\nand at.cd_pessoa_fisica = pf.cd_pessoa_fisica\nand p.cd_material = pr.cd_material\nand p.nr_interno_conta = c.nr_interno_conta\nand p.nr_cirurgia = ci.nr_cirurgia\nand p.nr_atendimento = ci.nr_atendimento\nand at.dt_entrada >= '01/01/2018' ",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBatchSize": 10000
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "CD_MARCA"
+								},
+								"sink": {
+									"name": "CD_MARCA",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "MARCA"
+								},
+								"sink": {
+									"name": "MARCA",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CD_ESTABELECIMENTO"
+								},
+								"sink": {
+									"name": "CD_ESTABELECIMENTO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "NR_ATENDIMENTO"
+								},
+								"sink": {
+									"name": "NR_ATENDIMENTO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "NR_REGISTRO_UNICO"
+								},
+								"sink": {
+									"name": "NR_REGISTRO_UNICO",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "DT_ATUALIZACAO"
+								},
+								"sink": {
+									"name": "DT_ATUALIZACAO",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "DT_ENTRADA"
+								},
+								"sink": {
+									"name": "DT_ENTRADA",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "NR_INTERNO_CONTA"
+								},
+								"sink": {
+									"name": "NR_INTERNO_CONTA",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_ESTABELECIMENTO"
+								},
+								"sink": {
+									"name": "DS_ESTABELECIMENTO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CD_PESSOA_FISICA"
+								},
+								"sink": {
+									"name": "CD_PESSOA_FISICA",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "DT_NASCIMENTO"
+								},
+								"sink": {
+									"name": "DT_NASCIMENTO",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "NR_CPF"
+								},
+								"sink": {
+									"name": "NR_CPF",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "IE_SEXO"
+								},
+								"sink": {
+									"name": "IE_SEXO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NR_CEP"
+								},
+								"sink": {
+									"name": "NR_CEP",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_CIDADE"
+								},
+								"sink": {
+									"name": "DS_CIDADE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_PESSOA_FISICA"
+								},
+								"sink": {
+									"name": "DS_PESSOA_FISICA",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CD_CONVENIO"
+								},
+								"sink": {
+									"name": "CD_CONVENIO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_CONVENIO"
+								},
+								"sink": {
+									"name": "DS_CONVENIO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CD_MEDICO_EXECUTOR"
+								},
+								"sink": {
+									"name": "CD_MEDICO_EXECUTOR",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_MEDICO_EXECUTOR"
+								},
+								"sink": {
+									"name": "DS_MEDICO_EXECUTOR",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CD_MEDICO_REQUISITANTE"
+								},
+								"sink": {
+									"name": "CD_MEDICO_REQUISITANTE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_MEDICO_REQUISITANTE"
+								},
+								"sink": {
+									"name": "DS_MEDICO_REQUISITANTE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "IE_ORIGEM_PROCED"
+								},
+								"sink": {
+									"name": "IE_ORIGEM_PROCED",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "CD_PROCEDIMENTO"
+								},
+								"sink": {
+									"name": "CD_PROCEDIMENTO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_PROCEDIMENTO"
+								},
+								"sink": {
+									"name": "DS_PROCEDIMENTO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_CLASSIFICACAO"
+								},
+								"sink": {
+									"name": "DS_CLASSIFICACAO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_CLASSIF_PROCEDIMENTO"
+								},
+								"sink": {
+									"name": "DS_CLASSIF_PROCEDIMENTO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CD_PROCED_PRINCIPAL"
+								},
+								"sink": {
+									"name": "CD_PROCED_PRINCIPAL",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_PROCED_PRINCIPAL"
+								},
+								"sink": {
+									"name": "DS_PROCED_PRINCIPAL",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "QT_PROCEDIMENTO"
+								},
+								"sink": {
+									"name": "QT_PROCEDIMENTO",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_CONTA"
+								},
+								"sink": {
+									"name": "VL_CONTA",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_PROCEDIMENTO"
+								},
+								"sink": {
+									"name": "VL_PROCEDIMENTO",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "IE_STATUS_ACERTO"
+								},
+								"sink": {
+									"name": "IE_STATUS_ACERTO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "STATUS_CONTA"
+								},
+								"sink": {
+									"name": "STATUS_CONTA",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_CLASSIF_LIO"
+								},
+								"sink": {
+									"name": "DS_CLASSIF_LIO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "BASE"
+								},
+								"sink": {
+									"name": "BASE",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SadallaTasyPrdDataSet",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AzureSqlTEMPTable",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"folder": {
