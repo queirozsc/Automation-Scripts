@@ -398,6 +398,105 @@
 								"sink": {
 									"name": "RESLMODE"
 								}
+							},
+							{
+								"source": {
+									"name": "NOCOMPUTE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "NOCOMPUTE"
+								}
+							},
+							{
+								"source": {
+									"name": "APROVANLTYPE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "APROVANLTYPE"
+								}
+							},
+							{
+								"source": {
+									"name": "APROVCLITYPE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "APROVCLITYPE"
+								}
+							},
+							{
+								"source": {
+									"name": "MLEVELAPROV",
+									"type": "String"
+								},
+								"sink": {
+									"name": "MLEVELAPROV"
+								}
+							},
+							{
+								"source": {
+									"name": "CLIENTAPROV",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLIENTAPROV"
+								}
+							},
+							{
+								"source": {
+									"name": "PACKAGE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "PACKAGE"
+								}
+							},
+							{
+								"source": {
+									"name": "WORKFLOW",
+									"type": "String"
+								},
+								"sink": {
+									"name": "WORKFLOW"
+								}
+							},
+							{
+								"source": {
+									"name": "LASTSEVENT",
+									"type": "String"
+								},
+								"sink": {
+									"name": "LASTSEVENT"
+								}
+							},
+							{
+								"source": {
+									"name": "REQWORKFLOW",
+									"type": "String"
+								},
+								"sink": {
+									"name": "REQWORKFLOW"
+								}
+							},
+							{
+								"source": {
+									"name": "ORIGCATEGORY",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ORIGCATEGORY"
+								}
+							},
+							{
+								"source": {
+									"name": "ORIGPRODUCT",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ORIGPRODUCT"
+								}
 							}
 						]
 					}
