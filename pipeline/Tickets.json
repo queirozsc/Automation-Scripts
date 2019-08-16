@@ -963,16 +963,6 @@
 									"name": "QUESTION",
 									"type": "String"
 								}
-							},
-							{
-								"source": {
-									"name": "QANSWER",
-									"type": "String"
-								},
-								"sink": {
-									"name": "QANSWER",
-									"type": "String"
-								}
 							}
 						]
 					}
