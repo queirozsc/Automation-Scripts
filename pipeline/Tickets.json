@@ -953,26 +953,6 @@
 									"name": "QSESSION",
 									"type": "String"
 								}
-							},
-							{
-								"source": {
-									"name": "QUESTION",
-									"type": "String"
-								},
-								"sink": {
-									"name": "QUESTION",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "QANSWER",
-									"type": "String"
-								},
-								"sink": {
-									"name": "QANSWER",
-									"type": "String"
-								}
 							}
 						]
 					}
