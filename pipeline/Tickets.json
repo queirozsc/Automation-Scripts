@@ -944,11 +944,82 @@
 						"mappings": [
 							{
 								"source": {
+									"name": "QSESSION",
+									"type": "String"
+								},
+								"sink": {
+									"name": "QSESSION",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "QUESTION",
+									"type": "String"
+								},
+								"sink": {
+									"name": "QUESTION",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
 									"name": "QANSWER",
 									"type": "String"
 								},
 								"sink": {
-									"name": "QANSWER"
+									"name": "QANSWER",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "QANSWERED",
+									"type": "String"
+								},
+								"sink": {
+									"name": "QANSWERED",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "QANSWERDATE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "QANSWERDATE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "QSHOW",
+									"type": "String"
+								},
+								"sink": {
+									"name": "QSHOW",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "QORDER",
+									"type": "String"
+								},
+								"sink": {
+									"name": "QORDER",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "QUPDATED",
+									"type": "String"
+								},
+								"sink": {
+									"name": "QUPDATED",
+									"type": "String"
 								}
 							}
 						]
