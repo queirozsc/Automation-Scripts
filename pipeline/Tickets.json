@@ -933,7 +933,8 @@
 							"recursive": true
 						},
 						"formatSettings": {
-							"type": "DelimitedTextReadSettings"
+							"type": "DelimitedTextReadSettings",
+							"skipLineCount": 5400000
 						}
 					},
 					"sink": {
@@ -951,6 +952,16 @@
 								},
 								"sink": {
 									"name": "QSESSION",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "QUESTION",
+									"type": "String"
+								},
+								"sink": {
+									"name": "QUESTION",
 									"type": "String"
 								}
 							}
