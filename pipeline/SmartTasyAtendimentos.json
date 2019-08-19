@@ -1,6 +1,44 @@
 {
 	"name": "SmartTasyAtendimentos",
 	"properties": {
+		"activities": [
+			{
+				"name": "TasyHTML5",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "select unique min(at.dt_entrada) as dt_atendimento, \nobter_nome_estab(at.cd_estabelecimento) as unidade, \npf.nr_prontuario, obter_nome_pf(at.cd_pessoa_fisica) as paciente, pf.nr_cpf, cpf.cd_cep, pf.ie_sexo, pf.dt_nascimento\nfrom atendimento_paciente at,\n     pessoa_fisica pf,\n     compl_pessoa_fisica cpf,\n     conta_paciente ct\nwhere at.cd_pessoa_fisica = pf.cd_pessoa_fisica\nand pf.cd_pessoa_fisica = cpf.cd_pessoa_fisica\nand at.nr_atendimento = ct.nr_atendimento\nand cpf.ie_tipo_complemento = 1\nand at.dt_cancelamento is null\nand at.dt_entrada between '01/01/2019' and fim_dia('31/12/2019')\ngroup by obter_nome_estab(at.cd_estabelecimento), pf.nr_prontuario, at.cd_pessoa_fisica, pf.nr_cpf, cpf.cd_cep, pf.ie_sexo, pf.dt_nascimento\norder by 1",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "CloudTasyPrdDataSet",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AZ_SQL_TB_Atend_Pac",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
 		"folder": {
 			"name": "Atendimento Pacientes"
 		},
