@@ -964,6 +964,16 @@
 									"name": "QUESTION",
 									"type": "String"
 								}
+							},
+							{
+								"source": {
+									"name": "Sim",
+									"type": "String"
+								},
+								"sink": {
+									"name": "QANSWER",
+									"type": "String"
+								}
 							}
 						]
 					}
