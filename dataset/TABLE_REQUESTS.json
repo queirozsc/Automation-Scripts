@@ -298,6 +298,58 @@
 			{
 				"name": "ORIGRPRIORITY",
 				"type": "varchar"
+			},
+			{
+				"name": "ABERTURA",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "RESOLUCAO",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "ULTIMA ACAO",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "ULTIMO ANALISTA",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "REABERTURA",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "% SLA",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TEMPO SOLUCAO (H)",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "SITUACAO",
+				"type": "varchar"
+			},
+			{
+				"name": "SITUACAO SLA",
+				"type": "varchar"
+			},
+			{
+				"name": "UNIDADE ATENDIMENTO",
+				"type": "varchar"
 			}
 		],
 		"typeProperties": {
