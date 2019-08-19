@@ -1,0 +1,9 @@
+{
+	"name": "SmartTasyAtendimentos",
+	"properties": {
+		"folder": {
+			"name": "Atendimento Pacientes"
+		},
+		"annotations": []
+	}
+}
