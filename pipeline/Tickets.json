@@ -1041,7 +1041,7 @@
 				]
 			},
 			{
-				"name": "Update client",
+				"name": "Update clients",
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
@@ -1058,7 +1058,14 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[sp_UPDATEREQUESTCLIENT]"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"folder": {
