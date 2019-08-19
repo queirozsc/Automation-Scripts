@@ -947,7 +947,7 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "QSESSION",
+									"name": "156098",
 									"type": "String"
 								},
 								"sink": {
@@ -957,7 +957,7 @@
 							},
 							{
 								"source": {
-									"name": "QUESTION",
+									"name": "COM_DIV_Com",
 									"type": "String"
 								},
 								"sink": {
