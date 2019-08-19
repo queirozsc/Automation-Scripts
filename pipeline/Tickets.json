@@ -9,7 +9,7 @@
 					{
 						"activity": "Clear tables",
 						"dependencyConditions": [
-							"Failed"
+							"Succeeded"
 						]
 					}
 				],
@@ -722,7 +722,7 @@
 					{
 						"activity": "Copy requests",
 						"dependencyConditions": [
-							"Failed"
+							"Succeeded"
 						]
 					}
 				],
@@ -749,7 +749,7 @@
 					{
 						"activity": "Clear tables",
 						"dependencyConditions": [
-							"Failed"
+							"Succeeded"
 						]
 					}
 				],
