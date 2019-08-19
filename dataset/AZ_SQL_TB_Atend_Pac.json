@@ -47,7 +47,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "tasy_smart_pac_atend"
+			"table": "Tasy_Smart_Pac_Atend"
 		}
 	}
 }
