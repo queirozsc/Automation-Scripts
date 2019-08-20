@@ -559,7 +559,14 @@
 			{
 				"name": "OrdensdeServicoHist",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "OrdensServicoPhilipsHTML5",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -584,31 +591,55 @@
 							{
 								"source": {
 									"name": "NR_SEQ_ORDEM_SERV"
+								},
+								"sink": {
+									"name": "nr_seq_ordem_serv",
+									"type": "Int32"
 								}
 							},
 							{
 								"source": {
 									"name": "IE_ORIGEM"
+								},
+								"sink": {
+									"name": "ie_origem",
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "NR_SEQ_TIPO"
+								},
+								"sink": {
+									"name": "nr_seq_tipo",
+									"type": "Int32"
 								}
 							},
 							{
 								"source": {
 									"name": "NM_USUARIO_LIB"
+								},
+								"sink": {
+									"name": "nm_usuario_lib",
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "DT_ATUALIZACAO"
+								},
+								"sink": {
+									"name": "dt_atualizacao",
+									"type": "DateTime"
 								}
 							},
 							{
 								"source": {
 									"name": "DS_RELAT_TECNICO"
+								},
+								"sink": {
+									"name": "ds_relat_tecnico",
+									"type": "String"
 								}
 							}
 						]
