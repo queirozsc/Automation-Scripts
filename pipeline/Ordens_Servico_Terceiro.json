@@ -577,7 +577,42 @@
 					"sink": {
 						"type": "AzureSqlSink"
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "NR_SEQ_ORDEM_SERV"
+								}
+							},
+							{
+								"source": {
+									"name": "IE_ORIGEM"
+								}
+							},
+							{
+								"source": {
+									"name": "NR_SEQ_TIPO"
+								}
+							},
+							{
+								"source": {
+									"name": "NM_USUARIO_LIB"
+								}
+							},
+							{
+								"source": {
+									"name": "DT_ATUALIZACAO"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_RELAT_TECNICO"
+								}
+							}
+						]
+					}
 				},
 				"inputs": [
 					{
