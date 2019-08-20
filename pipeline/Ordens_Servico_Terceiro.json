@@ -559,14 +559,7 @@
 			{
 				"name": "OrdensServicoHist",
 				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "OrdensServicoPhilipsHTML5",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
