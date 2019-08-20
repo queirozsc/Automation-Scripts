@@ -12,36 +12,28 @@
 		"type": "OracleTable",
 		"structure": [
 			{
-				"name": "DT_ATENDIMENTO",
-				"type": "DateTime"
-			},
-			{
-				"name": "UNIDADE",
-				"type": "String"
-			},
-			{
-				"name": "NR_PRONTUARIO",
+				"name": "NR_SEQ_ORDEM_SERV",
 				"type": "Decimal"
 			},
 			{
-				"name": "PACIENTE",
+				"name": "IE_ORIGEM",
 				"type": "String"
 			},
 			{
-				"name": "NR_CPF",
+				"name": "NR_SEQ_TIPO",
+				"type": "Decimal"
+			},
+			{
+				"name": "NM_USUARIO_LIB",
 				"type": "String"
 			},
 			{
-				"name": "CD_CEP",
-				"type": "String"
-			},
-			{
-				"name": "IE_SEXO",
-				"type": "String"
-			},
-			{
-				"name": "DT_NASCIMENTO",
+				"name": "DT_ATUALIZACAO",
 				"type": "DateTime"
+			},
+			{
+				"name": "DS_RELAT_TECNICO",
+				"type": "String"
 			}
 		]
 	},

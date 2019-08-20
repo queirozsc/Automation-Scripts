@@ -9,41 +9,7 @@
 			"name": "Power BI"
 		},
 		"annotations": [],
-		"type": "OracleTable",
-		"structure": [
-			{
-				"name": "DT_ATENDIMENTO",
-				"type": "DateTime"
-			},
-			{
-				"name": "UNIDADE",
-				"type": "String"
-			},
-			{
-				"name": "NR_PRONTUARIO",
-				"type": "Decimal"
-			},
-			{
-				"name": "PACIENTE",
-				"type": "String"
-			},
-			{
-				"name": "NR_CPF",
-				"type": "String"
-			},
-			{
-				"name": "CD_CEP",
-				"type": "String"
-			},
-			{
-				"name": "IE_SEXO",
-				"type": "String"
-			},
-			{
-				"name": "DT_NASCIMENTO",
-				"type": "DateTime"
-			}
-		]
+		"type": "OracleTable"
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
 }
