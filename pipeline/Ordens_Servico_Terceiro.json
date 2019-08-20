@@ -3,6 +3,101 @@
 	"properties": {
 		"activities": [
 			{
+				"name": "Ordens_Hist_HTML5",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "select x.nr_seq_ordem_serv, \n       x.ie_origem, \n       x.nr_seq_tipo, \n       x.nm_usuario_lib, \n       x.dt_atualizacao, \n       x.ds_relat_tecnico\nfrom man_ordem_serv_tecnico x",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "NR_SEQ_ORDEM_SERV"
+								},
+								"sink": {
+									"name": "nr_seq_ordem_serv",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "IE_ORIGEM"
+								},
+								"sink": {
+									"name": "ie_origem",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NR_SEQ_TIPO"
+								},
+								"sink": {
+									"name": "nr_seq_tipo",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "NM_USUARIO_LIB"
+								},
+								"sink": {
+									"name": "nm_usuario_lib",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DT_ATUALIZACAO"
+								},
+								"sink": {
+									"name": "dt_atualizacao",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_RELAT_TECNICO"
+								},
+								"sink": {
+									"name": "ds_relat_tecnico",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "CloudTasyPrdDataSet",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AZ_SQL_TB_Ordens_Servico_Hist",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
 				"name": "Ordens_HTML5",
 				"type": "Copy",
 				"dependsOn": [],
@@ -552,101 +647,6 @@
 				"outputs": [
 					{
 						"referenceName": "AZ_SQL_TB_Ordens_Servico_Terceiro",
-						"type": "DatasetReference"
-					}
-				]
-			},
-			{
-				"name": "Ordens_Hist_HTML5",
-				"type": "Copy",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "OracleSource",
-						"oracleReaderQuery": "select x.nr_seq_ordem_serv, \n       x.ie_origem, \n       x.nr_seq_tipo, \n       x.nm_usuario_lib, \n       x.dt_atualizacao, \n       x.ds_relat_tecnico\nfrom man_ordem_serv_tecnico x",
-						"partitionOption": "None"
-					},
-					"sink": {
-						"type": "AzureSqlSink"
-					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"name": "NR_SEQ_ORDEM_SERV"
-								},
-								"sink": {
-									"name": "nr_seq_ordem_serv",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"name": "IE_ORIGEM"
-								},
-								"sink": {
-									"name": "ie_origem",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "NR_SEQ_TIPO"
-								},
-								"sink": {
-									"name": "nr_seq_tipo",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"name": "NM_USUARIO_LIB"
-								},
-								"sink": {
-									"name": "nm_usuario_lib",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "DT_ATUALIZACAO"
-								},
-								"sink": {
-									"name": "dt_atualizacao",
-									"type": "DateTime"
-								}
-							},
-							{
-								"source": {
-									"name": "DS_RELAT_TECNICO"
-								},
-								"sink": {
-									"name": "ds_relat_tecnico",
-									"type": "String"
-								}
-							}
-						]
-					}
-				},
-				"inputs": [
-					{
-						"referenceName": "CloudTasyPrdDataSet",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "AZ_SQL_TB_Ordens_Servico_Hist",
 						"type": "DatasetReference"
 					}
 				]
