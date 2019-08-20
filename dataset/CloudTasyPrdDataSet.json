@@ -24,23 +24,11 @@
 				"type": "Decimal"
 			},
 			{
-				"name": "DS_LOCALIZACAO",
-				"type": "String"
-			},
-			{
 				"name": "NR_SEQ_EQUIPAMENTO",
 				"type": "Decimal"
 			},
 			{
-				"name": "DS_EQUIPAMENTO",
-				"type": "String"
-			},
-			{
 				"name": "CD_PESSOA_SOLICITANTE",
-				"type": "String"
-			},
-			{
-				"name": "NM_SOLICITANTE",
 				"type": "String"
 			},
 			{
@@ -132,8 +120,20 @@
 				"type": "Decimal"
 			},
 			{
+				"name": "NM_SOLICITANTE",
+				"type": "String"
+			},
+			{
+				"name": "DS_EQUIPAMENTO",
+				"type": "String"
+			},
+			{
 				"name": "NR_SEQ_TRAB",
 				"type": "Double"
+			},
+			{
+				"name": "DS_LOCALIZACAO",
+				"type": "String"
 			},
 			{
 				"name": "CD_SETOR",
