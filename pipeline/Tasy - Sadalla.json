@@ -1282,8 +1282,7 @@
 									"name": "BASE"
 								},
 								"sink": {
-									"name": "BASE",
-									"type": "String"
+									"name": "BASE"
 								}
 							}
 						]
