@@ -10,12 +10,6 @@
 					"referenceName": "AZ_Oracle_To_SQL",
 					"type": "PipelineReference"
 				}
-			},
-			{
-				"pipelineReference": {
-					"referenceName": "Tasy - HTML",
-					"type": "PipelineReference"
-				}
 			}
 		],
 		"type": "ScheduleTrigger",
