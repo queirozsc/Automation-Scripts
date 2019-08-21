@@ -46,10 +46,13 @@ ForEach ($Computer in $Computers) {
         $Win32_OperatingSystem = Get-WmiObject Win32_OperatingSystem -ComputerName $Computer.Name
         $UpTime = (Get-Date) - ($Win32_OperatingSystem.ConvertToDateTime($Win32_OperatingSystem.LastBootupTime))
 
+        # Tamanho total da pasta de usuários
+        # Get-ChildItem -Path \\OCT14\c$\Users -Recurse -File | Measure-Object -Property Length -Sum
     }
 
-    # Organizando as informacoes
-    $ResultItem = New-Object -TypeName PSObject -Property @{
+    # Organizando as informacoes, preservando a ordem das propriedades
+    # (https://adamtheautomator.com/powershell-tutorial-mini-course)
+    $ResultItem = [ordered] @{
         Nome         = $Computer.Name
         TeamviewerID = $TeamviewerID
         ADQuery      = $Computer.DistinguishedName
@@ -64,7 +67,8 @@ ForEach ($Computer in $Computers) {
         DiscoGB      = $Win32_LogicalDisk
         TempoLigada  = "" + $UpTime.Days + " dias " + $UpTime.Hours + " horas " + $UpTime.Minutes + " minutos"
     }
-    Write-Host $ResultItem | Format-Table
+    [PSCustomObject] $ResultItem
+    # Write-Host $ResultItem | Format-Table
     $Result += $ResultItem
 }
 
