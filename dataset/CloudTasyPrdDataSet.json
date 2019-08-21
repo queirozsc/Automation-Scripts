@@ -1,0 +1,41 @@
+{
+	"name": "CloudTasyPrdDataSet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "CloudTasyProd_NEW",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Power BI"
+		},
+		"annotations": [],
+		"type": "OracleTable",
+		"structure": [
+			{
+				"name": "NR_SEQ_ORDEM_SERV",
+				"type": "Decimal"
+			},
+			{
+				"name": "IE_ORIGEM",
+				"type": "String"
+			},
+			{
+				"name": "NR_SEQ_TIPO",
+				"type": "Decimal"
+			},
+			{
+				"name": "NM_USUARIO_LIB",
+				"type": "String"
+			},
+			{
+				"name": "DT_ATUALIZACAO",
+				"type": "DateTime"
+			},
+			{
+				"name": "DS_RELAT_TECNICO",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

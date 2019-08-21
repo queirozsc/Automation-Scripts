@@ -1,0 +1,290 @@
+{
+	"name": "AZ_SQL_TB_Ordens_Servico_Hist",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSQL_DB_Procedimentos",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Ordens de Serviço"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "nr_sequencia",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ds_ordem",
+				"type": "varchar"
+			},
+			{
+				"name": "nr_seq_localizacao",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ds_localizacao",
+				"type": "varchar"
+			},
+			{
+				"name": "nr_seq_equipamento",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ds_equipamento",
+				"type": "varchar"
+			},
+			{
+				"name": "cd_pessoa_solicitante",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "nm_solicitante",
+				"type": "varchar"
+			},
+			{
+				"name": "dt_ordem_servico",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "ie_prioridade",
+				"type": "varchar"
+			},
+			{
+				"name": "ds_dano_breve",
+				"type": "varchar"
+			},
+			{
+				"name": "dt_atualizacao",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "nm_usuario",
+				"type": "varchar"
+			},
+			{
+				"name": "dt_inicio_desejado",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "ds_dano",
+				"type": "varchar"
+			},
+			{
+				"name": "dt_fim_previsto",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "dt_inicio_real",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "dt_fim_real",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "ie_status_ordem",
+				"type": "varchar"
+			},
+			{
+				"name": "nr_grupo_planej",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "nr_grupo_trabalho",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "nr_seq_estagio",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "dt_reabertura",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "cd_funcao",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ie_classificacao",
+				"type": "varchar"
+			},
+			{
+				"name": "ds_situacao",
+				"type": "varchar"
+			},
+			{
+				"name": "ie_grau_satisfacao",
+				"type": "varchar"
+			},
+			{
+				"name": "nr_seq_wheb",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ie_origem_os",
+				"type": "varchar"
+			},
+			{
+				"name": "ie_tipo_ordem",
+				"type": "varchar"
+			},
+			{
+				"name": "nr_seq_trab",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "cd_setor",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ds_setor_localizacao",
+				"type": "varchar"
+			},
+			{
+				"name": "nm_usuario_exec",
+				"type": "varchar"
+			},
+			{
+				"name": "ds_estagio",
+				"type": "varchar"
+			},
+			{
+				"name": "dt_inicio_semana",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "dt_inicio_mes",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "dt_ano",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "cd_estabelecimento",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ie_novo_hist",
+				"type": "varchar"
+			},
+			{
+				"name": "ds_cor_fonte_estagio",
+				"type": "varchar"
+			},
+			{
+				"name": "ds_cor_fundo_estagio",
+				"type": "varchar"
+			},
+			{
+				"name": "ds_grau_satisfacao",
+				"type": "varchar"
+			},
+			{
+				"name": "nm_usuario_exec_prev",
+				"type": "varchar"
+			},
+			{
+				"name": "nr_seq_origem",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ie_parado",
+				"type": "varchar"
+			},
+			{
+				"name": "dt_inicio_previsto",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "dt_conclusao_desejada",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "ds_setor_atendimento",
+				"type": "varchar"
+			},
+			{
+				"name": "ds_grupo_trabalho",
+				"type": "varchar"
+			},
+			{
+				"name": "ds_complexidade",
+				"type": "varchar"
+			},
+			{
+				"name": "ds_origem_os",
+				"type": "varchar"
+			},
+			{
+				"name": "ds_servico",
+				"type": "varchar"
+			},
+			{
+				"name": "qt_horas_aberta",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "qt_horas_processo",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "qt_horas_total",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "dt_ult_hist",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Ordem_Servico_Terc_Hist"
+		}
+	}
+}

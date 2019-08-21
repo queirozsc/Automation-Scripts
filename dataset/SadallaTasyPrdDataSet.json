@@ -1,0 +1,15 @@
+{
+	"name": "SadallaTasyPrdDataSet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SadallaTasyProd_NEW",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Power BI"
+		},
+		"annotations": [],
+		"type": "OracleTable"
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

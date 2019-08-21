@@ -1,0 +1,16 @@
+{
+	"name": "SMART_IOF",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "integrated security=False;data source=10.0.70.148;initial catalog=SMART;user id=smartbi",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJkY2RhODMzYi0zOWE3LTQ3N2YtYTZmOC1hMDMyMGZkMThlODQiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "integrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
