@@ -1,0 +1,1411 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory Name",
+			"defaultValue": "OptyADF"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/AZ_Oracle_To_SQL')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Data_Zero_Faltas",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Truncate Table",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "select\nc.nr_sequencia as id_compromisso,\nc.cd_pessoa_fisica as id_cliente,\nobter_nome_pf(c.cd_pessoa_fisica) as NomePaciente,\npf.dt_nascimento as DtNascimento,\n'55' || substr(pf.nr_ddd_celular, -2) || substr(replace(replace(replace(replace(pf.nr_telefone_celular, '(', ''), ')', ''), ' ', ''), '-', ''), -9) AS CELULAR,\nobter_compl_pf(pf.cd_pessoa_fisica,1,'M') as email,\nc.cd_convenio idconvenio,\nobter_nome_convenio(c.cd_convenio) as convenio,\nc.cd_plano,\nobter_desc_plano(c.cd_convenio, c.cd_plano) ds_plano,\nc.dt_agenda as datacompromisso,\nc.hr_inicio as horacompromisso,\nc.ie_status_agenda as id_status,\nobter_status_agenda_paciente(c.nr_sequencia) as ds_status,\na.cd_agenda,\na.ds_agenda as agenda,\nc.cd_procedimento,\nobter_desc_procedimento(c.cd_procedimento, c.ie_origem_proced) as procedimento,\nobter_empresa_estab(a.cd_estabelecimento) as id_empresa,\nobter_nome_empresa(obter_empresa_estab(a.cd_estabelecimento)) as empresa,\na.cd_estabelecimento as id_unidade,\nobter_nome_estab(a.cd_estabelecimento)as unidade,\nc.ie_autorizacao,\nobter_valor_dominio(1227, c.ie_autorizacao) as autorizacao,\nobter_nome_pf(c.cd_medico_exec) as nm_medico,\nc.dt_agendamento,\na.cd_tipo_agenda  as tipo_agenda,\n'' as tipo_agenda_desc,\na.cd_pessoa_fisica as ds_medico_agenda\nfrom agenda_paciente c,\nagenda a,\npessoa_fisica pf\nwhere c.cd_pessoa_fisica = pf.cd_pessoa_fisica\nand c.cd_agenda = a.cd_agenda\nand c.cd_pessoa_fisica is not null\nand trunc(c.dt_agenda) between inicio_dia(sysdate - 6) and fim_dia(sysdate + 6)\nAND c.IE_STATUS_AGENDA NOT IN ('C', 'F', 'I')\nand length('55' || substr(pf.nr_ddd_celular, -2) || substr(replace(replace(replace(replace(pf.nr_telefone_celular, '(', ''), ')', ''), ' ', ''), '-', ''), -9)) = 13\norder by 1",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "ID_COMPROMISSO"
+										},
+										"sink": {
+											"name": "id_compromisso",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ID_CLIENTE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "id_cliente",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "NOMEPACIENTE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "nomepaciente",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DTNASCIMENTO",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "dtnascimento",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "CELULAR",
+											"type": "String"
+										},
+										"sink": {
+											"name": "celular",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "EMAIL",
+											"type": "String"
+										},
+										"sink": {
+											"name": "email",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "IDCONVENIO",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "idconvenio",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "CONVENIO",
+											"type": "String"
+										},
+										"sink": {
+											"name": "convenio",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CD_PLANO",
+											"type": "String"
+										},
+										"sink": {
+											"name": "cd_plano",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_PLANO",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ds_plano",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DATACOMPROMISSO",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "datacompromisso",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "HORACOMPROMISSO",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "horacompromisso",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ID_STATUS",
+											"type": "String"
+										},
+										"sink": {
+											"name": "id_status",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_STATUS",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ds_status",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CD_AGENDA",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "cd_agenda",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "AGENDA",
+											"type": "String"
+										},
+										"sink": {
+											"name": "agenda",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CD_PROCEDIMENTO",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "cd_procedimento",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "PROCEDIMENTO",
+											"type": "String"
+										},
+										"sink": {
+											"name": "procedimento",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ID_EMPRESA",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "id_empresa",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "EMPRESA",
+											"type": "String"
+										},
+										"sink": {
+											"name": "empresa",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ID_UNIDADE",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "id_unidade",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "UNIDADE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "unidade",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "IE_AUTORIZACAO",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ie_autorizacao",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "AUTORIZACAO",
+											"type": "String"
+										},
+										"sink": {
+											"name": "autorizacao",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "NM_MEDICO",
+											"type": "String"
+										},
+										"sink": {
+											"name": "nm_medico",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DT_AGENDAMENTO",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "dt_agendamento",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "TIPO_AGENDA",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "tipo_agenda",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "TIPO_AGENDA_DESC",
+											"type": "String"
+										},
+										"sink": {
+											"name": "tipo_agenda_desc",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_MEDICO_AGENDA",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ds_medico_agenda",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "Oracle_Zero_Faltas",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AZSQL_TB_Zero_Faltas",
+								"type": "DatasetReference"
+							}
+						]
+					},
+					{
+						"name": "Truncate Table",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[sp_TRUNCATEZEROFALTAS]"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureSQL_DB_Procedimentos",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Altera_tipo_agenda",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Data_Zero_Faltas",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[sp_ALTERTIPOAGENDASPROJESI]"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureSQL_DB_Procedimentos",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"folder": {
+					"name": "Projesi"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/Oracle_Zero_Faltas')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Ordens_Servico_Terceiro')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Ordens_HTML5",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "SELECT a.NR_SEQUENCIA,\n\t   a.ds_ordem,\n\t   a.NR_SEQ_LOCALIZACAO,\n       a.ds_localizacao,\n\t   a.nr_seq_equipamento,\n       a.ds_equipamento,\n\t   a.cd_pessoa_solicitante,\n       a.nm_solicitante,\n\t   a.dt_ordem_servico,\n\t   a.ie_prioridade,\n\t   a.ds_dano_breve,\n\t   a.dt_atualizacao,\n\t   a.nm_usuario,\n\t   a.dt_inicio_desejado,\n\t   a.ds_dano,\n\t   a.dt_fim_previsto,\n\t   a.dt_inicio_real,\n\t   a.dt_fim_real,\n\t   substr(obter_desc_status_os(a.nr_sequencia),1,255) ie_status_ordem,\n\t   a.nr_grupo_planej,\n\t   a.nr_grupo_trabalho,\n\t   a.nr_seq_estagio,\n\t   a.dt_reabertura,\n\t   a.cd_funcao,\n\t   a.ie_classificacao,\n       a.ds_situacao,\n\t   a.ie_grau_satisfacao,\n\t   a.nr_seq_wheb,\n\t   a.ie_origem_os,\n\t   a.ie_tipo_ordem,\n\t   a.nr_seq_trab,\n\t   a.cd_setor,\n\t   a.ds_setor_localizacao,\n\t   a.nm_usuario_exec,\n\t   a.ds_estagio,\n\t   a.dt_inicio_semana,\n\t   a.dt_inicio_mes,\n\t   a.dt_ano,\n\t   a.cd_estabelecimento,\n\t   substr(Man_Obter_Se_Novo_Hist(a.nr_sequencia, 'Allan.C' ),1,3) ie_novo_hist,\n\t   substr(man_obter_dados_estagio(a.nr_seq_estagio,'C'),1,15) ds_cor_fonte_estagio,\n\t   substr(man_obter_dados_estagio(a.nr_seq_estagio,'F'),1,15) ds_cor_fundo_estagio,\n\t   substr(obter_valor_dominio(1197,a.ie_grau_satisfacao),1,255) ds_grau_satisfacao, \n       a.NM_USUARIO_EXEC_PREV,   \n        a.nr_seq_origem,   \n        a.ie_parado,   \n        a.dt_inicio_previsto,   \n        a.dt_conclusao_desejada,   \n        a.ds_setor_atendimento,   \n        a.ds_grupo_trabalho,   \n        SUBSTR(man_obter_complexidade(a.nr_seq_complex),1,100) ds_complexidade,     \n        a.ds_origem_os,   \n        SUBSTR(obter_descricao_padrao('SERVICO','DS_SERVICO', a.nr_seq_servico),1,255) ds_servico,   \n        ROUND(NVL(obter_hora_entre_datas(a.dt_ordem_servico, NVL(a.dt_aceite_os,SYSDATE)),0),0) qt_horas_aberta,   \n        ROUND(NVL(obter_hora_entre_datas(a.dt_aceite_os,NVL(a.dt_fim_real,SYSDATE)),0),0) qt_horas_processo,   \n        ROUND(NVL(obter_hora_entre_datas(a.dt_ordem_servico, NVL(a.dt_fim_real,SYSDATE)),0),0) qt_horas_total,   \n        man_obter_data_ult_hist(a.nr_sequencia) dt_ult_hist\n        FROM\tman_ordem_servico_v2 a\nwhere a.nr_seq_equipamento = 47\nORDER BY DS_ESTAGIO asc ",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "NR_SEQUENCIA"
+										},
+										"sink": {
+											"name": "nr_sequencia",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_ORDEM"
+										},
+										"sink": {
+											"name": "ds_ordem",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "NR_SEQ_LOCALIZACAO"
+										},
+										"sink": {
+											"name": "nr_seq_localizacao",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_LOCALIZACAO"
+										},
+										"sink": {
+											"name": "ds_localizacao",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "NR_SEQ_EQUIPAMENTO"
+										},
+										"sink": {
+											"name": "nr_seq_equipamento",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_EQUIPAMENTO"
+										},
+										"sink": {
+											"name": "ds_equipamento",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CD_PESSOA_SOLICITANTE"
+										},
+										"sink": {
+											"name": "cd_pessoa_solicitante",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "NM_SOLICITANTE"
+										},
+										"sink": {
+											"name": "nm_solicitante",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DT_ORDEM_SERVICO"
+										},
+										"sink": {
+											"name": "dt_ordem_servico",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "IE_PRIORIDADE"
+										},
+										"sink": {
+											"name": "ie_prioridade",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_DANO_BREVE"
+										},
+										"sink": {
+											"name": "ds_dano_breve",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DT_ATUALIZACAO"
+										},
+										"sink": {
+											"name": "dt_atualizacao",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "NM_USUARIO"
+										},
+										"sink": {
+											"name": "nm_usuario",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DT_INICIO_DESEJADO"
+										},
+										"sink": {
+											"name": "dt_inicio_desejado",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_DANO"
+										},
+										"sink": {
+											"name": "ds_dano",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DT_FIM_PREVISTO"
+										},
+										"sink": {
+											"name": "dt_fim_previsto",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "DT_INICIO_REAL"
+										},
+										"sink": {
+											"name": "dt_inicio_real",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "DT_FIM_REAL"
+										},
+										"sink": {
+											"name": "dt_fim_real",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "IE_STATUS_ORDEM"
+										},
+										"sink": {
+											"name": "ie_status_ordem",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "NR_GRUPO_PLANEJ"
+										},
+										"sink": {
+											"name": "nr_grupo_planej",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "NR_GRUPO_TRABALHO"
+										},
+										"sink": {
+											"name": "nr_grupo_trabalho",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "NR_SEQ_ESTAGIO"
+										},
+										"sink": {
+											"name": "nr_seq_estagio",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "DT_REABERTURA"
+										},
+										"sink": {
+											"name": "dt_reabertura",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "CD_FUNCAO"
+										},
+										"sink": {
+											"name": "cd_funcao",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "IE_CLASSIFICACAO"
+										},
+										"sink": {
+											"name": "ie_classificacao",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_SITUACAO"
+										},
+										"sink": {
+											"name": "ds_situacao",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "IE_GRAU_SATISFACAO"
+										},
+										"sink": {
+											"name": "ie_grau_satisfacao",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "NR_SEQ_WHEB"
+										},
+										"sink": {
+											"name": "nr_seq_wheb",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "IE_ORIGEM_OS"
+										},
+										"sink": {
+											"name": "ie_origem_os",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "IE_TIPO_ORDEM"
+										},
+										"sink": {
+											"name": "ie_tipo_ordem",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "NR_SEQ_TRAB"
+										},
+										"sink": {
+											"name": "nr_seq_trab",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "CD_SETOR"
+										},
+										"sink": {
+											"name": "cd_setor",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_SETOR_LOCALIZACAO"
+										},
+										"sink": {
+											"name": "ds_setor_localizacao",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "NM_USUARIO_EXEC"
+										},
+										"sink": {
+											"name": "nm_usuario_exec",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_ESTAGIO"
+										},
+										"sink": {
+											"name": "ds_estagio",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DT_INICIO_SEMANA"
+										},
+										"sink": {
+											"name": "dt_inicio_semana",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "DT_INICIO_MES"
+										},
+										"sink": {
+											"name": "dt_inicio_mes",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "DT_ANO"
+										},
+										"sink": {
+											"name": "dt_ano",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "CD_ESTABELECIMENTO"
+										},
+										"sink": {
+											"name": "cd_estabelecimento",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "IE_NOVO_HIST"
+										},
+										"sink": {
+											"name": "ie_novo_hist",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_COR_FONTE_ESTAGIO"
+										},
+										"sink": {
+											"name": "ds_cor_fonte_estagio",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_COR_FUNDO_ESTAGIO"
+										},
+										"sink": {
+											"name": "ds_cor_fundo_estagio",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_GRAU_SATISFACAO"
+										},
+										"sink": {
+											"name": "ds_grau_satisfacao",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "NM_USUARIO_EXEC_PREV"
+										},
+										"sink": {
+											"name": "nm_usuario_exec_prev",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "NR_SEQ_ORIGEM"
+										},
+										"sink": {
+											"name": "nr_seq_origem",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "IE_PARADO"
+										},
+										"sink": {
+											"name": "ie_parado",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DT_INICIO_PREVISTO"
+										},
+										"sink": {
+											"name": "dt_inicio_previsto",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "DT_CONCLUSAO_DESEJADA"
+										},
+										"sink": {
+											"name": "dt_conclusao_desejada",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_SETOR_ATENDIMENTO"
+										},
+										"sink": {
+											"name": "ds_setor_atendimento",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_GRUPO_TRABALHO"
+										},
+										"sink": {
+											"name": "ds_grupo_trabalho",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_COMPLEXIDADE"
+										},
+										"sink": {
+											"name": "ds_complexidade",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_ORIGEM_OS"
+										},
+										"sink": {
+											"name": "ds_origem_os",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_SERVICO"
+										},
+										"sink": {
+											"name": "ds_servico",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "QT_HORAS_ABERTA"
+										},
+										"sink": {
+											"name": "qt_horas_aberta",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "QT_HORAS_PROCESSO"
+										},
+										"sink": {
+											"name": "qt_horas_processo",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "QT_HORAS_TOTAL"
+										},
+										"sink": {
+											"name": "qt_horas_total",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "DT_ULT_HIST"
+										},
+										"sink": {
+											"name": "dt_ult_hist",
+											"type": "DateTime"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "CloudTasyPrdDataSet",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AZ_SQL_TB_Ordens_Servico_Terceiro",
+								"type": "DatasetReference"
+							}
+						]
+					},
+					{
+						"name": "Ordens_HTML5_Hist",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Ordens_HTML5",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "select x.nr_seq_ordem_serv, \n       x.ie_origem, \n       x.nr_seq_tipo, \n       x.nm_usuario_lib, \n       x.dt_atualizacao, \n       x.ds_relat_tecnico\nfrom man_ordem_serv_tecnico x",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "CloudTasyPrdDataSet",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AZ_SQL_TB_Ordens_Servico_Hist",
+								"type": "DatasetReference"
+							}
+						]
+					}
+				],
+				"folder": {
+					"name": "Ordens de Serviço"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/CloudTasyPrdDataSet')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CloudTasyPrdDataSet')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "CloudTasyProd_NEW",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Power BI"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"structure": [
+					{
+						"name": "NR_SEQUENCIA",
+						"type": "Decimal"
+					},
+					{
+						"name": "DS_ORDEM",
+						"type": "String"
+					},
+					{
+						"name": "NR_SEQ_LOCALIZACAO",
+						"type": "Decimal"
+					},
+					{
+						"name": "DS_LOCALIZACAO",
+						"type": "String"
+					},
+					{
+						"name": "NR_SEQ_EQUIPAMENTO",
+						"type": "Decimal"
+					},
+					{
+						"name": "DS_EQUIPAMENTO",
+						"type": "String"
+					},
+					{
+						"name": "CD_PESSOA_SOLICITANTE",
+						"type": "String"
+					},
+					{
+						"name": "NM_SOLICITANTE",
+						"type": "String"
+					},
+					{
+						"name": "DT_ORDEM_SERVICO",
+						"type": "DateTime"
+					},
+					{
+						"name": "IE_PRIORIDADE",
+						"type": "String"
+					},
+					{
+						"name": "DS_DANO_BREVE",
+						"type": "String"
+					},
+					{
+						"name": "DT_ATUALIZACAO",
+						"type": "DateTime"
+					},
+					{
+						"name": "NM_USUARIO",
+						"type": "String"
+					},
+					{
+						"name": "DT_INICIO_DESEJADO",
+						"type": "DateTime"
+					},
+					{
+						"name": "DS_DANO",
+						"type": "String"
+					},
+					{
+						"name": "DT_FIM_PREVISTO",
+						"type": "DateTime"
+					},
+					{
+						"name": "DT_INICIO_REAL",
+						"type": "DateTime"
+					},
+					{
+						"name": "DT_FIM_REAL",
+						"type": "DateTime"
+					},
+					{
+						"name": "IE_STATUS_ORDEM",
+						"type": "String"
+					},
+					{
+						"name": "NR_GRUPO_PLANEJ",
+						"type": "Decimal"
+					},
+					{
+						"name": "NR_GRUPO_TRABALHO",
+						"type": "Decimal"
+					},
+					{
+						"name": "NR_SEQ_ESTAGIO",
+						"type": "Decimal"
+					},
+					{
+						"name": "DT_REABERTURA",
+						"type": "DateTime"
+					},
+					{
+						"name": "CD_FUNCAO",
+						"type": "Decimal"
+					},
+					{
+						"name": "IE_CLASSIFICACAO",
+						"type": "String"
+					},
+					{
+						"name": "DS_SITUACAO",
+						"type": "String"
+					},
+					{
+						"name": "IE_GRAU_SATISFACAO",
+						"type": "String"
+					},
+					{
+						"name": "NR_SEQ_WHEB",
+						"type": "Decimal"
+					},
+					{
+						"name": "IE_ORIGEM_OS",
+						"type": "String"
+					},
+					{
+						"name": "IE_TIPO_ORDEM",
+						"type": "Decimal"
+					},
+					{
+						"name": "NR_SEQ_TRAB",
+						"type": "Double"
+					},
+					{
+						"name": "CD_SETOR",
+						"type": "Decimal"
+					},
+					{
+						"name": "DS_SETOR_LOCALIZACAO",
+						"type": "String"
+					},
+					{
+						"name": "NM_USUARIO_EXEC",
+						"type": "String"
+					},
+					{
+						"name": "DS_ESTAGIO",
+						"type": "String"
+					},
+					{
+						"name": "DT_INICIO_SEMANA",
+						"type": "DateTime"
+					},
+					{
+						"name": "DT_INICIO_MES",
+						"type": "DateTime"
+					},
+					{
+						"name": "DT_ANO",
+						"type": "DateTime"
+					},
+					{
+						"name": "CD_ESTABELECIMENTO",
+						"type": "Decimal"
+					},
+					{
+						"name": "IE_NOVO_HIST",
+						"type": "String"
+					},
+					{
+						"name": "DS_COR_FONTE_ESTAGIO",
+						"type": "String"
+					},
+					{
+						"name": "DS_COR_FUNDO_ESTAGIO",
+						"type": "String"
+					},
+					{
+						"name": "DS_GRAU_SATISFACAO",
+						"type": "String"
+					},
+					{
+						"name": "NM_USUARIO_EXEC_PREV",
+						"type": "String"
+					},
+					{
+						"name": "NR_SEQ_ORIGEM",
+						"type": "Decimal"
+					},
+					{
+						"name": "IE_PARADO",
+						"type": "String"
+					},
+					{
+						"name": "DT_INICIO_PREVISTO",
+						"type": "DateTime"
+					},
+					{
+						"name": "DT_CONCLUSAO_DESEJADA",
+						"type": "DateTime"
+					},
+					{
+						"name": "DS_SETOR_ATENDIMENTO",
+						"type": "String"
+					},
+					{
+						"name": "DS_GRUPO_TRABALHO",
+						"type": "String"
+					},
+					{
+						"name": "DS_COMPLEXIDADE",
+						"type": "String"
+					},
+					{
+						"name": "DS_ORIGEM_OS",
+						"type": "String"
+					},
+					{
+						"name": "DS_SERVICO",
+						"type": "String"
+					},
+					{
+						"name": "QT_HORAS_ABERTA",
+						"type": "Double"
+					},
+					{
+						"name": "QT_HORAS_PROCESSO",
+						"type": "Double"
+					},
+					{
+						"name": "QT_HORAS_TOTAL",
+						"type": "Double"
+					},
+					{
+						"name": "DT_ULT_HIST",
+						"type": "DateTime"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Oracle_Zero_Faltas')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "CloudTasyProd_NEW",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Zero Faltas"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"structure": [
+					{
+						"name": "ID_COMPROMISSO",
+						"type": "Decimal"
+					},
+					{
+						"name": "ID_CLIENTE",
+						"type": "String"
+					},
+					{
+						"name": "NOMEPACIENTE",
+						"type": "String"
+					},
+					{
+						"name": "DTNASCIMENTO",
+						"type": "DateTime"
+					},
+					{
+						"name": "CELULAR",
+						"type": "String"
+					},
+					{
+						"name": "EMAIL",
+						"type": "String"
+					},
+					{
+						"name": "IDCONVENIO",
+						"type": "Decimal"
+					},
+					{
+						"name": "CONVENIO",
+						"type": "String"
+					},
+					{
+						"name": "CD_PLANO",
+						"type": "String"
+					},
+					{
+						"name": "DS_PLANO",
+						"type": "String"
+					},
+					{
+						"name": "DATACOMPROMISSO",
+						"type": "DateTime"
+					},
+					{
+						"name": "HORACOMPROMISSO",
+						"type": "DateTime"
+					},
+					{
+						"name": "ID_STATUS",
+						"type": "String"
+					},
+					{
+						"name": "DS_STATUS",
+						"type": "String"
+					},
+					{
+						"name": "CD_AGENDA",
+						"type": "Decimal"
+					},
+					{
+						"name": "AGENDA",
+						"type": "String"
+					},
+					{
+						"name": "CD_PROCEDIMENTO",
+						"type": "Decimal"
+					},
+					{
+						"name": "PROCEDIMENTO",
+						"type": "String"
+					},
+					{
+						"name": "ID_EMPRESA",
+						"type": "Double"
+					},
+					{
+						"name": "EMPRESA",
+						"type": "String"
+					},
+					{
+						"name": "ID_UNIDADE",
+						"type": "Decimal"
+					},
+					{
+						"name": "UNIDADE",
+						"type": "String"
+					},
+					{
+						"name": "IE_AUTORIZACAO",
+						"type": "String"
+					},
+					{
+						"name": "AUTORIZACAO",
+						"type": "String"
+					},
+					{
+						"name": "NM_MEDICO",
+						"type": "String"
+					},
+					{
+						"name": "DT_AGENDAMENTO",
+						"type": "DateTime"
+					},
+					{
+						"name": "TIPO_AGENDA",
+						"type": "Decimal"
+					},
+					{
+						"name": "TIPO_AGENDA_DESC",
+						"type": "String"
+					},
+					{
+						"name": "DS_MEDICO_AGENDA",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		}
+	]
+}
