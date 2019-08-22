@@ -149,26 +149,11 @@
 					"Folder_Nexcore_Consolidado_password": {
 						"value": "[parameters('Folder_Nexcore_Consolidado_password')]"
 					},
-					"Folder_Requestia_password": {
-						"value": "[parameters('Folder_Requestia_password')]"
-					},
-					"SMARTProd_connectionString": {
-						"value": "[parameters('SMARTProd_connectionString')]"
-					},
-					"SMART_HOSL_connectionString": {
-						"value": "[parameters('SMART_HOSL_connectionString')]"
-					},
 					"Folder_Nexcore_Consolidado_properties_typeProperties_host": {
 						"value": "[parameters('Folder_Nexcore_Consolidado_properties_typeProperties_host')]"
 					},
 					"Folder_Nexcore_Consolidado_properties_typeProperties_userId": {
 						"value": "[parameters('Folder_Nexcore_Consolidado_properties_typeProperties_userId')]"
-					},
-					"Folder_Requestia_properties_typeProperties_host": {
-						"value": "[parameters('Folder_Requestia_properties_typeProperties_host')]"
-					},
-					"Folder_Requestia_properties_typeProperties_userId": {
-						"value": "[parameters('Folder_Requestia_properties_typeProperties_userId')]"
 					}
 				}
 			},
@@ -187,6 +172,15 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"Folder_Requestia_password": {
+						"value": "[parameters('Folder_Requestia_password')]"
+					},
+					"SMARTProd_connectionString": {
+						"value": "[parameters('SMARTProd_connectionString')]"
+					},
+					"SMART_HOSL_connectionString": {
+						"value": "[parameters('SMART_HOSL_connectionString')]"
 					},
 					"SMART_HOSL_NEW_connectionString": {
 						"value": "[parameters('SMART_HOSL_NEW_connectionString')]"
@@ -226,6 +220,12 @@
 					},
 					"SadallaTasyTeste_connectionString": {
 						"value": "[parameters('SadallaTasyTeste_connectionString')]"
+					},
+					"Folder_Requestia_properties_typeProperties_host": {
+						"value": "[parameters('Folder_Requestia_properties_typeProperties_host')]"
+					},
+					"Folder_Requestia_properties_typeProperties_userId": {
+						"value": "[parameters('Folder_Requestia_properties_typeProperties_userId')]"
 					}
 				}
 			},
@@ -271,6 +271,26 @@
 			},
 			"dependsOn": [
 				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_2')]"
+			]
+		},
+		{
+			"name": "ArmTemplate_4",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_4.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_3')]"
 			]
 		}
 	]

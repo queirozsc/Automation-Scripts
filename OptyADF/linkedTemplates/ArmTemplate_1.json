@@ -7,6 +7,18 @@
 			"metadata": "Data Factory Name",
 			"defaultValue": "OptyADF"
 		},
+		"Folder_Requestia_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Folder_Requestia'"
+		},
+		"SMARTProd_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SMARTProd'"
+		},
+		"SMART_HOSL_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SMART_HOSL'"
+		},
 		"SMART_HOSL_NEW_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'SMART_HOSL_NEW'"
@@ -58,12 +70,76 @@
 		"SadallaTasyTeste_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'SadallaTasyTeste'"
+		},
+		"Folder_Requestia_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "C:\\Power BI Gateway Files\\Requestia"
+		},
+		"Folder_Requestia_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "hobrasil\\sergio.queiroz"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/Folder_Requestia')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "FileServer",
+				"typeProperties": {
+					"host": "[parameters('Folder_Requestia_properties_typeProperties_host')]",
+					"userId": "[parameters('Folder_Requestia_properties_typeProperties_userId')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('Folder_Requestia_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "ServidorArquivosBI",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SMARTProd')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('SMARTProd_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SMART_HOSL')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('SMART_HOSL_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/SMART_HOSL_NEW')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -301,27 +377,19 @@
 				"type": "OracleTable",
 				"structure": [
 					{
-						"name": "BASE",
-						"type": "String"
-					},
-					{
-						"name": "CD_ESTABELECIMENTO",
+						"name": "NR_SEQ_ORDEM_SERV",
 						"type": "Decimal"
 					},
 					{
-						"name": "CD_MARCA",
-						"type": "Double"
-					},
-					{
-						"name": "MARCA",
+						"name": "IE_ORIGEM",
 						"type": "String"
 					},
 					{
-						"name": "NR_ATENDIMENTO",
+						"name": "NR_SEQ_TIPO",
 						"type": "Decimal"
 					},
 					{
-						"name": "NR_REGISTRO_UNICO",
+						"name": "NM_USUARIO_LIB",
 						"type": "String"
 					},
 					{
@@ -329,123 +397,7 @@
 						"type": "DateTime"
 					},
 					{
-						"name": "DT_ENTRADA",
-						"type": "DateTime"
-					},
-					{
-						"name": "NR_INTERNO_CONTA",
-						"type": "Decimal"
-					},
-					{
-						"name": "DS_ESTABELECIMENTO",
-						"type": "String"
-					},
-					{
-						"name": "CD_PESSOA_FISICA",
-						"type": "String"
-					},
-					{
-						"name": "DT_NASCIMENTO",
-						"type": "DateTime"
-					},
-					{
-						"name": "NR_CPF",
-						"type": "String"
-					},
-					{
-						"name": "IE_SEXO",
-						"type": "String"
-					},
-					{
-						"name": "NR_CEP",
-						"type": "String"
-					},
-					{
-						"name": "DS_CIDADE",
-						"type": "String"
-					},
-					{
-						"name": "DS_PESSOA_FISICA",
-						"type": "String"
-					},
-					{
-						"name": "CD_CONVENIO",
-						"type": "Decimal"
-					},
-					{
-						"name": "DS_CONVENIO",
-						"type": "String"
-					},
-					{
-						"name": "CD_MEDICO_EXECUTOR",
-						"type": "String"
-					},
-					{
-						"name": "DS_MEDICO_EXECUTOR",
-						"type": "String"
-					},
-					{
-						"name": "CD_MEDICO_REQUISITANTE",
-						"type": "String"
-					},
-					{
-						"name": "DS_MEDICO_REQUISITANTE",
-						"type": "String"
-					},
-					{
-						"name": "IE_ORIGEM_PROCED",
-						"type": "Double"
-					},
-					{
-						"name": "CD_PROCEDIMENTO",
-						"type": "Double"
-					},
-					{
-						"name": "DS_PROCEDIMENTO",
-						"type": "String"
-					},
-					{
-						"name": "DS_CLASSIFICACAO",
-						"type": "String"
-					},
-					{
-						"name": "DS_CLASSIF_PROCEDIMENTO",
-						"type": "String"
-					},
-					{
-						"name": "CD_PROCED_PRINCIPAL",
-						"type": "String"
-					},
-					{
-						"name": "DS_PROCED_PRINCIPAL",
-						"type": "String"
-					},
-					{
-						"name": "QT_PROCEDIMENTO",
-						"type": "Decimal"
-					},
-					{
-						"name": "VL_CONTA",
-						"type": "Decimal"
-					},
-					{
-						"name": "VL_PROCEDIMENTO",
-						"type": "Decimal"
-					},
-					{
-						"name": "IE_STATUS_ACERTO",
-						"type": "Decimal"
-					},
-					{
-						"name": "STATUS_CONTA",
-						"type": "String"
-					},
-					{
-						"name": "CD_TUSS",
-						"type": "Double"
-					},
-					{
-						"name": "DS_CLASSIF_LIO",
+						"name": "DS_RELAT_TECNICO",
 						"type": "String"
 					}
 				],
@@ -791,338 +743,6 @@
 					},
 					{
 						"name": "Linked ID",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DH_CSV_NC_FilasPorHora')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Folder_Nexcore_Consolidado",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Nexcore/DH"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "FileServerLocation",
-						"fileName": "FilasPorHoraDAYHORC.csv"
-					},
-					"columnDelimiter": ";",
-					"escapeChar": "",
-					"firstRowAsHeader": true,
-					"quoteChar": ""
-				},
-				"schema": [
-					{
-						"name": "Fila",
-						"type": "String"
-					},
-					{
-						"name": "Intervalo",
-						"type": "String"
-					},
-					{
-						"name": "Atendidas Ate NS",
-						"type": "String"
-					},
-					{
-						"name": "Atendidas Apos NS",
-						"type": "String"
-					},
-					{
-						"name": "Atendidas",
-						"type": "String"
-					},
-					{
-						"name": "Abandonos Ate NS",
-						"type": "String"
-					},
-					{
-						"name": "Abandonos Apos NS",
-						"type": "String"
-					},
-					{
-						"name": "Abandonos Anuncio Inicial",
-						"type": "String"
-					},
-					{
-						"name": "Abandonos",
-						"type": "String"
-					},
-					{
-						"name": "Roteamentos Timeout",
-						"type": "String"
-					},
-					{
-						"name": "Roteamentos Fila Cheia",
-						"type": "String"
-					},
-					{
-						"name": "Roteamentos Fila Vazia",
-						"type": "String"
-					},
-					{
-						"name": "Roteamentos Fila Sem Ags. Disp.",
-						"type": "String"
-					},
-					{
-						"name": "Roteamentos Caixa Postal",
-						"type": "String"
-					},
-					{
-						"name": "Roteamentos",
-						"type": "String"
-					},
-					{
-						"name": "Fora Horario Antes",
-						"type": "String"
-					},
-					{
-						"name": "Fora Horario Intervalo",
-						"type": "String"
-					},
-					{
-						"name": "Fora Horario Depois",
-						"type": "String"
-					},
-					{
-						"name": "Fora Horario",
-						"type": "String"
-					},
-					{
-						"name": "Total Recebidas",
-						"type": "String"
-					},
-					{
-						"name": "Callback Tratados",
-						"type": "String"
-					},
-					{
-						"name": "Callback Nao Tratados",
-						"type": "String"
-					},
-					{
-						"name": "Callback",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Toque",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Falado",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Medio Falado",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Medio Pausa ACW",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Medio Produtivo AHT",
-						"type": "String"
-					},
-					{
-						"name": "% Nivel Servico",
-						"type": "String"
-					},
-					{
-						"name": "% Taxa Atendimento",
-						"type": "String"
-					},
-					{
-						"name": "% Taxa Abandono",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Medio Espera",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Medio para Atender",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Total para Atender",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Medio para Abandono",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Total para Abandono",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Total Espera",
-						"type": "String"
-					},
-					{
-						"name": "Agentes Logados - Minimo",
-						"type": "String"
-					},
-					{
-						"name": "Agentes Logados - Maximo",
-						"type": "String"
-					},
-					{
-						"name": "Chamadas em Espera - Minimo",
-						"type": "String"
-					},
-					{
-						"name": "Chamadas em Espera - Medio",
-						"type": "String"
-					},
-					{
-						"name": "Chamadas em Espera = Maximo",
-						"type": "String"
-					},
-					{
-						"name": "Marca",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/FILE_QANSWER')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Folder_Requestia",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "FileServerLocation",
-						"fileName": "qanswer.csv"
-					},
-					"columnDelimiter": ";",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "QSESSION",
-						"type": "String"
-					},
-					{
-						"name": "QUESTION",
-						"type": "String"
-					},
-					{
-						"name": "QANSWER",
-						"type": "String"
-					},
-					{
-						"name": "QANSWERED",
-						"type": "String"
-					},
-					{
-						"name": "QANSWERDATE",
-						"type": "String"
-					},
-					{
-						"name": "QSHOW",
-						"type": "String"
-					},
-					{
-						"name": "QORDER",
-						"type": "String"
-					},
-					{
-						"name": "QUPDATED",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/FILE_QSESSION')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Folder_Requestia",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Requestia"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "FileServerLocation",
-						"fileName": "qsession.csv"
-					},
-					"columnDelimiter": ";",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "QSESSION",
-						"type": "String"
-					},
-					{
-						"name": "QSESSIONTITLE",
-						"type": "String"
-					},
-					{
-						"name": "QCLIENT",
-						"type": "String"
-					},
-					{
-						"name": "QFORM",
-						"type": "String"
-					},
-					{
-						"name": "QVERSION",
-						"type": "String"
-					},
-					{
-						"name": "QSTATUS",
-						"type": "String"
-					},
-					{
-						"name": "QANSWERDATE",
-						"type": "String"
-					},
-					{
-						"name": "QEXPDATE",
-						"type": "String"
-					},
-					{
-						"name": "QAPPLICATION",
-						"type": "String"
-					},
-					{
-						"name": "QSURVEYTYPE",
-						"type": "String"
-					},
-					{
-						"name": "REQLOCATION",
 						"type": "String"
 					}
 				]
