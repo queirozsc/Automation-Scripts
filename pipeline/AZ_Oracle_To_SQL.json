@@ -45,7 +45,8 @@
 							},
 							{
 								"source": {
-									"name": "ID_CLIENTE"
+									"name": "ID_CLIENTE",
+									"type": "String"
 								},
 								"sink": {
 									"name": "id_cliente",
@@ -54,7 +55,8 @@
 							},
 							{
 								"source": {
-									"name": "NOMEPACIENTE"
+									"name": "NOMEPACIENTE",
+									"type": "String"
 								},
 								"sink": {
 									"name": "nomepaciente",
@@ -63,7 +65,8 @@
 							},
 							{
 								"source": {
-									"name": "DTNASCIMENTO"
+									"name": "DTNASCIMENTO",
+									"type": "DateTime"
 								},
 								"sink": {
 									"name": "dtnascimento",
@@ -72,7 +75,8 @@
 							},
 							{
 								"source": {
-									"name": "CELULAR"
+									"name": "CELULAR",
+									"type": "String"
 								},
 								"sink": {
 									"name": "celular",
@@ -81,7 +85,8 @@
 							},
 							{
 								"source": {
-									"name": "EMAIL"
+									"name": "EMAIL",
+									"type": "String"
 								},
 								"sink": {
 									"name": "email",
@@ -90,7 +95,8 @@
 							},
 							{
 								"source": {
-									"name": "IDCONVENIO"
+									"name": "IDCONVENIO",
+									"type": "Decimal"
 								},
 								"sink": {
 									"name": "idconvenio",
@@ -99,7 +105,8 @@
 							},
 							{
 								"source": {
-									"name": "CONVENIO"
+									"name": "CONVENIO",
+									"type": "String"
 								},
 								"sink": {
 									"name": "convenio",
@@ -108,7 +115,8 @@
 							},
 							{
 								"source": {
-									"name": "CD_PLANO"
+									"name": "CD_PLANO",
+									"type": "String"
 								},
 								"sink": {
 									"name": "cd_plano",
@@ -117,7 +125,8 @@
 							},
 							{
 								"source": {
-									"name": "DS_PLANO"
+									"name": "DS_PLANO",
+									"type": "String"
 								},
 								"sink": {
 									"name": "ds_plano",
@@ -126,7 +135,8 @@
 							},
 							{
 								"source": {
-									"name": "DATACOMPROMISSO"
+									"name": "DATACOMPROMISSO",
+									"type": "DateTime"
 								},
 								"sink": {
 									"name": "datacompromisso",
@@ -135,7 +145,8 @@
 							},
 							{
 								"source": {
-									"name": "HORACOMPROMISSO"
+									"name": "HORACOMPROMISSO",
+									"type": "DateTime"
 								},
 								"sink": {
 									"name": "horacompromisso",
@@ -144,7 +155,8 @@
 							},
 							{
 								"source": {
-									"name": "ID_STATUS"
+									"name": "ID_STATUS",
+									"type": "String"
 								},
 								"sink": {
 									"name": "id_status",
@@ -153,7 +165,8 @@
 							},
 							{
 								"source": {
-									"name": "DS_STATUS"
+									"name": "DS_STATUS",
+									"type": "String"
 								},
 								"sink": {
 									"name": "ds_status",
@@ -162,7 +175,8 @@
 							},
 							{
 								"source": {
-									"name": "CD_AGENDA"
+									"name": "CD_AGENDA",
+									"type": "Decimal"
 								},
 								"sink": {
 									"name": "cd_agenda",
@@ -171,7 +185,8 @@
 							},
 							{
 								"source": {
-									"name": "AGENDA"
+									"name": "AGENDA",
+									"type": "String"
 								},
 								"sink": {
 									"name": "agenda",
@@ -180,7 +195,8 @@
 							},
 							{
 								"source": {
-									"name": "CD_PROCEDIMENTO"
+									"name": "CD_PROCEDIMENTO",
+									"type": "Decimal"
 								},
 								"sink": {
 									"name": "cd_procedimento",
@@ -189,7 +205,8 @@
 							},
 							{
 								"source": {
-									"name": "PROCEDIMENTO"
+									"name": "PROCEDIMENTO",
+									"type": "String"
 								},
 								"sink": {
 									"name": "procedimento",
@@ -198,7 +215,8 @@
 							},
 							{
 								"source": {
-									"name": "ID_EMPRESA"
+									"name": "ID_EMPRESA",
+									"type": "Double"
 								},
 								"sink": {
 									"name": "id_empresa",
@@ -207,7 +225,8 @@
 							},
 							{
 								"source": {
-									"name": "EMPRESA"
+									"name": "EMPRESA",
+									"type": "String"
 								},
 								"sink": {
 									"name": "empresa",
@@ -216,7 +235,8 @@
 							},
 							{
 								"source": {
-									"name": "ID_UNIDADE"
+									"name": "ID_UNIDADE",
+									"type": "Decimal"
 								},
 								"sink": {
 									"name": "id_unidade",
@@ -225,7 +245,8 @@
 							},
 							{
 								"source": {
-									"name": "UNIDADE"
+									"name": "UNIDADE",
+									"type": "String"
 								},
 								"sink": {
 									"name": "unidade",
@@ -234,7 +255,8 @@
 							},
 							{
 								"source": {
-									"name": "IE_AUTORIZACAO"
+									"name": "IE_AUTORIZACAO",
+									"type": "String"
 								},
 								"sink": {
 									"name": "ie_autorizacao",
@@ -243,7 +265,8 @@
 							},
 							{
 								"source": {
-									"name": "AUTORIZACAO"
+									"name": "AUTORIZACAO",
+									"type": "String"
 								},
 								"sink": {
 									"name": "autorizacao",
@@ -252,7 +275,8 @@
 							},
 							{
 								"source": {
-									"name": "NM_MEDICO"
+									"name": "NM_MEDICO",
+									"type": "String"
 								},
 								"sink": {
 									"name": "nm_medico",
@@ -261,7 +285,8 @@
 							},
 							{
 								"source": {
-									"name": "DT_AGENDAMENTO"
+									"name": "DT_AGENDAMENTO",
+									"type": "DateTime"
 								},
 								"sink": {
 									"name": "dt_agendamento",
@@ -270,7 +295,8 @@
 							},
 							{
 								"source": {
-									"name": "TIPO_AGENDA"
+									"name": "TIPO_AGENDA",
+									"type": "Decimal"
 								},
 								"sink": {
 									"name": "tipo_agenda",
@@ -279,7 +305,8 @@
 							},
 							{
 								"source": {
-									"name": "TIPO_AGENDA_DESC"
+									"name": "TIPO_AGENDA_DESC",
+									"type": "String"
 								},
 								"sink": {
 									"name": "tipo_agenda_desc",
@@ -288,11 +315,12 @@
 							},
 							{
 								"source": {
-									"name": "DS_MEDICO_AGENDA"
+									"name": "DS_MEDICO_AGENDA",
+									"type": "String"
 								},
 								"sink": {
-									"name": "ds_medico_genda",
-									"type": "Int32"
+									"name": "ds_medico_agenda",
+									"type": "String"
 								}
 							}
 						]
