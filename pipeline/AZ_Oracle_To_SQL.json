@@ -24,7 +24,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select\nc.nr_sequencia as id_compromisso,\nc.cd_pessoa_fisica as id_cliente,\nobter_nome_pf(c.cd_pessoa_fisica) as NomePaciente,\npf.dt_nascimento as DtNascimento,\n'55' || substr(pf.nr_ddd_celular, -2) || substr(replace(replace(replace(replace(pf.nr_telefone_celular, '(', ''), ')', ''), ' ', ''), '-', ''), -9) AS CELULAR,\nobter_compl_pf(pf.cd_pessoa_fisica,1,'M') as email,\nc.cd_convenio idconvenio,\nobter_nome_convenio(c.cd_convenio) as convenio,\nc.cd_plano,\nobter_desc_plano(c.cd_convenio, c.cd_plano) ds_plano,\nc.dt_agenda as datacompromisso,\nc.hr_inicio as horacompromisso,\nc.ie_status_agenda as id_status,\nobter_status_agenda_paciente(c.nr_sequencia) as ds_status,\na.cd_agenda,\na.ds_agenda as agenda,\nc.cd_procedimento,\nobter_desc_procedimento(c.cd_procedimento, c.ie_origem_proced) as procedimento,\nobter_empresa_estab(a.cd_estabelecimento) as id_empresa,\nobter_nome_empresa(obter_empresa_estab(a.cd_estabelecimento)) as empresa,\na.cd_estabelecimento as id_unidade,\nobter_nome_estab(a.cd_estabelecimento)as unidade,\nc.ie_autorizacao,\nobter_valor_dominio(1227, c.ie_autorizacao) as autorizacao\nfrom agenda_paciente c,\nagenda a,\npessoa_fisica pf\nwhere c.cd_pessoa_fisica = pf.cd_pessoa_fisica\nand c.cd_agenda = a.cd_agenda\nand c.cd_pessoa_fisica is not null\nand trunc(c.dt_agenda) between inicio_dia(sysdate - 6) and fim_dia(sysdate + 6)\nAND c.IE_STATUS_AGENDA NOT IN ('C', 'F', 'I')\nand length('55' || substr(pf.nr_ddd_celular, -2) || substr(replace(replace(replace(replace(pf.nr_telefone_celular, '(', ''), ')', ''), ' ', ''), '-', ''), -9)) = 13\norder by 1",
+						"oracleReaderQuery": "select\nc.nr_sequencia as id_compromisso,\nc.cd_pessoa_fisica as id_cliente,\nobter_nome_pf(c.cd_pessoa_fisica) as NomePaciente,\npf.dt_nascimento as DtNascimento,\n'55' || substr(pf.nr_ddd_celular, -2) || substr(replace(replace(replace(replace(pf.nr_telefone_celular, '(', ''), ')', ''), ' ', ''), '-', ''), -9) AS CELULAR,\nobter_compl_pf(pf.cd_pessoa_fisica,1,'M') as email,\nc.cd_convenio idconvenio,\nobter_nome_convenio(c.cd_convenio) as convenio,\nc.cd_plano,\nobter_desc_plano(c.cd_convenio, c.cd_plano) ds_plano,\nc.dt_agenda as datacompromisso,\nto_char(c.hr_inicio, 'hh:mi:ss') as horacompromisso,\nc.ie_status_agenda as id_status,\nobter_status_agenda_paciente(c.nr_sequencia) as ds_status,\na.cd_agenda,\na.ds_agenda as agenda,\nc.cd_procedimento,\nobter_desc_procedimento(c.cd_procedimento, c.ie_origem_proced) as procedimento,\nobter_empresa_estab(a.cd_estabelecimento) as id_empresa,\nobter_nome_empresa(obter_empresa_estab(a.cd_estabelecimento)) as empresa,\na.cd_estabelecimento as id_unidade,\nobter_nome_estab(a.cd_estabelecimento)as unidade,\nc.ie_autorizacao,\nobter_valor_dominio(1227, c.ie_autorizacao) as autorizacao,\nobter_nome_pf(c.cd_medico_exec) as nm_medico,\nc.dt_agendamento,\na.cd_tipo_agenda  as tipo_agenda,\n'' as tipo_agenda_desc,\na.cd_pessoa_fisica as ds_medico_agenda\nfrom agenda_paciente c,\nagenda a,\npessoa_fisica pf\nwhere c.cd_pessoa_fisica = pf.cd_pessoa_fisica\nand c.cd_agenda = a.cd_agenda\nand c.cd_pessoa_fisica is not null\nand trunc(c.dt_agenda) between inicio_dia(sysdate - 6) and fim_dia(sysdate + 6)\nAND c.IE_STATUS_AGENDA NOT IN ('C', 'F', 'I')\nand length('55' || substr(pf.nr_ddd_celular, -2) || substr(replace(replace(replace(replace(pf.nr_telefone_celular, '(', ''), ')', ''), ' ', ''), '-', ''), -9)) = 13\norder by 1",
 						"partitionOption": "None"
 					},
 					"sink": {
@@ -45,7 +45,8 @@
 							},
 							{
 								"source": {
-									"name": "ID_CLIENTE"
+									"name": "ID_CLIENTE",
+									"type": "String"
 								},
 								"sink": {
 									"name": "id_cliente",
@@ -54,7 +55,8 @@
 							},
 							{
 								"source": {
-									"name": "NOMEPACIENTE"
+									"name": "NOMEPACIENTE",
+									"type": "String"
 								},
 								"sink": {
 									"name": "nomepaciente",
@@ -63,7 +65,8 @@
 							},
 							{
 								"source": {
-									"name": "DTNASCIMENTO"
+									"name": "DTNASCIMENTO",
+									"type": "DateTime"
 								},
 								"sink": {
 									"name": "dtnascimento",
@@ -72,7 +75,8 @@
 							},
 							{
 								"source": {
-									"name": "CELULAR"
+									"name": "CELULAR",
+									"type": "String"
 								},
 								"sink": {
 									"name": "celular",
@@ -81,7 +85,8 @@
 							},
 							{
 								"source": {
-									"name": "EMAIL"
+									"name": "EMAIL",
+									"type": "String"
 								},
 								"sink": {
 									"name": "email",
@@ -90,7 +95,8 @@
 							},
 							{
 								"source": {
-									"name": "IDCONVENIO"
+									"name": "IDCONVENIO",
+									"type": "Decimal"
 								},
 								"sink": {
 									"name": "idconvenio",
@@ -99,7 +105,8 @@
 							},
 							{
 								"source": {
-									"name": "CONVENIO"
+									"name": "CONVENIO",
+									"type": "String"
 								},
 								"sink": {
 									"name": "convenio",
@@ -108,7 +115,8 @@
 							},
 							{
 								"source": {
-									"name": "CD_PLANO"
+									"name": "CD_PLANO",
+									"type": "String"
 								},
 								"sink": {
 									"name": "cd_plano",
@@ -117,7 +125,8 @@
 							},
 							{
 								"source": {
-									"name": "DS_PLANO"
+									"name": "DS_PLANO",
+									"type": "String"
 								},
 								"sink": {
 									"name": "ds_plano",
@@ -126,7 +135,8 @@
 							},
 							{
 								"source": {
-									"name": "DATACOMPROMISSO"
+									"name": "DATACOMPROMISSO",
+									"type": "DateTime"
 								},
 								"sink": {
 									"name": "datacompromisso",
@@ -135,7 +145,8 @@
 							},
 							{
 								"source": {
-									"name": "HORACOMPROMISSO"
+									"name": "HORACOMPROMISSO",
+									"type": "DateTime"
 								},
 								"sink": {
 									"name": "horacompromisso",
@@ -144,7 +155,8 @@
 							},
 							{
 								"source": {
-									"name": "ID_STATUS"
+									"name": "ID_STATUS",
+									"type": "String"
 								},
 								"sink": {
 									"name": "id_status",
@@ -153,7 +165,8 @@
 							},
 							{
 								"source": {
-									"name": "DS_STATUS"
+									"name": "DS_STATUS",
+									"type": "String"
 								},
 								"sink": {
 									"name": "ds_status",
@@ -162,7 +175,8 @@
 							},
 							{
 								"source": {
-									"name": "CD_AGENDA"
+									"name": "CD_AGENDA",
+									"type": "Decimal"
 								},
 								"sink": {
 									"name": "cd_agenda",
@@ -171,7 +185,8 @@
 							},
 							{
 								"source": {
-									"name": "AGENDA"
+									"name": "AGENDA",
+									"type": "String"
 								},
 								"sink": {
 									"name": "agenda",
@@ -180,7 +195,8 @@
 							},
 							{
 								"source": {
-									"name": "CD_PROCEDIMENTO"
+									"name": "CD_PROCEDIMENTO",
+									"type": "Decimal"
 								},
 								"sink": {
 									"name": "cd_procedimento",
@@ -189,7 +205,8 @@
 							},
 							{
 								"source": {
-									"name": "PROCEDIMENTO"
+									"name": "PROCEDIMENTO",
+									"type": "String"
 								},
 								"sink": {
 									"name": "procedimento",
@@ -198,7 +215,8 @@
 							},
 							{
 								"source": {
-									"name": "ID_EMPRESA"
+									"name": "ID_EMPRESA",
+									"type": "Double"
 								},
 								"sink": {
 									"name": "id_empresa",
@@ -207,7 +225,8 @@
 							},
 							{
 								"source": {
-									"name": "EMPRESA"
+									"name": "EMPRESA",
+									"type": "String"
 								},
 								"sink": {
 									"name": "empresa",
@@ -216,7 +235,8 @@
 							},
 							{
 								"source": {
-									"name": "ID_UNIDADE"
+									"name": "ID_UNIDADE",
+									"type": "Decimal"
 								},
 								"sink": {
 									"name": "id_unidade",
@@ -225,7 +245,8 @@
 							},
 							{
 								"source": {
-									"name": "UNIDADE"
+									"name": "UNIDADE",
+									"type": "String"
 								},
 								"sink": {
 									"name": "unidade",
@@ -234,7 +255,8 @@
 							},
 							{
 								"source": {
-									"name": "IE_AUTORIZACAO"
+									"name": "IE_AUTORIZACAO",
+									"type": "String"
 								},
 								"sink": {
 									"name": "ie_autorizacao",
@@ -243,10 +265,61 @@
 							},
 							{
 								"source": {
-									"name": "AUTORIZACAO"
+									"name": "AUTORIZACAO",
+									"type": "String"
 								},
 								"sink": {
 									"name": "autorizacao",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NM_MEDICO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "nm_medico",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DT_AGENDAMENTO",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "dt_agendamento",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "TIPO_AGENDA",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "tipo_agenda",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "TIPO_AGENDA_DESC",
+									"type": "String"
+								},
+								"sink": {
+									"name": "tipo_agenda_desc",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_MEDICO_AGENDA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ds_medico_agenda",
 									"type": "String"
 								}
 							}
@@ -285,10 +358,37 @@
 					"referenceName": "AzureSQL_DB_Procedimentos",
 					"type": "LinkedServiceReference"
 				}
+			},
+			{
+				"name": "Altera_tipo_agenda",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Data_Zero_Faltas",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[sp_ALTERTIPOAGENDASPROJESI]"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"folder": {
-			"name": "Projesi"
+			"name": "Projesi Zero Faltas"
 		},
 		"annotations": []
 	},
