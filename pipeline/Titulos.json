@@ -15,8 +15,193 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"enableStaging": false
-				}
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT  SUBSTR(OBTER_NOME_ESTABELECIMENTO(A.CD_ESTABELECIMENTO),1,255) ESTABELECIMENTO,\n        A.CD_CGC CD_CNPJ,\n\t\tB.DS_RAZAO_SOCIAL NM_RAZAOSOCIAL,\n        B.NM_FANTASIA,\n        A.NR_TITULO,\n        A.NR_NOTA_FISCAL,\n        A.DT_EMISSAO,\n        A.DT_VENCIMENTO DT_VENCIMENTO_ORIGINAL,\n        A.DT_PAGAMENTO_PREVISTO DT_VENCIMENTO_PRORROGADO,\n        A.VL_TITULO VL_BRUTO,\n        A.VL_SALDO_JUROS,\n        A.VL_SALDO_MULTA,\n        OBTER_DADOS_TITULO_RECEBER(A.NR_TITULO, 'VLL') VL_LIQUIDO,\n        A.VL_SALDO_TITULO,\n        OBTER_VL_AMENOR_TIT(A.NR_TITULO,'A',A.DT_ATUALIZACAO) as VL_AMENOR,\n        Obter_valor_dominio(710, a.ie_situacao) as situacao\nFROM    TITULO_RECEBER A, PESSOA_JURIDICA B -- TITULO_RECEBER_LIQ L\nwhere     b.cd_cgc = a.cd_cgc\nand     a.vl_saldo_titulo <> 0",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ESTABELECIMENTO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ESTABELECIMENTO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CD_CNPJ",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CD_CNPJ",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NM_RAZAOSOCIAL",
+									"type": "String"
+								},
+								"sink": {
+									"name": "NM_RAZAOSOCIAL",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NM_FANTASIA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "NM_FANTASIA",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NR_TITULO",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "NR_TITULO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "NR_NOTA_FISCAL",
+									"type": "String"
+								},
+								"sink": {
+									"name": "NR_NOTA_FISCAL",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "DT_EMISSAO",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DT_EMISSAO",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "DT_VENCIMENTO_ORIGINAL",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DT_VENCIMENTO_ORIGINAL",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "DT_VENCIMENTO_PRORROGADO",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DT_VENCIMENTO_PRORROGADO",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_BRUTO",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "VL_BRUTO",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_SALDO_JUROS",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "VL_SALDO_JUROS",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_SALDO_MULTA",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "VL_SALDO_MULTA",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_LIQUIDO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "VL_LIQUIDO",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_SALDO_TITULO",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "VL_SALDO_TITULO",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_AMENOR",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "VL_AMENOR",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "SITUACAO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "SITUACAO",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "CloudTasyPrdDataSet",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AZ_SQL_TB_Titulos_Receber",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"folder": {
