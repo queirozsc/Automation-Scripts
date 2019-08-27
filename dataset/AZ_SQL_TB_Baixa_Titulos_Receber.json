@@ -6,7 +6,7 @@
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "Aging Financeiro"
+			"name": "Contas a Receber"
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
