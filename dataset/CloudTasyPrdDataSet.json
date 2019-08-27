@@ -12,103 +12,43 @@
 		"type": "OracleTable",
 		"structure": [
 			{
-				"name": "ESTABELECIMENTO",
-				"type": "String"
-			},
-			{
-				"name": "CD_CGC",
-				"type": "String"
-			},
-			{
-				"name": "NM_RAZAOSOCIAL",
-				"type": "String"
-			},
-			{
-				"name": "NM_FANTASIA",
-				"type": "String"
-			},
-			{
 				"name": "NR_TITULO",
 				"type": "Decimal"
 			},
 			{
-				"name": "NR_SEQ_NOTA_FISCAL",
+				"name": "NR_SEQUENCIA",
 				"type": "Decimal"
 			},
 			{
-				"name": "DT_EMISSAO",
+				"name": "DT_BAIXA",
 				"type": "DateTime"
 			},
 			{
-				"name": "DT_VENCIMENTO_ORIGINAL",
+				"name": "VL_PAGO",
+				"type": "Decimal"
+			},
+			{
+				"name": "VL_DESCONTOS",
+				"type": "Decimal"
+			},
+			{
+				"name": "VL_JUROS",
+				"type": "Decimal"
+			},
+			{
+				"name": "VL_MULTA",
+				"type": "Decimal"
+			},
+			{
+				"name": "DT_ATUALIZACAO",
 				"type": "DateTime"
 			},
 			{
-				"name": "DT_VENCIMENTO_ATUAL",
-				"type": "DateTime"
+				"name": "DS_TIPO_BAIXA",
+				"type": "String"
 			},
 			{
-				"name": "VL_TITULO",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_SALDO_TITULO",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_SALDO_JUROS",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_SALDO_MULTA",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_DIA_ANTECIPACAO",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_BORDERO",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_JUROS_BORDERO",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_MULTA_BORDERO",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_DESCONTO_BORDERO",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_IR",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_IMPOSTO_MUNIC",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_INSS",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_OUT_DESP_BORDERO",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_TITULO_ESTRANG",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_COTACAO",
-				"type": "Decimal"
-			},
-			{
-				"name": "SITUACAO",
+				"name": "DS_TRANSACAO",
 				"type": "String"
 			}
 		]
