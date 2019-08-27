@@ -1,0 +1,142 @@
+{
+	"name": "Baixas titulos",
+	"properties": {
+		"activities": [
+			{
+				"name": "Baixa titulos",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "select\nl.nr_titulo, \nl.dt_recebimento, \nl.vl_recebido, \nl.vl_descontos, \nl.vl_juros, \nl.vl_multa, \nl.dt_atualizacao, \nt.ds_tipo_recebimento,\nX.DS_TRANSACAO\nfrom TITULO_RECEBER_LIQ L,\n     tipo_recebimento t,\n     TRANSACAO_FINANCEIRA X\nwhere l.cd_tipo_recebimento = t.cd_tipo_recebimento\nAND l.nr_seq_trans_fin = X.NR_SEQUENCIA",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "NR_TITULO",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "nr_titulO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "DT_RECEBIMENTO",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "dt_recebimento",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_RECEBIDO",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "vl_recebido",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_DESCONTOS",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "vl_descontos",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_JUROS",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "vl_juros",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_MULTA",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "vl_multa",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "DT_ATUALIZACAO",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "dt_atualizacao",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_TIPO_RECEBIMENTO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ds_tipo_recebimento",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_TRANSACAO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "nr_seq_trans_fin",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "CloudTasyPrdDataSet",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AZ_SQL_TB_Baixa_Titulos_Receber",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "Contas a receber"
+		},
+		"annotations": []
+	}
+}

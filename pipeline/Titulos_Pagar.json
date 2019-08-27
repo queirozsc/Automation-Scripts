@@ -1,0 +1,302 @@
+{
+	"name": "Titulos_Pagar",
+	"properties": {
+		"activities": [
+			{
+				"name": "Titulos_Pagar",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "select obter_nome_estab(t.cd_estabelecimento) as estabelecimento,\n       t.cd_cgc,\n       obter_razao_social(t.cd_cgc) as nm_razaosocial,\n       obter_nome_fantasia_pj(t.cd_cgc) nm_fantasia,\n       t.nr_titulo,\n       t.nr_seq_nota_fiscal,\n       t.dt_emissao,\n       t.dt_vencimento_original,\n       t.dt_vencimento_atual,\n       t.vl_titulo,\n       t.vl_saldo_titulo,\n       t.vl_saldo_juros,\n       t.vl_saldo_multa,\n       t.vl_dia_antecipacao,\n       t.vl_bordero,\n       t.vl_juros_bordero,\n       t.vl_multa_bordero,\n       t.vl_desconto_bordero,\n       t.vl_ir,\n       t.vl_imposto_munic,\n       t.vl_inss,\n       t.vl_out_desp_bordero,\n       t.vl_titulo_estrang,\n       t.vl_cotacao,\n       obter_valor_dominio(501,t.ie_situacao) as situacao\nfrom titulo_pagar t",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ESTABELECIMENTO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "estabelecimento",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CD_CGC",
+									"type": "String"
+								},
+								"sink": {
+									"name": "cd_cgc",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NM_RAZAOSOCIAL",
+									"type": "String"
+								},
+								"sink": {
+									"name": "nm_razaosocial",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NM_FANTASIA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "nm_fantasia",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NR_TITULO",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "nr_titulo",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "NR_SEQ_NOTA_FISCAL",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "nr_seq_nota_fiscal",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "DT_EMISSAO",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "dt_emissao",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "DT_VENCIMENTO_ORIGINAL",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "dt_vencimento_original",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "DT_VENCIMENTO_ATUAL",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "dt_vencimento_atual",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_TITULO",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "vl_titulo",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_SALDO_TITULO",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "vl_saldo_titulo",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_SALDO_JUROS",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "vl_saldo_juros",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_SALDO_MULTA",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "vl_saldo_multa",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_DIA_ANTECIPACAO",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "vl_dia_antecipacao",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_BORDERO",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "vl_bordero",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_JUROS_BORDERO",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "vl_juros_bordero",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_MULTA_BORDERO",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "vl_multa_bordero",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_DESCONTO_BORDERO",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "vl_desconto_bordero",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_IR",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "vl_ir",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_IMPOSTO_MUNIC",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "vl_imposto_munic",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_INSS",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "vl_inss",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_OUT_DESP_BORDERO",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "vl_out_desp_bordero",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_TITULO_ESTRANG",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "vl_titulo_estrang",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_COTACAO",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "vl_cotacao",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "SITUACAO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "situacao",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "CloudTasyPrdDataSet",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AZ_SQL_TB_Titulos_Pagar",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "Contas a Pagar"
+		},
+		"annotations": []
+	}
+}
