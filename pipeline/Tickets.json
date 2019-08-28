@@ -1087,8 +1087,149 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"enableStaging": false
-				}
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "FileServerReadSettings",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false,
+					"enableSkipIncompatibleRow": true,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "QSESSION",
+									"type": "String"
+								},
+								"sink": {
+									"name": "QSESSION",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "TABLE_NAME",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TABLE_NAME",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "TABLE_ROWID",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TABLE_ROWID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "TABLE_ROWNUM",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TABLE_ROWNUM",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "COLUMN_NAME",
+									"type": "String"
+								},
+								"sink": {
+									"name": "COLUMN_NAME",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "COLUMN_VALUE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "COLUMN_VALUE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "COLUMN_POSITION",
+									"type": "String"
+								},
+								"sink": {
+									"name": "COLUMN_POSITION",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "COLUMN_ANSWERED",
+									"type": "String"
+								},
+								"sink": {
+									"name": "COLUMN_ANSWERED",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "COLUMN_ANSWERDATE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "COLUMN_ANSWERDATE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "COLUMN_UPDATED",
+									"type": "String"
+								},
+								"sink": {
+									"name": "COLUMN_UPDATED",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "COLUMN_VISIBLE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "COLUMN_VISIBLE",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "FILE_QTABLEANSWER",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "TABLE_QTABLEANSWER",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"folder": {
