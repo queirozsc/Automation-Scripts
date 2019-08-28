@@ -1072,7 +1072,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Copy answers",
+						"activity": "Clear tables",
 						"dependencyConditions": [
 							"Succeeded"
 						]
