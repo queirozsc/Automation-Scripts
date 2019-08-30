@@ -747,6 +747,7 @@
 			},
 			{
 				"name": "Copy sessions",
+				"description": "Copy sessions data from CSV (stored on Power BI Gateway VM) to Azure SQL",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -911,6 +912,7 @@
 			},
 			{
 				"name": "Copy answers",
+				"description": "Copy answers data from CSV (stored on Power BI Gateway VM) to Azure SQL",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -1045,6 +1047,7 @@
 			},
 			{
 				"name": "Update clients",
+				"description": "Transport [UNIDADE ATENDIMENTO] field from answers table to requests table, for time saving in queries",
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
@@ -1072,6 +1075,7 @@
 			},
 			{
 				"name": "Copy table answers",
+				"description": "Copy anwers table data from CSV (stored on Power BI Gateway VM) to Azure SQL",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -1235,9 +1239,17 @@
 				]
 			},
 			{
-				"name": "Stored Procedure1",
+				"name": "Copy CAPEX NFDs",
+				"description": "Copy NFD tickets to REQUESTIA_CAPEXNFD table, solving timeout in Microsoft Flow that send weekly mail from sergio.queiroz@opty.com.br account",
 				"type": "SqlServerStoredProcedure",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Update clients",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -1245,7 +1257,14 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[sp_EXTRACTCAPEXREQUESTS]"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"folder": {
