@@ -16,15 +16,11 @@
 				"type": "Decimal"
 			},
 			{
-				"name": "NR_SEQUENCIA",
-				"type": "Decimal"
-			},
-			{
-				"name": "DT_BAIXA",
+				"name": "DT_RECEBIMENTO",
 				"type": "DateTime"
 			},
 			{
-				"name": "VL_PAGO",
+				"name": "VL_RECEBIDO",
 				"type": "Decimal"
 			},
 			{
@@ -44,7 +40,7 @@
 				"type": "DateTime"
 			},
 			{
-				"name": "DS_TIPO_BAIXA",
+				"name": "DS_TIPO_RECEBIMENTO",
 				"type": "String"
 			},
 			{
