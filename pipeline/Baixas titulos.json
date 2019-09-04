@@ -24,7 +24,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select obter_cgc_estabelecimento(R.CD_ESTABELECIMENTO) AS CD_CGC_ESTAB, \nl.nr_titulo, \nl.dt_recebimento, \nl.vl_recebido, \nl.vl_descontos, \nl.vl_juros, \nl.vl_multa, \nl.dt_atualizacao, \nt.ds_tipo_recebimento,\nX.DS_TRANSACAO\nfrom titulo_receber r,\n     TITULO_RECEBER_LIQ L,\n     tipo_recebimento t,\n     TRANSACAO_FINANCEIRA X\nwhere r.nr_titulo = l.nr_titulo \nand l.cd_tipo_recebimento = t.cd_tipo_recebimento\nAND l.nr_seq_trans_fin = X.NR_SEQUENCIA\nand r.cd_estabelecimento not in (11)",
+						"oracleReaderQuery": "select obter_cgc_estabelecimento(R.CD_ESTABELECIMENTO) AS CD_CGC_ESTAB, \nl.nr_titulo, \nl.dt_recebimento, \nl.vl_recebido, \nl.vl_descontos, \nl.vl_juros, \nl.vl_multa, \nl.dt_atualizacao, \nt.ds_tipo_recebimento,\nX.DS_TRANSACAO,\n'' as MARCA,\n'' as SIGLA_UNIDADE\nfrom titulo_receber r,\n     TITULO_RECEBER_LIQ L,\n     tipo_recebimento t,\n     TRANSACAO_FINANCEIRA X\nwhere r.nr_titulo = l.nr_titulo \nand l.cd_tipo_recebimento = t.cd_tipo_recebimento\nAND l.nr_seq_trans_fin = X.NR_SEQUENCIA\nand r.cd_estabelecimento not in (11)",
 						"partitionOption": "None"
 					},
 					"sink": {
@@ -36,11 +36,21 @@
 						"mappings": [
 							{
 								"source": {
+									"name": "CD_CGC_ESTAB",
+									"type": "String"
+								},
+								"sink": {
+									"name": "cd_cgc_estab",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
 									"name": "NR_TITULO",
 									"type": "Decimal"
 								},
 								"sink": {
-									"name": "nr_titulO",
+									"name": "nr_titulo",
 									"type": "Int32"
 								}
 							},
@@ -121,6 +131,26 @@
 								},
 								"sink": {
 									"name": "nr_seq_trans_fin",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "MARCA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "SIGLA_UNIDADE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SIGLA_UNIDADE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "MARCA",
 									"type": "String"
 								}
 							}
