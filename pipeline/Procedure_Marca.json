@@ -18,7 +18,7 @@
 					"storedProcedureName": "sp_UPDATETRADEMARKV2",
 					"storedProcedureParameters": {
 						"CNPJ_FIELDNAME": {
-							"value": "cd_cdgc_estab",
+							"value": "cd_cgc_estab",
 							"type": "String"
 						},
 						"INITIALS_FIELDNAME": {
