@@ -330,51 +330,6 @@
 						"type": "DatasetReference"
 					}
 				]
-			},
-			{
-				"name": "Ajustar Marca",
-				"type": "SqlServerStoredProcedure",
-				"dependsOn": [
-					{
-						"activity": "Baixa titulos HTML5",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"storedProcedureName": "[dbo].[sp_UPDATETRADEMARK]",
-					"storedProcedureParameters": {
-						"TABLENAME": {
-							"value": "AGING_BAIXA_TITULO_RECEBER",
-							"type": "VARCHAR(50)"
-						},
-						"MARK_FIELDNAME": {
-							"value": "MARCA",
-							"type": "VARCHAR(50)"
-						},
-						"INITIALS_FIELDNAME": {
-							"value": "SIGLA_UNIDADE",
-							"type": "VARCHAR(50)"
-						},
-						"CNPJ_FIELDNAME": {
-							"value": "CD_CGC_ESTAB",
-							"type": "VARCHAR(50)"
-						}
-					}
-				},
-				"linkedServiceName": {
-					"referenceName": "AzureSQL_DB_Procedimentos",
-					"type": "LinkedServiceReference"
-				}
 			}
 		],
 		"folder": {
