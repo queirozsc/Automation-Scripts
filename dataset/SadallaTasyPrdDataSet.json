@@ -12,6 +12,10 @@
 		"type": "OracleTable",
 		"structure": [
 			{
+				"name": "CD_CGC_ESTAB",
+				"type": "String"
+			},
+			{
 				"name": "NR_TITULO",
 				"type": "Decimal"
 			},
@@ -45,6 +49,14 @@
 			},
 			{
 				"name": "DS_TRANSACAO",
+				"type": "String"
+			},
+			{
+				"name": "MARCA",
+				"type": "String"
+			},
+			{
+				"name": "SIGLA_UNIDADE",
 				"type": "String"
 			}
 		]
