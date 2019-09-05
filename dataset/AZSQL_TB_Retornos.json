@@ -92,7 +92,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "OFT_CONSULTA_RETORNO"
+			"table": "Oft_Consulta_Retorno"
 		}
 	}
 }
