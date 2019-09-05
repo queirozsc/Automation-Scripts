@@ -1,5 +1,5 @@
 {
-	"name": "AZSQL_TBRetornos",
+	"name": "AZSQL_TB_Retornos",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSQL_DB_Procedimentos",
