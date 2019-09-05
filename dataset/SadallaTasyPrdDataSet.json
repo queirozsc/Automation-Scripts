@@ -12,51 +12,75 @@
 		"type": "OracleTable",
 		"structure": [
 			{
-				"name": "CD_CGC_ESTAB",
+				"name": "ESTABELECIMENTO",
 				"type": "String"
 			},
 			{
-				"name": "NR_TITULO",
+				"name": "NR_ATENDIMENTO",
 				"type": "Decimal"
 			},
 			{
-				"name": "DT_RECEBIMENTO",
+				"name": "NR_PRONTUARIO",
+				"type": "Decimal"
+			},
+			{
+				"name": "CD_PESSOA_FISICA",
+				"type": "String"
+			},
+			{
+				"name": "NM_PACIENTE",
+				"type": "String"
+			},
+			{
+				"name": "NR_TEL",
+				"type": "String"
+			},
+			{
+				"name": "CD_MEDICO",
+				"type": "String"
+			},
+			{
+				"name": "NM_MEDICO",
+				"type": "String"
+			},
+			{
+				"name": "DS_EMAIL",
+				"type": "String"
+			},
+			{
+				"name": "NR_SEQ_CONSULTA",
+				"type": "Decimal"
+			},
+			{
+				"name": "CD_ESTABELECIMENTO",
+				"type": "String"
+			},
+			{
+				"name": "DATA_ATENDIMENTO",
 				"type": "DateTime"
 			},
 			{
-				"name": "VL_RECEBIDO",
-				"type": "Decimal"
+				"name": "TIPO_ATENDIMENTO",
+				"type": "String"
 			},
 			{
-				"name": "VL_DESCONTOS",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_JUROS",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_MULTA",
-				"type": "Decimal"
-			},
-			{
-				"name": "DT_ATUALIZACAO",
+				"name": "AGENDADO_PARA_DIA",
 				"type": "DateTime"
 			},
 			{
-				"name": "DS_TIPO_RECEBIMENTO",
+				"name": "TIPO_AGENDA",
+				"type": "Double"
+			},
+			{
+				"name": "RETORNO_EM",
 				"type": "String"
 			},
 			{
-				"name": "DS_TRANSACAO",
+				"name": "USUARIO",
 				"type": "String"
 			},
 			{
-				"name": "MARCA",
-				"type": "String"
-			},
-			{
-				"name": "SIGLA_UNIDADE",
+				"name": "PROCEDIMENTOS",
 				"type": "String"
 			}
 		]
