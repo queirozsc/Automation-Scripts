@@ -1,0 +1,54 @@
+{
+	"name": "Retornos Tasy",
+	"properties": {
+		"activities": [
+			{
+				"name": "HTML5",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "-----------------------------------------HTML5--------------------------------------------------------------\n\n\n SELECT obter_nome_estab(obter_estab_atend(m.nr_atendimento)) AS estabelecimento\n    , m.nr_atendimento\n    , n.nr_prontuario\n    , m.cd_pessoa_fisica\n    , n.nm_pessoa_fisica nm_paciente\n    , n.nr_tel\n    , m.cd_medico\n    , m.nm_medico\n    , n.ds_email\n    , m.nr_seq_consulta\n    , obter_estab_atendimento(m.nr_atendimento) cd_estabelecimento\n    , obter_data_entrada(m.nr_atendimento) AS data_atendimento\n    , obter_valor_dominio(12,obter_tipo_atendimento(m.nr_atendimento)) as tipo_atendimento\n    , \n    (\n        SELECT a.dt_agenda\n        FROM agenda_consulta a\n            , agenda x\n        WHERE a.cd_agenda = x.cd_agenda\n            AND a.dt_agenda > obter_data_entrada(m.nr_atendimento)\n            AND a.cd_pessoa_fisica = m.cd_pessoa_fisica\n            AND ROWNUM <= 1\n            AND a.dt_agenda <> obter_data_entrada(m.nr_atendimento)\n        ) AS agendado_para_dia,\n        \n        (\n        SELECT case when obter_tipo_agenda(a.cd_agenda) = 2 and x.cd_pessoa_fisica is null then 2\n                    when obter_tipo_agenda(a.cd_agenda) = 2 and x.cd_pessoa_fisica is not null then 3\n                    end as tipo\n        FROM agenda_paciente a\n            , agenda x\n        WHERE a.cd_agenda = x.cd_agenda\n            AND a.dt_agenda > obter_data_entrada(m.nr_atendimento)\n            AND a.cd_pessoa_fisica = m.cd_pessoa_fisica\n            AND ROWNUM <= 1\n            AND a.dt_agenda <> obter_data_entrada(m.nr_atendimento)\n        ) AS tipo_agenda,\n        \n     (\n        SELECT 'Retorno em ' || lpad(a.qt_periodo, 2, '0') || decode(a.ie_periodo, 'D', ' Dias', a.ie_periodo) ds_periodo\n        FROM oft_conduta a\n        WHERE a.nr_seq_consulta = m.nr_seq_consulta\n            AND a.dt_inativacao IS NULL\n            AND a.ie_situacao = 'A'\n            AND a.nr_sequencia = (\n                SELECT max(nr_sequencia)\n                FROM oft_conduta\n                WHERE nr_seq_consulta = a.nr_seq_consulta\n                )\n            AND a.qt_periodo IS NOT NULL\n        ) AS retorno_em,\n        \n     (\n        SELECT a.nm_usuario_orig\n        FROM agenda_paciente a\n            , agenda x\n        WHERE a.cd_agenda = x.cd_agenda\n            AND a.dt_agenda > obter_data_entrada(m.nr_atendimento)\n            AND a.cd_pessoa_fisica = m.cd_pessoa_fisica\n            AND obter_tipo_agenda(a.cd_agenda) = 2\n            AND ROWNUM <= 1\n            AND a.dt_agenda <> obter_data_entrada(m.nr_atendimento)\n        ) AS usuario\n    , (\n        SELECT listagg(obter_desc_procedimento(b.cd_procedimento, b.ie_origem_proced) || ' Quantidade = ' || b.qt_exame, ' ;') WITHIN GROUP (ORDER BY obter_desc_procedimento(b.cd_procedimento, b.ie_origem_proced))\n        FROM pedido_exame_externo_item b\n        INNER JOIN proc_interno c\n            ON c.nr_sequencia = b.nr_proc_interno\n        INNER JOIN pedido_exame_externo c\n            ON c.nr_sequencia = b.nr_seq_pedido\n        WHERE c.nr_seq_consulta = m.nr_seq_consulta AND c.ie_situacao = 'A'\n        ) AS procedimentos\nFROM (\n    SELECT a.nr_atendimento\n        , a.cd_pessoa_fisica\n        , a.cd_medico\n        , obter_nome_pf(a.cd_medico) nm_medico\n        , a.nr_sequencia nr_seq_consulta\n        , a.cd_estabelecimento\n    FROM oft_consulta a\n    WHERE a.dt_consulta BETWEEN inicio_dia(sysdate - 362) AND fim_dia(sysdate)\n    \n    UNION\n    \n    SELECT a.nr_atendimento\n        , a.cd_pessoa_fisica\n        , a.cd_medico\n        , obter_nome_pf(a.cd_medico) nm_medico\n        , a.nr_sequencia nr_seq_consulta\n        , a.cd_estabelecimento\n    FROM oft_consulta a\n    LEFT JOIN (\n        SELECT count(1) nr_conduta\n            , nr_seq_consulta\n        FROM oft_conduta\n        GROUP BY nr_seq_consulta\n        ) b\n        ON b.nr_seq_consulta = a.nr_sequencia\n    LEFT JOIN (\n        SELECT a.nr_seq_consulta\n            , count(1) nr_encaminhamento\n        FROM med_avaliacao_paciente a\n        INNER JOIN med_avaliacao_result b\n            ON b.nr_seq_avaliacao = a.nr_sequencia\n        WHERE a.nr_seq_tipo_avaliacao = 34\n            AND b.nr_seq_item IN (456, 457, 458)\n        GROUP BY a.nr_seq_consulta\n        ) c\n        ON c.nr_seq_consulta = a.nr_sequencia\n    LEFT JOIN (\n        SELECT nr_seq_consulta\n            , count(1) nr_procedimento\n        FROM pedido_exame_externo\n        WHERE ie_situacao = 'A'\n        GROUP BY nr_seq_consulta\n        ) d\n        ON d.nr_seq_consulta = a.nr_sequencia\n    WHERE a.dt_consulta BETWEEN inicio_dia(sysdate - 90) AND fim_dia(sysdate)\n        AND (\n            (nvl(b.nr_conduta, 0) > 0)\n            OR (nvl(c.nr_encaminhamento, 0) > 0)\n            OR (nvl(d.nr_procedimento, 0) > 0)\n            )\n    ) m\nINNER JOIN (\n    SELECT cd_pessoa_fisica\n        , nm_pessoa_fisica\n        , nvl(nvl(nr_cel, nr_cel2), nr_tel) nr_tel\n        , nr_prontuario\n        , ds_email\n    FROM (\n        SELECT x.cd_pessoa_fisica\n            , initcap(x.nm_pessoa_fisica) nm_pessoa_fisica\n            , x.nr_prontuario\n            , regexp_replace(regexp_replace(x.nr_telefone_celular, '[^[:digit:]]'), decode(length(regexp_replace(x.nr_telefone_celular, '[^[:digit:]]')), 8, ds_reg_8, 9, ds_reg_9, 10, ds_reg_10, ds_reg_11), decode(length(regexp_replace(x.nr_telefone_celular, '[^[:digit:]]')), 8, ds_for_8, 9, ds_for_9, 10, ds_for_10, ds_for_11)) nr_cel\n            , regexp_replace(regexp_replace(y.nr_telefone_celular, '[^[:digit:]]'), decode(length(regexp_replace(y.nr_telefone_celular, '[^[:digit:]]')), 8, ds_reg_8, 9, ds_reg_9, 10, ds_reg_10, ds_reg_11), decode(length(regexp_replace(y.nr_telefone_celular, '[^[:digit:]]')), 8, ds_for_8, 9, ds_for_9, 10, ds_for_10, ds_for_11)) nr_cel2\n            , regexp_replace(regexp_replace(y.nr_telefone, '[^[:digit:]]'), decode(length(regexp_replace(y.nr_telefone, '[^[:digit:]]')), 8, ds_reg_8, 9, ds_reg_9, 10, ds_reg_10, ds_reg_11), decode(length(regexp_replace(y.nr_telefone, '[^[:digit:]]')), 8, ds_for_8, 9, ds_for_9, 10, ds_for_10, ds_for_11)) nr_tel\n            , y.ds_email\n        FROM pessoa_fisica x\n        LEFT JOIN compl_pessoa_fisica y\n            ON y.cd_pessoa_fisica = x.cd_pessoa_fisica\n                AND y.ie_tipo_complemento = 1\n                , (\n                    SELECT '([0-9]{4})([0-9]{4})' ds_reg_8\n                        , '\\1-\\2' ds_for_8\n                        , '([0-9]{5})([0-9]{4})' ds_reg_9\n                        , '\\1-\\2' ds_for_9\n                        , '([0-9]{2})([0-9]{4})([0-9]{4})' ds_reg_10\n                        , '(\\1) \\2-\\3' ds_for_10\n                        , '([0-9]{2})([0-9]{5})([0-9]{4})' ds_reg_11\n                        , '(\\1) \\2-\\3' ds_for_11\n                    FROM dual) z\n        WHERE x.nr_telefone_celular IS NOT NULL\n            OR y.nr_telefone_celular IS NOT NULL\n            OR y.nr_telefone IS NOT NULL)) n\n    ON n.cd_pessoa_fisica = m.cd_pessoa_fisica\nWHERE NOT EXISTS (\n        SELECT a.dt_agenda\n            , a.cd_pessoa_fisica\n        FROM agenda_paciente a\n        WHERE obter_tipo_agenda(a.cd_agenda) = 2\n            AND a.cd_pessoa_fisica = m.cd_pessoa_fisica\n            AND a.dt_agenda > sysdate)\nand rownum < 10\norder by 1 desc",
+						"partitionOption": "None"
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "SadallaTasyPrdDataSet",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Copy Data2",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"enableStaging": false
+				}
+			}
+		],
+		"folder": {
+			"name": "Retornos de Consulta"
+		},
+		"annotations": []
+	}
+}
