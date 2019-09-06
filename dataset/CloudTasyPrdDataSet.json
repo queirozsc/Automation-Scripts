@@ -64,12 +64,12 @@
 				"type": "String"
 			},
 			{
-				"name": "AGENDADO_PARA_DIA",
-				"type": "DateTime"
-			},
-			{
 				"name": "AGENDADO_PARA_HORA",
 				"type": "String"
+			},
+			{
+				"name": "AGENDADO_PARA_DIA",
+				"type": "DateTime"
 			},
 			{
 				"name": "TIPO_AGENDA",
