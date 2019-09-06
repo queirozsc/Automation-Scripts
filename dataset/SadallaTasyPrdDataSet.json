@@ -56,11 +56,19 @@
 				"type": "String"
 			},
 			{
+				"name": "HORA",
+				"type": "String"
+			},
+			{
 				"name": "DATA_ATENDIMENTO",
 				"type": "DateTime"
 			},
 			{
 				"name": "TIPO_ATENDIMENTO",
+				"type": "String"
+			},
+			{
+				"name": "AGENDADO_PARA_HORA",
 				"type": "String"
 			},
 			{
