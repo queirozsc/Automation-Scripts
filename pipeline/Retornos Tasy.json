@@ -424,21 +424,22 @@
 							},
 							{
 								"source": {
-									"name": "AGENDADO_PARA_DIA",
-									"type": "DateTime"
-								},
-								"sink": {
-									"name": "AGENDADO_PARA_DIA",
-									"type": "DateTime"
-								}
-							},
-							{
-								"source": {
-									"name": "AGENDADO_PARA_HORA"
+									"name": "AGENDADO_PARA_HORA",
+									"type": "String"
 								},
 								"sink": {
 									"name": "agendado_para_hora",
 									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "AGENDADO_PARA_DIA",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "AGENDADO_PARA_DIA",
+									"type": "DateTime"
 								}
 							},
 							{
