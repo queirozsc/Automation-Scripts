@@ -518,7 +518,13 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"storedProcedureName": "[dbo].[sp_OFTRETORNOSCONSULTAS)]"
+					"storedProcedureName": "[dbo].[sp_TRUNCATETABLEDEFAUT)]",
+					"storedProcedureParameters": {
+						"TABLENAME": {
+							"value": "Oft_Consulta_Retorno",
+							"type": "String"
+						}
+					}
 				},
 				"linkedServiceName": {
 					"referenceName": "AzureSQL_DB_Procedimentos",
