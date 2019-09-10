@@ -7,7 +7,7 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "AZ_Oracle_To_SQL",
+					"referenceName": "Agendas Projesi",
 					"type": "PipelineReference"
 				}
 			}
