@@ -130,6 +130,10 @@
 			{
 				"name": "DS_MEDICO_AGENDA",
 				"type": "String"
+			},
+			{
+				"name": "STATUS_PACIENTE",
+				"type": "String"
 			}
 		]
 	},
