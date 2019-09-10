@@ -1,5 +1,5 @@
 {
-	"name": "Retornos Tasy",
+	"name": "Retornos",
 	"properties": {
 		"activities": [
 			{
@@ -533,7 +533,7 @@
 			}
 		],
 		"folder": {
-			"name": "Retornos de Consulta"
+			"name": "Atendimento"
 		},
 		"annotations": []
 	}

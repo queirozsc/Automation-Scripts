@@ -1,5 +1,5 @@
 {
-	"name": "AtendimentosUnidades",
+	"name": "Atendimentos",
 	"properties": {
 		"activities": [
 			{
@@ -556,7 +556,7 @@
 			}
 		],
 		"folder": {
-			"name": "Atendimento Pacientes"
+			"name": "Atendimento"
 		},
 		"annotations": []
 	}
