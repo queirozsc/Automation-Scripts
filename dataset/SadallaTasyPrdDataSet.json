@@ -53,7 +53,7 @@
 			},
 			{
 				"name": "DATA_ATENDIMENTO",
-				"type": "DateTime"
+				"type": "String"
 			},
 			{
 				"name": "HORA",
@@ -65,7 +65,7 @@
 			},
 			{
 				"name": "AGENDADO_PARA_DIA",
-				"type": "DateTime"
+				"type": "String"
 			},
 			{
 				"name": "AGENDADO_PARA_HORA",
