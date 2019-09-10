@@ -1,5 +1,5 @@
 {
-	"name": "Ordens_Servico_Terceiro",
+	"name": "Chamados Philips",
 	"properties": {
 		"activities": [
 			{
@@ -83,7 +83,7 @@
 			}
 		],
 		"folder": {
-			"name": "Ordens de Serviço"
+			"name": "Apoio"
 		},
 		"annotations": []
 	}

@@ -1,5 +1,5 @@
 {
-	"name": "Tickets",
+	"name": "Chamados Requestia",
 	"properties": {
 		"activities": [
 			{
@@ -1296,7 +1296,7 @@
 			}
 		],
 		"folder": {
-			"name": "Requestia"
+			"name": "Apoio"
 		},
 		"annotations": []
 	},
