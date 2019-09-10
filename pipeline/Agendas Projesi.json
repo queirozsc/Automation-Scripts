@@ -36,10 +36,21 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "ID_COMPROMISSO"
+									"name": "ID_COMPROMISSO",
+									"type": "Decimal"
 								},
 								"sink": {
 									"name": "id_compromisso",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "NR_ATENDIMENTO",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "nr_atendimento",
 									"type": "Int32"
 								}
 							},
@@ -146,7 +157,7 @@
 							{
 								"source": {
 									"name": "HORACOMPROMISSO",
-									"type": "DateTime"
+									"type": "String"
 								},
 								"sink": {
 									"name": "horacompromisso",
@@ -420,10 +431,21 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "ID_COMPROMISSO"
+									"name": "ID_COMPROMISSO",
+									"type": "Decimal"
 								},
 								"sink": {
 									"name": "id_compromisso",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "NR_ATENDIMENTO",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "nr_atendimento",
 									"type": "Int32"
 								}
 							},
@@ -530,7 +552,7 @@
 							{
 								"source": {
 									"name": "HORACOMPROMISSO",
-									"type": "DateTime"
+									"type": "String"
 								},
 								"sink": {
 									"name": "horacompromisso",
