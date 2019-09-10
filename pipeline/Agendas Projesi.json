@@ -131,7 +131,7 @@
 								},
 								"sink": {
 									"name": "cd_plano",
-									"type": "Int32"
+									"type": "String"
 								}
 							},
 							{
@@ -526,7 +526,7 @@
 								},
 								"sink": {
 									"name": "cd_plano",
-									"type": "Int32"
+									"type": "String"
 								}
 							},
 							{
