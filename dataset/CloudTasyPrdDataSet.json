@@ -12,232 +12,128 @@
 		"type": "OracleTable",
 		"structure": [
 			{
-				"name": "NR_SEQUENCIA",
+				"name": "ID_COMPROMISSO",
 				"type": "Decimal"
 			},
 			{
-				"name": "DS_ORDEM",
-				"type": "String"
-			},
-			{
-				"name": "NR_SEQ_LOCALIZACAO",
+				"name": "NR_ATENDIMENTO",
 				"type": "Decimal"
 			},
 			{
-				"name": "DS_LOCALIZACAO",
+				"name": "ID_CLIENTE",
 				"type": "String"
 			},
 			{
-				"name": "NR_SEQ_EQUIPAMENTO",
-				"type": "Decimal"
-			},
-			{
-				"name": "DS_EQUIPAMENTO",
+				"name": "NOMEPACIENTE",
 				"type": "String"
 			},
 			{
-				"name": "CD_PESSOA_SOLICITANTE",
-				"type": "String"
-			},
-			{
-				"name": "NM_SOLICITANTE",
-				"type": "String"
-			},
-			{
-				"name": "DT_ORDEM_SERVICO",
+				"name": "DTNASCIMENTO",
 				"type": "DateTime"
 			},
 			{
-				"name": "IE_PRIORIDADE",
+				"name": "CELULAR",
 				"type": "String"
 			},
 			{
-				"name": "DS_DANO_BREVE",
+				"name": "EMAIL",
 				"type": "String"
 			},
 			{
-				"name": "DT_ATUALIZACAO",
-				"type": "DateTime"
-			},
-			{
-				"name": "NM_USUARIO",
-				"type": "String"
-			},
-			{
-				"name": "DT_INICIO_DESEJADO",
-				"type": "DateTime"
-			},
-			{
-				"name": "DS_DANO",
-				"type": "String"
-			},
-			{
-				"name": "DT_FIM_PREVISTO",
-				"type": "DateTime"
-			},
-			{
-				"name": "DT_INICIO_REAL",
-				"type": "DateTime"
-			},
-			{
-				"name": "DT_FIM_REAL",
-				"type": "DateTime"
-			},
-			{
-				"name": "IE_STATUS_ORDEM",
-				"type": "String"
-			},
-			{
-				"name": "NR_GRUPO_PLANEJ",
+				"name": "IDCONVENIO",
 				"type": "Decimal"
 			},
 			{
-				"name": "NR_GRUPO_TRABALHO",
-				"type": "Decimal"
+				"name": "CONVENIO",
+				"type": "String"
 			},
 			{
-				"name": "NR_SEQ_ESTAGIO",
-				"type": "Decimal"
+				"name": "CD_PLANO",
+				"type": "String"
 			},
 			{
-				"name": "DT_REABERTURA",
+				"name": "DS_PLANO",
+				"type": "String"
+			},
+			{
+				"name": "DATACOMPROMISSO",
 				"type": "DateTime"
 			},
 			{
-				"name": "CD_FUNCAO",
+				"name": "HORACOMPROMISSO",
+				"type": "String"
+			},
+			{
+				"name": "ID_STATUS",
+				"type": "String"
+			},
+			{
+				"name": "DS_STATUS",
+				"type": "String"
+			},
+			{
+				"name": "CD_AGENDA",
 				"type": "Decimal"
 			},
 			{
-				"name": "IE_CLASSIFICACAO",
+				"name": "AGENDA",
 				"type": "String"
 			},
 			{
-				"name": "DS_SITUACAO",
-				"type": "String"
-			},
-			{
-				"name": "IE_GRAU_SATISFACAO",
-				"type": "String"
-			},
-			{
-				"name": "NR_SEQ_WHEB",
+				"name": "CD_PROCEDIMENTO",
 				"type": "Decimal"
 			},
 			{
-				"name": "IE_ORIGEM_OS",
+				"name": "PROCEDIMENTO",
 				"type": "String"
 			},
 			{
-				"name": "IE_TIPO_ORDEM",
-				"type": "Decimal"
-			},
-			{
-				"name": "NR_SEQ_TRAB",
+				"name": "ID_EMPRESA",
 				"type": "Double"
 			},
 			{
-				"name": "CD_SETOR",
+				"name": "EMPRESA",
+				"type": "String"
+			},
+			{
+				"name": "ID_UNIDADE",
 				"type": "Decimal"
 			},
 			{
-				"name": "DS_SETOR_LOCALIZACAO",
+				"name": "UNIDADE",
 				"type": "String"
 			},
 			{
-				"name": "NM_USUARIO_EXEC",
+				"name": "IE_AUTORIZACAO",
 				"type": "String"
 			},
 			{
-				"name": "DS_ESTAGIO",
+				"name": "AUTORIZACAO",
 				"type": "String"
 			},
 			{
-				"name": "DT_INICIO_SEMANA",
+				"name": "NM_MEDICO",
+				"type": "String"
+			},
+			{
+				"name": "DT_AGENDAMENTO",
 				"type": "DateTime"
 			},
 			{
-				"name": "DT_INICIO_MES",
-				"type": "DateTime"
-			},
-			{
-				"name": "DT_ANO",
-				"type": "DateTime"
-			},
-			{
-				"name": "CD_ESTABELECIMENTO",
+				"name": "TIPO_AGENDA",
 				"type": "Decimal"
 			},
 			{
-				"name": "IE_NOVO_HIST",
+				"name": "TIPO_AGENDA_DESC",
 				"type": "String"
 			},
 			{
-				"name": "DS_COR_FONTE_ESTAGIO",
+				"name": "DS_MEDICO_AGENDA",
 				"type": "String"
 			},
 			{
-				"name": "DS_COR_FUNDO_ESTAGIO",
+				"name": "STATUS_PACIENTE",
 				"type": "String"
-			},
-			{
-				"name": "DS_GRAU_SATISFACAO",
-				"type": "String"
-			},
-			{
-				"name": "NM_USUARIO_EXEC_PREV",
-				"type": "String"
-			},
-			{
-				"name": "NR_SEQ_ORIGEM",
-				"type": "Decimal"
-			},
-			{
-				"name": "IE_PARADO",
-				"type": "String"
-			},
-			{
-				"name": "DT_INICIO_PREVISTO",
-				"type": "DateTime"
-			},
-			{
-				"name": "DT_CONCLUSAO_DESEJADA",
-				"type": "DateTime"
-			},
-			{
-				"name": "DS_SETOR_ATENDIMENTO",
-				"type": "String"
-			},
-			{
-				"name": "DS_GRUPO_TRABALHO",
-				"type": "String"
-			},
-			{
-				"name": "DS_COMPLEXIDADE",
-				"type": "String"
-			},
-			{
-				"name": "DS_ORIGEM_OS",
-				"type": "String"
-			},
-			{
-				"name": "DS_SERVICO",
-				"type": "String"
-			},
-			{
-				"name": "QT_HORAS_ABERTA",
-				"type": "Double"
-			},
-			{
-				"name": "QT_HORAS_PROCESSO",
-				"type": "Double"
-			},
-			{
-				"name": "QT_HORAS_TOTAL",
-				"type": "Double"
-			},
-			{
-				"name": "DT_ULT_HIST",
-				"type": "DateTime"
 			}
 		]
 	},
