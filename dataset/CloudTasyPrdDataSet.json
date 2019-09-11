@@ -109,9 +109,9 @@
 			},
 			{
 				"name": "IE_CLASSIFICACAO",
-        "type": "String"
-      {
-      }
+				"type": "String"
+			},
+			{
 				"name": "HORA",
 				"type": "String"
 			},
