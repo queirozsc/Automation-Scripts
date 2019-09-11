@@ -16,7 +16,7 @@
 				"type": "Decimal"
 			},
 			{
-				"name": "NR_SEQUENCIA",
+				"name": "NR_SEQUENCIA_HIST",
 				"type": "Decimal"
 			},
 			{

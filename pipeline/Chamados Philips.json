@@ -628,7 +628,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select x.nr_seq_ordem_serv, \n       x.nr_sequencia,\n       x.ie_origem, \n       x.nr_seq_tipo, \n       x.nm_usuario_lib, \n       x.dt_atualizacao, \n       x.ds_relat_tecnico\nfrom man_ordem_serv_tecnico x",
+						"oracleReaderQuery": "select x.nr_seq_ordem_serv, \n       x.nr_sequencia as nr_sequencia_hist,\n       x.ie_origem, \n       x.nr_seq_tipo, \n       x.nm_usuario_lib, \n       x.dt_atualizacao, \n       x.ds_relat_tecnico\nfrom man_ordem_serv_tecnico x",
 						"partitionOption": "None"
 					},
 					"sink": {
@@ -650,11 +650,11 @@
 							},
 							{
 								"source": {
-									"name": "NR_SEQUENCIA",
+									"name": "NR_SEQUENCIA_HIST",
 									"type": "Decimal"
 								},
 								"sink": {
-									"name": "nr_sequencia",
+									"name": "nr_sequencia_hist",
 									"type": "Int32"
 								}
 							},
