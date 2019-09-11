@@ -140,43 +140,43 @@
 									"type": "String"
 								},
 								"sink": {
+									"name": "HORA",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "HORA",
+									"type": "String"
+								},
+								"sink": {
 									"name": "DATA_ATENDIMENTO",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"name": "HORA",
-									"type": "String"
-								},
-								"sink": {
-									"name": "HORA",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
 									"name": "TIPO_ATENDIMENTO",
 									"type": "String"
 								},
 								"sink": {
 									"name": "TIPO_ATENDIMENTO",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "AGENDADO_PARA_HORA",
-									"type": "String"
-								},
-								"sink": {
-									"name": "AGENDADO_PARA_HORA",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "AGENDADO_PARA_DIA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "AGENDADO_PARA_HORA",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "AGENDADO_PARA_HORA",
 									"type": "String"
 								},
 								"sink": {
@@ -407,7 +407,7 @@
 							},
 							{
 								"source": {
-									"name": "HORA",
+									"name": "DATA_ATENDIMENTO",
 									"type": "String"
 								},
 								"sink": {
@@ -417,7 +417,7 @@
 							},
 							{
 								"source": {
-									"name": "DATA_ATENDIMENTO",
+									"name": "HORA",
 									"type": "String"
 								},
 								"sink": {
@@ -432,22 +432,22 @@
 								},
 								"sink": {
 									"name": "TIPO_ATENDIMENTO",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "AGENDADO_PARA_HORA",
-									"type": "String"
-								},
-								"sink": {
-									"name": "AGENDADO_PARA_HORA",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "AGENDADO_PARA_DIA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "AGENDADO_PARA_HORA",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "AGENDADO_PARA_HORA",
 									"type": "String"
 								},
 								"sink": {
