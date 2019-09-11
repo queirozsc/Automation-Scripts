@@ -7,7 +7,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Tasy HTML5",
+						"activity": "Truncate Table",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -246,6 +246,12 @@
 				"dependsOn": [
 					{
 						"activity": "Tasy Sadalla",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Tasy HTML5",
 						"dependencyConditions": [
 							"Succeeded"
 						]
