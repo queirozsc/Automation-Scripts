@@ -12,23 +12,47 @@
 		"type": "OracleTable",
 		"structure": [
 			{
-				"name": "NR_SEQ_ORDEM_SERV",
+				"name": "NR_SEQUENCIA",
 				"type": "Decimal"
 			},
 			{
-				"name": "NR_SEQUENCIA_HIST",
-				"type": "Decimal"
-			},
-			{
-				"name": "IE_ORIGEM",
+				"name": "DS_ORDEM",
 				"type": "String"
 			},
 			{
-				"name": "NR_SEQ_TIPO",
+				"name": "NR_SEQ_LOCALIZACAO",
 				"type": "Decimal"
 			},
 			{
-				"name": "NM_USUARIO_LIB",
+				"name": "DS_LOCALIZACAO",
+				"type": "String"
+			},
+			{
+				"name": "NR_SEQ_EQUIPAMENTO",
+				"type": "Decimal"
+			},
+			{
+				"name": "DS_EQUIPAMENTO",
+				"type": "String"
+			},
+			{
+				"name": "CD_PESSOA_SOLICITANTE",
+				"type": "String"
+			},
+			{
+				"name": "NM_SOLICITANTE",
+				"type": "String"
+			},
+			{
+				"name": "DT_ORDEM_SERVICO",
+				"type": "DateTime"
+			},
+			{
+				"name": "IE_PRIORIDADE",
+				"type": "String"
+			},
+			{
+				"name": "DS_DANO_BREVE",
 				"type": "String"
 			},
 			{
@@ -36,8 +60,184 @@
 				"type": "DateTime"
 			},
 			{
-				"name": "DS_RELAT_TECNICO",
+				"name": "NM_USUARIO",
 				"type": "String"
+			},
+			{
+				"name": "DT_INICIO_DESEJADO",
+				"type": "DateTime"
+			},
+			{
+				"name": "DS_DANO",
+				"type": "String"
+			},
+			{
+				"name": "DT_FIM_PREVISTO",
+				"type": "DateTime"
+			},
+			{
+				"name": "DT_INICIO_REAL",
+				"type": "DateTime"
+			},
+			{
+				"name": "DT_FIM_REAL",
+				"type": "DateTime"
+			},
+			{
+				"name": "IE_STATUS_ORDEM",
+				"type": "String"
+			},
+			{
+				"name": "NR_GRUPO_PLANEJ",
+				"type": "Decimal"
+			},
+			{
+				"name": "NR_GRUPO_TRABALHO",
+				"type": "Decimal"
+			},
+			{
+				"name": "NR_SEQ_ESTAGIO",
+				"type": "Decimal"
+			},
+			{
+				"name": "DT_REABERTURA",
+				"type": "DateTime"
+			},
+			{
+				"name": "CD_FUNCAO",
+				"type": "Decimal"
+			},
+			{
+				"name": "IE_CLASSIFICACAO",
+				"type": "String"
+			},
+			{
+				"name": "DS_SITUACAO",
+				"type": "String"
+			},
+			{
+				"name": "IE_GRAU_SATISFACAO",
+				"type": "String"
+			},
+			{
+				"name": "NR_SEQ_WHEB",
+				"type": "Decimal"
+			},
+			{
+				"name": "IE_ORIGEM_OS",
+				"type": "String"
+			},
+			{
+				"name": "IE_TIPO_ORDEM",
+				"type": "Decimal"
+			},
+			{
+				"name": "NR_SEQ_TRAB",
+				"type": "Double"
+			},
+			{
+				"name": "CD_SETOR",
+				"type": "Decimal"
+			},
+			{
+				"name": "DS_SETOR_LOCALIZACAO",
+				"type": "String"
+			},
+			{
+				"name": "NM_USUARIO_EXEC",
+				"type": "String"
+			},
+			{
+				"name": "DS_ESTAGIO",
+				"type": "String"
+			},
+			{
+				"name": "DT_INICIO_SEMANA",
+				"type": "DateTime"
+			},
+			{
+				"name": "DT_INICIO_MES",
+				"type": "DateTime"
+			},
+			{
+				"name": "DT_ANO",
+				"type": "DateTime"
+			},
+			{
+				"name": "CD_ESTABELECIMENTO",
+				"type": "Decimal"
+			},
+			{
+				"name": "IE_NOVO_HIST",
+				"type": "String"
+			},
+			{
+				"name": "DS_COR_FONTE_ESTAGIO",
+				"type": "String"
+			},
+			{
+				"name": "DS_COR_FUNDO_ESTAGIO",
+				"type": "String"
+			},
+			{
+				"name": "DS_GRAU_SATISFACAO",
+				"type": "String"
+			},
+			{
+				"name": "NM_USUARIO_EXEC_PREV",
+				"type": "String"
+			},
+			{
+				"name": "NR_SEQ_ORIGEM",
+				"type": "Decimal"
+			},
+			{
+				"name": "IE_PARADO",
+				"type": "String"
+			},
+			{
+				"name": "DT_INICIO_PREVISTO",
+				"type": "DateTime"
+			},
+			{
+				"name": "DT_CONCLUSAO_DESEJADA",
+				"type": "DateTime"
+			},
+			{
+				"name": "DS_SETOR_ATENDIMENTO",
+				"type": "String"
+			},
+			{
+				"name": "DS_GRUPO_TRABALHO",
+				"type": "String"
+			},
+			{
+				"name": "DS_COMPLEXIDADE",
+				"type": "String"
+			},
+			{
+				"name": "DS_ORIGEM_OS",
+				"type": "String"
+			},
+			{
+				"name": "DS_SERVICO",
+				"type": "String"
+			},
+			{
+				"name": "QT_HORAS_ABERTA",
+				"type": "Double"
+			},
+			{
+				"name": "QT_HORAS_PROCESSO",
+				"type": "Double"
+			},
+			{
+				"name": "QT_HORAS_TOTAL",
+				"type": "Double"
+			},
+			{
+				"name": "DT_ULT_HIST",
+				"type": "DateTime"
 			}
 		]
 	},
