@@ -9486,17 +9486,16 @@
 									},
 									{
 										"source": {
-											"name": "HORA",
+											"name": "DATA_ATENDIMENTO",
 											"type": "String"
 										},
 										"sink": {
-											"name": "HORA",
-											"type": "String"
+											"name": "HORA"
 										}
 									},
 									{
 										"source": {
-											"name": "DATA_ATENDIMENTO",
+											"name": "HORA",
 											"type": "String"
 										},
 										"sink": {
@@ -9759,7 +9758,7 @@
 									},
 									{
 										"source": {
-											"name": "HORA",
+											"name": "DATA_ATENDIMENTO",
 											"type": "String"
 										},
 										"sink": {
@@ -9769,7 +9768,7 @@
 									},
 									{
 										"source": {
-											"name": "DATA_ATENDIMENTO",
+											"name": "HORA",
 											"type": "String"
 										},
 										"sink": {
@@ -15352,6 +15351,13 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "Retornos",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -15375,7 +15381,9 @@
 					}
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/Retornos')]"
+			]
 		}
 	]
 }
