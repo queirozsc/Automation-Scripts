@@ -52,11 +52,11 @@
 				"type": "Decimal"
 			},
 			{
-				"name": "DATA_ATENDIMENTO",
+				"name": "HORA",
 				"type": "String"
 			},
 			{
-				"name": "HORA",
+				"name": "DATA_ATENDIMENTO",
 				"type": "String"
 			},
 			{
