@@ -119,7 +119,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Data_Zero_Faltas",
+						"name": "Data_ZFaltas_HTML5",
 						"type": "Copy",
 						"dependsOn": [
 							{
@@ -140,311 +140,17 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "select\nc.nr_sequencia as id_compromisso,\nc.cd_pessoa_fisica as id_cliente,\nobter_nome_pf(c.cd_pessoa_fisica) as NomePaciente,\npf.dt_nascimento as DtNascimento,\n'55' || substr(pf.nr_ddd_celular, -2) || substr(replace(replace(replace(replace(pf.nr_telefone_celular, '(', ''), ')', ''), ' ', ''), '-', ''), -9) AS CELULAR,\nobter_compl_pf(pf.cd_pessoa_fisica,1,'M') as email,\nc.cd_convenio idconvenio,\nobter_nome_convenio(c.cd_convenio) as convenio,\nc.cd_plano,\nobter_desc_plano(c.cd_convenio, c.cd_plano) ds_plano,\nc.dt_agenda as datacompromisso,\nto_char(c.hr_inicio, 'hh24:mi:ss') as horacompromisso,\nc.ie_status_agenda as id_status,\nobter_status_agenda_paciente(c.nr_sequencia) as ds_status,\na.cd_agenda,\na.ds_agenda as agenda,\nc.cd_procedimento,\nobter_desc_procedimento(c.cd_procedimento, c.ie_origem_proced) as procedimento,\nobter_empresa_estab(a.cd_estabelecimento) as id_empresa,\nobter_nome_empresa(obter_empresa_estab(a.cd_estabelecimento)) as empresa,\na.cd_estabelecimento as id_unidade,\nobter_nome_estab(a.cd_estabelecimento)as unidade,\nc.ie_autorizacao,\nobter_valor_dominio(1227, c.ie_autorizacao) as autorizacao,\nobter_nome_pf(c.cd_medico_exec) as nm_medico,\nc.dt_agendamento,\na.cd_tipo_agenda  as tipo_agenda,\n'' as tipo_agenda_desc,\na.cd_pessoa_fisica as ds_medico_agenda\nfrom agenda_paciente c,\nagenda a,\npessoa_fisica pf\nwhere c.cd_pessoa_fisica = pf.cd_pessoa_fisica\nand c.cd_agenda = a.cd_agenda\nand c.cd_pessoa_fisica is not null\nand trunc(c.dt_agenda) between inicio_dia(sysdate - 6) and fim_dia(sysdate + 30)\nAND c.IE_STATUS_AGENDA NOT IN ('C', 'F', 'I')\nand a.cd_agenda not in (283,404) \nand length('55' || substr(pf.nr_ddd_celular, -2) || substr(replace(replace(replace(replace(pf.nr_telefone_celular, '(', ''), ')', ''), ' ', ''), '-', ''), -9)) = 13\norder by 1",
+								"oracleReaderQuery": "select\nc.nr_sequencia as id_compromisso,\nc.nr_atendimento as nr_atendimento,\nc.cd_pessoa_fisica as id_cliente,\nobter_nome_pf(c.cd_pessoa_fisica) as NomePaciente,\npf.dt_nascimento as DtNascimento,\n'55' || substr(pf.nr_ddd_celular, -2) || substr(replace(replace(replace(replace(pf.nr_telefone_celular, '(', ''), ')', ''), ' ', ''), '-', ''), -9) AS CELULAR,\nobter_compl_pf(pf.cd_pessoa_fisica,1,'M') as email,\nc.cd_convenio idconvenio,\nobter_nome_convenio(c.cd_convenio) as convenio,\nc.cd_plano,\nobter_desc_plano(c.cd_convenio, c.cd_plano) ds_plano,\nc.dt_agenda as datacompromisso,\nto_char(c.hr_inicio, 'hh24:mi:ss') as horacompromisso,\nc.ie_status_agenda as id_status,\nobter_status_agenda_paciente(c.nr_sequencia) as ds_status,\na.cd_agenda,\na.ds_agenda as agenda,\nc.cd_procedimento,\nobter_desc_procedimento(c.cd_procedimento, c.ie_origem_proced) as procedimento,\nobter_empresa_estab(a.cd_estabelecimento) as id_empresa,\nobter_nome_empresa(obter_empresa_estab(a.cd_estabelecimento)) as empresa,\na.cd_estabelecimento as id_unidade,\nobter_nome_estab(a.cd_estabelecimento)as unidade,\nc.ie_autorizacao,\nobter_valor_dominio(1227, c.ie_autorizacao) as autorizacao,\nobter_nome_pf(c.cd_medico_exec) as nm_medico,\nc.dt_agendamento,\na.cd_tipo_agenda  as tipo_agenda,\n'' as tipo_agenda_desc,\na.cd_pessoa_fisica as ds_medico_agenda,\n'' status_paciente\nfrom agenda_paciente c,\nagenda a,\npessoa_fisica pf\nwhere c.cd_pessoa_fisica = pf.cd_pessoa_fisica\nand c.cd_agenda = a.cd_agenda\nand c.cd_pessoa_fisica is not null\nand trunc(c.dt_agenda) between inicio_dia(sysdate - 30) and fim_dia(sysdate + 30)\nand a.cd_agenda not in (283,404) \nand length('55' || substr(pf.nr_ddd_celular, -2) || substr(replace(replace(replace(replace(pf.nr_telefone_celular, '(', ''), ')', ''), ' ', ''), '-', ''), -9)) = 13\norder by 1 desc",
 								"partitionOption": "None"
 							},
 							"sink": {
 								"type": "AzureSqlSink"
 							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "ID_COMPROMISSO"
-										},
-										"sink": {
-											"name": "id_compromisso",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ID_CLIENTE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "id_cliente",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "NOMEPACIENTE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "nomepaciente",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "DTNASCIMENTO",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "dtnascimento",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "CELULAR",
-											"type": "String"
-										},
-										"sink": {
-											"name": "celular",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "EMAIL",
-											"type": "String"
-										},
-										"sink": {
-											"name": "email",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "IDCONVENIO",
-											"type": "Decimal"
-										},
-										"sink": {
-											"name": "idconvenio",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "CONVENIO",
-											"type": "String"
-										},
-										"sink": {
-											"name": "convenio",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "CD_PLANO",
-											"type": "String"
-										},
-										"sink": {
-											"name": "cd_plano",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "DS_PLANO",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ds_plano",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "DATACOMPROMISSO",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "datacompromisso",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "HORACOMPROMISSO",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "horacompromisso",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ID_STATUS",
-											"type": "String"
-										},
-										"sink": {
-											"name": "id_status",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "DS_STATUS",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ds_status",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "CD_AGENDA",
-											"type": "Decimal"
-										},
-										"sink": {
-											"name": "cd_agenda",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "AGENDA",
-											"type": "String"
-										},
-										"sink": {
-											"name": "agenda",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "CD_PROCEDIMENTO",
-											"type": "Decimal"
-										},
-										"sink": {
-											"name": "cd_procedimento",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "PROCEDIMENTO",
-											"type": "String"
-										},
-										"sink": {
-											"name": "procedimento",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ID_EMPRESA",
-											"type": "Double"
-										},
-										"sink": {
-											"name": "id_empresa",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "EMPRESA",
-											"type": "String"
-										},
-										"sink": {
-											"name": "empresa",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ID_UNIDADE",
-											"type": "Decimal"
-										},
-										"sink": {
-											"name": "id_unidade",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "UNIDADE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "unidade",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "IE_AUTORIZACAO",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ie_autorizacao",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "AUTORIZACAO",
-											"type": "String"
-										},
-										"sink": {
-											"name": "autorizacao",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "NM_MEDICO",
-											"type": "String"
-										},
-										"sink": {
-											"name": "nm_medico",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "DT_AGENDAMENTO",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "dt_agendamento",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "TIPO_AGENDA",
-											"type": "Decimal"
-										},
-										"sink": {
-											"name": "tipo_agenda",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "TIPO_AGENDA_DESC",
-											"type": "String"
-										},
-										"sink": {
-											"name": "tipo_agenda_desc",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "DS_MEDICO_AGENDA",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ds_medico_agenda",
-											"type": "String"
-										}
-									}
-								]
-							}
+							"enableStaging": false
 						},
 						"inputs": [
 							{
-								"referenceName": "Oracle_Zero_Faltas",
+								"referenceName": "CloudTasyPrdDataSet",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -482,7 +188,13 @@
 						"type": "SqlServerStoredProcedure",
 						"dependsOn": [
 							{
-								"activity": "Data_Zero_Faltas",
+								"activity": "Data_ZFaltas_Sadalla",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Data_ZFaltas_HTML5",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -503,6 +215,78 @@
 							"referenceName": "AzureSQL_DB_Procedimentos",
 							"type": "LinkedServiceReference"
 						}
+					},
+					{
+						"name": "Data_ZFaltas_Sadalla",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Truncate Table",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "select\nc.nr_sequencia as id_compromisso,\nc.nr_atendimento as nr_atendimento,\nc.cd_pessoa_fisica as id_cliente,\nobter_nome_pf(c.cd_pessoa_fisica) as NomePaciente,\npf.dt_nascimento as DtNascimento,\n'55' || substr(pf.nr_ddd_celular, -2) || substr(replace(replace(replace(replace(pf.nr_telefone_celular, '(', ''), ')', ''), ' ', ''), '-', ''), -9) AS CELULAR,\nobter_compl_pf(pf.cd_pessoa_fisica,1,'M') as email,\nc.cd_convenio idconvenio,\nobter_nome_convenio(c.cd_convenio) as convenio,\nc.cd_plano,\nobter_desc_plano(c.cd_convenio, c.cd_plano) ds_plano,\nc.dt_agenda as datacompromisso,\nto_char(c.dt_agenda, 'hh24:mi:ss') as horacompromisso,\nc.ie_status_agenda as id_status,\nobter_status_agenda_paciente(c.nr_sequencia) as ds_status,\na.cd_agenda,\na.ds_agenda as agenda,\nc.cd_procedimento,\nobter_desc_procedimento(c.cd_procedimento, c.ie_origem_proced) as procedimento,\nobter_empresa_estab(a.cd_estabelecimento) as id_empresa,\nobter_nome_empresa(obter_empresa_estab(a.cd_estabelecimento)) as empresa,\na.cd_estabelecimento as id_unidade,\nobter_nome_estab(a.cd_estabelecimento)as unidade,\nc.ie_autorizacao,\nobter_valor_dominio(1227, c.ie_autorizacao) as autorizacao,\nobter_nome_pf(a.cd_pessoa_fisica) as nm_medico,\nc.dt_agendamento,\na.cd_tipo_agenda  as tipo_agenda,\n'' as tipo_agenda_desc,\na.cd_pessoa_fisica as ds_medico_agenda,\n'' status_paciente\nfrom agenda_consulta c,\nagenda a,\npessoa_fisica pf\nwhere c.cd_pessoa_fisica = pf.cd_pessoa_fisica\nand c.cd_agenda = a.cd_agenda\nand c.cd_pessoa_fisica is not null\nand trunc(c.dt_agenda) between inicio_dia(sysdate - 30) and fim_dia(sysdate + 30)\nand a.cd_agenda not in (283,404) \nand length('55' || substr(pf.nr_ddd_celular, -2) || substr(replace(replace(replace(replace(pf.nr_telefone_celular, '(', ''), ')', ''), ' ', ''), '-', ''), -9)) = 13\norder by 1 desc",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "SadallaTasyPrdDataSet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AZSQL_TB_Zero_Faltas",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Altera Status Paciente",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Altera_tipo_agenda",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[sp_ALTERSTATUSPACIENTE]"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureSQL_DB_Procedimentos",
+							"type": "LinkedServiceReference"
+						}
 					}
 				],
 				"folder": {
@@ -511,9 +295,10 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/Oracle_Zero_Faltas')]",
+				"[concat(variables('factoryId'), '/datasets/CloudTasyPrdDataSet')]",
 				"[concat(variables('factoryId'), '/datasets/AZSQL_TB_Zero_Faltas')]",
-				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]"
+				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]",
+				"[concat(variables('factoryId'), '/datasets/SadallaTasyPrdDataSet')]"
 			]
 		},
 		{
@@ -5095,6 +4880,1431 @@
 				"[concat(variables('factoryId'), '/datasets/HOB_CSV_NC_BilheteLigacoes')]",
 				"[concat(variables('factoryId'), '/datasets/HOSL_CSV_NC_BilheteLigacoes')]",
 				"[concat(variables('factoryId'), '/datasets/HOSAG_CSV_NC_BilheteLigacoes')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Chamados Philips')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Ordens_HTML5",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "SELECT a.NR_SEQUENCIA,\n\t   a.ds_ordem,\n\t   a.NR_SEQ_LOCALIZACAO,\n       a.ds_localizacao,\n\t   a.nr_seq_equipamento,\n       a.ds_equipamento,\n\t   a.cd_pessoa_solicitante,\n       a.nm_solicitante,\n\t   a.dt_ordem_servico,\n\t   a.ie_prioridade,\n\t   a.ds_dano_breve,\n\t   a.dt_atualizacao,\n\t   a.nm_usuario,\n\t   a.dt_inicio_desejado,\n\t   a.ds_dano,\n\t   a.dt_fim_previsto,\n\t   a.dt_inicio_real,\n\t   a.dt_fim_real,\n\t   substr(obter_desc_status_os(a.nr_sequencia),1,255) ie_status_ordem,\n\t   a.nr_grupo_planej,\n\t   a.nr_grupo_trabalho,\n\t   a.nr_seq_estagio,\n\t   a.dt_reabertura,\n\t   a.cd_funcao,\n\t   a.ie_classificacao,\n       a.ds_situacao,\n\t   a.ie_grau_satisfacao,\n\t   a.nr_seq_wheb,\n\t   a.ie_origem_os,\n\t   a.ie_tipo_ordem,\n\t   a.nr_seq_trab,\n\t   a.cd_setor,\n\t   a.ds_setor_localizacao,\n\t   a.nm_usuario_exec,\n\t   a.ds_estagio,\n\t   a.dt_inicio_semana,\n\t   a.dt_inicio_mes,\n\t   a.dt_ano,\n\t   a.cd_estabelecimento,\n\t   substr(Man_Obter_Se_Novo_Hist(a.nr_sequencia, 'Allan.C' ),1,3) ie_novo_hist,\n\t   substr(man_obter_dados_estagio(a.nr_seq_estagio,'C'),1,15) ds_cor_fonte_estagio,\n\t   substr(man_obter_dados_estagio(a.nr_seq_estagio,'F'),1,15) ds_cor_fundo_estagio,\n\t   substr(obter_valor_dominio(1197,a.ie_grau_satisfacao),1,255) ds_grau_satisfacao, \n       a.NM_USUARIO_EXEC_PREV,   \n        a.nr_seq_origem,   \n        a.ie_parado,   \n        a.dt_inicio_previsto,   \n        a.dt_conclusao_desejada,   \n        a.ds_setor_atendimento,   \n        a.ds_grupo_trabalho,   \n        SUBSTR(man_obter_complexidade(a.nr_seq_complex),1,100) ds_complexidade,     \n        a.ds_origem_os,   \n        SUBSTR(obter_descricao_padrao('SERVICO','DS_SERVICO', a.nr_seq_servico),1,255) ds_servico,   \n        ROUND(NVL(obter_hora_entre_datas(a.dt_ordem_servico, NVL(a.dt_aceite_os,SYSDATE)),0),0) qt_horas_aberta,   \n        ROUND(NVL(obter_hora_entre_datas(a.dt_aceite_os,NVL(a.dt_fim_real,SYSDATE)),0),0) qt_horas_processo,   \n        ROUND(NVL(obter_hora_entre_datas(a.dt_ordem_servico, NVL(a.dt_fim_real,SYSDATE)),0),0) qt_horas_total,   \n        man_obter_data_ult_hist(a.nr_sequencia) dt_ult_hist\n        FROM\tman_ordem_servico_v2 a\nwhere a.nr_seq_equipamento = 47\nORDER BY DS_ESTAGIO asc ",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "CloudTasyPrdDataSet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AZ_SQL_TB_Ordens_Servico_Terceiro",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Ordens_HTML5_Hist",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Ordens_HTML5",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "select x.nr_seq_ordem_serv, \n       x.ie_origem, \n       x.nr_seq_tipo, \n       x.nm_usuario_lib, \n       x.dt_atualizacao, \n       x.ds_relat_tecnico\nfrom man_ordem_serv_tecnico x",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "CloudTasyPrdDataSet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AZ_SQL_TB_Ordens_Servico_Hist",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"folder": {
+					"name": "Apoio"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/CloudTasyPrdDataSet')]",
+				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Ordens_Servico_Terceiro')]",
+				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Ordens_Servico_Hist')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Chamados Requestia')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy requests",
+						"description": "Copy requests data from CSV (stored on Power BI Gateway VM) to Azure SQL",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Clear tables",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "FileServerReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false,
+							"enableSkipIncompatibleRow": true,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "REQUEST",
+											"type": "String"
+										},
+										"sink": {
+											"name": "REQUEST",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CLIENT",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CLIENT"
+										}
+									},
+									{
+										"source": {
+											"name": "OPENDATE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "OPENDATE"
+										}
+									},
+									{
+										"source": {
+											"name": "CLOSEDATE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CLOSEDATE"
+										}
+									},
+									{
+										"source": {
+											"name": "LASTACTION",
+											"type": "String"
+										},
+										"sink": {
+											"name": "LASTACTION"
+										}
+									},
+									{
+										"source": {
+											"name": "LASTANALYST",
+											"type": "String"
+										},
+										"sink": {
+											"name": "LASTANALYST"
+										}
+									},
+									{
+										"source": {
+											"name": "LASTREOPEN",
+											"type": "String"
+										},
+										"sink": {
+											"name": "LASTREOPEN"
+										}
+									},
+									{
+										"source": {
+											"name": "RESLREMAINS",
+											"type": "String"
+										},
+										"sink": {
+											"name": "RESLREMAINS"
+										}
+									},
+									{
+										"source": {
+											"name": "RESPMINS",
+											"type": "String"
+										},
+										"sink": {
+											"name": "RESPMINS"
+										}
+									},
+									{
+										"source": {
+											"name": "RESLMINS",
+											"type": "String"
+										},
+										"sink": {
+											"name": "RESLMINS"
+										}
+									},
+									{
+										"source": {
+											"name": "CLOSED",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CLOSED"
+										}
+									},
+									{
+										"source": {
+											"name": "ORIGANAL",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ORIGANAL"
+										}
+									},
+									{
+										"source": {
+											"name": "CURRANAL",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CURRANAL"
+										}
+									},
+									{
+										"source": {
+											"name": "GROUPANAL",
+											"type": "String"
+										},
+										"sink": {
+											"name": "GROUPANAL"
+										}
+									},
+									{
+										"source": {
+											"name": "LASTANAL",
+											"type": "String"
+										},
+										"sink": {
+											"name": "LASTANAL"
+										}
+									},
+									{
+										"source": {
+											"name": "LASTANLGRP",
+											"type": "String"
+										},
+										"sink": {
+											"name": "LASTANLGRP"
+										}
+									},
+									{
+										"source": {
+											"name": "ORIGGROUP",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ORIGGROUP"
+										}
+									},
+									{
+										"source": {
+											"name": "CURRGROUP",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CURRGROUP"
+										}
+									},
+									{
+										"source": {
+											"name": "LASTGROUP",
+											"type": "String"
+										},
+										"sink": {
+											"name": "LASTGROUP"
+										}
+									},
+									{
+										"source": {
+											"name": "CATEGORY",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CATEGORY"
+										}
+									},
+									{
+										"source": {
+											"name": "PRODUCT",
+											"type": "String"
+										},
+										"sink": {
+											"name": "PRODUCT"
+										}
+									},
+									{
+										"source": {
+											"name": "PROCESS",
+											"type": "String"
+										},
+										"sink": {
+											"name": "PROCESS"
+										}
+									},
+									{
+										"source": {
+											"name": "RSTATUS",
+											"type": "String"
+										},
+										"sink": {
+											"name": "RSTATUS"
+										}
+									},
+									{
+										"source": {
+											"name": "RPRIORITY",
+											"type": "String"
+										},
+										"sink": {
+											"name": "RPRIORITY"
+										}
+									},
+									{
+										"source": {
+											"name": "REQTYPE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "REQTYPE"
+										}
+									},
+									{
+										"source": {
+											"name": "REQSOURCE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "REQSOURCE"
+										}
+									},
+									{
+										"source": {
+											"name": "LOCATION",
+											"type": "String"
+										},
+										"sink": {
+											"name": "REQLOCATION"
+										}
+									},
+									{
+										"source": {
+											"name": "ORGUNIT",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ORGUNIT"
+										}
+									},
+									{
+										"source": {
+											"name": "ORGUNIT_ROOT",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ORGUNIT_ROOT"
+										}
+									},
+									{
+										"source": {
+											"name": "ABSTRACT",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ABSTRACT"
+										}
+									},
+									{
+										"source": {
+											"name": "DESCRIPT",
+											"type": "String"
+										},
+										"sink": {
+											"name": "DESCRIPT"
+										}
+									},
+									{
+										"source": {
+											"name": "LASTSTATUS",
+											"type": "String"
+										},
+										"sink": {
+											"name": "LASTSTATUS"
+										}
+									},
+									{
+										"source": {
+											"name": "LASTPRIORITY",
+											"type": "String"
+										},
+										"sink": {
+											"name": "LASTPRIORITY"
+										}
+									},
+									{
+										"source": {
+											"name": "LASTACTIONATEND",
+											"type": "String"
+										},
+										"sink": {
+											"name": "LASTACTIONATEND"
+										}
+									},
+									{
+										"source": {
+											"name": "RESPDATE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "RESPDATE"
+										}
+									},
+									{
+										"source": {
+											"name": "RESPTIME",
+											"type": "String"
+										},
+										"sink": {
+											"name": "RESPTIME"
+										}
+									},
+									{
+										"source": {
+											"name": "RESLTIME",
+											"type": "String"
+										},
+										"sink": {
+											"name": "RESLTIME"
+										}
+									},
+									{
+										"source": {
+											"name": "RESPREMAINS"
+										},
+										"sink": {
+											"name": "RESPREMAINS"
+										}
+									},
+									{
+										"source": {
+											"name": "RESPMODE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "RESPMODE"
+										}
+									},
+									{
+										"source": {
+											"name": "RESLMODE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "RESLMODE"
+										}
+									},
+									{
+										"source": {
+											"name": "NOCOMPUTE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "NOCOMPUTE"
+										}
+									},
+									{
+										"source": {
+											"name": "APROVANLTYPE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "APROVANLTYPE"
+										}
+									},
+									{
+										"source": {
+											"name": "APROVCLITYPE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "APROVCLITYPE"
+										}
+									},
+									{
+										"source": {
+											"name": "MLEVELAPROV",
+											"type": "String"
+										},
+										"sink": {
+											"name": "MLEVELAPROV"
+										}
+									},
+									{
+										"source": {
+											"name": "CLIENTAPROV",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CLIENTAPROV"
+										}
+									},
+									{
+										"source": {
+											"name": "PACKAGE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "PACKAGE"
+										}
+									},
+									{
+										"source": {
+											"name": "WORKFLOW",
+											"type": "String"
+										},
+										"sink": {
+											"name": "WORKFLOW"
+										}
+									},
+									{
+										"source": {
+											"name": "LASTSEVENT",
+											"type": "String"
+										},
+										"sink": {
+											"name": "LASTSEVENT"
+										}
+									},
+									{
+										"source": {
+											"name": "REQWORKFLOW",
+											"type": "String"
+										},
+										"sink": {
+											"name": "REQWORKFLOW"
+										}
+									},
+									{
+										"source": {
+											"name": "ORIGCATEGORY",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ORIGCATEGORY"
+										}
+									},
+									{
+										"source": {
+											"name": "ORIGPRODUCT",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ORIGPRODUCT"
+										}
+									},
+									{
+										"source": {
+											"name": "ORIGPROCESS",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ORIGPROCESS"
+										}
+									},
+									{
+										"source": {
+											"name": "TOTALATTACH",
+											"type": "String"
+										},
+										"sink": {
+											"name": "TOTALATTACH"
+										}
+									},
+									{
+										"source": {
+											"name": "TOTALATTACHACT",
+											"type": "String"
+										},
+										"sink": {
+											"name": "TOTALATTACHACT"
+										}
+									},
+									{
+										"source": {
+											"name": "INSERTDATE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "INSERTDATE"
+										}
+									},
+									{
+										"source": {
+											"name": "QFORM",
+											"type": "String"
+										},
+										"sink": {
+											"name": "QFORM"
+										}
+									},
+									{
+										"source": {
+											"name": "QSURVEY",
+											"type": "String"
+										},
+										"sink": {
+											"name": "QSURVEY"
+										}
+									},
+									{
+										"source": {
+											"name": "QSESSIONFORM",
+											"type": "String"
+										},
+										"sink": {
+											"name": "QSESSIONFORM"
+										}
+									},
+									{
+										"source": {
+											"name": "QSESSIONSURVEY",
+											"type": "String"
+										},
+										"sink": {
+											"name": "QSESSIONSURVEY"
+										}
+									},
+									{
+										"source": {
+											"name": "REQUESTFLAGS",
+											"type": "String"
+										},
+										"sink": {
+											"name": "REQUESTFLAGS"
+										}
+									},
+									{
+										"source": {
+											"name": "V_ASSOCIATION",
+											"type": "String"
+										},
+										"sink": {
+											"name": "V_ASSOCIATION"
+										}
+									},
+									{
+										"source": {
+											"name": "V_HAS_APPROVER",
+											"type": "String"
+										},
+										"sink": {
+											"name": "V_HAS_APPROVER"
+										}
+									},
+									{
+										"source": {
+											"name": "LASTSEQUENCE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "LASTSEQUENCE"
+										}
+									},
+									{
+										"source": {
+											"name": "LASTRECALCDATE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "LASTRECALCDATE"
+										}
+									},
+									{
+										"source": {
+											"name": "LASTAPPROVCNTX",
+											"type": "String"
+										},
+										"sink": {
+											"name": "LASTAPPROVCNTX"
+										}
+									},
+									{
+										"source": {
+											"name": "LASTAPPROVUSER",
+											"type": "String"
+										},
+										"sink": {
+											"name": "LASTAPPROVUSER"
+										}
+									},
+									{
+										"source": {
+											"name": "LASTAPPROVCODE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "LASTAPPROVCODE"
+										}
+									},
+									{
+										"source": {
+											"name": "CURRAPPROVCODE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CURRAPPROVCODE"
+										}
+									},
+									{
+										"source": {
+											"name": "ORIGNOCOMPUTE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ORIGNOCOMPUTE"
+										}
+									},
+									{
+										"source": {
+											"name": "ORIGRSTATUS",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ORIGRSTATUS"
+										}
+									},
+									{
+										"source": {
+											"name": "ORIGRPRIORITY",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ORIGRPRIORITY"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "FILE_REQUESTS",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "TABLE_REQUESTS",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Clear tables",
+						"description": "Truncate all Requestia's tables",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[sp_TRUNCATEREQUESTS]"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureSQL_DB_Procedimentos",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Calculate fields",
+						"description": "Update calculated fields (for example, SLA formula, datetime conversions, business hours difference) for time saving in queries",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Copy requests",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[sp_CALCULATEREQUESTS]"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureSQL_DB_Procedimentos",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Copy sessions",
+						"description": "Copy sessions data from CSV (stored on Power BI Gateway VM) to Azure SQL",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Clear tables",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "FileServerReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false,
+							"enableSkipIncompatibleRow": true,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "QSESSION",
+											"type": "String"
+										},
+										"sink": {
+											"name": "QSESSION",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "QSESSIONTITLE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "QSESSIONTITLE",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "QCLIENT",
+											"type": "String"
+										},
+										"sink": {
+											"name": "QCLIENT",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "QFORM",
+											"type": "String"
+										},
+										"sink": {
+											"name": "QFORM",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "QVERSION",
+											"type": "String"
+										},
+										"sink": {
+											"name": "QVERSION",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "QSTATUS",
+											"type": "String"
+										},
+										"sink": {
+											"name": "QSTATUS",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "QANSWERDATE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "QANSWERDATE",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "QEXPDATE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "QEXPDATE",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "QAPPLICATION",
+											"type": "String"
+										},
+										"sink": {
+											"name": "QAPPLICATION",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "QSURVEYTYPE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "QSURVEYTYPE",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "REQLOCATION",
+											"type": "String"
+										},
+										"sink": {
+											"name": "REQLOCATION",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "FILE_QSESSION",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "TABLE_QSESSION",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Copy answers",
+						"description": "Copy answers data from CSV (stored on Power BI Gateway VM) to Azure SQL",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Clear tables",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "FileServerReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false,
+							"enableSkipIncompatibleRow": true,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "QSESSION",
+											"type": "String"
+										},
+										"sink": {
+											"name": "QSESSION",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "QUESTION",
+											"type": "String"
+										},
+										"sink": {
+											"name": "QUESTION",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "QANSWER",
+											"type": "String"
+										},
+										"sink": {
+											"name": "QANSWER",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "QANSWERED",
+											"type": "String"
+										},
+										"sink": {
+											"name": "QANSWERED",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "QANSWERDATE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "QANSWERDATE",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "QSHOW",
+											"type": "String"
+										},
+										"sink": {
+											"name": "QSHOW",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "QORDER",
+											"type": "String"
+										},
+										"sink": {
+											"name": "QORDER",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "QUPDATED",
+											"type": "String"
+										},
+										"sink": {
+											"name": "QUPDATED",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "FILE_QANSWER",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "TABLE_QANSWER",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Update clients",
+						"description": "Transport [UNIDADE ATENDIMENTO] field from answers table to requests table, for time saving in queries",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Copy answers",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[sp_UPDATEREQUESTCLIENT]"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureSQL_DB_Procedimentos",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Copy table answers",
+						"description": "Copy anwers table data from CSV (stored on Power BI Gateway VM) to Azure SQL",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Clear tables",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "FileServerReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false,
+							"enableSkipIncompatibleRow": true,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "QSESSION",
+											"type": "String"
+										},
+										"sink": {
+											"name": "QSESSION",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TABLE_NAME",
+											"type": "String"
+										},
+										"sink": {
+											"name": "TABLE_NAME",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TABLE_ROWID",
+											"type": "String"
+										},
+										"sink": {
+											"name": "TABLE_ROWID",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TABLE_ROWNUM",
+											"type": "String"
+										},
+										"sink": {
+											"name": "TABLE_ROWNUM",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "COLUMN_NAME",
+											"type": "String"
+										},
+										"sink": {
+											"name": "COLUMN_NAME",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "COLUMN_VALUE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "COLUMN_VALUE",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "COLUMN_POSITION",
+											"type": "String"
+										},
+										"sink": {
+											"name": "COLUMN_POSITION",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "COLUMN_ANSWERED",
+											"type": "String"
+										},
+										"sink": {
+											"name": "COLUMN_ANSWERED",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "COLUMN_ANSWERDATE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "COLUMN_ANSWERDATE",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "COLUMN_UPDATED",
+											"type": "String"
+										},
+										"sink": {
+											"name": "COLUMN_UPDATED",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "COLUMN_VISIBLE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "COLUMN_VISIBLE",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "FILE_QTABLEANSWER",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "TABLE_QTABLEANSWER",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Extract CAPEX",
+						"description": "Copy NFD tickets to REQUESTIA_CAPEXNFD table, solving timeout in Microsoft Flow that send weekly mail from sergio.queiroz@opty.com.br account",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Update clients",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[sp_EXTRACTCAPEXREQUESTS]"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureSQL_DB_Procedimentos",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Extract TISS",
+						"description": "Copy TISS tickets to specific table, solving timeout in Microsoft Flow that send weekly mail from sergio.queiroz@opty.com.br account",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Update clients",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[sp_EXTRACTTISSREQUESTS]"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureSQL_DB_Procedimentos",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"folder": {
+					"name": "Apoio"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/FILE_REQUESTS')]",
+				"[concat(variables('factoryId'), '/datasets/TABLE_REQUESTS')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]",
+				"[concat(variables('factoryId'), '/datasets/FILE_QSESSION')]",
+				"[concat(variables('factoryId'), '/datasets/TABLE_QSESSION')]",
+				"[concat(variables('factoryId'), '/datasets/FILE_QANSWER')]",
+				"[concat(variables('factoryId'), '/datasets/TABLE_QANSWER')]",
+				"[concat(variables('factoryId'), '/datasets/FILE_QTABLEANSWER')]",
+				"[concat(variables('factoryId'), '/datasets/TABLE_QTABLEANSWER')]"
 			]
 		},
 		{
@@ -10150,107 +11360,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Chamados Philips')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Ordens_HTML5",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "OracleSource",
-								"oracleReaderQuery": "SELECT a.NR_SEQUENCIA,\n\t   a.ds_ordem,\n\t   a.NR_SEQ_LOCALIZACAO,\n       a.ds_localizacao,\n\t   a.nr_seq_equipamento,\n       a.ds_equipamento,\n\t   a.cd_pessoa_solicitante,\n       a.nm_solicitante,\n\t   a.dt_ordem_servico,\n\t   a.ie_prioridade,\n\t   a.ds_dano_breve,\n\t   a.dt_atualizacao,\n\t   a.nm_usuario,\n\t   a.dt_inicio_desejado,\n\t   a.ds_dano,\n\t   a.dt_fim_previsto,\n\t   a.dt_inicio_real,\n\t   a.dt_fim_real,\n\t   substr(obter_desc_status_os(a.nr_sequencia),1,255) ie_status_ordem,\n\t   a.nr_grupo_planej,\n\t   a.nr_grupo_trabalho,\n\t   a.nr_seq_estagio,\n\t   a.dt_reabertura,\n\t   a.cd_funcao,\n\t   a.ie_classificacao,\n       a.ds_situacao,\n\t   a.ie_grau_satisfacao,\n\t   a.nr_seq_wheb,\n\t   a.ie_origem_os,\n\t   a.ie_tipo_ordem,\n\t   a.nr_seq_trab,\n\t   a.cd_setor,\n\t   a.ds_setor_localizacao,\n\t   a.nm_usuario_exec,\n\t   a.ds_estagio,\n\t   a.dt_inicio_semana,\n\t   a.dt_inicio_mes,\n\t   a.dt_ano,\n\t   a.cd_estabelecimento,\n\t   substr(Man_Obter_Se_Novo_Hist(a.nr_sequencia, 'Allan.C' ),1,3) ie_novo_hist,\n\t   substr(man_obter_dados_estagio(a.nr_seq_estagio,'C'),1,15) ds_cor_fonte_estagio,\n\t   substr(man_obter_dados_estagio(a.nr_seq_estagio,'F'),1,15) ds_cor_fundo_estagio,\n\t   substr(obter_valor_dominio(1197,a.ie_grau_satisfacao),1,255) ds_grau_satisfacao, \n       a.NM_USUARIO_EXEC_PREV,   \n        a.nr_seq_origem,   \n        a.ie_parado,   \n        a.dt_inicio_previsto,   \n        a.dt_conclusao_desejada,   \n        a.ds_setor_atendimento,   \n        a.ds_grupo_trabalho,   \n        SUBSTR(man_obter_complexidade(a.nr_seq_complex),1,100) ds_complexidade,     \n        a.ds_origem_os,   \n        SUBSTR(obter_descricao_padrao('SERVICO','DS_SERVICO', a.nr_seq_servico),1,255) ds_servico,   \n        ROUND(NVL(obter_hora_entre_datas(a.dt_ordem_servico, NVL(a.dt_aceite_os,SYSDATE)),0),0) qt_horas_aberta,   \n        ROUND(NVL(obter_hora_entre_datas(a.dt_aceite_os,NVL(a.dt_fim_real,SYSDATE)),0),0) qt_horas_processo,   \n        ROUND(NVL(obter_hora_entre_datas(a.dt_ordem_servico, NVL(a.dt_fim_real,SYSDATE)),0),0) qt_horas_total,   \n        man_obter_data_ult_hist(a.nr_sequencia) dt_ult_hist\n        FROM\tman_ordem_servico_v2 a\nwhere a.nr_seq_equipamento = 47\nORDER BY DS_ESTAGIO asc ",
-								"partitionOption": "None"
-							},
-							"sink": {
-								"type": "AzureSqlSink"
-							},
-							"enableStaging": false
-						},
-						"inputs": [
-							{
-								"referenceName": "CloudTasyPrdDataSet",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "AZ_SQL_TB_Ordens_Servico_Terceiro",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Ordens_HTML5_Hist",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "Ordens_HTML5",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "OracleSource",
-								"oracleReaderQuery": "select x.nr_seq_ordem_serv, \n       x.ie_origem, \n       x.nr_seq_tipo, \n       x.nm_usuario_lib, \n       x.dt_atualizacao, \n       x.ds_relat_tecnico\nfrom man_ordem_serv_tecnico x",
-								"partitionOption": "None"
-							},
-							"sink": {
-								"type": "AzureSqlSink"
-							},
-							"enableStaging": false
-						},
-						"inputs": [
-							{
-								"referenceName": "CloudTasyPrdDataSet",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "AZ_SQL_TB_Ordens_Servico_Hist",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"folder": {
-					"name": "Apoio"
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/CloudTasyPrdDataSet')]",
-				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Ordens_Servico_Terceiro')]",
-				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Ordens_Servico_Hist')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/Pipeline Principal')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -12397,7 +13506,7 @@
 						"type": "Copy",
 						"dependsOn": [
 							{
-								"activity": "Tasy HTML5",
+								"activity": "Truncate Table",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -12414,7 +13523,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "SELECT Obter_nome_estab(Obter_estab_atend(m.nr_atendimento))       AS \n       estabelecimento, \n       m.nr_atendimento, \n       n.nr_prontuario, \n       m.cd_pessoa_fisica, \n       n.nm_pessoa_fisica                                          nm_paciente, \n       n.nr_tel, \n       m.cd_medico, \n       m.nm_medico, \n       n.ds_email, \n       m.nr_seq_consulta, \n       substr(to_char(obter_data_entrada(m.nr_atendimento),'dd/mm/yyyy'),1,50) AS data_atendimento,\n       substr(to_char(obter_data_entrada(m.nr_atendimento), 'hh24:mi:ss'),1,50)as hora,\n       obter_valor_dominio(12,obter_tipo_atendimento(m.nr_atendimento)) as tipo_atendimento,\n               \n       (SELECT to_char(a.dt_agenda, 'dd/mm/yyyy')\n        FROM   agenda_consulta a, \n               agenda x \n        WHERE  a.cd_agenda = x.cd_agenda \n               AND trunc(a.dt_agenda) > trunc(obter_data_entrada(m.nr_atendimento))\n               AND a.cd_pessoa_fisica = m.cd_pessoa_fisica \n               AND ROWNUM <= 1) AS \n       agendado_para_dia, \n       \n       substr((\n        SELECT to_char(a.dt_agenda, 'hh24:mi:ss')\n        FROM agenda_consulta a\n            , agenda x\n        WHERE a.cd_agenda = x.cd_agenda\n               AND trunc(a.dt_agenda) > trunc(obter_data_entrada(m.nr_atendimento))\n               AND a.cd_pessoa_fisica = m.cd_pessoa_fisica\n               AND ROWNUM <= 1),1,255) AS agendado_para_hora,\n        \n        (SELECT case when obter_tipo_agenda(a.cd_agenda) = 2 and x.cd_pessoa_fisica is null then 2\n                     when obter_tipo_agenda(a.cd_agenda) = 2 and x.cd_pessoa_fisica is not null then 3\n                     when obter_tipo_agenda(a.cd_agenda) = 1 then 1 end tipo_agenda\n                                  \n        FROM agenda_paciente a\n            , agenda x\n        WHERE a.cd_agenda = x.cd_agenda\n            AND a.dt_agenda > obter_data_entrada(m.nr_atendimento)\n            AND a.cd_pessoa_fisica = m.cd_pessoa_fisica\n            AND ROWNUM <= 1\n            AND a.dt_agenda <> obter_data_entrada(m.nr_atendimento)\n        ) AS tipo_agenda,\n        \n        (SELECT 'Retorno em ' \n               || Lpad(a.qt_periodo, 2, '0') \n               || Decode(a.ie_periodo, 'D', ' Dias', \n                                       a.ie_periodo) ds_periodo \n        FROM   oft_conduta a \n        WHERE  a.nr_seq_consulta = m.nr_seq_consulta \n               AND a.dt_inativacao IS NULL \n               AND a.ie_situacao = 'A' \n               AND a.nr_sequencia = (SELECT Max(nr_sequencia) \n                                     FROM   oft_conduta \n                                     WHERE  nr_seq_consulta = a.nr_seq_consulta) \n        AND a.qt_periodo IS NOT NULL)                       AS retorno_em, \n       \n       (SELECT a.nm_usuario_orig \n        FROM   agenda_paciente a, \n               agenda x \n        WHERE  a.cd_agenda = x.cd_agenda \n               AND a.dt_agenda > Obter_data_entrada(m.nr_atendimento) \n               AND a.cd_pessoa_fisica = m.cd_pessoa_fisica \n               AND Obter_tipo_agenda(a.cd_agenda) = 2 \n               AND ROWNUM <= 1)                                    AS usuario, \n               \n       (SELECT Listagg(Obter_desc_procedimento(b.cd_procedimento, \n                       b.ie_origem_proced) \n                       || ' Quantidade = ' \n                       || b.qt_exame, ' ;') \n                 within GROUP (ORDER BY \n                 Obter_desc_procedimento(b.cd_procedimento, \n                 b.ie_origem_proced)) \n        FROM   pedido_exame_externo_item b \n               inner join proc_interno c \n                       ON c.nr_sequencia = b.nr_proc_interno \n               inner join pedido_exame_externo c \n                       ON c.nr_sequencia = b.nr_seq_pedido \n        WHERE  c.nr_seq_consulta = m.nr_seq_consulta \n               AND c.ie_situacao = 'A')                            AS \n       procedimentos \nFROM   (SELECT a.nr_atendimento, \n               obter_pessoa_atendimento(a.nr_atendimento, 'C') as cd_pessoa_fisica, \n               a.cd_profissional as cd_medico, \n               Obter_nome_pf(a.cd_profissional) nm_medico, \n               a.nr_sequencia             nr_seq_consulta, \n               obter_estab_atend(a.nr_atendimento) as cd_estabelecimento \n        FROM   oft_consulta_medica a \n        WHERE  a.dt_consulta BETWEEN Inicio_dia(SYSDATE - 90) AND Fim_dia( \n                                     SYSDATE)) m \n       inner join (SELECT cd_pessoa_fisica, \n                          nm_pessoa_fisica, \n                          Nvl(Nvl(nr_cel, nr_cel2), nr_tel) nr_tel, \n                          nr_prontuario, \n                          ds_email \n                   FROM   (SELECT x.cd_pessoa_fisica, \n                                  Initcap(x.nm_pessoa_fisica) \n                                          nm_pessoa_fisica, \n                                  x.nr_prontuario, \nRegexp_replace(Regexp_replace(x.nr_telefone_celular, \n               '[^[:digit:]]'), \nDecode( \nLength(Regexp_replace(x.nr_telefone_celular, \n       '[^[:digit:]]')), 8 \n, \nds_reg_8, \n9, \nds_reg_9, \n10, \nds_reg_10, \nds_reg_11) \n, \nDecode(Length(Regexp_replace(x.nr_telefone_celular, \n              '[^[:digit:]]')), 8, \nds_for_8 \n, \n9, \nds_for_9, \n10 \n        , \nds_for_10, \nds_for_11) \n) \n        nr_cel, \nRegexp_replace(Regexp_replace(y.nr_telefone_celular, \n               '[^[:digit:]]'), \nDecode( \nLength(Regexp_replace(y.nr_telefone_celular, \n       '[^[:digit:]]')), 8 \n, \nds_reg_8, \n9, \nds_reg_9, \n10, \nds_reg_10, \nds_reg_11) \n, \nDecode(Length(Regexp_replace(y.nr_telefone_celular, \n              '[^[:digit:]]')), 8, \nds_for_8 \n, \n9, \nds_for_9, \n10 \n        , \nds_for_10, \nds_for_11) \n) \n        nr_cel2, \nRegexp_replace(Regexp_replace(y.nr_telefone, \n               '[^[:digit:]]'), \nDecode(Length(Regexp_replace(y.nr_telefone, \n              '[^[:digit:]]')), 8, \nds_reg_8, \n9, ds_reg_9, \n10, ds_reg_10, \nds_reg_11), \nDecode(Length(Regexp_replace(y.nr_telefone, \n              '[^[:digit:]]')), 8, \nds_for_8, \n9, \nds_for_9, \n10 \n, \nds_for_10, \nds_for_11) \n        ) nr_tel, \ny.ds_email \nFROM   pessoa_fisica x \nleft join compl_pessoa_fisica y \n       ON y.cd_pessoa_fisica = x.cd_pessoa_fisica \n          AND y.ie_tipo_complemento = 1, \n(SELECT '([0-9]{4})([0-9]{4})'           ds_reg_8, \n        '\\1-\\2'                          ds_for_8, \n        '([0-9]{5})([0-9]{4})'           ds_reg_9, \n        '\\1-\\2'                          ds_for_9, \n        '([0-9]{2})([0-9]{4})([0-9]{4})' ds_reg_10, \n        '(\\1) \\2-\\3'                     ds_for_10, \n        '([0-9]{2})([0-9]{5})([0-9]{4})' ds_reg_11, \n        '(\\1) \\2-\\3'                     ds_for_11 \n FROM   dual) z \nWHERE  x.nr_telefone_celular IS NOT NULL \n OR y.nr_telefone_celular IS NOT NULL \n OR y.nr_telefone IS NOT NULL)) n \nON n.cd_pessoa_fisica = m.cd_pessoa_fisica \nWHERE  NOT EXISTS (SELECT a.dt_agenda, \n                          a.cd_pessoa_fisica \n                   FROM   agenda_consulta a \n                   where a.cd_pessoa_fisica = m.cd_pessoa_fisica \n                          AND a.dt_agenda > SYSDATE) ",
+								"oracleReaderQuery": "SELECT \n       Obter_nome_estab(Obter_estab_atend(m.nr_atendimento))       AS \n       estabelecimento, \n       m.nr_atendimento, \n       n.nr_prontuario, \n       m.cd_pessoa_fisica, \n       n.nm_pessoa_fisica                                          nm_paciente, \n       n.nr_tel, \n       m.cd_medico, \n       m.nm_medico, \n       n.ds_email, \n       m.nr_seq_consulta, \n       substr(to_char(obter_data_entrada(m.nr_atendimento),'dd/mm/yyyy'),1,50) AS data_atendimento,\n       substr(to_char(obter_data_entrada(m.nr_atendimento), 'hh24:mi:ss'),1,50)as hora,\n       obter_valor_dominio(12,obter_tipo_atendimento(m.nr_atendimento)) as tipo_atendimento,\n               \n       (SELECT to_char(a.dt_agenda, 'dd/mm/yyyy')\n        FROM   agenda_consulta a, \n               agenda x \n        WHERE  a.cd_agenda = x.cd_agenda \n               AND trunc(a.dt_agenda) > trunc(obter_data_entrada(m.nr_atendimento))\n               AND a.cd_pessoa_fisica = m.cd_pessoa_fisica \n               AND ROWNUM <= 1) AS \n       agendado_para_dia, \n       \n       substr((\n        SELECT to_char(a.dt_agenda, 'hh24:mi:ss')\n        FROM agenda_consulta a\n            , agenda x\n        WHERE a.cd_agenda = x.cd_agenda\n               AND trunc(a.dt_agenda) > trunc(obter_data_entrada(m.nr_atendimento))\n               AND a.cd_pessoa_fisica = m.cd_pessoa_fisica\n               AND ROWNUM <= 1),1,255) AS agendado_para_hora,\n        \n        (SELECT case when obter_tipo_agenda(a.cd_agenda) = 2 and x.cd_pessoa_fisica is null then 2\n                     when obter_tipo_agenda(a.cd_agenda) = 2 and x.cd_pessoa_fisica is not null then 3\n                     when obter_tipo_agenda(a.cd_agenda) = 1 then 1 end tipo_agenda\n                                  \n        FROM agenda_paciente a\n            , agenda x\n        WHERE a.cd_agenda = x.cd_agenda\n            AND a.dt_agenda > obter_data_entrada(m.nr_atendimento)\n            AND a.cd_pessoa_fisica = m.cd_pessoa_fisica\n            AND ROWNUM <= 1\n            AND a.dt_agenda <> obter_data_entrada(m.nr_atendimento)\n        ) AS tipo_agenda,\n        \n        (select o.ds_retorno from oft_retorno o where o.nr_sequencia = m.nr_seq_retorno) AS retorno_em, \n       \n       (SELECT a.nm_usuario_orig \n        FROM   agenda_paciente a, \n               agenda x \n        WHERE  a.cd_agenda = x.cd_agenda \n               AND a.dt_agenda > Obter_data_entrada(m.nr_atendimento) \n               AND a.cd_pessoa_fisica = m.cd_pessoa_fisica \n               AND Obter_tipo_agenda(a.cd_agenda) = 2 \n               AND ROWNUM <= 1)                                    AS usuario, \n               \n       (SELECT Listagg(Obter_desc_procedimento(b.cd_procedimento, \n                       b.ie_origem_proced) \n                       || ' Quantidade = ' \n                       || b.qt_exame, ' ;') \n                 within GROUP (ORDER BY \n                 Obter_desc_procedimento(b.cd_procedimento, \n                 b.ie_origem_proced)) \n        FROM   pedido_exame_externo_item b \n               inner join proc_interno c \n                       ON c.nr_sequencia = b.nr_proc_interno \n               inner join pedido_exame_externo c \n                       ON c.nr_sequencia = b.nr_seq_pedido \n        WHERE  c.nr_seq_consulta = m.nr_seq_consulta \n               AND c.ie_situacao = 'A')                            AS \n       procedimentos\nFROM   (SELECT a.nr_atendimento, \n               obter_pessoa_atendimento(a.nr_atendimento, 'C') as cd_pessoa_fisica, \n               a.cd_profissional as cd_medico, \n               Obter_nome_pf(a.cd_profissional) nm_medico, \n               a.nr_sequencia             nr_seq_consulta, \n               obter_estab_atend(a.nr_atendimento) as cd_estabelecimento,\n               a.nr_seq_retorno\n        FROM   oft_consulta_medica a \n                                     ) m \n       inner join (SELECT cd_pessoa_fisica, \n                          nm_pessoa_fisica, \n                          Nvl(Nvl(nr_cel, nr_cel2), nr_tel) nr_tel, \n                          nr_prontuario, \n                          ds_email \n                   FROM   (SELECT x.cd_pessoa_fisica, \n                                  Initcap(x.nm_pessoa_fisica) \n                                          nm_pessoa_fisica, \n                                  x.nr_prontuario, \nRegexp_replace(Regexp_replace(x.nr_telefone_celular, \n               '[^[:digit:]]'), \nDecode( \nLength(Regexp_replace(x.nr_telefone_celular, \n       '[^[:digit:]]')), 8 \n, \nds_reg_8, \n9, \nds_reg_9, \n10, \nds_reg_10, \nds_reg_11) \n, \nDecode(Length(Regexp_replace(x.nr_telefone_celular, \n              '[^[:digit:]]')), 8, \nds_for_8 \n, \n9, \nds_for_9, \n10 \n        , \nds_for_10, \nds_for_11) \n) \n        nr_cel, \nRegexp_replace(Regexp_replace(y.nr_telefone_celular, \n               '[^[:digit:]]'), \nDecode( \nLength(Regexp_replace(y.nr_telefone_celular, \n       '[^[:digit:]]')), 8 \n, \nds_reg_8, \n9, \nds_reg_9, \n10, \nds_reg_10, \nds_reg_11) \n, \nDecode(Length(Regexp_replace(y.nr_telefone_celular, \n              '[^[:digit:]]')), 8, \nds_for_8 \n, \n9, \nds_for_9, \n10 \n        , \nds_for_10, \nds_for_11) \n) \n        nr_cel2, \nRegexp_replace(Regexp_replace(y.nr_telefone, \n               '[^[:digit:]]'), \nDecode(Length(Regexp_replace(y.nr_telefone, \n              '[^[:digit:]]')), 8, \nds_reg_8, \n9, ds_reg_9, \n10, ds_reg_10, \nds_reg_11), \nDecode(Length(Regexp_replace(y.nr_telefone, \n              '[^[:digit:]]')), 8, \nds_for_8, \n9, \nds_for_9, \n10 \n, \nds_for_10, \nds_for_11) \n        ) nr_tel, \ny.ds_email \nFROM   pessoa_fisica x \nleft join compl_pessoa_fisica y \n       ON y.cd_pessoa_fisica = x.cd_pessoa_fisica \n          AND y.ie_tipo_complemento = 1, \n(SELECT '([0-9]{4})([0-9]{4})'           ds_reg_8, \n        '\\1-\\2'                          ds_for_8, \n        '([0-9]{5})([0-9]{4})'           ds_reg_9, \n        '\\1-\\2'                          ds_for_9, \n        '([0-9]{2})([0-9]{4})([0-9]{4})' ds_reg_10, \n        '(\\1) \\2-\\3'                     ds_for_10, \n        '([0-9]{2})([0-9]{5})([0-9]{4})' ds_reg_11, \n        '(\\1) \\2-\\3'                     ds_for_11 \n FROM   dual) z \nWHERE  x.nr_telefone_celular IS NOT NULL \n OR y.nr_telefone_celular IS NOT NULL \n OR y.nr_telefone IS NOT NULL)) n \nON n.cd_pessoa_fisica = m.cd_pessoa_fisica \nWHERE  NOT EXISTS (SELECT a.dt_agenda, \n                          a.cd_pessoa_fisica \n                   FROM   agenda_consulta a \n                   where a.cd_pessoa_fisica = m.cd_pessoa_fisica\n                          AND a.dt_agenda > SYSDATE) \nAND obter_data_entrada(m.nr_atendimento) BETWEEN SYSDATE - 720 AND SYSDATE",
 								"partitionOption": "None"
 							},
 							"sink": {
@@ -12641,6 +13750,12 @@
 								"dependencyConditions": [
 									"Succeeded"
 								]
+							},
+							{
+								"activity": "Tasy HTML5",
+								"dependencyConditions": [
+									"Succeeded"
+								]
 							}
 						],
 						"policy": {
@@ -12681,7 +13796,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "SELECT Obter_nome_estab(Obter_estab_atend(m.nr_atendimento))       AS \n       estabelecimento, \n       m.nr_atendimento, \n       n.nr_prontuario, \n       m.cd_pessoa_fisica, \n       n.nm_pessoa_fisica                                          nm_paciente, \n       n.nr_tel, \n       m.cd_medico, \n       m.nm_medico, \n       n.ds_email, \n       m.nr_seq_consulta, \n       substr(to_char(obter_data_entrada(m.nr_atendimento),'dd/mm/yyyy'),1,50) AS data_atendimento,\n       substr(to_char(obter_data_entrada(m.nr_atendimento), 'hh24:mi:ss'),1,50)as hora,\n       obter_valor_dominio(12,obter_tipo_atendimento(m.nr_atendimento)) as tipo_atendimento,\n       \n        \n       substr((SELECT to_char(a.dt_agenda,'dd/mm/yyyy')\n        FROM   agenda_paciente a, \n               agenda x \n        WHERE  a.cd_agenda = x.cd_agenda \n               AND a.dt_agenda > Obter_data_entrada(m.nr_atendimento) \n               AND a.cd_pessoa_fisica = m.cd_pessoa_fisica \n               AND Obter_tipo_agenda(a.cd_agenda) = 2 \n               AND ROWNUM <= 1),1,50)                                  AS \n       agendado_para_dia, \n       \n       substr((\n        SELECT to_char(a.hr_inicio, 'hh24:mi:ss')\n        FROM agenda_paciente a\n            , agenda x\n        WHERE a.cd_agenda = x.cd_agenda\n               AND a.dt_agenda > obter_data_entrada(m.nr_atendimento)\n               AND a.cd_pessoa_fisica = m.cd_pessoa_fisica\n               AND ROWNUM <= 1\n        ),1,50) AS agendado_para_hora,\n        \n        (SELECT case when obter_tipo_agenda(a.cd_agenda) = 2 and x.cd_pessoa_fisica is null then 2\n                     when obter_tipo_agenda(a.cd_agenda) = 2 and x.cd_pessoa_fisica is not null then 3\n                     when obter_tipo_agenda(a.cd_agenda) = 1 then 1 end tipo_agenda\n                                  \n        FROM agenda_paciente a\n            , agenda x\n        WHERE a.cd_agenda = x.cd_agenda\n            AND a.dt_agenda > obter_data_entrada(m.nr_atendimento)\n            AND a.cd_pessoa_fisica = m.cd_pessoa_fisica\n            AND ROWNUM <= 1\n            AND a.dt_agenda <> obter_data_entrada(m.nr_atendimento)\n        ) AS tipo_agenda,\n        \n        (SELECT 'Retorno em ' \n               || Lpad(a.qt_periodo, 2, '0') \n               || Decode(a.ie_periodo, 'D', ' Dias', \n                                       a.ie_periodo) ds_periodo \n        FROM   oft_conduta a \n        WHERE  a.nr_seq_consulta = m.nr_seq_consulta \n               AND a.dt_inativacao IS NULL \n               AND a.ie_situacao = 'A' \n               AND a.nr_sequencia = (SELECT Max(nr_sequencia) \n                                     FROM   oft_conduta \n                                     WHERE  nr_seq_consulta = a.nr_seq_consulta) \n        AND a.qt_periodo IS NOT NULL)                       AS retorno_em, \n       \n       (SELECT a.nm_usuario_orig \n        FROM   agenda_paciente a, \n               agenda x \n        WHERE  a.cd_agenda = x.cd_agenda \n               AND a.dt_agenda > Obter_data_entrada(m.nr_atendimento) \n               AND a.cd_pessoa_fisica = m.cd_pessoa_fisica \n               AND Obter_tipo_agenda(a.cd_agenda) = 2 \n               AND ROWNUM <= 1)                                    AS usuario, \n               \n       substr((SELECT Listagg(Obter_desc_procedimento(b.cd_procedimento, \n                       b.ie_origem_proced) \n                       || ' Quantidade = ' \n                       || b.qt_exame, ' ;') \n                 within GROUP (ORDER BY \n                 Obter_desc_procedimento(b.cd_procedimento, \n                 b.ie_origem_proced)) \n        FROM   pedido_exame_externo_item b \n               inner join proc_interno c \n                       ON c.nr_sequencia = b.nr_proc_interno \n               inner join pedido_exame_externo c \n                       ON c.nr_sequencia = b.nr_seq_pedido \n        WHERE  c.nr_seq_consulta = m.nr_seq_consulta \n               AND c.ie_situacao = 'A'),1,1000)                        AS \n       procedimentos \nFROM   (SELECT a.nr_atendimento, \n               a.cd_pessoa_fisica, \n               a.cd_medico, \n               Obter_nome_pf(a.cd_medico) nm_medico, \n               a.nr_sequencia             nr_seq_consulta, \n               a.cd_estabelecimento \n        FROM   oft_consulta a \n        WHERE  a.dt_consulta BETWEEN Inicio_dia(SYSDATE - 90) AND Fim_dia( \n                                     SYSDATE) \n        UNION \n        SELECT a.nr_atendimento, \n               a.cd_pessoa_fisica, \n               a.cd_medico, \n               Obter_nome_pf(a.cd_medico) nm_medico, \n               a.nr_sequencia             nr_seq_consulta, \n               a.cd_estabelecimento \n        FROM   oft_consulta a \n               left join (SELECT Count(1) nr_conduta, \n                                 nr_seq_consulta \n                          FROM   oft_conduta \n                          GROUP  BY nr_seq_consulta) b \n                      ON b.nr_seq_consulta = a.nr_sequencia \n               left join (SELECT a.nr_seq_consulta, \n                                 Count(1) nr_encaminhamento \n                          FROM   med_avaliacao_paciente a \n                                 inner join med_avaliacao_result b \n                                         ON b.nr_seq_avaliacao = a.nr_sequencia \n                          WHERE  a.nr_seq_tipo_avaliacao = 34 \n                                 AND b.nr_seq_item IN ( 456, 457, 458 ) \n                          GROUP  BY a.nr_seq_consulta) c \n                      ON c.nr_seq_consulta = a.nr_sequencia \n               left join (SELECT nr_seq_consulta, \n                                 Count(1) nr_procedimento \n                          FROM   pedido_exame_externo \n                          WHERE  ie_situacao = 'A' \n                          GROUP  BY nr_seq_consulta) d \n                      ON d.nr_seq_consulta = a.nr_sequencia \n        WHERE  a.dt_consulta BETWEEN Inicio_dia(SYSDATE - 30) AND Fim_dia( \n                                     SYSDATE) \n               AND ( ( Nvl(b.nr_conduta, 0) > 0 ) \n                      OR ( Nvl(c.nr_encaminhamento, 0) > 0 ) \n                      OR ( Nvl(d.nr_procedimento, 0) > 0 ) )) m \n       inner join (SELECT cd_pessoa_fisica, \n                          nm_pessoa_fisica, \n                          Nvl(Nvl(nr_cel, nr_cel2), nr_tel) nr_tel, \n                          nr_prontuario, \n                          ds_email \n                   FROM   (SELECT x.cd_pessoa_fisica, \n                                  Initcap(x.nm_pessoa_fisica) \n                                          nm_pessoa_fisica, \n                                  x.nr_prontuario, \nRegexp_replace(Regexp_replace(x.nr_telefone_celular, \n               '[^[:digit:]]'), \nDecode( \nLength(Regexp_replace(x.nr_telefone_celular, \n       '[^[:digit:]]')), 8 \n, \nds_reg_8, \n9, \nds_reg_9, \n10, \nds_reg_10, \nds_reg_11) \n, \nDecode(Length(Regexp_replace(x.nr_telefone_celular, \n              '[^[:digit:]]')), 8, \nds_for_8 \n, \n9, \nds_for_9, \n10 \n        , \nds_for_10, \nds_for_11) \n) \n        nr_cel, \nRegexp_replace(Regexp_replace(y.nr_telefone_celular, \n               '[^[:digit:]]'), \nDecode( \nLength(Regexp_replace(y.nr_telefone_celular, \n       '[^[:digit:]]')), 8 \n, \nds_reg_8, \n9, \nds_reg_9, \n10, \nds_reg_10, \nds_reg_11) \n, \nDecode(Length(Regexp_replace(y.nr_telefone_celular, \n              '[^[:digit:]]')), 8, \nds_for_8 \n, \n9, \nds_for_9, \n10 \n        , \nds_for_10, \nds_for_11) \n) \n        nr_cel2, \nRegexp_replace(Regexp_replace(y.nr_telefone, \n               '[^[:digit:]]'), \nDecode(Length(Regexp_replace(y.nr_telefone, \n              '[^[:digit:]]')), 8, \nds_reg_8, \n9, ds_reg_9, \n10, ds_reg_10, \nds_reg_11), \nDecode(Length(Regexp_replace(y.nr_telefone, \n              '[^[:digit:]]')), 8, \nds_for_8, \n9, \nds_for_9, \n10 \n, \nds_for_10, \nds_for_11) \n        ) nr_tel, \ny.ds_email \nFROM   pessoa_fisica x \nleft join compl_pessoa_fisica y \n       ON y.cd_pessoa_fisica = x.cd_pessoa_fisica \n          AND y.ie_tipo_complemento = 1, \n(SELECT '([0-9]{4})([0-9]{4})'           ds_reg_8, \n        '\\1-\\2'                          ds_for_8, \n        '([0-9]{5})([0-9]{4})'           ds_reg_9, \n        '\\1-\\2'                          ds_for_9, \n        '([0-9]{2})([0-9]{4})([0-9]{4})' ds_reg_10, \n        '(\\1) \\2-\\3'                     ds_for_10, \n        '([0-9]{2})([0-9]{5})([0-9]{4})' ds_reg_11, \n        '(\\1) \\2-\\3'                     ds_for_11 \n FROM   dual) z \nWHERE  x.nr_telefone_celular IS NOT NULL \n OR y.nr_telefone_celular IS NOT NULL \n OR y.nr_telefone IS NOT NULL)) n \nON n.cd_pessoa_fisica = m.cd_pessoa_fisica \nWHERE  NOT EXISTS (SELECT a.dt_agenda, \n                          a.cd_pessoa_fisica \n                   FROM   agenda_paciente a \n                   WHERE  Obter_tipo_agenda(a.cd_agenda) = 2 \n                          AND a.cd_pessoa_fisica = m.cd_pessoa_fisica \n                          AND a.dt_agenda > SYSDATE)",
+								"oracleReaderQuery": "SELECT \n       Obter_nome_estab(Obter_estab_atend(m.nr_atendimento)) AS \n       estabelecimento, \n       m.nr_atendimento, \n       n.nr_prontuario, \n       m.cd_pessoa_fisica, \n       n.nm_pessoa_fisica  nm_paciente, \n       n.nr_tel, \n       m.cd_medico, \n       m.nm_medico, \n       n.ds_email, \n       m.nr_seq_consulta, \n       substr(to_char(obter_data_entrada(m.nr_atendimento),'dd/mm/yyyy'),1,50) AS data_atendimento,\n       substr(to_char(obter_data_entrada(m.nr_atendimento), 'hh24:mi:ss'),1,50)as hora,\n       obter_valor_dominio(12,obter_tipo_atendimento(m.nr_atendimento)) as tipo_atendimento,\n       \n       substr((SELECT to_char(a.dt_agenda,'dd/mm/yyyy')\n        FROM   agenda_paciente a, \n               agenda x \n        WHERE  a.cd_agenda = x.cd_agenda \n               AND a.dt_agenda > Obter_data_entrada(m.nr_atendimento) \n               AND a.cd_pessoa_fisica = m.cd_pessoa_fisica \n               AND Obter_tipo_agenda(a.cd_agenda) = 2 \n               AND ROWNUM <= 1),1,50)                                  AS \n       agendado_para_dia, \n       \n       substr((\n        SELECT to_char(a.hr_inicio, 'hh24:mi:ss')\n        FROM agenda_paciente a\n            , agenda x\n        WHERE a.cd_agenda = x.cd_agenda\n               AND a.dt_agenda > obter_data_entrada(m.nr_atendimento)\n               AND a.cd_pessoa_fisica = m.cd_pessoa_fisica\n               AND ROWNUM <= 1\n        ),1,50) AS agendado_para_hora,\n        \n        (SELECT case when obter_tipo_agenda(a.cd_agenda) = 2 and x.cd_pessoa_fisica is null then 2\n                     when obter_tipo_agenda(a.cd_agenda) = 2 and x.cd_pessoa_fisica is not null then 3\n                     when obter_tipo_agenda(a.cd_agenda) = 1 then 1 end tipo_agenda\n                                  \n        FROM agenda_paciente a\n            , agenda x\n        WHERE a.cd_agenda = x.cd_agenda\n            AND a.dt_agenda > obter_data_entrada(m.nr_atendimento)\n            AND a.cd_pessoa_fisica = m.cd_pessoa_fisica\n            AND ROWNUM <= 1\n            AND a.dt_agenda <> obter_data_entrada(m.nr_atendimento)\n        ) AS tipo_agenda,\n        \n        (SELECT 'Retorno em ' \n               || Lpad(a.qt_periodo, 2, '0') \n               || Decode(a.ie_periodo, 'D', ' Dias', \n                                       a.ie_periodo) ds_periodo \n        FROM   oft_conduta a \n        WHERE  a.nr_seq_consulta = m.nr_seq_consulta \n               AND a.dt_inativacao IS NULL \n               AND a.ie_situacao = 'A' \n               AND a.nr_sequencia = (SELECT Max(nr_sequencia) \n                                     FROM   oft_conduta \n                                     WHERE  nr_seq_consulta = a.nr_seq_consulta) \n        AND a.qt_periodo IS NOT NULL)                       AS retorno_em, \n       \n       (SELECT a.nm_usuario_orig \n        FROM   agenda_paciente a, \n               agenda x \n        WHERE  a.cd_agenda = x.cd_agenda \n               AND a.dt_agenda > Obter_data_entrada(m.nr_atendimento) \n               AND a.cd_pessoa_fisica = m.cd_pessoa_fisica \n               AND Obter_tipo_agenda(a.cd_agenda) = 2 \n               AND ROWNUM <= 1)                                    AS usuario, \n               \n       substr((SELECT Listagg(Obter_desc_procedimento(b.cd_procedimento, \n                       b.ie_origem_proced) \n                       || ' Quantidade = ' \n                       || b.qt_exame, ' ;') \n                 within GROUP (ORDER BY \n                 Obter_desc_procedimento(b.cd_procedimento, \n                 b.ie_origem_proced)) \n        FROM   pedido_exame_externo_item b \n               inner join proc_interno c \n                       ON c.nr_sequencia = b.nr_proc_interno \n               inner join pedido_exame_externo c \n                       ON c.nr_sequencia = b.nr_seq_pedido \n        WHERE  c.nr_seq_consulta = m.nr_seq_consulta \n               AND c.ie_situacao = 'A'),1,1000)                        AS \n       procedimentos\nFROM   (SELECT a.nr_atendimento, \n               a.cd_pessoa_fisica, \n               a.cd_medico, \n               Obter_nome_pf(a.cd_medico) nm_medico, \n               a.nr_sequencia             nr_seq_consulta, \n               a.cd_estabelecimento \n        FROM   oft_consulta a \n        UNION \n        SELECT a.nr_atendimento, \n               a.cd_pessoa_fisica, \n               a.cd_medico, \n               Obter_nome_pf(a.cd_medico) nm_medico, \n               a.nr_sequencia             nr_seq_consulta, \n               a.cd_estabelecimento \n        FROM   oft_consulta a \n               left join (SELECT Count(1) nr_conduta, \n                                 nr_seq_consulta \n                          FROM   oft_conduta \n                          GROUP  BY nr_seq_consulta) b \n                      ON b.nr_seq_consulta = a.nr_sequencia \n               left join (SELECT a.nr_seq_consulta, \n                                 Count(1) nr_encaminhamento \n                          FROM   med_avaliacao_paciente a \n                                 inner join med_avaliacao_result b \n                                         ON b.nr_seq_avaliacao = a.nr_sequencia \n                          WHERE  a.nr_seq_tipo_avaliacao = 34 \n                                 AND b.nr_seq_item IN ( 456, 457, 458 ) \n                          GROUP  BY a.nr_seq_consulta) c \n                      ON c.nr_seq_consulta = a.nr_sequencia \n               left join (SELECT nr_seq_consulta, \n                                 Count(1) nr_procedimento \n                          FROM   pedido_exame_externo \n                          WHERE  ie_situacao = 'A' \n                          GROUP  BY nr_seq_consulta) d \n                      ON d.nr_seq_consulta = a.nr_sequencia \n               AND ( ( Nvl(b.nr_conduta, 0) > 0 ) \n                      OR ( Nvl(c.nr_encaminhamento, 0) > 0 ) \n                      OR ( Nvl(d.nr_procedimento, 0) > 0 ) )) m \n       inner join (SELECT cd_pessoa_fisica, \n                          nm_pessoa_fisica, \n                          Nvl(Nvl(nr_cel, nr_cel2), nr_tel) nr_tel, \n                          nr_prontuario, \n                          ds_email \n                   FROM   (SELECT x.cd_pessoa_fisica, \n                                  Initcap(x.nm_pessoa_fisica) \n                                          nm_pessoa_fisica, \n                                  x.nr_prontuario, \nRegexp_replace(Regexp_replace(x.nr_telefone_celular, \n               '[^[:digit:]]'), \nDecode( \nLength(Regexp_replace(x.nr_telefone_celular, \n       '[^[:digit:]]')), 8 \n, \nds_reg_8, \n9, \nds_reg_9, \n10, \nds_reg_10, \nds_reg_11) \n, \nDecode(Length(Regexp_replace(x.nr_telefone_celular, \n              '[^[:digit:]]')), 8, \nds_for_8 \n, \n9, \nds_for_9, \n10 \n        , \nds_for_10, \nds_for_11) \n) \n        nr_cel, \nRegexp_replace(Regexp_replace(y.nr_telefone_celular, \n               '[^[:digit:]]'), \nDecode( \nLength(Regexp_replace(y.nr_telefone_celular, \n       '[^[:digit:]]')), 8 \n, \nds_reg_8, \n9, \nds_reg_9, \n10, \nds_reg_10, \nds_reg_11) \n, \nDecode(Length(Regexp_replace(y.nr_telefone_celular, \n              '[^[:digit:]]')), 8, \nds_for_8 \n, \n9, \nds_for_9, \n10 \n        , \nds_for_10, \nds_for_11) \n) \n        nr_cel2, \nRegexp_replace(Regexp_replace(y.nr_telefone, \n               '[^[:digit:]]'), \nDecode(Length(Regexp_replace(y.nr_telefone, \n              '[^[:digit:]]')), 8, \nds_reg_8, \n9, ds_reg_9, \n10, ds_reg_10, \nds_reg_11), \nDecode(Length(Regexp_replace(y.nr_telefone, \n              '[^[:digit:]]')), 8, \nds_for_8, \n9, \nds_for_9, \n10 \n, \nds_for_10, \nds_for_11) \n        ) nr_tel, \ny.ds_email \nFROM   pessoa_fisica x \nleft join compl_pessoa_fisica y \n       ON y.cd_pessoa_fisica = x.cd_pessoa_fisica \n          AND y.ie_tipo_complemento = 1, \n(SELECT '([0-9]{4})([0-9]{4})'           ds_reg_8, \n        '\\1-\\2'                          ds_for_8, \n        '([0-9]{5})([0-9]{4})'           ds_reg_9, \n        '\\1-\\2'                          ds_for_9, \n        '([0-9]{2})([0-9]{4})([0-9]{4})' ds_reg_10, \n        '(\\1) \\2-\\3'                     ds_for_10, \n        '([0-9]{2})([0-9]{5})([0-9]{4})' ds_reg_11, \n        '(\\1) \\2-\\3'                     ds_for_11 \n FROM   dual) z \nWHERE  x.nr_telefone_celular IS NOT NULL \n OR y.nr_telefone_celular IS NOT NULL\n OR y.nr_telefone IS NOT NULL)) n \nON n.cd_pessoa_fisica = m.cd_pessoa_fisica \nWHERE  NOT EXISTS (SELECT a.dt_agenda, \n                          a.cd_pessoa_fisica \n                   FROM   agenda_paciente a \n                   WHERE  Obter_tipo_agenda(a.cd_agenda) = 2 \n                          AND a.cd_pessoa_fisica = m.cd_pessoa_fisica\n                          AND a.dt_agenda > SYSDATE)\nAND obter_data_entrada(m.nr_atendimento) BETWEEN SYSDATE - 720 AND SYSDATE",
 								"partitionOption": "None"
 							},
 							"sink": {
@@ -18163,1330 +19278,6 @@
 				"[concat(variables('factoryId'), '/datasets/AzureSqlTEMPTable')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase')]",
 				"[concat(variables('factoryId'), '/datasets/AzureSqlProcedimentosTable')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Chamados Requestia')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Copy requests",
-						"description": "Copy requests data from CSV (stored on Power BI Gateway VM) to Azure SQL",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "Clear tables",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "FileServerReadSettings",
-									"recursive": true
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "AzureSqlSink"
-							},
-							"enableStaging": false,
-							"enableSkipIncompatibleRow": true,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "REQUEST",
-											"type": "String"
-										},
-										"sink": {
-											"name": "REQUEST",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "CLIENT",
-											"type": "String"
-										},
-										"sink": {
-											"name": "CLIENT"
-										}
-									},
-									{
-										"source": {
-											"name": "OPENDATE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "OPENDATE"
-										}
-									},
-									{
-										"source": {
-											"name": "CLOSEDATE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "CLOSEDATE"
-										}
-									},
-									{
-										"source": {
-											"name": "LASTACTION",
-											"type": "String"
-										},
-										"sink": {
-											"name": "LASTACTION"
-										}
-									},
-									{
-										"source": {
-											"name": "LASTANALYST",
-											"type": "String"
-										},
-										"sink": {
-											"name": "LASTANALYST"
-										}
-									},
-									{
-										"source": {
-											"name": "LASTREOPEN",
-											"type": "String"
-										},
-										"sink": {
-											"name": "LASTREOPEN"
-										}
-									},
-									{
-										"source": {
-											"name": "RESLREMAINS",
-											"type": "String"
-										},
-										"sink": {
-											"name": "RESLREMAINS"
-										}
-									},
-									{
-										"source": {
-											"name": "RESPMINS",
-											"type": "String"
-										},
-										"sink": {
-											"name": "RESPMINS"
-										}
-									},
-									{
-										"source": {
-											"name": "RESLMINS",
-											"type": "String"
-										},
-										"sink": {
-											"name": "RESLMINS"
-										}
-									},
-									{
-										"source": {
-											"name": "CLOSED",
-											"type": "String"
-										},
-										"sink": {
-											"name": "CLOSED"
-										}
-									},
-									{
-										"source": {
-											"name": "ORIGANAL",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ORIGANAL"
-										}
-									},
-									{
-										"source": {
-											"name": "CURRANAL",
-											"type": "String"
-										},
-										"sink": {
-											"name": "CURRANAL"
-										}
-									},
-									{
-										"source": {
-											"name": "GROUPANAL",
-											"type": "String"
-										},
-										"sink": {
-											"name": "GROUPANAL"
-										}
-									},
-									{
-										"source": {
-											"name": "LASTANAL",
-											"type": "String"
-										},
-										"sink": {
-											"name": "LASTANAL"
-										}
-									},
-									{
-										"source": {
-											"name": "LASTANLGRP",
-											"type": "String"
-										},
-										"sink": {
-											"name": "LASTANLGRP"
-										}
-									},
-									{
-										"source": {
-											"name": "ORIGGROUP",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ORIGGROUP"
-										}
-									},
-									{
-										"source": {
-											"name": "CURRGROUP",
-											"type": "String"
-										},
-										"sink": {
-											"name": "CURRGROUP"
-										}
-									},
-									{
-										"source": {
-											"name": "LASTGROUP",
-											"type": "String"
-										},
-										"sink": {
-											"name": "LASTGROUP"
-										}
-									},
-									{
-										"source": {
-											"name": "CATEGORY",
-											"type": "String"
-										},
-										"sink": {
-											"name": "CATEGORY"
-										}
-									},
-									{
-										"source": {
-											"name": "PRODUCT",
-											"type": "String"
-										},
-										"sink": {
-											"name": "PRODUCT"
-										}
-									},
-									{
-										"source": {
-											"name": "PROCESS",
-											"type": "String"
-										},
-										"sink": {
-											"name": "PROCESS"
-										}
-									},
-									{
-										"source": {
-											"name": "RSTATUS",
-											"type": "String"
-										},
-										"sink": {
-											"name": "RSTATUS"
-										}
-									},
-									{
-										"source": {
-											"name": "RPRIORITY",
-											"type": "String"
-										},
-										"sink": {
-											"name": "RPRIORITY"
-										}
-									},
-									{
-										"source": {
-											"name": "REQTYPE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "REQTYPE"
-										}
-									},
-									{
-										"source": {
-											"name": "REQSOURCE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "REQSOURCE"
-										}
-									},
-									{
-										"source": {
-											"name": "LOCATION",
-											"type": "String"
-										},
-										"sink": {
-											"name": "REQLOCATION"
-										}
-									},
-									{
-										"source": {
-											"name": "ORGUNIT",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ORGUNIT"
-										}
-									},
-									{
-										"source": {
-											"name": "ORGUNIT_ROOT",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ORGUNIT_ROOT"
-										}
-									},
-									{
-										"source": {
-											"name": "ABSTRACT",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ABSTRACT"
-										}
-									},
-									{
-										"source": {
-											"name": "DESCRIPT",
-											"type": "String"
-										},
-										"sink": {
-											"name": "DESCRIPT"
-										}
-									},
-									{
-										"source": {
-											"name": "LASTSTATUS",
-											"type": "String"
-										},
-										"sink": {
-											"name": "LASTSTATUS"
-										}
-									},
-									{
-										"source": {
-											"name": "LASTPRIORITY",
-											"type": "String"
-										},
-										"sink": {
-											"name": "LASTPRIORITY"
-										}
-									},
-									{
-										"source": {
-											"name": "LASTACTIONATEND",
-											"type": "String"
-										},
-										"sink": {
-											"name": "LASTACTIONATEND"
-										}
-									},
-									{
-										"source": {
-											"name": "RESPDATE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "RESPDATE"
-										}
-									},
-									{
-										"source": {
-											"name": "RESPTIME",
-											"type": "String"
-										},
-										"sink": {
-											"name": "RESPTIME"
-										}
-									},
-									{
-										"source": {
-											"name": "RESLTIME",
-											"type": "String"
-										},
-										"sink": {
-											"name": "RESLTIME"
-										}
-									},
-									{
-										"source": {
-											"name": "RESPREMAINS"
-										},
-										"sink": {
-											"name": "RESPREMAINS"
-										}
-									},
-									{
-										"source": {
-											"name": "RESPMODE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "RESPMODE"
-										}
-									},
-									{
-										"source": {
-											"name": "RESLMODE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "RESLMODE"
-										}
-									},
-									{
-										"source": {
-											"name": "NOCOMPUTE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "NOCOMPUTE"
-										}
-									},
-									{
-										"source": {
-											"name": "APROVANLTYPE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "APROVANLTYPE"
-										}
-									},
-									{
-										"source": {
-											"name": "APROVCLITYPE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "APROVCLITYPE"
-										}
-									},
-									{
-										"source": {
-											"name": "MLEVELAPROV",
-											"type": "String"
-										},
-										"sink": {
-											"name": "MLEVELAPROV"
-										}
-									},
-									{
-										"source": {
-											"name": "CLIENTAPROV",
-											"type": "String"
-										},
-										"sink": {
-											"name": "CLIENTAPROV"
-										}
-									},
-									{
-										"source": {
-											"name": "PACKAGE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "PACKAGE"
-										}
-									},
-									{
-										"source": {
-											"name": "WORKFLOW",
-											"type": "String"
-										},
-										"sink": {
-											"name": "WORKFLOW"
-										}
-									},
-									{
-										"source": {
-											"name": "LASTSEVENT",
-											"type": "String"
-										},
-										"sink": {
-											"name": "LASTSEVENT"
-										}
-									},
-									{
-										"source": {
-											"name": "REQWORKFLOW",
-											"type": "String"
-										},
-										"sink": {
-											"name": "REQWORKFLOW"
-										}
-									},
-									{
-										"source": {
-											"name": "ORIGCATEGORY",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ORIGCATEGORY"
-										}
-									},
-									{
-										"source": {
-											"name": "ORIGPRODUCT",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ORIGPRODUCT"
-										}
-									},
-									{
-										"source": {
-											"name": "ORIGPROCESS",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ORIGPROCESS"
-										}
-									},
-									{
-										"source": {
-											"name": "TOTALATTACH",
-											"type": "String"
-										},
-										"sink": {
-											"name": "TOTALATTACH"
-										}
-									},
-									{
-										"source": {
-											"name": "TOTALATTACHACT",
-											"type": "String"
-										},
-										"sink": {
-											"name": "TOTALATTACHACT"
-										}
-									},
-									{
-										"source": {
-											"name": "INSERTDATE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "INSERTDATE"
-										}
-									},
-									{
-										"source": {
-											"name": "QFORM",
-											"type": "String"
-										},
-										"sink": {
-											"name": "QFORM"
-										}
-									},
-									{
-										"source": {
-											"name": "QSURVEY",
-											"type": "String"
-										},
-										"sink": {
-											"name": "QSURVEY"
-										}
-									},
-									{
-										"source": {
-											"name": "QSESSIONFORM",
-											"type": "String"
-										},
-										"sink": {
-											"name": "QSESSIONFORM"
-										}
-									},
-									{
-										"source": {
-											"name": "QSESSIONSURVEY",
-											"type": "String"
-										},
-										"sink": {
-											"name": "QSESSIONSURVEY"
-										}
-									},
-									{
-										"source": {
-											"name": "REQUESTFLAGS",
-											"type": "String"
-										},
-										"sink": {
-											"name": "REQUESTFLAGS"
-										}
-									},
-									{
-										"source": {
-											"name": "V_ASSOCIATION",
-											"type": "String"
-										},
-										"sink": {
-											"name": "V_ASSOCIATION"
-										}
-									},
-									{
-										"source": {
-											"name": "V_HAS_APPROVER",
-											"type": "String"
-										},
-										"sink": {
-											"name": "V_HAS_APPROVER"
-										}
-									},
-									{
-										"source": {
-											"name": "LASTSEQUENCE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "LASTSEQUENCE"
-										}
-									},
-									{
-										"source": {
-											"name": "LASTRECALCDATE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "LASTRECALCDATE"
-										}
-									},
-									{
-										"source": {
-											"name": "LASTAPPROVCNTX",
-											"type": "String"
-										},
-										"sink": {
-											"name": "LASTAPPROVCNTX"
-										}
-									},
-									{
-										"source": {
-											"name": "LASTAPPROVUSER",
-											"type": "String"
-										},
-										"sink": {
-											"name": "LASTAPPROVUSER"
-										}
-									},
-									{
-										"source": {
-											"name": "LASTAPPROVCODE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "LASTAPPROVCODE"
-										}
-									},
-									{
-										"source": {
-											"name": "CURRAPPROVCODE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "CURRAPPROVCODE"
-										}
-									},
-									{
-										"source": {
-											"name": "ORIGNOCOMPUTE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ORIGNOCOMPUTE"
-										}
-									},
-									{
-										"source": {
-											"name": "ORIGRSTATUS",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ORIGRSTATUS"
-										}
-									},
-									{
-										"source": {
-											"name": "ORIGRPRIORITY",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ORIGRPRIORITY"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "FILE_REQUESTS",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "TABLE_REQUESTS",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Clear tables",
-						"description": "Truncate all Requestia's tables",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[dbo].[sp_TRUNCATEREQUESTS]"
-						},
-						"linkedServiceName": {
-							"referenceName": "AzureSQL_DB_Procedimentos",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
-						"name": "Calculate fields",
-						"description": "Update calculated fields (for example, SLA formula, datetime conversions, business hours difference) for time saving in queries",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [
-							{
-								"activity": "Copy requests",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[dbo].[sp_CALCULATEREQUESTS]"
-						},
-						"linkedServiceName": {
-							"referenceName": "AzureSQL_DB_Procedimentos",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
-						"name": "Copy sessions",
-						"description": "Copy sessions data from CSV (stored on Power BI Gateway VM) to Azure SQL",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "Clear tables",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "FileServerReadSettings",
-									"recursive": true
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "AzureSqlSink"
-							},
-							"enableStaging": false,
-							"enableSkipIncompatibleRow": true,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "QSESSION",
-											"type": "String"
-										},
-										"sink": {
-											"name": "QSESSION",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "QSESSIONTITLE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "QSESSIONTITLE",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "QCLIENT",
-											"type": "String"
-										},
-										"sink": {
-											"name": "QCLIENT",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "QFORM",
-											"type": "String"
-										},
-										"sink": {
-											"name": "QFORM",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "QVERSION",
-											"type": "String"
-										},
-										"sink": {
-											"name": "QVERSION",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "QSTATUS",
-											"type": "String"
-										},
-										"sink": {
-											"name": "QSTATUS",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "QANSWERDATE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "QANSWERDATE",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "QEXPDATE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "QEXPDATE",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "QAPPLICATION",
-											"type": "String"
-										},
-										"sink": {
-											"name": "QAPPLICATION",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "QSURVEYTYPE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "QSURVEYTYPE",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "REQLOCATION",
-											"type": "String"
-										},
-										"sink": {
-											"name": "REQLOCATION",
-											"type": "String"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "FILE_QSESSION",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "TABLE_QSESSION",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Copy answers",
-						"description": "Copy answers data from CSV (stored on Power BI Gateway VM) to Azure SQL",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "Clear tables",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "FileServerReadSettings",
-									"recursive": true
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "AzureSqlSink"
-							},
-							"enableStaging": false,
-							"enableSkipIncompatibleRow": true,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "QSESSION",
-											"type": "String"
-										},
-										"sink": {
-											"name": "QSESSION",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "QUESTION",
-											"type": "String"
-										},
-										"sink": {
-											"name": "QUESTION",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "QANSWER",
-											"type": "String"
-										},
-										"sink": {
-											"name": "QANSWER",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "QANSWERED",
-											"type": "String"
-										},
-										"sink": {
-											"name": "QANSWERED",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "QANSWERDATE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "QANSWERDATE",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "QSHOW",
-											"type": "String"
-										},
-										"sink": {
-											"name": "QSHOW",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "QORDER",
-											"type": "String"
-										},
-										"sink": {
-											"name": "QORDER",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "QUPDATED",
-											"type": "String"
-										},
-										"sink": {
-											"name": "QUPDATED",
-											"type": "String"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "FILE_QANSWER",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "TABLE_QANSWER",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Update clients",
-						"description": "Transport [UNIDADE ATENDIMENTO] field from answers table to requests table, for time saving in queries",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [
-							{
-								"activity": "Copy answers",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[dbo].[sp_UPDATEREQUESTCLIENT]"
-						},
-						"linkedServiceName": {
-							"referenceName": "AzureSQL_DB_Procedimentos",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
-						"name": "Copy table answers",
-						"description": "Copy anwers table data from CSV (stored on Power BI Gateway VM) to Azure SQL",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "Clear tables",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "FileServerReadSettings",
-									"recursive": true
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "AzureSqlSink"
-							},
-							"enableStaging": false,
-							"enableSkipIncompatibleRow": true,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "QSESSION",
-											"type": "String"
-										},
-										"sink": {
-											"name": "QSESSION",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "TABLE_NAME",
-											"type": "String"
-										},
-										"sink": {
-											"name": "TABLE_NAME",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "TABLE_ROWID",
-											"type": "String"
-										},
-										"sink": {
-											"name": "TABLE_ROWID",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "TABLE_ROWNUM",
-											"type": "String"
-										},
-										"sink": {
-											"name": "TABLE_ROWNUM",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "COLUMN_NAME",
-											"type": "String"
-										},
-										"sink": {
-											"name": "COLUMN_NAME",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "COLUMN_VALUE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "COLUMN_VALUE",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "COLUMN_POSITION",
-											"type": "String"
-										},
-										"sink": {
-											"name": "COLUMN_POSITION",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "COLUMN_ANSWERED",
-											"type": "String"
-										},
-										"sink": {
-											"name": "COLUMN_ANSWERED",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "COLUMN_ANSWERDATE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "COLUMN_ANSWERDATE",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "COLUMN_UPDATED",
-											"type": "String"
-										},
-										"sink": {
-											"name": "COLUMN_UPDATED",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "COLUMN_VISIBLE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "COLUMN_VISIBLE",
-											"type": "String"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "FILE_QTABLEANSWER",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "TABLE_QTABLEANSWER",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Extract CAPEX",
-						"description": "Copy NFD tickets to REQUESTIA_CAPEXNFD table, solving timeout in Microsoft Flow that send weekly mail from sergio.queiroz@opty.com.br account",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [
-							{
-								"activity": "Update clients",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[dbo].[sp_EXTRACTCAPEXREQUESTS]"
-						},
-						"linkedServiceName": {
-							"referenceName": "AzureSQL_DB_Procedimentos",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
-						"name": "Extract TISS",
-						"description": "Copy TISS tickets to specific table, solving timeout in Microsoft Flow that send weekly mail from sergio.queiroz@opty.com.br account",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [
-							{
-								"activity": "Update clients",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[dbo].[sp_EXTRACTTISSREQUESTS]"
-						},
-						"linkedServiceName": {
-							"referenceName": "AzureSQL_DB_Procedimentos",
-							"type": "LinkedServiceReference"
-						}
-					}
-				],
-				"folder": {
-					"name": "Apoio"
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/FILE_REQUESTS')]",
-				"[concat(variables('factoryId'), '/datasets/TABLE_REQUESTS')]",
-				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]",
-				"[concat(variables('factoryId'), '/datasets/FILE_QSESSION')]",
-				"[concat(variables('factoryId'), '/datasets/TABLE_QSESSION')]",
-				"[concat(variables('factoryId'), '/datasets/FILE_QANSWER')]",
-				"[concat(variables('factoryId'), '/datasets/TABLE_QANSWER')]",
-				"[concat(variables('factoryId'), '/datasets/FILE_QTABLEANSWER')]",
-				"[concat(variables('factoryId'), '/datasets/TABLE_QTABLEANSWER')]"
 			]
 		},
 		{
