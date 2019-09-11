@@ -12,103 +12,31 @@
 		"type": "OracleTable",
 		"structure": [
 			{
-				"name": "ID_COMPROMISSO",
-				"type": "Decimal"
+				"name": "ESTABELECIMENTO",
+				"type": "String"
 			},
 			{
 				"name": "NR_ATENDIMENTO",
 				"type": "Decimal"
 			},
 			{
-				"name": "ID_CLIENTE",
-				"type": "String"
-			},
-			{
-				"name": "NOMEPACIENTE",
-				"type": "String"
-			},
-			{
-				"name": "DTNASCIMENTO",
-				"type": "DateTime"
-			},
-			{
-				"name": "CELULAR",
-				"type": "String"
-			},
-			{
-				"name": "EMAIL",
-				"type": "String"
-			},
-			{
-				"name": "IDCONVENIO",
+				"name": "NR_PRONTUARIO",
 				"type": "Decimal"
 			},
 			{
-				"name": "CONVENIO",
+				"name": "CD_PESSOA_FISICA",
 				"type": "String"
 			},
 			{
-				"name": "CD_PLANO",
+				"name": "NM_PACIENTE",
 				"type": "String"
 			},
 			{
-				"name": "DS_PLANO",
+				"name": "NR_TEL",
 				"type": "String"
 			},
 			{
-				"name": "DATACOMPROMISSO",
-				"type": "DateTime"
-			},
-			{
-				"name": "HORACOMPROMISSO",
-				"type": "String"
-			},
-			{
-				"name": "ID_STATUS",
-				"type": "String"
-			},
-			{
-				"name": "DS_STATUS",
-				"type": "String"
-			},
-			{
-				"name": "CD_AGENDA",
-				"type": "Decimal"
-			},
-			{
-				"name": "AGENDA",
-				"type": "String"
-			},
-			{
-				"name": "CD_PROCEDIMENTO",
-				"type": "Decimal"
-			},
-			{
-				"name": "PROCEDIMENTO",
-				"type": "String"
-			},
-			{
-				"name": "ID_EMPRESA",
-				"type": "Double"
-			},
-			{
-				"name": "EMPRESA",
-				"type": "String"
-			},
-			{
-				"name": "ID_UNIDADE",
-				"type": "Decimal"
-			},
-			{
-				"name": "UNIDADE",
-				"type": "String"
-			},
-			{
-				"name": "IE_AUTORIZACAO",
-				"type": "String"
-			},
-			{
-				"name": "AUTORIZACAO",
+				"name": "CD_MEDICO",
 				"type": "String"
 			},
 			{
@@ -116,23 +44,47 @@
 				"type": "String"
 			},
 			{
-				"name": "DT_AGENDAMENTO",
-				"type": "DateTime"
+				"name": "DS_EMAIL",
+				"type": "String"
 			},
 			{
-				"name": "TIPO_AGENDA",
+				"name": "NR_SEQ_CONSULTA",
 				"type": "Decimal"
 			},
 			{
-				"name": "TIPO_AGENDA_DESC",
+				"name": "DATA_ATENDIMENTO",
 				"type": "String"
 			},
 			{
-				"name": "DS_MEDICO_AGENDA",
+				"name": "HORA",
 				"type": "String"
 			},
 			{
-				"name": "STATUS_PACIENTE",
+				"name": "TIPO_ATENDIMENTO",
+				"type": "String"
+			},
+			{
+				"name": "AGENDADO_PARA_DIA",
+				"type": "String"
+			},
+			{
+				"name": "AGENDADO_PARA_HORA",
+				"type": "String"
+			},
+			{
+				"name": "TIPO_AGENDA",
+				"type": "Double"
+			},
+			{
+				"name": "RETORNO_EM",
+				"type": "String"
+			},
+			{
+				"name": "USUARIO",
+				"type": "String"
+			},
+			{
+				"name": "PROCEDIMENTOS",
 				"type": "String"
 			}
 		]
