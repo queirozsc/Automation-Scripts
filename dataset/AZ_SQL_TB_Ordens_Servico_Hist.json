@@ -10,41 +10,7 @@
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
-		"schema": [
-			{
-				"name": "nr_seq_ordem_serv",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "nr_sequencia",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "ie_origem",
-				"type": "varchar"
-			},
-			{
-				"name": "nr_seq_tipo",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "nm_usuario_lib",
-				"type": "varchar"
-			},
-			{
-				"name": "dt_atualizacao",
-				"type": "datetime",
-				"precision": 23,
-				"scale": 3
-			},
-			{
-				"name": "ds_relat_tecnico",
-				"type": "varchar"
-			}
-		],
+		"schema": [],
 		"typeProperties": {
 			"schema": "dbo",
 			"table": "Ordem_Servico_Terc_Hist"
