@@ -407,21 +407,21 @@
 							},
 							{
 								"source": {
-									"name": "DATA_ATENDIMENTO",
+									"name": "HORA",
 									"type": "String"
 								},
 								"sink": {
-									"name": "DATA_ATENDIMENTO",
+									"name": "HORA",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"name": "HORA",
+									"name": "DATA_ATENDIMENTO",
 									"type": "String"
 								},
 								"sink": {
-									"name": "HORA",
+									"name": "DATA_ATENDIMENTO",
 									"type": "String"
 								}
 							},
