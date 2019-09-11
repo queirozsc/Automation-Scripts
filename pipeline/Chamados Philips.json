@@ -616,14 +616,7 @@
 			{
 				"name": "Ordens_HTML5_Hist",
 				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "Ordens_HTML5",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
