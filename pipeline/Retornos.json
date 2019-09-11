@@ -401,8 +401,8 @@
 									"type": "Decimal"
 								},
 								"sink": {
-									"name": "NR_SEQ_CONSULTA",
-									"type": "Int32"
+									"name": "HORA",
+									"type": "String"
 								}
 							},
 							{
