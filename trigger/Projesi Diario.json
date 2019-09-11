@@ -10,6 +10,12 @@
 					"referenceName": "Agendas Projesi",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "Retornos",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
@@ -25,8 +31,6 @@
 					],
 					"hours": [
 						11,
-						12,
-						13,
 						10
 					]
 				}

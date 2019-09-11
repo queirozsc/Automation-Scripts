@@ -109,6 +109,14 @@
 			},
 			{
 				"name": "IE_CLASSIFICACAO",
+        "type": "String"
+      {
+      }
+				"name": "HORA",
+				"type": "String"
+			},
+			{
+				"name": "DATA_ATENDIMENTO",
 				"type": "String"
 			},
 			{
