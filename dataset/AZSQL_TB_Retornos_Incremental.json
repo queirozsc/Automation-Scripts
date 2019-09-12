@@ -5,6 +5,9 @@
 			"referenceName": "AzureSQL_DB_Procedimentos",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "Retornos de consulta"
+		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [
