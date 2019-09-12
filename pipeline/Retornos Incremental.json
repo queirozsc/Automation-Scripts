@@ -189,39 +189,39 @@
 					"storedProcedureName": "[dbo].[INSERTNEWRETURNS]",
 					"storedProcedureParameters": {
 						"AGENDADO_PARA_DIA": {
-							"value": "AGENDADO_PARA_DIA",
+							"value": null,
 							"type": "String"
 						},
 						"AGENDADO_PARA_HORA": {
-							"value": "AGENDADO_PARA_HORA",
+							"value": null,
 							"type": "String"
 						},
 						"CD_MEDICO": {
-							"value": "CD_MEDICO",
+							"value": null,
 							"type": "Int32"
 						},
 						"CD_PESSOA_FISICA": {
-							"value": "CD_PESSOA_FISICA",
+							"value": null,
 							"type": "Int32"
 						},
 						"CNPJ": {
-							"value": "CNPJ",
+							"value": null,
 							"type": "String"
 						},
 						"DATA_ATENDIMENTO": {
-							"value": "DATA_ATENDIMENTO",
+							"value": null,
 							"type": "String"
 						},
 						"DS_EMAIL": {
-							"value": "DS_EMAIL",
+							"value": null,
 							"type": "String"
 						},
 						"ESTABELECIMENTO": {
-							"value": "ESTABELECIMENTO",
+							"value": null,
 							"type": "String"
 						},
 						"HORA": {
-							"value": "HORA",
+							"value": null,
 							"type": "String"
 						},
 						"MARCA": {
@@ -229,11 +229,11 @@
 							"type": "String"
 						},
 						"NM_MEDICO": {
-							"value": "NM_MEDICO",
+							"value": null,
 							"type": "String"
 						},
 						"NM_PACIENTE": {
-							"value": "NM_PACIENTE",
+							"value": null,
 							"type": "String"
 						},
 						"NR_ATENDIMENTO": {
@@ -241,7 +241,7 @@
 							"type": "Int32"
 						},
 						"NR_PRONTUARIO": {
-							"value": "NR_PRONTUARIO",
+							"value": null,
 							"type": "Int32"
 						},
 						"NR_SEQ_CONSULTA": {
@@ -249,15 +249,15 @@
 							"type": "Int32"
 						},
 						"NR_TEL": {
-							"value": "NR_TEL",
+							"value": null,
 							"type": "String"
 						},
 						"PROCEDIMENTOS": {
-							"value": "PROCEDIMENTOS",
+							"value": null,
 							"type": "String"
 						},
 						"RETORNO_EM": {
-							"value": "RETORNO_EM",
+							"value": null,
 							"type": "String"
 						},
 						"SIGLA_UNIDADE": {
@@ -265,15 +265,15 @@
 							"type": "String"
 						},
 						"TIPO_AGENDA": {
-							"value": "TIPO_AGENDA",
+							"value": null,
 							"type": "String"
 						},
 						"TIPO_ATENDIMENTO": {
-							"value": "TIPO_ATENDIMENTO",
+							"value": null,
 							"type": "String"
 						},
 						"USUARIO": {
-							"value": "USUARIO",
+							"value": null,
 							"type": "String"
 						}
 					}
