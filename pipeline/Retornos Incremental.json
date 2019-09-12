@@ -79,7 +79,13 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "Temp_para_Tabela",
+						"activity": "Tasy HTML5",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Tasy Sadalla",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -165,13 +171,7 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "Tasy HTML5",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "Tasy Sadalla",
+						"activity": "ALTERA_MARCA",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -186,97 +186,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"storedProcedureName": "[dbo].[INSERTNEWRETURNS]",
-					"storedProcedureParameters": {
-						"AGENDADO_PARA_DIA": {
-							"value": "AGENDADO_PARA_DIA",
-							"type": "String"
-						},
-						"AGENDADO_PARA_HORA": {
-							"value": "AGENDADO_PARA_HORA",
-							"type": "String"
-						},
-						"CD_MEDICO": {
-							"value": "CD_MEDICO",
-							"type": "Int32"
-						},
-						"CD_PESSOA_FISICA": {
-							"value": "CD_PESSOA_FISICA",
-							"type": "Int32"
-						},
-						"CNPJ": {
-							"value": "CNPJ",
-							"type": "String"
-						},
-						"DATA_ATENDIMENTO": {
-							"value": "DATA_ATENDIMENTO",
-							"type": "String"
-						},
-						"DS_EMAIL": {
-							"value": "DS_EMAIL",
-							"type": "String"
-						},
-						"ESTABELECIMENTO": {
-							"value": "ESTABELECIMENTO",
-							"type": "String"
-						},
-						"HORA": {
-							"value": "HORA",
-							"type": "String"
-						},
-						"MARCA": {
-							"value": "MARCA",
-							"type": "String"
-						},
-						"NM_MEDICO": {
-							"value": "NM_MEDICO",
-							"type": "String"
-						},
-						"NM_PACIENTE": {
-							"value": "NM_PACIENTE",
-							"type": "String"
-						},
-						"NR_ATENDIMENTO": {
-							"value": "NR_ATENDIMENTO",
-							"type": "Int32"
-						},
-						"NR_PRONTUARIO": {
-							"value": "NR_PRONTUARIO",
-							"type": "Int32"
-						},
-						"NR_SEQ_CONSULTA": {
-							"value": "NR_SEQ_CONSULTA",
-							"type": "Int32"
-						},
-						"NR_TEL": {
-							"value": "NR_TEL",
-							"type": "String"
-						},
-						"PROCEDIMENTOS": {
-							"value": "PROCEDIMENTOS",
-							"type": "String"
-						},
-						"RETORNO_EM": {
-							"value": "RETORNO_EM",
-							"type": "String"
-						},
-						"SIGLA_UNIDADE": {
-							"value": "SIGLA_UNIDADE",
-							"type": "String"
-						},
-						"TIPO_AGENDA": {
-							"value": "TIPO_AGENDA",
-							"type": "String"
-						},
-						"TIPO_ATENDIMENTO": {
-							"value": "TIPO_ATENDIMENTO",
-							"type": "String"
-						},
-						"USUARIO": {
-							"value": "USUARIO",
-							"type": "String"
-						}
-					}
+					"storedProcedureName": "[dbo].[INSERTNEWRETURNS]"
 				},
 				"linkedServiceName": {
 					"referenceName": "AzureSQL_DB_Procedimentos",
