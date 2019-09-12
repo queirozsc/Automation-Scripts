@@ -189,91 +189,87 @@
 					"storedProcedureName": "[dbo].[INSERTNEWRETURNS]",
 					"storedProcedureParameters": {
 						"AGENDADO_PARA_DIA": {
-							"value": "",
+							"value": "AGENDADO_PARA_DIA",
 							"type": "String"
 						},
 						"AGENDADO_PARA_HORA": {
-							"value": "",
+							"value": "AGENDADO_PARA_HORA",
 							"type": "String"
 						},
 						"CD_MEDICO": {
-							"value": "",
+							"value": "CD_MEDICO",
 							"type": "Int32"
 						},
 						"CD_PESSOA_FISICA": {
-							"value": "",
+							"value": "CD_PESSOA_FISICA",
 							"type": "Int32"
 						},
 						"CNPJ": {
-							"value": "",
+							"value": "CNPJ",
 							"type": "String"
 						},
 						"DATA_ATENDIMENTO": {
-							"value": "",
+							"value": "DATA_ATENDIMENTO",
 							"type": "String"
 						},
 						"DS_EMAIL": {
-							"value": "",
+							"value": "DS_EMAIL",
 							"type": "String"
 						},
 						"ESTABELECIMENTO": {
-							"value": "",
+							"value": "ESTABELECIMENTO",
 							"type": "String"
 						},
 						"HORA": {
-							"value": "",
+							"value": "HORA",
 							"type": "String"
 						},
 						"MARCA": {
-							"value": "",
+							"value": "MARCA",
 							"type": "String"
 						},
 						"NM_MEDICO": {
-							"value": "",
+							"value": "NM_MEDICO",
 							"type": "String"
 						},
 						"NM_PACIENTE": {
-							"value": "",
+							"value": "NM_PACIENTE",
 							"type": "String"
 						},
 						"NR_ATENDIMENTO": {
-							"value": "",
+							"value": "NR_ATENDIMENTO",
 							"type": "Int32"
 						},
 						"NR_PRONTUARIO": {
-							"value": "",
+							"value": "NR_PRONTUARIO",
 							"type": "Int32"
 						},
 						"NR_SEQ_CONSULTA": {
-							"value": "",
+							"value": "NR_SEQ_CONSULTA",
 							"type": "Int32"
 						},
 						"NR_TEL": {
-							"value": "",
+							"value": "NR_TEL",
 							"type": "String"
 						},
 						"PROCEDIMENTOS": {
-							"value": "",
+							"value": "PROCEDIMENTOS",
 							"type": "String"
 						},
 						"RETORNO_EM": {
-							"value": "",
-							"type": "String"
-						},
-						"SIGLA_UNIDADE": {
-							"value": "",
+							"value": "RETORNO_EM",
 							"type": "String"
 						},
 						"TIPO_AGENDA": {
-							"value": "",
+							"value": "TIPO_AGENDA",
 							"type": "String"
 						},
 						"TIPO_ATENDIMENTO": {
-							"value": "",
+							"value": "TIPO_ATENDIMENTO",
 							"type": "String"
 						},
 						"USUARIO": {
-							"value": "",
+							"value": "USUARIO",
 							"type": "String"
 						}
 					}
