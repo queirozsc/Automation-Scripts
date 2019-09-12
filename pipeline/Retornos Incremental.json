@@ -300,7 +300,7 @@
 				]
 			},
 			{
-				"name": "Altera Agendas",
+				"name": "ALTERA AGENDAS",
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
@@ -333,11 +333,11 @@
 				}
 			},
 			{
-				"name": "Altera Marca ",
+				"name": "ALTERA_MARCA",
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "Altera Agendas",
+						"activity": "ALTERA AGENDAS",
 						"dependencyConditions": [
 							"Succeeded"
 						]
