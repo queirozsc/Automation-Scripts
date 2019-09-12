@@ -260,6 +260,10 @@
 							"value": "RETORNO_EM",
 							"type": "String"
 						},
+						"SIGLA_UNIDADE": {
+							"value": "SIGLA_UNIDADE",
+							"type": "String"
+						},
 						"TIPO_AGENDA": {
 							"value": "TIPO_AGENDA",
 							"type": "String"
