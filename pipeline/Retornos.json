@@ -137,7 +137,7 @@
 					"storedProcedureName": "[dbo].[sp_TRUNCATETABLEDEFAUT)]",
 					"storedProcedureParameters": {
 						"TABLENAME": {
-							"value": "Oft_Consulta_Retorno",
+							"value": "Oft_Consulta_Retorno_Increment",
 							"type": "String"
 						}
 					}
