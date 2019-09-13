@@ -40,7 +40,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "AZSQL_TB_Retornos",
+						"referenceName": "AZSQL_TB_Retornos_Incremental",
 						"type": "DatasetReference"
 					}
 				]
@@ -116,7 +116,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "AZSQL_TB_Retornos",
+						"referenceName": "AZSQL_TB_Retornos_Incremental",
 						"type": "DatasetReference"
 					}
 				]
