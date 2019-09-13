@@ -71,7 +71,21 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"storedProcedureName": "[dbo].[sp_ALTERTIPOAGENDASRETORNOS]"
+					"storedProcedureName": "[dbo].[sp_ALTERTIPOAGENDAS]",
+					"storedProcedureParameters": {
+						"FIELDNAME_DEST": {
+							"value": "TIPO_AGENDA",
+							"type": "String"
+						},
+						"FIELDNAME_ORIG": {
+							"value": "TIPO_AGENDA",
+							"type": "String"
+						},
+						"TABLENAME": {
+							"value": "Oft_Consulta_Retorno_Increment",
+							"type": "String"
+						}
+					}
 				},
 				"linkedServiceName": {
 					"referenceName": "AzureSQL_DB_Procedimentos",
