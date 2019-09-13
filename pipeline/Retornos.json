@@ -160,6 +160,51 @@
 					"referenceName": "AzureSQL_DB_Procedimentos",
 					"type": "LinkedServiceReference"
 				}
+			},
+			{
+				"name": "Altera_marca",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Altera Agendas",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "sp_UPDATETRADEMARKV2",
+					"storedProcedureParameters": {
+						"CNPJ_FIELDNAME": {
+							"value": "CNPJ",
+							"type": "String"
+						},
+						"INITIALS_FIELDNAME": {
+							"value": "SIGLA_UNIDADE",
+							"type": "String"
+						},
+						"MARK_FIELDNAME": {
+							"value": "MARCA",
+							"type": "String"
+						},
+						"TABLENAME": {
+							"value": "Oft_Consulta_Retorno_Increment",
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"folder": {
