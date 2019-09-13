@@ -16,6 +16,10 @@
 				"type": "String"
 			},
 			{
+				"name": "CNPJ",
+				"type": "String"
+			},
+			{
 				"name": "NR_ATENDIMENTO",
 				"type": "Decimal"
 			},
