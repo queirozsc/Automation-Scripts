@@ -40,7 +40,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "AZSQL_TB_Retornos_Incremental",
+						"referenceName": "AZSQL_TB_Retornos",
 						"type": "DatasetReference"
 					}
 				]
@@ -82,7 +82,7 @@
 							"type": "String"
 						},
 						"TABLENAME": {
-							"value": "Oft_Consulta_Retorno_Increment",
+							"value": "Oft_Consulta_Retorno",
 							"type": "String"
 						}
 					}
@@ -130,7 +130,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "AZSQL_TB_Retornos_Incremental",
+						"referenceName": "AZSQL_TB_Retornos",
 						"type": "DatasetReference"
 					}
 				]
@@ -151,7 +151,7 @@
 					"storedProcedureName": "[dbo].[sp_TRUNCATETABLEDEFAUT)]",
 					"storedProcedureParameters": {
 						"TABLENAME": {
-							"value": "Oft_Consulta_Retorno_Increment",
+							"value": "Oft_Consulta_Retorno",
 							"type": "String"
 						}
 					}
@@ -196,7 +196,7 @@
 							"type": "String"
 						},
 						"TABLENAME": {
-							"value": "Oft_Consulta_Retorno_Increment",
+							"value": "Oft_Consulta_Retorno",
 							"type": "String"
 						}
 					}
