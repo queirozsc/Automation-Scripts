@@ -1,7 +1,7 @@
 {
-	"name": "Projesi Diario",
+	"name": "Atualizacao Call Center",
 	"properties": {
-		"description": "Execução de pipeline para atualização das informações Projesi",
+		"description": "Execução de pipeline para atualização das informações dos indicadores de Call Center",
 		"annotations": [],
 		"runtimeState": "Started",
 		"pipelines": [
@@ -27,7 +27,7 @@
 				"timeZone": "UTC",
 				"schedule": {
 					"minutes": [
-						30
+						0
 					],
 					"hours": [
 						12,
