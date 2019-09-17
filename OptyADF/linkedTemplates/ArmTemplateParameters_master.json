@@ -5,49 +5,46 @@
 		"factoryName": {
 			"value": "OptyADF"
 		},
-		"SadallaTasyProd_connectionString": {
-			"value": ""
-		},
-		"SadallaTasyTeste_connectionString": {
-			"value": ""
-		},
-		"SadallaSeniorProd_connectionString": {
-			"value": ""
-		},
-		"SadallaSeniorTeste_connectionString": {
-			"value": ""
-		},
-		"CloudTasyProd_connectionString": {
+		"AzureSQL_DB_Procedimentos_connectionString": {
 			"value": ""
 		},
 		"AzureSqlDatabase_connectionString": {
 			"value": ""
 		},
-		"SMARTProd_connectionString": {
+		"CloudTasyProd_connectionString": {
 			"value": ""
 		},
-		"SMART_ITABUNA_connectionString": {
+		"CloudTasyProd_NEW_connectionString": {
+			"value": ""
+		},
+		"Folder_Nexcore_Consolidado_password": {
+			"value": ""
+		},
+		"Folder_Requestia_password": {
+			"value": ""
+		},
+		"SMARTProd_connectionString": {
 			"value": ""
 		},
 		"SMART_HOSL_connectionString": {
 			"value": ""
 		},
-		"SMART_INOB_connectionString": {
-			"value": ""
-		},
-		"AzureSQL_DB_Procedimentos_connectionString": {
-			"value": ""
-		},
-		"SMART_IOF_connectionString": {
-			"value": ""
-		},
 		"SMART_HOSL_NEW_connectionString": {
+			"value": ""
+		},
+		"SMART_INOB_connectionString": {
 			"value": ""
 		},
 		"SMART_INOB_NEW_connectionString": {
 			"value": ""
 		},
+		"SMART_IOF_connectionString": {
+			"value": ""
+		},
 		"SMART_IOF_NEW_connectionString": {
+			"value": ""
+		},
+		"SMART_ITABUNA_connectionString": {
 			"value": ""
 		},
 		"SMART_ITABUNA_NEW_connectionString": {
@@ -56,16 +53,19 @@
 		"SMART_ITAIGARA_NEW_connectionString": {
 			"value": ""
 		},
-		"CloudTasyProd_NEW_connectionString": {
+		"SadallaSeniorProd_connectionString": {
+			"value": ""
+		},
+		"SadallaSeniorTeste_connectionString": {
+			"value": ""
+		},
+		"SadallaTasyProd_connectionString": {
 			"value": ""
 		},
 		"SadallaTasyProd_NEW_connectionString": {
 			"value": ""
 		},
-		"Folder_Nexcore_Consolidado_password": {
-			"value": ""
-		},
-		"Folder_Requestia_password": {
+		"SadallaTasyTeste_connectionString": {
 			"value": ""
 		},
 		"Folder_Nexcore_Consolidado_properties_typeProperties_host": {
