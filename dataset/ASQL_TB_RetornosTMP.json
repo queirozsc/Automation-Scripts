@@ -1,105 +1,110 @@
 {
-	"name": "CloudTasyPrdDataSet",
+	"name": "ASQL_TB_RetornosTMP",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "CloudTasyProd_NEW",
+			"referenceName": "AzureSQL_DB_Procedimentos",
 			"type": "LinkedServiceReference"
 		},
-		"folder": {
-			"name": "Power BI"
-		},
 		"annotations": [],
-		"type": "OracleTable",
-		"structure": [
+		"type": "AzureSqlTable",
+		"schema": [
 			{
 				"name": "ESTABELECIMENTO",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "CNPJ",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "NR_ATENDIMENTO",
-				"type": "Decimal"
+				"type": "int",
+				"precision": 10
 			},
 			{
 				"name": "NR_PRONTUARIO",
-				"type": "Decimal"
+				"type": "int",
+				"precision": 10
 			},
 			{
 				"name": "CD_PESSOA_FISICA",
-				"type": "String"
+				"type": "int",
+				"precision": 10
 			},
 			{
 				"name": "NM_PACIENTE",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "NR_TEL",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "CD_MEDICO",
-				"type": "String"
+				"type": "int",
+				"precision": 10
 			},
 			{
 				"name": "NM_MEDICO",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "DS_EMAIL",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "NR_SEQ_CONSULTA",
-				"type": "Decimal"
+				"type": "int",
+				"precision": 10
 			},
 			{
 				"name": "HORA",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "DATA_ATENDIMENTO",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "TIPO_ATENDIMENTO",
-				"type": "String"
-			},
-			{
-				"name": "AGENDADO_PARA_DIA",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "AGENDADO_PARA_HORA",
-				"type": "String"
+				"type": "varchar"
+			},
+			{
+				"name": "AGENDADO_PARA_DIA",
+				"type": "varchar"
 			},
 			{
 				"name": "TIPO_AGENDA",
-				"type": "Double"
+				"type": "varchar"
 			},
 			{
 				"name": "RETORNO_EM",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "USUARIO",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "PROCEDIMENTOS",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "SIGLA_UNIDADE",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "MARCA",
-				"type": "String"
+				"type": "varchar"
 			}
-		]
-	},
-	"type": "Microsoft.DataFactory/factories/datasets"
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Oft_Consulta_Retorno_Increment_temp"
+		}
+	}
 }
