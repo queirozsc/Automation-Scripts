@@ -26092,12 +26092,10 @@
 						"timeZone": "UTC",
 						"schedule": {
 							"minutes": [
-								0
+								30
 							],
 							"hours": [
-								12,
-								11,
-								14
+								8
 							]
 						}
 					}
