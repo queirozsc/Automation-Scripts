@@ -69,7 +69,7 @@
 		},
 		"Folder_Nexcore_Consolidado_properties_typeProperties_userId": {
 			"type": "string",
-			"defaultValue": "hobrasil\\sergio.queiroz"
+			"defaultValue": "hobrasil\\allan.pacheco"
 		},
 		"Folder_Requestia_properties_typeProperties_host": {
 			"type": "string",
