@@ -130,7 +130,7 @@
 							}
 						],
 						"policy": {
-							"timeout": "7.00:00:00",
+							"timeout": "0.05:00:00",
 							"retry": 0,
 							"retryIntervalInSeconds": 30,
 							"secureOutput": false,
@@ -228,7 +228,7 @@
 							}
 						],
 						"policy": {
-							"timeout": "7.00:00:00",
+							"timeout": "0.05:00:00",
 							"retry": 0,
 							"retryIntervalInSeconds": 30,
 							"secureOutput": false,
@@ -9007,7 +9007,7 @@
 									{
 										"source": {
 											"name": "Atendidas Ate NS",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Atendidas_Ate_NS",
@@ -9017,7 +9017,7 @@
 									{
 										"source": {
 											"name": "Atendidas Apos NS",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Atendidas_Apos_NS",
@@ -9027,7 +9027,7 @@
 									{
 										"source": {
 											"name": "Atendidas",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Atendidas",
@@ -9067,7 +9067,7 @@
 									{
 										"source": {
 											"name": "Abandonos",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Abandonos",
@@ -9077,7 +9077,7 @@
 									{
 										"source": {
 											"name": "Roteamentos Timeout",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Roteamentos_Timeout",
@@ -9107,7 +9107,7 @@
 									{
 										"source": {
 											"name": "Roteamentos Fila Sem Ags. Disp.",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Roteamentos_Fila_Sem_Ags_Disp",
@@ -9127,7 +9127,7 @@
 									{
 										"source": {
 											"name": "Roteamentos",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Roteamentos",
@@ -9207,7 +9207,7 @@
 									{
 										"source": {
 											"name": "Callback",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Callback",
@@ -9357,7 +9357,7 @@
 									{
 										"source": {
 											"name": "Agentes Logados - Minimo",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Agentes_Logados_Minimo",
@@ -9367,7 +9367,7 @@
 									{
 										"source": {
 											"name": "Agentes Logados - Maximo",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Agentes_Logados_Maximo",
@@ -9377,7 +9377,7 @@
 									{
 										"source": {
 											"name": "Chamadas em Espera - Minimo",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Chamadas_em_Espera_Minimo",
@@ -9387,17 +9387,17 @@
 									{
 										"source": {
 											"name": "Chamadas em Espera - Medio",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Chamadas_em_Espera_Medio",
-											"type": "Int32"
+											"type": "Double"
 										}
 									},
 									{
 										"source": {
 											"name": "Chamadas em Espera = Maximo",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Chamadas_em_Espera_Maximo",
@@ -9485,7 +9485,7 @@
 									{
 										"source": {
 											"name": "Atendidas Ate NS",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Atendidas_Ate_NS",
@@ -9495,7 +9495,7 @@
 									{
 										"source": {
 											"name": "Atendidas Apos NS",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Atendidas_Apos_NS",
@@ -9505,7 +9505,7 @@
 									{
 										"source": {
 											"name": "Atendidas",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Atendidas",
@@ -9545,7 +9545,7 @@
 									{
 										"source": {
 											"name": "Abandonos",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Abandonos",
@@ -9555,7 +9555,7 @@
 									{
 										"source": {
 											"name": "Roteamentos Timeout",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Roteamentos_Timeout",
@@ -9585,7 +9585,7 @@
 									{
 										"source": {
 											"name": "Roteamentos Fila Sem Ags. Disp.",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Roteamentos_Fila_Sem_Ags_Disp",
@@ -9605,7 +9605,7 @@
 									{
 										"source": {
 											"name": "Roteamentos",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Roteamentos",
@@ -9685,7 +9685,7 @@
 									{
 										"source": {
 											"name": "Callback",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Callback",
@@ -9835,7 +9835,7 @@
 									{
 										"source": {
 											"name": "Agentes Logados - Minimo",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Agentes_Logados_Minimo",
@@ -9845,7 +9845,7 @@
 									{
 										"source": {
 											"name": "Agentes Logados - Maximo",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Agentes_Logados_Maximo",
@@ -9855,7 +9855,7 @@
 									{
 										"source": {
 											"name": "Chamadas em Espera - Minimo",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Chamadas_em_Espera_Minimo",
@@ -9865,17 +9865,17 @@
 									{
 										"source": {
 											"name": "Chamadas em Espera - Medio",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Chamadas_em_Espera_Medio",
-											"type": "Int32"
+											"type": "Double"
 										}
 									},
 									{
 										"source": {
 											"name": "Chamadas em Espera = Maximo",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Chamadas_em_Espera_Maximo",
@@ -9963,7 +9963,7 @@
 									{
 										"source": {
 											"name": "Atendidas Ate NS",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Atendidas_Ate_NS",
@@ -9973,7 +9973,7 @@
 									{
 										"source": {
 											"name": "Atendidas Apos NS",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Atendidas_Apos_NS",
@@ -9983,7 +9983,7 @@
 									{
 										"source": {
 											"name": "Atendidas",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Atendidas",
@@ -10023,7 +10023,7 @@
 									{
 										"source": {
 											"name": "Abandonos",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Abandonos",
@@ -10033,7 +10033,7 @@
 									{
 										"source": {
 											"name": "Roteamentos Timeout",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Roteamentos_Timeout",
@@ -10063,7 +10063,7 @@
 									{
 										"source": {
 											"name": "Roteamentos Fila Sem Ags. Disp.",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Roteamentos_Fila_Sem_Ags_Disp",
@@ -10083,7 +10083,7 @@
 									{
 										"source": {
 											"name": "Roteamentos",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Roteamentos",
@@ -10163,7 +10163,7 @@
 									{
 										"source": {
 											"name": "Callback",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Callback",
@@ -10313,7 +10313,7 @@
 									{
 										"source": {
 											"name": "Agentes Logados - Minimo",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Agentes_Logados_Minimo",
@@ -10323,7 +10323,7 @@
 									{
 										"source": {
 											"name": "Agentes Logados - Maximo",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Agentes_Logados_Maximo",
@@ -10333,7 +10333,7 @@
 									{
 										"source": {
 											"name": "Chamadas em Espera - Minimo",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Chamadas_em_Espera_Minimo",
@@ -10343,17 +10343,17 @@
 									{
 										"source": {
 											"name": "Chamadas em Espera - Medio",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Chamadas_em_Espera_Medio",
-											"type": "Int32"
+											"type": "Double"
 										}
 									},
 									{
 										"source": {
 											"name": "Chamadas em Espera = Maximo",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Chamadas_em_Espera_Maximo",
@@ -10441,7 +10441,7 @@
 									{
 										"source": {
 											"name": "Atendidas Ate NS",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Atendidas_Ate_NS",
@@ -10451,7 +10451,7 @@
 									{
 										"source": {
 											"name": "Atendidas Apos NS",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Atendidas_Apos_NS",
@@ -10461,7 +10461,7 @@
 									{
 										"source": {
 											"name": "Atendidas",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Atendidas",
@@ -10501,7 +10501,7 @@
 									{
 										"source": {
 											"name": "Abandonos",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Abandonos",
@@ -10511,7 +10511,7 @@
 									{
 										"source": {
 											"name": "Roteamentos Timeout",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Roteamentos_Timeout",
@@ -10541,7 +10541,7 @@
 									{
 										"source": {
 											"name": "Roteamentos Fila Sem Ags. Disp.",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Roteamentos_Fila_Sem_Ags_Disp",
@@ -10561,7 +10561,7 @@
 									{
 										"source": {
 											"name": "Roteamentos",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Roteamentos",
@@ -10641,7 +10641,7 @@
 									{
 										"source": {
 											"name": "Callback",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Callback",
@@ -10791,7 +10791,7 @@
 									{
 										"source": {
 											"name": "Agentes Logados - Minimo",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Agentes_Logados_Minimo",
@@ -10801,7 +10801,7 @@
 									{
 										"source": {
 											"name": "Agentes Logados - Maximo",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Agentes_Logados_Maximo",
@@ -10811,7 +10811,7 @@
 									{
 										"source": {
 											"name": "Chamadas em Espera - Minimo",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Chamadas_em_Espera_Minimo",
@@ -10821,17 +10821,17 @@
 									{
 										"source": {
 											"name": "Chamadas em Espera - Medio",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Chamadas_em_Espera_Medio",
-											"type": "Int32"
+											"type": "Double"
 										}
 									},
 									{
 										"source": {
 											"name": "Chamadas em Espera = Maximo",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Chamadas_em_Espera_Maximo",
@@ -10919,7 +10919,7 @@
 									{
 										"source": {
 											"name": "Atendidas Ate NS",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Atendidas_Ate_NS",
@@ -10929,7 +10929,7 @@
 									{
 										"source": {
 											"name": "Atendidas Apos NS",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Atendidas_Apos_NS",
@@ -10939,7 +10939,7 @@
 									{
 										"source": {
 											"name": "Atendidas",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Atendidas",
@@ -10979,7 +10979,7 @@
 									{
 										"source": {
 											"name": "Abandonos",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Abandonos",
@@ -10989,7 +10989,7 @@
 									{
 										"source": {
 											"name": "Roteamentos Timeout",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Roteamentos_Timeout",
@@ -11019,7 +11019,7 @@
 									{
 										"source": {
 											"name": "Roteamentos Fila Sem Ags. Disp.",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Roteamentos_Fila_Sem_Ags_Disp",
@@ -11039,7 +11039,7 @@
 									{
 										"source": {
 											"name": "Roteamentos",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Roteamentos",
@@ -11119,7 +11119,7 @@
 									{
 										"source": {
 											"name": "Callback",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Callback",
@@ -11269,7 +11269,7 @@
 									{
 										"source": {
 											"name": "Agentes Logados - Minimo",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Agentes_Logados_Minimo",
@@ -11279,7 +11279,7 @@
 									{
 										"source": {
 											"name": "Agentes Logados - Maximo",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Agentes_Logados_Maximo",
@@ -11289,7 +11289,7 @@
 									{
 										"source": {
 											"name": "Chamadas em Espera - Minimo",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Chamadas_em_Espera_Minimo",
@@ -11299,17 +11299,17 @@
 									{
 										"source": {
 											"name": "Chamadas em Espera - Medio",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Chamadas_em_Espera_Medio",
-											"type": "Int32"
+											"type": "Double"
 										}
 									},
 									{
 										"source": {
 											"name": "Chamadas em Espera = Maximo",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "Chamadas_em_Espera_Maximo",
@@ -13727,7 +13727,7 @@
 							}
 						],
 						"policy": {
-							"timeout": "7.00:00:00",
+							"timeout": "0.05:00:00",
 							"retry": 0,
 							"retryIntervalInSeconds": 30,
 							"secureOutput": false,
@@ -13737,7 +13737,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "SELECT \n       Obter_nome_estab(Obter_estab_atend(m.nr_atendimento))       AS estabelecimento, \n       obter_cnpj_estabelecimento(Obter_estab_atend(m.nr_atendimento)) as cnpj,\n       m.nr_atendimento, \n       n.nr_prontuario, \n       m.cd_pessoa_fisica, \n       n.nm_pessoa_fisica as nm_paciente, \n       substr(n.nr_tel,1,100) as nr_tel,\n       substr(n.nr_cel,1,100) as nr_cel,\n       substr(n.nr_cel2,1,100) as nr_cel2,\n       m.cd_medico, \n       m.nm_medico, \n       substr(n.ds_email,1,100) as ds_email, \n       m.nr_seq_consulta, \n       substr(to_char(obter_data_entrada(m.nr_atendimento), 'hh24:mi:ss'),1,50)as hora,\n       substr(to_char(obter_data_entrada(m.nr_atendimento),'dd/mm/yyyy'),1,50) AS data_atendimento,\n       obter_valor_dominio(12,obter_tipo_atendimento(m.nr_atendimento)) as tipo_atendimento,\n               \n       (SELECT to_char(a.dt_agenda, 'dd/mm/yyyy')\n        FROM   agenda_consulta a, \n               agenda x \n        WHERE  a.cd_agenda = x.cd_agenda \n               AND trunc(a.dt_agenda) > trunc(obter_data_entrada(m.nr_atendimento))\n               AND a.cd_pessoa_fisica = m.cd_pessoa_fisica \n               AND ROWNUM <= 1\n               AND a.dt_agenda <> obter_data_entrada(m.nr_atendimento)) AS \n       agendado_para_dia, \n       \n       (\n        SELECT to_char(a.dt_agenda, 'hh24:mi:ss')\n        FROM agenda_consulta a\n            , agenda x\n        WHERE a.cd_agenda = x.cd_agenda\n               AND trunc(a.dt_agenda) > trunc(obter_data_entrada(m.nr_atendimento))\n               AND a.cd_pessoa_fisica = m.cd_pessoa_fisica\n               AND ROWNUM <= 1\n               AND a.dt_agenda <> obter_data_entrada(m.nr_atendimento)) AS agendado_para_hora,\n        \n        (SELECT obter_tipo_agenda(a.cd_agenda) as tipo_agenda                     \n        FROM agenda_consulta a\n            , agenda x\n        WHERE a.cd_agenda = x.cd_agenda\n            AND trunc(a.dt_agenda) > trunc(obter_data_entrada(m.nr_atendimento))\n            AND a.cd_pessoa_fisica = m.cd_pessoa_fisica\n            AND ROWNUM <= 1\n            AND a.dt_agenda <> obter_data_entrada(m.nr_atendimento)\n        ) AS tipo_agenda,\n        \n        (select o.ds_retorno from oft_retorno o where o.nr_sequencia = m.nr_seq_retorno) AS retorno_em, \n       \n       (SELECT a.nm_usuario_origem\n        FROM   agenda_consulta a, \n               agenda x \n        WHERE  a.cd_agenda = x.cd_agenda \n               AND trunc(a.dt_agenda) > trunc(obter_data_entrada(m.nr_atendimento))\n               AND a.cd_pessoa_fisica = m.cd_pessoa_fisica\n               AND ROWNUM <= 1\n               AND a.dt_agenda <> obter_data_entrada(m.nr_atendimento)) AS usuario, \n               \n       (SELECT 'Consulta Oftalmologica Completa'\n        FROM   agenda_consulta a, \n               agenda x \n        WHERE  a.cd_agenda = x.cd_agenda\n               AND trunc(a.dt_agenda) > trunc(obter_data_entrada(m.nr_atendimento))\n               AND a.cd_pessoa_fisica = m.cd_pessoa_fisica\n               AND ROWNUM <= 1\n               AND a.dt_agenda <> obter_data_entrada(m.nr_atendimento)) as procedimentos,\n       \n       '' SIGLA_UNIDADE,\n       '' MARCA\nFROM   (SELECT a.nr_atendimento, \n               obter_pessoa_atendimento(a.nr_atendimento, 'C') as cd_pessoa_fisica, \n               a.cd_profissional as cd_medico, \n               Obter_nome_pf(a.cd_profissional) nm_medico, \n               a.nr_sequencia             nr_seq_consulta, \n               obter_estab_atend(a.nr_atendimento) as cd_estabelecimento,\n               a.nr_seq_retorno\n        FROM   oft_consulta_medica a,\n               atendimento_paciente b\n        where  a.nr_atendimento = b.nr_atendimento\n        and  b.nr_seq_classificacao in (2,6)\n                                     ) m \n       inner join (SELECT cd_pessoa_fisica, \n                          nm_pessoa_fisica, \n                          nr_cel,\n                          nr_cel2,\n                          nr_tel, \n                          nr_prontuario, \n                          ds_email \n                   FROM   (SELECT x.cd_pessoa_fisica, \n                                  Initcap(x.nm_pessoa_fisica) nm_pessoa_fisica, \n                                  x.nr_prontuario, \n                                  x.nr_ddd_celular ||''|| x.nr_telefone_celular       AS nr_cel, \n                                  y.nr_ddd_celular ||''|| y.nr_telefone_celular       AS nr_cel2, \n                                  y.nr_ddd_telefone ||''|| y.nr_telefone              AS nr_tel, \n                                  y.ds_email \nFROM   pessoa_fisica x \n     left join compl_pessoa_fisica y \n       ON y.cd_pessoa_fisica = x.cd_pessoa_fisica \n          AND y.ie_tipo_complemento = 1\nWHERE  x.nr_telefone_celular IS NOT NULL \n OR y.nr_telefone_celular IS NOT NULL \n OR y.nr_telefone IS NOT NULL)) n \n ON n.cd_pessoa_fisica = m.cd_pessoa_fisica \nWHERE  NOT EXISTS (SELECT a.dt_agenda, \n                          a.cd_pessoa_fisica \n                   FROM   agenda_consulta a \n                   where a.cd_pessoa_fisica = m.cd_pessoa_fisica\n                   AND a.dt_agenda > SYSDATE)",
+								"oracleReaderQuery": "SELECT \n       Obter_nome_estab(Obter_estab_atend(m.nr_atendimento))       AS estabelecimento, \n       obter_cnpj_estabelecimento(Obter_estab_atend(m.nr_atendimento)) as cnpj,\n       m.nr_atendimento, \n       n.nr_prontuario, \n       m.cd_pessoa_fisica, \n       n.nm_pessoa_fisica as nm_paciente, \n       substr(n.nr_tel,1,100) as nr_tel,\n       substr(n.nr_cel,1,100) as nr_cel,\n       substr(n.nr_cel2,1,100) as nr_cel2,\n       m.cd_medico, \n       m.nm_medico, \n       substr(n.ds_email,1,100) as ds_email, \n       m.nr_seq_consulta, \n       substr(to_char(obter_data_entrada(m.nr_atendimento), 'hh24:mi:ss'),1,50)as hora,\n       substr(to_char(obter_data_entrada(m.nr_atendimento),'dd/mm/yyyy'),1,50) AS data_atendimento,\n       obter_valor_dominio(12,obter_tipo_atendimento(m.nr_atendimento)) as tipo_atendimento,\n               \n       (SELECT to_char(a.dt_agenda, 'dd/mm/yyyy')\n        FROM   agenda_consulta a, \n               agenda x \n        WHERE  a.cd_agenda = x.cd_agenda \n               AND trunc(a.dt_agenda) > trunc(obter_data_entrada(m.nr_atendimento))\n               AND a.cd_pessoa_fisica = m.cd_pessoa_fisica \n               AND ROWNUM <= 1\n               AND a.dt_agenda <> obter_data_entrada(m.nr_atendimento)) AS \n       agendado_para_dia, \n       \n       (\n        SELECT to_char(a.dt_agenda, 'hh24:mi:ss')\n        FROM agenda_consulta a\n            , agenda x\n        WHERE a.cd_agenda = x.cd_agenda\n               AND trunc(a.dt_agenda) > trunc(obter_data_entrada(m.nr_atendimento))\n               AND a.cd_pessoa_fisica = m.cd_pessoa_fisica\n               AND ROWNUM <= 1\n               AND a.dt_agenda <> obter_data_entrada(m.nr_atendimento)) AS agendado_para_hora,\n        \n        (SELECT obter_tipo_agenda(a.cd_agenda) as tipo_agenda                     \n        FROM agenda_consulta a\n            , agenda x\n        WHERE a.cd_agenda = x.cd_agenda\n            AND trunc(a.dt_agenda) > trunc(obter_data_entrada(m.nr_atendimento))\n            AND a.cd_pessoa_fisica = m.cd_pessoa_fisica\n            AND ROWNUM <= 1\n            AND a.dt_agenda <> obter_data_entrada(m.nr_atendimento)\n        ) AS tipo_agenda,\n        \n        (SELECT obter_desc_classif_agenda(a.cd_agenda, obter_classif_agenda(a.nr_sequencia))                \n        FROM agenda_consulta a\n            , agenda x\n        WHERE a.cd_agenda = x.cd_agenda\n            AND trunc(a.dt_agenda) > trunc(obter_data_entrada(m.nr_atendimento))\n            AND a.cd_pessoa_fisica = m.cd_pessoa_fisica\n            AND ROWNUM <= 1\n            AND a.dt_agenda <> obter_data_entrada(m.nr_atendimento)\n        ) AS classif_agenda,\n        \n        (select o.ds_retorno from oft_retorno o where o.nr_sequencia = m.nr_seq_retorno) AS retorno_em, \n       \n       (SELECT a.nm_usuario_origem\n        FROM   agenda_consulta a, \n               agenda x \n        WHERE  a.cd_agenda = x.cd_agenda \n               AND trunc(a.dt_agenda) > trunc(obter_data_entrada(m.nr_atendimento))\n               AND a.cd_pessoa_fisica = m.cd_pessoa_fisica\n               AND ROWNUM <= 1\n               AND a.dt_agenda <> obter_data_entrada(m.nr_atendimento)) AS usuario, \n               \n       (SELECT 'Consulta Oftalmologica Completa'\n        FROM   agenda_consulta a, \n               agenda x \n        WHERE  a.cd_agenda = x.cd_agenda\n               AND trunc(a.dt_agenda) > trunc(obter_data_entrada(m.nr_atendimento))\n               AND a.cd_pessoa_fisica = m.cd_pessoa_fisica\n               AND ROWNUM <= 1\n               AND a.dt_agenda <> obter_data_entrada(m.nr_atendimento)) as procedimentos,\n       \n       '' SIGLA_UNIDADE,\n       '' MARCA,\n       substr(m.conduta,1,1000) as conduta\n       \nFROM   (SELECT a.nr_atendimento, \n               obter_pessoa_atendimento(a.nr_atendimento, 'C') as cd_pessoa_fisica, \n               a.cd_profissional as cd_medico, \n               Obter_nome_pf(a.cd_profissional) nm_medico, \n               a.nr_sequencia             nr_seq_consulta, \n               obter_estab_atend(a.nr_atendimento) as cd_estabelecimento,\n               a.nr_seq_retorno,\n               a.ds_conduta as conduta\n        FROM   oft_consulta_medica a,\n               atendimento_paciente b\n        where  a.nr_atendimento = b.nr_atendimento\n                                     ) m \n       inner join (SELECT cd_pessoa_fisica, \n                          nm_pessoa_fisica, \n                          nr_cel,\n                          nr_cel2,\n                          nr_tel, \n                          nr_prontuario, \n                          ds_email \n                   FROM   (SELECT x.cd_pessoa_fisica, \n                                  Initcap(x.nm_pessoa_fisica) nm_pessoa_fisica, \n                                  x.nr_prontuario, \n                                  x.nr_ddd_celular ||''|| x.nr_telefone_celular       AS nr_cel, \n                                  y.nr_ddd_celular ||''|| y.nr_telefone_celular       AS nr_cel2, \n                                  y.nr_ddd_telefone ||''|| y.nr_telefone              AS nr_tel, \n                                  y.ds_email \nFROM   pessoa_fisica x \n     left join compl_pessoa_fisica y \n       ON y.cd_pessoa_fisica = x.cd_pessoa_fisica \n          AND y.ie_tipo_complemento = 1\nWHERE  x.nr_telefone_celular IS NOT NULL \n OR y.nr_telefone_celular IS NOT NULL \n OR y.nr_telefone IS NOT NULL)) n \n ON n.cd_pessoa_fisica = m.cd_pessoa_fisica \nWHERE  NOT EXISTS (SELECT a.dt_agenda, \n                          a.cd_pessoa_fisica \n                   FROM   agenda_consulta a \n                   where a.cd_pessoa_fisica = m.cd_pessoa_fisica\n                   AND a.dt_agenda > SYSDATE)",
 								"partitionOption": "None"
 							},
 							"sink": {
@@ -13819,7 +13819,7 @@
 							}
 						],
 						"policy": {
-							"timeout": "7.00:00:00",
+							"timeout": "0.05:00:00",
 							"retry": 0,
 							"retryIntervalInSeconds": 30,
 							"secureOutput": false,
@@ -13829,7 +13829,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "SELECT Obter_nome_estab(Obter_estab_atend(m.nr_atendimento)) AS estabelecimento, \n       Obter_cnpj_estabelecimento(Obter_estab_atend(m.nr_atendimento)) \n       AS cnpj, \n       m.nr_atendimento, \n       n.nr_prontuario, \n       m.cd_pessoa_fisica, \n       n.nm_pessoa_fisica nm_paciente, \n       REPLACE(REPLACE(n.nr_tel,')',''),'(','') AS NR_TEL,\n       REPLACE(REPLACE(n.nr_cel,')',''),'(','') AS NR_CEL,\n       REPLACE(REPLACE(n.nr_cel2,')',''),'(','') AS NR_CEL2,\n       m.cd_medico, \n       m.nm_medico, \n       n.ds_email, \n       m.nr_seq_consulta, \n       Substr(To_char(Obter_data_entrada(m.nr_atendimento), 'hh24:mi:ss'), 1, 50 ) AS hora, \n       Substr(To_char(Obter_data_entrada(m.nr_atendimento), 'dd/mm/yyyy'), 1, 50 ) AS data_atendimento, \n       Obter_valor_dominio(12, Obter_tipo_atendimento(m.nr_atendimento)) AS tipo_atendimento, \n       Substr((SELECT To_char(a.dt_agenda, 'dd/mm/yyyy') \n               FROM   agenda_paciente a, \n                      agenda x \n               WHERE  a.cd_agenda = x.cd_agenda \n                      AND a.dt_agenda > Obter_data_entrada(m.nr_atendimento) \n                      AND a.cd_pessoa_fisica = m.cd_pessoa_fisica \n                      AND Obter_tipo_agenda(a.cd_agenda) = 2 \n                      AND ROWNUM <= 1), 1, 50) AS agendado_para_dia, \n       Substr((SELECT To_char(a.hr_inicio, 'hh24:mi:ss') \n               FROM   agenda_paciente a, \n                      agenda x \n               WHERE  a.cd_agenda = x.cd_agenda \n                      AND a.dt_agenda > Obter_data_entrada(m.nr_atendimento) \n                      AND a.cd_pessoa_fisica = m.cd_pessoa_fisica \n                      AND ROWNUM <= 1), 1, 50) AS agendado_para_hora, \n       (SELECT CASE \n                 WHEN Obter_tipo_agenda(a.cd_agenda) = 2 \n                      AND x.cd_pessoa_fisica IS NULL THEN 2 \n                 WHEN Obter_tipo_agenda(a.cd_agenda) = 2 \n                      AND x.cd_pessoa_fisica IS NOT NULL THEN 3 \n                 WHEN Obter_tipo_agenda(a.cd_agenda) = 1 THEN 1 \n               END tipo_agenda \n        FROM   agenda_paciente a, \n               agenda x \n        WHERE  a.cd_agenda = x.cd_agenda \n               AND a.dt_agenda > Obter_data_entrada(m.nr_atendimento) \n               AND a.cd_pessoa_fisica = m.cd_pessoa_fisica \n               AND ROWNUM <= 1 \n               AND a.dt_agenda <> Obter_data_entrada(m.nr_atendimento)) AS tipo_agenda, \n       (SELECT 'Retorno em ' \n               || Lpad(a.qt_periodo, 2, '0') \n               || Decode(a.ie_periodo, 'D', ' Dias', \n                                       a.ie_periodo) ds_periodo \n        FROM   oft_conduta a \n        WHERE  a.nr_seq_consulta = m.nr_seq_consulta \n               AND a.dt_inativacao IS NULL \n               AND a.ie_situacao = 'A' \n               AND a.nr_sequencia = (SELECT Max(nr_sequencia) \n                                     FROM   oft_conduta \n                                     WHERE  nr_seq_consulta = a.nr_seq_consulta) \n               AND a.qt_periodo IS NOT NULL) AS retorno_em, \n       (SELECT a.nm_usuario_orig \n        FROM   agenda_paciente a, \n               agenda x \n        WHERE  a.cd_agenda = x.cd_agenda \n               AND a.dt_agenda > Obter_data_entrada(m.nr_atendimento) \n               AND a.cd_pessoa_fisica = m.cd_pessoa_fisica \n               AND Obter_tipo_agenda(a.cd_agenda) = 2 \n               AND ROWNUM <= 1) AS usuario, \n       Substr((SELECT Listagg(Obter_desc_procedimento(b.cd_procedimento, \n                              b.ie_origem_proced) \n                              || ' Quantidade = ' \n                              || b.qt_exame, ' ;') \n                        within GROUP (ORDER BY \n                        Obter_desc_procedimento(b.cd_procedimento, \n                        b.ie_origem_proced)) \n               FROM   pedido_exame_externo_item b \n                      inner join proc_interno c \n                              ON c.nr_sequencia = b.nr_proc_interno \n                      inner join pedido_exame_externo c \n                              ON c.nr_sequencia = b.nr_seq_pedido \n               WHERE  c.nr_seq_consulta = m.nr_seq_consulta \n                      AND c.ie_situacao = 'A'), 1, 1000) AS procedimentos, \n       '' sigla_unidade, \n       '' marca \nFROM   (SELECT a.nr_atendimento, \n               a.cd_pessoa_fisica, \n               a.cd_medico, \n               Obter_nome_pf(a.cd_medico) nm_medico, \n               a.nr_sequencia             nr_seq_consulta, \n               a.cd_estabelecimento \n        FROM   oft_consulta a \n        UNION \n        SELECT a.nr_atendimento, \n               a.cd_pessoa_fisica, \n               a.cd_medico, \n               Obter_nome_pf(a.cd_medico) nm_medico, \n               a.nr_sequencia             nr_seq_consulta, \n               a.cd_estabelecimento \n        FROM   oft_consulta a \n               left join (SELECT Count(1) nr_conduta, \n                                 nr_seq_consulta \n                          FROM   oft_conduta \n                          GROUP  BY nr_seq_consulta) b \n                      ON b.nr_seq_consulta = a.nr_sequencia \n               left join (SELECT a.nr_seq_consulta, \n                                 Count(1) nr_encaminhamento \n                          FROM   med_avaliacao_paciente a \n                                 inner join med_avaliacao_result b \n                                         ON b.nr_seq_avaliacao = a.nr_sequencia \n                          WHERE  a.nr_seq_tipo_avaliacao = 34 \n                                 AND b.nr_seq_item IN ( 456, 457, 458 ) \n                          GROUP  BY a.nr_seq_consulta) c \n                      ON c.nr_seq_consulta = a.nr_sequencia \n               left join (SELECT nr_seq_consulta, \n                                 Count(1) nr_procedimento \n                          FROM   pedido_exame_externo \n                          WHERE  ie_situacao = 'A' \n                          GROUP  BY nr_seq_consulta) d \n                      ON d.nr_seq_consulta = a.nr_sequencia \n                         AND ( ( Nvl(b.nr_conduta, 0) > 0 ) \n                                OR ( Nvl(c.nr_encaminhamento, 0) > 0 ) \n                                OR ( Nvl(d.nr_procedimento, 0) > 0 ) )) m \n       inner join (SELECT cd_pessoa_fisica, \n                          nm_pessoa_fisica, \n                          nr_cel, nr_cel2, nr_tel,\n                          nr_prontuario, \n                          ds_email \n                   FROM   (SELECT x.cd_pessoa_fisica, \n                                  Initcap(x.nm_pessoa_fisica) nm_pessoa_fisica, \n                                  x.nr_prontuario, \n                                  x.nr_telefone_celular       AS nr_cel, \n                                  y.nr_telefone_celular       AS nr_cel2, \n                                  y.nr_telefone               AS nr_tel, \n                                  y.ds_email \n                           FROM   pessoa_fisica x \n                                  left join compl_pessoa_fisica y ON y.cd_pessoa_fisica = x.cd_pessoa_fisica AND y.ie_tipo_complemento = 1 \n                           WHERE  x.nr_telefone_celular IS NOT NULL \n                                   OR y.nr_telefone_celular IS NOT NULL \n                                   OR y.nr_telefone IS NOT NULL)) n \n               ON n.cd_pessoa_fisica = m.cd_pessoa_fisica \nWHERE  NOT EXISTS (SELECT a.dt_agenda, \n                          a.cd_pessoa_fisica \n                   FROM   agenda_paciente a \n                   WHERE  Obter_tipo_agenda(a.cd_agenda) = 2 \n                          AND a.cd_pessoa_fisica = m.cd_pessoa_fisica \n                          AND a.dt_agenda > SYSDATE) ",
+								"oracleReaderQuery": "SELECT Obter_nome_estab(Obter_estab_atend(m.nr_atendimento)) AS estabelecimento, \n       Obter_cnpj_estabelecimento(Obter_estab_atend(m.nr_atendimento)) \n       AS cnpj, \n       m.nr_atendimento, \n       n.nr_prontuario, \n       m.cd_pessoa_fisica, \n       n.nm_pessoa_fisica nm_paciente, \n       REPLACE(REPLACE(n.nr_tel,')',''),'(','') AS NR_TEL,\n       REPLACE(REPLACE(n.nr_cel,')',''),'(','') AS NR_CEL,\n       REPLACE(REPLACE(n.nr_cel2,')',''),'(','') AS NR_CEL2,\n       m.cd_medico, \n       m.nm_medico, \n       n.ds_email, \n       m.nr_seq_consulta, \n       Substr(To_char(Obter_data_entrada(m.nr_atendimento), 'hh24:mi:ss'), 1, 50 ) AS hora, \n       Substr(To_char(Obter_data_entrada(m.nr_atendimento), 'dd/mm/yyyy'), 1, 50 ) AS data_atendimento, \n       Obter_valor_dominio(12, Obter_tipo_atendimento(m.nr_atendimento)) AS tipo_atendimento, \n       Substr((SELECT To_char(a.dt_agenda, 'dd/mm/yyyy') \n               FROM   agenda_paciente a, \n                      agenda x \n               WHERE  a.cd_agenda = x.cd_agenda \n                      AND a.dt_agenda > Obter_data_entrada(m.nr_atendimento) \n                      AND a.cd_pessoa_fisica = m.cd_pessoa_fisica \n                      AND Obter_tipo_agenda(a.cd_agenda) = 2 \n                      AND ROWNUM <= 1), 1, 50) AS agendado_para_dia, \n       Substr((SELECT To_char(a.hr_inicio, 'hh24:mi:ss') \n               FROM   agenda_paciente a, \n                      agenda x \n               WHERE  a.cd_agenda = x.cd_agenda \n                      AND a.dt_agenda > Obter_data_entrada(m.nr_atendimento) \n                      AND a.cd_pessoa_fisica = m.cd_pessoa_fisica \n                      AND ROWNUM <= 1), 1, 50) AS agendado_para_hora, \n       (SELECT CASE \n                 WHEN Obter_tipo_agenda(a.cd_agenda) = 2 \n                      AND x.cd_pessoa_fisica IS NULL THEN 2 \n                 WHEN Obter_tipo_agenda(a.cd_agenda) = 2 \n                      AND x.cd_pessoa_fisica IS NOT NULL THEN 3 \n                 WHEN Obter_tipo_agenda(a.cd_agenda) = 1 THEN 1 \n               END tipo_agenda \n        FROM   agenda_paciente a, \n               agenda x \n        WHERE  a.cd_agenda = x.cd_agenda \n               AND a.dt_agenda > Obter_data_entrada(m.nr_atendimento) \n               AND a.cd_pessoa_fisica = m.cd_pessoa_fisica \n               AND ROWNUM <= 1 \n               AND a.dt_agenda <> Obter_data_entrada(m.nr_atendimento)) AS tipo_agenda, \n       (SELECT 'Retorno em ' \n               || Lpad(a.qt_periodo, 2, '0') \n               || Decode(a.ie_periodo, 'D', ' Dias', \n                                       a.ie_periodo) ds_periodo \n        FROM   oft_conduta a \n        WHERE  a.nr_seq_consulta = m.nr_seq_consulta \n               AND a.dt_inativacao IS NULL \n               AND a.ie_situacao = 'A' \n               AND a.nr_sequencia = (SELECT Max(nr_sequencia) \n                                     FROM   oft_conduta \n                                     WHERE  nr_seq_consulta = a.nr_seq_consulta) \n               AND a.qt_periodo IS NOT NULL) AS retorno_em, \n       (SELECT a.nm_usuario_orig \n        FROM   agenda_paciente a, \n               agenda x \n        WHERE  a.cd_agenda = x.cd_agenda \n               AND a.dt_agenda > Obter_data_entrada(m.nr_atendimento) \n               AND a.cd_pessoa_fisica = m.cd_pessoa_fisica \n               AND Obter_tipo_agenda(a.cd_agenda) = 2 \n               AND ROWNUM <= 1) AS usuario, \n       Substr((SELECT Listagg(Obter_desc_procedimento(b.cd_procedimento, \n                              b.ie_origem_proced) \n                              || ' Quantidade = ' \n                              || b.qt_exame, ' ;') \n                        within GROUP (ORDER BY \n                        Obter_desc_procedimento(b.cd_procedimento, \n                        b.ie_origem_proced)) \n               FROM   pedido_exame_externo_item b \n                      inner join proc_interno c \n                              ON c.nr_sequencia = b.nr_proc_interno \n                      inner join pedido_exame_externo c \n                              ON c.nr_sequencia = b.nr_seq_pedido \n               WHERE  c.nr_seq_consulta = m.nr_seq_consulta \n                      AND c.ie_situacao = 'A'), 1, 1000) AS procedimentos, \n       '' sigla_unidade, \n       '' marca,\n       substr(m.conduta,1,1000) as conduta\nFROM   (SELECT a.nr_atendimento, \n               a.cd_pessoa_fisica, \n               a.cd_medico, \n               Obter_nome_pf(a.cd_medico) nm_medico, \n               a.nr_sequencia             nr_seq_consulta, \n               a.cd_estabelecimento,\n               '' as conduta\n        FROM   oft_consulta a \n        UNION \n        SELECT a.nr_atendimento, \n               a.cd_pessoa_fisica, \n               a.cd_medico, \n               Obter_nome_pf(a.cd_medico) nm_medico, \n               a.nr_sequencia             nr_seq_consulta, \n               a.cd_estabelecimento,\n               c.conduta\n        FROM   oft_consulta a \n               left join (SELECT Count(1) nr_conduta, \n                                 nr_seq_consulta \n                          FROM   oft_conduta \n                          GROUP  BY nr_seq_consulta) b \n                      ON b.nr_seq_consulta = a.nr_sequencia \n               left join (SELECT a.nr_seq_consulta, b.ds_resultado as conduta,\n                                 Count(1) nr_encaminhamento \n                          FROM   med_avaliacao_paciente a \n                                 inner join med_avaliacao_result b \n                                         ON b.nr_seq_avaliacao = a.nr_sequencia \n                          WHERE  a.nr_seq_tipo_avaliacao = 34 \n                                 AND b.nr_seq_item IN ( 456, 457, 458 ) \n                          GROUP  BY a.nr_seq_consulta, b.ds_resultado ) c \n                      ON c.nr_seq_consulta = a.nr_sequencia \n               left join (SELECT nr_seq_consulta, \n                                 Count(1) nr_procedimento \n                          FROM   pedido_exame_externo \n                          WHERE  ie_situacao = 'A' \n                          GROUP  BY nr_seq_consulta) d \n                      ON d.nr_seq_consulta = a.nr_sequencia \n                         AND ( ( Nvl(b.nr_conduta, 0) > 0 ) \n                                OR ( Nvl(c.nr_encaminhamento, 0) > 0 ) \n                                OR ( Nvl(d.nr_procedimento, 0) > 0 ) )) m \n       inner join (SELECT cd_pessoa_fisica, \n                          nm_pessoa_fisica, \n                          nr_cel, nr_cel2, nr_tel,\n                          nr_prontuario, \n                          ds_email \n                   FROM   (SELECT x.cd_pessoa_fisica, \n                                  Initcap(x.nm_pessoa_fisica) nm_pessoa_fisica, \n                                  x.nr_prontuario, \n                                  x.nr_telefone_celular       AS nr_cel, \n                                  y.nr_telefone_celular       AS nr_cel2, \n                                  y.nr_telefone               AS nr_tel, \n                                  y.ds_email \n                           FROM   pessoa_fisica x \n                                  left join compl_pessoa_fisica y ON y.cd_pessoa_fisica = x.cd_pessoa_fisica AND y.ie_tipo_complemento = 1 \n                           WHERE  x.nr_telefone_celular IS NOT NULL \n                                   OR y.nr_telefone_celular IS NOT NULL \n                                   OR y.nr_telefone IS NOT NULL)) n \n               ON n.cd_pessoa_fisica = m.cd_pessoa_fisica \nWHERE  NOT EXISTS (SELECT a.dt_agenda, \n                          a.cd_pessoa_fisica \n                   FROM   agenda_paciente a \n                   WHERE  Obter_tipo_agenda(a.cd_agenda) = 2 \n                          AND a.cd_pessoa_fisica = m.cd_pessoa_fisica \n                          AND a.dt_agenda > SYSDATE) and rownum < 100 and m.conduta is not null",
 								"partitionOption": "None"
 							},
 							"sink": {
@@ -21382,6 +21382,14 @@
 						"type": "String"
 					},
 					{
+						"name": "NR_CEL",
+						"type": "String"
+					},
+					{
+						"name": "NR_CEL2",
+						"type": "String"
+					},
+					{
 						"name": "CD_MEDICO",
 						"type": "String"
 					},
@@ -21439,6 +21447,10 @@
 					},
 					{
 						"name": "MARCA",
+						"type": "String"
+					},
+					{
+						"name": "CONDUTA",
 						"type": "String"
 					}
 				],
@@ -25035,6 +25047,14 @@
 						"type": "String"
 					},
 					{
+						"name": "NR_CEL",
+						"type": "String"
+					},
+					{
+						"name": "NR_CEL2",
+						"type": "String"
+					},
+					{
 						"name": "CD_MEDICO",
 						"type": "String"
 					},
@@ -25075,6 +25095,10 @@
 						"type": "Double"
 					},
 					{
+						"name": "CLASSIF_AGENDA",
+						"type": "String"
+					},
+					{
 						"name": "RETORNO_EM",
 						"type": "String"
 					},
@@ -25092,6 +25116,10 @@
 					},
 					{
 						"name": "MARCA",
+						"type": "String"
+					},
+					{
+						"name": "CONDUTA",
 						"type": "String"
 					}
 				],

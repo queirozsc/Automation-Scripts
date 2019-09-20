@@ -1540,6 +1540,14 @@
 						"type": "String"
 					},
 					{
+						"name": "NR_CEL",
+						"type": "String"
+					},
+					{
+						"name": "NR_CEL2",
+						"type": "String"
+					},
+					{
 						"name": "CD_MEDICO",
 						"type": "String"
 					},
@@ -1580,6 +1588,10 @@
 						"type": "Double"
 					},
 					{
+						"name": "CLASSIF_AGENDA",
+						"type": "String"
+					},
+					{
 						"name": "RETORNO_EM",
 						"type": "String"
 					},
@@ -1597,6 +1609,10 @@
 					},
 					{
 						"name": "MARCA",
+						"type": "String"
+					},
+					{
+						"name": "CONDUTA",
 						"type": "String"
 					}
 				],
@@ -1622,7 +1638,7 @@
 							}
 						],
 						"policy": {
-							"timeout": "7.00:00:00",
+							"timeout": "0.05:00:00",
 							"retry": 0,
 							"retryIntervalInSeconds": 30,
 							"secureOutput": false,
@@ -1720,7 +1736,7 @@
 							}
 						],
 						"policy": {
-							"timeout": "7.00:00:00",
+							"timeout": "0.05:00:00",
 							"retry": 0,
 							"retryIntervalInSeconds": 30,
 							"secureOutput": false,
