@@ -24,7 +24,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT \n       Obter_nome_estab(Obter_estab_atend(m.nr_atendimento))       AS estabelecimento, \n       obter_cnpj_estabelecimento(Obter_estab_atend(m.nr_atendimento)) as cnpj,\n       m.nr_atendimento, \n       n.nr_prontuario, \n       m.cd_pessoa_fisica, \n       n.nm_pessoa_fisica as nm_paciente, \n       substr(n.nr_tel,1,100) as nr_tel,\n       substr(n.nr_cel,1,100) as nr_cel,\n       substr(n.nr_cel2,1,100) as nr_cel2,\n       m.cd_medico, \n       m.nm_medico, \n       substr(n.ds_email,1,100) as ds_email, \n       m.nr_seq_consulta, \n       substr(to_char(obter_data_entrada(m.nr_atendimento), 'hh24:mi:ss'),1,50)as hora,\n       substr(to_char(obter_data_entrada(m.nr_atendimento),'dd/mm/yyyy'),1,50) AS data_atendimento,\n       obter_valor_dominio(12,obter_tipo_atendimento(m.nr_atendimento)) as tipo_atendimento,\n               \n       (SELECT to_char(a.dt_agenda, 'dd/mm/yyyy')\n        FROM   agenda_consulta a, \n               agenda x \n        WHERE  a.cd_agenda = x.cd_agenda \n               AND trunc(a.dt_agenda) > trunc(obter_data_entrada(m.nr_atendimento))\n               AND a.cd_pessoa_fisica = m.cd_pessoa_fisica \n               AND ROWNUM <= 1\n               AND a.dt_agenda <> obter_data_entrada(m.nr_atendimento)) AS \n       agendado_para_dia, \n       \n       (\n        SELECT to_char(a.dt_agenda, 'hh24:mi:ss')\n        FROM agenda_consulta a\n            , agenda x\n        WHERE a.cd_agenda = x.cd_agenda\n               AND trunc(a.dt_agenda) > trunc(obter_data_entrada(m.nr_atendimento))\n               AND a.cd_pessoa_fisica = m.cd_pessoa_fisica\n               AND ROWNUM <= 1\n               AND a.dt_agenda <> obter_data_entrada(m.nr_atendimento)) AS agendado_para_hora,\n        \n        (SELECT obter_tipo_agenda(a.cd_agenda) as tipo_agenda                     \n        FROM agenda_consulta a\n            , agenda x\n        WHERE a.cd_agenda = x.cd_agenda\n            AND trunc(a.dt_agenda) > trunc(obter_data_entrada(m.nr_atendimento))\n            AND a.cd_pessoa_fisica = m.cd_pessoa_fisica\n            AND ROWNUM <= 1\n            AND a.dt_agenda <> obter_data_entrada(m.nr_atendimento)\n        ) AS tipo_agenda,\n        \n        (select o.ds_retorno from oft_retorno o where o.nr_sequencia = m.nr_seq_retorno) AS retorno_em, \n       \n       (SELECT a.nm_usuario_origem\n        FROM   agenda_consulta a, \n               agenda x \n        WHERE  a.cd_agenda = x.cd_agenda \n               AND trunc(a.dt_agenda) > trunc(obter_data_entrada(m.nr_atendimento))\n               AND a.cd_pessoa_fisica = m.cd_pessoa_fisica\n               AND ROWNUM <= 1\n               AND a.dt_agenda <> obter_data_entrada(m.nr_atendimento)) AS usuario, \n               \n       (SELECT 'Consulta Oftalmologica Completa'\n        FROM   agenda_consulta a, \n               agenda x \n        WHERE  a.cd_agenda = x.cd_agenda\n               AND trunc(a.dt_agenda) > trunc(obter_data_entrada(m.nr_atendimento))\n               AND a.cd_pessoa_fisica = m.cd_pessoa_fisica\n               AND ROWNUM <= 1\n               AND a.dt_agenda <> obter_data_entrada(m.nr_atendimento)) as procedimentos,\n       \n       '' SIGLA_UNIDADE,\n       '' MARCA\nFROM   (SELECT a.nr_atendimento, \n               obter_pessoa_atendimento(a.nr_atendimento, 'C') as cd_pessoa_fisica, \n               a.cd_profissional as cd_medico, \n               Obter_nome_pf(a.cd_profissional) nm_medico, \n               a.nr_sequencia             nr_seq_consulta, \n               obter_estab_atend(a.nr_atendimento) as cd_estabelecimento,\n               a.nr_seq_retorno\n        FROM   oft_consulta_medica a,\n               atendimento_paciente b\n        where  a.nr_atendimento = b.nr_atendimento\n                                     ) m \n       inner join (SELECT cd_pessoa_fisica, \n                          nm_pessoa_fisica, \n                          nr_cel,\n                          nr_cel2,\n                          nr_tel, \n                          nr_prontuario, \n                          ds_email \n                   FROM   (SELECT x.cd_pessoa_fisica, \n                                  Initcap(x.nm_pessoa_fisica) nm_pessoa_fisica, \n                                  x.nr_prontuario, \n                                  x.nr_ddd_celular ||''|| x.nr_telefone_celular       AS nr_cel, \n                                  y.nr_ddd_celular ||''|| y.nr_telefone_celular       AS nr_cel2, \n                                  y.nr_ddd_telefone ||''|| y.nr_telefone              AS nr_tel, \n                                  y.ds_email \nFROM   pessoa_fisica x \n     left join compl_pessoa_fisica y \n       ON y.cd_pessoa_fisica = x.cd_pessoa_fisica \n          AND y.ie_tipo_complemento = 1\nWHERE  x.nr_telefone_celular IS NOT NULL \n OR y.nr_telefone_celular IS NOT NULL \n OR y.nr_telefone IS NOT NULL)) n \n ON n.cd_pessoa_fisica = m.cd_pessoa_fisica \nWHERE  NOT EXISTS (SELECT a.dt_agenda, \n                          a.cd_pessoa_fisica \n                   FROM   agenda_consulta a \n                   where a.cd_pessoa_fisica = m.cd_pessoa_fisica\n                   AND a.dt_agenda > SYSDATE)",
+						"oracleReaderQuery": "SELECT \n       Obter_nome_estab(Obter_estab_atend(m.nr_atendimento))       AS estabelecimento, \n       obter_cnpj_estabelecimento(Obter_estab_atend(m.nr_atendimento)) as cnpj,\n       m.nr_atendimento, \n       n.nr_prontuario, \n       m.cd_pessoa_fisica, \n       n.nm_pessoa_fisica as nm_paciente, \n       substr(n.nr_tel,1,100) as nr_tel,\n       substr(n.nr_cel,1,100) as nr_cel,\n       substr(n.nr_cel2,1,100) as nr_cel2,\n       m.cd_medico, \n       m.nm_medico, \n       substr(n.ds_email,1,100) as ds_email, \n       m.nr_seq_consulta, \n       substr(to_char(obter_data_entrada(m.nr_atendimento), 'hh24:mi:ss'),1,50)as hora,\n       substr(to_char(obter_data_entrada(m.nr_atendimento),'dd/mm/yyyy'),1,50) AS data_atendimento,\n       obter_valor_dominio(12,obter_tipo_atendimento(m.nr_atendimento)) as tipo_atendimento,\n               \n       (SELECT to_char(a.dt_agenda, 'dd/mm/yyyy')\n        FROM   agenda_consulta a, \n               agenda x \n        WHERE  a.cd_agenda = x.cd_agenda \n               AND trunc(a.dt_agenda) > trunc(obter_data_entrada(m.nr_atendimento))\n               AND a.cd_pessoa_fisica = m.cd_pessoa_fisica \n               AND ROWNUM <= 1\n               AND a.dt_agenda <> obter_data_entrada(m.nr_atendimento)) AS \n       agendado_para_dia, \n       \n       (\n        SELECT to_char(a.dt_agenda, 'hh24:mi:ss')\n        FROM agenda_consulta a\n            , agenda x\n        WHERE a.cd_agenda = x.cd_agenda\n               AND trunc(a.dt_agenda) > trunc(obter_data_entrada(m.nr_atendimento))\n               AND a.cd_pessoa_fisica = m.cd_pessoa_fisica\n               AND ROWNUM <= 1\n               AND a.dt_agenda <> obter_data_entrada(m.nr_atendimento)) AS agendado_para_hora,\n        \n        (SELECT obter_tipo_agenda(a.cd_agenda) as tipo_agenda                     \n        FROM agenda_consulta a\n            , agenda x\n        WHERE a.cd_agenda = x.cd_agenda\n            AND trunc(a.dt_agenda) > trunc(obter_data_entrada(m.nr_atendimento))\n            AND a.cd_pessoa_fisica = m.cd_pessoa_fisica\n            AND ROWNUM <= 1\n            AND a.dt_agenda <> obter_data_entrada(m.nr_atendimento)\n        ) AS tipo_agenda,\n        \n        (SELECT obter_desc_classif_agenda(a.cd_agenda, obter_classif_agenda(a.nr_sequencia))                \n        FROM agenda_consulta a\n            , agenda x\n        WHERE a.cd_agenda = x.cd_agenda\n            AND trunc(a.dt_agenda) > trunc(obter_data_entrada(m.nr_atendimento))\n            AND a.cd_pessoa_fisica = m.cd_pessoa_fisica\n            AND ROWNUM <= 1\n            AND a.dt_agenda <> obter_data_entrada(m.nr_atendimento)\n        ) AS classif_agenda,\n        \n        (select o.ds_retorno from oft_retorno o where o.nr_sequencia = m.nr_seq_retorno) AS retorno_em, \n       \n       (SELECT a.nm_usuario_origem\n        FROM   agenda_consulta a, \n               agenda x \n        WHERE  a.cd_agenda = x.cd_agenda \n               AND trunc(a.dt_agenda) > trunc(obter_data_entrada(m.nr_atendimento))\n               AND a.cd_pessoa_fisica = m.cd_pessoa_fisica\n               AND ROWNUM <= 1\n               AND a.dt_agenda <> obter_data_entrada(m.nr_atendimento)) AS usuario, \n               \n       (SELECT 'Consulta Oftalmologica Completa'\n        FROM   agenda_consulta a, \n               agenda x \n        WHERE  a.cd_agenda = x.cd_agenda\n               AND trunc(a.dt_agenda) > trunc(obter_data_entrada(m.nr_atendimento))\n               AND a.cd_pessoa_fisica = m.cd_pessoa_fisica\n               AND ROWNUM <= 1\n               AND a.dt_agenda <> obter_data_entrada(m.nr_atendimento)) as procedimentos,\n       \n       '' SIGLA_UNIDADE,\n       '' MARCA,\n       m.conduta\nFROM   (SELECT a.nr_atendimento, \n               obter_pessoa_atendimento(a.nr_atendimento, 'C') as cd_pessoa_fisica, \n               a.cd_profissional as cd_medico, \n               Obter_nome_pf(a.cd_profissional) nm_medico, \n               a.nr_sequencia             nr_seq_consulta, \n               obter_estab_atend(a.nr_atendimento) as cd_estabelecimento,\n               a.nr_seq_retorno,\n               a.ds_conduta as conduta\n        FROM   oft_consulta_medica a,\n               atendimento_paciente b\n        where  a.nr_atendimento = b.nr_atendimento\n                                     ) m \n       inner join (SELECT cd_pessoa_fisica, \n                          nm_pessoa_fisica, \n                          nr_cel,\n                          nr_cel2,\n                          nr_tel, \n                          nr_prontuario, \n                          ds_email \n                   FROM   (SELECT x.cd_pessoa_fisica, \n                                  Initcap(x.nm_pessoa_fisica) nm_pessoa_fisica, \n                                  x.nr_prontuario, \n                                  x.nr_ddd_celular ||''|| x.nr_telefone_celular       AS nr_cel, \n                                  y.nr_ddd_celular ||''|| y.nr_telefone_celular       AS nr_cel2, \n                                  y.nr_ddd_telefone ||''|| y.nr_telefone              AS nr_tel, \n                                  y.ds_email \nFROM   pessoa_fisica x \n     left join compl_pessoa_fisica y \n       ON y.cd_pessoa_fisica = x.cd_pessoa_fisica \n          AND y.ie_tipo_complemento = 1\nWHERE  x.nr_telefone_celular IS NOT NULL \n OR y.nr_telefone_celular IS NOT NULL \n OR y.nr_telefone IS NOT NULL)) n \n ON n.cd_pessoa_fisica = m.cd_pessoa_fisica \nWHERE  NOT EXISTS (SELECT a.dt_agenda, \n                          a.cd_pessoa_fisica \n                   FROM   agenda_consulta a \n                   where a.cd_pessoa_fisica = m.cd_pessoa_fisica\n                   AND a.dt_agenda > SYSDATE)",
 						"partitionOption": "None"
 					},
 					"sink": {
@@ -120,7 +120,258 @@
 					"sink": {
 						"type": "AzureSqlSink"
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ESTABELECIMENTO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ESTABELECIMENTO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CNPJ",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CNPJ",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NR_ATENDIMENTO",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "NR_ATENDIMENTO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "NR_PRONTUARIO",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "NR_PRONTUARIO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "CD_PESSOA_FISICA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CD_PESSOA_FISICA",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "NM_PACIENTE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "NM_PACIENTE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NR_TEL",
+									"type": "String"
+								},
+								"sink": {
+									"name": "NR_TEL",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NR_CEL",
+									"type": "String"
+								},
+								"sink": {
+									"name": "NR_CEL",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NR_CEL2",
+									"type": "String"
+								},
+								"sink": {
+									"name": "NR_CEL2",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CD_MEDICO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CD_MEDICO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "NM_MEDICO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "NM_MEDICO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_EMAIL",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DS_EMAIL",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NR_SEQ_CONSULTA",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "NR_SEQ_CONSULTA",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "HORA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "HORA",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DATA_ATENDIMENTO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DATA_ATENDIMENTO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "TIPO_ATENDIMENTO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TIPO_ATENDIMENTO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "AGENDADO_PARA_DIA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "AGENDADO_PARA_HORA",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "AGENDADO_PARA_HORA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "AGENDADO_PARA_DIA",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "TIPO_AGENDA",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "TIPO_AGENDA",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "RETORNO_EM",
+									"type": "String"
+								},
+								"sink": {
+									"name": "RETORNO_EM",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "USUARIO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "USUARIO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PROCEDIMENTOS",
+									"type": "String"
+								},
+								"sink": {
+									"name": "PROCEDIMENTOS",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SIGLA_UNIDADE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "SIGLA_UNIDADE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "MARCA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "MARCA",
+									"type": "String"
+								}
+							},
+							{
+								"sink": {
+									"name": "CONDUTA",
+									"type": "String"
+								}
+							}
+						]
+					}
 				},
 				"inputs": [
 					{
