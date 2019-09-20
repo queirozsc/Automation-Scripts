@@ -40,6 +40,14 @@
 				"type": "String"
 			},
 			{
+				"name": "NR_CEL",
+				"type": "String"
+			},
+			{
+				"name": "NR_CEL2",
+				"type": "String"
+			},
+			{
 				"name": "CD_MEDICO",
 				"type": "String"
 			},
@@ -97,6 +105,10 @@
 			},
 			{
 				"name": "MARCA",
+				"type": "String"
+			},
+			{
+				"name": "CONDUTA",
 				"type": "String"
 			}
 		]
