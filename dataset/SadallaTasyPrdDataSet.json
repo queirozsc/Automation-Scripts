@@ -88,6 +88,10 @@
 				"type": "Double"
 			},
 			{
+				"name": "CLASSIF_AGENDA",
+				"type": "String"
+			},
+			{
 				"name": "RETORNO_EM",
 				"type": "String"
 			},
