@@ -4,9 +4,16 @@
 		"description": "Truncate all Philips' tables",
 		"activities": [
 			{
-				"name": "Ordens_HTML5",
+				"name": "Copy OS",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Clear tables",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -40,11 +47,11 @@
 				]
 			},
 			{
-				"name": "Ordens_HTML5_Hist",
+				"name": "Copy OS History",
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Ordens_HTML5",
+						"activity": "Clear tables",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -93,7 +100,14 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[sp_TRUNCATEOSPHILIPS]"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"folder": {
