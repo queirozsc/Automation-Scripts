@@ -13,6 +13,42 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/Daily Philips Tickets')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "Chamados Philips",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Day",
+						"interval": 1,
+						"startTime": "2019-09-27T11:00:00.000Z",
+						"timeZone": "UTC",
+						"schedule": {
+							"minutes": [
+								0
+							],
+							"hours": [
+								11
+							]
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Daily Requestia Tickets')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
@@ -33,7 +69,7 @@
 					"recurrence": {
 						"frequency": "Day",
 						"interval": 1,
-						"startTime": "2019-08-26T11:00:00Z",
+						"startTime": "2019-08-26T11:00:00.000Z",
 						"timeZone": "UTC",
 						"schedule": {
 							"minutes": [
@@ -49,24 +85,38 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Atualizacao Call Center')]",
+			"name": "[concat(parameters('factoryName'), '/Nexcore Diario')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"description": "Execução de pipeline para atualização das informações dos indicadores de Call Center",
+				"description": "Trigger para a execução do pipeline diariamente (Importante: 11h30 UTC = 08h30 horário de Brasília)",
 				"annotations": [],
 				"runtimeState": "Started",
 				"pipelines": [
 					{
 						"pipelineReference": {
-							"referenceName": "Agendas Projesi",
+							"referenceName": "Agentes por dia",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
 					},
 					{
 						"pipelineReference": {
-							"referenceName": "Retornos",
+							"referenceName": "Agentes por hora",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "Filas por hora",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "Bilhete Ligacoes",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -77,14 +127,14 @@
 					"recurrence": {
 						"frequency": "Day",
 						"interval": 1,
-						"startTime": "2019-08-20T15:22:00Z",
+						"startTime": "2019-06-17T20:00:00Z",
 						"timeZone": "UTC",
 						"schedule": {
 							"minutes": [
 								30
 							],
 							"hours": [
-								9
+								11
 							]
 						}
 					}
