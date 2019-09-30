@@ -597,9 +597,16 @@
 				]
 			},
 			{
-				"name": "Agentes Dia HOB",
+				"name": "Copy HOB agentes dia",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "HOB file exists",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -1490,7 +1497,14 @@
 			{
 				"name": "Check HOB file exists",
 				"type": "GetMetadata",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Wait 1s",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -1514,6 +1528,35 @@
 					"formatSettings": {
 						"type": "DelimitedTextReadSettings"
 					}
+				}
+			},
+			{
+				"name": "HOB file exists",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "Check HOB file exists",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@equals(\nactivity('Check HOB file exists').output.exists, \ntrue)",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Wait 1s",
+				"description": "Step added to paralellize execution",
+				"type": "Wait",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 1
 				}
 			}
 		],
