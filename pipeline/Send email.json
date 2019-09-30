@@ -23,7 +23,7 @@
 					},
 					"body": {
 						"DataFactoryName": "@{pipeline().DataFactory}",
-						"PipelineName": "@{pipeline().Pipeline.Pipeline}",
+						"PipelineName": "@{pipeline().Pipeline}",
 						"Subject": "@{pipeline().parameters.Subject}",
 						"ErrorMessage": "@{pipeline().parameters.ErrorMessage}",
 						"EmailTo": "@pipeline().parameters.EmailTo"
