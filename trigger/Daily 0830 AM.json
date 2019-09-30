@@ -1,5 +1,5 @@
 {
-	"name": "Nexcore Diario",
+	"name": "Daily 0830 AM",
 	"properties": {
 		"description": "Trigger para a execução do pipeline diariamente (Importante: 11h30 UTC = 08h30 horário de Brasília)",
 		"annotations": [],
@@ -35,7 +35,7 @@
 			"recurrence": {
 				"frequency": "Day",
 				"interval": 1,
-				"startTime": "2019-06-17T20:00:00Z",
+				"startTime": "2019-06-17T20:00:00.000Z",
 				"timeZone": "UTC",
 				"schedule": {
 					"minutes": [

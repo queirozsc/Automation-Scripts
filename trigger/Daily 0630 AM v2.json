@@ -1,19 +1,12 @@
 {
-	"name": "Atualizacao Call Center",
+	"name": "Daily 0630 AM v2",
 	"properties": {
-		"description": "Execução de pipeline para atualização das informações dos indicadores de Call Center",
 		"annotations": [],
 		"runtimeState": "Started",
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "Agendas Projesi",
-					"type": "PipelineReference"
-				}
-			},
-			{
-				"pipelineReference": {
-					"referenceName": "Retornos",
+					"referenceName": "Chamados Requestia",
 					"type": "PipelineReference"
 				}
 			}
@@ -23,7 +16,7 @@
 			"recurrence": {
 				"frequency": "Day",
 				"interval": 1,
-				"startTime": "2019-08-20T15:22:00.000Z",
+				"startTime": "2019-08-26T11:00:00.000Z",
 				"timeZone": "UTC",
 				"schedule": {
 					"minutes": [

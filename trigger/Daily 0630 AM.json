@@ -1,12 +1,19 @@
 {
-	"name": "Daily Requestia Tickets",
+	"name": "Daily 0630 AM",
 	"properties": {
+		"description": "Execução de pipeline para atualização das informações dos indicadores de Call Center",
 		"annotations": [],
 		"runtimeState": "Started",
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "Chamados Requestia",
+					"referenceName": "Agendas Projesi",
+					"type": "PipelineReference"
+				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "Retornos",
 					"type": "PipelineReference"
 				}
 			}
@@ -16,7 +23,7 @@
 			"recurrence": {
 				"frequency": "Day",
 				"interval": 1,
-				"startTime": "2019-08-26T11:00:00.000Z",
+				"startTime": "2019-08-20T15:22:00.000Z",
 				"timeZone": "UTC",
 				"schedule": {
 					"minutes": [
