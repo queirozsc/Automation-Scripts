@@ -7,7 +7,7 @@
 				"type": "GetMetadata",
 				"dependsOn": [
 					{
-						"activity": "Wait 1s",
+						"activity": "Start",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -357,7 +357,7 @@
 				}
 			},
 			{
-				"name": "Wait 1s",
+				"name": "Start",
 				"description": "Step added to paralellize execution",
 				"type": "Wait",
 				"dependsOn": [],
@@ -371,7 +371,7 @@
 				"type": "GetMetadata",
 				"dependsOn": [
 					{
-						"activity": "Wait 1s",
+						"activity": "Start",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -725,7 +725,7 @@
 				"type": "GetMetadata",
 				"dependsOn": [
 					{
-						"activity": "Wait 1s",
+						"activity": "Start",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -1079,7 +1079,7 @@
 				"type": "GetMetadata",
 				"dependsOn": [
 					{
-						"activity": "Wait 1s",
+						"activity": "Start",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -1433,7 +1433,7 @@
 				"type": "GetMetadata",
 				"dependsOn": [
 					{
-						"activity": "Wait 1s",
+						"activity": "Start",
 						"dependencyConditions": [
 							"Succeeded"
 						]
