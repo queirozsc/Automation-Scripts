@@ -55,6 +55,37 @@
 						"value": "@equals(\nactivity('Check HOB file exists').output.exists, \ntrue)",
 						"type": "Expression"
 					},
+					"ifFalseActivities": [
+						{
+							"name": "Send failure email",
+							"type": "WebActivity",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"url": "https://prod-53.eastus2.logic.azure.com:443/workflows/464dec07d29247d9961de309d3bce20f/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=sh4Xorsyt738hlUwbioYqXIxNAoMWRw8gey3yBcg8fc",
+								"method": "POST",
+								"headers": {
+									"Content-Type": "application/json"
+								},
+								"body": {
+									"DataFactoryName": "@{pipeline().DataFactory}",
+									"EmailTo": "sergio.queiroz@opty.com.br",
+									"ErrorMessage": "O arquivo Nexcore Agentes por Dia HOB não foi encontrado!",
+									"PipelineName": "@{pipeline().Pipeline}",
+									"Subject": "ADF: erro na execução do pipeline"
+								},
+								"linkedServices": [],
+								"datasets": []
+							}
+						}
+					],
 					"ifTrueActivities": [
 						{
 							"name": "Copy HOB agentes dia",
