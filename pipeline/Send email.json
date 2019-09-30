@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Send email",
+				"name": "Send notification",
 				"description": "Generic pipeline for sending email using Azure Logic App",
 				"type": "WebActivity",
 				"dependsOn": [],
@@ -23,14 +23,28 @@
 					},
 					"body": {
 						"DataFactoryName": "@{pipeline().DataFactory}",
-						"EmailTo": "sergio.queiroz@opty.com.br",
-						"ErrorMessage": "O arquivo Nexcore Agentes por Dia HOB não foi encontrado!",
 						"PipelineName": "@{pipeline().Pipeline}",
-						"Subject": "ADF: erro na execução do pipeline"
+						"Subject": "@{pipeline().parameters.Subject}",
+						"ErrorMessage": "@{pipeline().parameters.ErrorMessage}",
+						"EmailTo": "@pipeline().parameters.EmailTo"
 					}
 				}
 			}
 		],
+		"parameters": {
+			"EmailTo": {
+				"type": "string",
+				"defaultValue": "No email set!"
+			},
+			"Subject": {
+				"type": "string",
+				"defaultValue": "No subject set!"
+			},
+			"ErrorMessage": {
+				"type": "string",
+				"defaultValue": "No message set!"
+			}
+		},
 		"annotations": []
 	}
 }
