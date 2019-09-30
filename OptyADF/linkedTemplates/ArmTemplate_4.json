@@ -4,7 +4,7 @@
 	"parameters": {
 		"factoryName": {
 			"type": "string",
-			"metadata": "Data Factory Name",
+			"metadata": "Data Factory name",
 			"defaultValue": "OptyADF"
 		}
 	},
@@ -15287,24 +15287,16 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Atualizacao Call Center')]",
+			"name": "[concat(parameters('factoryName'), '/Daily 0630 AM v2')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"description": "Execução de pipeline para atualização das informações dos indicadores de Call Center",
 				"annotations": [],
 				"runtimeState": "Started",
 				"pipelines": [
 					{
 						"pipelineReference": {
-							"referenceName": "Agendas Projesi",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
-					{
-						"pipelineReference": {
-							"referenceName": "Retornos",
+							"referenceName": "Chamados Requestia",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -15315,7 +15307,7 @@
 					"recurrence": {
 						"frequency": "Day",
 						"interval": 1,
-						"startTime": "2019-08-20T15:22:00.000Z",
+						"startTime": "2019-08-26T11:00:00.000Z",
 						"timeZone": "UTC",
 						"schedule": {
 							"minutes": [
@@ -15329,7 +15321,7 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/Retornos')]"
+				"[concat(variables('factoryId'), '/pipelines/Chamados Requestia')]"
 			]
 		}
 	]

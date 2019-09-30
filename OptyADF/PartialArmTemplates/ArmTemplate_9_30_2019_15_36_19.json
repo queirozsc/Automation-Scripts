@@ -13,6 +13,41 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/Daily 0630 AM v2')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "Chamados Requestia",
+							"type": "PipelineReference"
+						}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Day",
+						"interval": 1,
+						"startTime": "2019-08-26T11:00:00.000Z",
+						"timeZone": "UTC",
+						"schedule": {
+							"minutes": [
+								30
+							],
+							"hours": [
+								9
+							]
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Daily 0630 AM')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
@@ -25,15 +60,13 @@
 						"pipelineReference": {
 							"referenceName": "Agendas Projesi",
 							"type": "PipelineReference"
-						},
-						"parameters": {}
+						}
 					},
 					{
 						"pipelineReference": {
 							"referenceName": "Retornos",
 							"type": "PipelineReference"
-						},
-						"parameters": {}
+						}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -68,8 +101,7 @@
 						"pipelineReference": {
 							"referenceName": "Chamados Philips",
 							"type": "PipelineReference"
-						},
-						"parameters": {}
+						}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -105,29 +137,25 @@
 						"pipelineReference": {
 							"referenceName": "Agentes por dia",
 							"type": "PipelineReference"
-						},
-						"parameters": {}
+						}
 					},
 					{
 						"pipelineReference": {
 							"referenceName": "Agentes por hora",
 							"type": "PipelineReference"
-						},
-						"parameters": {}
+						}
 					},
 					{
 						"pipelineReference": {
 							"referenceName": "Filas por hora",
 							"type": "PipelineReference"
-						},
-						"parameters": {}
+						}
 					},
 					{
 						"pipelineReference": {
 							"referenceName": "Bilhete Ligacoes",
 							"type": "PipelineReference"
-						},
-						"parameters": {}
+						}
 					}
 				],
 				"type": "ScheduleTrigger",
