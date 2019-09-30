@@ -4,3 +4,4 @@ PowerShell/Office365/credentials.xml
 PowerShell/Nexcore/SessionProperties.ps1
 PowerShell/GetNet/SessionProperties.ps1
 PowerShell/Requestia/SessionProperties.ps1
+PowerShell/Azure/azcredentials.xml
