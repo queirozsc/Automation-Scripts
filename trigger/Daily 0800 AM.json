@@ -1,13 +1,12 @@
 {
-	"name": "Projesi Diario",
+	"name": "Daily 0800 AM",
 	"properties": {
-		"description": "Execução de pipeline para atualização das informações Projesi",
 		"annotations": [],
 		"runtimeState": "Started",
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "AZ_Oracle_To_SQL",
+					"referenceName": "Chamados Philips",
 					"type": "PipelineReference"
 				}
 			}
@@ -17,14 +16,14 @@
 			"recurrence": {
 				"frequency": "Day",
 				"interval": 1,
-				"startTime": "2019-08-20T15:22:00.000Z",
+				"startTime": "2019-09-27T11:00:00.000Z",
 				"timeZone": "UTC",
 				"schedule": {
 					"minutes": [
-						30
+						0
 					],
 					"hours": [
-						10
+						11
 					]
 				}
 			}
