@@ -70,7 +70,8 @@
 								"parameters": {
 									"EmailTo": "sergio.queiroz@opty.com.br",
 									"Subject": "Arquivo Nexcore\\HOB não encontrado!",
-									"ErrorMessage": "O arquivo HOB\\Agentes por Dia não foi encontrado"
+									"ErrorMessage": "O arquivo HOB\\Agentes por Dia não foi encontrado",
+									"MasterPipeline": "@{pipeline().Pipeline}"
 								}
 							}
 						}
