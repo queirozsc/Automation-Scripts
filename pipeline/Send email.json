@@ -43,6 +43,10 @@
 			"ErrorMessage": {
 				"type": "string",
 				"defaultValue": "No message set!"
+			},
+			"MasterPipeline": {
+				"type": "string",
+				"defaultValue": "No pipeline set!"
 			}
 		},
 		"annotations": []
