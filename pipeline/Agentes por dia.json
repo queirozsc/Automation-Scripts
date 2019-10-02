@@ -373,6 +373,32 @@
 									"type": "DatasetReference"
 								}
 							]
+						},
+						{
+							"name": "Send Sucess Mail",
+							"type": "ExecutePipeline",
+							"dependsOn": [
+								{
+									"activity": "Copy HOB agentes dia",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "Send email",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true,
+								"parameters": {
+									"EmailTo": "sergio.queiroz@opty.com.br",
+									"Subject": "Tudo certo!",
+									"ErrorMessage": "Funcionou!",
+									"MasterPipeline": "@{pipeline().Pipeline}"
+								}
+							}
 						}
 					]
 				}
