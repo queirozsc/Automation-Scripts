@@ -7,69 +7,13 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "OptyADF"
 		},
-		"AzureSQL_DB_Procedimentos_connectionString": {
+		"SadallaTasyProd_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureSQL_DB_Procedimentos'"
+			"metadata": "Secure string for 'connectionString' of 'SadallaTasyProd'"
 		},
-		"AzureSqlDatabase_connectionString": {
+		"SadallaTasyTeste_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase'"
-		},
-		"CloudTasyProd_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'CloudTasyProd'"
-		},
-		"CloudTasyProd_NEW_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'CloudTasyProd_NEW'"
-		},
-		"Folder_Nexcore_Consolidado_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Folder_Nexcore_Consolidado'"
-		},
-		"Folder_Requestia_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Folder_Requestia'"
-		},
-		"SMARTProd_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SMARTProd'"
-		},
-		"SMART_HOSL_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SMART_HOSL'"
-		},
-		"SMART_HOSL_NEW_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SMART_HOSL_NEW'"
-		},
-		"SMART_INOB_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SMART_INOB'"
-		},
-		"SMART_INOB_NEW_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SMART_INOB_NEW'"
-		},
-		"SMART_IOF_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SMART_IOF'"
-		},
-		"SMART_IOF_NEW_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SMART_IOF_NEW'"
-		},
-		"SMART_ITABUNA_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SMART_ITABUNA'"
-		},
-		"SMART_ITABUNA_NEW_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SMART_ITABUNA_NEW'"
-		},
-		"SMART_ITAIGARA_NEW_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SMART_ITAIGARA_NEW'"
+			"metadata": "Secure string for 'connectionString' of 'SadallaTasyTeste'"
 		},
 		"SadallaSeniorProd_connectionString": {
 			"type": "secureString",
@@ -79,17 +23,73 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'SadallaSeniorTeste'"
 		},
-		"SadallaTasyProd_connectionString": {
+		"CloudTasyProd_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SadallaTasyProd'"
+			"metadata": "Secure string for 'connectionString' of 'CloudTasyProd'"
+		},
+		"AzureSqlDatabase_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase'"
+		},
+		"SMARTProd_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SMARTProd'"
+		},
+		"SMART_ITABUNA_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SMART_ITABUNA'"
+		},
+		"SMART_HOSL_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SMART_HOSL'"
+		},
+		"SMART_INOB_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SMART_INOB'"
+		},
+		"AzureSQL_DB_Procedimentos_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSQL_DB_Procedimentos'"
+		},
+		"SMART_IOF_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SMART_IOF'"
+		},
+		"SMART_HOSL_NEW_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SMART_HOSL_NEW'"
+		},
+		"SMART_INOB_NEW_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SMART_INOB_NEW'"
+		},
+		"SMART_IOF_NEW_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SMART_IOF_NEW'"
+		},
+		"SMART_ITABUNA_NEW_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SMART_ITABUNA_NEW'"
+		},
+		"SMART_ITAIGARA_NEW_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SMART_ITAIGARA_NEW'"
+		},
+		"CloudTasyProd_NEW_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'CloudTasyProd_NEW'"
 		},
 		"SadallaTasyProd_NEW_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'SadallaTasyProd_NEW'"
 		},
-		"SadallaTasyTeste_connectionString": {
+		"Folder_Nexcore_Consolidado_password": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SadallaTasyTeste'"
+			"metadata": "Secure string for 'password' of 'Folder_Nexcore_Consolidado'"
+		},
+		"Folder_Requestia_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Folder_Requestia'"
 		},
 		"Folder_Nexcore_Consolidado_properties_typeProperties_host": {
 			"type": "string",
@@ -97,7 +97,7 @@
 		},
 		"Folder_Nexcore_Consolidado_properties_typeProperties_userId": {
 			"type": "string",
-			"defaultValue": "hobrasil\\allan.pacheco"
+			"defaultValue": "hobrasil\\sa.adf"
 		},
 		"Folder_Requestia_properties_typeProperties_host": {
 			"type": "string",
@@ -105,7 +105,7 @@
 		},
 		"Folder_Requestia_properties_typeProperties_userId": {
 			"type": "string",
-			"defaultValue": "hobrasil\\sergio.queiroz"
+			"defaultValue": "hobrasil\\sa.adf"
 		},
 		"containerUri": {
 			"type": "string",
@@ -134,11 +134,56 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"AzureSqlDatabase_connectionString": {
+						"value": "[parameters('AzureSqlDatabase_connectionString')]"
+					},
 					"AzureSQL_DB_Procedimentos_connectionString": {
 						"value": "[parameters('AzureSQL_DB_Procedimentos_connectionString')]"
 					},
-					"AzureSqlDatabase_connectionString": {
-						"value": "[parameters('AzureSqlDatabase_connectionString')]"
+					"SadallaTasyProd_connectionString": {
+						"value": "[parameters('SadallaTasyProd_connectionString')]"
+					},
+					"SadallaTasyTeste_connectionString": {
+						"value": "[parameters('SadallaTasyTeste_connectionString')]"
+					},
+					"SadallaSeniorProd_connectionString": {
+						"value": "[parameters('SadallaSeniorProd_connectionString')]"
+					},
+					"SadallaSeniorTeste_connectionString": {
+						"value": "[parameters('SadallaSeniorTeste_connectionString')]"
+					},
+					"CloudTasyProd_connectionString": {
+						"value": "[parameters('CloudTasyProd_connectionString')]"
+					},
+					"SMARTProd_connectionString": {
+						"value": "[parameters('SMARTProd_connectionString')]"
+					},
+					"SMART_ITABUNA_connectionString": {
+						"value": "[parameters('SMART_ITABUNA_connectionString')]"
+					},
+					"SMART_HOSL_connectionString": {
+						"value": "[parameters('SMART_HOSL_connectionString')]"
+					},
+					"SMART_INOB_connectionString": {
+						"value": "[parameters('SMART_INOB_connectionString')]"
+					},
+					"SMART_IOF_connectionString": {
+						"value": "[parameters('SMART_IOF_connectionString')]"
+					},
+					"SMART_HOSL_NEW_connectionString": {
+						"value": "[parameters('SMART_HOSL_NEW_connectionString')]"
+					},
+					"SMART_INOB_NEW_connectionString": {
+						"value": "[parameters('SMART_INOB_NEW_connectionString')]"
+					},
+					"SMART_IOF_NEW_connectionString": {
+						"value": "[parameters('SMART_IOF_NEW_connectionString')]"
+					},
+					"SMART_ITABUNA_NEW_connectionString": {
+						"value": "[parameters('SMART_ITABUNA_NEW_connectionString')]"
+					},
+					"SMART_ITAIGARA_NEW_connectionString": {
+						"value": "[parameters('SMART_ITAIGARA_NEW_connectionString')]"
 					}
 				}
 			},
@@ -158,47 +203,17 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
-					"CloudTasyProd_connectionString": {
-						"value": "[parameters('CloudTasyProd_connectionString')]"
-					},
 					"CloudTasyProd_NEW_connectionString": {
 						"value": "[parameters('CloudTasyProd_NEW_connectionString')]"
+					},
+					"SadallaTasyProd_NEW_connectionString": {
+						"value": "[parameters('SadallaTasyProd_NEW_connectionString')]"
 					},
 					"Folder_Nexcore_Consolidado_password": {
 						"value": "[parameters('Folder_Nexcore_Consolidado_password')]"
 					},
 					"Folder_Requestia_password": {
 						"value": "[parameters('Folder_Requestia_password')]"
-					},
-					"SMARTProd_connectionString": {
-						"value": "[parameters('SMARTProd_connectionString')]"
-					},
-					"SMART_HOSL_connectionString": {
-						"value": "[parameters('SMART_HOSL_connectionString')]"
-					},
-					"SMART_HOSL_NEW_connectionString": {
-						"value": "[parameters('SMART_HOSL_NEW_connectionString')]"
-					},
-					"SMART_INOB_connectionString": {
-						"value": "[parameters('SMART_INOB_connectionString')]"
-					},
-					"SMART_INOB_NEW_connectionString": {
-						"value": "[parameters('SMART_INOB_NEW_connectionString')]"
-					},
-					"SMART_IOF_connectionString": {
-						"value": "[parameters('SMART_IOF_connectionString')]"
-					},
-					"SMART_IOF_NEW_connectionString": {
-						"value": "[parameters('SMART_IOF_NEW_connectionString')]"
-					},
-					"SMART_ITABUNA_connectionString": {
-						"value": "[parameters('SMART_ITABUNA_connectionString')]"
-					},
-					"SMART_ITABUNA_NEW_connectionString": {
-						"value": "[parameters('SMART_ITABUNA_NEW_connectionString')]"
-					},
-					"SMART_ITAIGARA_NEW_connectionString": {
-						"value": "[parameters('SMART_ITAIGARA_NEW_connectionString')]"
 					},
 					"Folder_Nexcore_Consolidado_properties_typeProperties_host": {
 						"value": "[parameters('Folder_Nexcore_Consolidado_properties_typeProperties_host')]"
@@ -231,21 +246,6 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
-					},
-					"SadallaSeniorProd_connectionString": {
-						"value": "[parameters('SadallaSeniorProd_connectionString')]"
-					},
-					"SadallaSeniorTeste_connectionString": {
-						"value": "[parameters('SadallaSeniorTeste_connectionString')]"
-					},
-					"SadallaTasyProd_connectionString": {
-						"value": "[parameters('SadallaTasyProd_connectionString')]"
-					},
-					"SadallaTasyProd_NEW_connectionString": {
-						"value": "[parameters('SadallaTasyProd_NEW_connectionString')]"
-					},
-					"SadallaTasyTeste_connectionString": {
-						"value": "[parameters('SadallaTasyTeste_connectionString')]"
 					}
 				}
 			},
