@@ -445,7 +445,7 @@
 					},
 					"ifFalseActivities": [
 						{
-							"name": "Send failure email",
+							"name": "Send failure HOSAG",
 							"type": "ExecutePipeline",
 							"dependsOn": [],
 							"userProperties": [],
