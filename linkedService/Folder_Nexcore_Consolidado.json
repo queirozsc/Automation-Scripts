@@ -7,8 +7,8 @@
 		"type": "FileServer",
 		"typeProperties": {
 			"host": "C:\\Power BI Gateway Files\\Nexcore\\Consolidado",
-			"userId": "hobrasil\\allan.pacheco",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI2NTlhZDgxMS02MGI2LTQ4N2YtODNhOS0wYzYwZDJhZjQxZWQiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"userId": "hobrasil\\sa.adf",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIzNWNjZThmYS1iNzllLTRiOTktYjJhZi1iZWI4YTNkN2U5NzMiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
 			"referenceName": "ServidorArquivosBI",
