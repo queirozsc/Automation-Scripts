@@ -1481,6 +1481,16 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Start",
+				"description": "Step added to paralellize execution",
+				"type": "Wait",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 1
+				}
 			}
 		],
 		"folder": {
