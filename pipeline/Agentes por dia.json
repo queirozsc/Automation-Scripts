@@ -1577,6 +1577,30 @@
 						"value": "@equals(\nactivity('Check INOB file exists').output.exists, \ntrue)",
 						"type": "Expression"
 					},
+					"ifFalseActivities": [
+						{
+							"name": "Send failure email",
+							"type": "ExecutePipeline",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "Send email",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true,
+								"parameters": {
+									"EmailTo": "sergio.queiroz@opty.com.br",
+									"Subject": "Arquivo Nexcore\\INOB não encontrado!",
+									"ErrorMessage": "O arquivo INOB\\Agentes por Dia não foi encontrado",
+									"MasterPipeline": {
+										"value": "@{pipeline().Pipeline}",
+										"type": "Expression"
+									}
+								}
+							}
+						}
+					],
 					"ifTrueActivities": [
 						{
 							"name": "Copy INOB agentes dia",
