@@ -1164,7 +1164,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "HOB_CSV_NC_AgentesPorDia",
+						"referenceName": "HOSL_CSV_NC_AgentesPorHora",
 						"type": "DatasetReference"
 					},
 					"fieldList": [
