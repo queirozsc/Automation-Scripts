@@ -411,7 +411,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "HOB_CSV_NC_AgentesPorDia",
+						"referenceName": "HOSAG_CSV_NC_AgentesPorDia",
 						"type": "DatasetReference"
 					},
 					"fieldList": [
@@ -789,7 +789,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "HOB_CSV_NC_AgentesPorDia",
+						"referenceName": "DH_CSV_NC_AgentesPorDia",
 						"type": "DatasetReference"
 					},
 					"fieldList": [
@@ -1167,7 +1167,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "HOB_CSV_NC_AgentesPorDia",
+						"referenceName": "HOSL_CSV_NC_AgentesPorDia",
 						"type": "DatasetReference"
 					},
 					"fieldList": [
@@ -1545,7 +1545,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "HOB_CSV_NC_AgentesPorDia",
+						"referenceName": "INOB_CSV_NC_AgentesPorDia",
 						"type": "DatasetReference"
 					},
 					"fieldList": [
