@@ -1738,7 +1738,7 @@
 					},
 					"ifFalseActivities": [
 						{
-							"name": "ExecutePipeline1",
+							"name": "Send HOSL failure",
 							"type": "ExecutePipeline",
 							"dependsOn": [],
 							"userProperties": [],
@@ -1751,7 +1751,7 @@
 								"parameters": {
 									"EmailTo": "sergio.queiroz@opty.com.br",
 									"Subject": "Arquivo Nexcore\\HOSL não encontrado!",
-									"ErrorMessage": "O arquivo HOSL\\BilhetesLigacoes não foi encontrado",
+									"ErrorMessage": "O arquivo HOSL\\FilasHora não foi encontrado",
 									"MasterPipeline": {
 										"value": "@{pipeline().Pipeline}",
 										"type": "Expression"
