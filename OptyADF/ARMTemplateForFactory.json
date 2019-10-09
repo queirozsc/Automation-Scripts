@@ -28545,7 +28545,15 @@
 				"description": "Criado para executar as consultas no HOSAG",
 				"annotations": [],
 				"runtimeState": "Started",
-				"pipelines": [],
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "Retornos Sadalla",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
 				"type": "ScheduleTrigger",
 				"typeProperties": {
 					"recurrence": {
@@ -28564,7 +28572,9 @@
 					}
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/Retornos Sadalla')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Daily 0630 AM')]",
@@ -28585,6 +28595,13 @@
 					{
 						"pipelineReference": {
 							"referenceName": "Chamados Requestia",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "Retornos HOB",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -28610,7 +28627,8 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/Agendas Projesi')]",
-				"[concat(variables('factoryId'), '/pipelines/Chamados Requestia')]"
+				"[concat(variables('factoryId'), '/pipelines/Chamados Requestia')]",
+				"[concat(variables('factoryId'), '/pipelines/Retornos HOB')]"
 			]
 		},
 		{
