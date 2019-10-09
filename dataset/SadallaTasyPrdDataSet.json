@@ -76,20 +76,16 @@
 				"type": "String"
 			},
 			{
-				"name": "AGENDADO_PARA_DIA",
+				"name": "AGENDADO_PARA_HORA",
 				"type": "String"
 			},
 			{
-				"name": "AGENDADO_PARA_HORA",
+				"name": "AGENDADO_PARA_DIA",
 				"type": "String"
 			},
 			{
 				"name": "TIPO_AGENDA",
 				"type": "Double"
-			},
-			{
-				"name": "CLASSIF_AGENDA",
-				"type": "String"
 			},
 			{
 				"name": "RETORNO_EM",
