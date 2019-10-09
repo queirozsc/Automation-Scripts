@@ -1,0 +1,113 @@
+{
+	"name": "AZSQL_TB_Retornos_Incremental_testes",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSQL_DB_Procedimentos",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Retornos de consulta"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "ESTABELECIMENTO",
+				"type": "varchar"
+			},
+			{
+				"name": "CNPJ",
+				"type": "varchar"
+			},
+			{
+				"name": "NR_ATENDIMENTO",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "NR_PRONTUARIO",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CD_PESSOA_FISICA",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "NM_PACIENTE",
+				"type": "varchar"
+			},
+			{
+				"name": "NR_TEL",
+				"type": "varchar"
+			},
+			{
+				"name": "CD_MEDICO",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "NM_MEDICO",
+				"type": "varchar"
+			},
+			{
+				"name": "DS_EMAIL",
+				"type": "varchar"
+			},
+			{
+				"name": "NR_SEQ_CONSULTA",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "HORA",
+				"type": "varchar"
+			},
+			{
+				"name": "DATA_ATENDIMENTO",
+				"type": "varchar"
+			},
+			{
+				"name": "TIPO_ATENDIMENTO",
+				"type": "varchar"
+			},
+			{
+				"name": "AGENDADO_PARA_HORA",
+				"type": "varchar"
+			},
+			{
+				"name": "AGENDADO_PARA_DIA",
+				"type": "varchar"
+			},
+			{
+				"name": "TIPO_AGENDA",
+				"type": "varchar"
+			},
+			{
+				"name": "RETORNO_EM",
+				"type": "varchar"
+			},
+			{
+				"name": "USUARIO",
+				"type": "varchar"
+			},
+			{
+				"name": "PROCEDIMENTOS",
+				"type": "varchar"
+			},
+			{
+				"name": "SIGLA_UNIDADE",
+				"type": "varchar"
+			},
+			{
+				"name": "MARCA",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Oft_Consulta_Retorno_Increment_testes"
+		}
+	}
+}
