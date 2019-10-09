@@ -76,7 +76,7 @@
 							"type": "String"
 						},
 						"TABLENAME": {
-							"value": "AZSQL_TB_Retornos_Incremental",
+							"value": "Oft_Consulta_Retorno_Increment_testes",
 							"type": "String"
 						}
 					}
@@ -147,7 +147,7 @@
 							"type": "String"
 						},
 						"TABLENAME": {
-							"value": "Oft_Consulta_Retorno_Increment",
+							"value": "Oft_Consulta_Retorno_Increment_testes",
 							"type": "String"
 						}
 					}

@@ -33,7 +33,7 @@
 							"type": "String"
 						},
 						"TABLENAME": {
-							"value": "Oft_Consulta_Retorno_Increment",
+							"value": "Oft_Consulta_Retorno_Increment_testes",
 							"type": "String"
 						}
 					}
@@ -114,7 +114,7 @@
 							"type": "String"
 						},
 						"TABLENAME": {
-							"value": "Oft_Consulta_Retorno_Increment",
+							"value": "Oft_Consulta_Retorno_Increment_testes",
 							"type": "String"
 						}
 					}
