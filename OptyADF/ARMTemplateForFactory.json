@@ -7797,7 +7797,7 @@
 							{
 								"activity": "Clear tables",
 								"dependencyConditions": [
-									"Succeeded"
+									"Skipped"
 								]
 							}
 						],
@@ -7834,7 +7834,7 @@
 							{
 								"activity": "Check table answers file exists",
 								"dependencyConditions": [
-									"Succeeded"
+									"Skipped"
 								]
 							}
 						],
