@@ -18,6 +18,7 @@ SELECT nfs.nfs_serie,
     nfs.nfs_bloquete,
     nfs.nfs_descr,
     nfs.nfs_emp_cod,
+    emp.emp_nome_fantasia,
     nfs.nfs_nde_serie,
     nfs.nfs_nde_tipo,
     nfs.nfs_nde_num,
@@ -36,8 +37,10 @@ SELECT nfs.nfs_serie,
     nfs.nfs_nfl_serie,
     str.str_nome
 FROM nfs,
-    str
+    str,
+    emp
 WHERE (str.str_cod = nfs.nfs_str_cod)
+    AND nfs.nfs_emp_cod = emp.emp_cod
     AND ((nfs.nfs_tipo = 'NR'))
 ORDER BY nfs.nfs_dt_emis DESC,
     nfs.nfs_serie ASC,
