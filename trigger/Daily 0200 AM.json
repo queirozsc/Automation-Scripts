@@ -1,5 +1,5 @@
 {
-	"name": "Daily 0200",
+	"name": "Daily 0200 AM",
 	"properties": {
 		"description": "Criado para executar as consultas no HOSAG",
 		"annotations": [],
@@ -10,7 +10,7 @@
 			"recurrence": {
 				"frequency": "Minute",
 				"interval": 1,
-				"startTime": "2019-10-09T15:02:00.000Z",
+				"startTime": "2019-10-08T03:02:00.000Z",
 				"timeZone": "UTC"
 			}
 		}
