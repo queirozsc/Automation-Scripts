@@ -188,15 +188,6 @@
 					"SMART_IOF_connectionString": {
 						"value": "[parameters('SMART_IOF_connectionString')]"
 					},
-					"SMART_IOF_NEW_connectionString": {
-						"value": "[parameters('SMART_IOF_NEW_connectionString')]"
-					},
-					"SMART_ITABUNA_connectionString": {
-						"value": "[parameters('SMART_ITABUNA_connectionString')]"
-					},
-					"SMART_ITABUNA_NEW_connectionString": {
-						"value": "[parameters('SMART_ITABUNA_NEW_connectionString')]"
-					},
 					"Folder_Nexcore_Consolidado_properties_typeProperties_host": {
 						"value": "[parameters('Folder_Nexcore_Consolidado_properties_typeProperties_host')]"
 					},
@@ -228,6 +219,15 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"SMART_IOF_NEW_connectionString": {
+						"value": "[parameters('SMART_IOF_NEW_connectionString')]"
+					},
+					"SMART_ITABUNA_connectionString": {
+						"value": "[parameters('SMART_ITABUNA_connectionString')]"
+					},
+					"SMART_ITABUNA_NEW_connectionString": {
+						"value": "[parameters('SMART_ITABUNA_NEW_connectionString')]"
 					},
 					"SMART_ITAIGARA_NEW_connectionString": {
 						"value": "[parameters('SMART_ITAIGARA_NEW_connectionString')]"

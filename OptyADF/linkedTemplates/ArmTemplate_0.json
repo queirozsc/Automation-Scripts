@@ -104,6 +104,35 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Daily 0200 AM')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Criado para executar as consultas no HOSAG",
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Day",
+						"interval": 1,
+						"startTime": "2019-10-08T03:02:00.000Z",
+						"timeZone": "UTC",
+						"schedule": {
+							"minutes": [
+								0
+							],
+							"hours": [
+								5
+							]
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ServidorArquivosBI')]",
 			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
 			"apiVersion": "2018-06-01",
@@ -170,6 +199,88 @@
 				],
 				"folder": {
 					"name": "Contas a receber"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Workflows Requestia')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Extrai informações específicas para serem processadas nos workflows do Office Flow",
+				"activities": [
+					{
+						"name": "Extract CAPEX",
+						"description": "Copy NFD tickets to REQUESTIA_CAPEXNFD table, solving timeout in Microsoft Flow that send weekly mail from sergio.queiroz@opty.com.br account",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Start",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[sp_EXTRACTCAPEXREQUESTS]"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureSQL_DB_Procedimentos",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Extract TISS",
+						"description": "Copy TISS tickets to specific table, solving timeout in Microsoft Flow that send weekly mail from sergio.queiroz@opty.com.br account",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Start",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[sp_EXTRACTTISSREQUESTS]"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureSQL_DB_Procedimentos",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Start",
+						"type": "Wait",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"waitTimeInSeconds": 1
+						}
+					}
+				],
+				"folder": {
+					"name": "Apoio"
 				},
 				"annotations": []
 			},
@@ -1104,6 +1215,124 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AZSQL_TB_Retornos_Incremental_testes')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Retornos de consulta"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ESTABELECIMENTO",
+						"type": "varchar"
+					},
+					{
+						"name": "CNPJ",
+						"type": "varchar"
+					},
+					{
+						"name": "NR_ATENDIMENTO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "NR_PRONTUARIO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CD_PESSOA_FISICA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "NM_PACIENTE",
+						"type": "varchar"
+					},
+					{
+						"name": "NR_TEL",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_MEDICO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "NM_MEDICO",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_EMAIL",
+						"type": "varchar"
+					},
+					{
+						"name": "NR_SEQ_CONSULTA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "HORA",
+						"type": "varchar"
+					},
+					{
+						"name": "DATA_ATENDIMENTO",
+						"type": "varchar"
+					},
+					{
+						"name": "TIPO_ATENDIMENTO",
+						"type": "varchar"
+					},
+					{
+						"name": "AGENDADO_PARA_HORA",
+						"type": "varchar"
+					},
+					{
+						"name": "AGENDADO_PARA_DIA",
+						"type": "varchar"
+					},
+					{
+						"name": "TIPO_AGENDA",
+						"type": "varchar"
+					},
+					{
+						"name": "RETORNO_EM",
+						"type": "varchar"
+					},
+					{
+						"name": "USUARIO",
+						"type": "varchar"
+					},
+					{
+						"name": "PROCEDIMENTOS",
+						"type": "varchar"
+					},
+					{
+						"name": "SIGLA_UNIDADE",
+						"type": "varchar"
+					},
+					{
+						"name": "MARCA",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Oft_Consulta_Retorno_Increment_testes"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/AZSQL_TB_Zero_Faltas')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1417,196 +1646,6 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "Aging_Baixa_Titulo_Receber"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Ordens_Servico_Hist')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSQL_DB_Procedimentos",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Ordens de Serviço"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Ordem_Servico_Terc_Hist"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Ordens_Servico_Terceiro')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSQL_DB_Procedimentos",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Ordens de Serviço"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Ordem_Servico_Terceiros"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Titulos_Pagar')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSQL_DB_Procedimentos",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Contas a Pagar"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "estabelecimento",
-						"type": "varchar"
-					},
-					{
-						"name": "cd_cgc",
-						"type": "varchar"
-					},
-					{
-						"name": "nm_razaosocial",
-						"type": "varchar"
-					},
-					{
-						"name": "nm_fantasia",
-						"type": "varchar"
-					},
-					{
-						"name": "nr_titulo",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "nr_seq_nota_fiscal",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "dt_emissao",
-						"type": "date"
-					},
-					{
-						"name": "dt_vencimento_original",
-						"type": "date"
-					},
-					{
-						"name": "dt_vencimento_atual",
-						"type": "date"
-					},
-					{
-						"name": "vl_titulo",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_saldo_titulo",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_saldo_juros",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_saldo_multa",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_dia_antecipacao",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_bordero",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_juros_bordero",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_multa_bordero",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_desconto_bordero",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_ir",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_imposto_munic",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_inss",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_out_desp_bordero",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_titulo_estrang",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_cotacao",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "situacao",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Aging_Titulo_Pagar"
 				}
 			},
 			"dependsOn": [
