@@ -13,12 +13,6 @@
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "Retornos Sadalla_Old",
-					"type": "PipelineReference"
-				}
-			},
-			{
-				"pipelineReference": {
 					"referenceName": "Chamados Requestia",
 					"type": "PipelineReference"
 				}
