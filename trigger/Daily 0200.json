@@ -1,0 +1,18 @@
+{
+	"name": "Daily 0200",
+	"properties": {
+		"description": "Criado para executar as consultas no HOSAG",
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 1,
+				"startTime": "2019-10-09T15:02:00.000Z",
+				"timeZone": "UTC"
+			}
+		}
+	}
+}
