@@ -583,8 +583,8 @@
 								"waitOnCompletion": true,
 								"parameters": {
 									"EmailTo": "sergio.queiroz@opty.com.br",
-									"Subject": "Arquivo Requestia\\requests não encontrado!",
-									"ErrorMessage": "O arquivo Requestia\\requests não foi encontrado",
+									"Subject": "Arquivo Requestia\\REQUESTS não encontrado!",
+									"ErrorMessage": "O arquivo Requestia\\REQUESTS não foi encontrado",
 									"MasterPipeline": {
 										"value": "@{pipeline().Pipeline}",
 										"type": "Expression"
