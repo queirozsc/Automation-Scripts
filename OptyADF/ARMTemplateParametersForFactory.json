@@ -72,13 +72,13 @@
 			"value": "C:\\Power BI Gateway Files\\Nexcore\\Consolidado"
 		},
 		"Folder_Nexcore_Consolidado_properties_typeProperties_userId": {
-			"value": "hobrasil\\sa.adf"
+			"value": "hobrasil\\sa.automation"
 		},
 		"Folder_Requestia_properties_typeProperties_host": {
 			"value": "C:\\Power BI Gateway Files\\Requestia"
 		},
 		"Folder_Requestia_properties_typeProperties_userId": {
-			"value": "hobrasil\\sa.adf"
+			"value": "hobrasil\\sa.automation"
 		}
 	}
 }

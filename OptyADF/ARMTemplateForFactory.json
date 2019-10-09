@@ -97,7 +97,7 @@
 		},
 		"Folder_Nexcore_Consolidado_properties_typeProperties_userId": {
 			"type": "string",
-			"defaultValue": "hobrasil\\sa.adf"
+			"defaultValue": "hobrasil\\sa.automation"
 		},
 		"Folder_Requestia_properties_typeProperties_host": {
 			"type": "string",
@@ -105,7 +105,7 @@
 		},
 		"Folder_Requestia_properties_typeProperties_userId": {
 			"type": "string",
-			"defaultValue": "hobrasil\\sa.adf"
+			"defaultValue": "hobrasil\\sa.automation"
 		}
 	},
 	"variables": {
@@ -28544,16 +28544,8 @@
 			"properties": {
 				"description": "Criado para executar as consultas no HOSAG",
 				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "Retornos Sadalla",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
+				"runtimeState": "Stopped",
+				"pipelines": [],
 				"type": "ScheduleTrigger",
 				"typeProperties": {
 					"recurrence": {
@@ -28572,9 +28564,7 @@
 					}
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/Retornos Sadalla')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Daily 0630 AM')]",
@@ -28595,13 +28585,6 @@
 					{
 						"pipelineReference": {
 							"referenceName": "Chamados Requestia",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
-					{
-						"pipelineReference": {
-							"referenceName": "Retornos HOB",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -28627,8 +28610,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/Agendas Projesi')]",
-				"[concat(variables('factoryId'), '/pipelines/Chamados Requestia')]",
-				"[concat(variables('factoryId'), '/pipelines/Retornos HOB')]"
+				"[concat(variables('factoryId'), '/pipelines/Chamados Requestia')]"
 			]
 		},
 		{

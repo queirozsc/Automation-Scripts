@@ -97,7 +97,7 @@
 		},
 		"Folder_Nexcore_Consolidado_properties_typeProperties_userId": {
 			"type": "string",
-			"defaultValue": "hobrasil\\sa.adf"
+			"defaultValue": "hobrasil\\sa.automation"
 		},
 		"Folder_Requestia_properties_typeProperties_host": {
 			"type": "string",
@@ -105,7 +105,7 @@
 		},
 		"Folder_Requestia_properties_typeProperties_userId": {
 			"type": "string",
-			"defaultValue": "hobrasil\\sa.adf"
+			"defaultValue": "hobrasil\\sa.automation"
 		},
 		"containerUri": {
 			"type": "string",
@@ -188,9 +188,6 @@
 					"SMART_IOF_connectionString": {
 						"value": "[parameters('SMART_IOF_connectionString')]"
 					},
-					"SMART_IOF_NEW_connectionString": {
-						"value": "[parameters('SMART_IOF_NEW_connectionString')]"
-					},
 					"Folder_Nexcore_Consolidado_properties_typeProperties_host": {
 						"value": "[parameters('Folder_Nexcore_Consolidado_properties_typeProperties_host')]"
 					},
@@ -222,6 +219,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"SMART_IOF_NEW_connectionString": {
+						"value": "[parameters('SMART_IOF_NEW_connectionString')]"
 					},
 					"SMART_ITABUNA_connectionString": {
 						"value": "[parameters('SMART_ITABUNA_connectionString')]"
