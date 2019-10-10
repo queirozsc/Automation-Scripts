@@ -95,72 +95,7 @@
 					"sink": {
 						"type": "AzureSqlSink"
 					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"name": "CD_PESSOA_FISICA",
-									"type": "String"
-								},
-								"sink": {
-									"name": "CD_PESSOA_FISICA",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"name": "CD_CONVENIO",
-									"type": "Decimal"
-								},
-								"sink": {
-									"name": "CD_CONVENIO",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"name": "DATA_AGENDA",
-									"type": "String"
-								},
-								"sink": {
-									"name": "DATA_AGENDA",
-									"type": "DateTime"
-								}
-							},
-							{
-								"source": {
-									"name": "HORA_AGENDA",
-									"type": "String"
-								},
-								"sink": {
-									"name": "HORA_AGENDA",
-									"type": "DateTime"
-								}
-							},
-							{
-								"source": {
-									"name": "CD_TIPO_AGENDA",
-									"type": "Decimal"
-								},
-								"sink": {
-									"name": "CD_TIPO_AGENDA",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "NM_MEDICO",
-									"type": "String"
-								},
-								"sink": {
-									"name": "NM_MEDICO",
-									"type": "String"
-								}
-							}
-						]
-					}
+					"enableStaging": false
 				},
 				"inputs": [
 					{
