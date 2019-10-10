@@ -1302,7 +1302,7 @@
 					{
 						"activity": "Clear tables",
 						"dependencyConditions": [
-							"Skipped"
+							"Succeeded"
 						]
 					}
 				],
@@ -1338,7 +1338,7 @@
 					{
 						"activity": "Check table answers file exists",
 						"dependencyConditions": [
-							"Skipped"
+							"Succeeded"
 						]
 					}
 				],
