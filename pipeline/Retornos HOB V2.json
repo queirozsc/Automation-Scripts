@@ -421,11 +421,11 @@
 					"storedProcedureName": "[dbo].[sp_ALTERTIPOAGENDAS]",
 					"storedProcedureParameters": {
 						"FIELDNAME_DEST": {
-							"value": "TIPO_AGENDA",
+							"value": "CD_TIPO_AGENDA",
 							"type": "String"
 						},
 						"FIELDNAME_ORIG": {
-							"value": "TIPO_AGENDA",
+							"value": "CD_TIPO_AGENDA",
 							"type": "String"
 						},
 						"TABLENAME": {
