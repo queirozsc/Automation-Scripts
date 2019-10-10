@@ -1,9 +1,12 @@
-﻿#Faz o update dos Contatos dos Usuário
+﻿".\Connect-O365.ps1"
+
+
+
 #importa CSV
 $Contatos = Import-Csv -Path C:\csv\LicencasOffice365.csv -Delimiter ";"
 
 #Conecta no Office 365
-Connect-MsolService
+#Connect-MsolService
 #Cria o laço com o Objeto
 $Contatos | ForEach-Object -Process {
     Write-Host $_
