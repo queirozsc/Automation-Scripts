@@ -12,40 +12,32 @@
 		"type": "OracleTable",
 		"structure": [
 			{
-				"name": "CD_PESSOA_FISICA",
-				"type": "String"
+				"name": "NR_SEQUENCIA",
+				"type": "Double"
 			},
 			{
-				"name": "CD_CONVENIO",
+				"name": "DT_ATUALIZACAO",
+				"type": "DateTime"
+			},
+			{
+				"name": "NR_ATENDIMENTO",
 				"type": "Decimal"
 			},
 			{
-				"name": "DATA_AGENDA",
+				"name": "CD_MEDICO",
 				"type": "String"
-			},
-			{
-				"name": "HORA_AGENDA",
-				"type": "String"
-			},
-			{
-				"name": "CD_TIPO_AGENDA",
-				"type": "Decimal"
 			},
 			{
 				"name": "NM_MEDICO",
 				"type": "String"
 			},
 			{
-				"name": "DS_PROCEDIMENTO_PRINC",
+				"name": "DS_RETORNO",
 				"type": "String"
 			},
 			{
-				"name": "DS_PROCEDIMENTO_ADIC",
+				"name": "DS_CONDUTA",
 				"type": "String"
-			},
-			{
-				"name": "IE_QUANTIDADE",
-				"type": "Double"
 			}
 		]
 	},
