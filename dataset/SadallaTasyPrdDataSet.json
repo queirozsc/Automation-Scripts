@@ -12,43 +12,27 @@
 		"type": "OracleTable",
 		"structure": [
 			{
+				"name": "ULTIMO_ATENDIMENTO",
+				"type": "Double"
+			},
+			{
 				"name": "CD_PESSOA_FISICA",
 				"type": "String"
 			},
 			{
-				"name": "CD_CONVENIO",
-				"type": "Decimal"
-			},
-			{
-				"name": "DATA_AGENDA",
+				"name": "NM_PESSOA_FISICA",
 				"type": "String"
 			},
 			{
-				"name": "HORA_AGENDA",
+				"name": "NR_TELEFONE_CELULAR",
 				"type": "String"
 			},
 			{
-				"name": "CD_TIPO_AGENDA",
-				"type": "Decimal"
-			},
-			{
-				"name": "NM_MEDICO",
+				"name": "NR_TELEFONE",
 				"type": "String"
 			},
 			{
-				"name": "DS_PROCEDIMENTO_PRINC",
-				"type": "String"
-			},
-			{
-				"name": "DS_PROCEDIMENTO_ADIC",
-				"type": "String"
-			},
-			{
-				"name": "IE_QUANTIDADE",
-				"type": "Double"
-			},
-			{
-				"name": "NM_USUARIO",
+				"name": "DS_EMAIL",
 				"type": "String"
 			}
 		]

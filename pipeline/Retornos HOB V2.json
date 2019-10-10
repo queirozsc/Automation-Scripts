@@ -17,13 +17,78 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select max(at.nr_atendimento) as ultimo_atendimento, \n\npf.cd_pessoa_fisica, \nsubstr(pf.nm_pessoa_fisica,1,200) as nm_pessoa_fisica,\nsubstr(pf.nr_telefone_celular,1,100) as nr_telefone_celular,\nsubstr(cpf.nr_telefone,1,100) as nr_telefone,\nsubstr(cpf.ds_email,1,100) as ds_email\n\nfrom pessoa_fisica pf,\natendimento_paciente at,\ncompl_pessoa_fisica cpf\nwhere pf.cd_pessoa_fisica = at.cd_pessoa_fisica (+)\nand pf.cd_pessoa_fisica = cpf.cd_pessoa_fisica\nand cpf.ie_tipo_complemento = 1\n\ngroup by pf.cd_pessoa_fisica,\npf.nm_pessoa_fisica,\npf.nr_telefone_celular,\npf.nr_telefone_celular,\ncpf.nr_telefone,\ncpf.ds_email",
+						"oracleReaderQuery": "select max(at.nr_atendimento) as ultimo_atendimento, \n\npf.cd_pessoa_fisica, \nsubstr(pf.nm_pessoa_fisica,1,200) as nm_pessoa_fisica,\nsubstr(replace(LTRIM(translate(pf.nr_telefone_celular, translate(pf.nr_telefone_celular, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone_celular,\nsubstr(replace(LTRIM(translate(cpf.nr_telefone, translate(cpf.nr_telefone, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone,\nsubstr(cpf.ds_email,1,100) as ds_email\n\nfrom pessoa_fisica pf,\natendimento_paciente at,\ncompl_pessoa_fisica cpf\nwhere pf.cd_pessoa_fisica = at.cd_pessoa_fisica (+)\nand pf.cd_pessoa_fisica = cpf.cd_pessoa_fisica\nand cpf.ie_tipo_complemento = 1\n\ngroup by pf.cd_pessoa_fisica,\npf.nm_pessoa_fisica,\npf.nr_telefone_celular,\npf.nr_telefone_celular,\ncpf.nr_telefone,\ncpf.ds_email",
 						"partitionOption": "None"
 					},
 					"sink": {
 						"type": "AzureSqlSink"
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ULTIMO_ATENDIMENTO",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "ULTIMO_ATENDIMENTO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "CD_PESSOA_FISICA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CD_PESSOA_FISICA",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "NM_PESSOA_FISICA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "NM_PESSOA_FISICA",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NR_TELEFONE_CELULAR",
+									"type": "String"
+								},
+								"sink": {
+									"name": "NR_TELEFONE_CELULAR",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NR_TELEFONE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "NR_TELEFONE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_EMAIL",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DS_EMAIL",
+									"type": "String"
+								}
+							}
+						]
+					}
 				},
 				"inputs": [
 					{
@@ -95,7 +160,112 @@
 					"sink": {
 						"type": "AzureSqlSink"
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "CD_PESSOA_FISICA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CD_PESSOA_FISICA",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "CD_CONVENIO",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "CD_CONVENIO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "DATA_AGENDA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DATA_AGENDA",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "HORA_AGENDA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "HORA_AGENDA",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "CD_TIPO_AGENDA",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "CD_TIPO_AGENDA",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NM_MEDICO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "NM_MEDICO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_PROCEDIMENTO_PRINC",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DS_PROCEDIMENTO_PRINC",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_PROCEDIMENTO_ADIC",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DS_PROCEDIMENTO_ADIC",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "IE_QUANTIDADE",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "IE_QUANTIDADE",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "NM_USUARIO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "NM_USUARIO",
+									"type": "String"
+								}
+							}
+						]
+					}
 				},
 				"inputs": [
 					{
