@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select max(at.nr_atendimento) as ultimo_atendimento, \n\npf.cd_pessoa_fisica, \nsubstr(pf.nm_pessoa_fisica,1,200) as nm_pessoa_fisica,\nsubstr(pf.nr_telefone_celular,1,100) as nr_telefone_celular,\nsubstr(cpf.nr_telefone,1,100) as nr_telefone,\nsubstr(cpf.ds_email,1,100) as ds_email\n\nfrom pessoa_fisica pf,\natendimento_paciente at,\ncompl_pessoa_fisica cpf\nwhere pf.cd_pessoa_fisica = at.cd_pessoa_fisica\nand pf.cd_pessoa_fisica = cpf.cd_pessoa_fisica\nand cpf.ie_tipo_complemento = 1\n\ngroup by pf.cd_pessoa_fisica,\npf.nm_pessoa_fisica,\npf.nr_telefone_celular,\npf.nr_telefone_celular,\ncpf.nr_telefone,\ncpf.ds_email",
+						"oracleReaderQuery": "select max(at.nr_atendimento) as ultimo_atendimento, \n\npf.cd_pessoa_fisica, \nsubstr(pf.nm_pessoa_fisica,1,200) as nm_pessoa_fisica,\nsubstr(pf.nr_telefone_celular,1,100) as nr_telefone_celular,\nsubstr(cpf.nr_telefone,1,100) as nr_telefone,\nsubstr(cpf.ds_email,1,100) as ds_email\n\nfrom pessoa_fisica pf,\natendimento_paciente at,\ncompl_pessoa_fisica cpf\nwhere pf.cd_pessoa_fisica = at.cd_pessoa_fisica (+)\nand pf.cd_pessoa_fisica = cpf.cd_pessoa_fisica\nand cpf.ie_tipo_complemento = 1\n\ngroup by pf.cd_pessoa_fisica,\npf.nm_pessoa_fisica,\npf.nr_telefone_celular,\npf.nr_telefone_celular,\ncpf.nr_telefone,\ncpf.ds_email",
 						"partitionOption": "None"
 					},
 					"sink": {
