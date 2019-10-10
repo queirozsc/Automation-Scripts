@@ -48,7 +48,7 @@
 				"type": "Double"
 			},
 			{
-				"name": "USUARIO",
+				"name": "NM_USUARIO",
 				"type": "String"
 			}
 		]
