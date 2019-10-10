@@ -12,40 +12,16 @@
 		"type": "OracleTable",
 		"structure": [
 			{
-				"name": "ESTABELECIMENTO",
-				"type": "String"
+				"name": "NR_SEQUENCIA",
+				"type": "Double"
 			},
 			{
-				"name": "CNPJ",
-				"type": "String"
+				"name": "DT_ATUALIZACAO",
+				"type": "DateTime"
 			},
 			{
 				"name": "NR_ATENDIMENTO",
 				"type": "Decimal"
-			},
-			{
-				"name": "NR_PRONTUARIO",
-				"type": "Decimal"
-			},
-			{
-				"name": "CD_PESSOA_FISICA",
-				"type": "String"
-			},
-			{
-				"name": "NM_PACIENTE",
-				"type": "String"
-			},
-			{
-				"name": "NR_TEL",
-				"type": "String"
-			},
-			{
-				"name": "NR_CEL",
-				"type": "String"
-			},
-			{
-				"name": "NR_CEL2",
-				"type": "String"
 			},
 			{
 				"name": "CD_MEDICO",
@@ -56,59 +32,11 @@
 				"type": "String"
 			},
 			{
-				"name": "DS_EMAIL",
+				"name": "DS_RETORNO",
 				"type": "String"
 			},
 			{
-				"name": "NR_SEQ_CONSULTA",
-				"type": "Decimal"
-			},
-			{
-				"name": "HORA",
-				"type": "String"
-			},
-			{
-				"name": "DATA_ATENDIMENTO",
-				"type": "String"
-			},
-			{
-				"name": "TIPO_ATENDIMENTO",
-				"type": "String"
-			},
-			{
-				"name": "AGENDADO_PARA_DIA",
-				"type": "String"
-			},
-			{
-				"name": "AGENDADO_PARA_HORA",
-				"type": "String"
-			},
-			{
-				"name": "TIPO_AGENDA",
-				"type": "Double"
-			},
-			{
-				"name": "RETORNO_EM",
-				"type": "String"
-			},
-			{
-				"name": "USUARIO",
-				"type": "String"
-			},
-			{
-				"name": "PROCEDIMENTOS",
-				"type": "String"
-			},
-			{
-				"name": "SIGLA_UNIDADE",
-				"type": "String"
-			},
-			{
-				"name": "MARCA",
-				"type": "String"
-			},
-			{
-				"name": "CONDUTA",
+				"name": "DS_CONDUTA",
 				"type": "String"
 			}
 		]

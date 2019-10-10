@@ -1,0 +1,227 @@
+{
+	"name": "Retornos Sadalla V2",
+	"properties": {
+		"activities": [
+			{
+				"name": "Pacientes_Unidade",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "select max(at.nr_atendimento) as ultimo_atendimento, \n\npf.cd_pessoa_fisica, \nsubstr(pf.nm_pessoa_fisica,1,200) as nm_pessoa_fisica,\nsubstr(pf.nr_telefone_celular,1,100) as nr_telefone_celular,\nsubstr(cpf.nr_telefone,1,100) as nr_telefone,\nsubstr(cpf.ds_email,1,100) as ds_email\n\nfrom pessoa_fisica pf,\natendimento_paciente at,\ncompl_pessoa_fisica cpf\nwhere pf.cd_pessoa_fisica = at.cd_pessoa_fisica\nand pf.cd_pessoa_fisica = cpf.cd_pessoa_fisica\nand cpf.ie_tipo_complemento = 1\n\ngroup by pf.cd_pessoa_fisica,\npf.nm_pessoa_fisica,\npf.nr_telefone_celular,\npf.nr_telefone_celular,\ncpf.nr_telefone,\ncpf.ds_email",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "SadallaTasyPrdDataSet",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AZSQL_TB_Ret_Pacientes_unidade",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Atendimento_Unidade",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "select at.nr_atendimento, at.cd_medico_resp as cd_medico, at.dt_entrada, at.cd_estabelecimento, e.cd_cgc, pf.nm_pessoa_fisica as nm_medico, e.nm_fantasia_estab\nfrom atendimento_paciente at, \n     estabelecimento e,\n     pessoa_fisica pf\nwhere pf.cd_pessoa_fisica = at.cd_medico_resp\nand at.cd_estabelecimento = e.cd_estabelecimento",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "SadallaTasyPrdDataSet",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AZSQL_TB_Ret_Atendimentos_Unidade",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Agendamento_Futuros_Unidade",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "select a.cd_pessoa_fisica, a.cd_convenio, \nto_char(a.dt_agenda, 'dd/mm/yyyy') as data_agenda,\nto_char(a.dt_agenda, 'hh24:mi:ss') as hora_agenda,\nag.cd_tipo_agenda,\npf.nm_pessoa_fisica as nm_medico\nfrom agenda_consulta a,\n     agenda ag,\n     pessoa_fisica pf\nwhere a.cd_agenda = ag.cd_agenda\nand ag.cd_pessoa_fisica = pf.cd_pessoa_fisica \nand a.dt_agenda between inicio_dia(sysdate) and fim_dia(sysdate + 720)\nand a.cd_pessoa_fisica is not null",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "SadallaTasyPrdDataSet",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AZSQL_TB_Agendamentos_Futuros_Unidade",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Consulta_Paciente_Unidade",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "select max(o.nr_sequencia) as nr_sequencia, o.dt_atualizacao, o.nr_atendimento, o.cd_profissional as cd_medico ,obter_nome_pf(o.cd_profissional) as nm_medico, r.ds_retorno, substr(o.ds_conduta,1,1000) as ds_conduta\nfrom oft_consulta_medica o,\n     oft_retorno r\nwhere o.nr_seq_retorno = r.nr_sequencia\nand o.nr_atendimento is not null\ngroup by o.dt_atualizacao ,o.nr_atendimento, o.cd_profissional,obter_nome_pf(o.cd_profissional), r.ds_retorno, o.ds_conduta",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "NR_SEQUENCIA",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "NR_SEQUENCIA",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "DT_ATUALIZACAO",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DT_ATUALIZACAO",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "NR_ATENDIMENTO",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "NR_ATENDIMENTO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "CD_MEDICO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CD_MEDICO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "NM_MEDICO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "NM_MEDICO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_RETORNO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DS_RETORNO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_CONDUTA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DS_CONDUTA",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SadallaTasyPrdDataSet",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AZSQL_TB_Ret_Consulta_Oft_Unidade",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}
