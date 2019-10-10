@@ -89,13 +89,108 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select a.cd_pessoa_fisica, a.cd_convenio, \nto_char(a.dt_agenda, 'dd/mm/yyyy') as data_agenda,\nto_char(a.dt_agenda, 'hh24:mi:ss') as hora_agenda,\nag.cd_tipo_agenda,\npf.nm_pessoa_fisica as nm_medico\nfrom agenda_consulta a,\n     agenda ag,\n     pessoa_fisica pf\nwhere a.cd_agenda = ag.cd_agenda\nand ag.cd_pessoa_fisica = pf.cd_pessoa_fisica \nand a.dt_agenda between inicio_dia(sysdate) and fim_dia(sysdate + 720)\nand a.cd_pessoa_fisica is not null",
+						"oracleReaderQuery": "select a.cd_pessoa_fisica, a.cd_convenio, \nto_char(a.dt_agenda, 'dd/mm/yyyy') as data_agenda,\nto_char(a.dt_agenda, 'hh24:mi:ss') as hora_agenda,\nag.cd_tipo_agenda,\npf.nm_pessoa_fisica as nm_medico,\nobter_desc_procedimento(10502, 1) as ds_procedimento_princ,\n'' ds_procedimento_adic,\n1 as ie_quantidade\nfrom agenda_consulta a,\n     agenda ag,\n     pessoa_fisica pf\nwhere a.cd_agenda = ag.cd_agenda\nand ag.cd_pessoa_fisica = pf.cd_pessoa_fisica \nand a.dt_agenda between inicio_dia(sysdate) and fim_dia(sysdate + 720)\nand a.cd_pessoa_fisica is not null\nand a.dt_agenda = (select max(x.dt_agenda) from agenda_consulta x where x.cd_pessoa_fisica = a.cd_pessoa_fisica)",
 						"partitionOption": "None"
 					},
 					"sink": {
 						"type": "AzureSqlSink"
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "CD_PESSOA_FISICA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CD_PESSOA_FISICA",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "CD_CONVENIO",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "CD_CONVENIO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "DATA_AGENDA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DATA_AGENDA",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "HORA_AGENDA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "HORA_AGENDA",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "CD_TIPO_AGENDA",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "CD_TIPO_AGENDA",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NM_MEDICO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "NM_MEDICO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_PROCEDIMENTO_PRINC",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DS_PROCEDIMENTO_PRINC",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_PROCEDIMENTO_ADIC",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DS_PROCEDIMENTO_ADIC",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "IE_QUANTIDADE",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "IE_QUANTIDADE",
+									"type": "Int32"
+								}
+							}
+						]
+					}
 				},
 				"inputs": [
 					{
