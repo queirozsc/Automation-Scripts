@@ -1,49 +1,24 @@
-Function Get-O365Users {
-    Param (
-        [String] $Email = '',
-        [String] $Domain = '',
-        [String] $a = '',
-        [Switch] $DeletedOnly,
-        [Switch] $DisabledOnly
+function Get-O365Users {
+    Param
+    (
+        [PSDefaultValue(Help = 'opty.com.br')]
+        [String] $Domain = 'opty.com.br',
+        [String] $Department = '',
+        [String] $Title = '',
+        [String] $City = '',
+        [String] $State = '',
+        [switch] $Export
     )
-    If ($DeletedOnly) {
-        $Users = Get-MsolUser `
-            -ReturnDeletedUsers
-
+    Write-Host "Processamento iniciado às " (Get-Date)
+    $CSVFilename = "O365ActiveUsers-" + (Get-Date -Format "yyyyMMddhhmm") + ".csv"
+    #Connect-MsolService
+    $Users = Get-MsolUser -DomainName $Domain -Department $Department -Title $Title -City $City -State $State -EnabledFilter EnabledOnly -All | `
+        Sort-Object -Property DisplayName
+    If ($Export) {
+        $Users | Export-Csv -Path $CSVFilename -Encoding UTF8 -Delimiter ";" -NoTypeInformation
+        Write-Host "Arquivo gerado: $CSVFilename"
     }
-    If ($DisabledOnly) {
-        $Users = Get-MsolUser `
-        -EnabledFilter DisabledOnly
-    }
-    If ($Users -eq $null) {
-        $Users = Get-MsolUser `
-            -UserPrincipalName $Email `
-            -DomainName $Domain
-    }
-    # Else {
-            #     $Users = Get-MsolUser `
-            #         -EnabledFilter EnabledOnly
-            #         Get-MsolUser
-            #         [-ReturnDeletedUsers]
-            #         [-City <String>]
-            #         [-Country <String>]
-            #         [-Department <String>]
-            #         [-DomainName <String>]
-            #         [-EnabledFilter <UserEnabledFilter>]
-            #         [-State <String>]
-            #         [-Synchronized]
-            #         [-Title <String>]
-            #         [-HasErrorsOnly]
-            #         [-LicenseReconciliationNeededOnly]
-            #         [-UnlicensedUsersOnly]
-            #         [-UsageLocation <String>]
-            #         [-SearchString <String>]
-            #         [-MaxResults <Int32>]
-            #         [-TenantId <Guid>]
-            #         [<CommonParameters>]
-            # }
-            Return $Users | Sort-Object -Property DisplayName
-        }
+    Return $Users
+}
 
-
-. .\Connect-O365.ps1
+#. .\Connect-O365.ps1
