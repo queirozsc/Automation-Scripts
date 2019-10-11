@@ -32,12 +32,6 @@
 					},
 					"enableStaging": false
 				},
-				"inputs": [
-					{
-						"referenceName": "CloudTasyPrdDataSet",
-						"type": "DatasetReference"
-					}
-				],
 				"outputs": [
 					{
 						"referenceName": "AZSQL_TB_Ret_Pacientes_unidade",
@@ -75,12 +69,6 @@
 					},
 					"enableStaging": false
 				},
-				"inputs": [
-					{
-						"referenceName": "CloudTasyPrdDataSet",
-						"type": "DatasetReference"
-					}
-				],
 				"outputs": [
 					{
 						"referenceName": "AZSQL_TB_Ret_Atendimentos_Unidade",
@@ -118,12 +106,6 @@
 					},
 					"enableStaging": false
 				},
-				"inputs": [
-					{
-						"referenceName": "CloudTasyPrdDataSet",
-						"type": "DatasetReference"
-					}
-				],
 				"outputs": [
 					{
 						"referenceName": "AZSQL_TB_Agendamentos_Futuros_Unidade",
@@ -161,12 +143,6 @@
 					},
 					"enableStaging": false
 				},
-				"inputs": [
-					{
-						"referenceName": "CloudTasyPrdDataSet",
-						"type": "DatasetReference"
-					}
-				],
 				"outputs": [
 					{
 						"referenceName": "AZSQL_TB_Ret_Consulta_Oft_Unidade",

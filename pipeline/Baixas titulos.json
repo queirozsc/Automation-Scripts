@@ -25,12 +25,6 @@
 					},
 					"enableStaging": false
 				},
-				"inputs": [
-					{
-						"referenceName": "CloudTasyPrdDataSet",
-						"type": "DatasetReference"
-					}
-				],
 				"outputs": [
 					{
 						"referenceName": "AZ_SQL_TB_Baixa_Titulos_Receber",
@@ -61,12 +55,6 @@
 					},
 					"enableStaging": false
 				},
-				"inputs": [
-					{
-						"referenceName": "SadallaTasyPrdDataSet",
-						"type": "DatasetReference"
-					}
-				],
 				"outputs": [
 					{
 						"referenceName": "AZ_SQL_TB_Baixa_Titulos_Receber",
