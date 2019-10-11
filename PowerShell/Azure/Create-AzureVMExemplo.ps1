@@ -64,11 +64,7 @@ $credinfo = New-Object -TypeName "System.Management.Automation.PSCredential" -Ar
 
 #Configura a VM
 $vmname='NomedaVM'
-$vmConfig = New-AzureRmVMConfig -VMName $vmname -VMSize $vmsize | 
-Set-AzureRmVMOperatingSystem -Windows -ComputerName $vmname -Credential $credinfo | 
-Set-AzureRmVMSourceImage -PublisherName $pub -Offer $offer -Skus $sku -Version latest | 
-Add-AzureRmVMNetworkInterface -Id $nic.Id | 
-New-AzureRMDisk
+$vmConfig = New-AzureRmVMConfig -VMName $vmname -VMSize $vmsize | Set-AzureRmVMOperatingSystem -Windows -ComputerName $vmname -Credential $credinfo | Set-AzureRmVMSourceImage -PublisherName $pub -Offer $offer -Skus $sku -Version latest | Add-AzureRmVMNetworkInterface -Id $nic.Id
 
 #Cria a VM
 New-AzureRmVM -ResourceGroupName $rg -Location $loc -VM $vmConfig
