@@ -6,6 +6,38 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "OptyADF"
+		},
+		"SMART_ITABUNA_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SMART_ITABUNA'"
+		},
+		"SMART_ITABUNA_NEW_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SMART_ITABUNA_NEW'"
+		},
+		"SMART_ITAIGARA_NEW_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SMART_ITAIGARA_NEW'"
+		},
+		"SadallaSeniorProd_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SadallaSeniorProd'"
+		},
+		"SadallaSeniorTeste_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SadallaSeniorTeste'"
+		},
+		"SadallaTasyProd_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SadallaTasyProd'"
+		},
+		"SadallaTasyProd_NEW_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SadallaTasyProd_NEW'"
+		},
+		"SadallaTasyTeste_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SadallaTasyTeste'"
 		}
 	},
 	"variables": {
@@ -13,899 +45,140 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/TABLE_QTABLEANSWER')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
+			"name": "[concat(parameters('factoryName'), '/SMART_ITABUNA')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSQL_DB_Procedimentos",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Requestia"
-				},
 				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "QSESSION",
-						"type": "varchar"
-					},
-					{
-						"name": "TABLE_NAME",
-						"type": "varchar"
-					},
-					{
-						"name": "TABLE_ROWID",
-						"type": "varchar"
-					},
-					{
-						"name": "TABLE_ROWNUM",
-						"type": "varchar"
-					},
-					{
-						"name": "COLUMN_NAME",
-						"type": "varchar"
-					},
-					{
-						"name": "COLUMN_VALUE",
-						"type": "varchar"
-					},
-					{
-						"name": "COLUMN_POSITION",
-						"type": "varchar"
-					},
-					{
-						"name": "COLUMN_ANSWERED",
-						"type": "varchar"
-					},
-					{
-						"name": "COLUMN_ANSWERDATE",
-						"type": "varchar"
-					},
-					{
-						"name": "COLUMN_UPDATED",
-						"type": "varchar"
-					},
-					{
-						"name": "COLUMN_VISIBLE",
-						"type": "varchar"
-					}
-				],
+				"type": "SqlServer",
 				"typeProperties": {
-					"schema": "dbo",
-					"table": "REQUESTIA_QTABLEANSWER"
+					"connectionString": "[parameters('SMART_ITABUNA_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime",
+					"type": "IntegrationRuntimeReference"
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Titulos_Pagar')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
+			"name": "[concat(parameters('factoryName'), '/SMART_ITABUNA_NEW')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSQL_DB_Procedimentos",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Contas a Pagar"
-				},
 				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "estabelecimento",
-						"type": "varchar"
-					},
-					{
-						"name": "cd_cgc",
-						"type": "varchar"
-					},
-					{
-						"name": "nm_razaosocial",
-						"type": "varchar"
-					},
-					{
-						"name": "nm_fantasia",
-						"type": "varchar"
-					},
-					{
-						"name": "nr_titulo",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "nr_seq_nota_fiscal",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "dt_emissao",
-						"type": "date"
-					},
-					{
-						"name": "dt_vencimento_original",
-						"type": "date"
-					},
-					{
-						"name": "dt_vencimento_atual",
-						"type": "date"
-					},
-					{
-						"name": "vl_titulo",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_saldo_titulo",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_saldo_juros",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_saldo_multa",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_dia_antecipacao",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_bordero",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_juros_bordero",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_multa_bordero",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_desconto_bordero",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_ir",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_imposto_munic",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_inss",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_out_desp_bordero",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_titulo_estrang",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_cotacao",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "situacao",
-						"type": "varchar"
-					}
-				],
+				"type": "SqlServer",
 				"typeProperties": {
-					"schema": "dbo",
-					"table": "Aging_Titulo_Pagar"
+					"connectionString": "[parameters('SMART_ITABUNA_NEW_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "ServidorArquivosBI",
+					"type": "IntegrationRuntimeReference"
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Baixa_Titulos_Pagar')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
+			"name": "[concat(parameters('factoryName'), '/SMART_ITAIGARA_NEW')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSQL_DB_Procedimentos",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Contas a Pagar"
-				},
 				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "nr_titulo",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "nr_sequencia",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "dt_baixa",
-						"type": "date"
-					},
-					{
-						"name": "vl_pago",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_descontos",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_juros",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_multa",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "dt_atualizacao",
-						"type": "date"
-					},
-					{
-						"name": "ds_tipo_baixa",
-						"type": "varchar"
-					},
-					{
-						"name": "ds_transacao",
-						"type": "varchar"
-					}
-				],
+				"type": "SqlServer",
 				"typeProperties": {
-					"schema": "dbo",
-					"table": "Aging_Baixa_Titulo_Pagar"
+					"connectionString": "[parameters('SMART_ITAIGARA_NEW_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "ServidorArquivosBI",
+					"type": "IntegrationRuntimeReference"
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AZSQL_TB_Retornos')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
+			"name": "[concat(parameters('factoryName'), '/SadallaSeniorProd')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSQL_DB_Procedimentos",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Retornos de consulta"
-				},
 				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ESTABELECIMENTO",
-						"type": "varchar"
-					},
-					{
-						"name": "NR_ATENDIMENTO",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "NR_PRONTUARIO",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "CD_PESSOA_FISICA",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "NM_PACIENTE",
-						"type": "varchar"
-					},
-					{
-						"name": "NR_TEL",
-						"type": "varchar"
-					},
-					{
-						"name": "CD_MEDICO",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "NM_MEDICO",
-						"type": "varchar"
-					},
-					{
-						"name": "DS_EMAIL",
-						"type": "varchar"
-					},
-					{
-						"name": "NR_SEQ_CONSULTA",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "CD_ESTABELECIMENTO",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "DATA_ATENDIMENTO",
-						"type": "date"
-					},
-					{
-						"name": "TIPO_ATENDIMENTO",
-						"type": "varchar"
-					},
-					{
-						"name": "AGENDADO_PARA_DIA",
-						"type": "date"
-					},
-					{
-						"name": "TIPO_AGENDA",
-						"type": "varchar"
-					},
-					{
-						"name": "RETORNO_EM",
-						"type": "varchar"
-					},
-					{
-						"name": "USUARIO",
-						"type": "varchar"
-					},
-					{
-						"name": "PROCEDIMENTOS",
-						"type": "varchar"
-					}
-				],
+				"type": "Oracle",
 				"typeProperties": {
-					"schema": "dbo",
-					"table": "Oft_Consulta_Retorno"
+					"connectionString": "[parameters('SadallaSeniorProd_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime",
+					"type": "IntegrationRuntimeReference"
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AZSQL_TB_Retornos_Incremental')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
+			"name": "[concat(parameters('factoryName'), '/SadallaSeniorTeste')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSQL_DB_Procedimentos",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Retornos de consulta"
-				},
 				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ESTABELECIMENTO",
-						"type": "varchar"
-					},
-					{
-						"name": "CNPJ",
-						"type": "varchar"
-					},
-					{
-						"name": "NR_ATENDIMENTO",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "NR_PRONTUARIO",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "CD_PESSOA_FISICA",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "NM_PACIENTE",
-						"type": "varchar"
-					},
-					{
-						"name": "NR_TEL",
-						"type": "varchar"
-					},
-					{
-						"name": "CD_MEDICO",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "NM_MEDICO",
-						"type": "varchar"
-					},
-					{
-						"name": "DS_EMAIL",
-						"type": "varchar"
-					},
-					{
-						"name": "NR_SEQ_CONSULTA",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "HORA",
-						"type": "varchar"
-					},
-					{
-						"name": "DATA_ATENDIMENTO",
-						"type": "varchar"
-					},
-					{
-						"name": "TIPO_ATENDIMENTO",
-						"type": "varchar"
-					},
-					{
-						"name": "AGENDADO_PARA_HORA",
-						"type": "varchar"
-					},
-					{
-						"name": "AGENDADO_PARA_DIA",
-						"type": "varchar"
-					},
-					{
-						"name": "TIPO_AGENDA",
-						"type": "varchar"
-					},
-					{
-						"name": "RETORNO_EM",
-						"type": "varchar"
-					},
-					{
-						"name": "USUARIO",
-						"type": "varchar"
-					},
-					{
-						"name": "PROCEDIMENTOS",
-						"type": "varchar"
-					},
-					{
-						"name": "SIGLA_UNIDADE",
-						"type": "varchar"
-					},
-					{
-						"name": "MARCA",
-						"type": "varchar"
-					}
-				],
+				"type": "Oracle",
 				"typeProperties": {
-					"schema": "dbo",
-					"table": "Oft_Consulta_Retorno_Increment"
+					"connectionString": "[parameters('SadallaSeniorTeste_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime",
+					"type": "IntegrationRuntimeReference"
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ASQL_TB_RetornosTMP')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
+			"name": "[concat(parameters('factoryName'), '/SadallaTasyProd')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSQL_DB_Procedimentos",
-					"type": "LinkedServiceReference"
-				},
 				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ESTABELECIMENTO",
-						"type": "varchar"
-					},
-					{
-						"name": "CNPJ",
-						"type": "varchar"
-					},
-					{
-						"name": "NR_ATENDIMENTO",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "NR_PRONTUARIO",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "CD_PESSOA_FISICA",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "NM_PACIENTE",
-						"type": "varchar"
-					},
-					{
-						"name": "NR_TEL",
-						"type": "varchar"
-					},
-					{
-						"name": "CD_MEDICO",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "NM_MEDICO",
-						"type": "varchar"
-					},
-					{
-						"name": "DS_EMAIL",
-						"type": "varchar"
-					},
-					{
-						"name": "NR_SEQ_CONSULTA",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "HORA",
-						"type": "varchar"
-					},
-					{
-						"name": "DATA_ATENDIMENTO",
-						"type": "varchar"
-					},
-					{
-						"name": "TIPO_ATENDIMENTO",
-						"type": "varchar"
-					},
-					{
-						"name": "AGENDADO_PARA_HORA",
-						"type": "varchar"
-					},
-					{
-						"name": "AGENDADO_PARA_DIA",
-						"type": "varchar"
-					},
-					{
-						"name": "TIPO_AGENDA",
-						"type": "varchar"
-					},
-					{
-						"name": "RETORNO_EM",
-						"type": "varchar"
-					},
-					{
-						"name": "USUARIO",
-						"type": "varchar"
-					},
-					{
-						"name": "PROCEDIMENTOS",
-						"type": "varchar"
-					},
-					{
-						"name": "SIGLA_UNIDADE",
-						"type": "varchar"
-					},
-					{
-						"name": "MARCA",
-						"type": "varchar"
-					}
-				],
+				"type": "Oracle",
 				"typeProperties": {
-					"schema": "dbo",
-					"table": "Oft_Consulta_Retorno_Increment_temp"
+					"connectionString": "[parameters('SadallaTasyProd_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime",
+					"type": "IntegrationRuntimeReference"
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AZSQL_TB_Retornos_Incremental_testes')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
+			"name": "[concat(parameters('factoryName'), '/SadallaTasyProd_NEW')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSQL_DB_Procedimentos",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Retornos de consulta"
-				},
 				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ESTABELECIMENTO",
-						"type": "varchar"
-					},
-					{
-						"name": "CNPJ",
-						"type": "varchar"
-					},
-					{
-						"name": "NR_ATENDIMENTO",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "NR_PRONTUARIO",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "CD_PESSOA_FISICA",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "NM_PACIENTE",
-						"type": "varchar"
-					},
-					{
-						"name": "NR_TEL",
-						"type": "varchar"
-					},
-					{
-						"name": "CD_MEDICO",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "NM_MEDICO",
-						"type": "varchar"
-					},
-					{
-						"name": "DS_EMAIL",
-						"type": "varchar"
-					},
-					{
-						"name": "NR_SEQ_CONSULTA",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "HORA",
-						"type": "varchar"
-					},
-					{
-						"name": "DATA_ATENDIMENTO",
-						"type": "varchar"
-					},
-					{
-						"name": "TIPO_ATENDIMENTO",
-						"type": "varchar"
-					},
-					{
-						"name": "AGENDADO_PARA_HORA",
-						"type": "varchar"
-					},
-					{
-						"name": "AGENDADO_PARA_DIA",
-						"type": "varchar"
-					},
-					{
-						"name": "TIPO_AGENDA",
-						"type": "varchar"
-					},
-					{
-						"name": "RETORNO_EM",
-						"type": "varchar"
-					},
-					{
-						"name": "USUARIO",
-						"type": "varchar"
-					},
-					{
-						"name": "PROCEDIMENTOS",
-						"type": "varchar"
-					},
-					{
-						"name": "SIGLA_UNIDADE",
-						"type": "varchar"
-					},
-					{
-						"name": "MARCA",
-						"type": "varchar"
-					}
-				],
+				"type": "Oracle",
 				"typeProperties": {
-					"schema": "dbo",
-					"table": "Oft_Consulta_Retorno_Increment_testes"
+					"connectionString": "[parameters('SadallaTasyProd_NEW_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "ServidorArquivosBI",
+					"type": "IntegrationRuntimeReference"
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Procedure_Marca')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Procedure_Marca",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "sp_UPDATETRADEMARKV2",
-							"storedProcedureParameters": {
-								"CNPJ_FIELDNAME": {
-									"value": "cd_cgc_estab",
-									"type": "String"
-								},
-								"INITIALS_FIELDNAME": {
-									"value": "SIGLA_UNIDADE",
-									"type": "String"
-								},
-								"MARK_FIELDNAME": {
-									"value": "MARCA",
-									"type": "String"
-								},
-								"TABLENAME": {
-									"value": "Aging_Baixa_Titulo_Receber",
-									"type": "String"
-								}
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "AzureSQL_DB_Procedimentos",
-							"type": "LinkedServiceReference"
-						}
-					}
-				],
-				"folder": {
-					"name": "Contas a receber"
-				},
-				"annotations": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Workflows Requestia')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Extrai informações específicas para serem processadas nos workflows do Office Flow",
-				"activities": [
-					{
-						"name": "Extract CAPEX",
-						"description": "Copy NFD tickets to REQUESTIA_CAPEXNFD table, solving timeout in Microsoft Flow that send weekly mail from sergio.queiroz@opty.com.br account",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [
-							{
-								"activity": "Start",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[dbo].[sp_EXTRACTCAPEXREQUESTS]"
-						},
-						"linkedServiceName": {
-							"referenceName": "AzureSQL_DB_Procedimentos",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
-						"name": "Extract TISS",
-						"description": "Copy TISS tickets to specific table, solving timeout in Microsoft Flow that send weekly mail from sergio.queiroz@opty.com.br account",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [
-							{
-								"activity": "Start",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[dbo].[sp_EXTRACTTISSREQUESTS]"
-						},
-						"linkedServiceName": {
-							"referenceName": "AzureSQL_DB_Procedimentos",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
-						"name": "Start",
-						"type": "Wait",
-						"dependsOn": [],
-						"userProperties": [],
-						"typeProperties": {
-							"waitTimeInSeconds": 1
-						}
-					}
-				],
-				"folder": {
-					"name": "Apoio"
-				},
-				"annotations": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Mondays 0800 AM')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
+			"name": "[concat(parameters('factoryName'), '/SadallaTasyTeste')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "Workflows Requestia",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
+				"type": "Oracle",
 				"typeProperties": {
-					"recurrence": {
-						"frequency": "Week",
-						"interval": 1,
-						"startTime": "2019-10-14T23:00:00Z",
-						"timeZone": "UTC",
-						"schedule": {
-							"minutes": [
-								0
-							],
-							"hours": [
-								11
-							],
-							"weekDays": [
-								"Monday"
-							]
-						}
-					}
+					"connectionString": "[parameters('SadallaTasyTeste_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime",
+					"type": "IntegrationRuntimeReference"
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/Workflows Requestia')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/CloudTasyPrdDataSet')]",
@@ -923,43 +196,23 @@
 				"type": "OracleTable",
 				"structure": [
 					{
-						"name": "ESTABELECIMENTO",
-						"type": "String"
-					},
-					{
-						"name": "CNPJ",
-						"type": "String"
-					},
-					{
 						"name": "NR_ATENDIMENTO",
 						"type": "Decimal"
 					},
 					{
-						"name": "NR_PRONTUARIO",
+						"name": "CD_MEDICO",
+						"type": "String"
+					},
+					{
+						"name": "DT_ENTRADA",
+						"type": "DateTime"
+					},
+					{
+						"name": "CD_ESTABELECIMENTO",
 						"type": "Decimal"
 					},
 					{
-						"name": "CD_PESSOA_FISICA",
-						"type": "String"
-					},
-					{
-						"name": "NM_PACIENTE",
-						"type": "String"
-					},
-					{
-						"name": "NR_TEL",
-						"type": "String"
-					},
-					{
-						"name": "NR_CEL",
-						"type": "String"
-					},
-					{
-						"name": "NR_CEL2",
-						"type": "String"
-					},
-					{
-						"name": "CD_MEDICO",
+						"name": "CD_CGC",
 						"type": "String"
 					},
 					{
@@ -967,59 +220,15 @@
 						"type": "String"
 					},
 					{
-						"name": "DS_EMAIL",
+						"name": "NM_FANTASIA_ESTAB",
 						"type": "String"
 					},
 					{
-						"name": "NR_SEQ_CONSULTA",
-						"type": "Decimal"
-					},
-					{
-						"name": "HORA",
+						"name": "DS_CONVENIO",
 						"type": "String"
 					},
 					{
-						"name": "DATA_ATENDIMENTO",
-						"type": "String"
-					},
-					{
-						"name": "TIPO_ATENDIMENTO",
-						"type": "String"
-					},
-					{
-						"name": "AGENDADO_PARA_DIA",
-						"type": "String"
-					},
-					{
-						"name": "AGENDADO_PARA_HORA",
-						"type": "String"
-					},
-					{
-						"name": "TIPO_AGENDA",
-						"type": "Double"
-					},
-					{
-						"name": "RETORNO_EM",
-						"type": "String"
-					},
-					{
-						"name": "USUARIO",
-						"type": "String"
-					},
-					{
-						"name": "PROCEDIMENTOS",
-						"type": "String"
-					},
-					{
-						"name": "SIGLA_UNIDADE",
-						"type": "String"
-					},
-					{
-						"name": "MARCA",
-						"type": "String"
-					},
-					{
-						"name": "CONDUTA",
+						"name": "CD_PESSOA_FISICA",
 						"type": "String"
 					}
 				],
@@ -1028,239 +237,23 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/SadallaTasyPrdDataSet')]",
+			"name": "[concat(parameters('factoryName'), '/DH_CSV_NC_AgentesPorDia')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"linkedServiceName": {
-					"referenceName": "SadallaTasyProd_NEW",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Power BI"
-				},
-				"annotations": [],
-				"type": "OracleTable",
-				"structure": [
-					{
-						"name": "ESTABELECIMENTO",
-						"type": "String"
-					},
-					{
-						"name": "CNPJ",
-						"type": "String"
-					},
-					{
-						"name": "NR_ATENDIMENTO",
-						"type": "Decimal"
-					},
-					{
-						"name": "NR_PRONTUARIO",
-						"type": "Decimal"
-					},
-					{
-						"name": "CD_PESSOA_FISICA",
-						"type": "String"
-					},
-					{
-						"name": "NM_PACIENTE",
-						"type": "String"
-					},
-					{
-						"name": "NR_TEL",
-						"type": "String"
-					},
-					{
-						"name": "NR_CEL",
-						"type": "String"
-					},
-					{
-						"name": "NR_CEL2",
-						"type": "String"
-					},
-					{
-						"name": "CD_MEDICO",
-						"type": "String"
-					},
-					{
-						"name": "NM_MEDICO",
-						"type": "String"
-					},
-					{
-						"name": "DS_EMAIL",
-						"type": "String"
-					},
-					{
-						"name": "NR_SEQ_CONSULTA",
-						"type": "Decimal"
-					},
-					{
-						"name": "HORA",
-						"type": "String"
-					},
-					{
-						"name": "DATA_ATENDIMENTO",
-						"type": "String"
-					},
-					{
-						"name": "TIPO_ATENDIMENTO",
-						"type": "String"
-					},
-					{
-						"name": "AGENDADO_PARA_HORA",
-						"type": "String"
-					},
-					{
-						"name": "AGENDADO_PARA_DIA",
-						"type": "String"
-					},
-					{
-						"name": "TIPO_AGENDA",
-						"type": "Double"
-					},
-					{
-						"name": "RETORNO_EM",
-						"type": "String"
-					},
-					{
-						"name": "USUARIO",
-						"type": "String"
-					},
-					{
-						"name": "PROCEDIMENTOS",
-						"type": "String"
-					},
-					{
-						"name": "SIGLA_UNIDADE",
-						"type": "String"
-					},
-					{
-						"name": "MARCA",
-						"type": "String"
-					},
-					{
-						"name": "CONDUTA",
-						"type": "String"
-					}
-				],
-				"typeProperties": {}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SMART_ITAIGARA_PrdDataSet')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "SMART_ITAIGARA_NEW",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Power BI"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [],
-				"typeProperties": {}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SMART_ITABUNA_PrdDataSet')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "SMART_ITABUNA_NEW",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Power BI"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [],
-				"typeProperties": {}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SMART_HOSL_PrdDataSet')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "SMART_HOSL_NEW",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Power BI"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [],
-				"typeProperties": {}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SMART_INOB_PrdDataSet')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "SMART_INOB_NEW",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Power BI"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [],
-				"typeProperties": {}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SMART_IOF_PrdDataSet')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "SMART_IOF_NEW",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Power BI"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [],
-				"typeProperties": {}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/INOB_CSV_NC_BilheteLigacoes')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Arquivo Nexcore BilheteLigacoes.csv",
 				"linkedServiceName": {
 					"referenceName": "Folder_Nexcore_Consolidado",
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
-					"name": "Nexcore/INOB"
+					"name": "Nexcore/DH"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
 					"location": {
 						"type": "FileServerLocation",
-						"fileName": "BilheteLigacoesINOB.csv"
+						"fileName": "AgentesPorDiaDAYHORC.csv"
 					},
 					"columnDelimiter": ";",
 					"escapeChar": "",
@@ -1269,59 +262,228 @@
 				},
 				"schema": [
 					{
-						"name": "Data",
+						"name": "Usuario",
 						"type": "String"
 					},
 					{
-						"name": "Hora",
+						"name": "Intervalo",
 						"type": "String"
 					},
 					{
-						"name": "Usu�rio",
+						"name": "Atendidas",
 						"type": "String"
 					},
 					{
-						"name": "Tipo",
+						"name": "Recusas",
 						"type": "String"
 					},
 					{
-						"name": "Origem",
+						"name": "Recebidas",
 						"type": "String"
 					},
 					{
-						"name": "Destino",
+						"name": "Internas Recebidas",
 						"type": "String"
 					},
 					{
-						"name": "Status",
+						"name": "Transferencias",
 						"type": "String"
 					},
 					{
-						"name": "Centro de Custo",
+						"name": "Efetuadas",
 						"type": "String"
 					},
 					{
-						"name": "Tempo Tarifado",
+						"name": "Efetuadas Tratados",
 						"type": "String"
 					},
 					{
-						"name": "Tempo Decorrido",
+						"name": "% Taxa de Contato",
 						"type": "String"
 					},
 					{
-						"name": "Campanha",
+						"name": "Tempo Atendidas",
 						"type": "String"
 					},
 					{
-						"name": "Fila",
+						"name": "Tempo Internas Recebidas",
 						"type": "String"
 					},
 					{
-						"name": "Unique ID",
+						"name": "Tempo Efetuadas",
 						"type": "String"
 					},
 					{
-						"name": "Linked ID",
+						"name": "Tempo Medio Falado",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Total Falado",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Toque Agente",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Toque Cliente",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Pausa",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Estouro",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Dispon�vel",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Indispon�vel",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Logado",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Deslogado",
+						"type": "String"
+					},
+					{
+						"name": "% Falado x Logado",
+						"type": "String"
+					},
+					{
+						"name": "Marca",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DH_CSV_NC_AgentesPorHora')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Folder_Nexcore_Consolidado",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Nexcore/DH"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "FileServerLocation",
+						"fileName": "AgentesPorHoraDAYHORC.csv"
+					},
+					"columnDelimiter": ";",
+					"escapeChar": "",
+					"firstRowAsHeader": true,
+					"quoteChar": ""
+				},
+				"schema": [
+					{
+						"name": "Usuario",
+						"type": "String"
+					},
+					{
+						"name": "Intervalo",
+						"type": "String"
+					},
+					{
+						"name": "Atendidas",
+						"type": "String"
+					},
+					{
+						"name": "Recusas",
+						"type": "String"
+					},
+					{
+						"name": "Recebidas",
+						"type": "String"
+					},
+					{
+						"name": "Internas Recebidas",
+						"type": "String"
+					},
+					{
+						"name": "Transferencias",
+						"type": "String"
+					},
+					{
+						"name": "Efetuadas",
+						"type": "String"
+					},
+					{
+						"name": "Efetuadas Tratados",
+						"type": "String"
+					},
+					{
+						"name": "% Taxa de Contato",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Atendidas",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Internas Recebidas",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Efetuadas",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Medio Falado",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Total Falado",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Toque Agente",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Toque Cliente",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Pausa",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Estouro",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Dispon�vel",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Indispon�vel",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Logado",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Deslogado",
+						"type": "String"
+					},
+					{
+						"name": "% Falado x Logado",
 						"type": "String"
 					},
 					{
@@ -1412,6 +574,1118 @@
 					},
 					{
 						"name": "Linked ID",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DH_CSV_NC_FilasPorHora')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Folder_Nexcore_Consolidado",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Nexcore/DH"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "FileServerLocation",
+						"fileName": "FilasPorHoraDAYHORC.csv"
+					},
+					"columnDelimiter": ";",
+					"escapeChar": "",
+					"firstRowAsHeader": true,
+					"quoteChar": ""
+				},
+				"schema": [
+					{
+						"name": "Fila",
+						"type": "String"
+					},
+					{
+						"name": "Intervalo",
+						"type": "String"
+					},
+					{
+						"name": "Atendidas Ate NS",
+						"type": "String"
+					},
+					{
+						"name": "Atendidas Apos NS",
+						"type": "String"
+					},
+					{
+						"name": "Atendidas",
+						"type": "String"
+					},
+					{
+						"name": "Abandonos Ate NS",
+						"type": "String"
+					},
+					{
+						"name": "Abandonos Apos NS",
+						"type": "String"
+					},
+					{
+						"name": "Abandonos Anuncio Inicial",
+						"type": "String"
+					},
+					{
+						"name": "Abandonos",
+						"type": "String"
+					},
+					{
+						"name": "Roteamentos Timeout",
+						"type": "String"
+					},
+					{
+						"name": "Roteamentos Fila Cheia",
+						"type": "String"
+					},
+					{
+						"name": "Roteamentos Fila Vazia",
+						"type": "String"
+					},
+					{
+						"name": "Roteamentos Fila Sem Ags. Disp.",
+						"type": "String"
+					},
+					{
+						"name": "Roteamentos Caixa Postal",
+						"type": "String"
+					},
+					{
+						"name": "Roteamentos",
+						"type": "String"
+					},
+					{
+						"name": "Fora Horario Antes",
+						"type": "String"
+					},
+					{
+						"name": "Fora Horario Intervalo",
+						"type": "String"
+					},
+					{
+						"name": "Fora Horario Depois",
+						"type": "String"
+					},
+					{
+						"name": "Fora Horario",
+						"type": "String"
+					},
+					{
+						"name": "Total Recebidas",
+						"type": "String"
+					},
+					{
+						"name": "Callback Tratados",
+						"type": "String"
+					},
+					{
+						"name": "Callback Nao Tratados",
+						"type": "String"
+					},
+					{
+						"name": "Callback",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Toque",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Falado",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Medio Falado",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Medio Pausa ACW",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Medio Produtivo AHT",
+						"type": "String"
+					},
+					{
+						"name": "% Nivel Servico",
+						"type": "String"
+					},
+					{
+						"name": "% Taxa Atendimento",
+						"type": "String"
+					},
+					{
+						"name": "% Taxa Abandono",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Medio Espera",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Medio para Atender",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Total para Atender",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Medio para Abandono",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Total para Abandono",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Total Espera",
+						"type": "String"
+					},
+					{
+						"name": "Agentes Logados - Minimo",
+						"type": "String"
+					},
+					{
+						"name": "Agentes Logados - Maximo",
+						"type": "String"
+					},
+					{
+						"name": "Chamadas em Espera - Minimo",
+						"type": "String"
+					},
+					{
+						"name": "Chamadas em Espera - Medio",
+						"type": "String"
+					},
+					{
+						"name": "Chamadas em Espera = Maximo",
+						"type": "String"
+					},
+					{
+						"name": "Marca",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/FILE_QANSWER')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Folder_Requestia",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Requestia"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "FileServerLocation",
+						"fileName": "qanswer.csv"
+					},
+					"columnDelimiter": ";",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "QSESSION",
+						"type": "String"
+					},
+					{
+						"name": "QUESTION",
+						"type": "String"
+					},
+					{
+						"name": "QANSWER",
+						"type": "String"
+					},
+					{
+						"name": "QANSWERED",
+						"type": "String"
+					},
+					{
+						"name": "QANSWERDATE",
+						"type": "String"
+					},
+					{
+						"name": "QSHOW",
+						"type": "String"
+					},
+					{
+						"name": "QORDER",
+						"type": "String"
+					},
+					{
+						"name": "QUPDATED",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/FILE_QSESSION')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Folder_Requestia",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Requestia"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "FileServerLocation",
+						"fileName": "qsession.csv"
+					},
+					"columnDelimiter": ";",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "QSESSION",
+						"type": "String"
+					},
+					{
+						"name": "QSESSIONTITLE",
+						"type": "String"
+					},
+					{
+						"name": "QCLIENT",
+						"type": "String"
+					},
+					{
+						"name": "QFORM",
+						"type": "String"
+					},
+					{
+						"name": "QVERSION",
+						"type": "String"
+					},
+					{
+						"name": "QSTATUS",
+						"type": "String"
+					},
+					{
+						"name": "QANSWERDATE",
+						"type": "String"
+					},
+					{
+						"name": "QEXPDATE",
+						"type": "String"
+					},
+					{
+						"name": "QAPPLICATION",
+						"type": "String"
+					},
+					{
+						"name": "QSURVEYTYPE",
+						"type": "String"
+					},
+					{
+						"name": "REQLOCATION",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/FILE_QTABLEANSWER')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Folder_Requestia",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "FileServerLocation",
+						"fileName": "qtableanswer.csv"
+					},
+					"columnDelimiter": ";",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "QSESSION",
+						"type": "String"
+					},
+					{
+						"name": "TABLE_NAME",
+						"type": "String"
+					},
+					{
+						"name": "TABLE_ROWID",
+						"type": "String"
+					},
+					{
+						"name": "TABLE_ROWNUM",
+						"type": "String"
+					},
+					{
+						"name": "COLUMN_NAME",
+						"type": "String"
+					},
+					{
+						"name": "COLUMN_VALUE",
+						"type": "String"
+					},
+					{
+						"name": "COLUMN_POSITION",
+						"type": "String"
+					},
+					{
+						"name": "COLUMN_ANSWERED",
+						"type": "String"
+					},
+					{
+						"name": "COLUMN_ANSWERDATE",
+						"type": "String"
+					},
+					{
+						"name": "COLUMN_UPDATED",
+						"type": "String"
+					},
+					{
+						"name": "COLUMN_VISIBLE",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/FILE_REQUESTS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Folder_Requestia",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Requestia"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "FileServerLocation",
+						"fileName": "request.csv"
+					},
+					"columnDelimiter": ";",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "REQUEST",
+						"type": "String"
+					},
+					{
+						"name": "CLIENT",
+						"type": "String"
+					},
+					{
+						"name": "ORIGANAL",
+						"type": "String"
+					},
+					{
+						"name": "CURRANAL",
+						"type": "String"
+					},
+					{
+						"name": "GROUPANAL",
+						"type": "String"
+					},
+					{
+						"name": "LASTANAL",
+						"type": "String"
+					},
+					{
+						"name": "LASTANLGRP",
+						"type": "String"
+					},
+					{
+						"name": "ORIGGROUP",
+						"type": "String"
+					},
+					{
+						"name": "CURRGROUP",
+						"type": "String"
+					},
+					{
+						"name": "LASTGROUP",
+						"type": "String"
+					},
+					{
+						"name": "GRGROUP",
+						"type": "String"
+					},
+					{
+						"name": "CATEGORY",
+						"type": "String"
+					},
+					{
+						"name": "PRODUCT",
+						"type": "String"
+					},
+					{
+						"name": "PROCESS",
+						"type": "String"
+					},
+					{
+						"name": "PROBLEM",
+						"type": "String"
+					},
+					{
+						"name": "RSTATUS",
+						"type": "String"
+					},
+					{
+						"name": "RPRIORITY",
+						"type": "String"
+					},
+					{
+						"name": "REQTYPE",
+						"type": "String"
+					},
+					{
+						"name": "REQSOURCE",
+						"type": "String"
+					},
+					{
+						"name": "LOCATION",
+						"type": "String"
+					},
+					{
+						"name": "ORGUNIT",
+						"type": "String"
+					},
+					{
+						"name": "ORGUNIT_ROOT",
+						"type": "String"
+					},
+					{
+						"name": "CHARGE",
+						"type": "String"
+					},
+					{
+						"name": "SLEVEL",
+						"type": "String"
+					},
+					{
+						"name": "EQUIP",
+						"type": "String"
+					},
+					{
+						"name": "RESOURCEID",
+						"type": "String"
+					},
+					{
+						"name": "REQUESTOR",
+						"type": "String"
+					},
+					{
+						"name": "ABSTRACT",
+						"type": "String"
+					},
+					{
+						"name": "DESCRIPT",
+						"type": "String"
+					},
+					{
+						"name": "OPENDATE",
+						"type": "String"
+					},
+					{
+						"name": "CLOSEDATE",
+						"type": "String"
+					},
+					{
+						"name": "CLOSED",
+						"type": "String"
+					},
+					{
+						"name": "LASTACTION",
+						"type": "String"
+					},
+					{
+						"name": "LASTANALYST",
+						"type": "String"
+					},
+					{
+						"name": "LASTSTATUS",
+						"type": "String"
+					},
+					{
+						"name": "LASTPRIORITY",
+						"type": "String"
+					},
+					{
+						"name": "LASTREOPEN",
+						"type": "String"
+					},
+					{
+						"name": "LASTACTIONATEND",
+						"type": "String"
+					},
+					{
+						"name": "LASTACTTYPE",
+						"type": "String"
+					},
+					{
+						"name": "REFDATE",
+						"type": "String"
+					},
+					{
+						"name": "RESPDATE",
+						"type": "String"
+					},
+					{
+						"name": "RESPTIME",
+						"type": "String"
+					},
+					{
+						"name": "RESLTIME",
+						"type": "String"
+					},
+					{
+						"name": "RESPMINS",
+						"type": "String"
+					},
+					{
+						"name": "RESLMINS",
+						"type": "String"
+					},
+					{
+						"name": "RESPREMAINS",
+						"type": "String"
+					},
+					{
+						"name": "RESLREMAINS",
+						"type": "String"
+					},
+					{
+						"name": "RESPMODE",
+						"type": "String"
+					},
+					{
+						"name": "RESLMODE",
+						"type": "String"
+					},
+					{
+						"name": "NOCOMPUTE",
+						"type": "String"
+					},
+					{
+						"name": "RLOCKED",
+						"type": "String"
+					},
+					{
+						"name": "ESTIMCOST",
+						"type": "String"
+					},
+					{
+						"name": "TOTALCOST",
+						"type": "String"
+					},
+					{
+						"name": "APROVANLTYPE",
+						"type": "String"
+					},
+					{
+						"name": "APROVANALYST",
+						"type": "String"
+					},
+					{
+						"name": "APROVCLITYPE",
+						"type": "String"
+					},
+					{
+						"name": "APROVCLIEXACTOUNIT",
+						"type": "String"
+					},
+					{
+						"name": "MLEVELAPROV",
+						"type": "String"
+					},
+					{
+						"name": "OUNITAPROV",
+						"type": "String"
+					},
+					{
+						"name": "CLIENTAPROV",
+						"type": "String"
+					},
+					{
+						"name": "PACKAGE",
+						"type": "String"
+					},
+					{
+						"name": "PROJECT",
+						"type": "String"
+					},
+					{
+						"name": "REQPARENT",
+						"type": "String"
+					},
+					{
+						"name": "PAYMETHOD",
+						"type": "String"
+					},
+					{
+						"name": "WORKFLOW",
+						"type": "String"
+					},
+					{
+						"name": "SEVENT",
+						"type": "String"
+					},
+					{
+						"name": "CURRSEVENT",
+						"type": "String"
+					},
+					{
+						"name": "LASTSEVENT",
+						"type": "String"
+					},
+					{
+						"name": "REQWORKFLOW",
+						"type": "String"
+					},
+					{
+						"name": "ORIGCATEGORY",
+						"type": "String"
+					},
+					{
+						"name": "ORIGPRODUCT",
+						"type": "String"
+					},
+					{
+						"name": "ORIGPROCESS",
+						"type": "String"
+					},
+					{
+						"name": "ORIGPROBLEM",
+						"type": "String"
+					},
+					{
+						"name": "TIMEZONE",
+						"type": "String"
+					},
+					{
+						"name": "ID3PART",
+						"type": "String"
+					},
+					{
+						"name": "MQI_PROFILEID",
+						"type": "String"
+					},
+					{
+						"name": "MQI_VERIFIED",
+						"type": "String"
+					},
+					{
+						"name": "VIEWPROJECT",
+						"type": "String"
+					},
+					{
+						"name": "PROJSTARTED",
+						"type": "String"
+					},
+					{
+						"name": "TOTALATTACH",
+						"type": "String"
+					},
+					{
+						"name": "TOTALATTACHACT",
+						"type": "String"
+					},
+					{
+						"name": "INSERTDATE",
+						"type": "String"
+					},
+					{
+						"name": "UPDATEDATE",
+						"type": "String"
+					},
+					{
+						"name": "QFORM",
+						"type": "String"
+					},
+					{
+						"name": "QFORMSCRIPT",
+						"type": "String"
+					},
+					{
+						"name": "QSURVEY",
+						"type": "String"
+					},
+					{
+						"name": "QSESSIONFORM",
+						"type": "String"
+					},
+					{
+						"name": "QSESSIONSURVEY",
+						"type": "String"
+					},
+					{
+						"name": "REQUESTFLAGS",
+						"type": "String"
+					},
+					{
+						"name": "V_ASSOCIATION",
+						"type": "String"
+					},
+					{
+						"name": "V_ID_CONTRACT",
+						"type": "String"
+					},
+					{
+						"name": "V_ID_PROJECT",
+						"type": "String"
+					},
+					{
+						"name": "V_IS_PROJECT",
+						"type": "String"
+					},
+					{
+						"name": "V_HAS_PROJECT",
+						"type": "String"
+					},
+					{
+						"name": "V_HAS_APPROVER",
+						"type": "String"
+					},
+					{
+						"name": "LASTSEQUENCE",
+						"type": "String"
+					},
+					{
+						"name": "PRBPARENT",
+						"type": "String"
+					},
+					{
+						"name": "LASTRECALCDATE",
+						"type": "String"
+					},
+					{
+						"name": "LASTAPPROVCNTX",
+						"type": "String"
+					},
+					{
+						"name": "LASTAPPROVUSER",
+						"type": "String"
+					},
+					{
+						"name": "LASTAPPROVCODE",
+						"type": "String"
+					},
+					{
+						"name": "CURRAPPROVCODE",
+						"type": "String"
+					},
+					{
+						"name": "ORIGNOCOMPUTE",
+						"type": "String"
+					},
+					{
+						"name": "ORIGRSTATUS",
+						"type": "String"
+					},
+					{
+						"name": "ORIGRPRIORITY",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/HOB_CSV_NC_AgentesPorDia')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Folder_Nexcore_Consolidado",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Nexcore/HOB"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "FileServerLocation",
+						"fileName": "AgentesPorDiaHOBL2.csv"
+					},
+					"columnDelimiter": ";",
+					"escapeChar": "",
+					"firstRowAsHeader": true,
+					"quoteChar": ""
+				},
+				"schema": [
+					{
+						"name": "Usuario",
+						"type": "String"
+					},
+					{
+						"name": "Intervalo",
+						"type": "String"
+					},
+					{
+						"name": "Atendidas",
+						"type": "String"
+					},
+					{
+						"name": "Recusas",
+						"type": "String"
+					},
+					{
+						"name": "Recebidas",
+						"type": "String"
+					},
+					{
+						"name": "Internas Recebidas",
+						"type": "String"
+					},
+					{
+						"name": "Transferencias",
+						"type": "String"
+					},
+					{
+						"name": "Efetuadas",
+						"type": "String"
+					},
+					{
+						"name": "Efetuadas Tratados",
+						"type": "String"
+					},
+					{
+						"name": "% Taxa de Contato",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Atendidas",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Internas Recebidas",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Efetuadas",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Medio Falado",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Total Falado",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Toque Agente",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Toque Cliente",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Pausa",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Estouro",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Dispon�vel",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Indispon�vel",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Logado",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Deslogado",
+						"type": "String"
+					},
+					{
+						"name": "% Falado x Logado",
+						"type": "String"
+					},
+					{
+						"name": "Marca",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/HOB_CSV_NC_AgentesPorHora')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Folder_Nexcore_Consolidado",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Nexcore/HOB"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "FileServerLocation",
+						"fileName": "AgentesPorHoraHOBL2.csv"
+					},
+					"columnDelimiter": ";",
+					"escapeChar": "",
+					"firstRowAsHeader": true,
+					"quoteChar": ""
+				},
+				"schema": [
+					{
+						"name": "Usuario",
+						"type": "String"
+					},
+					{
+						"name": "Intervalo",
+						"type": "String"
+					},
+					{
+						"name": "Atendidas",
+						"type": "String"
+					},
+					{
+						"name": "Recusas",
+						"type": "String"
+					},
+					{
+						"name": "Recebidas",
+						"type": "String"
+					},
+					{
+						"name": "Internas Recebidas",
+						"type": "String"
+					},
+					{
+						"name": "Transferencias",
+						"type": "String"
+					},
+					{
+						"name": "Efetuadas",
+						"type": "String"
+					},
+					{
+						"name": "Efetuadas Tratados",
+						"type": "String"
+					},
+					{
+						"name": "% Taxa de Contato",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Atendidas",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Internas Recebidas",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Efetuadas",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Medio Falado",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Total Falado",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Toque Agente",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Toque Cliente",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Pausa",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Estouro",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Dispon�vel",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Indispon�vel",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Logado",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Deslogado",
+						"type": "String"
+					},
+					{
+						"name": "% Falado x Logado",
+						"type": "String"
+					},
+					{
+						"name": "Marca",
 						"type": "String"
 					}
 				]
