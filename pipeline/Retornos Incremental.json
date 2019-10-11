@@ -21,7 +21,8 @@
 						"partitionOption": "None"
 					},
 					"sink": {
-						"type": "AzureSqlSink"
+						"type": "OracleSink",
+						"writeBatchSize": 10000
 					},
 					"enableStaging": false
 				},
@@ -33,7 +34,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ASQL_TB_RetornosTMP",
+						"referenceName": "SadallaTasyPrdDataSet",
 						"type": "DatasetReference"
 					}
 				]
@@ -176,7 +177,8 @@
 						"partitionOption": "None"
 					},
 					"sink": {
-						"type": "AzureSqlSink"
+						"type": "OracleSink",
+						"writeBatchSize": 10000
 					},
 					"enableStaging": false
 				},
@@ -188,7 +190,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ASQL_TB_RetornosTMP",
+						"referenceName": "CloudTasyPrdDataSet",
 						"type": "DatasetReference"
 					}
 				]
