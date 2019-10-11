@@ -13,13 +13,13 @@
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "Retornos",
+					"referenceName": "Chamados Requestia",
 					"type": "PipelineReference"
 				}
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "Chamados Requestia",
+					"referenceName": "Retornos HOB",
 					"type": "PipelineReference"
 				}
 			}
