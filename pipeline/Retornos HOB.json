@@ -30,82 +30,7 @@
 					"sink": {
 						"type": "AzureSqlSink"
 					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"name": "ULTIMO_ATENDIMENTO",
-									"type": "Double"
-								},
-								"sink": {
-									"name": "ULTIMO_ATENDIMENTO",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"name": "CD_PESSOA_FISICA",
-									"type": "String"
-								},
-								"sink": {
-									"name": "CD_PESSOA_FISICA",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"name": "NM_PESSOA_FISICA",
-									"type": "String"
-								},
-								"sink": {
-									"name": "NM_PESSOA_FISICA",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "NR_TELEFONE_CELULAR",
-									"type": "String"
-								},
-								"sink": {
-									"name": "NR_TELEFONE_CELULAR",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "NR_TELEFONE",
-									"type": "String"
-								},
-								"sink": {
-									"name": "NR_TELEFONE",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "DS_EMAIL",
-									"type": "String"
-								},
-								"sink": {
-									"name": "DS_EMAIL",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "CNPJ",
-									"type": "String"
-								},
-								"sink": {
-									"name": "CNPJ",
-									"type": "String"
-								}
-							}
-						]
-					}
+					"enableStaging": false
 				},
 				"inputs": [
 					{
@@ -142,7 +67,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select  at.nr_atendimento, at.cd_medico_resp as cd_medico, at.dt_entrada, at.cd_estabelecimento, e.cd_cgc, pf.nm_pessoa_fisica as nm_medico, e.nm_fantasia_estab, \n        cn.ds_convenio, at.cd_pessoa_fisica\nfrom atendimento_paciente at, \n     estabelecimento e,\n     pessoa_fisica pf,\n     atend_categoria_convenio c,\n     convenio cn\nwhere pf.cd_pessoa_fisica = at.cd_medico_resp\nand c.nr_atendimento = c.nr_atendimento\nand c.cd_convenio = cn.cd_convenio\nand at.cd_estabelecimento = e.cd_estabelecimento",
+						"oracleReaderQuery": "select  at.nr_atendimento, at.cd_medico_resp as cd_medico, at.dt_entrada, at.cd_estabelecimento, e.cd_cgc, pf.nm_pessoa_fisica as nm_medico, e.nm_fantasia_estab, \n        cn.ds_convenio, at.cd_pessoa_fisica\nfrom atendimento_paciente at, \n     estabelecimento e,\n     pessoa_fisica pf,\n     atend_categoria_convenio c,\n     convenio cn\nwhere pf.cd_pessoa_fisica = at.cd_medico_resp\nand at.nr_atendimento = c.nr_atendimento\nand c.cd_convenio = cn.cd_convenio\nand at.cd_estabelecimento = e.cd_estabelecimento",
 						"partitionOption": "None"
 					},
 					"sink": {
