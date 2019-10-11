@@ -19,7 +19,7 @@
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "Retornos HOB-NEW",
+					"referenceName": "Retornos HOB",
 					"type": "PipelineReference"
 				}
 			}
