@@ -1,5 +1,5 @@
 {
-	"name": "OracleTable1",
+	"name": "CloudTasyPrdDataSet",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "CloudTasyProd_NEW",
