@@ -3,11 +3,237 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Altera Agendas",
+				"name": "Pacientes_Unidade",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Wait1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "select max(at.nr_atendimento) as ultimo_atendimento, \npf.cd_pessoa_fisica, \nsubstr(pf.nm_pessoa_fisica,1,200) as nm_pessoa_fisica,\nsubstr(replace(LTRIM(translate(pf.nr_telefone_celular, translate(pf.nr_telefone_celular, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone_celular,\nsubstr(replace(LTRIM(translate(cpf.nr_telefone, translate(cpf.nr_telefone, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone,\nsubstr(cpf.ds_email,1,100) as ds_email,\nobter_cgc_estabelecimento(pf.cd_estabelecimento) as cnpj\n\nfrom pessoa_fisica pf,\natendimento_paciente at,\ncompl_pessoa_fisica cpf\nwhere pf.cd_pessoa_fisica = at.cd_pessoa_fisica (+)\nand pf.cd_pessoa_fisica = cpf.cd_pessoa_fisica\nand cpf.ie_tipo_complemento = 1\n\ngroup by pf.cd_pessoa_fisica,\npf.nm_pessoa_fisica,\npf.nr_telefone_celular,\npf.nr_telefone_celular,\ncpf.nr_telefone,\ncpf.ds_email,\npf.cd_estabelecimento",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "CloudTasyPrdDataSet",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AZSQL_TB_Ret_Pacientes_unidade",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Atendimento_Unidade",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Wait1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "select  at.nr_atendimento, at.cd_medico_resp as cd_medico, at.dt_entrada, at.cd_estabelecimento, e.cd_cgc, pf.nm_pessoa_fisica as nm_medico, e.nm_fantasia_estab, \n        cn.ds_convenio, at.cd_pessoa_fisica\nfrom atendimento_paciente at, \n     estabelecimento e,\n     pessoa_fisica pf,\n     atend_categoria_convenio c,\n     convenio cn\nwhere pf.cd_pessoa_fisica = at.cd_medico_resp\nand at.nr_atendimento = (select max(x.nr_atendimento) from atendimento_paciente x where x.cd_pessoa_fisica = at.cd_pessoa_fisica)\nand at.nr_atendimento = c.nr_atendimento\nand c.cd_convenio = cn.cd_convenio\nand at.cd_estabelecimento = e.cd_estabelecimento ",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "CloudTasyPrdDataSet",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AZSQL_TB_Ret_Atendimentos_Unidade",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Agendamento_Futuros_Unidade",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Wait1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "select  a.cd_pessoa_fisica, a.cd_convenio, \nto_char((a.hr_inicio) , 'dd/mm/yyyy') as data_agenda,\nto_char((a.hr_inicio) , 'hh24:mi:ss') as hora_agenda,\nag.cd_tipo_agenda,\npf.nm_pessoa_fisica as nm_medico,\nsubstr(obter_desc_procedimento(a.cd_procedimento, a.ie_origem_proced),1,200) as ds_procedimento_princ,\n\nsubstr((select Listagg(Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced), ' ;') within GROUP (ORDER BY Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced))  from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia),1,1000) as ds_procedimento_adic,\n\n1 + (select count(1)from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia) as ie_quantidade,\n\nobter_nome_usuario(a.nm_usuario_orig) as nm_usuario\n\nfrom agenda_paciente a,\n     agenda ag,\n     pessoa_fisica pf\nwhere a.cd_agenda = ag.cd_agenda\nand ag.cd_pessoa_fisica = pf.cd_pessoa_fisica \nand a.dt_agenda between inicio_dia(sysdate) and fim_dia(sysdate + 720)\nand a.cd_pessoa_fisica is not null\nand a.hr_inicio = (select max(x.hr_inicio) from agenda_paciente x where x.cd_pessoa_fisica = a.cd_pessoa_fisica)\nand ag.cd_tipo_agenda = 2\ngroup by \na.cd_pessoa_fisica, \na.cd_convenio, \nag.cd_tipo_agenda,\npf.nm_pessoa_fisica,\na.hr_inicio,\na.cd_procedimento,\na.ie_origem_proced,\na.nr_sequencia,\na.nm_usuario_orig",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "CloudTasyPrdDataSet",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AZSQL_TB_Agendamentos_Futuros_Unidade",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Consulta_Paciente_Unidade",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Wait1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "select max(o.nr_sequencia) as nr_sequencia, o.dt_atualizacao, o.nr_atendimento, o.cd_medico as cd_medico ,obter_nome_pf(o.cd_medico) as nm_medico, c.qt_periodo||' '||c.ie_periodo as ds_retorno,  substr(z.conduta,1,1000) as ds_conduta,\nobter_pessoa_atendimento(o.nr_atendimento, 'C') as cd_pessoa_fisica\nfrom oft_consulta o,\n     (SELECT a.nr_seq_consulta, b.ds_resultado as conduta\n      FROM   med_avaliacao_paciente a \n      inner join med_avaliacao_result b ON b.nr_seq_avaliacao = a.nr_sequencia \n      WHERE  a.nr_seq_tipo_avaliacao = 34 \n      and  b.nr_seq_item = 457 --456, 458 ) \n      GROUP  BY a.nr_seq_consulta, b.ds_resultado) z,\n      oft_conduta c\nwhere o.nr_sequencia = z.nr_seq_consulta\nand o.nr_sequencia = c.nr_seq_consulta\nand o.nr_atendimento is not null\ngroup by o.nr_atendimento, o.dt_atualizacao, o.cd_pessoa_fisica, o.cd_medico, obter_nome_pf(o.cd_medico), z.conduta, c.qt_periodo, c.ie_periodo",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "CloudTasyPrdDataSet",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AZSQL_TB_Ret_Consulta_Oft_Unidade",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Wait1",
+				"type": "Wait",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 1
+				}
+			},
+			{
+				"name": "Create_Proximas_Consultas",
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "Tasy HTML5",
+						"activity": "Pacientes_Unidade",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Atendimento_Unidade",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Agendamento_Futuros_Unidade",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Consulta_Paciente_Unidade",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[CREATEPROXIMASCONSULTAS]"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Altera_tipo_agendas",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Altera_marca",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -25,15 +251,15 @@
 					"storedProcedureName": "[dbo].[sp_ALTERTIPOAGENDAS]",
 					"storedProcedureParameters": {
 						"FIELDNAME_DEST": {
-							"value": "TIPO_AGENDA",
+							"value": "CD_TIPO_AGENDA",
 							"type": "String"
 						},
 						"FIELDNAME_ORIG": {
-							"value": "TIPO_AGENDA",
+							"value": "CD_TIPO_AGENDA",
 							"type": "String"
 						},
 						"TABLENAME": {
-							"value": "Oft_Consulta_Retorno_Increment",
+							"value": "Ret_Proximas_Consultas",
 							"type": "String"
 						}
 					}
@@ -44,47 +270,11 @@
 				}
 			},
 			{
-				"name": "Tasy HTML5",
-				"type": "Copy",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "0.05:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT Obter_nome_estab(Obter_estab_atend(m.nr_atendimento)) AS estabelecimento, \n       Obter_cnpj_estabelecimento(Obter_estab_atend(m.nr_atendimento)) \n       AS cnpj, \n       m.nr_atendimento, \n       n.nr_prontuario, \n       m.cd_pessoa_fisica, \n       n.nm_pessoa_fisica nm_paciente, \n       replace(LTRIM(translate(n.nr_tel, translate(n.nr_tel, '1234567890', ' ') , ' ')),' ','') as NR_TEL,\n       replace(LTRIM(translate(n.nr_cel, translate(n.nr_cel, '1234567890', ' ') , ' ')),' ','') as NR_CEL,\n       replace(LTRIM(translate(n.nr_cel2, translate(n.nr_cel2, '1234567890', ' ') , ' ')),' ','') as NR_CEL2,\n       m.cd_medico, \n       m.nm_medico, \n       n.ds_email, \n       m.nr_seq_consulta, \n       Substr(To_char(Obter_data_entrada(m.nr_atendimento), 'hh24:mi:ss'), 1, 50 ) AS hora, \n       Substr(To_char(Obter_data_entrada(m.nr_atendimento), 'dd/mm/yyyy'), 1, 50 ) AS data_atendimento, \n       Obter_valor_dominio(12, Obter_tipo_atendimento(m.nr_atendimento)) AS tipo_atendimento, \n       Substr((SELECT To_char(a.dt_agenda, 'dd/mm/yyyy') \n               FROM   agenda_paciente a, \n                      agenda x \n               WHERE  a.cd_agenda = x.cd_agenda \n                      AND a.dt_agenda > Obter_data_entrada(m.nr_atendimento) \n                      AND a.cd_pessoa_fisica = m.cd_pessoa_fisica \n                      AND Obter_tipo_agenda(a.cd_agenda) = 2 \n                      AND ROWNUM <= 1), 1, 50) AS agendado_para_dia, \n       Substr((SELECT To_char(a.hr_inicio, 'hh24:mi:ss') \n               FROM   agenda_paciente a, \n                      agenda x \n               WHERE  a.cd_agenda = x.cd_agenda \n                      AND a.dt_agenda > Obter_data_entrada(m.nr_atendimento) \n                      AND a.cd_pessoa_fisica = m.cd_pessoa_fisica \n                      AND ROWNUM <= 1), 1, 50) AS agendado_para_hora, \n       (SELECT CASE \n                 WHEN Obter_tipo_agenda(a.cd_agenda) = 2 \n                      AND x.cd_pessoa_fisica IS NULL THEN 2 \n                 WHEN Obter_tipo_agenda(a.cd_agenda) = 2 \n                      AND x.cd_pessoa_fisica IS NOT NULL THEN 3 \n                 WHEN Obter_tipo_agenda(a.cd_agenda) = 1 THEN 1 \n               END tipo_agenda \n        FROM   agenda_paciente a, \n               agenda x \n        WHERE  a.cd_agenda = x.cd_agenda \n               AND a.dt_agenda > Obter_data_entrada(m.nr_atendimento) \n               AND a.cd_pessoa_fisica = m.cd_pessoa_fisica \n               AND ROWNUM <= 1 \n               AND a.dt_agenda <> Obter_data_entrada(m.nr_atendimento)) AS tipo_agenda, \n       (SELECT 'Retorno em ' \n               || Lpad(a.qt_periodo, 2, '0') \n               || Decode(a.ie_periodo, 'D', ' Dias', \n                                       a.ie_periodo) ds_periodo \n        FROM   oft_conduta a \n        WHERE  a.nr_seq_consulta = m.nr_seq_consulta \n               AND a.dt_inativacao IS NULL \n               AND a.ie_situacao = 'A' \n               AND a.nr_sequencia = (SELECT Max(nr_sequencia) \n                                     FROM   oft_conduta \n                                     WHERE  nr_seq_consulta = a.nr_seq_consulta) \n               AND a.qt_periodo IS NOT NULL) AS retorno_em, \n       (SELECT a.nm_usuario_orig \n        FROM   agenda_paciente a, \n               agenda x \n        WHERE  a.cd_agenda = x.cd_agenda \n               AND a.dt_agenda > Obter_data_entrada(m.nr_atendimento) \n               AND a.cd_pessoa_fisica = m.cd_pessoa_fisica \n               AND Obter_tipo_agenda(a.cd_agenda) = 2 \n               AND ROWNUM <= 1) AS usuario, \n       Substr((SELECT Listagg(Obter_desc_procedimento(b.cd_procedimento, \n                              b.ie_origem_proced) \n                              || ' Quantidade = ' \n                              || b.qt_exame, ' ;') \n                        within GROUP (ORDER BY \n                        Obter_desc_procedimento(b.cd_procedimento, \n                        b.ie_origem_proced)) \n               FROM   pedido_exame_externo_item b \n                      inner join proc_interno c \n                              ON c.nr_sequencia = b.nr_proc_interno \n                      inner join pedido_exame_externo c \n                              ON c.nr_sequencia = b.nr_seq_pedido \n               WHERE  c.nr_seq_consulta = m.nr_seq_consulta \n                      AND c.ie_situacao = 'A'), 1, 1000) AS procedimentos, \n       '' sigla_unidade, \n       '' marca,\n       substr(m.conduta,1,1000) as conduta\nFROM   (SELECT a.nr_atendimento, \n               a.cd_pessoa_fisica, \n               a.cd_medico, \n               Obter_nome_pf(a.cd_medico) nm_medico, \n               a.nr_sequencia             nr_seq_consulta, \n               a.cd_estabelecimento,\n               '' as conduta\n        FROM   oft_consulta a \n        UNION \n        SELECT a.nr_atendimento, \n               a.cd_pessoa_fisica, \n               a.cd_medico, \n               Obter_nome_pf(a.cd_medico) nm_medico, \n               a.nr_sequencia             nr_seq_consulta, \n               a.cd_estabelecimento,\n               c.conduta\n        FROM   oft_consulta a \n               left join (SELECT Count(1) nr_conduta, \n                                 nr_seq_consulta \n                          FROM   oft_conduta \n                          GROUP  BY nr_seq_consulta) b \n                      ON b.nr_seq_consulta = a.nr_sequencia \n               left join (SELECT a.nr_seq_consulta, b.ds_resultado as conduta,\n                                 Count(1) nr_encaminhamento \n                          FROM   med_avaliacao_paciente a \n                                 inner join med_avaliacao_result b \n                                         ON b.nr_seq_avaliacao = a.nr_sequencia \n                          WHERE  a.nr_seq_tipo_avaliacao = 34 \n                                 AND b.nr_seq_item IN ( 456, 457, 458 ) \n                          GROUP  BY a.nr_seq_consulta, b.ds_resultado ) c \n                      ON c.nr_seq_consulta = a.nr_sequencia \n               left join (SELECT nr_seq_consulta, \n                                 Count(1) nr_procedimento \n                          FROM   pedido_exame_externo \n                          WHERE  ie_situacao = 'A' \n                          GROUP  BY nr_seq_consulta) d \n                      ON d.nr_seq_consulta = a.nr_sequencia \n                         AND ( ( Nvl(b.nr_conduta, 0) > 0 ) \n                                OR ( Nvl(c.nr_encaminhamento, 0) > 0 ) \n                                OR ( Nvl(d.nr_procedimento, 0) > 0 ) )) m \n       inner join (SELECT cd_pessoa_fisica, \n                          nm_pessoa_fisica, \n                          nr_cel, nr_cel2, nr_tel,\n                          nr_prontuario, \n                          ds_email \n                   FROM   (SELECT x.cd_pessoa_fisica, \n                                  Initcap(x.nm_pessoa_fisica) nm_pessoa_fisica, \n                                  x.nr_prontuario, \n                                  x.nr_telefone_celular       AS nr_cel, \n                                  y.nr_telefone_celular       AS nr_cel2, \n                                  y.nr_telefone               AS nr_tel, \n                                  y.ds_email \n                           FROM   pessoa_fisica x \n                                  left join compl_pessoa_fisica y ON y.cd_pessoa_fisica = x.cd_pessoa_fisica AND y.ie_tipo_complemento = 1 \n                           WHERE  x.nr_telefone_celular IS NOT NULL \n                                   OR y.nr_telefone_celular IS NOT NULL \n                                   OR y.nr_telefone IS NOT NULL)) n \n               ON n.cd_pessoa_fisica = m.cd_pessoa_fisica \nWHERE  NOT EXISTS (SELECT a.dt_agenda, \n                          a.cd_pessoa_fisica \n                   FROM   agenda_paciente a \n                   WHERE  Obter_tipo_agenda(a.cd_agenda) = 2 \n                          AND a.cd_pessoa_fisica = m.cd_pessoa_fisica \n                          AND a.dt_agenda > SYSDATE) \n",
-						"partitionOption": "None"
-					},
-					"sink": {
-						"type": "AzureSqlSink"
-					},
-					"enableStaging": false
-				},
-				"inputs": [
-					{
-						"referenceName": "CloudTasyPrdDataSet",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "AZSQL_TB_Retornos_Incremental",
-						"type": "DatasetReference"
-					}
-				]
-			},
-			{
 				"name": "Altera_marca",
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "Altera Agendas",
+						"activity": "Create_Proximas_Consultas",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -114,7 +304,7 @@
 							"type": "String"
 						},
 						"TABLENAME": {
-							"value": "Oft_Consulta_Retorno_Increment",
+							"value": "Ret_Proximas_Consultas",
 							"type": "String"
 						}
 					}
@@ -129,7 +319,7 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "Altera_marca",
+						"activity": "Altera_tipo_agendas",
 						"dependencyConditions": [
 							"Succeeded"
 						]
