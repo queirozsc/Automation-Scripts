@@ -132,7 +132,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select  at.nr_atendimento, at.cd_medico_resp as cd_medico, at.dt_entrada, at.cd_estabelecimento, e.cd_cgc, pf.nm_pessoa_fisica as nm_medico, e.nm_fantasia_estab\nfrom atendimento_paciente at, \n     estabelecimento e,\n     pessoa_fisica pf\nwhere pf.cd_pessoa_fisica = at.cd_medico_resp\nand at.cd_estabelecimento = e.cd_estabelecimento",
+						"oracleReaderQuery": "select  at.nr_atendimento, at.cd_medico_resp as cd_medico, at.dt_entrada, at.cd_estabelecimento, e.cd_cgc, pf.nm_pessoa_fisica as nm_medico, e.nm_fantasia_estab, \n        cn.ds_convenio, at.cd_pessoa_fisica\nfrom atendimento_paciente at, \n     estabelecimento e,\n     pessoa_fisica pf,\n     atend_categoria_convenio c,\n     convenio cn\nwhere pf.cd_pessoa_fisica = at.cd_medico_resp\nand c.nr_atendimento = c.nr_atendimento\nand c.cd_convenio = cn.cd_convenio\nand at.cd_estabelecimento = e.cd_estabelecimento",
 						"partitionOption": "None"
 					},
 					"sink": {
