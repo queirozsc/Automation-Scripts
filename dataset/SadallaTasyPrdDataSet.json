@@ -13,7 +13,7 @@
 		"structure": [
 			{
 				"name": "ULTIMO_ATENDIMENTO",
-				"type": "Decimal"
+				"type": "Double"
 			},
 			{
 				"name": "CD_PESSOA_FISICA",
