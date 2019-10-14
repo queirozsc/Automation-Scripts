@@ -15444,7 +15444,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "select max(at.nr_atendimento) as ultimo_atendimento, \npf.cd_pessoa_fisica, \nsubstr(pf.nm_pessoa_fisica,1,200) as nm_pessoa_fisica,\nsubstr(replace(LTRIM(translate(pf.nr_telefone_celular, translate(pf.nr_telefone_celular, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone_celular,\nsubstr(replace(LTRIM(translate(cpf.nr_telefone, translate(cpf.nr_telefone, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone,\nsubstr(cpf.ds_email,1,100) as ds_email,\nobter_cgc_estabelecimento(pf.cd_estabelecimento) as cnpj\n\nfrom pessoa_fisica pf,\natendimento_paciente at,\ncompl_pessoa_fisica cpf\nwhere pf.cd_pessoa_fisica = at.cd_pessoa_fisica (+)\nand pf.cd_pessoa_fisica = cpf.cd_pessoa_fisica\nand cpf.ie_tipo_complemento = 1\n\ngroup by pf.cd_pessoa_fisica,\npf.nm_pessoa_fisica,\npf.nr_telefone_celular,\npf.nr_telefone_celular,\ncpf.nr_telefone,\ncpf.ds_email,\npf.cd_estabelecimento",
+								"oracleReaderQuery": "select max(at.nr_atendimento) as ultimo_atendimento, \npf.cd_pessoa_fisica, \nsubstr(pf.nm_pessoa_fisica,1,200) as nm_pessoa_fisica,\nsubstr(replace(LTRIM(translate(pf.nr_telefone_celular, translate(pf.nr_telefone_celular, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone_celular,\nsubstr(replace(LTRIM(translate(cpf.nr_telefone, translate(cpf.nr_telefone, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone,\nsubstr(cpf.ds_email,1,100) as ds_email,\n\nobter_cgc_estabelecimento(decode(pf.cd_estabelecimento, null, 1, pf.cd_estabelecimento)) as cnpj,\n'Nao informado' marca,\n'Nao informado' sigla_unidade\n\nfrom pessoa_fisica pf,\natendimento_paciente at,\ncompl_pessoa_fisica cpf\nwhere pf.cd_pessoa_fisica = at.cd_pessoa_fisica (+)\nand pf.cd_pessoa_fisica = cpf.cd_pessoa_fisica\nand cpf.ie_tipo_complemento = 1\n\ngroup by \n\npf.cd_pessoa_fisica, \nsubstr(pf.nm_pessoa_fisica,1,200),\nsubstr(replace(LTRIM(translate(pf.nr_telefone_celular, translate(pf.nr_telefone_celular, '1234567890', ' ') , ' ')),' ',''),1,100),\nsubstr(replace(LTRIM(translate(cpf.nr_telefone, translate(cpf.nr_telefone, '1234567890', ' ') , ' ')),' ',''),1,100),\nsubstr(cpf.ds_email,1,100),\nobter_cgc_estabelecimento(at.cd_estabelecimento),\npf.cd_estabelecimento",
 								"partitionOption": "None"
 							},
 							"sink": {
@@ -15768,6 +15768,51 @@
 							"referenceName": "AzureSQL_DB_Procedimentos",
 							"type": "LinkedServiceReference"
 						}
+					},
+					{
+						"name": "Altera_marca_TBPacientes",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Pacientes_Unidade",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "sp_UPDATETRADEMARKV2",
+							"storedProcedureParameters": {
+								"CNPJ_FIELDNAME": {
+									"value": "CNPJ",
+									"type": "String"
+								},
+								"INITIALS_FIELDNAME": {
+									"value": "SIGLA_UNIDADE",
+									"type": "String"
+								},
+								"MARK_FIELDNAME": {
+									"value": "MARCA",
+									"type": "String"
+								},
+								"TABLENAME": {
+									"value": "Ret_Pacientes_Unidade",
+									"type": "String"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureSQL_DB_Procedimentos",
+							"type": "LinkedServiceReference"
+						}
 					}
 				],
 				"folder": {
@@ -15805,7 +15850,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "select max(at.nr_atendimento) as ultimo_atendimento, \npf.cd_pessoa_fisica, \nsubstr(pf.nm_pessoa_fisica,1,200) as nm_pessoa_fisica,\nsubstr(replace(LTRIM(translate(pf.nr_telefone_celular, translate(pf.nr_telefone_celular, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone_celular,\nsubstr(replace(LTRIM(translate(cpf.nr_telefone, translate(cpf.nr_telefone, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone,\nsubstr(cpf.ds_email,1,100) as ds_email,\nobter_cgc_estabelecimento(pf.cd_estabelecimento) as cnpj\n\nfrom pessoa_fisica pf,\natendimento_paciente at,\ncompl_pessoa_fisica cpf\nwhere pf.cd_pessoa_fisica = at.cd_pessoa_fisica (+)\nand pf.cd_pessoa_fisica = cpf.cd_pessoa_fisica\nand cpf.ie_tipo_complemento = 1\n\ngroup by pf.cd_pessoa_fisica,\npf.nm_pessoa_fisica,\npf.nr_telefone_celular,\npf.nr_telefone_celular,\ncpf.nr_telefone,\ncpf.ds_email,\npf.cd_estabelecimento",
+								"oracleReaderQuery": "select max(at.nr_atendimento) as ultimo_atendimento, \npf.cd_pessoa_fisica, \nsubstr(pf.nm_pessoa_fisica,1,200) as nm_pessoa_fisica,\nsubstr(replace(LTRIM(translate(pf.nr_telefone_celular, translate(pf.nr_telefone_celular, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone_celular,\nsubstr(replace(LTRIM(translate(cpf.nr_telefone, translate(cpf.nr_telefone, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone,\nsubstr(cpf.ds_email,1,100) as ds_email,\n\nobter_cgc_estabelecimento(pf.cd_estabelecimento) as cnpj,\n'Nao informado' marca,\n'Nao informado' sigla_unidade\n\nfrom pessoa_fisica pf,\natendimento_paciente at,\ncompl_pessoa_fisica cpf\nwhere pf.cd_pessoa_fisica = at.cd_pessoa_fisica (+)\nand pf.cd_pessoa_fisica = cpf.cd_pessoa_fisica\nand cpf.ie_tipo_complemento = 1\n\ngroup by \n\npf.cd_pessoa_fisica, \nsubstr(pf.nm_pessoa_fisica,1,200),\nsubstr(replace(LTRIM(translate(pf.nr_telefone_celular, translate(pf.nr_telefone_celular, '1234567890', ' ') , ' ')),' ',''),1,100),\nsubstr(replace(LTRIM(translate(cpf.nr_telefone, translate(cpf.nr_telefone, '1234567890', ' ') , ' ')),' ',''),1,100),\nsubstr(cpf.ds_email,1,100),\nobter_cgc_estabelecimento(at.cd_estabelecimento),\npf.cd_estabelecimento",
 								"partitionOption": "None"
 							},
 							"sink": {
