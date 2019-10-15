@@ -197,7 +197,7 @@
 				"structure": [
 					{
 						"name": "ULTIMO_ATENDIMENTO",
-						"type": "Double"
+						"type": "Decimal"
 					},
 					{
 						"name": "CD_PESSOA_FISICA",
@@ -229,6 +229,14 @@
 					},
 					{
 						"name": "SIGLA_UNIDADE",
+						"type": "String"
+					},
+					{
+						"name": "DT_NASCIMENTO",
+						"type": "DateTime"
+					},
+					{
+						"name": "NR_CPF",
 						"type": "String"
 					}
 				],
