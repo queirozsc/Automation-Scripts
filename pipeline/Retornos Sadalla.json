@@ -24,13 +24,128 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select at.nr_atendimento as ultimo_atendimento, \npf.cd_pessoa_fisica, \nsubstr(pf.nm_pessoa_fisica,1,200) as nm_pessoa_fisica,\nsubstr(replace(LTRIM(translate(pf.nr_telefone_celular, translate(pf.nr_telefone_celular, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone_celular,\nsubstr(replace(LTRIM(translate(cpf.nr_telefone, translate(cpf.nr_telefone, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone,\nsubstr(cpf.ds_email,1,100) as ds_email,\n\nobter_cgc_estabelecimento(decode(pf.cd_estabelecimento, null, 1, pf.cd_estabelecimento)) as cnpj,\n'Nao informado' marca,\n'Nao informado' sigla_unidade,\n\npf.dt_nascimento,\npf.nr_cpf\n\nfrom pessoa_fisica pf,\natendimento_paciente at,\ncompl_pessoa_fisica cpf\nwhere pf.cd_pessoa_fisica = at.cd_pessoa_fisica (+)\nand pf.cd_pessoa_fisica = cpf.cd_pessoa_fisica\nand cpf.ie_tipo_complemento = 1\nand at.nr_atendimento = (select max(x.nr_atendimento) from atendimento_paciente x where x.cd_pessoa_fisica = pf.cd_pessoa_fisica)",
+						"oracleReaderQuery": "select at.nr_atendimento as ultimo_atendimento, \npf.cd_pessoa_fisica, \nsubstr(pf.nm_pessoa_fisica,1,200) as nm_pessoa_fisica,\nsubstr(replace(LTRIM(translate(pf.nr_telefone_celular, translate(pf.nr_telefone_celular, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone_celular,\nsubstr(replace(LTRIM(translate(cpf.nr_telefone, translate(cpf.nr_telefone, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone,\nsubstr(cpf.ds_email,1,100) as ds_email,\n\nobter_cgc_estabelecimento(decode(pf.cd_estabelecimento, null, 1, pf.cd_estabelecimento)) as cnpj,\n'Nao informado' marca,\n'Nao informado' sigla_unidade,\n\npf.dt_nascimento,\npf.nr_cpf\n\nfrom pessoa_fisica pf,\natendimento_paciente at,\ncompl_pessoa_fisica cpf\nwhere pf.cd_pessoa_fisica = at.cd_pessoa_fisica (+)\nand pf.cd_pessoa_fisica = cpf.cd_pessoa_fisica\nand cpf.ie_tipo_complemento = 1\nand pf.ie_funcionario = 'N'\nand at.nr_atendimento = (select max(x.nr_atendimento) from atendimento_paciente x where x.cd_pessoa_fisica = pf.cd_pessoa_fisica)",
 						"partitionOption": "None"
 					},
 					"sink": {
 						"type": "AzureSqlSink"
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ULTIMO_ATENDIMENTO",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "ULTIMO_ATENDIMENTO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "CD_PESSOA_FISICA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CD_PESSOA_FISICA",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "NM_PESSOA_FISICA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "NM_PESSOA_FISICA",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NR_TELEFONE_CELULAR",
+									"type": "String"
+								},
+								"sink": {
+									"name": "NR_TELEFONE_CELULAR",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NR_TELEFONE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "NR_TELEFONE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_EMAIL",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DS_EMAIL",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CNPJ",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CNPJ",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "MARCA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "MARCA",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SIGLA_UNIDADE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "SIGLA_UNIDADE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DT_NASCIMENTO",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "DT_NASCIMENTO",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "NR_CPF",
+									"type": "String"
+								},
+								"sink": {
+									"name": "NR_CPF",
+									"type": "String"
+								}
+							}
+						]
+					}
 				},
 				"inputs": [
 					{
