@@ -411,14 +411,213 @@
 						"oracleReaderQuery": "select  a.cd_pessoa_fisica, a.cd_convenio, \nobter_cnpj_estabelecimento(ag.cd_estabelecimento) as cnpj,\nto_char((a.hr_inicio) , 'dd/mm/yyyy') as data_agenda,\nto_char((a.hr_inicio) , 'hh24:mi:ss') as hora_agenda,\nag.cd_tipo_agenda,\npf.nm_pessoa_fisica as nm_paciente,\nsubstr(obter_desc_procedimento(a.cd_procedimento, a.ie_origem_proced),1,200) as ds_procedimento_princ,\nsubstr((select Listagg(Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced), ' ;') within GROUP (ORDER BY Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced))  from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia),1,1000) as ds_procedimento_adic,\n1 + (select count(1)from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia) as ie_quantidade,\nobter_nome_usuario(a.nm_usuario_orig) as nm_usuario,\nobter_nome_pf(a.cd_medico_exec) as medico,\n'NAO ENCONTRADO' SIGLA_UNIDADE,\n'NAO ENCONTRADO' MARCA\n\nfrom agenda_paciente a,\n     agenda ag,\n     pessoa_fisica pf\nwhere a.cd_agenda = ag.cd_agenda\nand a.cd_pessoa_fisica = pf.cd_pessoa_fisica \nand a.dt_agenda between inicio_dia(sysdate) and fim_dia(sysdate + 720)\nand a.cd_pessoa_fisica is not null\nand ag.cd_tipo_agenda = 2",
 						"partitionOption": "None"
 					},
-					"enableStaging": false
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "CD_PESSOA_FISICA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CD_PESSOA_FISICA",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "CD_CONVENIO",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "CD_CONVENIO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "CNPJ",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CNPJ",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DATA_AGENDA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DATA_AGENDA",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "HORA_AGENDA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "HORA_AGENDA",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "CD_TIPO_AGENDA",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "CD_TIPO_AGENDA",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NM_PACIENTE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "NM_PACIENTE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_PROCEDIMENTO_PRINC",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DS_PROCEDIMENTO_PRINC",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_PROCEDIMENTO_ADIC",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DS_PROCEDIMENTO_ADIC",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "IE_QUANTIDADE",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "IE_QUANTIDADE",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "NM_USUARIO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "NM_USUARIO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "MEDICO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "MEDICO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SIGLA_UNIDADE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "SIGLA_UNIDADE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "MARCA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "MARCA",
+									"type": "String"
+								}
+							}
+						]
+					}
 				},
 				"inputs": [
 					{
 						"referenceName": "CloudTasyPrdDataSet",
 						"type": "DatasetReference"
 					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AZSQL_TB_Agendamentos_Futuros_Unidade",
+						"type": "DatasetReference"
+					}
 				]
+			},
+			{
+				"name": "Altera_marca_TB_Agendamentos",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Agendamentos_Futuros",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "sp_UPDATETRADEMARKV2",
+					"storedProcedureParameters": {
+						"CNPJ_FIELDNAME": {
+							"value": "CNPJ",
+							"type": "String"
+						},
+						"INITIALS_FIELDNAME": {
+							"value": "SIGLA_UNIDADE",
+							"type": "String"
+						},
+						"MARK_FIELDNAME": {
+							"value": "MARCA",
+							"type": "String"
+						},
+						"TABLENAME": {
+							"value": "Agendamentos_Futuros_Unidade",
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"folder": {
