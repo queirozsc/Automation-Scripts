@@ -66,6 +66,10 @@
 			{
 				"name": "MARCA",
 				"type": "String"
+			},
+			{
+				"name": "STATUS_AGENDA",
+				"type": "String"
 			}
 		]
 	},
