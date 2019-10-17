@@ -15667,7 +15667,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Pacientes_Unidade",
+						"name": "Ret_Pacientes_Unidade",
 						"type": "Copy",
 						"dependsOn": [
 							{
@@ -15712,7 +15712,7 @@
 						]
 					},
 					{
-						"name": "Atendimento_Unidade",
+						"name": "Ret_Atendimento_Unidade",
 						"type": "Copy",
 						"dependsOn": [
 							{
@@ -15757,7 +15757,7 @@
 						]
 					},
 					{
-						"name": "Agendamento_Futuros_Unidade",
+						"name": "Ret_Agendamento_Futuros_Unidade",
 						"type": "Copy",
 						"dependsOn": [
 							{
@@ -15795,14 +15795,14 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "AZSQL_TB_Agendamentos_Futuros_Unidade",
+								"referenceName": "AZSQL_TB_Ret_Agendamentos_Futuros_Unidade",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						]
 					},
 					{
-						"name": "Consulta_Paciente_Unidade",
+						"name": "Ret_Consulta_Paciente_Unidade",
 						"type": "Copy",
 						"dependsOn": [
 							{
@@ -15860,25 +15860,25 @@
 						"type": "SqlServerStoredProcedure",
 						"dependsOn": [
 							{
-								"activity": "Pacientes_Unidade",
+								"activity": "Ret_Pacientes_Unidade",
 								"dependencyConditions": [
 									"Succeeded"
 								]
 							},
 							{
-								"activity": "Atendimento_Unidade",
+								"activity": "Ret_Atendimento_Unidade",
 								"dependencyConditions": [
 									"Succeeded"
 								]
 							},
 							{
-								"activity": "Agendamento_Futuros_Unidade",
+								"activity": "Ret_Agendamento_Futuros_Unidade",
 								"dependencyConditions": [
 									"Succeeded"
 								]
 							},
 							{
-								"activity": "Consulta_Paciente_Unidade",
+								"activity": "Ret_Consulta_Paciente_Unidade",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -16018,7 +16018,7 @@
 						"type": "SqlServerStoredProcedure",
 						"dependsOn": [
 							{
-								"activity": "Pacientes_Unidade",
+								"activity": "Ret_Pacientes_Unidade",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -16057,6 +16057,141 @@
 							"referenceName": "AzureSQL_DB_Procedimentos",
 							"type": "LinkedServiceReference"
 						}
+					},
+					{
+						"name": "Agendamentos_Futuros",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Wait1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "select  a.cd_pessoa_fisica, a.cd_convenio, \nobter_cnpj_estabelecimento(ag.cd_estabelecimento) as cnpj,\nto_char((a.hr_inicio) , 'dd/mm/yyyy') as data_agenda,\nto_char((a.hr_inicio) , 'hh24:mi:ss') as hora_agenda,\nag.cd_tipo_agenda,\npf.nm_pessoa_fisica as nm_paciente,\nsubstr(obter_desc_procedimento(a.cd_procedimento, a.ie_origem_proced),1,200) as ds_procedimento_princ,\nsubstr((select Listagg(Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced), ' ;') within GROUP (ORDER BY Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced))  from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia),1,1000) as ds_procedimento_adic,\n1 + (select count(1)from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia) as ie_quantidade,\nobter_nome_usuario(a.nm_usuario_orig) as nm_usuario,\nobter_nome_pf(a.cd_medico_exec) as nm_medico,\n'NAO ENCONTRADO' SIGLA_UNIDADE,\n'NAO ENCONTRADO' MARCA,\nobter_valor_dominio(83,a.ie_status_agenda) as status_agenda\n\nfrom agenda_paciente a,\n     agenda ag,\n     pessoa_fisica pf\nwhere a.cd_agenda = ag.cd_agenda\nand a.cd_pessoa_fisica = pf.cd_pessoa_fisica \nand a.dt_agenda between inicio_dia(sysdate) and fim_dia(sysdate + 720)\nand a.cd_pessoa_fisica is not null\nand ag.cd_tipo_agenda = 2",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "CloudTasyPrdDataSet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AZSQL_TB_Agendamentos_Futuros_Unidade",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Altera_marca_TB_Agendamentos",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Agendamentos_Futuros",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "sp_UPDATETRADEMARKV2",
+							"storedProcedureParameters": {
+								"CNPJ_FIELDNAME": {
+									"value": "CNPJ",
+									"type": "String"
+								},
+								"INITIALS_FIELDNAME": {
+									"value": "SIGLA_UNIDADE",
+									"type": "String"
+								},
+								"MARK_FIELDNAME": {
+									"value": "MARCA",
+									"type": "String"
+								},
+								"TABLENAME": {
+									"value": "Agendamentos_Futuros_Unidade",
+									"type": "String"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureSQL_DB_Procedimentos",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Pacientes Unidades",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Wait1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "select pf.cd_pessoa_fisica,\n       pf.nm_pessoa_fisica,\n       pf.nr_cpf,\n       to_char((pf.dt_nascimento) , 'dd/mm/yyyy') as dt_nascimento,\n       substr(replace(LTRIM(translate(pf.nr_telefone_celular, translate(pf.nr_telefone_celular, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone_celular,\n       substr(replace(LTRIM(translate(cpf.nr_telefone, translate(cpf.nr_telefone, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone\nfrom pessoa_fisica pf,\n     compl_pessoa_fisica cpf\nwhere pf.cd_pessoa_fisica = cpf.cd_pessoa_fisica\nand cpf.ie_tipo_complemento = 1\nand pf.ie_funcionario = 'N'",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "CloudTasyPrdDataSet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AZSQL_TB_Pacientes_Unidade",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
 					}
 				],
 				"folder": {
@@ -16068,9 +16203,11 @@
 				"[concat(variables('factoryId'), '/datasets/CloudTasyPrdDataSet')]",
 				"[concat(variables('factoryId'), '/datasets/AZSQL_TB_Ret_Pacientes_unidade')]",
 				"[concat(variables('factoryId'), '/datasets/AZSQL_TB_Ret_Atendimentos_Unidade')]",
-				"[concat(variables('factoryId'), '/datasets/AZSQL_TB_Agendamentos_Futuros_Unidade')]",
+				"[concat(variables('factoryId'), '/datasets/AZSQL_TB_Ret_Agendamentos_Futuros_Unidade')]",
 				"[concat(variables('factoryId'), '/datasets/AZSQL_TB_Ret_Consulta_Oft_Unidade')]",
-				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]"
+				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]",
+				"[concat(variables('factoryId'), '/datasets/AZSQL_TB_Agendamentos_Futuros_Unidade')]",
+				"[concat(variables('factoryId'), '/datasets/AZSQL_TB_Pacientes_Unidade')]"
 			]
 		},
 		{
@@ -16080,7 +16217,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Pacientes_Unidade",
+						"name": "Ret_Pacientes_Unidade",
 						"type": "Copy",
 						"dependsOn": [
 							{
@@ -16107,122 +16244,7 @@
 							"sink": {
 								"type": "AzureSqlSink"
 							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "ULTIMO_ATENDIMENTO",
-											"type": "Decimal"
-										},
-										"sink": {
-											"name": "ULTIMO_ATENDIMENTO",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "CD_PESSOA_FISICA",
-											"type": "String"
-										},
-										"sink": {
-											"name": "CD_PESSOA_FISICA",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "NM_PESSOA_FISICA",
-											"type": "String"
-										},
-										"sink": {
-											"name": "NM_PESSOA_FISICA",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "NR_TELEFONE_CELULAR",
-											"type": "String"
-										},
-										"sink": {
-											"name": "NR_TELEFONE_CELULAR",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "NR_TELEFONE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "NR_TELEFONE",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "DS_EMAIL",
-											"type": "String"
-										},
-										"sink": {
-											"name": "DS_EMAIL",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "CNPJ",
-											"type": "String"
-										},
-										"sink": {
-											"name": "CNPJ",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "MARCA",
-											"type": "String"
-										},
-										"sink": {
-											"name": "MARCA",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "SIGLA_UNIDADE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "SIGLA_UNIDADE",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "DT_NASCIMENTO",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "DT_NASCIMENTO",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "NR_CPF",
-											"type": "String"
-										},
-										"sink": {
-											"name": "NR_CPF",
-											"type": "String"
-										}
-									}
-								]
-							}
+							"enableStaging": false
 						},
 						"inputs": [
 							{
@@ -16240,52 +16262,7 @@
 						]
 					},
 					{
-						"name": "Atendimento_Unidade",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "Wait",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "OracleSource",
-								"oracleReaderQuery": "select  at.nr_atendimento, at.cd_medico_resp as cd_medico, at.dt_entrada, at.cd_estabelecimento, e.cd_cgc, pf.nm_pessoa_fisica as nm_medico, e.nm_fantasia_estab, \n        cn.ds_convenio, at.cd_pessoa_fisica\nfrom atendimento_paciente at, \n     estabelecimento e,\n     pessoa_fisica pf,\n     atend_categoria_convenio c,\n     convenio cn\nwhere pf.cd_pessoa_fisica = at.cd_medico_resp\nand at.nr_atendimento = (select max(x.nr_atendimento) from atendimento_paciente x where x.cd_pessoa_fisica = at.cd_pessoa_fisica)\nand at.nr_atendimento = c.nr_atendimento\nand c.cd_convenio = cn.cd_convenio\nand at.cd_estabelecimento = e.cd_estabelecimento ",
-								"partitionOption": "None"
-							},
-							"sink": {
-								"type": "AzureSqlSink"
-							},
-							"enableStaging": false
-						},
-						"inputs": [
-							{
-								"referenceName": "SadallaTasyPrdDataSet",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "AZSQL_TB_Ret_Atendimentos_Unidade",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Agendamento_Futuros_Unidade",
+						"name": "Ret_Agendamento_Futuros_Unidade",
 						"type": "Copy",
 						"dependsOn": [
 							{
@@ -16323,14 +16300,14 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "AZSQL_TB_Agendamentos_Futuros_Unidade",
+								"referenceName": "AZSQL_TB_Ret_Agendamentos_Futuros_Unidade",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						]
 					},
 					{
-						"name": "Consulta_Paciente_Unidade",
+						"name": "Ret_Consulta_Paciente_Unidade",
 						"type": "Copy",
 						"dependsOn": [
 							{
@@ -16379,7 +16356,7 @@
 						"type": "Wait",
 						"dependsOn": [
 							{
-								"activity": "Clear_Base_Retornos",
+								"activity": "Clear_Base",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -16391,7 +16368,142 @@
 						}
 					},
 					{
-						"name": "Clear_Base_Retornos",
+						"name": "Ret_Agendamentos_Fututos_Unidade",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Wait",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "select a.cd_pessoa_fisica, a.cd_convenio, \nto_char(a.dt_agenda, 'dd/mm/yyyy') as data_agenda,\nto_char(a.dt_agenda, 'hh24:mi:ss') as hora_agenda,\nag.cd_tipo_agenda,\npf.nm_pessoa_fisica as nm_medico,\nobter_desc_procedimento(10502, 1) as ds_procedimento_princ,\n'' ds_procedimento_adic,\n1 as ie_quantidade,\nobter_nome_usuario(a.nm_usuario_origem) as nm_usuario\nfrom agenda_consulta a,\n     agenda ag,\n     pessoa_fisica pf\nwhere a.cd_agenda = ag.cd_agenda\nand ag.cd_pessoa_fisica = pf.cd_pessoa_fisica \nand a.dt_agenda between inicio_dia(sysdate) and fim_dia(sysdate + 720)\nand a.cd_pessoa_fisica is not null\nand a.dt_agenda = (select max(x.dt_agenda) from agenda_consulta x where x.cd_pessoa_fisica = a.cd_pessoa_fisica)",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "SadallaTasyPrdDataSet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AZSQL_TB_Ret_Agendamentos_Futuros_Unidade",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Pacientes_Unidade",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Wait",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "select pf.cd_pessoa_fisica,\n       pf.nm_pessoa_fisica,\n       pf.nr_cpf,\n       to_char((pf.dt_nascimento) , 'dd/mm/yyyy') as dt_nascimento,\n       substr(replace(LTRIM(translate(pf.nr_telefone_celular, translate(pf.nr_telefone_celular, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone_celular,\n       substr(replace(LTRIM(translate(cpf.nr_telefone, translate(cpf.nr_telefone, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone\nfrom pessoa_fisica pf,\n     compl_pessoa_fisica cpf\nwhere pf.cd_pessoa_fisica = cpf.cd_pessoa_fisica\nand cpf.ie_tipo_complemento = 1\nand pf.ie_funcionario = 'N'",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "SadallaTasyPrdDataSet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AZSQL_TB_Pacientes_Unidade",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Agendamentos_Fututos_Unidade",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Wait",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "select  a.cd_pessoa_fisica, a.cd_convenio, \nobter_cnpj_estabelecimento(ag.cd_estabelecimento) as cnpj,\nto_char((a.dt_agenda) , 'dd/mm/yyyy') as data_agenda,\nto_char((a.dt_agenda) , 'hh24:mi:ss') as hora_agenda,\nag.cd_tipo_agenda,\npf.nm_pessoa_fisica as nm_paciente,\nobter_desc_procedimento(10502, 1) as ds_procedimento_princ,\nsubstr((select Listagg(Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced), ' ;') within GROUP (ORDER BY Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced))  from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia),1,1000) as ds_procedimento_adic,\n1 + (select count(1)from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia) as ie_quantidade,\nobter_nome_usuario(a.nm_usuario_origem) as nm_usuario,\nobter_nome_pf(ag.cd_pessoa_fisica) as nm_medico,\n'NAO ENCONTRADO' SIGLA_UNIDADE,\n'NAO ENCONTRADO' MARCA,\nobter_valor_dominio(83,a.ie_status_agenda) as status_agenda\nfrom agenda ag,\n     agenda_consulta a,\n     pessoa_fisica pf\nwhere ag.cd_agenda = a.cd_agenda\nand   pf.cd_pessoa_fisica  = a.cd_pessoa_fisica\nand a.dt_agenda between inicio_dia(sysdate) and fim_dia(sysdate + 720)\nand   a.cd_pessoa_fisica is not null",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "SadallaTasyPrdDataSet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AZSQL_TB_Agendamentos_Futuros_Unidade",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Clear_Base",
 						"type": "SqlServerStoredProcedure",
 						"dependsOn": [],
 						"policy": {
@@ -16419,9 +16531,10 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/SadallaTasyPrdDataSet')]",
 				"[concat(variables('factoryId'), '/datasets/AZSQL_TB_Ret_Pacientes_unidade')]",
-				"[concat(variables('factoryId'), '/datasets/AZSQL_TB_Ret_Atendimentos_Unidade')]",
-				"[concat(variables('factoryId'), '/datasets/AZSQL_TB_Agendamentos_Futuros_Unidade')]",
+				"[concat(variables('factoryId'), '/datasets/AZSQL_TB_Ret_Agendamentos_Futuros_Unidade')]",
 				"[concat(variables('factoryId'), '/datasets/AZSQL_TB_Ret_Consulta_Oft_Unidade')]",
+				"[concat(variables('factoryId'), '/datasets/AZSQL_TB_Pacientes_Unidade')]",
+				"[concat(variables('factoryId'), '/datasets/AZSQL_TB_Agendamentos_Futuros_Unidade')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]"
 			]
 		},
@@ -21966,6 +22079,10 @@
 						"precision": 10
 					},
 					{
+						"name": "CNPJ",
+						"type": "varchar"
+					},
+					{
 						"name": "DATA_AGENDA",
 						"type": "date"
 					},
@@ -21976,17 +22093,46 @@
 						"scale": 3
 					},
 					{
-						"name": "IE_TIPO_AGENDA",
+						"name": "CD_TIPO_AGENDA",
 						"type": "varchar"
 					},
 					{
-						"name": "NM_MEDICO",
+						"name": "NM_PACIENTE",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_PROCEDIMENTO_PRINC",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_PROCEDIMENTO_ADIC",
+						"type": "varchar"
+					},
+					{
+						"name": "IE_QUANTIDADE",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "NM_USUARIO",
+						"type": "varchar"
+					},
+					{
+						"name": "MEDICO",
+						"type": "varchar"
+					},
+					{
+						"name": "SIGLA_UNIDADE",
+						"type": "varchar"
+					},
+					{
+						"name": "MARCA",
 						"type": "varchar"
 					}
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "Ret_Agendamentos_Futuros_Unidade"
+					"table": "Agendamentos_Futuros_Unidade"
 				}
 			},
 			"dependsOn": [
@@ -22577,6 +22723,109 @@
 				],
 				"typeProperties": {
 					"tableName": "[[dbo].[Nexcore_FilasPorHoras]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AZSQL_TB_Pacientes_Unidade')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Retornos"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "cd_pessoa_fisica",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "nm_pessoa_fisica",
+						"type": "varchar"
+					},
+					{
+						"name": "nr_cpf",
+						"type": "varchar"
+					},
+					{
+						"name": "dt_nascimento",
+						"type": "date"
+					},
+					{
+						"name": "nr_telefone_celular",
+						"type": "varchar"
+					},
+					{
+						"name": "nr_telefone",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Pacientes_Unidade"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AZSQL_TB_Ret_Agendamentos_Futuros_Unidade')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Retornos"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "CD_PESSOA_FISICA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CD_CONVENIO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DATA_AGENDA",
+						"type": "date"
+					},
+					{
+						"name": "HORA_AGENDA",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "IE_TIPO_AGENDA",
+						"type": "varchar"
+					},
+					{
+						"name": "NM_MEDICO",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Ret_Agendamentos_Futuros_Unidade"
 				}
 			},
 			"dependsOn": [
@@ -23862,10 +24111,6 @@
 				"type": "OracleTable",
 				"structure": [
 					{
-						"name": "ULTIMO_ATENDIMENTO",
-						"type": "Decimal"
-					},
-					{
 						"name": "CD_PESSOA_FISICA",
 						"type": "String"
 					},
@@ -23874,27 +24119,7 @@
 						"type": "String"
 					},
 					{
-						"name": "NR_TELEFONE_CELULAR",
-						"type": "String"
-					},
-					{
-						"name": "NR_TELEFONE",
-						"type": "String"
-					},
-					{
-						"name": "DS_EMAIL",
-						"type": "String"
-					},
-					{
-						"name": "CNPJ",
-						"type": "String"
-					},
-					{
-						"name": "MARCA",
-						"type": "String"
-					},
-					{
-						"name": "SIGLA_UNIDADE",
+						"name": "NR_CPF",
 						"type": "String"
 					},
 					{
@@ -23902,7 +24127,11 @@
 						"type": "DateTime"
 					},
 					{
-						"name": "NR_CPF",
+						"name": "NR_TELEFONE_CELULAR",
+						"type": "String"
+					},
+					{
+						"name": "NR_TELEFONE",
 						"type": "String"
 					}
 				],
@@ -27471,35 +27700,51 @@
 				"type": "OracleTable",
 				"structure": [
 					{
-						"name": "ULTIMO_ATENDIMENTO",
-						"type": "Decimal"
-					},
-					{
 						"name": "CD_PESSOA_FISICA",
 						"type": "String"
 					},
 					{
-						"name": "NM_PESSOA_FISICA",
-						"type": "String"
-					},
-					{
-						"name": "NR_TELEFONE_CELULAR",
-						"type": "String"
-					},
-					{
-						"name": "NR_TELEFONE",
-						"type": "String"
-					},
-					{
-						"name": "DS_EMAIL",
-						"type": "String"
+						"name": "CD_CONVENIO",
+						"type": "Decimal"
 					},
 					{
 						"name": "CNPJ",
 						"type": "String"
 					},
 					{
-						"name": "MARCA",
+						"name": "DATA_AGENDA",
+						"type": "String"
+					},
+					{
+						"name": "HORA_AGENDA",
+						"type": "String"
+					},
+					{
+						"name": "CD_TIPO_AGENDA",
+						"type": "Decimal"
+					},
+					{
+						"name": "NM_PACIENTE",
+						"type": "String"
+					},
+					{
+						"name": "DS_PROCEDIMENTO_PRINC",
+						"type": "String"
+					},
+					{
+						"name": "DS_PROCEDIMENTO_ADIC",
+						"type": "String"
+					},
+					{
+						"name": "IE_QUANTIDADE",
+						"type": "Double"
+					},
+					{
+						"name": "NM_USUARIO",
+						"type": "String"
+					},
+					{
+						"name": "NM_MEDICO",
 						"type": "String"
 					},
 					{
@@ -27507,11 +27752,11 @@
 						"type": "String"
 					},
 					{
-						"name": "DT_NASCIMENTO",
-						"type": "DateTime"
+						"name": "MARCA",
+						"type": "String"
 					},
 					{
-						"name": "NR_CPF",
+						"name": "STATUS_AGENDA",
 						"type": "String"
 					}
 				],

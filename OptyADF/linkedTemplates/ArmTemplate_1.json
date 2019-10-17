@@ -43,14 +43,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'SMART_INOB_NEW'"
 		},
-		"SMART_IOF_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SMART_IOF'"
-		},
-		"SMART_IOF_NEW_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SMART_IOF_NEW'"
-		},
 		"Folder_Nexcore_Consolidado_properties_typeProperties_host": {
 			"type": "string",
 			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Consolidado"
@@ -72,6 +64,92 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Baixa_Titulos_Receber')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Contas a Receber"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "nr_titulO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "dt_recebimento",
+						"type": "date"
+					},
+					{
+						"name": "vl_recebido",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_descontos",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_juros",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_multa",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "dt_atualizacao",
+						"type": "date"
+					},
+					{
+						"name": "ds_tipo_recebimento",
+						"type": "varchar"
+					},
+					{
+						"name": "nr_seq_trans_fin",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Aging_Baixa_Titulo_Receber"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Ordens_Servico_Hist')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Ordens de Serviço"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Ordem_Servico_Terc_Hist"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Ordens_Servico_Terceiro')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
@@ -1526,40 +1604,6 @@
 				"type": "SqlServer",
 				"typeProperties": {
 					"connectionString": "[parameters('SMART_INOB_NEW_connectionString')]"
-				},
-				"connectVia": {
-					"referenceName": "ServidorArquivosBI",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SMART_IOF')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('SMART_IOF_connectionString')]"
-				},
-				"connectVia": {
-					"referenceName": "integrationRuntime",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SMART_IOF_NEW')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('SMART_IOF_NEW_connectionString')]"
 				},
 				"connectVia": {
 					"referenceName": "ServidorArquivosBI",
