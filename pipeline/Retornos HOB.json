@@ -502,72 +502,7 @@
 					"sink": {
 						"type": "AzureSqlSink"
 					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"name": "CD_PESSOA_FISICA",
-									"type": "String"
-								},
-								"sink": {
-									"name": "cd_pessoa_fisica",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"name": "NM_PESSOA_FISICA",
-									"type": "String"
-								},
-								"sink": {
-									"name": "nm_pessoa_fisica",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "NR_CPF",
-									"type": "String"
-								},
-								"sink": {
-									"name": "nr_cpf",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "DT_NASCIMENTO",
-									"type": "DateTime"
-								},
-								"sink": {
-									"name": "dt_nascimento",
-									"type": "DateTime"
-								}
-							},
-							{
-								"source": {
-									"name": "NR_TELEFONE_CELULAR",
-									"type": "String"
-								},
-								"sink": {
-									"name": "nr_telefone_celular",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "NR_TELEFONE",
-									"type": "String"
-								},
-								"sink": {
-									"name": "nr_telefone",
-									"type": "String"
-								}
-							}
-						]
-					}
+					"enableStaging": false
 				},
 				"inputs": [
 					{
