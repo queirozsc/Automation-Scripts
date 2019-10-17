@@ -473,6 +473,114 @@
 					"referenceName": "AzureSQL_DB_Procedimentos",
 					"type": "LinkedServiceReference"
 				}
+			},
+			{
+				"name": "Pacientes Unidades",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Wait1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "select pf.cd_pessoa_fisica,\n       pf.nm_pessoa_fisica,\n       pf.nr_cpf,\n       pf.dt_nascimento,\n       substr(replace(LTRIM(translate(pf.nr_telefone_celular, translate(pf.nr_telefone_celular, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone_celular,\n       substr(replace(LTRIM(translate(cpf.nr_telefone, translate(cpf.nr_telefone, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone\nfrom pessoa_fisica pf,\n     compl_pessoa_fisica cpf\nwhere pf.cd_pessoa_fisica = cpf.cd_pessoa_fisica\nand cpf.ie_tipo_complemento = 1\nand pf.ie_funcionario = 'N'",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "CD_PESSOA_FISICA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "cd_pessoa_fisica",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "NM_PESSOA_FISICA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "nm_pessoa_fisica",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NR_CPF",
+									"type": "String"
+								},
+								"sink": {
+									"name": "nr_cpf",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DT_NASCIMENTO",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "dt_nascimento",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "NR_TELEFONE_CELULAR",
+									"type": "String"
+								},
+								"sink": {
+									"name": "nr_telefone_celular",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NR_TELEFONE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "nr_telefone",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "CloudTasyPrdDataSet",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AZSQL_TB_Pacientes_Unidade",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"folder": {
