@@ -1,5 +1,5 @@
 {
-	"name": "AZSQL_TB_Agendamentos_Futuros",
+	"name": "AZSQL_TB_Agendamentos_Futuros_Unidade",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSQL_DB_Procedimentos",

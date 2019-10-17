@@ -241,7 +241,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "AZSQL_TB_Agendamentos_Futuros_Unidade",
+						"referenceName": "AZSQL_TB_Ret_Agendamentos_Futuros_Unidade",
 						"type": "DatasetReference"
 					}
 				]
