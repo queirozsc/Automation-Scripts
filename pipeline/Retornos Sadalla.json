@@ -369,9 +369,16 @@
 				]
 			},
 			{
-				"name": "Pac",
+				"name": "Pacientes_Unidade",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Wait",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -381,8 +388,28 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "select pf.cd_pessoa_fisica,\n       pf.nm_pessoa_fisica,\n       pf.nr_cpf,\n       pf.dt_nascimento,\n       substr(replace(LTRIM(translate(pf.nr_telefone_celular, translate(pf.nr_telefone_celular, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone_celular,\n       substr(replace(LTRIM(translate(cpf.nr_telefone, translate(cpf.nr_telefone, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone\nfrom pessoa_fisica pf,\n     compl_pessoa_fisica cpf\nwhere pf.cd_pessoa_fisica = cpf.cd_pessoa_fisica\nand cpf.ie_tipo_complemento = 1\nand pf.ie_funcionario = 'N'",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
 					"enableStaging": false
-				}
+				},
+				"inputs": [
+					{
+						"referenceName": "SadallaTasyPrdDataSet",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AZSQL_TB_Pacientes_Unidade",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"folder": {
