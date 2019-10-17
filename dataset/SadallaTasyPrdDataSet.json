@@ -56,7 +56,7 @@
 				"type": "String"
 			},
 			{
-				"name": "MEDICO",
+				"name": "NM_MEDICO",
 				"type": "String"
 			},
 			{
