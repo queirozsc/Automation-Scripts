@@ -12,10 +12,6 @@
 		"type": "OracleTable",
 		"structure": [
 			{
-				"name": "ULTIMO_ATENDIMENTO",
-				"type": "Decimal"
-			},
-			{
 				"name": "CD_PESSOA_FISICA",
 				"type": "String"
 			},
@@ -24,27 +20,7 @@
 				"type": "String"
 			},
 			{
-				"name": "NR_TELEFONE_CELULAR",
-				"type": "String"
-			},
-			{
-				"name": "NR_TELEFONE",
-				"type": "String"
-			},
-			{
-				"name": "DS_EMAIL",
-				"type": "String"
-			},
-			{
-				"name": "CNPJ",
-				"type": "String"
-			},
-			{
-				"name": "MARCA",
-				"type": "String"
-			},
-			{
-				"name": "SIGLA_UNIDADE",
+				"name": "NR_CPF",
 				"type": "String"
 			},
 			{
@@ -52,7 +28,11 @@
 				"type": "DateTime"
 			},
 			{
-				"name": "NR_CPF",
+				"name": "NR_TELEFONE_CELULAR",
+				"type": "String"
+			},
+			{
+				"name": "NR_TELEFONE",
 				"type": "String"
 			}
 		]
