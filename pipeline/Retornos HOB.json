@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Pacientes_Unidade",
+				"name": "Ret_Pacientes_Unidade",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -46,7 +46,7 @@
 				]
 			},
 			{
-				"name": "Atendimento_Unidade",
+				"name": "Ret_Atendimento_Unidade",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -89,7 +89,7 @@
 				]
 			},
 			{
-				"name": "Agendamento_Futuros_Unidade",
+				"name": "Ret_Agendamento_Futuros_Unidade",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -132,7 +132,7 @@
 				]
 			},
 			{
-				"name": "Consulta_Paciente_Unidade",
+				"name": "Ret_Consulta_Paciente_Unidade",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -188,25 +188,25 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "Pacientes_Unidade",
+						"activity": "Ret_Pacientes_Unidade",
 						"dependencyConditions": [
 							"Succeeded"
 						]
 					},
 					{
-						"activity": "Atendimento_Unidade",
+						"activity": "Ret_Atendimento_Unidade",
 						"dependencyConditions": [
 							"Succeeded"
 						]
 					},
 					{
-						"activity": "Agendamento_Futuros_Unidade",
+						"activity": "Ret_Agendamento_Futuros_Unidade",
 						"dependencyConditions": [
 							"Succeeded"
 						]
 					},
 					{
-						"activity": "Consulta_Paciente_Unidade",
+						"activity": "Ret_Consulta_Paciente_Unidade",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -346,7 +346,7 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "Pacientes_Unidade",
+						"activity": "Ret_Pacientes_Unidade",
 						"dependencyConditions": [
 							"Succeeded"
 						]

@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Pacientes_Unidade",
+				"name": "Ret_Pacientes_Unidade",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -161,7 +161,7 @@
 				]
 			},
 			{
-				"name": "Atendimento_Unidade",
+				"name": "Ret_Atendimento_Unidade",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -247,7 +247,7 @@
 				]
 			},
 			{
-				"name": "Consulta_Paciente_Unidade",
+				"name": "Ret_Consulta_Paciente_Unidade",
 				"type": "Copy",
 				"dependsOn": [
 					{
