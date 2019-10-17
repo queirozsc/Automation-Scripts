@@ -20,6 +20,10 @@
 				"type": "Decimal"
 			},
 			{
+				"name": "CNPJ",
+				"type": "String"
+			},
+			{
 				"name": "DATA_AGENDA",
 				"type": "String"
 			},
@@ -61,6 +65,10 @@
 			},
 			{
 				"name": "MARCA",
+				"type": "String"
+			},
+			{
+				"name": "STATUS_AGENDA",
 				"type": "String"
 			}
 		]
