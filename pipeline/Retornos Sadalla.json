@@ -46,7 +46,8 @@
 				]
 			},
 			{
-				"name": "Atendimento_Unidade",
+				"name": "Agendamentos_futuros_Unidade",
+				"description": "\n",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -73,7 +74,152 @@
 					"sink": {
 						"type": "AzureSqlSink"
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "CD_PESSOA_FISICA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CD_PESSOA_FISICA",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "CD_CONVENIO",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "CD_CONVENIO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "CNPJ",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CNPJ",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DATA_AGENDA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DATA_AGENDA",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "HORA_AGENDA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "HORA_AGENDA",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "CD_TIPO_AGENDA",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "CD_TIPO_AGENDA",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NM_PACIENTE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "NM_MEDICO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_PROCEDIMENTO_PRINC",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DS_PROCEDIMENTO_PRINC",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_PROCEDIMENTO_ADIC",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DS_PROCEDIMENTO_ADIC",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "IE_QUANTIDADE",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "IE_QUANTIDADE",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "NM_USUARIO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "NM_USUARIO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "MEDICO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "SIGLA_UNIDADE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SIGLA_UNIDADE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "MARCA",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "MARCA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "STATUS_AGENDA",
+									"type": "String"
+								}
+							}
+						]
+					}
 				},
 				"inputs": [
 					{
