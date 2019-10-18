@@ -12,47 +12,19 @@
 		"type": "OracleTable",
 		"structure": [
 			{
-				"name": "CD_PESSOA_FISICA",
-				"type": "String"
-			},
-			{
-				"name": "CD_CONVENIO",
-				"type": "Decimal"
-			},
-			{
-				"name": "CNPJ",
-				"type": "String"
-			},
-			{
-				"name": "DATA_AGENDA",
-				"type": "String"
-			},
-			{
-				"name": "HORA_AGENDA",
-				"type": "String"
-			},
-			{
-				"name": "CD_TIPO_AGENDA",
-				"type": "Decimal"
-			},
-			{
-				"name": "NM_PACIENTE",
-				"type": "String"
-			},
-			{
-				"name": "DS_PROCEDIMENTO_PRINC",
-				"type": "String"
-			},
-			{
-				"name": "DS_PROCEDIMENTO_ADIC",
-				"type": "String"
-			},
-			{
-				"name": "IE_QUANTIDADE",
+				"name": "NR_SEQUENCIA",
 				"type": "Double"
 			},
 			{
-				"name": "NM_USUARIO",
+				"name": "DT_ATUALIZACAO",
+				"type": "DateTime"
+			},
+			{
+				"name": "NR_ATENDIMENTO",
+				"type": "Decimal"
+			},
+			{
+				"name": "CD_MEDICO",
 				"type": "String"
 			},
 			{
@@ -60,15 +32,15 @@
 				"type": "String"
 			},
 			{
-				"name": "SIGLA_UNIDADE",
+				"name": "DS_RETORNO",
 				"type": "String"
 			},
 			{
-				"name": "MARCA",
+				"name": "DS_CONDUTA",
 				"type": "String"
 			},
 			{
-				"name": "STATUS_AGENDA",
+				"name": "CD_PESSOA_FISICA",
 				"type": "String"
 			}
 		]
