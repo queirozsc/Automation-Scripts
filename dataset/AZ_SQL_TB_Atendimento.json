@@ -1,0 +1,43 @@
+{
+	"name": "AZ_SQL_TB_Atendimento",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSQL_DB_Procedimentos",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "CD_PESSOA_FISICA",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "NM_PESSOA_FISICA",
+				"type": "varchar"
+			},
+			{
+				"name": "DT_ENTRADA",
+				"type": "date"
+			},
+			{
+				"name": "NM_MEDICO",
+				"type": "varchar"
+			},
+			{
+				"name": "CD_CONVENIO",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DS_CONVENIO",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Atendimento_Unidade"
+		}
+	}
+}

@@ -1,0 +1,43 @@
+{
+	"name": "AZ_SQL_TB_Consulta",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSQL_DB_Procedimentos",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "NR_SEQUENCIA",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DT_ATUALIZACAO",
+				"type": "date"
+			},
+			{
+				"name": "NR_ATENDIMENTO",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "NM_MEDICO",
+				"type": "varchar"
+			},
+			{
+				"name": "DS_RETORNO",
+				"type": "varchar"
+			},
+			{
+				"name": "DS_CONDUTA",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Consulta_Unidade"
+		}
+	}
+}
