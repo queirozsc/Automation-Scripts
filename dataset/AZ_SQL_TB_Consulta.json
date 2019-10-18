@@ -1,53 +1,46 @@
 {
-	"name": "AZ_SQL_TB_Atend_Pac",
+	"name": "AZ_SQL_TB_Consulta",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSQL_DB_Procedimentos",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "Atendimentos Pacientes"
+			"name": "Geral Atendimentos Unidades"
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "data_entrada",
-				"type": "date"
-			},
-			{
-				"name": "ds_unidade",
-				"type": "varchar"
-			},
-			{
-				"name": "nr_prontuario",
+				"name": "NR_SEQUENCIA",
 				"type": "int",
 				"precision": 10
 			},
 			{
-				"name": "nm_paciente",
-				"type": "varchar"
-			},
-			{
-				"name": "nr_cpf",
-				"type": "varchar"
-			},
-			{
-				"name": "nr_cep",
-				"type": "varchar"
-			},
-			{
-				"name": "ie_sexo",
-				"type": "char"
-			},
-			{
-				"name": "dt_nascimento",
+				"name": "DT_ATUALIZACAO",
 				"type": "date"
+			},
+			{
+				"name": "NR_ATENDIMENTO",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "NM_MEDICO",
+				"type": "varchar"
+			},
+			{
+				"name": "DS_RETORNO",
+				"type": "varchar"
+			},
+			{
+				"name": "DS_CONDUTA",
+				"type": "varchar"
 			}
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "Tasy_Smart_Pac_Atend"
+			"table": "Consulta_Unidade"
 		}
 	}
 }
