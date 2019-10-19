@@ -12,6 +12,14 @@
 		"type": "OracleTable",
 		"structure": [
 			{
+				"name": "NR_SEQUENCIA",
+				"type": "Double"
+			},
+			{
+				"name": "DT_ATUALIZACAO",
+				"type": "DateTime"
+			},
+			{
 				"name": "NR_ATENDIMENTO",
 				"type": "Decimal"
 			},
@@ -20,27 +28,15 @@
 				"type": "String"
 			},
 			{
-				"name": "DT_ENTRADA",
-				"type": "DateTime"
-			},
-			{
-				"name": "CD_ESTABELECIMENTO",
-				"type": "Decimal"
-			},
-			{
-				"name": "CD_CGC",
-				"type": "String"
-			},
-			{
 				"name": "NM_MEDICO",
 				"type": "String"
 			},
 			{
-				"name": "NM_FANTASIA_ESTAB",
+				"name": "DS_RETORNO",
 				"type": "String"
 			},
 			{
-				"name": "DS_CONVENIO",
+				"name": "DS_CONDUTA",
 				"type": "String"
 			},
 			{

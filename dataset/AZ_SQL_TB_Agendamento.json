@@ -1,12 +1,12 @@
 {
-	"name": "AZSQL_TB_Agendamentos_Futuros_Unidade",
+	"name": "AZ_SQL_TB_Agendamento",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSQL_DB_Procedimentos",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "Retornos"
+			"name": "Geral Atendimentos Unidades"
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
@@ -61,7 +61,7 @@
 				"type": "varchar"
 			},
 			{
-				"name": "MEDICO",
+				"name": "NM_MEDICO",
 				"type": "varchar"
 			},
 			{
@@ -71,11 +71,15 @@
 			{
 				"name": "MARCA",
 				"type": "varchar"
+			},
+			{
+				"name": "STATUS_AGENDA",
+				"type": "varchar"
 			}
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "Agendamentos_Futuros_Unidade"
+			"table": "Agendamento_Unidade"
 		}
 	}
 }
