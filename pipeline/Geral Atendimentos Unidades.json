@@ -24,7 +24,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select pf.cd_pessoa_fisica,\n       pf.nm_pessoa_fisica,\n       pf.nr_cpf,\n       to_char((pf.dt_nascimento) , 'dd/mm/yyyy') as dt_nascimento,\n       substr(replace(LTRIM(translate(pf.nr_telefone_celular, translate(pf.nr_telefone_celular, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone_celular,\n       substr(replace(LTRIM(translate(cpf.nr_telefone, translate(cpf.nr_telefone, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone,\n       obter_cnpj_estabelecimento(decode(pf.cd_estabelecimento,null,1,pf.cd_estabelecimento)) as CNPJ,\n       'NAO ENCONTRADO' as SIGLA_UNIDADE,\n       'NAO ENCONTRADO' as MARCA\nfrom pessoa_fisica pf,\n     compl_pessoa_fisica cpf\nwhere pf.cd_pessoa_fisica = cpf.cd_pessoa_fisica\nand cpf.ie_tipo_complemento = 1\nand pf.ie_funcionario = 'N'",
+						"oracleReaderQuery": "select pf.cd_pessoa_fisica,\n       pf.nm_pessoa_fisica,\n       pf.nr_cpf,\n       to_char((pf.dt_nascimento) , 'dd/mm/yyyy') as dt_nascimento,\n       substr(replace(LTRIM(translate(pf.nr_telefone_celular, translate(pf.nr_telefone_celular, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone_celular,\n       substr(replace(LTRIM(translate(cpf.nr_telefone, translate(cpf.nr_telefone, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone,\n       obter_cnpj_estabelecimento(decode(pf.cd_estabelecimento,null,1,pf.cd_estabelecimento)) as CNPJ,\n       'NAO ENCONTRADO' as SIGLA_UNIDADE,\n       obter_nome_estabelecimento(decode(pf.cd_estabelecimento, null, 1,pf.cd_estabelecimento)) as MARCA\nfrom pessoa_fisica pf,\n     compl_pessoa_fisica cpf\nwhere pf.cd_pessoa_fisica = cpf.cd_pessoa_fisica\nand cpf.ie_tipo_complemento = 1\nand pf.ie_funcionario = 'N'",
 						"partitionOption": "None"
 					},
 					"sink": {
@@ -196,7 +196,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select pf.cd_pessoa_fisica,\n       pf.nm_pessoa_fisica,\n       pf.nr_cpf,\n       to_char((pf.dt_nascimento) , 'dd/mm/yyyy') as dt_nascimento,\n       substr(replace(LTRIM(translate(pf.nr_telefone_celular, translate(pf.nr_telefone_celular, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone_celular,\n       substr(replace(LTRIM(translate(cpf.nr_telefone, translate(cpf.nr_telefone, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone,\n       obter_cnpj_estabelecimento(decode(pf.cd_estabelecimento,null,1,pf.cd_estabelecimento)) as CNPJ,\n       'NAO ENCONTRADO' as SIGLA_UNIDADE,\n       'NAO ENCONTRADO' as MARCA\nfrom pessoa_fisica pf,\n     compl_pessoa_fisica cpf\nwhere pf.cd_pessoa_fisica = cpf.cd_pessoa_fisica\nand cpf.ie_tipo_complemento = 1\nand pf.ie_funcionario = 'N'",
+						"oracleReaderQuery": "select pf.cd_pessoa_fisica,\n       pf.nm_pessoa_fisica,\n       pf.nr_cpf,\n       to_char((pf.dt_nascimento) , 'dd/mm/yyyy') as dt_nascimento,\n       substr(replace(LTRIM(translate(pf.nr_telefone_celular, translate(pf.nr_telefone_celular, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone_celular,\n       substr(replace(LTRIM(translate(cpf.nr_telefone, translate(cpf.nr_telefone, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone,\n       obter_cnpj_estabelecimento(decode(pf.cd_estabelecimento,null,1,pf.cd_estabelecimento)) as CNPJ,\n       'NAO ENCONTRADO' as SIGLA_UNIDADE,\n       obter_nome_estabelecimento(decode(pf.cd_estabelecimento, null, 1,pf.cd_estabelecimento)) as MARCA\nfrom pessoa_fisica pf,\n     compl_pessoa_fisica cpf\nwhere pf.cd_pessoa_fisica = cpf.cd_pessoa_fisica\nand cpf.ie_tipo_complemento = 1\nand pf.ie_funcionario = 'N'",
 						"partitionOption": "None"
 					},
 					"sink": {
@@ -325,7 +325,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select  a.cd_pessoa_fisica, a.cd_convenio, \nobter_cnpj_estabelecimento(ag.cd_estabelecimento) as cnpj,\nto_char((a.hr_inicio) , 'dd/mm/yyyy') as data_agenda,\nto_char((a.hr_inicio) , 'hh24:mi:ss') as hora_agenda,\nag.cd_tipo_agenda as tipo_agenda,\npf.nm_pessoa_fisica as nm_paciente,\nsubstr(obter_desc_procedimento(a.cd_procedimento, a.ie_origem_proced),1,200) as ds_procedimento_princ,\nsubstr((select Listagg(Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced), ' ;') within GROUP (ORDER BY Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced))  from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia),1,1000) as ds_procedimento_adic,\n1 + (select count(1)from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia) as ie_quantidade,\nobter_nome_usuario(a.nm_usuario_orig) as nm_usuario,\nobter_nome_pf(a.cd_medico_exec) as nm_medico,\n'NAO ENCONTRADO' SIGLA_UNIDADE,\n'NAO ENCONTRADO' MARCA,\nobter_valor_dominio(83,a.ie_status_agenda) as status_agenda\nfrom agenda_paciente a,\n     agenda ag,\n     pessoa_fisica pf\nwhere a.cd_agenda = ag.cd_agenda\nand a.cd_pessoa_fisica = pf.cd_pessoa_fisica \nand a.cd_pessoa_fisica is not null\nand ag.cd_tipo_agenda = 2",
+						"oracleReaderQuery": "select  a.cd_pessoa_fisica, a.cd_convenio, \nobter_cnpj_estabelecimento(ag.cd_estabelecimento) as cnpj,\nto_char((a.hr_inicio) , 'dd/mm/yyyy') as data_agenda,\nto_char((a.hr_inicio) , 'hh24:mi:ss') as hora_agenda,\nag.cd_tipo_agenda as tipo_agenda,\npf.nm_pessoa_fisica as nm_paciente,\nsubstr(obter_desc_procedimento(a.cd_procedimento, a.ie_origem_proced),1,1000) as ds_procedimento_princ,\nsubstr((select Listagg(Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced), ' ;') within GROUP (ORDER BY Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced))  from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia),1,1000) as ds_procedimento_adic,\n1 + (select count(1)from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia) as ie_quantidade,\nobter_nome_usuario(a.nm_usuario_orig) as nm_usuario,\nobter_nome_pf(a.cd_medico_exec) as nm_medico,\n'NAO ENCONTRADO' SIGLA_UNIDADE,\n'NAO ENCONTRADO' MARCA,\nobter_valor_dominio(83,a.ie_status_agenda) as status_agenda\nfrom agenda_paciente a,\n     agenda ag,\n     pessoa_fisica pf\nwhere a.cd_agenda = ag.cd_agenda\nand a.cd_pessoa_fisica = pf.cd_pessoa_fisica \nand a.cd_pessoa_fisica is not null\nand ag.cd_tipo_agenda = 2",
 						"partitionOption": "None"
 					},
 					"sink": {
@@ -408,25 +408,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"storedProcedureName": "[dbo].[sp_UPDATETRADEMARKLOTE]",
-					"storedProcedureParameters": {
-						"CNPJ_FIELDNAME": {
-							"value": "CNPJ",
-							"type": "String"
-						},
-						"INITIALS_FIELDNAME": {
-							"value": "SIGLA_UNIDADE",
-							"type": "String"
-						},
-						"MARK_FIELDNAME": {
-							"value": "MARCA",
-							"type": "String"
-						},
-						"TABLENAME": {
-							"value": "Ret_Proximas_Consultas",
-							"type": "String"
-						}
-					}
+					"storedProcedureName": "[dbo].[sp_UPDATETRADEMARKLOTE]"
 				},
 				"linkedServiceName": {
 					"referenceName": "AzureSQL_DB_Procedimentos",
