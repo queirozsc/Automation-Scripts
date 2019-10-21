@@ -3,49 +3,6 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Atendimento Sadalla",
-				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "Wait1",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "OracleSource",
-						"oracleReaderQuery": "select pf.cd_pessoa_fisica, pf.nm_pessoa_fisica, at.dt_entrada, obter_nome_pf(at.cd_medico_resp) as nm_medico, c.cd_convenio, obter_nome_convenio(c.cd_convenio) AS ds_convenio\nfrom \natendimento_paciente at, \npessoa_fisica pf,\natend_categoria_convenio c\nwhere at.cd_pessoa_fisica = pf.cd_pessoa_fisica\nand at.nr_atendimento = c.nr_atendimento",
-						"partitionOption": "None"
-					},
-					"sink": {
-						"type": "AzureSqlSink"
-					},
-					"enableStaging": false
-				},
-				"inputs": [
-					{
-						"referenceName": "SadallaTasyPrdDataSet",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "AZ_SQL_TB_Atendimento",
-						"type": "DatasetReference"
-					}
-				]
-			},
-			{
 				"name": "Paciente HOB",
 				"type": "Copy",
 				"dependsOn": [
@@ -91,14 +48,7 @@
 			{
 				"name": "Atendimento HOB",
 				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "Atendimento Sadalla",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
