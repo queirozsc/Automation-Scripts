@@ -1327,7 +1327,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Atend_Pac')]",
+			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Agendamento')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -1336,48 +1336,80 @@
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
-					"name": "Atendimentos Pacientes"
+					"name": "Geral Atendimentos Unidades"
 				},
 				"annotations": [],
 				"type": "AzureSqlTable",
 				"schema": [
 					{
-						"name": "data_entrada",
-						"type": "date"
-					},
-					{
-						"name": "ds_unidade",
-						"type": "varchar"
-					},
-					{
-						"name": "nr_prontuario",
+						"name": "CD_PESSOA_FISICA",
 						"type": "int",
 						"precision": 10
 					},
 					{
-						"name": "nm_paciente",
+						"name": "CD_CONVENIO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CNPJ",
 						"type": "varchar"
 					},
 					{
-						"name": "nr_cpf",
-						"type": "varchar"
-					},
-					{
-						"name": "nr_cep",
-						"type": "varchar"
-					},
-					{
-						"name": "ie_sexo",
-						"type": "char"
-					},
-					{
-						"name": "dt_nascimento",
+						"name": "DATA_AGENDA",
 						"type": "date"
+					},
+					{
+						"name": "HORA_AGENDA",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "CD_TIPO_AGENDA",
+						"type": "varchar"
+					},
+					{
+						"name": "NM_PACIENTE",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_PROCEDIMENTO_PRINC",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_PROCEDIMENTO_ADIC",
+						"type": "varchar"
+					},
+					{
+						"name": "IE_QUANTIDADE",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "NM_USUARIO",
+						"type": "varchar"
+					},
+					{
+						"name": "NM_MEDICO",
+						"type": "varchar"
+					},
+					{
+						"name": "SIGLA_UNIDADE",
+						"type": "varchar"
+					},
+					{
+						"name": "MARCA",
+						"type": "varchar"
+					},
+					{
+						"name": "STATUS_AGENDA",
+						"type": "varchar"
 					}
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "Tasy_Smart_Pac_Atend"
+					"table": "Agendamento_Unidade"
 				}
 			},
 			"dependsOn": [
@@ -1385,7 +1417,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Baixa_Titulos_Pagar')]",
+			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Atendimento')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -1394,61 +1426,41 @@
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
-					"name": "Contas a Pagar"
+					"name": "Geral Atendimentos Unidades"
 				},
 				"annotations": [],
 				"type": "AzureSqlTable",
 				"schema": [
 					{
-						"name": "nr_titulo",
+						"name": "CD_PESSOA_FISICA",
 						"type": "int",
 						"precision": 10
 					},
 					{
-						"name": "nr_sequencia",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "dt_baixa",
-						"type": "date"
-					},
-					{
-						"name": "vl_pago",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_descontos",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_juros",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_multa",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "dt_atualizacao",
-						"type": "date"
-					},
-					{
-						"name": "ds_tipo_baixa",
+						"name": "NM_PESSOA_FISICA",
 						"type": "varchar"
 					},
 					{
-						"name": "ds_transacao",
+						"name": "DT_ENTRADA",
+						"type": "date"
+					},
+					{
+						"name": "NM_MEDICO",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_CONVENIO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_CONVENIO",
 						"type": "varchar"
 					}
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "Aging_Baixa_Titulo_Pagar"
+					"table": "Atendimento_Unidade"
 				}
 			},
 			"dependsOn": [
