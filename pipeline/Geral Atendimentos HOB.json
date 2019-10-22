@@ -211,15 +211,9 @@
 				}
 			},
 			{
-				"name": "Altera_marca",
+				"name": "Altera_marca_Atendimento",
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
-					{
-						"activity": "Altera_telefones",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
 					{
 						"activity": "Atendimento HOB",
 						"dependencyConditions": [
@@ -236,7 +230,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"storedProcedureName": "[dbo].[sp_UPDATETRADEMARKLOTE]"
+					"storedProcedureName": "sp_UPDATETRADEMARKATENDIMENTO"
 				},
 				"linkedServiceName": {
 					"referenceName": "AzureSQL_DB_Procedimentos",
@@ -264,6 +258,60 @@
 				"userProperties": [],
 				"typeProperties": {
 					"storedProcedureName": "[dbo].[sp_ALTERTELEPHONEMASKPACIENTES]"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Altera_marca_Pacientes",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Altera_telefones",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "sp_UPDATETRADEMARKPACIENTES"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Altera_marca_Agendamento",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Altera_tipo_agendas",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "sp_UPDATETRADEMARKAGENDAMENTO"
 				},
 				"linkedServiceName": {
 					"referenceName": "AzureSQL_DB_Procedimentos",
