@@ -21,7 +21,11 @@
 			},
 			{
 				"name": "DT_ENTRADA",
-				"type": "DateTime"
+				"type": "String"
+			},
+			{
+				"name": "HR_ENTRADA",
+				"type": "String"
 			},
 			{
 				"name": "NM_MEDICO",
