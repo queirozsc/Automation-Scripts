@@ -110,7 +110,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select max(o.nr_sequencia) as nr_sequencia, o.dt_atualizacao, o.nr_atendimento, o.cd_profissional as cd_medico ,obter_nome_pf(o.cd_profissional) as nm_medico, r.ds_retorno, substr(o.ds_conduta,1,1000) as ds_conduta,\nobter_pessoa_atendimento(o.nr_atendimento, 'C') as cd_pessoa_fisica\nfrom oft_consulta_medica o,\n     oft_retorno r\nwhere o.nr_seq_retorno = r.nr_sequencia\nand o.nr_atendimento is not null\ngroup by o.dt_atualizacao ,o.nr_atendimento, o.cd_profissional,obter_nome_pf(o.cd_profissional), r.ds_retorno, o.ds_conduta",
+						"oracleReaderQuery": "select o.nr_sequencia as nr_sequencia, o.dt_atualizacao, o.nr_atendimento, o.cd_profissional as cd_medico ,obter_nome_pf(o.cd_profissional) as nm_medico, r.ds_retorno, substr(o.ds_conduta,1,1000) as ds_conduta,\nobter_pessoa_atendimento(o.nr_atendimento, 'C') as cd_pessoa_fisica\nfrom oft_consulta_medica o,\n     oft_retorno r\nwhere o.nr_seq_retorno = r.nr_sequencia\nand o.nr_atendimento is not null",
 						"partitionOption": "None"
 					},
 					"sink": {
