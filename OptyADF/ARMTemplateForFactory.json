@@ -13011,7 +13011,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "select pf.cd_pessoa_fisica, pf.nm_pessoa_fisica, at.dt_entrada, obter_nome_pf(at.cd_medico_resp) as nm_medico, c.cd_convenio, obter_nome_convenio(c.cd_convenio) AS ds_convenio\nfrom \natendimento_paciente at, \npessoa_fisica pf,\natend_categoria_convenio c\nwhere at.cd_pessoa_fisica = pf.cd_pessoa_fisica\nand at.nr_atendimento = c.nr_atendimento",
+								"oracleReaderQuery": "select pf.cd_pessoa_fisica, pf.nm_pessoa_fisica, at.dt_entrada, obter_nome_pf(at.cd_medico_resp) as nm_medico, c.cd_convenio, obter_nome_convenio(c.cd_convenio) AS ds_convenio, at.nr_atendimento,\nobter_cgc_estabelecimento(at.cd_estabelecimento) as CNPJ,\n'NAO ENCONTRADO' as SIGLA_UNIDADE,\n'NAO ENCONTRADO' as MARCA\nfrom \natendimento_paciente at, \npessoa_fisica pf,\natend_categoria_convenio c\nwhere at.cd_pessoa_fisica = pf.cd_pessoa_fisica\nand at.nr_atendimento = c.nr_atendimento",
 								"partitionOption": "None"
 							},
 							"sink": {
@@ -13101,7 +13101,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "select  a.cd_pessoa_fisica, a.cd_convenio, \nobter_cnpj_estabelecimento(ag.cd_estabelecimento) as cnpj,\nto_char((a.hr_inicio) , 'dd/mm/yyyy') as data_agenda,\nto_char((a.hr_inicio) , 'hh24:mi:ss') as hora_agenda,\nag.cd_tipo_agenda as tipo_agenda,\npf.nm_pessoa_fisica as nm_paciente,\nsubstr(obter_desc_procedimento(a.cd_procedimento, a.ie_origem_proced),1,1000) as ds_procedimento_princ,\nsubstr((select Listagg(Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced), ' ;') within GROUP (ORDER BY Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced))  from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia),1,1000) as ds_procedimento_adic,\n1 + (select count(1)from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia) as ie_quantidade,\nobter_nome_usuario(a.nm_usuario_orig) as nm_usuario,\nobter_nome_pf(a.cd_medico_exec) as nm_medico,\n'NAO ENCONTRADO' SIGLA_UNIDADE,\n'NAO ENCONTRADO' MARCA,\nobter_valor_dominio(83,a.ie_status_agenda) as status_agenda\nfrom agenda_paciente a,\n     agenda ag,\n     pessoa_fisica pf\nwhere a.cd_agenda = ag.cd_agenda\nand a.cd_pessoa_fisica = pf.cd_pessoa_fisica \nand a.cd_pessoa_fisica is not null\nand ag.cd_tipo_agenda = 2",
+								"oracleReaderQuery": "select  a.cd_pessoa_fisica, a.cd_convenio, \nobter_cnpj_estabelecimento(ag.cd_estabelecimento) as cnpj,\nto_char((a.hr_inicio) , 'dd/mm/yyyy') as data_agenda,\nto_char((a.hr_inicio) , 'hh24:mi:ss') as hora_agenda,\nag.cd_tipo_agenda as tipo_agenda,\npf.nm_pessoa_fisica as nm_paciente,\nsubstr(obter_desc_procedimento(a.cd_procedimento, a.ie_origem_proced),1,1000) as ds_procedimento_princ,\nsubstr((select Listagg(Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced), ' ;') within GROUP (ORDER BY Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced))  from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia),1,1000) as ds_procedimento_adic,\n1 + (select count(1)from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia) as ie_quantidade,\nobter_nome_usuario(a.nm_usuario_orig) as nm_usuario,\nobter_nome_pf(a.cd_medico_exec) as nm_medico,\n'NAO ENCONTRADO' SIGLA_UNIDADE,\n'NAO ENCONTRADO' MARCA,\nobter_valor_dominio(83,a.ie_status_agenda) as status_agenda,\na.nr_atendimento,\na.nr_sequencia\nfrom agenda_paciente a,\n     agenda ag,\n     pessoa_fisica pf\nwhere a.cd_agenda = ag.cd_agenda\nand a.cd_pessoa_fisica = pf.cd_pessoa_fisica \nand a.cd_pessoa_fisica is not null\nand ag.cd_tipo_agenda = 2",
 								"partitionOption": "None"
 							},
 							"sink": {
@@ -13161,15 +13161,9 @@
 						}
 					},
 					{
-						"name": "Altera_marca",
+						"name": "Altera_marca_Atendimento",
 						"type": "SqlServerStoredProcedure",
 						"dependsOn": [
-							{
-								"activity": "Altera_telefones",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
 							{
 								"activity": "Atendimento HOB",
 								"dependencyConditions": [
@@ -13186,7 +13180,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"storedProcedureName": "[[dbo].[sp_UPDATETRADEMARKLOTE]"
+							"storedProcedureName": "sp_UPDATETRADEMARKATENDIMENTO"
 						},
 						"linkedServiceName": {
 							"referenceName": "AzureSQL_DB_Procedimentos",
@@ -13214,6 +13208,60 @@
 						"userProperties": [],
 						"typeProperties": {
 							"storedProcedureName": "[[dbo].[sp_ALTERTELEPHONEMASKPACIENTES]"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureSQL_DB_Procedimentos",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Altera_marca_Pacientes",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Altera_telefones",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "sp_UPDATETRADEMARKPACIENTES"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureSQL_DB_Procedimentos",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Altera_marca_Agendamento",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Altera_tipo_agendas",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "sp_UPDATETRADEMARKAGENDAMENTO"
 						},
 						"linkedServiceName": {
 							"referenceName": "AzureSQL_DB_Procedimentos",
@@ -13308,7 +13356,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "select pf.cd_pessoa_fisica, pf.nm_pessoa_fisica, at.dt_entrada, obter_nome_pf(at.cd_medico_resp) as nm_medico, c.cd_convenio, obter_nome_convenio(c.cd_convenio) AS ds_convenio\nfrom \natendimento_paciente at, \npessoa_fisica pf,\natend_categoria_convenio c\nwhere at.cd_pessoa_fisica = pf.cd_pessoa_fisica\nand at.nr_atendimento = c.nr_atendimento",
+								"oracleReaderQuery": "select pf.cd_pessoa_fisica, pf.nm_pessoa_fisica, at.dt_entrada, obter_nome_pf(at.cd_medico_resp) as nm_medico, c.cd_convenio, obter_nome_convenio(c.cd_convenio) AS ds_convenio, at.nr_atendimento,\nobter_cgc_estabelecimento(at.cd_estabelecimento) as CNPJ,\n'NAO ENCONTRADO' as SIGLA_UNIDADE,\n'NAO ENCONTRADO' as MARCA\nfrom \natendimento_paciente at, \npessoa_fisica pf,\natend_categoria_convenio c\nwhere at.cd_pessoa_fisica = pf.cd_pessoa_fisica\nand at.nr_atendimento = c.nr_atendimento",
 								"partitionOption": "None"
 							},
 							"sink": {
@@ -13398,7 +13446,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "select a.cd_pessoa_fisica, \na.cd_convenio, \nobter_cnpj_estabelecimento(ag.cd_estabelecimento) as cnpj,\nto_char(a.dt_agenda, 'dd/mm/yyyy') as data_agenda,\nto_char(a.dt_agenda, 'hh24:mi:ss') as hora_agenda,\nag.cd_tipo_agenda as tipo_agenda,\npf.nm_pessoa_fisica as nm_paciente,\nobter_desc_procedimento(10502, 1) as ds_procedimento_princ,\n'' ds_procedimento_adic,\n1 as ie_quantidade,\nobter_nome_usuario(a.nm_usuario_origem) as nm_usuario,\nobter_nome_pf(ag.cd_pessoa_fisica) as nm_medico,\n'NAO ENCONTRADO' SIGLA_UNIDADE,\n'NAO ENCONTRADO' MARCA,\nobter_valor_dominio(83,a.ie_status_agenda) as status_agenda\nfrom agenda_consulta a,\n     agenda ag,\n     pessoa_fisica pf\nwhere a.cd_agenda = ag.cd_agenda\nand ag.cd_pessoa_fisica = pf.cd_pessoa_fisica \nand a.cd_pessoa_fisica is not null",
+								"oracleReaderQuery": "select a.cd_pessoa_fisica, \na.cd_convenio, \nobter_cnpj_estabelecimento(ag.cd_estabelecimento) as cnpj,\nto_char(a.dt_agenda, 'dd/mm/yyyy') as data_agenda,\nto_char(a.dt_agenda, 'hh24:mi:ss') as hora_agenda,\nag.cd_tipo_agenda as tipo_agenda,\npf.nm_pessoa_fisica as nm_paciente,\nobter_desc_procedimento(10502, 1) as ds_procedimento_princ,\n'' ds_procedimento_adic,\n1 as ie_quantidade,\nobter_nome_usuario(a.nm_usuario_origem) as nm_usuario,\nobter_nome_pf(ag.cd_pessoa_fisica) as nm_medico,\n'NAO ENCONTRADO' SIGLA_UNIDADE,\n'NAO ENCONTRADO' MARCA,\nobter_valor_dominio(83,a.ie_status_agenda) as status_agenda,\na.nr_atendimento,\na.nr_sequencia\nfrom agenda_consulta a,\n     agenda ag,\n     pessoa_fisica pf\nwhere a.cd_agenda = ag.cd_agenda\nand ag.cd_pessoa_fisica = pf.cd_pessoa_fisica \nand a.cd_pessoa_fisica is not null",
 								"partitionOption": "None"
 							},
 							"sink": {
@@ -13458,17 +13506,11 @@
 						}
 					},
 					{
-						"name": "Altera_marca",
+						"name": "Altera_marca_Pacientes",
 						"type": "SqlServerStoredProcedure",
 						"dependsOn": [
 							{
 								"activity": "Altera_telefones",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "Atendimento Sadalla",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -13483,7 +13525,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"storedProcedureName": "[[dbo].[sp_UPDATETRADEMARKLOTE]"
+							"storedProcedureName": "sp_UPDATETRADEMARKPACIENTES"
 						},
 						"linkedServiceName": {
 							"referenceName": "AzureSQL_DB_Procedimentos",
@@ -13538,6 +13580,60 @@
 						"userProperties": [],
 						"typeProperties": {
 							"storedProcedureName": "[[dbo].[sp_ALTERTELEPHONEMASKPACIENTES]"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureSQL_DB_Procedimentos",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Altera_marca_Atendimento",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Atendimento Sadalla",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "sp_UPDATETRADEMARKATENDIMENTO"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureSQL_DB_Procedimentos",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Altera_marca_Agenda",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Altera_tipo_agendas",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "sp_UPDATETRADEMARKAGENDAMENTO"
 						},
 						"linkedServiceName": {
 							"referenceName": "AzureSQL_DB_Procedimentos",
@@ -24209,47 +24305,31 @@
 						"type": "String"
 					},
 					{
+						"name": "NM_PESSOA_FISICA",
+						"type": "String"
+					},
+					{
+						"name": "DT_ENTRADA",
+						"type": "DateTime"
+					},
+					{
+						"name": "NM_MEDICO",
+						"type": "String"
+					},
+					{
 						"name": "CD_CONVENIO",
 						"type": "Decimal"
 					},
 					{
-						"name": "CNPJ",
+						"name": "DS_CONVENIO",
 						"type": "String"
 					},
 					{
-						"name": "DATA_AGENDA",
-						"type": "String"
-					},
-					{
-						"name": "HORA_AGENDA",
-						"type": "String"
-					},
-					{
-						"name": "CD_TIPO_AGENDA",
+						"name": "NR_ATENDIMENTO",
 						"type": "Decimal"
 					},
 					{
-						"name": "NM_PACIENTE",
-						"type": "String"
-					},
-					{
-						"name": "DS_PROCEDIMENTO_PRINC",
-						"type": "String"
-					},
-					{
-						"name": "DS_PROCEDIMENTO_ADIC",
-						"type": "String"
-					},
-					{
-						"name": "IE_QUANTIDADE",
-						"type": "Double"
-					},
-					{
-						"name": "NM_USUARIO",
-						"type": "String"
-					},
-					{
-						"name": "NM_MEDICO",
+						"name": "CNPJ",
 						"type": "String"
 					},
 					{
@@ -24258,10 +24338,6 @@
 					},
 					{
 						"name": "MARCA",
-						"type": "String"
-					},
-					{
-						"name": "STATUS_AGENDA",
 						"type": "String"
 					}
 				],
@@ -27830,35 +27906,43 @@
 				"type": "OracleTable",
 				"structure": [
 					{
-						"name": "NR_SEQUENCIA",
-						"type": "Double"
-					},
-					{
-						"name": "DT_ATUALIZACAO",
-						"type": "DateTime"
-					},
-					{
-						"name": "NR_ATENDIMENTO",
-						"type": "Decimal"
-					},
-					{
-						"name": "CD_MEDICO",
+						"name": "CD_PESSOA_FISICA",
 						"type": "String"
+					},
+					{
+						"name": "NM_PESSOA_FISICA",
+						"type": "String"
+					},
+					{
+						"name": "DT_ENTRADA",
+						"type": "DateTime"
 					},
 					{
 						"name": "NM_MEDICO",
 						"type": "String"
 					},
 					{
-						"name": "DS_RETORNO",
+						"name": "CD_CONVENIO",
+						"type": "Decimal"
+					},
+					{
+						"name": "DS_CONVENIO",
 						"type": "String"
 					},
 					{
-						"name": "DS_CONDUTA",
+						"name": "NR_ATENDIMENTO",
+						"type": "Decimal"
+					},
+					{
+						"name": "CNPJ",
 						"type": "String"
 					},
 					{
-						"name": "CD_PESSOA_FISICA",
+						"name": "SIGLA_UNIDADE",
+						"type": "String"
+					},
+					{
+						"name": "MARCA",
 						"type": "String"
 					}
 				],

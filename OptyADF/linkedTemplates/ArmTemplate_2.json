@@ -305,47 +305,31 @@
 						"type": "String"
 					},
 					{
+						"name": "NM_PESSOA_FISICA",
+						"type": "String"
+					},
+					{
+						"name": "DT_ENTRADA",
+						"type": "DateTime"
+					},
+					{
+						"name": "NM_MEDICO",
+						"type": "String"
+					},
+					{
 						"name": "CD_CONVENIO",
 						"type": "Decimal"
 					},
 					{
-						"name": "CNPJ",
+						"name": "DS_CONVENIO",
 						"type": "String"
 					},
 					{
-						"name": "DATA_AGENDA",
-						"type": "String"
-					},
-					{
-						"name": "HORA_AGENDA",
-						"type": "String"
-					},
-					{
-						"name": "CD_TIPO_AGENDA",
+						"name": "NR_ATENDIMENTO",
 						"type": "Decimal"
 					},
 					{
-						"name": "NM_PACIENTE",
-						"type": "String"
-					},
-					{
-						"name": "DS_PROCEDIMENTO_PRINC",
-						"type": "String"
-					},
-					{
-						"name": "DS_PROCEDIMENTO_ADIC",
-						"type": "String"
-					},
-					{
-						"name": "IE_QUANTIDADE",
-						"type": "Double"
-					},
-					{
-						"name": "NM_USUARIO",
-						"type": "String"
-					},
-					{
-						"name": "NM_MEDICO",
+						"name": "CNPJ",
 						"type": "String"
 					},
 					{
@@ -354,10 +338,6 @@
 					},
 					{
 						"name": "MARCA",
-						"type": "String"
-					},
-					{
-						"name": "STATUS_AGENDA",
 						"type": "String"
 					}
 				],
