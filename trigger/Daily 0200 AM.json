@@ -7,7 +7,7 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "Retornos Sadalla",
+					"referenceName": "Geral Atendimentos Sadalla",
 					"type": "PipelineReference"
 				}
 			}

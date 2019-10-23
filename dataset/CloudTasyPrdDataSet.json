@@ -12,10 +12,6 @@
 		"type": "OracleTable",
 		"structure": [
 			{
-				"name": "ULTIMO_ATENDIMENTO",
-				"type": "Decimal"
-			},
-			{
 				"name": "CD_PESSOA_FISICA",
 				"type": "String"
 			},
@@ -24,23 +20,31 @@
 				"type": "String"
 			},
 			{
-				"name": "NR_TELEFONE_CELULAR",
+				"name": "DT_ENTRADA",
 				"type": "String"
 			},
 			{
-				"name": "NR_TELEFONE",
+				"name": "HR_ENTRADA",
 				"type": "String"
 			},
 			{
-				"name": "DS_EMAIL",
+				"name": "NM_MEDICO",
 				"type": "String"
+			},
+			{
+				"name": "CD_CONVENIO",
+				"type": "Decimal"
+			},
+			{
+				"name": "DS_CONVENIO",
+				"type": "String"
+			},
+			{
+				"name": "NR_ATENDIMENTO",
+				"type": "Decimal"
 			},
 			{
 				"name": "CNPJ",
-				"type": "String"
-			},
-			{
-				"name": "MARCA",
 				"type": "String"
 			},
 			{
@@ -48,11 +52,7 @@
 				"type": "String"
 			},
 			{
-				"name": "DT_NASCIMENTO",
-				"type": "DateTime"
-			},
-			{
-				"name": "NR_CPF",
+				"name": "MARCA",
 				"type": "String"
 			}
 		]
