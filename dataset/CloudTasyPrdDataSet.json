@@ -54,6 +54,14 @@
 			{
 				"name": "MARCA",
 				"type": "String"
+			},
+			{
+				"name": "CD_PROCEDENCIA",
+				"type": "Decimal"
+			},
+			{
+				"name": "DS_PROCEDENCIA",
+				"type": "String"
 			}
 		]
 	},
