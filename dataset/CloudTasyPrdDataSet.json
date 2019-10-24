@@ -16,39 +16,51 @@
 				"type": "String"
 			},
 			{
-				"name": "CD_CONVENIO",
-				"type": "Decimal"
-			},
-			{
-				"name": "DATA_AGENDA",
+				"name": "NM_PESSOA_FISICA",
 				"type": "String"
 			},
 			{
-				"name": "HORA_AGENDA",
+				"name": "DT_ENTRADA",
 				"type": "String"
 			},
 			{
-				"name": "CD_TIPO_AGENDA",
-				"type": "Decimal"
+				"name": "HR_ENTRADA",
+				"type": "String"
 			},
 			{
 				"name": "NM_MEDICO",
 				"type": "String"
 			},
 			{
-				"name": "DS_PROCEDIMENTO_PRINC",
+				"name": "CD_CONVENIO",
+				"type": "Decimal"
+			},
+			{
+				"name": "DS_CONVENIO",
 				"type": "String"
 			},
 			{
-				"name": "DS_PROCEDIMENTO_ADIC",
+				"name": "NR_ATENDIMENTO",
+				"type": "Decimal"
+			},
+			{
+				"name": "CNPJ",
 				"type": "String"
 			},
 			{
-				"name": "IE_QUANTIDADE",
-				"type": "Double"
+				"name": "SIGLA_UNIDADE",
+				"type": "String"
 			},
 			{
-				"name": "NM_USUARIO",
+				"name": "MARCA",
+				"type": "String"
+			},
+			{
+				"name": "CD_PROCEDENCIA",
+				"type": "Decimal"
+			},
+			{
+				"name": "DS_PROCEDENCIA",
 				"type": "String"
 			}
 		]
