@@ -89,35 +89,47 @@
 						"type": "String"
 					},
 					{
-						"name": "NM_PESSOA_FISICA",
-						"type": "String"
-					},
-					{
-						"name": "DT_ENTRADA",
-						"type": "String"
-					},
-					{
-						"name": "HR_ENTRADA",
-						"type": "String"
-					},
-					{
-						"name": "NM_MEDICO",
-						"type": "String"
-					},
-					{
 						"name": "CD_CONVENIO",
 						"type": "Decimal"
 					},
 					{
-						"name": "DS_CONVENIO",
+						"name": "CNPJ",
 						"type": "String"
 					},
 					{
-						"name": "NR_ATENDIMENTO",
+						"name": "DATA_AGENDA",
+						"type": "String"
+					},
+					{
+						"name": "HORA_AGENDA",
+						"type": "String"
+					},
+					{
+						"name": "TIPO_AGENDA",
 						"type": "Decimal"
 					},
 					{
-						"name": "CNPJ",
+						"name": "NM_PACIENTE",
+						"type": "String"
+					},
+					{
+						"name": "DS_PROCEDIMENTO_PRINC",
+						"type": "String"
+					},
+					{
+						"name": "DS_PROCEDIMENTO_ADIC",
+						"type": "String"
+					},
+					{
+						"name": "IE_QUANTIDADE",
+						"type": "Double"
+					},
+					{
+						"name": "NM_USUARIO",
+						"type": "String"
+					},
+					{
+						"name": "NM_MEDICO",
 						"type": "String"
 					},
 					{
@@ -126,6 +138,22 @@
 					},
 					{
 						"name": "MARCA",
+						"type": "String"
+					},
+					{
+						"name": "STATUS_AGENDA",
+						"type": "String"
+					},
+					{
+						"name": "NR_ATENDIMENTO",
+						"type": "Decimal"
+					},
+					{
+						"name": "NR_SEQUENCIA",
+						"type": "Decimal"
+					},
+					{
+						"name": "ID",
 						"type": "String"
 					},
 					{
@@ -13103,7 +13131,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "select  a.cd_pessoa_fisica, a.cd_convenio, \nobter_cnpj_estabelecimento(ag.cd_estabelecimento) as cnpj,\nto_char((a.hr_inicio) , 'dd/mm/yyyy') as data_agenda,\nto_char((a.hr_inicio) , 'hh24:mi:ss') as hora_agenda,\nag.cd_tipo_agenda as tipo_agenda,\npf.nm_pessoa_fisica as nm_paciente,\nsubstr(obter_desc_procedimento(a.cd_procedimento, a.ie_origem_proced),1,1000) as ds_procedimento_princ,\nsubstr((select Listagg(Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced), ' ;') within GROUP (ORDER BY Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced))  from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia),1,1000) as ds_procedimento_adic,\n1 + (select count(1)from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia) as ie_quantidade,\nobter_nome_usuario(a.nm_usuario_orig) as nm_usuario,\nobter_nome_pf(a.cd_medico_exec) as nm_medico,\n'NAO ENCONTRADO' SIGLA_UNIDADE,\n'NAO ENCONTRADO' MARCA,\nobter_valor_dominio(83,a.ie_status_agenda) as status_agenda,\na.nr_atendimento,\na.nr_sequencia,\n'NAO ENCONTRADO' as ID\nfrom agenda_paciente a,\n     agenda ag,\n     pessoa_fisica pf\nwhere a.cd_agenda = ag.cd_agenda\nand a.cd_pessoa_fisica = pf.cd_pessoa_fisica \nand a.cd_pessoa_fisica is not null\nand ag.cd_tipo_agenda = 2",
+								"oracleReaderQuery": "select  a.cd_pessoa_fisica, a.cd_convenio, \nobter_cnpj_estabelecimento(ag.cd_estabelecimento) as cnpj,\nto_char((a.hr_inicio) , 'dd/mm/yyyy') as data_agenda,\nto_char((a.hr_inicio) , 'hh24:mi:ss') as hora_agenda,\nag.cd_tipo_agenda as tipo_agenda,\npf.nm_pessoa_fisica as nm_paciente,\nsubstr(obter_desc_procedimento(a.cd_procedimento, a.ie_origem_proced),1,1000) as ds_procedimento_princ,\nsubstr((select Listagg(Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced), ' ;') within GROUP (ORDER BY Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced))  from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia),1,1000) as ds_procedimento_adic,\n1 + (select count(1)from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia) as ie_quantidade,\nobter_nome_usuario(a.nm_usuario_orig) as nm_usuario,\nobter_nome_pf(a.cd_medico_exec) as nm_medico,\n'NAO ENCONTRADO' SIGLA_UNIDADE,\n'NAO ENCONTRADO' MARCA,\nobter_valor_dominio(83,a.ie_status_agenda) as status_agenda,\na.nr_atendimento,\na.nr_sequencia,\n'NAO ENCONTRADO' as ID,\na.cd_procedencia,\np.ds_procedencia\nfrom agenda_paciente a,\n     agenda ag,\n     pessoa_fisica pf,\n     procedencia p\nwhere a.cd_agenda = ag.cd_agenda\nand a.cd_pessoa_fisica = pf.cd_pessoa_fisica \nand a.cd_procedencia = p.cd_procedencia (+)\nand a.cd_pessoa_fisica is not null\nand ag.cd_tipo_agenda = 2",
 								"partitionOption": "None"
 							},
 							"sink": {
@@ -13474,7 +13502,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "select a.cd_pessoa_fisica, \na.cd_convenio, \nobter_cnpj_estabelecimento(ag.cd_estabelecimento) as cnpj,\nto_char(a.dt_agenda, 'dd/mm/yyyy') as data_agenda,\nto_char(a.dt_agenda, 'hh24:mi:ss') as hora_agenda,\nag.cd_tipo_agenda as tipo_agenda,\npf.nm_pessoa_fisica as nm_paciente,\nobter_desc_procedimento(10502, 1) as ds_procedimento_princ,\n'' ds_procedimento_adic,\n1 as ie_quantidade,\nobter_nome_usuario(a.nm_usuario_origem) as nm_usuario,\nobter_nome_pf(ag.cd_pessoa_fisica) as nm_medico,\n'NAO ENCONTRADO' SIGLA_UNIDADE,\n'NAO ENCONTRADO' MARCA,\nobter_valor_dominio(83,a.ie_status_agenda) as status_agenda,\na.nr_atendimento,\na.nr_sequencia,\n'NAO ENCONTRADO' as ID\nfrom agenda_consulta a,\n     agenda ag,\n     pessoa_fisica pf\nwhere a.cd_agenda = ag.cd_agenda\nand a.cd_pessoa_fisica = pf.cd_pessoa_fisica \nand a.cd_pessoa_fisica is not null",
+								"oracleReaderQuery": "select a.cd_pessoa_fisica, \na.cd_convenio, \nobter_cnpj_estabelecimento(ag.cd_estabelecimento) as cnpj,\nto_char(a.dt_agenda, 'dd/mm/yyyy') as data_agenda,\nto_char(a.dt_agenda, 'hh24:mi:ss') as hora_agenda,\nag.cd_tipo_agenda as tipo_agenda,\npf.nm_pessoa_fisica as nm_paciente,\nobter_desc_procedimento(10502, 1) as ds_procedimento_princ,\n'' ds_procedimento_adic,\n1 as ie_quantidade,\nobter_nome_usuario(a.nm_usuario_origem) as nm_usuario,\nobter_nome_pf(ag.cd_pessoa_fisica) as nm_medico,\n'NAO ENCONTRADO' SIGLA_UNIDADE,\n'NAO ENCONTRADO' MARCA,\nobter_valor_dominio(83,a.ie_status_agenda) as status_agenda,\na.nr_atendimento,\na.nr_sequencia,\n'NAO ENCONTRADO' as ID,\na.cd_procedencia,\np.ds_procedencia\nfrom agenda_consulta a,\n     agenda ag,\n     pessoa_fisica pf,\n     procedencia p\nwhere a.cd_agenda = ag.cd_agenda\nand a.cd_pessoa_fisica = pf.cd_pessoa_fisica \nand a.cd_procedencia = p.cd_procedencia (+)\nand a.cd_pessoa_fisica is not null",
 								"partitionOption": "None"
 							},
 							"sink": {
@@ -15861,7 +15889,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "select  at.nr_atendimento, at.cd_medico_resp as cd_medico, at.dt_entrada, at.cd_estabelecimento, e.cd_cgc, pf.nm_pessoa_fisica as nm_medico, e.nm_fantasia_estab, \n        cn.ds_convenio, at.cd_pessoa_fisica\nfrom atendimento_paciente at, \n     estabelecimento e,\n     pessoa_fisica pf,\n     atend_categoria_convenio c,\n     convenio cn\nwhere pf.cd_pessoa_fisica = at.cd_medico_resp\nand at.nr_atendimento = (select max(x.nr_atendimento) from atendimento_paciente x where x.cd_pessoa_fisica = at.cd_pessoa_fisica)\nand at.nr_atendimento = c.nr_atendimento\nand c.cd_convenio = cn.cd_convenio\nand at.cd_estabelecimento = e.cd_estabelecimento ",
+								"oracleReaderQuery": "select  at.nr_atendimento, at.cd_medico_resp as cd_medico, at.dt_entrada, at.cd_estabelecimento, e.cd_cgc, pf.nm_pessoa_fisica as nm_medico, e.nm_fantasia_estab, \n        cn.ds_convenio, at.cd_pessoa_fisica\nfrom atendimento_paciente at, \n     estabelecimento e,\n     pessoa_fisica pf,\n     atend_categoria_convenio c,\n     convenio cn\nwhere pf.cd_pessoa_fisica = at.cd_medico_resp\nand at.nr_atendimento = (select max(x.nr_atendimento) from atendimento_paciente x where x.cd_pessoa_fisica = at.cd_pessoa_fisica)\nand at.nr_atendimento = c.nr_atendimento\nand c.cd_convenio = cn.cd_convenio\nand at.cd_estabelecimento = e.cd_estabelecimento",
 								"partitionOption": "None"
 							},
 							"sink": {
