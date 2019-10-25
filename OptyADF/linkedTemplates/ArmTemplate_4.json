@@ -89,47 +89,27 @@
 						"type": "String"
 					},
 					{
-						"name": "CD_CONVENIO",
-						"type": "Decimal"
+						"name": "NM_PESSOA_FISICA",
+						"type": "String"
+					},
+					{
+						"name": "NR_CPF",
+						"type": "String"
+					},
+					{
+						"name": "DT_NASCIMENTO",
+						"type": "String"
+					},
+					{
+						"name": "NR_TELEFONE_CELULAR",
+						"type": "String"
+					},
+					{
+						"name": "NR_TELEFONE",
+						"type": "String"
 					},
 					{
 						"name": "CNPJ",
-						"type": "String"
-					},
-					{
-						"name": "DATA_AGENDA",
-						"type": "String"
-					},
-					{
-						"name": "HORA_AGENDA",
-						"type": "String"
-					},
-					{
-						"name": "TIPO_AGENDA",
-						"type": "Decimal"
-					},
-					{
-						"name": "NM_PACIENTE",
-						"type": "String"
-					},
-					{
-						"name": "DS_PROCEDIMENTO_PRINC",
-						"type": "String"
-					},
-					{
-						"name": "DS_PROCEDIMENTO_ADIC",
-						"type": "String"
-					},
-					{
-						"name": "IE_QUANTIDADE",
-						"type": "Double"
-					},
-					{
-						"name": "NM_USUARIO",
-						"type": "String"
-					},
-					{
-						"name": "NM_MEDICO",
 						"type": "String"
 					},
 					{
@@ -138,30 +118,6 @@
 					},
 					{
 						"name": "MARCA",
-						"type": "String"
-					},
-					{
-						"name": "STATUS_AGENDA",
-						"type": "String"
-					},
-					{
-						"name": "NR_ATENDIMENTO",
-						"type": "Decimal"
-					},
-					{
-						"name": "NR_SEQUENCIA",
-						"type": "Decimal"
-					},
-					{
-						"name": "ID",
-						"type": "String"
-					},
-					{
-						"name": "CD_PROCEDENCIA",
-						"type": "Decimal"
-					},
-					{
-						"name": "DS_PROCEDENCIA",
 						"type": "String"
 					}
 				],
@@ -12996,7 +12952,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "select pf.cd_pessoa_fisica,\n       pf.nm_pessoa_fisica,\n       pf.nr_cpf,\n       to_char((pf.dt_nascimento) , 'dd/mm/yyyy') as dt_nascimento,\n       substr(replace(LTRIM(translate(pf.nr_telefone_celular, translate(pf.nr_telefone_celular, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone_celular,\n       substr(replace(LTRIM(translate(cpf.nr_telefone, translate(cpf.nr_telefone, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone,\n       obter_cnpj_estabelecimento(decode(pf.cd_estabelecimento,null,1,pf.cd_estabelecimento)) as CNPJ,\n       'NAO ENCONTRADO' as SIGLA_UNIDADE,\n       'NAO ENCONTRADO' as MARCA\nfrom pessoa_fisica pf,\n     compl_pessoa_fisica cpf\nwhere pf.cd_pessoa_fisica = cpf.cd_pessoa_fisica (+)\nand cpf.ie_tipo_complemento = 1\nand pf.ie_funcionario = 'N'",
+								"oracleReaderQuery": "select pf.cd_pessoa_fisica,\n       pf.nm_pessoa_fisica,\n       pf.nr_cpf,\n       to_char((pf.dt_nascimento) , 'dd/mm/yyyy') as dt_nascimento,\n       substr(replace(LTRIM(translate(pf.nr_telefone_celular, translate(pf.nr_telefone_celular, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone_celular,\n       obter_compl_pf(pf.cd_pessoa_fisica,1,'T') as nr_telefone,\n       obter_cnpj_estabelecimento(decode(pf.cd_estabelecimento,null,1,pf.cd_estabelecimento)) as CNPJ,\n       'NAO ENCONTRADO' as SIGLA_UNIDADE,\n       'NAO ENCONTRADO' as MARCA\nfrom pessoa_fisica pf",
 								"partitionOption": "None"
 							},
 							"sink": {
@@ -13367,7 +13323,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "select pf.cd_pessoa_fisica,\n       pf.nm_pessoa_fisica,\n       pf.nr_cpf,\n       to_char((pf.dt_nascimento) , 'dd/mm/yyyy') as dt_nascimento,\n       substr(replace(LTRIM(translate(pf.nr_telefone_celular, translate(pf.nr_telefone_celular, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone_celular,\n       substr(replace(LTRIM(translate(cpf.nr_telefone, translate(cpf.nr_telefone, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone,\n       obter_cnpj_estabelecimento(decode(pf.cd_estabelecimento,null,1,pf.cd_estabelecimento)) as CNPJ,\n       'NAO ENCONTRADO' as SIGLA_UNIDADE,\n       'NAO ENCONTRADO' as MARCA\nfrom pessoa_fisica pf,\n     compl_pessoa_fisica cpf\nwhere pf.cd_pessoa_fisica = cpf.cd_pessoa_fisica (+)\nand cpf.ie_tipo_complemento = 1\nand pf.ie_funcionario = 'N'",
+								"oracleReaderQuery": "select pf.cd_pessoa_fisica,\n       pf.nm_pessoa_fisica,\n       pf.nr_cpf,\n       to_char((pf.dt_nascimento) , 'dd/mm/yyyy') as dt_nascimento,\n       substr(replace(LTRIM(translate(pf.nr_telefone_celular, translate(pf.nr_telefone_celular, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone_celular,\n       obter_compl_pf(pf.cd_pessoa_fisica,1,'T') as nr_telefone,\n       obter_cnpj_estabelecimento(decode(pf.cd_estabelecimento,null,1,pf.cd_estabelecimento)) as CNPJ,\n       'NAO ENCONTRADO' as SIGLA_UNIDADE,\n       'NAO ENCONTRADO' as MARCA\nfrom pessoa_fisica pf",
 								"partitionOption": "None"
 							},
 							"sink": {
