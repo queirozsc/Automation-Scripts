@@ -1411,6 +1411,384 @@
 						}
 					]
 				}
+			},
+			{
+				"name": "Check CSI file exists",
+				"type": "GetMetadata",
+				"dependsOn": [
+					{
+						"activity": "Start",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "CSI_CSV_NC_BilhetesLigacoes",
+						"type": "DatasetReference"
+					},
+					"fieldList": [
+						"exists"
+					],
+					"storeSettings": {
+						"type": "FileServerReadSettings",
+						"recursive": true
+					},
+					"formatSettings": {
+						"type": "DelimitedTextReadSettings"
+					}
+				}
+			},
+			{
+				"name": "CSI file exists",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "Check CSI file exists",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@equals(\nactivity('Check CSI file exists').output.exists, \ntrue)",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "Send failure CSI",
+							"type": "ExecutePipeline",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "Send email",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true,
+								"parameters": {
+									"EmailTo": "sergio.queiroz@opty.com.br",
+									"Subject": "Arquivo Nexcore\\INOB não encontrado!",
+									"ErrorMessage": "O arquivo INOB\\Agentes por Dia não foi encontrado",
+									"MasterPipeline": {
+										"value": "@{pipeline().Pipeline}",
+										"type": "Expression"
+									}
+								}
+							}
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "Copy CSI BilheteLigacoes",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "FileServerReadSettings",
+										"recursive": true
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
+								},
+								"sink": {
+									"type": "AzureSqlSink"
+								},
+								"enableStaging": false,
+								"enableSkipIncompatibleRow": true,
+								"translator": {
+									"type": "TabularTranslator",
+									"mappings": [
+										{
+											"source": {
+												"name": "Usuario",
+												"type": "String"
+											},
+											"sink": {
+												"name": "Usuario",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"name": "Intervalo",
+												"type": "String"
+											},
+											"sink": {
+												"name": "Intervalo",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"name": "Atendidas",
+												"type": "Int32"
+											},
+											"sink": {
+												"name": "Atendidas",
+												"type": "Int32"
+											}
+										},
+										{
+											"source": {
+												"name": "Recusas",
+												"type": "Int32"
+											},
+											"sink": {
+												"name": "Recusas",
+												"type": "Int32"
+											}
+										},
+										{
+											"source": {
+												"name": "Recebidas",
+												"type": "Int32"
+											},
+											"sink": {
+												"name": "Recebidas",
+												"type": "Int32"
+											}
+										},
+										{
+											"source": {
+												"name": "Internas Recebidas",
+												"type": "Int32"
+											},
+											"sink": {
+												"name": "Internas_Recebidas",
+												"type": "Int32"
+											}
+										},
+										{
+											"source": {
+												"name": "Transferencias",
+												"type": "Int32"
+											},
+											"sink": {
+												"name": "Transferencias",
+												"type": "Int32"
+											}
+										},
+										{
+											"source": {
+												"name": "Efetuadas",
+												"type": "Int32"
+											},
+											"sink": {
+												"name": "Efetuadas",
+												"type": "Int32"
+											}
+										},
+										{
+											"source": {
+												"name": "Efetuadas Tratados",
+												"type": "String"
+											},
+											"sink": {
+												"name": "Efetuadas_Tratados",
+												"type": "Int32"
+											}
+										},
+										{
+											"source": {
+												"name": "% Taxa de Contato",
+												"type": "String"
+											},
+											"sink": {
+												"name": "Taxa_de_Contato",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"name": "Tempo Atendidas",
+												"type": "String"
+											},
+											"sink": {
+												"name": "Tempo_Atendidas",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"name": "Tempo Internas Recebidas",
+												"type": "String"
+											},
+											"sink": {
+												"name": "Tempo_Internas_Recebidas",
+												"type": "TimeSpan"
+											}
+										},
+										{
+											"source": {
+												"name": "Tempo Efetuadas",
+												"type": "String"
+											},
+											"sink": {
+												"name": "Tempo_Efetuadas",
+												"type": "TimeSpan"
+											}
+										},
+										{
+											"source": {
+												"name": "Tempo Medio Falado",
+												"type": "String"
+											},
+											"sink": {
+												"name": "Tempo_Medio_Falado",
+												"type": "TimeSpan"
+											}
+										},
+										{
+											"source": {
+												"name": "Tempo Total Falado",
+												"type": "String"
+											},
+											"sink": {
+												"name": "Tempo_Total_Falado",
+												"type": "TimeSpan"
+											}
+										},
+										{
+											"source": {
+												"name": "Tempo Toque Agente",
+												"type": "String"
+											},
+											"sink": {
+												"name": "Tempo_Toque_Agente",
+												"type": "TimeSpan"
+											}
+										},
+										{
+											"source": {
+												"name": "Tempo Toque Cliente",
+												"type": "String"
+											},
+											"sink": {
+												"name": "Tempo_Toque_Cliente",
+												"type": "TimeSpan"
+											}
+										},
+										{
+											"source": {
+												"name": "Tempo Pausa",
+												"type": "String"
+											},
+											"sink": {
+												"name": "Tempo_Pausa",
+												"type": "TimeSpan"
+											}
+										},
+										{
+											"source": {
+												"name": "Tempo Estouro",
+												"type": "String"
+											},
+											"sink": {
+												"name": "Tempo_Estouro",
+												"type": "TimeSpan"
+											}
+										},
+										{
+											"source": {
+												"name": "Tempo Dispon�vel",
+												"type": "String"
+											},
+											"sink": {
+												"name": "Tempo_Disponivel",
+												"type": "TimeSpan"
+											}
+										},
+										{
+											"source": {
+												"name": "Tempo Indispon�vel",
+												"type": "String"
+											},
+											"sink": {
+												"name": "Tempo_Indisponivel",
+												"type": "TimeSpan"
+											}
+										},
+										{
+											"source": {
+												"name": "Tempo Logado",
+												"type": "String"
+											},
+											"sink": {
+												"name": "Tempo_Logado",
+												"type": "TimeSpan"
+											}
+										},
+										{
+											"source": {
+												"name": "Tempo Deslogado",
+												"type": "String"
+											},
+											"sink": {
+												"name": "Tempo_Deslogado",
+												"type": "TimeSpan"
+											}
+										},
+										{
+											"source": {
+												"name": "% Falado x Logado",
+												"type": "String"
+											},
+											"sink": {
+												"name": "Falado_x_Logado",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"name": "Marca",
+												"type": "String"
+											},
+											"sink": {
+												"name": "MARCA",
+												"type": "String"
+											}
+										}
+									]
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "CSI_CSV_NC_BilhetesLigacoes",
+									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "AZSQL_TB_NC_AgentesPorDia",
+									"type": "DatasetReference"
+								}
+							]
+						}
+					]
+				}
 			}
 		],
 		"folder": {
