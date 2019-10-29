@@ -1976,7 +1976,7 @@
 					],
 					"ifTrueActivities": [
 						{
-							"name": "Copy CSI agentes hora",
+							"name": "Copy CSI AgentesPorHora",
 							"type": "Copy",
 							"dependsOn": [],
 							"policy": {
@@ -2267,7 +2267,7 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "AZSQL_TB_NC_AgentesPorDia",
+									"referenceName": "AZSQL_TB_NC_AgentesPorHora",
 									"type": "DatasetReference"
 								}
 							]
