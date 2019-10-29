@@ -15,9 +15,9 @@
 				"type": "FileServerLocation",
 				"fileName": "FilasPorHoraCSI.csv"
 			},
-			"columnDelimiter": ",",
-			"escapeChar": "\\",
-			"quoteChar": "\""
+			"columnDelimiter": ";",
+			"escapeChar": "",
+			"quoteChar": ""
 		},
 		"schema": [
 			{
