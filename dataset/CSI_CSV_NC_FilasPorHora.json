@@ -1,0 +1,25 @@
+{
+	"name": "CSI_CSV_NC_FilasPorHora",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Folder_Nexcore_Consolidado",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "FileServerLocation",
+				"fileName": "FilasPorHoraCSI.csv"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"type": "String"
+			}
+		]
+	}
+}
