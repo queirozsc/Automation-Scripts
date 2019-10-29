@@ -15,9 +15,10 @@
 				"type": "FileServerLocation",
 				"fileName": "AgentesPorHoraCSI.csv"
 			},
-			"columnDelimiter": ",",
-			"escapeChar": "\\",
-			"quoteChar": "\""
+			"columnDelimiter": ";",
+			"escapeChar": "",
+			"firstRowAsHeader": true,
+			"quoteChar": ""
 		},
 		"schema": [
 			{
