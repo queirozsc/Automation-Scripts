@@ -5,6 +5,9 @@
 			"referenceName": "Folder_Nexcore_Consolidado",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "Nexcore/CSI"
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
