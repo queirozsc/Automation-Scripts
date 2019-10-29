@@ -2564,8 +2564,7 @@
 												"type": "String"
 											},
 											"sink": {
-												"name": "Callback_Nao_Tratados",
-												"type": "Int32"
+												"name": "Callback_Nao_Tratados"
 											}
 										},
 										{
@@ -2958,7 +2957,7 @@
 										},
 										{
 											"source": {
-												"name": "Abandonos Anuncio Inicial",
+												"name": "Abandonos Ate NS",
 												"type": "String"
 											},
 											"sink": {
