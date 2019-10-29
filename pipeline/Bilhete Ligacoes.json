@@ -1523,249 +1523,93 @@
 									"mappings": [
 										{
 											"source": {
-												"name": "Usuario",
-												"type": "String"
+												"type": "String",
+												"ordinal": 1
 											},
 											"sink": {
-												"name": "Usuario",
-												"type": "String"
+												"name": "DATA",
+												"type": "DateTime"
 											}
 										},
 										{
-											"source": {
-												"name": "Intervalo",
-												"type": "String"
-											},
 											"sink": {
-												"name": "Intervalo",
-												"type": "String"
-											}
-										},
-										{
-											"source": {
-												"name": "Atendidas",
-												"type": "Int32"
-											},
-											"sink": {
-												"name": "Atendidas",
-												"type": "Int32"
-											}
-										},
-										{
-											"source": {
-												"name": "Recusas",
-												"type": "Int32"
-											},
-											"sink": {
-												"name": "Recusas",
-												"type": "Int32"
-											}
-										},
-										{
-											"source": {
-												"name": "Recebidas",
-												"type": "Int32"
-											},
-											"sink": {
-												"name": "Recebidas",
-												"type": "Int32"
-											}
-										},
-										{
-											"source": {
-												"name": "Internas Recebidas",
-												"type": "Int32"
-											},
-											"sink": {
-												"name": "Internas_Recebidas",
-												"type": "Int32"
-											}
-										},
-										{
-											"source": {
-												"name": "Transferencias",
-												"type": "Int32"
-											},
-											"sink": {
-												"name": "Transferencias",
-												"type": "Int32"
-											}
-										},
-										{
-											"source": {
-												"name": "Efetuadas",
-												"type": "Int32"
-											},
-											"sink": {
-												"name": "Efetuadas",
-												"type": "Int32"
-											}
-										},
-										{
-											"source": {
-												"name": "Efetuadas Tratados",
-												"type": "String"
-											},
-											"sink": {
-												"name": "Efetuadas_Tratados",
-												"type": "Int32"
-											}
-										},
-										{
-											"source": {
-												"name": "% Taxa de Contato",
-												"type": "String"
-											},
-											"sink": {
-												"name": "Taxa_de_Contato",
-												"type": "String"
-											}
-										},
-										{
-											"source": {
-												"name": "Tempo Atendidas",
-												"type": "String"
-											},
-											"sink": {
-												"name": "Tempo_Atendidas",
-												"type": "String"
-											}
-										},
-										{
-											"source": {
-												"name": "Tempo Internas Recebidas",
-												"type": "String"
-											},
-											"sink": {
-												"name": "Tempo_Internas_Recebidas",
+												"name": "HORA",
 												"type": "TimeSpan"
 											}
 										},
 										{
-											"source": {
-												"name": "Tempo Efetuadas",
-												"type": "String"
-											},
 											"sink": {
-												"name": "Tempo_Efetuadas",
-												"type": "TimeSpan"
-											}
-										},
-										{
-											"source": {
-												"name": "Tempo Medio Falado",
-												"type": "String"
-											},
-											"sink": {
-												"name": "Tempo_Medio_Falado",
-												"type": "TimeSpan"
-											}
-										},
-										{
-											"source": {
-												"name": "Tempo Total Falado",
-												"type": "String"
-											},
-											"sink": {
-												"name": "Tempo_Total_Falado",
-												"type": "TimeSpan"
-											}
-										},
-										{
-											"source": {
-												"name": "Tempo Toque Agente",
-												"type": "String"
-											},
-											"sink": {
-												"name": "Tempo_Toque_Agente",
-												"type": "TimeSpan"
-											}
-										},
-										{
-											"source": {
-												"name": "Tempo Toque Cliente",
-												"type": "String"
-											},
-											"sink": {
-												"name": "Tempo_Toque_Cliente",
-												"type": "TimeSpan"
-											}
-										},
-										{
-											"source": {
-												"name": "Tempo Pausa",
-												"type": "String"
-											},
-											"sink": {
-												"name": "Tempo_Pausa",
-												"type": "TimeSpan"
-											}
-										},
-										{
-											"source": {
-												"name": "Tempo Estouro",
-												"type": "String"
-											},
-											"sink": {
-												"name": "Tempo_Estouro",
-												"type": "TimeSpan"
-											}
-										},
-										{
-											"source": {
-												"name": "Tempo Dispon�vel",
-												"type": "String"
-											},
-											"sink": {
-												"name": "Tempo_Disponivel",
-												"type": "TimeSpan"
-											}
-										},
-										{
-											"source": {
-												"name": "Tempo Indispon�vel",
-												"type": "String"
-											},
-											"sink": {
-												"name": "Tempo_Indisponivel",
-												"type": "TimeSpan"
-											}
-										},
-										{
-											"source": {
-												"name": "Tempo Logado",
-												"type": "String"
-											},
-											"sink": {
-												"name": "Tempo_Logado",
-												"type": "TimeSpan"
-											}
-										},
-										{
-											"source": {
-												"name": "Tempo Deslogado",
-												"type": "String"
-											},
-											"sink": {
-												"name": "Tempo_Deslogado",
-												"type": "TimeSpan"
-											}
-										},
-										{
-											"source": {
-												"name": "% Falado x Logado",
-												"type": "String"
-											},
-											"sink": {
-												"name": "Falado_x_Logado",
+												"name": "USUARIO",
 												"type": "String"
 											}
 										},
 										{
-											"source": {
-												"name": "Marca",
+											"sink": {
+												"name": "TIPO",
 												"type": "String"
-											},
+											}
+										},
+										{
+											"sink": {
+												"name": "ORIGEM",
+												"type": "String"
+											}
+										},
+										{
+											"sink": {
+												"name": "DESTINO",
+												"type": "String"
+											}
+										},
+										{
+											"sink": {
+												"name": "STATUS",
+												"type": "String"
+											}
+										},
+										{
+											"sink": {
+												"name": "CENTRO_DE_CUSTO",
+												"type": "String"
+											}
+										},
+										{
+											"sink": {
+												"name": "TEMPO_TARIFADO",
+												"type": "Int32"
+											}
+										},
+										{
+											"sink": {
+												"name": "TEMPO_DECORRIDO",
+												"type": "Int32"
+											}
+										},
+										{
+											"sink": {
+												"name": "CAMPANHA",
+												"type": "String"
+											}
+										},
+										{
+											"sink": {
+												"name": "FILA",
+												"type": "String"
+											}
+										},
+										{
+											"sink": {
+												"name": "UNIQUE_ID",
+												"type": "Double"
+											}
+										},
+										{
+											"sink": {
+												"name": "LINKED_ID",
+												"type": "Double"
+											}
+										},
+										{
 											"sink": {
 												"name": "MARCA",
 												"type": "String"
