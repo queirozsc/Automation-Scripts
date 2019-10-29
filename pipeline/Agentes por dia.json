@@ -1981,7 +1981,7 @@
 					],
 					"ifTrueActivities": [
 						{
-							"name": "Copy INOB agentes dia_copy1",
+							"name": "Copy CSI agentes dia",
 							"type": "Copy",
 							"dependsOn": [],
 							"policy": {
@@ -2266,7 +2266,7 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "INOB_CSV_NC_AgentesPorDia",
+									"referenceName": "CSI_CSV_NC_AgentesPorDia",
 									"type": "DatasetReference"
 								}
 							],
