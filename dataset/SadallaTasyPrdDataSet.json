@@ -20,28 +20,20 @@
 				"type": "String"
 			},
 			{
-				"name": "DT_ENTRADA",
+				"name": "NR_CPF",
 				"type": "String"
 			},
 			{
-				"name": "HR_ENTRADA",
+				"name": "DT_NASCIMENTO",
 				"type": "String"
 			},
 			{
-				"name": "NM_MEDICO",
+				"name": "NR_TELEFONE_CELULAR",
 				"type": "String"
 			},
 			{
-				"name": "CD_CONVENIO",
-				"type": "Decimal"
-			},
-			{
-				"name": "DS_CONVENIO",
+				"name": "NR_TELEFONE",
 				"type": "String"
-			},
-			{
-				"name": "NR_ATENDIMENTO",
-				"type": "Decimal"
 			},
 			{
 				"name": "CNPJ",
