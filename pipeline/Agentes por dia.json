@@ -1649,8 +1649,7 @@
 												"type": "String"
 											},
 											"sink": {
-												"name": "Intervalo",
-												"type": "String"
+												"name": "Intervalo"
 											}
 										},
 										{
@@ -2013,8 +2012,7 @@
 									"mappings": [
 										{
 											"source": {
-												"type": "String",
-												"ordinal": 1
+												"type": "String"
 											},
 											"sink": {
 												"name": "Usuario",
@@ -2022,6 +2020,9 @@
 											}
 										},
 										{
+											"source": {
+												"type": "String"
+											},
 											"sink": {
 												"name": "Intervalo",
 												"type": "String"
