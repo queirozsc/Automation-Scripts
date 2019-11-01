@@ -244,7 +244,7 @@
 										{
 											"source": {
 												"name": "Unique ID",
-												"type": "Double"
+												"type": "String"
 											},
 											"sink": {
 												"name": "UNIQUE_ID",
@@ -254,7 +254,7 @@
 										{
 											"source": {
 												"name": "Linked ID",
-												"type": "Double"
+												"type": "String"
 											},
 											"sink": {
 												"name": "LINKED_ID",
