@@ -1524,7 +1524,9 @@
 										{
 											"source": {
 												"name": "Data",
-												"type": "DateTime"
+												"type": "DateTime",
+												"format": "dd/mm/yyyy",
+												"culture": "pt-br"
 											},
 											"sink": {
 												"name": "DATA",
