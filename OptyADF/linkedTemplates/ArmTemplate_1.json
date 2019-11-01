@@ -27,10 +27,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'SMARTProd'"
 		},
-		"SMART_HOSL_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SMART_HOSL'"
-		},
 		"Folder_Nexcore_Consolidado_properties_typeProperties_host": {
 			"type": "string",
 			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Consolidado"
@@ -569,6 +565,53 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "Aging_Titulo_Receber"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Usuario')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Geral Atendimentos Unidades"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "NM_USUARIO",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_USUARIO",
+						"type": "varchar"
+					},
+					{
+						"name": "IE_SITUACAO",
+						"type": "char"
+					},
+					{
+						"name": "DT_ATUALIZACAO",
+						"type": "date"
+					},
+					{
+						"name": "SIGLA_UNIDADE",
+						"type": "varchar"
+					},
+					{
+						"name": "MARCA",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Usuario_Unidade"
 				}
 			},
 			"dependsOn": []
@@ -1702,23 +1745,6 @@
 				"type": "SqlServer",
 				"typeProperties": {
 					"connectionString": "[parameters('SMARTProd_connectionString')]"
-				},
-				"connectVia": {
-					"referenceName": "integrationRuntime",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SMART_HOSL')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('SMART_HOSL_connectionString')]"
 				},
 				"connectVia": {
 					"referenceName": "integrationRuntime",

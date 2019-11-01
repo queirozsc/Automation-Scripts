@@ -6618,14 +6618,16 @@
 											"type": "AzureSqlSink"
 										},
 										"enableStaging": false,
-										"enableSkipIncompatibleRow": true,
+										"enableSkipIncompatibleRow": false,
 										"translator": {
 											"type": "TabularTranslator",
 											"mappings": [
 												{
 													"source": {
 														"name": "Data",
-														"type": "String"
+														"type": "DateTime",
+														"format": "dd/mm/yyyy",
+														"culture": "pt-br"
 													},
 													"sink": {
 														"name": "DATA",
@@ -6745,7 +6747,7 @@
 												{
 													"source": {
 														"name": "Unique ID",
-														"type": "Double"
+														"type": "String"
 													},
 													"sink": {
 														"name": "UNIQUE_ID",
@@ -6755,7 +6757,7 @@
 												{
 													"source": {
 														"name": "Linked ID",
-														"type": "Double"
+														"type": "String"
 													},
 													"sink": {
 														"name": "LINKED_ID",
@@ -14905,6 +14907,51 @@
 							"referenceName": "AzureSQL_DB_Procedimentos",
 							"type": "LinkedServiceReference"
 						}
+					},
+					{
+						"name": "Usuarios HOB",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Wait1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "select u.nm_usuario, \nu.ds_usuario, \nu.ie_situacao, \nu.dt_atualizacao,\nobter_nome_estabelecimento(u.cd_estabelecimento) as sigla_unidade,\nobter_nome_empresa(obter_empresa_estab(u.cd_estabelecimento)) as Marca\nfrom usuario u",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "CloudTasyPrdDataSet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AZ_SQL_TB_Usuario",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
 					}
 				],
 				"folder": {
@@ -14918,7 +14965,8 @@
 				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Atendimento')]",
 				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Consulta')]",
 				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Agendamento')]",
-				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]"
+				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]",
+				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Usuario')]"
 			]
 		},
 		{
@@ -15310,6 +15358,51 @@
 							"referenceName": "AzureSQL_DB_Procedimentos",
 							"type": "LinkedServiceReference"
 						}
+					},
+					{
+						"name": "Usuarios HOB",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Wait1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "select u.nm_usuario, \nu.ds_usuario, \nu.ie_situacao, \nu.dt_atualizacao,\nobter_nome_estabelecimento(u.cd_estabelecimento) as sigla_unidade,\nobter_nome_empresa(obter_empresa_estab(u.cd_estabelecimento)) as Marca\nfrom usuario u",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "SadallaTasyPrdDataSet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AZ_SQL_TB_Usuario",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
 					}
 				],
 				"folder": {
@@ -15323,7 +15416,8 @@
 				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Atendimento')]",
 				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Consulta')]",
 				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Agendamento')]",
-				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]"
+				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]",
+				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Usuario')]"
 			]
 		},
 		{
@@ -25464,6 +25558,55 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Usuario')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Geral Atendimentos Unidades"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "NM_USUARIO",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_USUARIO",
+						"type": "varchar"
+					},
+					{
+						"name": "IE_SITUACAO",
+						"type": "char"
+					},
+					{
+						"name": "DT_ATUALIZACAO",
+						"type": "date"
+					},
+					{
+						"name": "SIGLA_UNIDADE",
+						"type": "varchar"
+					},
+					{
+						"name": "MARCA",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Usuario_Unidade"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlProcedimentosTable')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -26108,52 +26251,20 @@
 				"type": "OracleTable",
 				"structure": [
 					{
-						"name": "CD_PESSOA_FISICA",
-						"type": "String"
-					},
-					{
-						"name": "CD_CONVENIO",
-						"type": "Decimal"
-					},
-					{
-						"name": "CNPJ",
-						"type": "String"
-					},
-					{
-						"name": "DATA_AGENDA",
-						"type": "String"
-					},
-					{
-						"name": "HORA_AGENDA",
-						"type": "String"
-					},
-					{
-						"name": "TIPO_AGENDA",
-						"type": "Decimal"
-					},
-					{
-						"name": "NM_PACIENTE",
-						"type": "String"
-					},
-					{
-						"name": "DS_PROCEDIMENTO_PRINC",
-						"type": "String"
-					},
-					{
-						"name": "DS_PROCEDIMENTO_ADIC",
-						"type": "String"
-					},
-					{
-						"name": "IE_QUANTIDADE",
-						"type": "Double"
-					},
-					{
 						"name": "NM_USUARIO",
 						"type": "String"
 					},
 					{
-						"name": "NM_MEDICO",
+						"name": "DS_USUARIO",
 						"type": "String"
+					},
+					{
+						"name": "IE_SITUACAO",
+						"type": "String"
+					},
+					{
+						"name": "DT_ATUALIZACAO",
+						"type": "DateTime"
 					},
 					{
 						"name": "SIGLA_UNIDADE",
@@ -26162,34 +26273,6 @@
 					{
 						"name": "MARCA",
 						"type": "String"
-					},
-					{
-						"name": "STATUS_AGENDA",
-						"type": "String"
-					},
-					{
-						"name": "NR_ATENDIMENTO",
-						"type": "Decimal"
-					},
-					{
-						"name": "NR_SEQUENCIA",
-						"type": "Decimal"
-					},
-					{
-						"name": "ID",
-						"type": "String"
-					},
-					{
-						"name": "CD_PROCEDENCIA",
-						"type": "Decimal"
-					},
-					{
-						"name": "DS_PROCEDENCIA",
-						"type": "String"
-					},
-					{
-						"name": "DT_AGENDAMENTO",
-						"type": "DateTime"
 					}
 				],
 				"typeProperties": {}
@@ -29757,52 +29840,20 @@
 				"type": "OracleTable",
 				"structure": [
 					{
-						"name": "CD_PESSOA_FISICA",
-						"type": "String"
-					},
-					{
-						"name": "CD_CONVENIO",
-						"type": "Decimal"
-					},
-					{
-						"name": "CNPJ",
-						"type": "String"
-					},
-					{
-						"name": "DATA_AGENDA",
-						"type": "String"
-					},
-					{
-						"name": "HORA_AGENDA",
-						"type": "String"
-					},
-					{
-						"name": "TIPO_AGENDA",
-						"type": "Decimal"
-					},
-					{
-						"name": "NM_PACIENTE",
-						"type": "String"
-					},
-					{
-						"name": "DS_PROCEDIMENTO_PRINC",
-						"type": "String"
-					},
-					{
-						"name": "DS_PROCEDIMENTO_ADIC",
-						"type": "String"
-					},
-					{
-						"name": "IE_QUANTIDADE",
-						"type": "Double"
-					},
-					{
 						"name": "NM_USUARIO",
 						"type": "String"
 					},
 					{
-						"name": "NM_MEDICO",
+						"name": "DS_USUARIO",
 						"type": "String"
+					},
+					{
+						"name": "IE_SITUACAO",
+						"type": "String"
+					},
+					{
+						"name": "DT_ATUALIZACAO",
+						"type": "DateTime"
 					},
 					{
 						"name": "SIGLA_UNIDADE",
@@ -29811,34 +29862,6 @@
 					{
 						"name": "MARCA",
 						"type": "String"
-					},
-					{
-						"name": "STATUS_AGENDA",
-						"type": "String"
-					},
-					{
-						"name": "NR_ATENDIMENTO",
-						"type": "Decimal"
-					},
-					{
-						"name": "NR_SEQUENCIA",
-						"type": "Decimal"
-					},
-					{
-						"name": "ID",
-						"type": "String"
-					},
-					{
-						"name": "CD_PROCEDENCIA",
-						"type": "Decimal"
-					},
-					{
-						"name": "DS_PROCEDENCIA",
-						"type": "String"
-					},
-					{
-						"name": "DT_AGENDAMENTO",
-						"type": "DateTime"
 					}
 				],
 				"typeProperties": {}
