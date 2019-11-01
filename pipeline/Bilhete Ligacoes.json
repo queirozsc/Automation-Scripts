@@ -1524,7 +1524,7 @@
 										{
 											"source": {
 												"name": "Data",
-												"type": "String"
+												"type": "DateTime"
 											},
 											"sink": {
 												"name": "DATA",
