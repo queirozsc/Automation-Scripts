@@ -33,7 +33,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "select pac_reg as CD_PESSOA_FISICA, \npac_nome AS NM_PESSOA_FISICA, \npac_numcpf AS NR_CPF, \nconvert(char(10),pac_nasc,121) as DT_NASCIMENTO, \npac_fone AS NR_TELEFONE_CELULAR,\npac_fone2 AS NR_TELEFONE, \n'13188370000227' as CNPJ ,\n'NAO ENCONTRADO' as SIGLA_UNIDADE,\n'NAO ENCONTRADO' as MARCA\nfrom pac"
+						"sqlReaderQuery": "select pac_reg as CD_PESSOA_FISICA, \npac_nome AS NM_PESSOA_FISICA, \npac_numcpf AS NR_CPF, \nconvert(char(10),pac_nasc,121) as DT_NASCIMENTO, \npac_fone AS NR_TELEFONE_CELULAR,\npac_fone2 AS NR_TELEFONE, \n'13188370000227' as CNPJ ,\n'NAO ENCONTRADO' as SIGLA_UNIDADE,\n'NAO ENCONTRADO' as MARCA,\npac_pront\nfrom pac"
 					},
 					"sink": {
 						"type": "AzureSqlSink"
