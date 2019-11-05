@@ -55,8 +55,6 @@ WHERE (nfs.nfs_emp_cod = emp.emp_cod)
             WHERE b.mns_nfs_tipo = nfs.nfs_tipo
                 AND b.mns_nfs_serie = nfs.nfs_serie
                 AND b.mns_nfs_numero = nfs.nfs_numero
-                AND b.mns_dt >= '2019-07-01 00:00:00.000'
-                AND b.mns_dt <= '2019-11-05 23:59:59.000'
             )
         )
     AND (mns.mns_ind_liberado = 'S')
