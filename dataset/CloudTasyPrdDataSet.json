@@ -12,20 +12,32 @@
 		"type": "OracleTable",
 		"structure": [
 			{
-				"name": "NM_USUARIO",
+				"name": "CD_PESSOA_FISICA",
 				"type": "String"
 			},
 			{
-				"name": "DS_USUARIO",
+				"name": "NM_PESSOA_FISICA",
 				"type": "String"
 			},
 			{
-				"name": "IE_SITUACAO",
+				"name": "NR_CPF",
 				"type": "String"
 			},
 			{
-				"name": "DT_ATUALIZACAO",
-				"type": "DateTime"
+				"name": "DT_NASCIMENTO",
+				"type": "String"
+			},
+			{
+				"name": "NR_TELEFONE_CELULAR",
+				"type": "String"
+			},
+			{
+				"name": "NR_TELEFONE",
+				"type": "String"
+			},
+			{
+				"name": "CNPJ",
+				"type": "String"
 			},
 			{
 				"name": "SIGLA_UNIDADE",
@@ -34,6 +46,10 @@
 			{
 				"name": "MARCA",
 				"type": "String"
+			},
+			{
+				"name": "NR_PRONTUARIO",
+				"type": "Decimal"
 			}
 		]
 	},

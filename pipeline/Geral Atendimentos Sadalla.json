@@ -36,8 +36,7 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "CD_PESSOA_FISICA",
-									"type": "String"
+									"name": "CD_PESSOA_FISICA"
 								},
 								"sink": {
 									"name": "CD_PESSOA_FISICA",
@@ -46,8 +45,7 @@
 							},
 							{
 								"source": {
-									"name": "NM_PESSOA_FISICA",
-									"type": "String"
+									"name": "NM_PESSOA_FISICA"
 								},
 								"sink": {
 									"name": "NM_PESSOA_FISICA",
@@ -56,8 +54,7 @@
 							},
 							{
 								"source": {
-									"name": "NR_CPF",
-									"type": "String"
+									"name": "NR_CPF"
 								},
 								"sink": {
 									"name": "NR_CPF",
@@ -66,8 +63,7 @@
 							},
 							{
 								"source": {
-									"name": "DT_NASCIMENTO",
-									"type": "String"
+									"name": "DT_NASCIMENTO"
 								},
 								"sink": {
 									"name": "DT_NASCIMENTO",
@@ -76,8 +72,7 @@
 							},
 							{
 								"source": {
-									"name": "NR_TELEFONE_CELULAR",
-									"type": "String"
+									"name": "NR_TELEFONE_CELULAR"
 								},
 								"sink": {
 									"name": "NR_TELEFONE_CELULAR",
@@ -86,8 +81,7 @@
 							},
 							{
 								"source": {
-									"name": "NR_TELEFONE",
-									"type": "String"
+									"name": "NR_TELEFONE"
 								},
 								"sink": {
 									"name": "NR_TELEFONE",
@@ -96,8 +90,7 @@
 							},
 							{
 								"source": {
-									"name": "CNPJ",
-									"type": "String"
+									"name": "CNPJ"
 								},
 								"sink": {
 									"name": "CNPJ",
@@ -106,8 +99,7 @@
 							},
 							{
 								"source": {
-									"name": "SIGLA_UNIDADE",
-									"type": "String"
+									"name": "SIGLA_UNIDADE"
 								},
 								"sink": {
 									"name": "SIGLA_UNIDADE",
@@ -116,12 +108,20 @@
 							},
 							{
 								"source": {
-									"name": "MARCA",
-									"type": "String"
+									"name": "MARCA"
 								},
 								"sink": {
 									"name": "MARCA",
 									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NR_PRONTUARIO"
+								},
+								"sink": {
+									"name": "NR_PRONTUARIO",
+									"type": "Int32"
 								}
 							}
 						]
