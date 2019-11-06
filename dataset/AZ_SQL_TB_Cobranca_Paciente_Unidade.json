@@ -1,0 +1,104 @@
+{
+	"name": "AZ_SQL_TB_Cobranca_Paciente_Unidade",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSQL_DB_Procedimentos",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Geral Atendimentos Unidades"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "DT_PROCEDIMENTO",
+				"type": "date"
+			},
+			{
+				"name": "NR_ATENDIMENTO",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "NR_INTERNO_CONTA",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CD_CONVENIO",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DS_CONVENIO",
+				"type": "varchar"
+			},
+			{
+				"name": "NM_PACIENTE",
+				"type": "varchar"
+			},
+			{
+				"name": "NM_MEDICO",
+				"type": "varchar"
+			},
+			{
+				"name": "DS_SETOR",
+				"type": "varchar"
+			},
+			{
+				"name": "IE_IDENTIFICADOR",
+				"type": "char"
+			},
+			{
+				"name": "CD_PROCEDIMENTO",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DS_PROCEDIMENTO",
+				"type": "varchar"
+			},
+			{
+				"name": "QT_PROCEDIMENTO",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "VL_MEDICO",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "VL_PROCEDIMENTO",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "VL_CONTA",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "STATUS_CONTA",
+				"type": "varchar"
+			},
+			{
+				"name": "CNPJ",
+				"type": "varchar"
+			},
+			{
+				"name": "NR_PROTOCOLO",
+				"type": "varchar"
+			},
+			{
+				"name": "NR_SEQ_GRUPO_REC",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Cobranca_Paciente_Unidade"
+		}
+	}
+}
