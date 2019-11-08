@@ -1,8 +1,8 @@
 {
-	"name": "CSI_CSV_NC_BilhetesLigacoes_HIST",
+	"name": "CSI_CSV_NC_FilasporHora",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "Historicos_Bilhetes",
+			"referenceName": "Folder_Nexcore_Consolidado",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
@@ -12,7 +12,8 @@
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "FileServerLocation"
+				"type": "FileServerLocation",
+				"fileName": "FilasPorHoraCSI.csv"
 			},
 			"columnDelimiter": ";",
 			"escapeChar": "",
