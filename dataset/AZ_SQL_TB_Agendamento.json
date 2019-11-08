@@ -36,7 +36,7 @@
 				"scale": 3
 			},
 			{
-				"name": "CD_TIPO_AGENDA",
+				"name": "TIPO_AGENDA",
 				"type": "varchar"
 			},
 			{
@@ -74,6 +74,61 @@
 			},
 			{
 				"name": "STATUS_AGENDA",
+				"type": "varchar"
+			},
+			{
+				"name": "NR_ATENDIMENTO",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "NR_SEQUENCIA",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ID",
+				"type": "varchar"
+			},
+			{
+				"name": "CD_PROCEDENCIA",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DS_PROCEDENCIA",
+				"type": "varchar"
+			},
+			{
+				"name": "DT_AGENDAMENTO",
+				"type": "date"
+			},
+			{
+				"name": "DIA",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "MES",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ANO",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DS_AGRUPAMENTO",
+				"type": "varchar"
+			},
+			{
+				"name": "CD_MOTIVO_CANCELAMENTO",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DS_MOTIVO_CANCELAMENTO",
 				"type": "varchar"
 			}
 		],

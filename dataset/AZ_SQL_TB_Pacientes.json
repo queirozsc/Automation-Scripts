@@ -47,6 +47,11 @@
 			{
 				"name": "MARCA",
 				"type": "varchar"
+			},
+			{
+				"name": "NR_PRONTUARIO",
+				"type": "int",
+				"precision": 10
 			}
 		],
 		"typeProperties": {

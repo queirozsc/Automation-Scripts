@@ -94,6 +94,14 @@
 			{
 				"name": "NR_SEQ_GRUPO_REC",
 				"type": "varchar"
+			},
+			{
+				"name": "SIGLA_UNIDADE",
+				"type": "varchar"
+			},
+			{
+				"name": "MARCA",
+				"type": "varchar"
 			}
 		],
 		"typeProperties": {
