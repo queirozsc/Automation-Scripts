@@ -589,7 +589,7 @@
 				]
 			},
 			{
-				"name": "Producao Procedimentos HOB",
+				"name": "Producao Procedimentos Sadalla",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -632,7 +632,7 @@
 				]
 			},
 			{
-				"name": "Producao Materiais HOB",
+				"name": "Producao Materiais Sadalla",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -679,13 +679,13 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "Producao Materiais HOB",
+						"activity": "Producao Materiais Sadalla",
 						"dependencyConditions": [
 							"Succeeded"
 						]
 					},
 					{
-						"activity": "Producao Procedimentos HOB",
+						"activity": "Producao Procedimentos Sadalla",
 						"dependencyConditions": [
 							"Succeeded"
 						]
