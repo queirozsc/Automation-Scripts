@@ -69,8 +69,8 @@ WHERE (nfs.nfs_emp_cod = emp.emp_cod)
             WHERE b.mns_nfs_tipo = nfs.nfs_tipo
                 AND b.mns_nfs_serie = nfs.nfs_serie
                 AND b.mns_nfs_numero = nfs.nfs_numero
-                AND b.mns_dt >= '2019-01-01 00:00:00.000'
-                AND b.mns_dt <= '2019-09-18 23:59:59.000'
+                /*AND b.mns_dt >= '2019-01-01 00:00:00.000'
+                AND b.mns_dt <= '2019-09-10 23:59:59.000'*/
                 AND (b.mns_tipo LIKE 'G%' OR (b.mns_tipo LIKE 'R%' AND b.mns_vlr_glosa <> 0))
                 AND b.mns_ind_liberado = 'S'
             )
@@ -102,4 +102,4 @@ GROUP BY emp.emp_cod,
 /*
 SELECT * FROM mns WHERE mns_nfs_tipo like 'NR'
 ORDER by 7 desc
-*/
+*/ 

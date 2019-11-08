@@ -19,7 +19,7 @@
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "Retornos HOB",
+					"referenceName": "Geral Atendimentos HOB",
 					"type": "PipelineReference"
 				}
 			}

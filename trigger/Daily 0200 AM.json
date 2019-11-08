@@ -7,7 +7,7 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "Retornos Sadalla",
+					"referenceName": "Altera Marca Producao",
 					"type": "PipelineReference"
 				}
 			}

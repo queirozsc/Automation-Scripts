@@ -1,31 +1,23 @@
 {
-	"name": "AZ_SQL_TB_Atend_Pac",
+	"name": "AZSQL_TB_Pacientes_Unidade",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSQL_DB_Procedimentos",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "Atendimentos Pacientes"
+			"name": "Retornos"
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "data_entrada",
-				"type": "date"
-			},
-			{
-				"name": "ds_unidade",
-				"type": "varchar"
-			},
-			{
-				"name": "nr_prontuario",
+				"name": "cd_pessoa_fisica",
 				"type": "int",
 				"precision": 10
 			},
 			{
-				"name": "nm_paciente",
+				"name": "nm_pessoa_fisica",
 				"type": "varchar"
 			},
 			{
@@ -33,21 +25,21 @@
 				"type": "varchar"
 			},
 			{
-				"name": "nr_cep",
+				"name": "dt_nascimento",
+				"type": "date"
+			},
+			{
+				"name": "nr_telefone_celular",
 				"type": "varchar"
 			},
 			{
-				"name": "ie_sexo",
-				"type": "char"
-			},
-			{
-				"name": "dt_nascimento",
-				"type": "date"
+				"name": "nr_telefone",
+				"type": "varchar"
 			}
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "Tasy_Smart_Pac_Atend"
+			"table": "Pacientes_Unidade"
 		}
 	}
 }
