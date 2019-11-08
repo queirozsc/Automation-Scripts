@@ -7,6 +7,14 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "OptyADF"
 		},
+		"Folder_Requestia_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Folder_Requestia'"
+		},
+		"Historicos_Bilhetes_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Historicos_Bilhetes'"
+		},
 		"SMARTProd_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'SMARTProd'"
@@ -66,12 +74,73 @@
 		"SadallaTasyTeste_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'SadallaTasyTeste'"
+		},
+		"Folder_Requestia_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "C:\\Power BI Gateway Files\\Requestia"
+		},
+		"Folder_Requestia_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "hobrasil\\sa.automation"
+		},
+		"Historicos_Bilhetes_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos Bilhetes CSI"
+		},
+		"Historicos_Bilhetes_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "hobrasil\\sa.automation"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/Folder_Requestia')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "FileServer",
+				"typeProperties": {
+					"host": "[parameters('Folder_Requestia_properties_typeProperties_host')]",
+					"userId": "[parameters('Folder_Requestia_properties_typeProperties_userId')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('Folder_Requestia_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "ServidorArquivosBI",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Historicos_Bilhetes')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Historicos_Bilhetes",
+				"annotations": [],
+				"type": "FileServer",
+				"typeProperties": {
+					"host": "[parameters('Historicos_Bilhetes_properties_typeProperties_host')]",
+					"userId": "[parameters('Historicos_Bilhetes_properties_typeProperties_userId')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('Historicos_Bilhetes_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "ServidorArquivosBI",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/SMARTProd')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -420,142 +489,6 @@
 						"type": "String"
 					}
 				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/CSI_CSV_NC_FilasPorHora')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Folder_Nexcore_Consolidado",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Nexcore/CSI"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "FileServerLocation",
-						"fileName": "FilasPorHoraCSI.csv"
-					},
-					"columnDelimiter": ";",
-					"escapeChar": "",
-					"firstRowAsHeader": true,
-					"quoteChar": ""
-				},
-				"schema": [
-					{
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/CloudTasyPrdDataSet')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "CloudTasyProd_NEW",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Power BI"
-				},
-				"annotations": [],
-				"type": "OracleTable",
-				"structure": [
-					{
-						"name": "DT_PROCEDIMENTO",
-						"type": "DateTime"
-					},
-					{
-						"name": "NR_ATENDIMENTO",
-						"type": "Decimal"
-					},
-					{
-						"name": "NR_INTERNO_CONTA",
-						"type": "Decimal"
-					},
-					{
-						"name": "CD_CONVENIO",
-						"type": "Decimal"
-					},
-					{
-						"name": "DS_CONVENIO",
-						"type": "String"
-					},
-					{
-						"name": "NM_PACIENTE",
-						"type": "String"
-					},
-					{
-						"name": "NM_MEDICO",
-						"type": "String"
-					},
-					{
-						"name": "DS_SETOR",
-						"type": "String"
-					},
-					{
-						"name": "IE_IDENTIFICADOR",
-						"type": "String"
-					},
-					{
-						"name": "CD_PROCEDIMENTO",
-						"type": "Decimal"
-					},
-					{
-						"name": "DS_PROCEDIMENTO",
-						"type": "String"
-					},
-					{
-						"name": "QT_PROCEDIMENTO",
-						"type": "Decimal"
-					},
-					{
-						"name": "VL_MEDICO",
-						"type": "Decimal"
-					},
-					{
-						"name": "VL_PROCEDIMENTO",
-						"type": "Decimal"
-					},
-					{
-						"name": "VL_CONTA",
-						"type": "Double"
-					},
-					{
-						"name": "STATUS_CONTA",
-						"type": "String"
-					},
-					{
-						"name": "CNPJ",
-						"type": "String"
-					},
-					{
-						"name": "NR_PROTOCOLO",
-						"type": "String"
-					},
-					{
-						"name": "NR_SEQ_GRUPO_REC",
-						"type": "String"
-					},
-					{
-						"name": "SIGLA_UNIDADE",
-						"type": "String"
-					},
-					{
-						"name": "MARCA",
-						"type": "String"
-					}
-				],
-				"typeProperties": {}
 			},
 			"dependsOn": []
 		}

@@ -31,6 +31,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'Folder_Requestia'"
 		},
+		"Historicos_Bilhetes_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Historicos_Bilhetes'"
+		},
 		"SMARTProd_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'SMARTProd'"
@@ -104,6 +108,14 @@
 			"defaultValue": "C:\\Power BI Gateway Files\\Requestia"
 		},
 		"Folder_Requestia_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "hobrasil\\sa.automation"
+		},
+		"Historicos_Bilhetes_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos Bilhetes CSI"
+		},
+		"Historicos_Bilhetes_properties_typeProperties_userId": {
 			"type": "string",
 			"defaultValue": "hobrasil\\sa.automation"
 		}
@@ -14562,7 +14574,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"dataset": {
-								"referenceName": "CSI_CSV_NC_FilasPorHora",
+								"referenceName": "CSI_CSV_NC_FilasporHora",
 								"type": "DatasetReference",
 								"parameters": {}
 							},
@@ -15086,7 +15098,7 @@
 									},
 									"inputs": [
 										{
-											"referenceName": "CSI_CSV_NC_FilasPorHora",
+											"referenceName": "CSI_CSV_NC_FilasporHora",
 											"type": "DatasetReference",
 											"parameters": {}
 										}
@@ -15114,7 +15126,7 @@
 				"[concat(variables('factoryId'), '/datasets/DH_CSV_NC_FilasPorHora')]",
 				"[concat(variables('factoryId'), '/datasets/HOSL_CSV_NC_BilheteLigacoes')]",
 				"[concat(variables('factoryId'), '/datasets/INOB_CSV_NC_FilasPorHora')]",
-				"[concat(variables('factoryId'), '/datasets/CSI_CSV_NC_FilasPorHora')]",
+				"[concat(variables('factoryId'), '/datasets/CSI_CSV_NC_FilasporHora')]",
 				"[concat(variables('factoryId'), '/pipelines/Send email')]",
 				"[concat(variables('factoryId'), '/datasets/AZSQL_TB_NC_FilasPorHoras')]",
 				"[concat(variables('factoryId'), '/datasets/HOSL_CSV_NC_FilasPorHora')]"
@@ -16533,6 +16545,304 @@
 				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]",
 				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Usuario')]",
 				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Cobranca_Paciente_Unidade')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Historico Bilhetes CSI')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Start",
+						"description": "Step added to paralellize execution",
+						"type": "Wait",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"waitTimeInSeconds": 1
+						}
+					},
+					{
+						"name": "Check CSI file exists",
+						"type": "GetMetadata",
+						"dependsOn": [
+							{
+								"activity": "Start",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "CSI_CSV_NC_BilhetesLigacoes",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"fieldList": [
+								"exists"
+							],
+							"storeSettings": {
+								"type": "FileServerReadSettings",
+								"recursive": true
+							},
+							"formatSettings": {
+								"type": "DelimitedTextReadSettings"
+							}
+						}
+					},
+					{
+						"name": "CSI file exists",
+						"type": "IfCondition",
+						"dependsOn": [
+							{
+								"activity": "Check CSI file exists",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"expression": {
+								"value": "@equals(\nactivity('Check CSI file exists').output.exists, \ntrue)",
+								"type": "Expression"
+							},
+							"ifFalseActivities": [
+								{
+									"name": "Send failure CSI",
+									"type": "ExecutePipeline",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"pipeline": {
+											"referenceName": "Send email",
+											"type": "PipelineReference"
+										},
+										"waitOnCompletion": true,
+										"parameters": {
+											"EmailTo": "sergio.queiroz@opty.com.br",
+											"Subject": "Arquivo Nexcore\\INOB não encontrado!",
+											"ErrorMessage": "O arquivo INOB\\Agentes por Dia não foi encontrado",
+											"MasterPipeline": {
+												"value": "@{pipeline().Pipeline}",
+												"type": "Expression"
+											}
+										}
+									}
+								}
+							],
+							"ifTrueActivities": [
+								{
+									"name": "Copy CSI BilheteLigacoes",
+									"type": "Copy",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "DelimitedTextSource",
+											"storeSettings": {
+												"type": "FileServerReadSettings",
+												"recursive": true,
+												"wildcardFileName": "*"
+											},
+											"formatSettings": {
+												"type": "DelimitedTextReadSettings"
+											}
+										},
+										"sink": {
+											"type": "AzureSqlSink"
+										},
+										"enableStaging": false,
+										"enableSkipIncompatibleRow": false,
+										"translator": {
+											"type": "TabularTranslator",
+											"mappings": [
+												{
+													"source": {
+														"name": "Data",
+														"type": "String"
+													},
+													"sink": {
+														"name": "DATA",
+														"type": "DateTime"
+													}
+												},
+												{
+													"source": {
+														"name": "Hora",
+														"type": "String"
+													},
+													"sink": {
+														"name": "HORA",
+														"type": "TimeSpan"
+													}
+												},
+												{
+													"source": {
+														"name": "Usu�rio",
+														"type": "String"
+													},
+													"sink": {
+														"name": "USUARIO",
+														"type": "String"
+													}
+												},
+												{
+													"source": {
+														"name": "Tipo",
+														"type": "String"
+													},
+													"sink": {
+														"name": "TIPO",
+														"type": "String"
+													}
+												},
+												{
+													"source": {
+														"name": "Origem",
+														"type": "String"
+													},
+													"sink": {
+														"name": "ORIGEM",
+														"type": "String"
+													}
+												},
+												{
+													"source": {
+														"name": "Destino",
+														"type": "String"
+													},
+													"sink": {
+														"name": "DESTINO",
+														"type": "String"
+													}
+												},
+												{
+													"source": {
+														"name": "Status",
+														"type": "String"
+													},
+													"sink": {
+														"name": "STATUS",
+														"type": "String"
+													}
+												},
+												{
+													"source": {
+														"name": "Centro de Custo",
+														"type": "String"
+													},
+													"sink": {
+														"name": "CENTRO_DE_CUSTO",
+														"type": "String"
+													}
+												},
+												{
+													"source": {
+														"name": "Tempo Tarifado",
+														"type": "String"
+													},
+													"sink": {
+														"name": "TEMPO_TARIFADO",
+														"type": "Int32"
+													}
+												},
+												{
+													"source": {
+														"name": "Tempo Decorrido",
+														"type": "String"
+													},
+													"sink": {
+														"name": "TEMPO_DECORRIDO",
+														"type": "Int32"
+													}
+												},
+												{
+													"source": {
+														"name": "Campanha",
+														"type": "String"
+													},
+													"sink": {
+														"name": "CAMPANHA",
+														"type": "String"
+													}
+												},
+												{
+													"source": {
+														"name": "Fila",
+														"type": "String"
+													},
+													"sink": {
+														"name": "FILA",
+														"type": "String"
+													}
+												},
+												{
+													"source": {
+														"name": "Unique ID",
+														"type": "String"
+													},
+													"sink": {
+														"name": "UNIQUE_ID",
+														"type": "Double"
+													}
+												},
+												{
+													"source": {
+														"name": "Linked ID",
+														"type": "String"
+													},
+													"sink": {
+														"name": "LINKED_ID",
+														"type": "Double"
+													}
+												}
+											]
+										}
+									},
+									"inputs": [
+										{
+											"referenceName": "CSI_CSV_NC_FilasporHora",
+											"type": "DatasetReference",
+											"parameters": {}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "AZSQL_TB_NC_BilheteLigacoes_Hist",
+											"type": "DatasetReference",
+											"parameters": {}
+										}
+									]
+								}
+							]
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/CSI_CSV_NC_BilhetesLigacoes')]",
+				"[concat(variables('factoryId'), '/pipelines/Send email')]",
+				"[concat(variables('factoryId'), '/datasets/CSI_CSV_NC_FilasporHora')]",
+				"[concat(variables('factoryId'), '/datasets/AZSQL_TB_NC_BilheteLigacoes_Hist')]"
 			]
 		},
 		{
@@ -24697,314 +25007,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Teste Bilhetes CSI')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Start",
-						"description": "Step added to paralellize execution",
-						"type": "Wait",
-						"dependsOn": [],
-						"userProperties": [],
-						"typeProperties": {
-							"waitTimeInSeconds": 1
-						}
-					},
-					{
-						"name": "Check CSI file exists",
-						"type": "GetMetadata",
-						"dependsOn": [
-							{
-								"activity": "Start",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataset": {
-								"referenceName": "CSI_CSV_NC_BilhetesLigacoes",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"fieldList": [
-								"exists"
-							],
-							"storeSettings": {
-								"type": "FileServerReadSettings",
-								"recursive": true
-							},
-							"formatSettings": {
-								"type": "DelimitedTextReadSettings"
-							}
-						}
-					},
-					{
-						"name": "CSI file exists",
-						"type": "IfCondition",
-						"dependsOn": [
-							{
-								"activity": "Check CSI file exists",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"expression": {
-								"value": "@equals(\nactivity('Check CSI file exists').output.exists, \ntrue)",
-								"type": "Expression"
-							},
-							"ifFalseActivities": [
-								{
-									"name": "Send failure CSI",
-									"type": "ExecutePipeline",
-									"dependsOn": [],
-									"userProperties": [],
-									"typeProperties": {
-										"pipeline": {
-											"referenceName": "Send email",
-											"type": "PipelineReference"
-										},
-										"waitOnCompletion": true,
-										"parameters": {
-											"EmailTo": "sergio.queiroz@opty.com.br",
-											"Subject": "Arquivo Nexcore\\INOB não encontrado!",
-											"ErrorMessage": "O arquivo INOB\\Agentes por Dia não foi encontrado",
-											"MasterPipeline": {
-												"value": "@{pipeline().Pipeline}",
-												"type": "Expression"
-											}
-										}
-									}
-								}
-							],
-							"ifTrueActivities": [
-								{
-									"name": "Copy CSI BilheteLigacoes",
-									"type": "Copy",
-									"dependsOn": [],
-									"policy": {
-										"timeout": "7.00:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"source": {
-											"type": "DelimitedTextSource",
-											"storeSettings": {
-												"type": "FileServerReadSettings",
-												"recursive": true
-											},
-											"formatSettings": {
-												"type": "DelimitedTextReadSettings"
-											}
-										},
-										"sink": {
-											"type": "AzureSqlSink"
-										},
-										"enableStaging": false,
-										"enableSkipIncompatibleRow": false,
-										"translator": {
-											"type": "TabularTranslator",
-											"mappings": [
-												{
-													"source": {
-														"name": "Data",
-														"type": "DateTime",
-														"format": "",
-														"culture": ""
-													},
-													"sink": {
-														"name": "DATA",
-														"type": "DateTime"
-													}
-												},
-												{
-													"source": {
-														"name": "Hora",
-														"type": "String"
-													},
-													"sink": {
-														"name": "HORA",
-														"type": "TimeSpan"
-													}
-												},
-												{
-													"source": {
-														"name": "Usu�rio",
-														"type": "String"
-													},
-													"sink": {
-														"name": "USUARIO",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "Tipo",
-														"type": "String"
-													},
-													"sink": {
-														"name": "TIPO",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "Origem",
-														"type": "String"
-													},
-													"sink": {
-														"name": "ORIGEM",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "Destino",
-														"type": "String"
-													},
-													"sink": {
-														"name": "DESTINO",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "Status",
-														"type": "String"
-													},
-													"sink": {
-														"name": "STATUS",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "Centro de Custo",
-														"type": "String"
-													},
-													"sink": {
-														"name": "CENTRO_DE_CUSTO",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "Tempo Tarifado",
-														"type": "String"
-													},
-													"sink": {
-														"name": "TEMPO_TARIFADO",
-														"type": "Int32"
-													}
-												},
-												{
-													"source": {
-														"name": "Tempo Decorrido",
-														"type": "String"
-													},
-													"sink": {
-														"name": "TEMPO_DECORRIDO",
-														"type": "Int32"
-													}
-												},
-												{
-													"source": {
-														"name": "Campanha",
-														"type": "String"
-													},
-													"sink": {
-														"name": "CAMPANHA",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "Fila",
-														"type": "String"
-													},
-													"sink": {
-														"name": "FILA",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "Unique ID",
-														"type": "String"
-													},
-													"sink": {
-														"name": "UNIQUE_ID",
-														"type": "Double"
-													}
-												},
-												{
-													"source": {
-														"name": "Linked ID",
-														"type": "String"
-													},
-													"sink": {
-														"name": "LINKED_ID",
-														"type": "Double"
-													}
-												},
-												{
-													"source": {
-														"name": "Marca",
-														"type": "String"
-													},
-													"sink": {
-														"name": "MARCA",
-														"type": "String"
-													}
-												}
-											]
-										}
-									},
-									"inputs": [
-										{
-											"referenceName": "CSI_CSV_NC_BilhetesLigacoes",
-											"type": "DatasetReference",
-											"parameters": {}
-										}
-									],
-									"outputs": [
-										{
-											"referenceName": "AZSQL_TB_NC_BilheteLigacoes",
-											"type": "DatasetReference",
-											"parameters": {}
-										}
-									]
-								}
-							]
-						}
-					}
-				],
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/CSI_CSV_NC_BilhetesLigacoes')]",
-				"[concat(variables('factoryId'), '/pipelines/Send email')]",
-				"[concat(variables('factoryId'), '/datasets/AZSQL_TB_NC_BilheteLigacoes')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/Titulos')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -25687,6 +25689,92 @@
 				],
 				"typeProperties": {
 					"tableName": "[[dbo].[Nexcore_BilheteLigacoes]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AZSQL_TB_NC_BilheteLigacoes_Hist')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Tabela Azure SQL Server Procedimentos.dbo.BilheteLigacoes",
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Nexcore/Azure"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "DATA",
+						"type": "date"
+					},
+					{
+						"name": "HORA",
+						"type": "time",
+						"scale": 7
+					},
+					{
+						"name": "USUARIO",
+						"type": "varchar"
+					},
+					{
+						"name": "TIPO",
+						"type": "varchar"
+					},
+					{
+						"name": "ORIGEM",
+						"type": "varchar"
+					},
+					{
+						"name": "DESTINO",
+						"type": "varchar"
+					},
+					{
+						"name": "STATUS",
+						"type": "varchar"
+					},
+					{
+						"name": "CENTRO_DE_CUSTO",
+						"type": "varchar"
+					},
+					{
+						"name": "TEMPO_TARIFADO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "TEMPO_DECORRIDO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CAMPANHA",
+						"type": "varchar"
+					},
+					{
+						"name": "FILA",
+						"type": "varchar"
+					},
+					{
+						"name": "UNIQUE_ID",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "LINKED_ID",
+						"type": "float",
+						"precision": 15
+					}
+				],
+				"typeProperties": {
+					"tableName": "[[dbo].[Nexcore_BilheteLigacoes_temp]"
 				}
 			},
 			"dependsOn": [
@@ -27877,7 +27965,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/CSI_CSV_NC_FilasPorHora')]",
+			"name": "[concat(parameters('factoryName'), '/CSI_CSV_NC_FilasporHora')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -32327,6 +32415,31 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Historicos_Bilhetes')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Historicos_Bilhetes",
+				"annotations": [],
+				"type": "FileServer",
+				"typeProperties": {
+					"host": "[parameters('Historicos_Bilhetes_properties_typeProperties_host')]",
+					"userId": "[parameters('Historicos_Bilhetes_properties_typeProperties_userId')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('Historicos_Bilhetes_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "ServidorArquivosBI",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/ServidorArquivosBI')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/SMARTProd')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -32626,6 +32739,13 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "Geral Atendimentos Sadalla",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -32647,7 +32767,8 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/Altera Marca Producao')]"
+				"[concat(variables('factoryId'), '/pipelines/Altera Marca Producao')]",
+				"[concat(variables('factoryId'), '/pipelines/Geral Atendimentos Sadalla')]"
 			]
 		},
 		{
@@ -32669,6 +32790,13 @@
 					{
 						"pipelineReference": {
 							"referenceName": "Chamados Requestia",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "Geral Atendimentos HOB",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -32694,7 +32822,8 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/Agendas Projesi')]",
-				"[concat(variables('factoryId'), '/pipelines/Chamados Requestia')]"
+				"[concat(variables('factoryId'), '/pipelines/Chamados Requestia')]",
+				"[concat(variables('factoryId'), '/pipelines/Geral Atendimentos HOB')]"
 			]
 		},
 		{

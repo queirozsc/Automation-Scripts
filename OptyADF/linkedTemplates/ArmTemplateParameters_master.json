@@ -23,6 +23,9 @@
 		"Folder_Requestia_password": {
 			"value": ""
 		},
+		"Historicos_Bilhetes_password": {
+			"value": ""
+		},
 		"SMARTProd_connectionString": {
 			"value": ""
 		},
@@ -78,6 +81,12 @@
 			"value": "C:\\Power BI Gateway Files\\Requestia"
 		},
 		"Folder_Requestia_properties_typeProperties_userId": {
+			"value": "hobrasil\\sa.automation"
+		},
+		"Historicos_Bilhetes_properties_typeProperties_host": {
+			"value": "C:\\Power BI Gateway Files\\Nexcore\\Historicos Bilhetes CSI"
+		},
+		"Historicos_Bilhetes_properties_typeProperties_userId": {
 			"value": "hobrasil\\sa.automation"
 		},
 		"containerUri": {

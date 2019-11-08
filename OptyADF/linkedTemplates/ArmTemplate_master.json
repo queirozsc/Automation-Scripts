@@ -31,6 +31,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'Folder_Requestia'"
 		},
+		"Historicos_Bilhetes_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Historicos_Bilhetes'"
+		},
 		"SMARTProd_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'SMARTProd'"
@@ -107,6 +111,14 @@
 			"type": "string",
 			"defaultValue": "hobrasil\\sa.automation"
 		},
+		"Historicos_Bilhetes_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos Bilhetes CSI"
+		},
+		"Historicos_Bilhetes_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "hobrasil\\sa.automation"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -167,20 +179,11 @@
 					"Folder_Nexcore_Consolidado_password": {
 						"value": "[parameters('Folder_Nexcore_Consolidado_password')]"
 					},
-					"Folder_Requestia_password": {
-						"value": "[parameters('Folder_Requestia_password')]"
-					},
 					"Folder_Nexcore_Consolidado_properties_typeProperties_host": {
 						"value": "[parameters('Folder_Nexcore_Consolidado_properties_typeProperties_host')]"
 					},
 					"Folder_Nexcore_Consolidado_properties_typeProperties_userId": {
 						"value": "[parameters('Folder_Nexcore_Consolidado_properties_typeProperties_userId')]"
-					},
-					"Folder_Requestia_properties_typeProperties_host": {
-						"value": "[parameters('Folder_Requestia_properties_typeProperties_host')]"
-					},
-					"Folder_Requestia_properties_typeProperties_userId": {
-						"value": "[parameters('Folder_Requestia_properties_typeProperties_userId')]"
 					}
 				}
 			},
@@ -201,6 +204,12 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"Folder_Requestia_password": {
+						"value": "[parameters('Folder_Requestia_password')]"
+					},
+					"Historicos_Bilhetes_password": {
+						"value": "[parameters('Historicos_Bilhetes_password')]"
 					},
 					"SMARTProd_connectionString": {
 						"value": "[parameters('SMARTProd_connectionString')]"
@@ -246,6 +255,18 @@
 					},
 					"SadallaTasyTeste_connectionString": {
 						"value": "[parameters('SadallaTasyTeste_connectionString')]"
+					},
+					"Folder_Requestia_properties_typeProperties_host": {
+						"value": "[parameters('Folder_Requestia_properties_typeProperties_host')]"
+					},
+					"Folder_Requestia_properties_typeProperties_userId": {
+						"value": "[parameters('Folder_Requestia_properties_typeProperties_userId')]"
+					},
+					"Historicos_Bilhetes_properties_typeProperties_host": {
+						"value": "[parameters('Historicos_Bilhetes_properties_typeProperties_host')]"
+					},
+					"Historicos_Bilhetes_properties_typeProperties_userId": {
+						"value": "[parameters('Historicos_Bilhetes_properties_typeProperties_userId')]"
 					}
 				}
 			},
