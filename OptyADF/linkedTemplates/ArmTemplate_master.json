@@ -170,9 +170,6 @@
 					"Folder_Requestia_password": {
 						"value": "[parameters('Folder_Requestia_password')]"
 					},
-					"SMARTProd_connectionString": {
-						"value": "[parameters('SMARTProd_connectionString')]"
-					},
 					"Folder_Nexcore_Consolidado_properties_typeProperties_host": {
 						"value": "[parameters('Folder_Nexcore_Consolidado_properties_typeProperties_host')]"
 					},
@@ -204,6 +201,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"SMARTProd_connectionString": {
+						"value": "[parameters('SMARTProd_connectionString')]"
 					},
 					"SMART_HOSL_connectionString": {
 						"value": "[parameters('SMART_HOSL_connectionString')]"
