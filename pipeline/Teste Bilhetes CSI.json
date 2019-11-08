@@ -124,7 +124,7 @@
 										{
 											"source": {
 												"name": "Data",
-												"type": "DateTime",
+												"type": "String",
 												"format": "dd/mm/yyyy",
 												"culture": "pt-br"
 											},
