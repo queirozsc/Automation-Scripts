@@ -837,7 +837,7 @@
 				]
 			},
 			{
-				"name": "Producao Procedimentos HOB",
+				"name": "Producao Procedimentos Sadalla",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -861,9 +861,6 @@
 						"oracleReaderQuery": "select \np.dt_procedimento dt_procedimento,\np.nr_atendimento nr_atendimento,\np.nr_interno_conta nr_interno_conta,\nc.cd_convenio_parametro cd_convenio,\nobter_nome_convenio(c.cd_convenio_parametro)as ds_convenio,\nobter_pessoa_atendimento(p.nr_atendimento, 'N') nm_paciente,\nobter_nome_pf(p.cd_medico_executor) nm_medico,\nobter_nome_setor(obter_setor_atendimento(p.nr_atendimento)) ds_setor,\ndecode(p.ie_tiss_tipo_guia,7,'M','P') ie_identificador,\np.cd_procedimento cd_procedimento,\nobter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced) ds_procedimento,\np.qt_procedimento qt_procedimento,\np.vl_medico as vl_medico,\np.vl_procedimento vl_procedimento,\nobter_valor_conta(p.nr_interno_conta,0) vl_conta,\n(select v.ds_valor_dominio from valor_dominio v where v.cd_dominio = 49 and v.vl_dominio =  obter_status_conta(p.nr_interno_conta,'C')) status_conta,\nobter_cgc_estabelecimento(b.cd_estabelecimento) as CNPJ,\nc.nr_protocolo,\n(select r.ds_grupo_receita from grupo_receita r where r.nr_sequencia = a.nr_seq_grupo_rec) as nr_seq_grupo_rec,\n\n'NAO ENCONTRADO' as SIGLA_UNIDADE,\n'NAO ENCONTRADO' as MARCA\n\nfrom procedimento_paciente p, procedimento a, atendimento_paciente b, conta_paciente c\nwhere ((a.cd_procedimento = p.cd_procedimento) and (a.ie_origem_proced = p.ie_origem_proced))\nand    b.nr_atendimento = p.nr_atendimento\nand p.nr_interno_conta = c.nr_interno_conta (+)\nand p.cd_motivo_exc_conta is null\nand c.ie_cancelamento is null\nand c.nr_interno_conta is not null\nand obter_area_procedimento(a.cd_procedimento, a.ie_origem_proced) <> 10\nand p.vl_procedimento > 0 \nand obter_se_atend_retorno(p.nr_atendimento) <> 'S'",
 						"partitionOption": "None"
 					},
-					"sink": {
-						"type": "AzureSqlSink"
-					},
 					"enableStaging": false
 				},
 				"inputs": [
@@ -874,7 +871,7 @@
 				]
 			},
 			{
-				"name": "Producao Materiais HOB",
+				"name": "Producao Materiais Sadalla",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -898,9 +895,6 @@
 						"oracleReaderQuery": "select m.dt_atendimento  dt_procedimento,\nm.nr_atendimento  nr_atendimento,\nm.nr_interno_conta  nr_interno_conta,\nc.cd_convenio_parametro  cd_convenio,\nobter_nome_convenio(c.cd_convenio_parametro) as ds_convenio,\nobter_pessoa_atendimento(m.nr_atendimento, 'N')  nm_paciente,\n(select obter_nome_pf(x.cd_medico_cirurgiao) from cirurgia x where x.nr_cirurgia = m.nr_cirurgia) as nm_medico,\nobter_nome_setor(obter_setor_atendimento(m.nr_atendimento))  ds_setor,\n'M'  ie_identificador,\nm.cd_material  cd_procedimento,\nobter_desc_material(m.cd_material)  ds_procedimento,\nm.qt_material  qt_procedimento,\n0 vl_medico,\nm.vl_material vl_procedimento,\nobter_valor_conta(c.nr_interno_conta,0)  vl_conta,\n(select v.ds_valor_dominio from valor_dominio v where v.cd_dominio = 49 and v.vl_dominio =  obter_status_conta(c.nr_interno_conta,'C'))  status_conta,\nobter_cgc_estabelecimento(d.cd_estabelecimento) as CNPJ,\nc.nr_protocolo,\n' ' as nr_seq_grupo_rec,\n\n'NAO ENCONTRADO' as SIGLA_UNIDADE,\n'NAO ENCONTRADO' as MARCA\n\nfrom material_atend_paciente m,\natendimento_paciente d, conta_paciente c\nwhere d.nr_atendimento = m.nr_atendimento\nand m.nr_interno_conta = c.nr_interno_conta (+)\nand m.cd_motivo_exc_conta is null\nand c.ie_cancelamento is null\nand c.nr_interno_conta is not null\nand m.vl_material > 0\nand obter_se_atend_retorno(m.nr_atendimento) <> 'S'",
 						"partitionOption": "None"
 					},
-					"sink": {
-						"type": "AzureSqlSink"
-					},
 					"enableStaging": false
 				},
 				"inputs": [
@@ -915,13 +909,13 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "Producao Materiais HOB",
+						"activity": "Producao Materiais Sadalla",
 						"dependencyConditions": [
 							"Succeeded"
 						]
 					},
 					{
-						"activity": "Producao Procedimentos HOB",
+						"activity": "Producao Procedimentos Sadalla",
 						"dependencyConditions": [
 							"Succeeded"
 						]
