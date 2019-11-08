@@ -104,7 +104,15 @@
 							"userProperties": [],
 							"typeProperties": {
 								"source": {
-									"type": "AzureSqlSource"
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "FileServerReadSettings",
+										"recursive": true,
+										"wildcardFileName": "*"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
 								},
 								"sink": {
 									"type": "AzureSqlSink"
@@ -114,7 +122,7 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "AZSQL_TB_NC_BilheteLigacoes_Hist",
+									"referenceName": "CSI_CSV_NC_BilhetesLigacoes_HIST",
 									"type": "DatasetReference"
 								}
 							],
