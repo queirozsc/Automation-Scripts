@@ -107,7 +107,8 @@
 									"type": "DelimitedTextSource",
 									"storeSettings": {
 										"type": "FileServerReadSettings",
-										"recursive": true
+										"recursive": true,
+										"wildcardFileName": "*"
 									},
 									"formatSettings": {
 										"type": "DelimitedTextReadSettings"
@@ -278,13 +279,13 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "CSI_CSV_NC_BilhetesLigacoes",
+									"referenceName": "CSI_CSV_NC_BilhetesLigacoes_HIst",
 									"type": "DatasetReference"
 								}
 							],
 							"outputs": [
 								{
-									"referenceName": "AZSQL_TB_NC_BilheteLigacoes",
+									"referenceName": "AZSQL_TB_NC_BilheteLigacoes_Hist",
 									"type": "DatasetReference"
 								}
 							]
