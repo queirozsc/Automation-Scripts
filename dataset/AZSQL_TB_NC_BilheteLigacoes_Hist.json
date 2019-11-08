@@ -72,10 +72,6 @@
 				"name": "LINKED_ID",
 				"type": "float",
 				"precision": 15
-			},
-			{
-				"name": "MARCA",
-				"type": "varchar"
 			}
 		],
 		"typeProperties": {
