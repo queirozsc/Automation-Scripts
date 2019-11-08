@@ -1,5 +1,5 @@
 {
-	"name": "Geral Atendimentos Sadalla",
+	"name": "Altera Marca Producao",
 	"properties": {
 		"activities": [
 			{
@@ -422,7 +422,7 @@
 				]
 			},
 			{
-				"name": "Producao Procedimentos",
+				"name": "Producao Procedimentos Sadalla",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -465,7 +465,7 @@
 				]
 			},
 			{
-				"name": "Producao Materiais",
+				"name": "Producao Materiais Sadalla",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -512,13 +512,13 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "Producao Procedimentos",
+						"activity": "Producao Procedimentos Sadalla",
 						"dependencyConditions": [
 							"Succeeded"
 						]
 					},
 					{
-						"activity": "Producao Materiais",
+						"activity": "Producao Materiais Sadalla",
 						"dependencyConditions": [
 							"Succeeded"
 						]
