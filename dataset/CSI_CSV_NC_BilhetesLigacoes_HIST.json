@@ -1,0 +1,28 @@
+{
+	"name": "CSI_CSV_NC_BilhetesLigacoes_HIST",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Historicos_Bilhetes",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Nexcore/CSI"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "FileServerLocation"
+			},
+			"columnDelimiter": ";",
+			"escapeChar": "",
+			"firstRowAsHeader": true,
+			"quoteChar": ""
+		},
+		"schema": [
+			{
+				"type": "String"
+			}
+		]
+	}
+}
