@@ -12,74 +12,14 @@
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "FileServerLocation"
+				"type": "FileServerLocation",
+				"fileName": "BilheteLigacoes_01-07-2019.csv"
 			},
 			"columnDelimiter": ";",
 			"escapeChar": "",
 			"firstRowAsHeader": true,
 			"quoteChar": ""
 		},
-		"schema": [
-			{
-				"name": "Data",
-				"type": "String"
-			},
-			{
-				"name": "Hora",
-				"type": "String"
-			},
-			{
-				"name": "Usu�rio",
-				"type": "String"
-			},
-			{
-				"name": "Tipo",
-				"type": "String"
-			},
-			{
-				"name": "Origem",
-				"type": "String"
-			},
-			{
-				"name": "Destino",
-				"type": "String"
-			},
-			{
-				"name": "Status",
-				"type": "String"
-			},
-			{
-				"name": "Centro de Custo",
-				"type": "String"
-			},
-			{
-				"name": "Tempo Tarifado",
-				"type": "String"
-			},
-			{
-				"name": "Tempo Decorrido",
-				"type": "String"
-			},
-			{
-				"name": "Campanha",
-				"type": "String"
-			},
-			{
-				"name": "Fila",
-				"type": "String"
-			},
-			{
-				"name": "Tabulacao",
-				"type": "String"
-			},
-			{
-				"name": "Unique ID",
-				"type": "String"
-			},
-			{
-				"name": "Linked ID",
-				"type": "String"
-			}
-		]
+		"schema": []
 	}
 }
