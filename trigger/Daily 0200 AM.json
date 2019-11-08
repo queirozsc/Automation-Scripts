@@ -1,33 +1,39 @@
 {
-    "name": "Daily 0200 AM",
-    "properties": {
-        "description": "Criado para executar as consultas no HOSAG",
-        "annotations": [],
-        "runtimeState": "Started",
-        "pipelines": [
-            {
-                "pipelineReference": {
-                    "referenceName": "Altera Marca Producao",
-                    "type": "PipelineReference"
-                }
-            }
-        ],
-        "type": "ScheduleTrigger",
-        "typeProperties": {
-            "recurrence": {
-                "frequency": "Day",
-                "interval": 1,
-                "startTime": "2019-10-08T03:02:00.000Z",
-                "timeZone": "UTC",
-                "schedule": {
-                    "minutes": [
-                        0
-                    ],
-                    "hours": [
-                        5
-                    ]
-                }
-            }
-        }
-    }
+	"name": "Daily 0200 AM",
+	"properties": {
+		"description": "Criado para executar as consultas no HOSAG",
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "Altera Marca Producao",
+					"type": "PipelineReference"
+				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "Geral Atendimentos Sadalla",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2019-10-08T03:02:00.000Z",
+				"timeZone": "UTC",
+				"schedule": {
+					"minutes": [
+						0
+					],
+					"hours": [
+						5
+					]
+				}
+			}
+		}
+	}
 }
