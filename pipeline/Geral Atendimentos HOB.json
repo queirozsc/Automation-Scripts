@@ -429,6 +429,12 @@
 						"referenceName": "CloudTasyPrdDataSet",
 						"type": "DatasetReference"
 					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AzureSqlProcedimentosTable",
+						"type": "DatasetReference"
+					}
 				]
 			},
 			{
@@ -464,6 +470,12 @@
 				"inputs": [
 					{
 						"referenceName": "CloudTasyPrdDataSet",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AzureSqlProcedimentosTable",
 						"type": "DatasetReference"
 					}
 				]
