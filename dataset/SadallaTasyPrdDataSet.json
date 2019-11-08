@@ -94,6 +94,34 @@
 			{
 				"name": "DT_AGENDAMENTO",
 				"type": "DateTime"
+			},
+			{
+				"name": "DIA",
+				"type": "String"
+			},
+			{
+				"name": "MES",
+				"type": "String"
+			},
+			{
+				"name": "ANO",
+				"type": "String"
+			},
+			{
+				"name": "DS_CLASSIFICACAO",
+				"type": "String"
+			},
+			{
+				"name": "DS_AGRUPAMENTO",
+				"type": "String"
+			},
+			{
+				"name": "CD_MOTIVO_CANCELAMENTO",
+				"type": "String"
+			},
+			{
+				"name": "DS_MOTIVO_CANCELAMENTO",
+				"type": "String"
 			}
 		]
 	},
