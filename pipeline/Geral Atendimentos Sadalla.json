@@ -379,7 +379,7 @@
 				}
 			},
 			{
-				"name": "Usuarios HOB",
+				"name": "Usuarios Sadalla",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -420,6 +420,266 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Producao Procedimentos",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Wait1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "select \np.dt_procedimento dt_procedimento,\np.nr_atendimento nr_atendimento,\np.nr_interno_conta nr_interno_conta,\nc.cd_convenio_parametro cd_convenio,\nobter_nome_convenio(c.cd_convenio_parametro)as ds_convenio,\nobter_pessoa_atendimento(p.nr_atendimento, 'N') nm_paciente,\nobter_nome_pf(p.cd_medico_executor) nm_medico,\nobter_nome_setor(obter_setor_atendimento(p.nr_atendimento)) ds_setor,\ndecode(p.ie_tiss_tipo_guia,7,'M','P') ie_identificador,\np.cd_procedimento cd_procedimento,\nobter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced) ds_procedimento,\np.qt_procedimento qt_procedimento,\np.vl_medico as vl_medico,\np.vl_procedimento vl_procedimento,\nobter_valor_conta(p.nr_interno_conta,0) vl_conta,\n(select v.ds_valor_dominio from valor_dominio v where v.cd_dominio = 49 and v.vl_dominio =  obter_status_conta(p.nr_interno_conta,'C')) status_conta,\nobter_cgc_estabelecimento(b.cd_estabelecimento) as CNPJ,\nc.nr_protocolo,\n(select r.ds_grupo_receita from grupo_receita r where r.nr_sequencia = a.nr_seq_grupo_rec) as nr_seq_grupo_rec,\n\n'NAO ENCONTRADO' as SIGLA_UNIDADE,\n'NAO ENCONTRADO' as MARCA\n\nfrom procedimento_paciente p, procedimento a, atendimento_paciente b, conta_paciente c\nwhere ((a.cd_procedimento = p.cd_procedimento) and (a.ie_origem_proced = p.ie_origem_proced))\nand    b.nr_atendimento = p.nr_atendimento\nand p.nr_interno_conta = c.nr_interno_conta (+)\nand p.cd_motivo_exc_conta is null\nand c.ie_cancelamento is null\nand c.nr_interno_conta is not null\nand obter_area_procedimento(a.cd_procedimento, a.ie_origem_proced) <> 10\nand p.vl_procedimento > 0 \nand obter_se_atend_retorno(p.nr_atendimento) <> 'S'",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "DT_PROCEDIMENTO"
+								},
+								"sink": {
+									"name": "DT_PROCEDIMENTO",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "NR_ATENDIMENTO"
+								},
+								"sink": {
+									"name": "NR_ATENDIMENTO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "NR_INTERNO_CONTA"
+								},
+								"sink": {
+									"name": "NR_INTERNO_CONTA",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "CD_CONVENIO"
+								},
+								"sink": {
+									"name": "CD_CONVENIO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_CONVENIO"
+								},
+								"sink": {
+									"name": "DS_CONVENIO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NM_PACIENTE"
+								},
+								"sink": {
+									"name": "NM_PACIENTE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NM_MEDICO"
+								},
+								"sink": {
+									"name": "NM_MEDICO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_SETOR"
+								},
+								"sink": {
+									"name": "DS_SETOR",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "IE_IDENTIFICADOR"
+								},
+								"sink": {
+									"name": "IE_IDENTIFICADOR",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CD_PROCEDIMENTO"
+								},
+								"sink": {
+									"name": "CD_PROCEDIMENTO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_PROCEDIMENTO"
+								},
+								"sink": {
+									"name": "DS_PROCEDIMENTO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "QT_PROCEDIMENTO"
+								},
+								"sink": {
+									"name": "QT_PROCEDIMENTO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_MEDICO"
+								},
+								"sink": {
+									"name": "VL_MEDICO",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_PROCEDIMENTO"
+								},
+								"sink": {
+									"name": "VL_PROCEDIMENTO",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_CONTA"
+								},
+								"sink": {
+									"name": "VL_CONTA",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "STATUS_CONTA"
+								},
+								"sink": {
+									"name": "STATUS_CONTA",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CNPJ"
+								},
+								"sink": {
+									"name": "CNPJ",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NR_PROTOCOLO"
+								},
+								"sink": {
+									"name": "NR_PROTOCOLO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NR_SEQ_GRUPO_REC"
+								},
+								"sink": {
+									"name": "NR_SEQ_GRUPO_REC",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SIGLA_UNIDADE"
+								},
+								"sink": {
+									"name": "SIGLA_UNIDADE",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "MARCA"
+								},
+								"sink": {
+									"name": "MARCA",
+									"type": "Int32"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "CloudTasyPrdDataSet",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AZ_SQL_TB_Cobranca_Paciente_Unidade",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Producao Materiais",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Wait1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"enableStaging": false
+				}
 			}
 		],
 		"folder": {
