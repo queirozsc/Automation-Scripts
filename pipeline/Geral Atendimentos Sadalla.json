@@ -1,430 +1,716 @@
 {
-	"name": "Geral Atendimentos Sadalla",
-	"properties": {
-		"activities": [
-			{
-				"name": "Paciente Sadalla",
-				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "Wait1",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "OracleSource",
-						"oracleReaderQuery": "select pf.cd_pessoa_fisica,\n       pf.nm_pessoa_fisica,\n       pf.nr_cpf,\n       to_char((pf.dt_nascimento) , 'dd/mm/yyyy') as dt_nascimento,\n       pf.nr_ddd_celular||''||substr(replace(LTRIM(translate(pf.nr_telefone_celular, translate(pf.nr_telefone_celular, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone_celular,\n       obter_compl_pf(pf.cd_pessoa_fisica,1,'DDT')||''||obter_compl_pf(pf.cd_pessoa_fisica,1,'T') as nr_telefone,\n       obter_cnpj_estabelecimento(decode(pf.cd_estabelecimento,null,1,pf.cd_estabelecimento)) as CNPJ,\n       'NAO ENCONTRADO' as SIGLA_UNIDADE,\n       'NAO ENCONTRADO' as MARCA\nfrom pessoa_fisica pf",
-						"partitionOption": "None"
-					},
-					"sink": {
-						"type": "AzureSqlSink"
-					},
-					"enableStaging": false
-				},
-				"inputs": [
-					{
-						"referenceName": "SadallaTasyPrdDataSet",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "AZ_SQL_TB_Pacientes",
-						"type": "DatasetReference"
-					}
-				]
-			},
-			{
-				"name": "Atendimento Sadalla",
-				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "Wait1",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "OracleSource",
-						"oracleReaderQuery": "select pf.cd_pessoa_fisica, pf.nm_pessoa_fisica, \n\nto_char(at.dt_entrada,'dd/mm/yyyy') as dt_entrada,\nto_char(at.dt_entrada,'hh24:mi:ss') as hr_entrada, \n\nobter_nome_pf(at.cd_medico_resp) as nm_medico, c.cd_convenio, obter_nome_convenio(c.cd_convenio) AS ds_convenio, \nat.nr_atendimento,\nobter_cgc_estabelecimento(at.cd_estabelecimento) as CNPJ,\n'NAO ENCONTRADO' as SIGLA_UNIDADE,\n'NAO ENCONTRADO' as MARCA,\n\nat.cd_procedencia,\np.ds_procedencia,\n'NAO ENCONTRADO' as ID\n\nfrom \natendimento_paciente at, \npessoa_fisica pf,\natend_categoria_convenio c,\nprocedencia p\nwhere at.cd_pessoa_fisica = pf.cd_pessoa_fisica\nand at.cd_procedencia = p.cd_procedencia (+)\nand at.nr_atendimento = c.nr_atendimento",
-						"partitionOption": "None"
-					},
-					"sink": {
-						"type": "AzureSqlSink"
-					},
-					"enableStaging": false
-				},
-				"inputs": [
-					{
-						"referenceName": "SadallaTasyPrdDataSet",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "AZ_SQL_TB_Atendimento",
-						"type": "DatasetReference"
-					}
-				]
-			},
-			{
-				"name": "Consulta Sadalla",
-				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "Wait1",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "OracleSource",
-						"oracleReaderQuery": "select o.nr_sequencia as nr_sequencia, to_char(o.dt_atualizacao,'dd/mm/yyyy') as dt_atualizacao,\nto_char(o.dt_atualizacao,'hh24:mi:ss') as hr_atualizacao, \no.nr_atendimento, o.cd_profissional as cd_medico ,obter_nome_pf(o.cd_profissional) as nm_medico, r.ds_retorno, substr(o.ds_conduta,1,1000) as ds_conduta,\nobter_pessoa_atendimento(o.nr_atendimento, 'C') as cd_pessoa_fisica\nfrom oft_consulta_medica o,\n     oft_retorno r\nwhere o.nr_seq_retorno = r.nr_sequencia\nand o.nr_atendimento is not null",
-						"partitionOption": "None"
-					},
-					"sink": {
-						"type": "AzureSqlSink"
-					},
-					"enableStaging": false
-				},
-				"inputs": [
-					{
-						"referenceName": "SadallaTasyPrdDataSet",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "AZ_SQL_TB_Consulta",
-						"type": "DatasetReference"
-					}
-				]
-			},
-			{
-				"name": "Agendamento Sadalla",
-				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "Wait1",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "OracleSource",
-						"oracleReaderQuery": "select a.cd_pessoa_fisica, \na.cd_convenio, \nobter_cnpj_estabelecimento(ag.cd_estabelecimento) as cnpj,\nto_char(a.dt_agenda, 'dd/mm/yyyy') as data_agenda,\nto_char(a.dt_agenda, 'hh24:mi:ss') as hora_agenda,\nag.cd_tipo_agenda as tipo_agenda,\npf.nm_pessoa_fisica as nm_paciente,\nobter_desc_procedimento(10502, 1) as ds_procedimento_princ,\n'' ds_procedimento_adic,\n1 as ie_quantidade,\nobter_nome_usuario(a.nm_usuario_origem) as nm_usuario,\nobter_nome_pf(ag.cd_pessoa_fisica) as nm_medico,\n'NAO ENCONTRADO' SIGLA_UNIDADE,\n'NAO ENCONTRADO' MARCA,\nobter_valor_dominio(83,a.ie_status_agenda) as status_agenda,\na.nr_atendimento,\na.nr_sequencia,\n'NAO ENCONTRADO' as ID,\na.cd_procedencia,\np.ds_procedencia,\na.dt_agendamento\nfrom agenda_consulta a,\n     agenda ag,\n     pessoa_fisica pf,\n     procedencia p\nwhere a.cd_agenda = ag.cd_agenda\nand a.cd_pessoa_fisica = pf.cd_pessoa_fisica \nand a.cd_procedencia = p.cd_procedencia (+)\nand a.cd_pessoa_fisica is not null",
-						"partitionOption": "None"
-					},
-					"sink": {
-						"type": "AzureSqlSink"
-					},
-					"enableStaging": false
-				},
-				"inputs": [
-					{
-						"referenceName": "SadallaTasyPrdDataSet",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "AZ_SQL_TB_Agendamento",
-						"type": "DatasetReference"
-					}
-				]
-			},
-			{
-				"name": "Wait1",
-				"type": "Wait",
-				"dependsOn": [
-					{
-						"activity": "Clear_Base",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"waitTimeInSeconds": 1
-				}
-			},
-			{
-				"name": "Clear_Base",
-				"type": "SqlServerStoredProcedure",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"storedProcedureName": "[dbo].[CLEARBASEATENDIMENTOUNIDADES]"
-				},
-				"linkedServiceName": {
-					"referenceName": "AzureSQL_DB_Procedimentos",
-					"type": "LinkedServiceReference"
-				}
-			},
-			{
-				"name": "Altera_marca_Pacientes",
-				"type": "SqlServerStoredProcedure",
-				"dependsOn": [
-					{
-						"activity": "Altera_telefones",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"storedProcedureName": "sp_UPDATETRADEMARKPACIENTES"
-				},
-				"linkedServiceName": {
-					"referenceName": "AzureSQL_DB_Procedimentos",
-					"type": "LinkedServiceReference"
-				}
-			},
-			{
-				"name": "Altera_tipo_agendas",
-				"type": "SqlServerStoredProcedure",
-				"dependsOn": [
-					{
-						"activity": "Agendamento Sadalla",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"storedProcedureName": "[dbo].[sp_ALTERTIPOAGENDASLOTE]"
-				},
-				"linkedServiceName": {
-					"referenceName": "AzureSQL_DB_Procedimentos",
-					"type": "LinkedServiceReference"
-				}
-			},
-			{
-				"name": "Altera_telefones",
-				"type": "SqlServerStoredProcedure",
-				"dependsOn": [
-					{
-						"activity": "Paciente Sadalla",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"storedProcedureName": "[dbo].[sp_ALTERTELEPHONEMASKPACIENTES]"
-				},
-				"linkedServiceName": {
-					"referenceName": "AzureSQL_DB_Procedimentos",
-					"type": "LinkedServiceReference"
-				}
-			},
-			{
-				"name": "Altera_marca_Atendimento",
-				"type": "SqlServerStoredProcedure",
-				"dependsOn": [
-					{
-						"activity": "Atendimento Sadalla",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"storedProcedureName": "sp_UPDATETRADEMARKATENDIMENTO"
-				},
-				"linkedServiceName": {
-					"referenceName": "AzureSQL_DB_Procedimentos",
-					"type": "LinkedServiceReference"
-				}
-			},
-			{
-				"name": "Altera_marca_Agenda",
-				"type": "SqlServerStoredProcedure",
-				"dependsOn": [
-					{
-						"activity": "Altera_tipo_agendas",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"storedProcedureName": "sp_UPDATETRADEMARKAGENDAMENTO"
-				},
-				"linkedServiceName": {
-					"referenceName": "AzureSQL_DB_Procedimentos",
-					"type": "LinkedServiceReference"
-				}
-			},
-			{
-				"name": "Insere ID",
-				"type": "SqlServerStoredProcedure",
-				"dependsOn": [
-					{
-						"activity": "Altera_marca_Agenda",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "Altera_marca_Atendimento",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"storedProcedureName": "[dbo].[INSERTIDINAGEND]"
-				},
-				"linkedServiceName": {
-					"referenceName": "AzureSQL_DB_Procedimentos",
-					"type": "LinkedServiceReference"
-				}
-			},
-			{
-				"name": "Usuarios HOB",
-				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "Wait1",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "OracleSource",
-						"oracleReaderQuery": "select u.nm_usuario, \nu.ds_usuario, \nu.ie_situacao, \nu.dt_atualizacao,\nobter_nome_estabelecimento(u.cd_estabelecimento) as sigla_unidade,\nobter_nome_empresa(obter_empresa_estab(u.cd_estabelecimento)) as Marca\nfrom usuario u",
-						"partitionOption": "None"
-					},
-					"sink": {
-						"type": "AzureSqlSink"
-					},
-					"enableStaging": false
-				},
-				"inputs": [
-					{
-						"referenceName": "SadallaTasyPrdDataSet",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "AZ_SQL_TB_Usuario",
-						"type": "DatasetReference"
-					}
-				]
-			}
-		],
-		"folder": {
-			"name": "Atendimento"
-		},
-		"annotations": []
-	}
+    "name": "Geral Atendimentos Sadalla",
+    "properties": {
+        "activities": [
+            {
+                "name": "Paciente Sadalla",
+                "type": "Copy",
+                "dependsOn": [
+                    {
+                        "activity": "Wait1",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "source": {
+                        "type": "OracleSource",
+                        "oracleReaderQuery": "select pf.cd_pessoa_fisica,\n       pf.nm_pessoa_fisica,\n       pf.nr_cpf,\n       to_char((pf.dt_nascimento) , 'dd/mm/yyyy') as dt_nascimento,\n       pf.nr_ddd_celular||''||substr(replace(LTRIM(translate(pf.nr_telefone_celular, translate(pf.nr_telefone_celular, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone_celular,\n       obter_compl_pf(pf.cd_pessoa_fisica,1,'DDT')||''||obter_compl_pf(pf.cd_pessoa_fisica,1,'T') as nr_telefone,\n       obter_cnpj_estabelecimento(decode(pf.cd_estabelecimento,null,1,pf.cd_estabelecimento)) as CNPJ,\n       'NAO ENCONTRADO' as SIGLA_UNIDADE,\n       'NAO ENCONTRADO' as MARCA\nfrom pessoa_fisica pf",
+                        "partitionOption": "None"
+                    },
+                    "sink": {
+                        "type": "AzureSqlSink"
+                    },
+                    "enableStaging": false
+                },
+                "inputs": [
+                    {
+                        "referenceName": "SadallaTasyPrdDataSet",
+                        "type": "DatasetReference"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "referenceName": "AZ_SQL_TB_Pacientes",
+                        "type": "DatasetReference"
+                    }
+                ]
+            },
+            {
+                "name": "Atendimento Sadalla",
+                "type": "Copy",
+                "dependsOn": [
+                    {
+                        "activity": "Wait1",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "source": {
+                        "type": "OracleSource",
+                        "oracleReaderQuery": "-- Atendimento HOB - Azure\n\nselect pf.cd_pessoa_fisica, pf.nm_pessoa_fisica, \n\nto_char(at.dt_entrada,'dd/mm/yyyy') as dt_entrada,\nto_char(at.dt_entrada,'hh24:mi:ss') as hr_entrada, \n\nobter_nome_pf(at.cd_medico_resp) as nm_medico, c.cd_convenio, obter_nome_convenio(c.cd_convenio) AS ds_convenio, \nat.nr_atendimento,\nobter_cgc_estabelecimento(at.cd_estabelecimento) as CNPJ,\n'NAO ENCONTRADO' as SIGLA_UNIDADE,\n'NAO ENCONTRADO' as MARCA,\n\nat.cd_procedencia,\np.ds_procedencia,\n'NAO ENCONTRADO' as ID,\n\nto_char(at.dt_entrada,'dd') dia,\nto_char(at.dt_entrada,'mm') mes,\nto_char(at.dt_entrada,'yyyy') ano,\nat.dt_cancelamento\n\nfrom \natendimento_paciente at, \npessoa_fisica pf,\natend_categoria_convenio c,\nprocedencia p\nwhere at.cd_pessoa_fisica = pf.cd_pessoa_fisica\nand at.cd_procedencia = p.cd_procedencia (+)\nand at.nr_atendimento = c.nr_atendimento",
+                        "partitionOption": "None"
+                    },
+                    "sink": {
+                        "type": "AzureSqlSink"
+                    },
+                    "enableStaging": false,
+                    "translator": {
+                        "type": "TabularTranslator",
+                        "mappings": [
+                            {
+                                "source": {
+                                    "name": "CD_PESSOA_FISICA"
+                                },
+                                "sink": {
+                                    "name": "CD_PESSOA_FISICA",
+                                    "type": "Int32"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "NM_PESSOA_FISICA"
+                                },
+                                "sink": {
+                                    "name": "NM_PESSOA_FISICA",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "DT_ENTRADA"
+                                },
+                                "sink": {
+                                    "name": "DT_ENTRADA",
+                                    "type": "DateTime"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "HR_ENTRADA"
+                                },
+                                "sink": {
+                                    "name": "HR_ENTRADA",
+                                    "type": "DateTime"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "NM_MEDICO"
+                                },
+                                "sink": {
+                                    "name": "NM_MEDICO",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "CD_CONVENIO"
+                                },
+                                "sink": {
+                                    "name": "CD_CONVENIO",
+                                    "type": "Int32"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "DS_CONVENIO"
+                                },
+                                "sink": {
+                                    "name": "DS_CONVENIO",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "NR_ATENDIMENTO"
+                                },
+                                "sink": {
+                                    "name": "NR_ATENDIMENTO",
+                                    "type": "Int32"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "CNPJ"
+                                },
+                                "sink": {
+                                    "name": "CNPJ",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "SIGLA_UNIDADE"
+                                },
+                                "sink": {
+                                    "name": "SIGLA_UNIDADE",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "MARCA"
+                                },
+                                "sink": {
+                                    "name": "MARCA",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "CD_PROCEDENCIA"
+                                },
+                                "sink": {
+                                    "name": "CD_PROCEDENCIA",
+                                    "type": "Int32"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "DS_PROCEDENCIA"
+                                },
+                                "sink": {
+                                    "name": "DS_PROCEDENCIA",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "ID"
+                                },
+                                "sink": {
+                                    "name": "ID",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "DIA"
+                                },
+                                "sink": {
+                                    "name": "DIA",
+                                    "type": "Int32"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "MES"
+                                },
+                                "sink": {
+                                    "name": "MES",
+                                    "type": "Int32"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "ANO"
+                                },
+                                "sink": {
+                                    "name": "ANO",
+                                    "type": "Int32"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "DT_CANCELAMENTO"
+                                },
+                                "sink": {
+                                    "name": "DT_CANCELAMENTO",
+                                    "type": "DateTime"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "inputs": [
+                    {
+                        "referenceName": "SadallaTasyPrdDataSet",
+                        "type": "DatasetReference"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "referenceName": "AZ_SQL_TB_Atendimento",
+                        "type": "DatasetReference"
+                    }
+                ]
+            },
+            {
+                "name": "Consulta Sadalla",
+                "type": "Copy",
+                "dependsOn": [
+                    {
+                        "activity": "Wait1",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "source": {
+                        "type": "OracleSource",
+                        "oracleReaderQuery": "-- Consulta Sadalla - Azure\n\nselect o.nr_sequencia as nr_sequencia, to_char(o.dt_atualizacao,'dd/mm/yyyy') as dt_atualizacao,\nto_char(o.dt_atualizacao,'hh24:mi:ss') as hr_atualizacao, \no.nr_atendimento, o.cd_profissional as cd_medico ,obter_nome_pf(o.cd_profissional) as nm_medico, r.ds_retorno, substr(o.ds_conduta,1,1000) as ds_conduta,\nobter_pessoa_atendimento(o.nr_atendimento, 'C') as cd_pessoa_fisica,\n\n(select unique d.cd_doenca ||' - '|| a.ds_doenca_cid\nfrom diagnostico_doenca d, \n     cid_doenca a\nwhere a.cd_doenca_cid = d.cd_doenca\nand d.nr_atendimento = o.nr_atendimento\nand d.nr_seq_interno = (select max(x.nr_seq_interno) from diagnostico_doenca x where x.nr_atendimento = d.nr_atendimento)) as ds_diagnostico\n\n\nfrom oft_consulta_medica o,\n     oft_retorno r\nwhere o.nr_seq_retorno = r.nr_sequencia\nand o.nr_atendimento is not null",
+                        "partitionOption": "None"
+                    },
+                    "sink": {
+                        "type": "AzureSqlSink"
+                    },
+                    "enableStaging": false
+                },
+                "inputs": [
+                    {
+                        "referenceName": "SadallaTasyPrdDataSet",
+                        "type": "DatasetReference"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "referenceName": "AZ_SQL_TB_Consulta",
+                        "type": "DatasetReference"
+                    }
+                ]
+            },
+            {
+                "name": "Agendamento Sadalla",
+                "type": "Copy",
+                "dependsOn": [
+                    {
+                        "activity": "Wait1",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "source": {
+                        "type": "OracleSource",
+                        "oracleReaderQuery": "-- Agendamento Sadalla - Azure\n\nselect a.cd_pessoa_fisica, \na.cd_convenio, \nobter_cnpj_estabelecimento(ag.cd_estabelecimento) as cnpj,\nto_char(a.dt_agenda, 'dd/mm/yyyy') as data_agenda,\nto_char(a.dt_agenda, 'hh24:mi:ss') as hora_agenda,\nag.cd_tipo_agenda as tipo_agenda,\npf.nm_pessoa_fisica as nm_paciente,\nobter_desc_procedimento(10502, 1) as ds_procedimento_princ,\n'' ds_procedimento_adic,\n1 as ie_quantidade,\nobter_nome_usuario(a.nm_usuario_origem) as nm_usuario,\nobter_nome_pf(ag.cd_pessoa_fisica) as nm_medico,\n'NAO ENCONTRADO' SIGLA_UNIDADE,\n'NAO ENCONTRADO' MARCA,\nobter_valor_dominio(83,a.ie_status_agenda) as status_agenda,\na.nr_atendimento,\na.nr_sequencia,\n'NAO ENCONTRADO' as ID,\na.cd_procedencia,\np.ds_procedencia,\na.dt_agendamento,\n\nto_char(a.dt_agenda,'dd') dia,\nto_char(a.dt_agenda,'mm') mes,\nto_char(a.dt_agenda,'yyyy') ano,\nac.ds_classificacao ,\naa.ds_agrupamento ds_agrupamento,\na.cd_motivo_cancelamento,\nobter_ds_motivo_status(a.nr_sequencia, a.cd_agenda) as ds_motivo_cancelamento\n\nfrom agenda_consulta a,\n     agenda ag,\n     pessoa_fisica pf,\n     procedencia p,\n     agenda_classif ac,\n     agrupamento_agenda aa\nwhere a.cd_agenda = ag.cd_agenda\nand a.cd_pessoa_fisica = pf.cd_pessoa_fisica \nand a.cd_procedencia = p.cd_procedencia(+)\nand a.ie_classif_agenda  = ac.cd_classificacao(+)\nand ag.nr_seq_agrupamento = aa.nr_sequencia (+)\nand a.cd_pessoa_fisica is not null",
+                        "partitionOption": "None"
+                    },
+                    "sink": {
+                        "type": "AzureSqlSink"
+                    },
+                    "enableStaging": false
+                },
+                "inputs": [
+                    {
+                        "referenceName": "SadallaTasyPrdDataSet",
+                        "type": "DatasetReference"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "referenceName": "AZ_SQL_TB_Agendamento",
+                        "type": "DatasetReference"
+                    }
+                ]
+            },
+            {
+                "name": "Wait1",
+                "type": "Wait",
+                "dependsOn": [
+                    {
+                        "activity": "Clear_Base",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "waitTimeInSeconds": 1
+                }
+            },
+            {
+                "name": "Clear_Base",
+                "type": "SqlServerStoredProcedure",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "storedProcedureName": "[dbo].[CLEARBASEATENDIMENTOUNIDADES]"
+                },
+                "linkedServiceName": {
+                    "referenceName": "AzureSQL_DB_Procedimentos",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "Altera_marca_Pacientes",
+                "type": "SqlServerStoredProcedure",
+                "dependsOn": [
+                    {
+                        "activity": "Altera_telefones",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "storedProcedureName": "sp_UPDATETRADEMARKPACIENTES"
+                },
+                "linkedServiceName": {
+                    "referenceName": "AzureSQL_DB_Procedimentos",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "Altera_tipo_agendas",
+                "type": "SqlServerStoredProcedure",
+                "dependsOn": [
+                    {
+                        "activity": "Agendamento Sadalla",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "storedProcedureName": "[dbo].[sp_ALTERTIPOAGENDASLOTE]"
+                },
+                "linkedServiceName": {
+                    "referenceName": "AzureSQL_DB_Procedimentos",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "Altera_telefones",
+                "type": "SqlServerStoredProcedure",
+                "dependsOn": [
+                    {
+                        "activity": "Paciente Sadalla",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "storedProcedureName": "[dbo].[sp_ALTERTELEPHONEMASKPACIENTES]"
+                },
+                "linkedServiceName": {
+                    "referenceName": "AzureSQL_DB_Procedimentos",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "Altera_marca_Atendimento",
+                "type": "SqlServerStoredProcedure",
+                "dependsOn": [
+                    {
+                        "activity": "Atendimento Sadalla",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "storedProcedureName": "sp_UPDATETRADEMARKATENDIMENTO"
+                },
+                "linkedServiceName": {
+                    "referenceName": "AzureSQL_DB_Procedimentos",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "Altera_marca_Agenda",
+                "type": "SqlServerStoredProcedure",
+                "dependsOn": [
+                    {
+                        "activity": "Altera_tipo_agendas",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "storedProcedureName": "sp_UPDATETRADEMARKAGENDAMENTO"
+                },
+                "linkedServiceName": {
+                    "referenceName": "AzureSQL_DB_Procedimentos",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "Insere ID",
+                "type": "SqlServerStoredProcedure",
+                "dependsOn": [
+                    {
+                        "activity": "Altera_marca_Agenda",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    },
+                    {
+                        "activity": "Altera_marca_Atendimento",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "storedProcedureName": "[dbo].[INSERTIDINAGEND]"
+                },
+                "linkedServiceName": {
+                    "referenceName": "AzureSQL_DB_Procedimentos",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "Usuarios Sadalla",
+                "type": "Copy",
+                "dependsOn": [
+                    {
+                        "activity": "Wait1",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "source": {
+                        "type": "OracleSource",
+                        "oracleReaderQuery": "select u.nm_usuario, \nu.ds_usuario, \nu.ie_situacao, \nu.dt_atualizacao,\nobter_nome_estabelecimento(u.cd_estabelecimento) as sigla_unidade,\nobter_nome_empresa(obter_empresa_estab(u.cd_estabelecimento)) as Marca\nfrom usuario u",
+                        "partitionOption": "None"
+                    },
+                    "sink": {
+                        "type": "AzureSqlSink"
+                    },
+                    "enableStaging": false
+                },
+                "inputs": [
+                    {
+                        "referenceName": "SadallaTasyPrdDataSet",
+                        "type": "DatasetReference"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "referenceName": "AZ_SQL_TB_Usuario",
+                        "type": "DatasetReference"
+                    }
+                ]
+            },
+            {
+                "name": "Producao Procedimentos Sadalla",
+                "type": "Copy",
+                "dependsOn": [
+                    {
+                        "activity": "Wait1",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "source": {
+                        "type": "OracleSource",
+                        "oracleReaderQuery": "select \np.dt_procedimento dt_procedimento,\np.nr_atendimento nr_atendimento,\np.nr_interno_conta nr_interno_conta,\nc.cd_convenio_parametro cd_convenio,\nobter_nome_convenio(c.cd_convenio_parametro)as ds_convenio,\nobter_pessoa_atendimento(p.nr_atendimento, 'N') nm_paciente,\nobter_nome_pf(p.cd_medico_executor) nm_medico,\nobter_nome_setor(obter_setor_atendimento(p.nr_atendimento)) ds_setor,\ndecode(p.ie_tiss_tipo_guia,7,'M','P') ie_identificador,\np.cd_procedimento cd_procedimento,\nobter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced) ds_procedimento,\np.qt_procedimento qt_procedimento,\np.vl_medico as vl_medico,\np.vl_procedimento vl_procedimento,\nobter_valor_conta(p.nr_interno_conta,0) vl_conta,\n(select v.ds_valor_dominio from valor_dominio v where v.cd_dominio = 49 and v.vl_dominio =  obter_status_conta(p.nr_interno_conta,'C')) status_conta,\nobter_cgc_estabelecimento(b.cd_estabelecimento) as CNPJ,\nc.nr_protocolo,\n(select r.ds_grupo_receita from grupo_receita r where r.nr_sequencia = a.nr_seq_grupo_rec) as nr_seq_grupo_rec,\n\n'NAO ENCONTRADO' as SIGLA_UNIDADE,\n'NAO ENCONTRADO' as MARCA\n\nfrom procedimento_paciente p, procedimento a, atendimento_paciente b, conta_paciente c\nwhere ((a.cd_procedimento = p.cd_procedimento) and (a.ie_origem_proced = p.ie_origem_proced))\nand    b.nr_atendimento = p.nr_atendimento\nand p.nr_interno_conta = c.nr_interno_conta (+)\nand p.cd_motivo_exc_conta is null\nand c.ie_cancelamento is null\nand c.nr_interno_conta is not null\nand obter_area_procedimento(a.cd_procedimento, a.ie_origem_proced) <> 10\nand p.vl_procedimento > 0 \nand obter_se_atend_retorno(p.nr_atendimento) <> 'S'",
+                        "partitionOption": "None"
+                    },
+                    "sink": {
+                        "type": "AzureSqlSink"
+                    },
+                    "enableStaging": false
+                },
+                "inputs": [
+                    {
+                        "referenceName": "SadallaTasyPrdDataSet",
+                        "type": "DatasetReference"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "referenceName": "AZ_SQL_TB_Cobranca_Paciente_Unidade",
+                        "type": "DatasetReference"
+                    }
+                ]
+            },
+            {
+                "name": "Producao Materiais Sadalla",
+                "type": "Copy",
+                "dependsOn": [
+                    {
+                        "activity": "Wait1",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "source": {
+                        "type": "OracleSource",
+                        "oracleReaderQuery": "select m.dt_atendimento  dt_procedimento,\nm.nr_atendimento  nr_atendimento,\nm.nr_interno_conta  nr_interno_conta,\nc.cd_convenio_parametro  cd_convenio,\nobter_nome_convenio(c.cd_convenio_parametro) as ds_convenio,\nobter_pessoa_atendimento(m.nr_atendimento, 'N')  nm_paciente,\n(select obter_nome_pf(x.cd_medico_cirurgiao) from cirurgia x where x.nr_cirurgia = m.nr_cirurgia) as nm_medico,\nobter_nome_setor(obter_setor_atendimento(m.nr_atendimento))  ds_setor,\n'M'  ie_identificador,\nm.cd_material  cd_procedimento,\nobter_desc_material(m.cd_material)  ds_procedimento,\nm.qt_material  qt_procedimento,\n0 vl_medico,\nm.vl_material vl_procedimento,\nobter_valor_conta(c.nr_interno_conta,0)  vl_conta,\n(select v.ds_valor_dominio from valor_dominio v where v.cd_dominio = 49 and v.vl_dominio =  obter_status_conta(c.nr_interno_conta,'C'))  status_conta,\nobter_cgc_estabelecimento(d.cd_estabelecimento) as CNPJ,\nc.nr_protocolo,\n' ' as nr_seq_grupo_rec,\n\n'NAO ENCONTRADO' as SIGLA_UNIDADE,\n'NAO ENCONTRADO' as MARCA\n\nfrom material_atend_paciente m,\natendimento_paciente d, conta_paciente c\nwhere d.nr_atendimento = m.nr_atendimento\nand m.nr_interno_conta = c.nr_interno_conta (+)\nand m.cd_motivo_exc_conta is null\nand c.ie_cancelamento is null\nand c.nr_interno_conta is not null\nand m.vl_material > 0\nand obter_se_atend_retorno(m.nr_atendimento) <> 'S'",
+                        "partitionOption": "None"
+                    },
+                    "sink": {
+                        "type": "AzureSqlSink"
+                    },
+                    "enableStaging": false
+                },
+                "inputs": [
+                    {
+                        "referenceName": "SadallaTasyPrdDataSet",
+                        "type": "DatasetReference"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "referenceName": "AZ_SQL_TB_Cobranca_Paciente_Unidade",
+                        "type": "DatasetReference"
+                    }
+                ]
+            },
+            {
+                "name": "Altera Marca Producao",
+                "type": "SqlServerStoredProcedure",
+                "dependsOn": [
+                    {
+                        "activity": "Producao Materiais Sadalla",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    },
+                    {
+                        "activity": "Producao Procedimentos Sadalla",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "storedProcedureName": "[dbo].[sp_UPDATETRADEMARKCOBRANCA]"
+                },
+                "linkedServiceName": {
+                    "referenceName": "AzureSQL_DB_Procedimentos",
+                    "type": "LinkedServiceReference"
+                }
+            }
+        ],
+        "folder": {
+            "name": "Atendimento"
+        },
+        "annotations": []
+    }
 }

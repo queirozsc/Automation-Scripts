@@ -12,20 +12,40 @@
 		"type": "OracleTable",
 		"structure": [
 			{
-				"name": "NM_USUARIO",
+				"name": "CD_PESSOA_FISICA",
 				"type": "String"
 			},
 			{
-				"name": "DS_USUARIO",
+				"name": "NM_PESSOA_FISICA",
 				"type": "String"
 			},
 			{
-				"name": "IE_SITUACAO",
+				"name": "DT_ENTRADA",
 				"type": "String"
 			},
 			{
-				"name": "DT_ATUALIZACAO",
-				"type": "DateTime"
+				"name": "HR_ENTRADA",
+				"type": "String"
+			},
+			{
+				"name": "NM_MEDICO",
+				"type": "String"
+			},
+			{
+				"name": "CD_CONVENIO",
+				"type": "Decimal"
+			},
+			{
+				"name": "DS_CONVENIO",
+				"type": "String"
+			},
+			{
+				"name": "NR_ATENDIMENTO",
+				"type": "Decimal"
+			},
+			{
+				"name": "CNPJ",
+				"type": "String"
 			},
 			{
 				"name": "SIGLA_UNIDADE",
@@ -34,6 +54,34 @@
 			{
 				"name": "MARCA",
 				"type": "String"
+			},
+			{
+				"name": "CD_PROCEDENCIA",
+				"type": "Decimal"
+			},
+			{
+				"name": "DS_PROCEDENCIA",
+				"type": "String"
+			},
+			{
+				"name": "ID",
+				"type": "String"
+			},
+			{
+				"name": "DIA",
+				"type": "String"
+			},
+			{
+				"name": "MES",
+				"type": "String"
+			},
+			{
+				"name": "ANO",
+				"type": "String"
+			},
+			{
+				"name": "DT_CANCELAMENTO",
+				"type": "DateTime"
 			}
 		]
 	},
