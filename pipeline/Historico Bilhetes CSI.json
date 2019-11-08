@@ -1,5 +1,5 @@
 {
-	"name": "Teste Bilhetes CSI",
+	"name": "Historico Bilhetes CSI",
 	"properties": {
 		"activities": [
 			{
@@ -107,7 +107,8 @@
 									"type": "DelimitedTextSource",
 									"storeSettings": {
 										"type": "FileServerReadSettings",
-										"recursive": true
+										"recursive": true,
+										"wildcardFileName": "*"
 									},
 									"formatSettings": {
 										"type": "DelimitedTextReadSettings"
@@ -124,9 +125,7 @@
 										{
 											"source": {
 												"name": "Data",
-												"type": "DateTime",
-												"format": "",
-												"culture": ""
+												"type": "String"
 											},
 											"sink": {
 												"name": "DATA",
@@ -262,29 +261,19 @@
 												"name": "LINKED_ID",
 												"type": "Double"
 											}
-										},
-										{
-											"source": {
-												"name": "Marca",
-												"type": "String"
-											},
-											"sink": {
-												"name": "MARCA",
-												"type": "String"
-											}
 										}
 									]
 								}
 							},
 							"inputs": [
 								{
-									"referenceName": "CSI_CSV_NC_BilhetesLigacoes",
+									"referenceName": "CSI_CSV_NC_BilhetesLigacoes_HIST",
 									"type": "DatasetReference"
 								}
 							],
 							"outputs": [
 								{
-									"referenceName": "AZSQL_TB_NC_BilheteLigacoes",
+									"referenceName": "AZSQL_TB_NC_BilheteLigacoes_Hist",
 									"type": "DatasetReference"
 								}
 							]
