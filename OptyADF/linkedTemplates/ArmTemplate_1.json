@@ -45,55 +45,6 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Atendimento')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSQL_DB_Procedimentos",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Geral Atendimentos Unidades"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "CD_PESSOA_FISICA",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "NM_PESSOA_FISICA",
-						"type": "varchar"
-					},
-					{
-						"name": "DT_ENTRADA",
-						"type": "date"
-					},
-					{
-						"name": "NM_MEDICO",
-						"type": "varchar"
-					},
-					{
-						"name": "CD_CONVENIO",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "DS_CONVENIO",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Atendimento_Unidade"
-				}
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Baixa_Titulos_Pagar')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -227,6 +178,121 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Cobranca_Paciente_Unidade')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Geral Atendimentos Unidades"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "DT_PROCEDIMENTO",
+						"type": "date"
+					},
+					{
+						"name": "NR_ATENDIMENTO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "NR_INTERNO_CONTA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CD_CONVENIO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_CONVENIO",
+						"type": "varchar"
+					},
+					{
+						"name": "NM_PACIENTE",
+						"type": "varchar"
+					},
+					{
+						"name": "NM_MEDICO",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_SETOR",
+						"type": "varchar"
+					},
+					{
+						"name": "IE_IDENTIFICADOR",
+						"type": "char"
+					},
+					{
+						"name": "CD_PROCEDIMENTO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_PROCEDIMENTO",
+						"type": "varchar"
+					},
+					{
+						"name": "QT_PROCEDIMENTO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "VL_MEDICO",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "VL_PROCEDIMENTO",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "VL_CONTA",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "STATUS_CONTA",
+						"type": "varchar"
+					},
+					{
+						"name": "CNPJ",
+						"type": "varchar"
+					},
+					{
+						"name": "NR_PROTOCOLO",
+						"type": "varchar"
+					},
+					{
+						"name": "NR_SEQ_GRUPO_REC",
+						"type": "varchar"
+					},
+					{
+						"name": "SIGLA_UNIDADE",
+						"type": "varchar"
+					},
+					{
+						"name": "MARCA",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Cobranca_Paciente_Unidade"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Consulta')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -251,7 +317,18 @@
 						"type": "date"
 					},
 					{
+						"name": "HR_ATUALIZACAO",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
 						"name": "NR_ATENDIMENTO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CD_MEDICO",
 						"type": "int",
 						"precision": 10
 					},
@@ -265,6 +342,15 @@
 					},
 					{
 						"name": "DS_CONDUTA",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_PESSOA_FISICA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_DIAGNOSTICO",
 						"type": "varchar"
 					}
 				],
@@ -370,6 +456,11 @@
 					{
 						"name": "MARCA",
 						"type": "varchar"
+					},
+					{
+						"name": "NR_PRONTUARIO",
+						"type": "int",
+						"precision": 10
 					}
 				],
 				"typeProperties": {

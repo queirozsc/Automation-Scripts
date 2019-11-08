@@ -124,35 +124,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Daily 0200 AM')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Criado para executar as consultas no HOSAG",
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Day",
-						"interval": 1,
-						"startTime": "2019-10-08T03:02:00.000Z",
-						"timeZone": "UTC",
-						"schedule": {
-							"minutes": [
-								0
-							],
-							"hours": [
-								5
-							]
-						}
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/Procedure_Marca')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -1395,7 +1366,7 @@
 						"scale": 3
 					},
 					{
-						"name": "CD_TIPO_AGENDA",
+						"name": "TIPO_AGENDA",
 						"type": "varchar"
 					},
 					{
@@ -1434,11 +1405,172 @@
 					{
 						"name": "STATUS_AGENDA",
 						"type": "varchar"
+					},
+					{
+						"name": "NR_ATENDIMENTO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "NR_SEQUENCIA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ID",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_PROCEDENCIA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_PROCEDENCIA",
+						"type": "varchar"
+					},
+					{
+						"name": "DT_AGENDAMENTO",
+						"type": "date"
+					},
+					{
+						"name": "DIA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "MES",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ANO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_AGRUPAMENTO",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_MOTIVO_CANCELAMENTO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_MOTIVO_CANCELAMENTO",
+						"type": "varchar"
 					}
 				],
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "Agendamento_Unidade"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Atendimento')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Geral Atendimentos Unidades"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "CD_PESSOA_FISICA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "NM_PESSOA_FISICA",
+						"type": "varchar"
+					},
+					{
+						"name": "DT_ENTRADA",
+						"type": "date"
+					},
+					{
+						"name": "HR_ENTRADA",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "NM_MEDICO",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_CONVENIO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_CONVENIO",
+						"type": "varchar"
+					},
+					{
+						"name": "NR_ATENDIMENTO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CNPJ",
+						"type": "varchar"
+					},
+					{
+						"name": "SIGLA_UNIDADE",
+						"type": "varchar"
+					},
+					{
+						"name": "MARCA",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_PROCEDENCIA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_PROCEDENCIA",
+						"type": "varchar"
+					},
+					{
+						"name": "ID",
+						"type": "varchar"
+					},
+					{
+						"name": "DIA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "MES",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ANO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DT_CANCELAMENTO",
+						"type": "date"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Atendimento_Unidade"
 				}
 			},
 			"dependsOn": [
