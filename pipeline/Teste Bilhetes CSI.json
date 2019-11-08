@@ -125,7 +125,7 @@
 											"source": {
 												"name": "Data",
 												"type": "DateTime",
-												"format": "dd/mm/yyyy",
+												"format": "",
 												"culture": ""
 											},
 											"sink": {
