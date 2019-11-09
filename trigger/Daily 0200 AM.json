@@ -7,6 +7,12 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
+					"referenceName": "Altera Marca Producao",
+					"type": "PipelineReference"
+				}
+			},
+			{
+				"pipelineReference": {
 					"referenceName": "Geral Atendimentos Sadalla",
 					"type": "PipelineReference"
 				}

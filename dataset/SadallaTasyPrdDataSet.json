@@ -54,6 +54,34 @@
 			{
 				"name": "MARCA",
 				"type": "String"
+			},
+			{
+				"name": "CD_PROCEDENCIA",
+				"type": "Decimal"
+			},
+			{
+				"name": "DS_PROCEDENCIA",
+				"type": "String"
+			},
+			{
+				"name": "ID",
+				"type": "String"
+			},
+			{
+				"name": "DIA",
+				"type": "String"
+			},
+			{
+				"name": "MES",
+				"type": "String"
+			},
+			{
+				"name": "ANO",
+				"type": "String"
+			},
+			{
+				"name": "DT_CANCELAMENTO",
+				"type": "DateTime"
 			}
 		]
 	},
