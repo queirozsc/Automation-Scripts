@@ -2817,7 +2817,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "CSI_CSV_NC_FilasPorHora",
+						"referenceName": "CSI_CSV_NC_FilasporHora",
 						"type": "DatasetReference"
 					},
 					"fieldList": [
@@ -3340,7 +3340,7 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "CSI_CSV_NC_FilasPorHora",
+									"referenceName": "CSI_CSV_NC_FilasporHora",
 									"type": "DatasetReference"
 								}
 							],

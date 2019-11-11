@@ -1,8 +1,8 @@
 {
-	"name": "DH_CSV_NC_AgentesPorDia",
+	"name": "DH_CSV_NC_AgentesPorDia_Temp",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "Folder_Nexcore_Consolidado",
+			"referenceName": "Historicos_AgentesPorDia_DAYHORC",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
