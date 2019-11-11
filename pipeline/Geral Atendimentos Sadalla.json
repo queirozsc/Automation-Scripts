@@ -177,14 +177,7 @@
 			{
 				"name": "Wait1",
 				"type": "Wait",
-				"dependsOn": [
-					{
-						"activity": "Clear_Base",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
 					"waitTimeInSeconds": 1
