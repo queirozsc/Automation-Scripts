@@ -1,5 +1,5 @@
 {
-	"name": "INOB_CSV_NC_Bilhete_Ligacoes_Temp_INOB",
+	"name": "INOB_CSV_NC_Bilhete_Ligacoes_Temp",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "Historicos_Bilhetes_HOSL",
