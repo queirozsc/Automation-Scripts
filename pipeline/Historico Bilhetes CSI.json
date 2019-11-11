@@ -54,7 +54,7 @@
 								"source": {
 									"name": "Data",
 									"type": "DateTime",
-									"format": ""
+									"format": "dd/MM/yyyy"
 								},
 								"sink": {
 									"name": "DATA",
@@ -249,7 +249,7 @@
 								"source": {
 									"name": "Data",
 									"type": "DateTime",
-									"format": ""
+									"format": "dd/MM/yyyy"
 								},
 								"sink": {
 									"name": "DATA",
@@ -444,7 +444,7 @@
 								"source": {
 									"name": "Data",
 									"type": "DateTime",
-									"format": ""
+									"format": "dd/MM/yyyy"
 								},
 								"sink": {
 									"name": "DATA",
@@ -639,7 +639,7 @@
 								"source": {
 									"name": "Data",
 									"type": "DateTime",
-									"format": ""
+									"format": "dd/MM/yyyy"
 								},
 								"sink": {
 									"name": "DATA",
@@ -834,7 +834,7 @@
 								"source": {
 									"name": "Data",
 									"type": "DateTime",
-									"format": ""
+									"format": "dd/MM/yyyy"
 								},
 								"sink": {
 									"name": "DATA",
@@ -1029,7 +1029,7 @@
 								"source": {
 									"name": "Data",
 									"type": "DateTime",
-									"format": ""
+									"format": "dd/MM/yyyy"
 								},
 								"sink": {
 									"name": "DATA",
