@@ -12,79 +12,51 @@
 		"type": "OracleTable",
 		"structure": [
 			{
-				"name": "DT_PROCEDIMENTO",
-				"type": "DateTime"
-			},
-			{
-				"name": "NR_ATENDIMENTO",
-				"type": "Decimal"
-			},
-			{
-				"name": "NR_INTERNO_CONTA",
-				"type": "Decimal"
+				"name": "CD_PESSOA_FISICA",
+				"type": "String"
 			},
 			{
 				"name": "CD_CONVENIO",
 				"type": "Decimal"
 			},
 			{
-				"name": "DS_CONVENIO",
+				"name": "CNPJ",
 				"type": "String"
+			},
+			{
+				"name": "DATA_AGENDA",
+				"type": "String"
+			},
+			{
+				"name": "HORA_AGENDA",
+				"type": "String"
+			},
+			{
+				"name": "TIPO_AGENDA",
+				"type": "Decimal"
 			},
 			{
 				"name": "NM_PACIENTE",
 				"type": "String"
 			},
 			{
-				"name": "NM_MEDICO",
+				"name": "DS_PROCEDIMENTO_PRINC",
 				"type": "String"
 			},
 			{
-				"name": "DS_SETOR",
+				"name": "DS_PROCEDIMENTO_ADIC",
 				"type": "String"
 			},
 			{
-				"name": "IE_IDENTIFICADOR",
-				"type": "String"
-			},
-			{
-				"name": "CD_PROCEDIMENTO",
-				"type": "Decimal"
-			},
-			{
-				"name": "DS_PROCEDIMENTO",
-				"type": "String"
-			},
-			{
-				"name": "QT_PROCEDIMENTO",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_MEDICO",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_PROCEDIMENTO",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_CONTA",
+				"name": "IE_QUANTIDADE",
 				"type": "Double"
 			},
 			{
-				"name": "STATUS_CONTA",
+				"name": "NM_USUARIO",
 				"type": "String"
 			},
 			{
-				"name": "CNPJ",
-				"type": "String"
-			},
-			{
-				"name": "NR_PROTOCOLO",
-				"type": "String"
-			},
-			{
-				"name": "NR_SEQ_GRUPO_REC",
+				"name": "NM_MEDICO",
 				"type": "String"
 			},
 			{
@@ -93,6 +65,62 @@
 			},
 			{
 				"name": "MARCA",
+				"type": "String"
+			},
+			{
+				"name": "STATUS_AGENDA",
+				"type": "String"
+			},
+			{
+				"name": "NR_ATENDIMENTO",
+				"type": "Decimal"
+			},
+			{
+				"name": "NR_SEQUENCIA",
+				"type": "Decimal"
+			},
+			{
+				"name": "ID",
+				"type": "String"
+			},
+			{
+				"name": "CD_PROCEDENCIA",
+				"type": "Decimal"
+			},
+			{
+				"name": "DS_PROCEDENCIA",
+				"type": "String"
+			},
+			{
+				"name": "DT_AGENDAMENTO",
+				"type": "DateTime"
+			},
+			{
+				"name": "DIA",
+				"type": "String"
+			},
+			{
+				"name": "MES",
+				"type": "String"
+			},
+			{
+				"name": "ANO",
+				"type": "String"
+			},
+			{
+				"name": "DS_CLASSIFICACAO",
+				"type": "String"
+			},
+			{
+				"name": "DS_AGRUPAMENTO",
+				"type": "String"
+			},
+			{
+				"name": "CD_MOTIVO_CANCELAMENTO",
+				"type": "String"
+			},
+			{
+				"name": "DS_MOTIVO_CANCELAMENTO",
 				"type": "String"
 			}
 		]
