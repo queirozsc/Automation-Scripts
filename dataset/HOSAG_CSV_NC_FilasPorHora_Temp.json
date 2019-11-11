@@ -12,8 +12,7 @@
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "FileServerLocation",
-				"fileName": "FilasPorHoraSADALLA.csv"
+				"type": "FileServerLocation"
 			},
 			"columnDelimiter": ";",
 			"escapeChar": "",
