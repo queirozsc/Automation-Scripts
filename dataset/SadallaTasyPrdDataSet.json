@@ -61,7 +61,7 @@
 			},
 			{
 				"name": "VL_MEDICO",
-				"type": "Decimal"
+				"type": "Double"
 			},
 			{
 				"name": "VL_PROCEDIMENTO",
