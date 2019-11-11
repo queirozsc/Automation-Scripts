@@ -67,7 +67,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "-- Atendimento HOB - Azure\n\nselect pf.cd_pessoa_fisica, pf.nm_pessoa_fisica, \n\nto_char(at.dt_entrada,'dd/mm/yyyy') as dt_entrada,\nto_char(at.dt_entrada,'hh24:mi:ss') as hr_entrada, \n\nobter_nome_pf(at.cd_medico_resp) as nm_medico, c.cd_convenio, obter_nome_convenio(c.cd_convenio) AS ds_convenio, \nat.nr_atendimento,\nobter_cgc_estabelecimento(at.cd_estabelecimento) as CNPJ,\n'NAO ENCONTRADO' as SIGLA_UNIDADE,\n'NAO ENCONTRADO' as MARCA,\n\nat.cd_procedencia,\np.ds_procedencia,\n'NAO ENCONTRADO' as ID,\n\nto_char(at.dt_entrada,'dd') dia,\nto_char(at.dt_entrada,'mm') mes,\nto_char(at.dt_entrada,'yyyy') ano,\nat.dt_cancelamento\n\nfrom \natendimento_paciente at, \npessoa_fisica pf,\natend_categoria_convenio c,\nprocedencia p\nwhere at.cd_pessoa_fisica = pf.cd_pessoa_fisica\nand at.cd_procedencia = p.cd_procedencia (+)\nand at.nr_atendimento = c.nr_atendimento\n\nand rownum < 20",
+						"oracleReaderQuery": "select pf.cd_pessoa_fisica, pf.nm_pessoa_fisica, \n\nto_char(at.dt_entrada,'dd/mm/yyyy') as dt_entrada,\nto_char(at.dt_entrada,'hh24:mi:ss') as hr_entrada, \n\nobter_nome_pf(at.cd_medico_resp) as nm_medico, c.cd_convenio, obter_nome_convenio(c.cd_convenio) AS ds_convenio, \nat.nr_atendimento,\nobter_cgc_estabelecimento(at.cd_estabelecimento) as CNPJ,\n'NAO ENCONTRADO' as SIGLA_UNIDADE,\n'NAO ENCONTRADO' as MARCA,\n\nat.cd_procedencia,\np.ds_procedencia,\n'NAO ENCONTRADO' as ID,\n\nto_char(at.dt_entrada,'dd') dia,\nto_char(at.dt_entrada,'mm') mes,\nto_char(at.dt_entrada,'yyyy') ano,\nat.dt_cancelamento\n\nfrom \natendimento_paciente at, \npessoa_fisica pf,\natend_categoria_convenio c,\nprocedencia p\nwhere at.cd_pessoa_fisica = pf.cd_pessoa_fisica\nand at.cd_procedencia = p.cd_procedencia (+)\nand at.nr_atendimento = c.nr_atendimento\n\nand rownum < 20",
 						"partitionOption": "None"
 					},
 					"sink": {
@@ -272,33 +272,6 @@
 				}
 			},
 			{
-				"name": "Altera_marca_Atendimento",
-				"type": "SqlServerStoredProcedure",
-				"dependsOn": [
-					{
-						"activity": "Atendimento Sadalla",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"storedProcedureName": "sp_UPDATETRADEMARKATENDIMENTO"
-				},
-				"linkedServiceName": {
-					"referenceName": "AzureSQL_DB_Procedimentos",
-					"type": "LinkedServiceReference"
-				}
-			},
-			{
 				"name": "Altera_marca_Agenda",
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
@@ -336,7 +309,7 @@
 						]
 					},
 					{
-						"activity": "Altera_marca_Atendimento",
+						"activity": "Atendimento Sadalla",
 						"dependencyConditions": [
 							"Succeeded"
 						]
