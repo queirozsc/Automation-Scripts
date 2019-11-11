@@ -36,7 +36,9 @@
 						"type": "DelimitedTextSource",
 						"storeSettings": {
 							"type": "FileServerReadSettings",
-							"recursive": true
+							"recursive": true,
+							"wildcardFileName": ".",
+							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
 							"type": "DelimitedTextReadSettings"
@@ -84,7 +86,9 @@
 						"type": "DelimitedTextSource",
 						"storeSettings": {
 							"type": "FileServerReadSettings",
-							"recursive": true
+							"recursive": true,
+							"wildcardFileName": ".",
+							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
 							"type": "DelimitedTextReadSettings"
@@ -132,7 +136,9 @@
 						"type": "DelimitedTextSource",
 						"storeSettings": {
 							"type": "FileServerReadSettings",
-							"recursive": true
+							"recursive": true,
+							"wildcardFileName": ".",
+							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
 							"type": "DelimitedTextReadSettings"
@@ -180,7 +186,9 @@
 						"type": "DelimitedTextSource",
 						"storeSettings": {
 							"type": "FileServerReadSettings",
-							"recursive": true
+							"recursive": true,
+							"wildcardFileName": ".",
+							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
 							"type": "DelimitedTextReadSettings"
@@ -228,7 +236,9 @@
 						"type": "DelimitedTextSource",
 						"storeSettings": {
 							"type": "FileServerReadSettings",
-							"recursive": true
+							"recursive": true,
+							"wildcardFileName": ".",
+							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
 							"type": "DelimitedTextReadSettings"
