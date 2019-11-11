@@ -391,7 +391,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "DH_CSV_NC_Bilhete_Ligacoes_Temp_DH",
+						"referenceName": "DH_CSV_NC_Bilhete_Ligacoes_Temp",
 						"type": "DatasetReference"
 					}
 				],
