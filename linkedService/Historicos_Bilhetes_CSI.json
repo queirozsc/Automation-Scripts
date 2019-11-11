@@ -1,0 +1,18 @@
+{
+	"name": "Historicos_Bilhetes_CSI",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "Historicos_Bilhetes_CSI",
+		"annotations": [],
+		"type": "FileServer",
+		"typeProperties": {
+			"host": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\CSI\\BilheteLigacoes",
+			"userId": "hobrasil\\sa.automation",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJlMDI4YmQxNi1jYTk5LTQ1ZTktYWM0YS04NThiYTUxMWUxZDQiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "ServidorArquivosBI",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
