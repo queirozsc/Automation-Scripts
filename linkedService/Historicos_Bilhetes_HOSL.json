@@ -6,9 +6,9 @@
 		"annotations": [],
 		"type": "FileServer",
 		"typeProperties": {
-			"host": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\HOSL\\BilheteLigacoes",
+			"host": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\HOSL\\BilheteLigacoes\\Novo",
 			"userId": "hobrasil\\sa.automation",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI5ZjQ4NzA0Mi1hZjI0LTRkZGMtYjhhZC00MWE1ZGExMzkzYmMiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIyNWVhNDg0NC05M2RhLTQ0OTAtOWU0Ny1jNGJkMTI1NzA1NzUiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
 			"referenceName": "ServidorArquivosBI",
