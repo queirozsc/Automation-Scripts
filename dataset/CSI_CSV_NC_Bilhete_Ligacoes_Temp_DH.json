@@ -2,7 +2,7 @@
 	"name": "CSI_CSV_NC_Bilhete_Ligacoes_Temp_DH",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "Historicos_Bilhetes_CSI",
+			"referenceName": "Historicos_Bilhetes_DAYHORC",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
