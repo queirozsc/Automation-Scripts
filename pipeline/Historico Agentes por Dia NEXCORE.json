@@ -37,7 +37,7 @@
 						"storeSettings": {
 							"type": "FileServerReadSettings",
 							"recursive": true,
-							"wildcardFileName": ".",
+							"wildcardFileName": " AgentesPorDia",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -87,7 +87,7 @@
 						"storeSettings": {
 							"type": "FileServerReadSettings",
 							"recursive": true,
-							"wildcardFileName": ".",
+							"wildcardFileName": " AgentesPorDia",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -137,7 +137,7 @@
 						"storeSettings": {
 							"type": "FileServerReadSettings",
 							"recursive": true,
-							"wildcardFileName": ".",
+							"wildcardFileName": " AgentesPorDia",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -187,7 +187,7 @@
 						"storeSettings": {
 							"type": "FileServerReadSettings",
 							"recursive": true,
-							"wildcardFileName": ".",
+							"wildcardFileName": " AgentesPorDia",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -237,7 +237,7 @@
 						"storeSettings": {
 							"type": "FileServerReadSettings",
 							"recursive": true,
-							"wildcardFileName": ".",
+							"wildcardFileName": " AgentesPorDia",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -287,7 +287,7 @@
 						"storeSettings": {
 							"type": "FileServerReadSettings",
 							"recursive": true,
-							"wildcardFileName": ".",
+							"wildcardFileName": " AgentesPorDia",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
