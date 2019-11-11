@@ -125,7 +125,7 @@
 											"source": {
 												"name": "Data",
 												"type": "DateTime",
-												"format": "",
+												"format": "dd/MM/yyyy",
 												"culture": ""
 											},
 											"sink": {
@@ -405,7 +405,7 @@
 											"source": {
 												"name": "Data",
 												"type": "DateTime",
-												"format": "",
+												"format": "dd/MM/yyyy",
 												"culture": ""
 											},
 											"sink": {
@@ -685,7 +685,7 @@
 											"source": {
 												"name": "Data",
 												"type": "DateTime",
-												"format": "",
+												"format": "dd/MM/yyyy",
 												"culture": ""
 											},
 											"sink": {
@@ -965,7 +965,7 @@
 											"source": {
 												"name": "Data",
 												"type": "DateTime",
-												"format": "",
+												"format": "dd/MM/yyyy",
 												"culture": ""
 											},
 											"sink": {
