@@ -1621,7 +1621,14 @@
 			{
 				"name": "Agentes por Hora DH",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Agentes por Dia DH",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -1999,6 +2006,54 @@
 				"outputs": [
 					{
 						"referenceName": "AZSQL_TB_NC_FilasPorHoras_Temp",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Agentes por Dia DH",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Bilhete de ligacoes DH",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "FileServerReadSettings",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "DH_CSV_NC_AgentesPorDia_Temp",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AZSQL_TB_NC_AgentesPorDia_Temp",
 						"type": "DatasetReference"
 					}
 				]
