@@ -12,24 +12,16 @@
 		"type": "OracleTable",
 		"structure": [
 			{
-				"name": "CD_PESSOA_FISICA",
-				"type": "String"
+				"name": "DT_PROCEDIMENTO",
+				"type": "DateTime"
 			},
 			{
-				"name": "NM_PESSOA_FISICA",
-				"type": "String"
+				"name": "NR_ATENDIMENTO",
+				"type": "Decimal"
 			},
 			{
-				"name": "DT_ENTRADA",
-				"type": "String"
-			},
-			{
-				"name": "HR_ENTRADA",
-				"type": "String"
-			},
-			{
-				"name": "NM_MEDICO",
-				"type": "String"
+				"name": "NR_INTERNO_CONTA",
+				"type": "Decimal"
 			},
 			{
 				"name": "CD_CONVENIO",
@@ -40,11 +32,59 @@
 				"type": "String"
 			},
 			{
-				"name": "NR_ATENDIMENTO",
+				"name": "NM_PACIENTE",
+				"type": "String"
+			},
+			{
+				"name": "NM_MEDICO",
+				"type": "String"
+			},
+			{
+				"name": "DS_SETOR",
+				"type": "String"
+			},
+			{
+				"name": "IE_IDENTIFICADOR",
+				"type": "String"
+			},
+			{
+				"name": "CD_PROCEDIMENTO",
 				"type": "Decimal"
 			},
 			{
+				"name": "DS_PROCEDIMENTO",
+				"type": "String"
+			},
+			{
+				"name": "QT_PROCEDIMENTO",
+				"type": "Decimal"
+			},
+			{
+				"name": "VL_MEDICO",
+				"type": "Double"
+			},
+			{
+				"name": "VL_PROCEDIMENTO",
+				"type": "Decimal"
+			},
+			{
+				"name": "VL_CONTA",
+				"type": "Double"
+			},
+			{
+				"name": "STATUS_CONTA",
+				"type": "String"
+			},
+			{
 				"name": "CNPJ",
+				"type": "String"
+			},
+			{
+				"name": "NR_PROTOCOLO",
+				"type": "String"
+			},
+			{
+				"name": "NR_SEQ_GRUPO_REC",
 				"type": "String"
 			},
 			{
@@ -54,34 +94,6 @@
 			{
 				"name": "MARCA",
 				"type": "String"
-			},
-			{
-				"name": "CD_PROCEDENCIA",
-				"type": "Decimal"
-			},
-			{
-				"name": "DS_PROCEDENCIA",
-				"type": "String"
-			},
-			{
-				"name": "ID",
-				"type": "String"
-			},
-			{
-				"name": "DIA",
-				"type": "String"
-			},
-			{
-				"name": "MES",
-				"type": "String"
-			},
-			{
-				"name": "ANO",
-				"type": "String"
-			},
-			{
-				"name": "DT_CANCELAMENTO",
-				"type": "DateTime"
 			}
 		]
 	},
