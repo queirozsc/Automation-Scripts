@@ -273,7 +273,7 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "AZSQL_TB_NC_BilheteLigacoes_Hist",
+									"referenceName": "AZSQL_TB_NC_BilheteLigacoes_Temp",
 									"type": "DatasetReference"
 								}
 							]
