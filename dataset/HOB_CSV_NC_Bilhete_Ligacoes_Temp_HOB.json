@@ -1,5 +1,5 @@
 {
-	"name": "CSI_CSV_NC_Bilhete_Ligacoes_Temp_HOB",
+	"name": "HOB_CSV_NC_Bilhete_Ligacoes_Temp_HOB",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "Historicos_Bilhetes_HOBL2",

@@ -391,7 +391,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "CSI_CSV_NC_Bilhete_Ligacoes_Temp_DH",
+						"referenceName": "DH_CSV_NC_Bilhete_Ligacoes_Temp_DH",
 						"type": "DatasetReference"
 					}
 				],
@@ -586,7 +586,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "CSI_CSV_NC_Bilhete_Ligacoes_Temp_SADALLA",
+						"referenceName": "HOSL_CSV_NC_Bilhete_Ligacoes_Temp_SADALLA",
 						"type": "DatasetReference"
 					}
 				],
@@ -781,7 +781,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "CSI_CSV_NC_Bilhete_Ligacoes_Temp_HOB",
+						"referenceName": "HOB_CSV_NC_Bilhete_Ligacoes_Temp_HOB",
 						"type": "DatasetReference"
 					}
 				],
@@ -976,7 +976,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "CSI_CSV_NC_Bilhete_Ligacoes_Temp_INOB",
+						"referenceName": "INOB_CSV_NC_Bilhete_Ligacoes_Temp_INOB",
 						"type": "DatasetReference"
 					}
 				],
@@ -1171,7 +1171,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "CSI_CSV_NC_Bilhete_Ligacoes_Temp_HOSL",
+						"referenceName": "HOSAG_CSV_NC_Bilhete_Ligacoes_Temp_HOSL",
 						"type": "DatasetReference"
 					}
 				],
