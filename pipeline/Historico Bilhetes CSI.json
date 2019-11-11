@@ -196,7 +196,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "CSI_CSV_NC_Bilhete_Ligacoes_Temp_CSI",
+						"referenceName": "CSI_CSV_NC_Bilhete_Ligacoes_Temp",
 						"type": "DatasetReference"
 					}
 				],

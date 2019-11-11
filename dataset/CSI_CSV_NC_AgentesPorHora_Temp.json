@@ -1,8 +1,8 @@
 {
-	"name": "CSI_CSV_NC_Bilhete_Ligacoes_Temp",
+	"name": "CSI_CSV_NC_AgentesPorHora_Temp",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "Historicos_Bilhetes_CSI",
+			"referenceName": "Historicos_AgentesPorHora_CSI",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
