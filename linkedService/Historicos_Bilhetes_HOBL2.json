@@ -1,0 +1,18 @@
+{
+	"name": "Historicos_Bilhetes_HOBL2",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "Historicos_Bilhetes_HOBL2",
+		"annotations": [],
+		"type": "FileServer",
+		"typeProperties": {
+			"host": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\HOBL2\\BilheteLigacoes",
+			"userId": "hobrasil\\sa.automation",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI3N2VjYzE5ZS02OWQ5LTQ5ZmUtODA3Ni1jN2Y0ZDRlY2QxMzgiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "ServidorArquivosBI",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
