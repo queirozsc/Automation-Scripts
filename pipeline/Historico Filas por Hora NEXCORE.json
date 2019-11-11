@@ -102,7 +102,7 @@
 							},
 							{
 								"source": {
-									"name": "Abandonos Anuncio Inicial",
+									"name": "Abandonos Ate NS",
 									"type": "String"
 								},
 								"sink": {
