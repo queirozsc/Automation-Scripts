@@ -12,19 +12,15 @@
 		"type": "OracleTable",
 		"structure": [
 			{
-				"name": "CD_CONVENIO",
+				"name": "CD_SETOR_ATENDIMENTO",
 				"type": "Decimal"
 			},
 			{
-				"name": "DS_CONVENIO",
+				"name": "DS_SETOR_ATENDIMENTO",
 				"type": "String"
 			},
 			{
-				"name": "CD_ESTABELECIMENTO",
-				"type": "Decimal"
-			},
-			{
-				"name": "CD_CGC",
+				"name": "CNPJ",
 				"type": "String"
 			}
 		]
