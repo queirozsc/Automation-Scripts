@@ -12,7 +12,7 @@
 		"type": "OracleTable",
 		"structure": [
 			{
-				"name": "DT_PROCEDIMENTO",
+				"name": "DT_ATUALIZACAO",
 				"type": "DateTime"
 			},
 			{
@@ -28,52 +28,36 @@
 				"type": "Decimal"
 			},
 			{
-				"name": "DS_CONVENIO",
-				"type": "String"
-			},
-			{
-				"name": "NM_PACIENTE",
-				"type": "String"
-			},
-			{
-				"name": "NM_MEDICO",
-				"type": "String"
-			},
-			{
-				"name": "DS_SETOR",
-				"type": "String"
-			},
-			{
-				"name": "IE_IDENTIFICADOR",
-				"type": "String"
-			},
-			{
-				"name": "CD_PROCEDIMENTO",
+				"name": "CD_SETOR_ATENDIMENTO",
 				"type": "Decimal"
 			},
 			{
-				"name": "DS_PROCEDIMENTO",
-				"type": "String"
-			},
-			{
-				"name": "QT_PROCEDIMENTO",
+				"name": "CD_MATERIAL",
 				"type": "Decimal"
 			},
 			{
-				"name": "VL_MEDICO",
-				"type": "Double"
+				"name": "DS_MATERIAL",
+				"type": "String"
 			},
 			{
-				"name": "VL_PROCEDIMENTO",
+				"name": "QT_MATERIAL",
+				"type": "Decimal"
+			},
+			{
+				"name": "VL_MATERIAL",
+				"type": "Decimal"
+			},
+			{
+				"name": "VL_UNITARIO",
 				"type": "Decimal"
 			},
 			{
 				"name": "VL_CONTA",
-				"type": "Double"
+				"type": "Decimal"
 			},
 			{
 				"name": "STATUS_CONTA",
-				"type": "String"
+				"type": "Decimal"
 			},
 			{
 				"name": "CNPJ",
@@ -81,10 +65,6 @@
 			},
 			{
 				"name": "NR_PROTOCOLO",
-				"type": "String"
-			},
-			{
-				"name": "NR_SEQ_GRUPO_REC",
 				"type": "String"
 			},
 			{
