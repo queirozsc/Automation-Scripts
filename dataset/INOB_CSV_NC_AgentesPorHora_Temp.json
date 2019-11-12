@@ -1,12 +1,12 @@
 {
-	"name": "DH_CSV_NC_AgentesPorDia",
+	"name": "INOB_CSV_NC_AgentesPorHora_Temp",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "Folder_Nexcore_Consolidado",
+			"referenceName": "Historicos_AgentesPorHora_INOB",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "Nexcore/DH"
+			"name": "Nexcore/INOB"
 		},
 		"annotations": [],
 		"type": "DelimitedText",

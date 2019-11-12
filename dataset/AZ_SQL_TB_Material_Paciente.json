@@ -1,5 +1,5 @@
 {
-	"name": "AZ_SQL_TB_Cobranca_Paciente_Unidade",
+	"name": "AZ_SQL_TB_Material_Paciente",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSQL_DB_Procedimentos",
@@ -12,7 +12,7 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "DT_PROCEDIMENTO",
+				"name": "DT_ATUALIZACAO",
 				"type": "date"
 			},
 			{
@@ -31,46 +31,30 @@
 				"precision": 10
 			},
 			{
-				"name": "DS_CONVENIO",
+				"name": "CD_SETOR_ATENDIMENTO",
 				"type": "varchar"
 			},
 			{
-				"name": "NM_PACIENTE",
-				"type": "varchar"
-			},
-			{
-				"name": "NM_MEDICO",
-				"type": "varchar"
-			},
-			{
-				"name": "DS_SETOR",
-				"type": "varchar"
-			},
-			{
-				"name": "IE_IDENTIFICADOR",
-				"type": "char"
-			},
-			{
-				"name": "CD_PROCEDIMENTO",
+				"name": "CD_MATERIAL",
 				"type": "int",
 				"precision": 10
 			},
 			{
-				"name": "DS_PROCEDIMENTO",
+				"name": "DS_MATERIAL",
 				"type": "varchar"
 			},
 			{
-				"name": "QT_PROCEDIMENTO",
+				"name": "QT_MATERIAL",
 				"type": "int",
 				"precision": 10
 			},
 			{
-				"name": "VL_MEDICO",
+				"name": "VL_MATERIAL",
 				"type": "float",
 				"precision": 15
 			},
 			{
-				"name": "VL_PROCEDIMENTO",
+				"name": "VL_UNITARIO",
 				"type": "float",
 				"precision": 15
 			},
@@ -92,10 +76,6 @@
 				"type": "varchar"
 			},
 			{
-				"name": "NR_SEQ_GRUPO_REC",
-				"type": "varchar"
-			},
-			{
 				"name": "SIGLA_UNIDADE",
 				"type": "varchar"
 			},
@@ -106,7 +86,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "Cobranca_Paciente_Unidade"
+			"table": "Material_Paciente_Unidade"
 		}
 	}
 }

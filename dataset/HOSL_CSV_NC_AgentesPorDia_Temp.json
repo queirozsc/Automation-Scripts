@@ -1,12 +1,12 @@
 {
-	"name": "DH_CSV_NC_AgentesPorDia",
+	"name": "HOSL_CSV_NC_AgentesPorDia_Temp",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "Folder_Nexcore_Consolidado",
+			"referenceName": "Historicos_AgentesPorDia_HOSL",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "Nexcore/DH"
+			"name": "Nexcore/HOSL"
 		},
 		"annotations": [],
 		"type": "DelimitedText",

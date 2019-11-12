@@ -1,5 +1,5 @@
 {
-	"name": "AZSQL_TB_NC_BilheteLigacoes_Hist",
+	"name": "AZSQL_TB_NC_BilheteLigacoes_Temp",
 	"properties": {
 		"description": "Tabela Azure SQL Server Procedimentos.dbo.BilheteLigacoes",
 		"linkedServiceName": {
