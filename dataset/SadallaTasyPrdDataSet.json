@@ -12,7 +12,7 @@
 		"type": "OracleTable",
 		"structure": [
 			{
-				"name": "DT_PROCEDIMENTO",
+				"name": "DT_ATUALIZACAO",
 				"type": "DateTime"
 			},
 			{
@@ -28,31 +28,27 @@
 				"type": "Decimal"
 			},
 			{
-				"name": "CD_MEDICO_EXECUTOR",
-				"type": "String"
-			},
-			{
 				"name": "CD_SETOR_ATENDIMENTO",
 				"type": "Decimal"
 			},
 			{
-				"name": "CD_PROCEDIMENTO",
+				"name": "CD_MATERIAL",
 				"type": "Decimal"
 			},
 			{
-				"name": "DS_PROCEDIMENTO",
+				"name": "DS_MATERIAL",
 				"type": "String"
 			},
 			{
-				"name": "QT_PROCEDIMENTO",
+				"name": "QT_MATERIAL",
 				"type": "Decimal"
 			},
 			{
-				"name": "VL_PROCEDIMENTO",
+				"name": "VL_MATERIAL",
 				"type": "Decimal"
 			},
 			{
-				"name": "VL_MEDICO",
+				"name": "VL_UNITARIO",
 				"type": "Decimal"
 			},
 			{
@@ -70,10 +66,6 @@
 			{
 				"name": "NR_PROTOCOLO",
 				"type": "String"
-			},
-			{
-				"name": "NR_SEQ_GRUPO_REC",
-				"type": "Decimal"
 			},
 			{
 				"name": "SIGLA_UNIDADE",
