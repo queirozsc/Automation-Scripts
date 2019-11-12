@@ -102,13 +102,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Producao Procedimentos Sadalla",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "Producao Materiais Sadalla",
+						"activity": "Wait1",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -151,7 +145,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Convenios",
+						"activity": "Wait1",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -194,7 +188,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Estabelecimento",
+						"activity": "Wait1",
 						"dependencyConditions": [
 							"Succeeded"
 						]
