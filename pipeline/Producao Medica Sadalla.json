@@ -98,7 +98,7 @@
 				]
 			},
 			{
-				"name": "Copy data1",
+				"name": "Convenios",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -110,8 +110,71 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"enableStaging": false
-				}
+					"source": {
+						"type": "AzureSqlSource"
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "CD_CONVENIO",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "CD_CONVENIO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_CONVENIO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DS_CONVENIO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CD_ESTABELECIMENTO",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "CD_ESTABELECIMENTO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "CNPJ",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CNPJ",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "AZ_SQL_TB_Convenio",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AZ_SQL_TB_Convenio",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"annotations": []
