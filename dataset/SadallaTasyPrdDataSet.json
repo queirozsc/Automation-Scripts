@@ -28,10 +28,6 @@
 				"type": "Decimal"
 			},
 			{
-				"name": "CD_PESSOA_FISICA",
-				"type": "String"
-			},
-			{
 				"name": "CD_MEDICO_EXECUTOR",
 				"type": "String"
 			},
