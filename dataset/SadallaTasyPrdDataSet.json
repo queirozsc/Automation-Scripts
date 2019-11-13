@@ -12,15 +12,27 @@
 		"type": "OracleTable",
 		"structure": [
 			{
-				"name": "CD_SETOR_ATENDIMENTO",
+				"name": "CD_AGENDA",
 				"type": "Decimal"
 			},
 			{
-				"name": "DS_SETOR_ATENDIMENTO",
+				"name": "DS_AGENDA",
 				"type": "String"
 			},
 			{
-				"name": "CNPJ",
+				"name": "CD_TIPO_AGENDA",
+				"type": "Decimal"
+			},
+			{
+				"name": "CD_PESSOA_FISICA",
+				"type": "String"
+			},
+			{
+				"name": "CD_CGC",
+				"type": "String"
+			},
+			{
+				"name": "DS_AREA_ATUACAO",
 				"type": "String"
 			}
 		]
