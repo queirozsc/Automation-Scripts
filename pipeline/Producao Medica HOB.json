@@ -43,7 +43,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SadallaTasyPrdDataSet",
+						"referenceName": "CloudTasyPrdDataSet",
 						"type": "DatasetReference"
 					}
 				],
@@ -86,7 +86,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SadallaTasyPrdDataSet",
+						"referenceName": "CloudTasyPrdDataSet",
 						"type": "DatasetReference"
 					}
 				],
@@ -129,7 +129,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SadallaTasyPrdDataSet",
+						"referenceName": "CloudTasyPrdDataSet",
 						"type": "DatasetReference"
 					}
 				],
@@ -172,7 +172,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SadallaTasyPrdDataSet",
+						"referenceName": "CloudTasyPrdDataSet",
 						"type": "DatasetReference"
 					}
 				],
@@ -215,7 +215,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SadallaTasyPrdDataSet",
+						"referenceName": "CloudTasyPrdDataSet",
 						"type": "DatasetReference"
 					}
 				],
