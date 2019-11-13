@@ -420,6 +420,49 @@
 					"referenceName": "AzureSQL_DB_Procedimentos",
 					"type": "LinkedServiceReference"
 				}
+			},
+			{
+				"name": "Agendas Sadalla",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Wait1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT A.CD_AGENDA, A.DS_AGENDA, A.CD_TIPO_AGENDA, A.CD_PESSOA_FISICA, E.CD_CGC, (SELECT X.DS_AREA_ATUACAO FROM AREA_ATUACAO_MEDICA X\nWHERE X.NR_SEQUENCIA = A.NR_SEQ_AREA_ATUACAO) AS DS_AREA_ATUACAO\nFROM AGENDA A,\n     ESTABELECIMENTO E\nWHERE A.CD_ESTABELECIMENTO = E.CD_ESTABELECIMENTO",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "SadallaTasyPrdDataSet",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AZ_SQL_TB_Agenda",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"folder": {
