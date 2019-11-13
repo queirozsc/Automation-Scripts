@@ -122,6 +122,10 @@
 			{
 				"name": "DS_MOTIVO_CANCELAMENTO",
 				"type": "String"
+			},
+			{
+				"name": "CD_AGENDA",
+				"type": "Decimal"
 			}
 		]
 	},
