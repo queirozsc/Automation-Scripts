@@ -6,7 +6,7 @@
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "Nexcore/INOB"
+			"name": "Nexcore/INOB/Históricos"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
