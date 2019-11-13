@@ -1783,6 +1783,9 @@
 				]
 			}
 		],
+		"folder": {
+			"name": "Atendimento/Nexcore/Históricos"
+		},
 		"annotations": []
 	}
 }
