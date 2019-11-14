@@ -6,190 +6,6 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "OptyADF"
-		},
-		"Historicos_AgentesPorHora_SADALLA_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Historicos_AgentesPorHora_SADALLA'"
-		},
-		"Historicos_Bilhetes_CSI_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Historicos_Bilhetes_CSI'"
-		},
-		"Historicos_Bilhetes_DAYHORC_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Historicos_Bilhetes_DAYHORC'"
-		},
-		"Historicos_Bilhetes_HOBL2_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Historicos_Bilhetes_HOBL2'"
-		},
-		"Historicos_Bilhetes_HOSL_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Historicos_Bilhetes_HOSL'"
-		},
-		"Historicos_Bilhetes_INOB_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Historicos_Bilhetes_INOB'"
-		},
-		"Historicos_Bilhetes_SADALLA_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Historicos_Bilhetes_SADALLA'"
-		},
-		"Historicos_FIlasPorHoras_CSI_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Historicos_FIlasPorHoras_CSI'"
-		},
-		"Historicos_FIlasPorHoras_DAYHORC_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Historicos_FIlasPorHoras_DAYHORC'"
-		},
-		"Historicos_FIlasPorHoras_HOBL2_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Historicos_FIlasPorHoras_HOBL2'"
-		},
-		"Historicos_FIlasPorHoras_HOSL_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Historicos_FIlasPorHoras_HOSL'"
-		},
-		"Historicos_FIlasPorHoras_INOB_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Historicos_FIlasPorHoras_INOB'"
-		},
-		"Historicos_FIlasPorHoras_SADALLA_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Historicos_FIlasPorHoras_SADALLA'"
-		},
-		"SMARTProd_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SMARTProd'"
-		},
-		"SMART_HOSL_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SMART_HOSL'"
-		},
-		"SMART_HOSL_NEW_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SMART_HOSL_NEW'"
-		},
-		"SMART_INOB_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SMART_INOB'"
-		},
-		"SMART_INOB_NEW_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SMART_INOB_NEW'"
-		},
-		"SMART_IOF_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SMART_IOF'"
-		},
-		"SMART_IOF_NEW_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SMART_IOF_NEW'"
-		},
-		"Historicos_AgentesPorHora_SADALLA_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\SADALLA\\AgentesPorHora"
-		},
-		"Historicos_AgentesPorHora_SADALLA_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "hobrasil\\sa.automation"
-		},
-		"Historicos_Bilhetes_CSI_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\CSI\\BilheteLigacoes\\Novo"
-		},
-		"Historicos_Bilhetes_CSI_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "hobrasil\\sa.automation"
-		},
-		"Historicos_Bilhetes_DAYHORC_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\CSI\\BilheteLigacoes\\Novo"
-		},
-		"Historicos_Bilhetes_DAYHORC_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "hobrasil\\sa.automation"
-		},
-		"Historicos_Bilhetes_HOBL2_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\HOBL2\\BilheteLigacoes\\Novo"
-		},
-		"Historicos_Bilhetes_HOBL2_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "hobrasil\\sa.automation"
-		},
-		"Historicos_Bilhetes_HOSL_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\HOSL\\BilheteLigacoes\\Novo"
-		},
-		"Historicos_Bilhetes_HOSL_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "hobrasil\\sa.automation"
-		},
-		"Historicos_Bilhetes_INOB_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\INOB\\BilheteLigacoes\\Novo"
-		},
-		"Historicos_Bilhetes_INOB_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "hobrasil\\sa.automation"
-		},
-		"Historicos_Bilhetes_SADALLA_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\SADALLA\\BilheteLigacoes\\Novo"
-		},
-		"Historicos_Bilhetes_SADALLA_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "hobrasil\\sa.automation"
-		},
-		"Historicos_FIlasPorHoras_CSI_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\CSI\\FilasPorHoras"
-		},
-		"Historicos_FIlasPorHoras_CSI_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "hobrasil\\sa.automation"
-		},
-		"Historicos_FIlasPorHoras_DAYHORC_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\DAYHORC\\FilasPorHoras"
-		},
-		"Historicos_FIlasPorHoras_DAYHORC_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "hobrasil\\sa.automation"
-		},
-		"Historicos_FIlasPorHoras_HOBL2_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\HOBL2\\FilasPorHoras"
-		},
-		"Historicos_FIlasPorHoras_HOBL2_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "hobrasil\\sa.automation"
-		},
-		"Historicos_FIlasPorHoras_HOSL_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\HOSL\\FilasPorHoras"
-		},
-		"Historicos_FIlasPorHoras_HOSL_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "hobrasil\\sa.automation"
-		},
-		"Historicos_FIlasPorHoras_INOB_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\INOB\\FilasPorHoras"
-		},
-		"Historicos_FIlasPorHoras_INOB_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "hobrasil\\sa.automation"
-		},
-		"Historicos_FIlasPorHoras_SADALLA_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\SADALLA\\FilasPorHoras"
-		},
-		"Historicos_FIlasPorHoras_SADALLA_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "hobrasil\\sa.automation"
 		}
 	},
 	"variables": {
@@ -197,419 +13,1591 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/Historicos_AgentesPorHora_SADALLA')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Baixa_Titulos_Receber')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"description": "Historicos_AgentesPorHora_SADALLA",
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Contas a Receber"
+				},
 				"annotations": [],
-				"type": "FileServer",
-				"typeProperties": {
-					"host": "[parameters('Historicos_AgentesPorHora_SADALLA_properties_typeProperties_host')]",
-					"userId": "[parameters('Historicos_AgentesPorHora_SADALLA_properties_typeProperties_userId')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('Historicos_AgentesPorHora_SADALLA_password')]"
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "nr_titulO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "dt_recebimento",
+						"type": "date"
+					},
+					{
+						"name": "vl_recebido",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_descontos",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_juros",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_multa",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "dt_atualizacao",
+						"type": "date"
+					},
+					{
+						"name": "ds_tipo_recebimento",
+						"type": "varchar"
+					},
+					{
+						"name": "nr_seq_trans_fin",
+						"type": "varchar"
 					}
-				},
-				"connectVia": {
-					"referenceName": "ServidorArquivosBI",
-					"type": "IntegrationRuntimeReference"
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Aging_Baixa_Titulo_Receber"
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Historicos_Bilhetes_CSI')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Titulos_Receber')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"description": "Historicos_Bilhetes_CSI",
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Contas a Receber"
+				},
 				"annotations": [],
-				"type": "FileServer",
-				"typeProperties": {
-					"host": "[parameters('Historicos_Bilhetes_CSI_properties_typeProperties_host')]",
-					"userId": "[parameters('Historicos_Bilhetes_CSI_properties_typeProperties_userId')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('Historicos_Bilhetes_CSI_password')]"
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ESTABELECIMENTO",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_CNPJ",
+						"type": "varchar"
+					},
+					{
+						"name": "NM_RAZAOSOCIAL",
+						"type": "varchar"
+					},
+					{
+						"name": "NM_FANTASIA",
+						"type": "varchar"
+					},
+					{
+						"name": "NR_TITULO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "NR_NOTA_FISCAL",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DT_EMISSAO",
+						"type": "date"
+					},
+					{
+						"name": "DT_VENCIMENTO_ORIGINAL",
+						"type": "date"
+					},
+					{
+						"name": "DT_VENCIMENTO_PRORROGADO",
+						"type": "date"
+					},
+					{
+						"name": "VL_BRUTO",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "VL_SALDO_JUROS",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "VL_SALDO_MULTA",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "VL_LIQUIDO",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "VL_SALDO_TITULO",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "VL_AMENOR",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "SITUACAO",
+						"type": "varchar"
 					}
-				},
-				"connectVia": {
-					"referenceName": "ServidorArquivosBI",
-					"type": "IntegrationRuntimeReference"
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Aging_Titulo_Receber"
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Historicos_Bilhetes_DAYHORC')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/TABLE_QTABLEANSWER')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"description": "Historicos_Bilhetes_DAYHORC",
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Requestia"
+				},
 				"annotations": [],
-				"type": "FileServer",
-				"typeProperties": {
-					"host": "[parameters('Historicos_Bilhetes_DAYHORC_properties_typeProperties_host')]",
-					"userId": "[parameters('Historicos_Bilhetes_DAYHORC_properties_typeProperties_userId')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('Historicos_Bilhetes_DAYHORC_password')]"
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "QSESSION",
+						"type": "varchar"
+					},
+					{
+						"name": "TABLE_NAME",
+						"type": "varchar"
+					},
+					{
+						"name": "TABLE_ROWID",
+						"type": "varchar"
+					},
+					{
+						"name": "TABLE_ROWNUM",
+						"type": "varchar"
+					},
+					{
+						"name": "COLUMN_NAME",
+						"type": "varchar"
+					},
+					{
+						"name": "COLUMN_VALUE",
+						"type": "varchar"
+					},
+					{
+						"name": "COLUMN_POSITION",
+						"type": "varchar"
+					},
+					{
+						"name": "COLUMN_ANSWERED",
+						"type": "varchar"
+					},
+					{
+						"name": "COLUMN_ANSWERDATE",
+						"type": "varchar"
+					},
+					{
+						"name": "COLUMN_UPDATED",
+						"type": "varchar"
+					},
+					{
+						"name": "COLUMN_VISIBLE",
+						"type": "varchar"
 					}
-				},
-				"connectVia": {
-					"referenceName": "ServidorArquivosBI",
-					"type": "IntegrationRuntimeReference"
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "REQUESTIA_QTABLEANSWER"
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Historicos_Bilhetes_HOBL2')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Titulos_Pagar')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"description": "Historicos_Bilhetes_HOBL2",
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Contas a Pagar"
+				},
 				"annotations": [],
-				"type": "FileServer",
-				"typeProperties": {
-					"host": "[parameters('Historicos_Bilhetes_HOBL2_properties_typeProperties_host')]",
-					"userId": "[parameters('Historicos_Bilhetes_HOBL2_properties_typeProperties_userId')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('Historicos_Bilhetes_HOBL2_password')]"
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "estabelecimento",
+						"type": "varchar"
+					},
+					{
+						"name": "cd_cgc",
+						"type": "varchar"
+					},
+					{
+						"name": "nm_razaosocial",
+						"type": "varchar"
+					},
+					{
+						"name": "nm_fantasia",
+						"type": "varchar"
+					},
+					{
+						"name": "nr_titulo",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "nr_seq_nota_fiscal",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "dt_emissao",
+						"type": "date"
+					},
+					{
+						"name": "dt_vencimento_original",
+						"type": "date"
+					},
+					{
+						"name": "dt_vencimento_atual",
+						"type": "date"
+					},
+					{
+						"name": "vl_titulo",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_saldo_titulo",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_saldo_juros",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_saldo_multa",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_dia_antecipacao",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_bordero",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_juros_bordero",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_multa_bordero",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_desconto_bordero",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_ir",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_imposto_munic",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_inss",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_out_desp_bordero",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_titulo_estrang",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_cotacao",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "situacao",
+						"type": "varchar"
 					}
-				},
-				"connectVia": {
-					"referenceName": "ServidorArquivosBI",
-					"type": "IntegrationRuntimeReference"
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Aging_Titulo_Pagar"
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Historicos_Bilhetes_HOSL')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Baixa_Titulos_Pagar')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"description": "Historicos_Bilhetes_HOSL",
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Contas a Pagar"
+				},
 				"annotations": [],
-				"type": "FileServer",
-				"typeProperties": {
-					"host": "[parameters('Historicos_Bilhetes_HOSL_properties_typeProperties_host')]",
-					"userId": "[parameters('Historicos_Bilhetes_HOSL_properties_typeProperties_userId')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('Historicos_Bilhetes_HOSL_password')]"
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "nr_titulo",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "nr_sequencia",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "dt_baixa",
+						"type": "date"
+					},
+					{
+						"name": "vl_pago",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_descontos",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_juros",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_multa",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "dt_atualizacao",
+						"type": "date"
+					},
+					{
+						"name": "ds_tipo_baixa",
+						"type": "varchar"
+					},
+					{
+						"name": "ds_transacao",
+						"type": "varchar"
 					}
-				},
-				"connectVia": {
-					"referenceName": "ServidorArquivosBI",
-					"type": "IntegrationRuntimeReference"
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Aging_Baixa_Titulo_Pagar"
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Historicos_Bilhetes_INOB')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/AZSQL_TB_Ret_Atendimentos_Unidade')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"description": "Historicos_Bilhetes_INOB",
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Retornos"
+				},
 				"annotations": [],
-				"type": "FileServer",
-				"typeProperties": {
-					"host": "[parameters('Historicos_Bilhetes_INOB_properties_typeProperties_host')]",
-					"userId": "[parameters('Historicos_Bilhetes_INOB_properties_typeProperties_userId')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('Historicos_Bilhetes_INOB_password')]"
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "NR_ATENDIMENTO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CD_MEDICO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DT_ENTRADA",
+						"type": "date"
+					},
+					{
+						"name": "CD_ESTABELECIMENTO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CD_CGC",
+						"type": "varchar"
+					},
+					{
+						"name": "NM_MEDICO",
+						"type": "varchar"
+					},
+					{
+						"name": "NM_FANTASIA_ESTAB",
+						"type": "varchar"
 					}
-				},
-				"connectVia": {
-					"referenceName": "ServidorArquivosBI",
-					"type": "IntegrationRuntimeReference"
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Ret_Atendimentos_Unidade"
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Historicos_Bilhetes_SADALLA')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/AZSQL_TB_Ret_Consulta_Oft_Unidade')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"description": "Historicos_Bilhetes_SADALLA",
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Retornos"
+				},
 				"annotations": [],
-				"type": "FileServer",
-				"typeProperties": {
-					"host": "[parameters('Historicos_Bilhetes_SADALLA_properties_typeProperties_host')]",
-					"userId": "[parameters('Historicos_Bilhetes_SADALLA_properties_typeProperties_userId')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('Historicos_Bilhetes_SADALLA_password')]"
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "NR_SEQUENCIA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DT_ATUALIZACAO",
+						"type": "date"
+					},
+					{
+						"name": "NR_ATENDIMENTO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CD_MEDICO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "NM_MEDICO",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_RETORNO",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_CONDUTA",
+						"type": "varchar"
 					}
-				},
-				"connectVia": {
-					"referenceName": "ServidorArquivosBI",
-					"type": "IntegrationRuntimeReference"
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Ret_Consulta_Oft_Unidade"
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Historicos_FIlasPorHoras_CSI')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/AZSQL_TB_Agendamentos_Futuros_Unidade')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"description": "Historicos_FIlasPorHoras_CSI",
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Retornos"
+				},
 				"annotations": [],
-				"type": "FileServer",
-				"typeProperties": {
-					"host": "[parameters('Historicos_FIlasPorHoras_CSI_properties_typeProperties_host')]",
-					"userId": "[parameters('Historicos_FIlasPorHoras_CSI_properties_typeProperties_userId')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('Historicos_FIlasPorHoras_CSI_password')]"
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "CD_PESSOA_FISICA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CD_CONVENIO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CNPJ",
+						"type": "varchar"
+					},
+					{
+						"name": "DATA_AGENDA",
+						"type": "date"
+					},
+					{
+						"name": "HORA_AGENDA",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "CD_TIPO_AGENDA",
+						"type": "varchar"
+					},
+					{
+						"name": "NM_PACIENTE",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_PROCEDIMENTO_PRINC",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_PROCEDIMENTO_ADIC",
+						"type": "varchar"
+					},
+					{
+						"name": "IE_QUANTIDADE",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "NM_USUARIO",
+						"type": "varchar"
+					},
+					{
+						"name": "MEDICO",
+						"type": "varchar"
+					},
+					{
+						"name": "SIGLA_UNIDADE",
+						"type": "varchar"
+					},
+					{
+						"name": "MARCA",
+						"type": "varchar"
 					}
-				},
-				"connectVia": {
-					"referenceName": "ServidorArquivosBI",
-					"type": "IntegrationRuntimeReference"
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Agendamentos_Futuros_Unidade"
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Historicos_FIlasPorHoras_DAYHORC')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/AZSQL_TB_Ret_Pacientes_unidade')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"description": "Historicos_FIlasPorHoras_DAYHORC",
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Retornos"
+				},
 				"annotations": [],
-				"type": "FileServer",
-				"typeProperties": {
-					"host": "[parameters('Historicos_FIlasPorHoras_DAYHORC_properties_typeProperties_host')]",
-					"userId": "[parameters('Historicos_FIlasPorHoras_DAYHORC_properties_typeProperties_userId')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('Historicos_FIlasPorHoras_DAYHORC_password')]"
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ULTIMO_ATENDIMENTO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CD_PESSOA_FISICA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "NM_PESSOA_FISICA",
+						"type": "varchar"
+					},
+					{
+						"name": "NR_TELEFONE_CELULAR",
+						"type": "varchar"
+					},
+					{
+						"name": "NR_TELEFONE",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_EMAIL",
+						"type": "varchar"
 					}
-				},
-				"connectVia": {
-					"referenceName": "ServidorArquivosBI",
-					"type": "IntegrationRuntimeReference"
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Ret_Pacientes_Unidade"
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Historicos_FIlasPorHoras_HOBL2')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/AZSQL_TB_Ret_Agendamentos_Futuros_Unidade')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"description": "Historicos_FIlasPorHoras_HOBL2",
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Retornos"
+				},
 				"annotations": [],
-				"type": "FileServer",
-				"typeProperties": {
-					"host": "[parameters('Historicos_FIlasPorHoras_HOBL2_properties_typeProperties_host')]",
-					"userId": "[parameters('Historicos_FIlasPorHoras_HOBL2_properties_typeProperties_userId')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('Historicos_FIlasPorHoras_HOBL2_password')]"
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "CD_PESSOA_FISICA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CD_CONVENIO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DATA_AGENDA",
+						"type": "date"
+					},
+					{
+						"name": "HORA_AGENDA",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "IE_TIPO_AGENDA",
+						"type": "varchar"
+					},
+					{
+						"name": "NM_MEDICO",
+						"type": "varchar"
 					}
-				},
-				"connectVia": {
-					"referenceName": "ServidorArquivosBI",
-					"type": "IntegrationRuntimeReference"
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Ret_Agendamentos_Futuros_Unidade"
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Historicos_FIlasPorHoras_HOSL')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/AZSQL_TB_Pacientes_Unidade')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"description": "Historicos_FIlasPorHoras_HOSL",
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Retornos"
+				},
 				"annotations": [],
-				"type": "FileServer",
-				"typeProperties": {
-					"host": "[parameters('Historicos_FIlasPorHoras_HOSL_properties_typeProperties_host')]",
-					"userId": "[parameters('Historicos_FIlasPorHoras_HOSL_properties_typeProperties_userId')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('Historicos_FIlasPorHoras_HOSL_password')]"
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "cd_pessoa_fisica",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "nm_pessoa_fisica",
+						"type": "varchar"
+					},
+					{
+						"name": "nr_cpf",
+						"type": "varchar"
+					},
+					{
+						"name": "dt_nascimento",
+						"type": "date"
+					},
+					{
+						"name": "nr_telefone_celular",
+						"type": "varchar"
+					},
+					{
+						"name": "nr_telefone",
+						"type": "varchar"
 					}
-				},
-				"connectVia": {
-					"referenceName": "ServidorArquivosBI",
-					"type": "IntegrationRuntimeReference"
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Pacientes_Unidade"
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Historicos_FIlasPorHoras_INOB')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Atendimento')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"description": "Historicos_FIlasPorHoras_INOB",
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Geral Atendimentos Unidades"
+				},
 				"annotations": [],
-				"type": "FileServer",
-				"typeProperties": {
-					"host": "[parameters('Historicos_FIlasPorHoras_INOB_properties_typeProperties_host')]",
-					"userId": "[parameters('Historicos_FIlasPorHoras_INOB_properties_typeProperties_userId')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('Historicos_FIlasPorHoras_INOB_password')]"
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "CD_PESSOA_FISICA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "NM_PESSOA_FISICA",
+						"type": "varchar"
+					},
+					{
+						"name": "DT_ENTRADA",
+						"type": "date"
+					},
+					{
+						"name": "HR_ENTRADA",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "NM_MEDICO",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_CONVENIO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_CONVENIO",
+						"type": "varchar"
+					},
+					{
+						"name": "NR_ATENDIMENTO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CNPJ",
+						"type": "varchar"
+					},
+					{
+						"name": "SIGLA_UNIDADE",
+						"type": "varchar"
+					},
+					{
+						"name": "MARCA",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_PROCEDENCIA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_PROCEDENCIA",
+						"type": "varchar"
+					},
+					{
+						"name": "ID",
+						"type": "varchar"
+					},
+					{
+						"name": "DIA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "MES",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ANO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DT_CANCELAMENTO",
+						"type": "date"
 					}
-				},
-				"connectVia": {
-					"referenceName": "ServidorArquivosBI",
-					"type": "IntegrationRuntimeReference"
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Atendimento_Unidade"
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Historicos_FIlasPorHoras_SADALLA')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Pacientes')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"description": "Historicos_FIlasPorHoras_SADALLA",
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Geral Atendimentos Unidades"
+				},
 				"annotations": [],
-				"type": "FileServer",
-				"typeProperties": {
-					"host": "[parameters('Historicos_FIlasPorHoras_SADALLA_properties_typeProperties_host')]",
-					"userId": "[parameters('Historicos_FIlasPorHoras_SADALLA_properties_typeProperties_userId')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('Historicos_FIlasPorHoras_SADALLA_password')]"
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "CD_PESSOA_FISICA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "NM_PESSOA_FISICA",
+						"type": "varchar"
+					},
+					{
+						"name": "NR_CPF",
+						"type": "varchar"
+					},
+					{
+						"name": "DT_NASCIMENTO",
+						"type": "date"
+					},
+					{
+						"name": "NR_TELEFONE_CELULAR",
+						"type": "varchar"
+					},
+					{
+						"name": "NR_TELEFONE",
+						"type": "varchar"
+					},
+					{
+						"name": "CNPJ",
+						"type": "varchar"
+					},
+					{
+						"name": "SIGLA_UNIDADE",
+						"type": "varchar"
+					},
+					{
+						"name": "MARCA",
+						"type": "varchar"
+					},
+					{
+						"name": "NR_PRONTUARIO",
+						"type": "int",
+						"precision": 10
 					}
-				},
-				"connectVia": {
-					"referenceName": "ServidorArquivosBI",
-					"type": "IntegrationRuntimeReference"
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Pacientes_Unidade"
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/SMARTProd')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Consulta')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('SMARTProd_connectionString')]"
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
 				},
-				"connectVia": {
-					"referenceName": "integrationRuntime",
-					"type": "IntegrationRuntimeReference"
+				"folder": {
+					"name": "Geral Atendimentos Unidades"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "NR_SEQUENCIA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DT_ATUALIZACAO",
+						"type": "date"
+					},
+					{
+						"name": "HR_ATUALIZACAO",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "NR_ATENDIMENTO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CD_MEDICO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "NM_MEDICO",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_RETORNO",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_CONDUTA",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_PESSOA_FISICA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_DIAGNOSTICO",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Consulta_Unidade"
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/SMART_HOSL')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Agendamento')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('SMART_HOSL_connectionString')]"
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
 				},
-				"connectVia": {
-					"referenceName": "integrationRuntime",
-					"type": "IntegrationRuntimeReference"
+				"folder": {
+					"name": "Geral Atendimentos Unidades"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "CD_PESSOA_FISICA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CD_CONVENIO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CNPJ",
+						"type": "varchar"
+					},
+					{
+						"name": "DATA_AGENDA",
+						"type": "date"
+					},
+					{
+						"name": "HORA_AGENDA",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "TIPO_AGENDA",
+						"type": "varchar"
+					},
+					{
+						"name": "NM_PACIENTE",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_PROCEDIMENTO_PRINC",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_PROCEDIMENTO_ADIC",
+						"type": "varchar"
+					},
+					{
+						"name": "IE_QUANTIDADE",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "NM_USUARIO",
+						"type": "varchar"
+					},
+					{
+						"name": "NM_MEDICO",
+						"type": "varchar"
+					},
+					{
+						"name": "SIGLA_UNIDADE",
+						"type": "varchar"
+					},
+					{
+						"name": "MARCA",
+						"type": "varchar"
+					},
+					{
+						"name": "STATUS_AGENDA",
+						"type": "varchar"
+					},
+					{
+						"name": "NR_ATENDIMENTO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "NR_SEQUENCIA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ID",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_PROCEDENCIA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_PROCEDENCIA",
+						"type": "varchar"
+					},
+					{
+						"name": "DT_AGENDAMENTO",
+						"type": "date"
+					},
+					{
+						"name": "DIA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "MES",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ANO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_AGRUPAMENTO",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_MOTIVO_CANCELAMENTO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_MOTIVO_CANCELAMENTO",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Agendamento_Unidade"
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/SMART_HOSL_NEW')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Usuario')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('SMART_HOSL_NEW_connectionString')]"
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
 				},
-				"connectVia": {
-					"referenceName": "ServidorArquivosBI",
-					"type": "IntegrationRuntimeReference"
+				"folder": {
+					"name": "Geral Atendimentos Unidades"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "NM_USUARIO",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_USUARIO",
+						"type": "varchar"
+					},
+					{
+						"name": "IE_SITUACAO",
+						"type": "char"
+					},
+					{
+						"name": "DT_ATUALIZACAO",
+						"type": "date"
+					},
+					{
+						"name": "SIGLA_UNIDADE",
+						"type": "varchar"
+					},
+					{
+						"name": "MARCA",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Usuario_Unidade"
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/SMART_INOB')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Setor')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('SMART_INOB_connectionString')]"
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
 				},
-				"connectVia": {
-					"referenceName": "integrationRuntime",
-					"type": "IntegrationRuntimeReference"
+				"folder": {
+					"name": "Geral Atendimentos Unidades"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "CD_SETOR_ATENDIMENTO",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_SETOR_ATENDIMENTO",
+						"type": "varchar"
+					},
+					{
+						"name": "CNPJ",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Setor_Unidade"
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/SMART_INOB_NEW')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/AZSQL_TB_NC_FilasPorHoras_Temp')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('SMART_INOB_NEW_connectionString')]"
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
 				},
-				"connectVia": {
-					"referenceName": "ServidorArquivosBI",
-					"type": "IntegrationRuntimeReference"
+				"folder": {
+					"name": "Nexcore/Azure"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Fila",
+						"type": "varchar"
+					},
+					{
+						"name": "Intervalo",
+						"type": "varchar"
+					},
+					{
+						"name": "Atendidas_Ate_NS",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Atendidas_Apos_NS",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Atendidas",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Abandonos_Ate_NS",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Abandonos_Apos_NS",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Abandonos_Anuncio_Inicial",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Abandonos",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Roteamentos_Timeout",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Roteamentos_Fila_Cheia",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Roteamentos_Fila_Vazia",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Roteamentos_Fila_Sem_Ags_Disp",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Roteamentos_Caixa_Postal",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Roteamentos",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Fora_Horario_Antes",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Fora_Horario_Intervalo",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Fora_Horario_Depois",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Fora_Horario",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Total_Recebidas",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Callback_Tratados",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Callback_Nao_Tratados",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Callback",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Tempo_Toque",
+						"type": "varchar"
+					},
+					{
+						"name": "Tempo_Falado",
+						"type": "varchar"
+					},
+					{
+						"name": "Tempo_Medio_Falado",
+						"type": "varchar"
+					},
+					{
+						"name": "Tempo_Medio_Pausa_ACW",
+						"type": "varchar"
+					},
+					{
+						"name": "Tempo_Medio_Produtivo_AHT",
+						"type": "varchar"
+					},
+					{
+						"name": "Nivel_Servico",
+						"type": "varchar"
+					},
+					{
+						"name": "Taxa_Atendimento",
+						"type": "varchar"
+					},
+					{
+						"name": "Taxa_Abandono",
+						"type": "varchar"
+					},
+					{
+						"name": "Tempo_Medio_Espera",
+						"type": "varchar"
+					},
+					{
+						"name": "Tempo_Medio_para_Atender",
+						"type": "varchar"
+					},
+					{
+						"name": "Tempo_Total_para_Atender",
+						"type": "varchar"
+					},
+					{
+						"name": "Tempo_Medio_para_Abandono",
+						"type": "varchar"
+					},
+					{
+						"name": "Tempo_Total_para_Abandono",
+						"type": "varchar"
+					},
+					{
+						"name": "Tempo_Total_Espera",
+						"type": "varchar"
+					},
+					{
+						"name": "Agentes_Logados_Minimo",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Agentes_Logados_Maximo",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Chamadas_em_Espera_Minimo",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Chamadas_em_Espera_Medio",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Chamadas_em_Espera_Maximo",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"tableName": "[[dbo].[Nexcore_FilasPorHoras_temp]"
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/SMART_IOF')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Material_Paciente')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('SMART_IOF_connectionString')]"
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
 				},
-				"connectVia": {
-					"referenceName": "integrationRuntime",
-					"type": "IntegrationRuntimeReference"
+				"folder": {
+					"name": "Geral Atendimentos Unidades"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "DT_ATUALIZACAO",
+						"type": "date"
+					},
+					{
+						"name": "NR_ATENDIMENTO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "NR_INTERNO_CONTA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CD_CONVENIO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CD_SETOR_ATENDIMENTO",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_MATERIAL",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_MATERIAL",
+						"type": "varchar"
+					},
+					{
+						"name": "QT_MATERIAL",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "VL_MATERIAL",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "VL_UNITARIO",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "VL_CONTA",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "STATUS_CONTA",
+						"type": "varchar"
+					},
+					{
+						"name": "CNPJ",
+						"type": "varchar"
+					},
+					{
+						"name": "NR_PROTOCOLO",
+						"type": "varchar"
+					},
+					{
+						"name": "SIGLA_UNIDADE",
+						"type": "varchar"
+					},
+					{
+						"name": "MARCA",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Material_Paciente_Unidade"
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/SMART_IOF_NEW')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Convenio')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('SMART_IOF_NEW_connectionString')]"
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
 				},
-				"connectVia": {
-					"referenceName": "ServidorArquivosBI",
-					"type": "IntegrationRuntimeReference"
+				"folder": {
+					"name": "Geral Atendimentos Unidades"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "CD_CONVENIO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_CONVENIO",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_ESTABELECIMENTO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CNPJ",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Convenio_Unidade"
 				}
 			},
 			"dependsOn": []
