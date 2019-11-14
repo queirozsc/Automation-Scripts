@@ -961,7 +961,7 @@
 				]
 			},
 			{
-				"name": "Filas por Hora HOSL_copy1",
+				"name": "Filas por Hora INOB",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -1416,7 +1416,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "HOSL_CSV_NC_FilasPorHora_Temp",
+						"referenceName": "INOB_CSV_NC_FilasPorHora_Temp",
 						"type": "DatasetReference"
 					}
 				],
