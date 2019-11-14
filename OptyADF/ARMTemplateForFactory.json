@@ -16178,7 +16178,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Medio_Falado",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -16188,7 +16188,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Total_Falado",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -16198,7 +16198,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Toque_Agente",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -16208,7 +16208,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Toque_Cliente",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -16218,7 +16218,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Pausa",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -16228,7 +16228,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Estouro",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -16238,7 +16238,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Disponivel",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -16248,7 +16248,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Indisponivel",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -16258,7 +16258,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Logado",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -16268,7 +16268,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Deslogado",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -16300,7 +16300,7 @@
 						]
 					},
 					{
-						"name": "Agentes por Dia HOBL2",
+						"name": "Agentes por Dia HOB",
 						"type": "Copy",
 						"dependsOn": [
 							{
@@ -16475,7 +16475,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Medio_Falado",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -16485,7 +16485,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Total_Falado",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -16495,7 +16495,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Toque_Agente",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -16505,7 +16505,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Toque_Cliente",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -16515,7 +16515,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Pausa",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -16525,7 +16525,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Estouro",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -16535,7 +16535,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Disponivel",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -16545,7 +16545,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Indisponivel",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -16555,7 +16555,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Logado",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -16565,7 +16565,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Deslogado",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -16584,6 +16584,303 @@
 						"inputs": [
 							{
 								"referenceName": "HOB_CSV_NC_AgentesPorDia_Temp",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AZSQL_TB_NC_AgentesPorDia_Temp",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Agentes por Dia Sadalla",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Start",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "FileServerReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Usuario",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Usuario",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Intervalo",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Intervalo",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Atendidas",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Atendidas",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Recusas",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Recusas",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Recebidas",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Recebidas",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Internas Recebidas",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Internas_Recebidas",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Transferencias",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Transferencias",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Efetuadas",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Efetuadas",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Efetuadas Tratados",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Efetuadas_Tratados",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "% Taxa de Contato",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Taxa_de_Contato",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Atendidas",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Atendidas",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Internas Recebidas",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Internas_Recebidas",
+											"type": "TimeSpan"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Efetuadas",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Efetuadas",
+											"type": "TimeSpan"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Medio Falado",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Medio_Falado",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Total Falado",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Total_Falado",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Toque Agente",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Toque_Agente",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Toque Cliente",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Toque_Cliente",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Pausa",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Pausa",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Estouro",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Estouro",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Dispon�vel",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Disponivel",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Indispon�vel",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Indisponivel",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Logado",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Logado",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Deslogado",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Deslogado",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "% Falado x Logado",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Falado_x_Logado",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "HOSAG_CSV_NC_AgentesPorDia_Temp",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -16772,7 +17069,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Medio_Falado",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -16782,7 +17079,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Total_Falado",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -16792,7 +17089,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Toque_Agente",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -16802,7 +17099,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Toque_Cliente",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -16812,7 +17109,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Pausa",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -16822,7 +17119,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Estouro",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -16832,7 +17129,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Disponivel",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -16842,7 +17139,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Indisponivel",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -16852,7 +17149,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Logado",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -16862,7 +17159,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Deslogado",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -16881,303 +17178,6 @@
 						"inputs": [
 							{
 								"referenceName": "INOB_CSV_NC_AgentesPorDia_Temp",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "AZSQL_TB_NC_AgentesPorDia_Temp",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Agentes por Dia DH",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "Start",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "FileServerReadSettings",
-									"recursive": true,
-									"wildcardFileName": "*",
-									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "AzureSqlSink"
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "Usuario",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Usuario",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Intervalo",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Intervalo",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Atendidas",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Atendidas",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Recusas",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Recusas",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Recebidas",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Recebidas",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Internas Recebidas",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Internas_Recebidas",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Transferencias",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Transferencias",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Efetuadas",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Efetuadas",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Efetuadas Tratados",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Efetuadas_Tratados",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "% Taxa de Contato",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Taxa_de_Contato",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Atendidas",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Atendidas",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Internas Recebidas",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Internas_Recebidas",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Efetuadas",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Efetuadas",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Medio Falado",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Medio_Falado",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Total Falado",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Total_Falado",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Toque Agente",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Toque_Agente",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Toque Cliente",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Toque_Cliente",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Pausa",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Pausa",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Estouro",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Estouro",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Dispon�vel",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Disponivel",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Indispon�vel",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Indisponivel",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Logado",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Logado",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Deslogado",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Deslogado",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "% Falado x Logado",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Falado_x_Logado",
-											"type": "String"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "DH_CSV_NC_AgentesPorDia_Temp",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -17366,7 +17366,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Medio_Falado",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -17376,7 +17376,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Total_Falado",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -17386,7 +17386,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Toque_Agente",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -17396,7 +17396,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Toque_Cliente",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -17406,7 +17406,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Pausa",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -17416,7 +17416,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Estouro",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -17426,7 +17426,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Disponivel",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -17436,7 +17436,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Indisponivel",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -17446,7 +17446,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Logado",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -17456,7 +17456,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Deslogado",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -17488,7 +17488,7 @@
 						]
 					},
 					{
-						"name": "Agentes por Dia SADALLA",
+						"name": "Agentes por Dia DH",
 						"type": "Copy",
 						"dependsOn": [
 							{
@@ -17663,7 +17663,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Medio_Falado",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -17673,7 +17673,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Total_Falado",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -17683,7 +17683,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Toque_Agente",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -17693,7 +17693,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Toque_Cliente",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -17703,7 +17703,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Pausa",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -17713,7 +17713,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Estouro",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -17723,7 +17723,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Disponivel",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -17733,7 +17733,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Indisponivel",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -17743,7 +17743,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Logado",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -17753,7 +17753,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Deslogado",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -17771,7 +17771,7 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "HOSAG_CSV_NC_AgentesPorDia_Temp",
+								"referenceName": "DH_CSV_NC_AgentesPorDia_Temp",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -17794,10 +17794,10 @@
 				"[concat(variables('factoryId'), '/datasets/CSI_CSV_NC_AgentesPorDia_Temp')]",
 				"[concat(variables('factoryId'), '/datasets/AZSQL_TB_NC_AgentesPorDia_Temp')]",
 				"[concat(variables('factoryId'), '/datasets/HOB_CSV_NC_AgentesPorDia_Temp')]",
+				"[concat(variables('factoryId'), '/datasets/HOSAG_CSV_NC_AgentesPorDia_Temp')]",
 				"[concat(variables('factoryId'), '/datasets/INOB_CSV_NC_AgentesPorDia_Temp')]",
-				"[concat(variables('factoryId'), '/datasets/DH_CSV_NC_AgentesPorDia_Temp')]",
 				"[concat(variables('factoryId'), '/datasets/HOSL_CSV_NC_AgentesPorDia_Temp')]",
-				"[concat(variables('factoryId'), '/datasets/HOSAG_CSV_NC_AgentesPorDia_Temp')]"
+				"[concat(variables('factoryId'), '/datasets/DH_CSV_NC_AgentesPorDia_Temp')]"
 			]
 		},
 		{
@@ -17815,302 +17815,6 @@
 						"typeProperties": {
 							"waitTimeInSeconds": 1
 						}
-					},
-					{
-						"name": "Agentes por Hora CSI",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "Start",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "FileServerReadSettings",
-									"recursive": true,
-									"wildcardFileName": "*"
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "AzureSqlSink"
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "Usuario",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Usuario",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Intervalo",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Intervalo",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Atendidas",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Atendidas",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Recusas",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Recusas",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Recebidas",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Recebidas",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Internas Recebidas",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Internas_Recebidas",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Transferencias",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Transferencias",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Efetuadas",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Efetuadas",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Efetuadas Tratados",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Efetuadas_Tratados",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "% Taxa de Contato",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Taxa_de_Contato",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Atendidas",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Atendidas",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Internas Recebidas",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Internas_Recebidas",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Efetuadas",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Efetuadas",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Medio Falado",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Medio_Falado",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Total Falado",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Total_Falado",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Toque Agente",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Toque_Agente",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Toque Cliente",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Toque_Cliente",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Pausa",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Pausa",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Estouro",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Estouro",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Dispon�vel",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Disponivel",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Indispon�vel",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Indisponivel",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Logado",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Logado",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Deslogado",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Deslogado",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "% Falado x Logado",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Falado_x_Logado",
-											"type": "String"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "CSI_CSV_NC_AgentesPorHora_Temp",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "AZSQL_TB_NC_AgentesPorHora_Temp",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
 					},
 					{
 						"name": "Agentes por Hora DH",
@@ -18277,7 +17981,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Efetuadas",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -18287,7 +17991,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Medio_Falado",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -18297,7 +18001,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Total_Falado",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -18307,7 +18011,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Toque_Agente",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -18317,7 +18021,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Toque_Cliente",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -18327,7 +18031,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Pausa",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -18337,7 +18041,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Estouro",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -18357,7 +18061,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Indisponivel",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -18367,7 +18071,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Logado",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -18377,7 +18081,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Deslogado",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -18395,7 +18099,599 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "DH_CSV_NC_AgentesPorHora",
+								"referenceName": "DH_CSV_NC_AgentesPorHora_Temp",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AZSQL_TB_NC_AgentesPorHora_Temp",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Agentes por Hora CSI",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Start",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "FileServerReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Usuario",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Usuario",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Intervalo",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Intervalo",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Atendidas",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Atendidas",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Recusas",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Recusas",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Recebidas",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Recebidas",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Internas Recebidas",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Internas_Recebidas",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Transferencias",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Transferencias",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Efetuadas",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Efetuadas",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Efetuadas Tratados",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Efetuadas_Tratados",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "% Taxa de Contato",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Taxa_de_Contato",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Atendidas",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Atendidas",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Internas Recebidas",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Internas_Recebidas",
+											"type": "TimeSpan"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Efetuadas",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Efetuadas",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Medio Falado",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Medio_Falado",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Total Falado",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Total_Falado",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Toque Agente",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Toque_Agente",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Toque Cliente",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Toque_Cliente",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Pausa",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Pausa",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Estouro",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Estouro",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Dispon�vel",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Disponivel",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Indispon�vel",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Indisponivel",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Logado",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Logado",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Deslogado",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Deslogado",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "% Falado x Logado",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Falado_x_Logado",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "CSI_CSV_NC_AgentesPorHora_Temp",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AZSQL_TB_NC_AgentesPorHora_Temp",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Agentes por Hora Sadalla",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Start",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "FileServerReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Usuario",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Usuario",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Intervalo",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Intervalo",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Atendidas",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Atendidas",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Recusas",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Recusas",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Recebidas",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Recebidas",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Internas Recebidas",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Internas_Recebidas",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Transferencias",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Transferencias",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Efetuadas",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Efetuadas",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Efetuadas Tratados",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Efetuadas_Tratados",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "% Taxa de Contato",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Taxa_de_Contato",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Atendidas",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Atendidas",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Internas Recebidas",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Internas_Recebidas",
+											"type": "TimeSpan"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Efetuadas",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Efetuadas",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Medio Falado",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Medio_Falado",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Total Falado",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Total_Falado",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Toque Agente",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Toque_Agente",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Toque Cliente",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Toque_Cliente",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Pausa",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Pausa",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Estouro",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Estouro",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Dispon�vel",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Disponivel",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Indispon�vel",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Indisponivel",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Logado",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Logado",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Deslogado",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Deslogado",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "% Falado x Logado",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Falado_x_Logado",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "HOSAG_CSV_NC_AgentesPorHora_Temp",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -18573,7 +18869,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Efetuadas",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -18583,7 +18879,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Medio_Falado",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -18593,7 +18889,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Total_Falado",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -18603,7 +18899,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Toque_Agente",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -18613,7 +18909,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Toque_Cliente",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -18623,7 +18919,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Pausa",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -18633,7 +18929,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Estouro",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -18653,7 +18949,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Indisponivel",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -18663,7 +18959,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Logado",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -18673,7 +18969,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Deslogado",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -18692,598 +18988,6 @@
 						"inputs": [
 							{
 								"referenceName": "HOB_CSV_NC_AgentesPorHora_Temp",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "AZSQL_TB_NC_AgentesPorHora_Temp",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Agentes por Hora SADALLA",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "Start",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "FileServerReadSettings",
-									"recursive": true,
-									"wildcardFileName": "*"
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "AzureSqlSink"
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "Usuario",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Usuario",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Intervalo",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Intervalo",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Atendidas",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Atendidas",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Recusas",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Recusas",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Recebidas",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Recebidas",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Internas Recebidas",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Internas_Recebidas",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Transferencias",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Transferencias",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Efetuadas",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Efetuadas",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Efetuadas Tratados",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Efetuadas_Tratados",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "% Taxa de Contato",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Taxa_de_Contato",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Atendidas",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Atendidas",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Internas Recebidas",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Internas_Recebidas",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Efetuadas",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Efetuadas",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Medio Falado",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Medio_Falado",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Total Falado",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Total_Falado",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Toque Agente",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Toque_Agente",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Toque Cliente",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Toque_Cliente",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Pausa",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Pausa",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Estouro",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Estouro",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Dispon�vel",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Disponivel",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Indispon�vel",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Indisponivel",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Logado",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Logado",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Deslogado",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Deslogado",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "% Falado x Logado",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Falado_x_Logado",
-											"type": "String"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "HOSAG_CSV_NC_AgentesPorHora_Temp",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "AZSQL_TB_NC_AgentesPorHora_Temp",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Agentes por Hora HOSL",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "Start",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "FileServerReadSettings",
-									"recursive": true,
-									"wildcardFileName": "*"
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "AzureSqlSink"
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "Usuario",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Usuario",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Intervalo",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Intervalo",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Atendidas",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Atendidas",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Recusas",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Recusas",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Recebidas",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Recebidas",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Internas Recebidas",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Internas_Recebidas",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Transferencias",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Transferencias",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Efetuadas",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Efetuadas",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Efetuadas Tratados",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Efetuadas_Tratados",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "% Taxa de Contato",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Taxa_de_Contato",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Atendidas",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Atendidas",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Internas Recebidas",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Internas_Recebidas",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Efetuadas",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Efetuadas",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Medio Falado",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Medio_Falado",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Total Falado",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Total_Falado",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Toque Agente",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Toque_Agente",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Toque Cliente",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Toque_Cliente",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Pausa",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Pausa",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Estouro",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Estouro",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Dispon�vel",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Disponivel",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Indispon�vel",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Indisponivel",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Logado",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Logado",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Deslogado",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Deslogado",
-											"type": "TimeSpan"
-										}
-									},
-									{
-										"source": {
-											"name": "% Falado x Logado",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Falado_x_Logado",
-											"type": "String"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "HOSL_CSV_NC_AgentesPorHora_Temp",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -19461,7 +19165,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Efetuadas",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -19471,7 +19175,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Medio_Falado",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -19481,7 +19185,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Total_Falado",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -19491,7 +19195,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Toque_Agente",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -19501,7 +19205,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Toque_Cliente",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -19511,7 +19215,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Pausa",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -19521,7 +19225,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Estouro",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -19541,7 +19245,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Indisponivel",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -19551,7 +19255,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Logado",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -19561,7 +19265,7 @@
 										},
 										"sink": {
 											"name": "Tempo_Deslogado",
-											"type": "TimeSpan"
+											"type": "String"
 										}
 									},
 									{
@@ -19591,6 +19295,302 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "Agentes por Hora HOSL",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Start",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "FileServerReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Usuario",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Usuario",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Intervalo",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Intervalo",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Atendidas",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Atendidas",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Recusas",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Recusas",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Recebidas",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Recebidas",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Internas Recebidas",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Internas_Recebidas",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Transferencias",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Transferencias",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Efetuadas",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Efetuadas",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Efetuadas Tratados",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Efetuadas_Tratados",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "% Taxa de Contato",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Taxa_de_Contato",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Atendidas",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Atendidas",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Internas Recebidas",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Internas_Recebidas",
+											"type": "TimeSpan"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Efetuadas",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Efetuadas",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Medio Falado",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Medio_Falado",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Total Falado",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Total_Falado",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Toque Agente",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Toque_Agente",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Toque Cliente",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Toque_Cliente",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Pausa",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Pausa",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Estouro",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Estouro",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Dispon�vel",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Disponivel",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Indispon�vel",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Indisponivel",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Logado",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Logado",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Deslogado",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Deslogado",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "% Falado x Logado",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Falado_x_Logado",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "HOSL_CSV_NC_AgentesPorHora_Temp",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AZSQL_TB_NC_AgentesPorHora_Temp",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
 					}
 				],
 				"folder": {
@@ -19599,13 +19599,13 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/CSI_CSV_NC_AgentesPorHora_Temp')]",
+				"[concat(variables('factoryId'), '/datasets/DH_CSV_NC_AgentesPorHora_Temp')]",
 				"[concat(variables('factoryId'), '/datasets/AZSQL_TB_NC_AgentesPorHora_Temp')]",
-				"[concat(variables('factoryId'), '/datasets/DH_CSV_NC_AgentesPorHora')]",
-				"[concat(variables('factoryId'), '/datasets/HOB_CSV_NC_AgentesPorHora_Temp')]",
+				"[concat(variables('factoryId'), '/datasets/CSI_CSV_NC_AgentesPorHora_Temp')]",
 				"[concat(variables('factoryId'), '/datasets/HOSAG_CSV_NC_AgentesPorHora_Temp')]",
-				"[concat(variables('factoryId'), '/datasets/HOSL_CSV_NC_AgentesPorHora_Temp')]",
-				"[concat(variables('factoryId'), '/datasets/INOB_CSV_NC_AgentesPorHora_Temp')]"
+				"[concat(variables('factoryId'), '/datasets/HOB_CSV_NC_AgentesPorHora_Temp')]",
+				"[concat(variables('factoryId'), '/datasets/INOB_CSV_NC_AgentesPorHora_Temp')]",
+				"[concat(variables('factoryId'), '/datasets/HOSL_CSV_NC_AgentesPorHora_Temp')]"
 			]
 		},
 		{
@@ -21315,475 +21315,6 @@
 						]
 					},
 					{
-						"name": "Filas por Hora HOBL2",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "FileServerReadSettings",
-									"recursive": true,
-									"wildcardFileName": "*"
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "AzureSqlSink"
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "Fila",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Fila",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Intervalo",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Intervalo",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Atendidas Ate NS",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Atendidas_Ate_NS",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Atendidas Apos NS",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Atendidas_Apos_NS",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Atendidas",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Atendidas",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Abandonos Ate NS",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Abandonos_Ate_NS",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Abandonos Apos NS",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Abandonos_Apos_NS",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Abandonos Anuncio Inicial",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Abandonos_Anuncio_Inicial",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Abandonos",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Abandonos",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Roteamentos Timeout",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Roteamentos_Timeout",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Roteamentos Fila Cheia",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Roteamentos_Fila_Cheia",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Roteamentos Fila Vazia",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Roteamentos_Fila_Vazia",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Roteamentos Fila Sem Ags. Disp.",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Roteamentos_Fila_Sem_Ags_Disp",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Roteamentos Caixa Postal",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Roteamentos_Caixa_Postal",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Roteamentos",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Roteamentos",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Fora Horario Antes",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Fora_Horario_Antes",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Fora Horario Intervalo",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Fora_Horario_Intervalo",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Fora Horario Depois",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Fora_Horario_Depois",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Fora Horario",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Fora_Horario",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Total Recebidas",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Total_Recebidas",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Callback Tratados",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Callback_Tratados",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Callback Nao Tratados",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Callback_Nao_Tratados",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Callback",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Callback",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Toque",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Toque",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Falado",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Falado",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Medio Falado",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Medio_Falado",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Medio Pausa ACW",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Medio_Pausa_ACW",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Medio Produtivo AHT",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Medio_Produtivo_AHT",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "% Nivel Servico",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Nivel_Servico",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "% Taxa Atendimento",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Taxa_Atendimento",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "% Taxa Abandono",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Taxa_Abandono",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Medio Espera",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Medio_Espera",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Medio para Atender",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Medio_para_Atender",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Total para Atender",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Total_para_Atender",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Medio para Abandono",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Medio_para_Abandono",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Total para Abandono",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Total_para_Abandono",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo Total Espera",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Tempo_Total_Espera",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Agentes Logados - Minimo",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Agentes_Logados_Minimo",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Agentes Logados - Maximo",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Agentes_Logados_Maximo",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Chamadas em Espera - Minimo",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Chamadas_em_Espera_Minimo",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Chamadas em Espera - Medio",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Chamadas_em_Espera_Medio",
-											"type": "Double"
-										}
-									},
-									{
-										"source": {
-											"name": "Chamadas em Espera = Maximo",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Chamadas_em_Espera_Maximo",
-											"type": "Int32"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "HOB_CSV_NC_FilasPorHora_Temp",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "AZSQL_TB_NC_FilasPorHoras_Temp",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
 						"name": "Filas por Hora HOSL",
 						"type": "Copy",
 						"dependsOn": [
@@ -22260,7 +21791,7 @@
 						]
 					},
 					{
-						"name": "Filas por Hora INOB",
+						"name": "Filas por Hora Sadalla",
 						"type": "Copy",
 						"dependsOn": [
 							{
@@ -22722,7 +22253,483 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "INOB_CSV_NC_FilasPorHora_Temp",
+								"referenceName": "HOSAG_CSV_NC_FilasPorHora_Temp",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AZSQL_TB_NC_FilasPorHoras_Temp",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Filas por Hora HOB",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Start",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "FileServerReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Fila",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Fila",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Intervalo",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Intervalo",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Atendidas Ate NS",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Atendidas_Ate_NS",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Atendidas Apos NS",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Atendidas_Apos_NS",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Atendidas",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Atendidas",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Abandonos Ate NS",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Abandonos_Ate_NS",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Abandonos Apos NS",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Abandonos_Apos_NS",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Abandonos Anuncio Inicial",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Abandonos_Anuncio_Inicial",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Abandonos",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Abandonos",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Roteamentos Timeout",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Roteamentos_Timeout",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Roteamentos Fila Cheia",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Roteamentos_Fila_Cheia",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Roteamentos Fila Vazia",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Roteamentos_Fila_Vazia",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Roteamentos Fila Sem Ags. Disp.",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Roteamentos_Fila_Sem_Ags_Disp",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Roteamentos Caixa Postal",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Roteamentos_Caixa_Postal",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Roteamentos",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Roteamentos",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Fora Horario Antes",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Fora_Horario_Antes",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Fora Horario Intervalo",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Fora_Horario_Intervalo",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Fora Horario Depois",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Fora_Horario_Depois",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Fora Horario",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Fora_Horario",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Total Recebidas",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Total_Recebidas",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Callback Tratados",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Callback_Tratados",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Callback Nao Tratados",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Callback_Nao_Tratados",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Callback",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Callback",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Toque",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Toque",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Falado",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Falado",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Medio Falado",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Medio_Falado",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Medio Pausa ACW",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Medio_Pausa_ACW",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Medio Produtivo AHT",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Medio_Produtivo_AHT",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "% Nivel Servico",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Nivel_Servico",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "% Taxa Atendimento",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Taxa_Atendimento",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "% Taxa Abandono",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Taxa_Abandono",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Medio Espera",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Medio_Espera",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Medio para Atender",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Medio_para_Atender",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Total para Atender",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Total_para_Atender",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Medio para Abandono",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Medio_para_Abandono",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Total para Abandono",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Total_para_Abandono",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Tempo Total Espera",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tempo_Total_Espera",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Agentes Logados - Minimo",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Agentes_Logados_Minimo",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Agentes Logados - Maximo",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Agentes_Logados_Maximo",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Chamadas em Espera - Minimo",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Chamadas_em_Espera_Minimo",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Chamadas em Espera - Medio",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Chamadas_em_Espera_Medio",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "Chamadas em Espera = Maximo",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Chamadas_em_Espera_Maximo",
+											"type": "Int32"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "HOB_CSV_NC_FilasPorHora_Temp",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -23212,7 +23219,7 @@
 						]
 					},
 					{
-						"name": "Filas por Hora SADALLA",
+						"name": "Filas por Hora INOB",
 						"type": "Copy",
 						"dependsOn": [
 							{
@@ -23674,7 +23681,7 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "HOSAG_CSV_NC_FilasPorHora_Temp",
+								"referenceName": "INOB_CSV_NC_FilasPorHora_Temp",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -23696,11 +23703,11 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/CSI_CSV_NC_FilasporHora_Temp')]",
 				"[concat(variables('factoryId'), '/datasets/AZSQL_TB_NC_FilasPorHoras_Temp')]",
-				"[concat(variables('factoryId'), '/datasets/HOB_CSV_NC_FilasPorHora_Temp')]",
 				"[concat(variables('factoryId'), '/datasets/HOSL_CSV_NC_FilasPorHora_Temp')]",
-				"[concat(variables('factoryId'), '/datasets/INOB_CSV_NC_FilasPorHora_Temp')]",
+				"[concat(variables('factoryId'), '/datasets/HOSAG_CSV_NC_FilasPorHora_Temp')]",
+				"[concat(variables('factoryId'), '/datasets/HOB_CSV_NC_FilasPorHora_Temp')]",
 				"[concat(variables('factoryId'), '/datasets/DH_CSV_NC_FilasPorHora_Temp')]",
-				"[concat(variables('factoryId'), '/datasets/HOSAG_CSV_NC_FilasPorHora_Temp')]"
+				"[concat(variables('factoryId'), '/datasets/INOB_CSV_NC_FilasPorHora_Temp')]"
 			]
 		},
 		{
@@ -36036,7 +36043,7 @@
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
-					"name": "Nexcore/CSI"
+					"name": "Nexcore/CSI/Históricos"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
@@ -36103,7 +36110,7 @@
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
-					"name": "Nexcore/CSI"
+					"name": "Nexcore/CSI/Históricos"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
@@ -36136,7 +36143,7 @@
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
-					"name": "Nexcore/CSI"
+					"name": "Nexcore/CSI/Históricos"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
@@ -36237,7 +36244,7 @@
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
-					"name": "Nexcore/CSI"
+					"name": "Nexcore/CSI/Históricos"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
@@ -36590,108 +36597,7 @@
 					"firstRowAsHeader": true,
 					"quoteChar": ""
 				},
-				"schema": [
-					{
-						"name": "Usuario",
-						"type": "String"
-					},
-					{
-						"name": "Intervalo",
-						"type": "String"
-					},
-					{
-						"name": "Atendidas",
-						"type": "String"
-					},
-					{
-						"name": "Recusas",
-						"type": "String"
-					},
-					{
-						"name": "Recebidas",
-						"type": "String"
-					},
-					{
-						"name": "Internas Recebidas",
-						"type": "String"
-					},
-					{
-						"name": "Transferencias",
-						"type": "String"
-					},
-					{
-						"name": "Efetuadas",
-						"type": "String"
-					},
-					{
-						"name": "Efetuadas Tratados",
-						"type": "String"
-					},
-					{
-						"name": "% Taxa de Contato",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Atendidas",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Internas Recebidas",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Efetuadas",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Medio Falado",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Total Falado",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Toque Agente",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Toque Cliente",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Pausa",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Estouro",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Dispon�vel",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Indispon�vel",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Logado",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Deslogado",
-						"type": "String"
-					},
-					{
-						"name": "% Falado x Logado",
-						"type": "String"
-					},
-					{
-						"name": "Marca",
-						"type": "String"
-					}
-				]
+				"schema": []
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/Folder_Nexcore_Consolidado')]"
@@ -36720,108 +36626,7 @@
 					"firstRowAsHeader": true,
 					"quoteChar": ""
 				},
-				"schema": [
-					{
-						"name": "Usuario",
-						"type": "String"
-					},
-					{
-						"name": "Intervalo",
-						"type": "String"
-					},
-					{
-						"name": "Atendidas",
-						"type": "String"
-					},
-					{
-						"name": "Recusas",
-						"type": "String"
-					},
-					{
-						"name": "Recebidas",
-						"type": "String"
-					},
-					{
-						"name": "Internas Recebidas",
-						"type": "String"
-					},
-					{
-						"name": "Transferencias",
-						"type": "String"
-					},
-					{
-						"name": "Efetuadas",
-						"type": "String"
-					},
-					{
-						"name": "Efetuadas Tratados",
-						"type": "String"
-					},
-					{
-						"name": "% Taxa de Contato",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Atendidas",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Internas Recebidas",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Efetuadas",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Medio Falado",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Total Falado",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Toque Agente",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Toque Cliente",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Pausa",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Estouro",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Dispon�vel",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Indispon�vel",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Logado",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Deslogado",
-						"type": "String"
-					},
-					{
-						"name": "% Falado x Logado",
-						"type": "String"
-					},
-					{
-						"name": "Marca",
-						"type": "String"
-					}
-				]
+				"schema": []
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/Historicos_AgentesPorHora_DAYHORC')]"
@@ -42035,180 +41840,7 @@
 					"firstRowAsHeader": true,
 					"quoteChar": ""
 				},
-				"schema": [
-					{
-						"name": "Fila",
-						"type": "String"
-					},
-					{
-						"name": "Intervalo",
-						"type": "String"
-					},
-					{
-						"name": "Atendidas Ate NS",
-						"type": "String"
-					},
-					{
-						"name": "Atendidas Apos NS",
-						"type": "String"
-					},
-					{
-						"name": "Atendidas",
-						"type": "String"
-					},
-					{
-						"name": "Abandonos Ate NS",
-						"type": "String"
-					},
-					{
-						"name": "Abandonos Apos NS",
-						"type": "String"
-					},
-					{
-						"name": "Abandonos Anuncio Inicial",
-						"type": "String"
-					},
-					{
-						"name": "Abandonos",
-						"type": "String"
-					},
-					{
-						"name": "Roteamentos Timeout",
-						"type": "String"
-					},
-					{
-						"name": "Roteamentos Fila Cheia",
-						"type": "String"
-					},
-					{
-						"name": "Roteamentos Fila Vazia",
-						"type": "String"
-					},
-					{
-						"name": "Roteamentos Fila Sem Ags. Disp.",
-						"type": "String"
-					},
-					{
-						"name": "Roteamentos Caixa Postal",
-						"type": "String"
-					},
-					{
-						"name": "Roteamentos",
-						"type": "String"
-					},
-					{
-						"name": "Fora Horario Antes",
-						"type": "String"
-					},
-					{
-						"name": "Fora Horario Intervalo",
-						"type": "String"
-					},
-					{
-						"name": "Fora Horario Depois",
-						"type": "String"
-					},
-					{
-						"name": "Fora Horario",
-						"type": "String"
-					},
-					{
-						"name": "Total Recebidas",
-						"type": "String"
-					},
-					{
-						"name": "Callback Tratados",
-						"type": "String"
-					},
-					{
-						"name": "Callback Nao Tratados",
-						"type": "String"
-					},
-					{
-						"name": "Callback",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Toque",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Falado",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Medio Falado",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Medio Pausa ACW",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Medio Produtivo AHT",
-						"type": "String"
-					},
-					{
-						"name": "% Nivel Servico",
-						"type": "String"
-					},
-					{
-						"name": "% Taxa Atendimento",
-						"type": "String"
-					},
-					{
-						"name": "% Taxa Abandono",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Medio Espera",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Medio para Atender",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Total para Atender",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Medio para Abandono",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Total para Abandono",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Total Espera",
-						"type": "String"
-					},
-					{
-						"name": "Agentes Logados - Minimo",
-						"type": "String"
-					},
-					{
-						"name": "Agentes Logados - Maximo",
-						"type": "String"
-					},
-					{
-						"name": "Chamadas em Espera - Minimo",
-						"type": "String"
-					},
-					{
-						"name": "Chamadas em Espera - Medio",
-						"type": "String"
-					},
-					{
-						"name": "Chamadas em Espera = Maximo",
-						"type": "String"
-					},
-					{
-						"name": "Marca",
-						"type": "String"
-					}
-				]
+				"schema": []
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/Historicos_FIlasPorHoras_INOB')]"
