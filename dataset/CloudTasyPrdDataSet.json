@@ -28,7 +28,7 @@
 				"type": "String"
 			},
 			{
-				"name": "CD_CGC",
+				"name": "CNPJ",
 				"type": "String"
 			},
 			{
