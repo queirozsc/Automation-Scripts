@@ -116,6 +116,9 @@
 								}
 							},
 							{
+								"source": {
+									"name": "NR_PRONTUARIO"
+								},
 								"sink": {
 									"name": "NR_PRONTUARIO",
 									"type": "Int32"

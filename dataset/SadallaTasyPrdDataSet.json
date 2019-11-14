@@ -46,6 +46,10 @@
 			{
 				"name": "MARCA",
 				"type": "String"
+			},
+			{
+				"name": "NR_PRONTUARIO",
+				"type": "Decimal"
 			}
 		]
 	},
