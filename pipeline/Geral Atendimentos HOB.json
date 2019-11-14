@@ -422,66 +422,7 @@
 					"sink": {
 						"type": "AzureSqlSink"
 					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"name": "CD_AGENDA"
-								},
-								"sink": {
-									"name": "CD_AGENDA",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"name": "DS_AGENDA"
-								},
-								"sink": {
-									"name": "DS_AGENDA",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "CD_TIPO_AGENDA"
-								},
-								"sink": {
-									"name": "CD_TIPO_AGENDA",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"name": "CD_PESSOA_FISICA"
-								},
-								"sink": {
-									"name": "CD_PESSOA_FISICA",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"name": "CNPJ"
-								},
-								"sink": {
-									"name": "CNPJ",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "DS_AREA_ATUACAO"
-								},
-								"sink": {
-									"name": "DS_AREA_ATUACAO",
-									"type": "String"
-								}
-							}
-						]
-					}
+					"enableStaging": false
 				},
 				"inputs": [
 					{
