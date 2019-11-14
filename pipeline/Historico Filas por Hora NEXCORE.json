@@ -2857,7 +2857,7 @@
 				]
 			},
 			{
-				"name": "Cria Base Nexcore ",
+				"name": "Cria Base Nexcore",
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
