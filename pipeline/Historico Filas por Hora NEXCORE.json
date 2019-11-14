@@ -963,7 +963,14 @@
 			{
 				"name": "Filas por Hora INOB",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Start",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -1416,7 +1423,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "INOB_CSV_NC_FilasPorHora_Temp",
+						"referenceName": "INOB_CSV_NC_AgentesPorHora_Temp",
 						"type": "DatasetReference"
 					}
 				],
