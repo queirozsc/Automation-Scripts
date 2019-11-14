@@ -20,20 +20,28 @@
 				"type": "String"
 			},
 			{
-				"name": "NR_CPF",
+				"name": "DT_ENTRADA",
 				"type": "String"
 			},
 			{
-				"name": "DT_NASCIMENTO",
+				"name": "HR_ENTRADA",
 				"type": "String"
 			},
 			{
-				"name": "NR_TELEFONE_CELULAR",
+				"name": "NM_MEDICO",
 				"type": "String"
 			},
 			{
-				"name": "NR_TELEFONE",
+				"name": "CD_CONVENIO",
+				"type": "Decimal"
+			},
+			{
+				"name": "DS_CONVENIO",
 				"type": "String"
+			},
+			{
+				"name": "NR_ATENDIMENTO",
+				"type": "Decimal"
 			},
 			{
 				"name": "CNPJ",
@@ -48,8 +56,32 @@
 				"type": "String"
 			},
 			{
-				"name": "NR_PRONTUARIO",
+				"name": "CD_PROCEDENCIA",
 				"type": "Decimal"
+			},
+			{
+				"name": "DS_PROCEDENCIA",
+				"type": "String"
+			},
+			{
+				"name": "ID",
+				"type": "String"
+			},
+			{
+				"name": "DIA",
+				"type": "String"
+			},
+			{
+				"name": "MES",
+				"type": "String"
+			},
+			{
+				"name": "ANO",
+				"type": "String"
+			},
+			{
+				"name": "DT_CANCELAMENTO",
+				"type": "DateTime"
 			}
 		]
 	},

@@ -215,13 +215,13 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "Agendas HOB",
+						"activity": "Atendimento HOB",
 						"dependencyConditions": [
 							"Succeeded"
 						]
 					},
 					{
-						"activity": "Atendimento HOB",
+						"activity": "Agendamento HOB",
 						"dependencyConditions": [
 							"Succeeded"
 						]
