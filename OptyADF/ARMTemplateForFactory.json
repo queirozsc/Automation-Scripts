@@ -15390,13 +15390,72 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "SELECT A.CD_AGENDA, A.DS_AGENDA, A.CD_TIPO_AGENDA, A.CD_PESSOA_FISICA, E.CD_CGC, (SELECT X.DS_AREA_ATUACAO FROM AREA_ATUACAO_MEDICA X\nWHERE X.NR_SEQUENCIA = A.NR_SEQ_AREA_ATUACAO) AS DS_AREA_ATUACAO\nFROM AGENDA A,\n     ESTABELECIMENTO E\nWHERE A.CD_ESTABELECIMENTO = E.CD_ESTABELECIMENTO",
+								"oracleReaderQuery": "SELECT A.CD_AGENDA, A.DS_AGENDA, A.CD_TIPO_AGENDA, A.CD_PESSOA_FISICA, E.CD_CGC as CNPJ, (SELECT X.DS_AREA_ATUACAO FROM AREA_ATUACAO_MEDICA X\nWHERE X.NR_SEQUENCIA = A.NR_SEQ_AREA_ATUACAO) AS DS_AREA_ATUACAO\nFROM AGENDA A,\n     ESTABELECIMENTO E\nWHERE A.CD_ESTABELECIMENTO = E.CD_ESTABELECIMENTO",
 								"partitionOption": "None"
 							},
 							"sink": {
 								"type": "AzureSqlSink"
 							},
-							"enableStaging": false
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "CD_AGENDA"
+										},
+										"sink": {
+											"name": "CD_AGENDA",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_AGENDA"
+										},
+										"sink": {
+											"name": "DS_AGENDA",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CD_TIPO_AGENDA"
+										},
+										"sink": {
+											"name": "CD_TIPO_AGENDA",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "CD_PESSOA_FISICA"
+										},
+										"sink": {
+											"name": "CD_PESSOA_FISICA",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "CNPJ"
+										},
+										"sink": {
+											"name": "CNPJ",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_AREA_ATUACAO"
+										},
+										"sink": {
+											"name": "DS_AREA_ATUACAO",
+											"type": "String"
+										}
+									}
+								]
+							}
 						},
 						"inputs": [
 							{
@@ -15887,7 +15946,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "SELECT A.CD_AGENDA, A.DS_AGENDA, A.CD_TIPO_AGENDA, A.CD_PESSOA_FISICA, E.CD_CGC, (SELECT X.DS_AREA_ATUACAO FROM AREA_ATUACAO_MEDICA X\nWHERE X.NR_SEQUENCIA = A.NR_SEQ_AREA_ATUACAO) AS DS_AREA_ATUACAO\nFROM AGENDA A,\n     ESTABELECIMENTO E\nWHERE A.CD_ESTABELECIMENTO = E.CD_ESTABELECIMENTO",
+								"oracleReaderQuery": "SELECT A.CD_AGENDA, A.DS_AGENDA, A.CD_TIPO_AGENDA, A.CD_PESSOA_FISICA, E.CD_CGC as CNPJ, (SELECT X.DS_AREA_ATUACAO FROM AREA_ATUACAO_MEDICA X\nWHERE X.NR_SEQUENCIA = A.NR_SEQ_AREA_ATUACAO) AS DS_AREA_ATUACAO\nFROM AGENDA A,\n     ESTABELECIMENTO E\nWHERE A.CD_ESTABELECIMENTO = E.CD_ESTABELECIMENTO",
 								"partitionOption": "None"
 							},
 							"sink": {
@@ -34200,6 +34259,58 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Agenda')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Geral Atendimentos Unidades"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "CD_AGENDA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_AGENDA",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_TIPO_AGENDA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CD_PESSOA_FISICA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CD_CGC",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_AREA_ATUACAO",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Agenda_Unidade"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Agendamento')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -36181,7 +36292,7 @@
 						"type": "String"
 					},
 					{
-						"name": "CD_CGC",
+						"name": "CNPJ",
 						"type": "String"
 					},
 					{
@@ -44067,58 +44178,6 @@
 				"typeProperties": {}
 			},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Agenda')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSQL_DB_Procedimentos",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Geral Atendimentos Unidades"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "CD_AGENDA",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "DS_AGENDA",
-						"type": "varchar"
-					},
-					{
-						"name": "CD_TIPO_AGENDA",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "CD_PESSOA_FISICA",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "CD_CGC",
-						"type": "varchar"
-					},
-					{
-						"name": "DS_AREA_ATUACAO",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Agenda_Unidade"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]"
-			]
 		}
 	]
 }
