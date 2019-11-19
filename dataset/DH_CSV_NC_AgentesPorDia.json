@@ -12,7 +12,8 @@
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "FileServerLocation"
+				"type": "FileServerLocation",
+				"fileName": "AgentesPorDiaDAYHORC.csv"
 			},
 			"columnDelimiter": ";",
 			"escapeChar": "",
