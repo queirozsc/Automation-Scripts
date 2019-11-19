@@ -1741,7 +1741,7 @@
 										{
 											"source": {
 												"name": "Tempo Internas Recebidas",
-												"type": "TimeSpan",
+												"type": "String",
 												"format": "hh:mi:ss"
 											},
 											"sink": {
