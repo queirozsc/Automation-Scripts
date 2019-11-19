@@ -1651,7 +1651,7 @@
 										{
 											"source": {
 												"name": "Atendidas",
-												"type": "String"
+												"type": "Int32"
 											},
 											"sink": {
 												"name": "Atendidas",
@@ -1661,7 +1661,7 @@
 										{
 											"source": {
 												"name": "Recusas",
-												"type": "String"
+												"type": "Int32"
 											},
 											"sink": {
 												"name": "Recusas",
@@ -1671,7 +1671,7 @@
 										{
 											"source": {
 												"name": "Recebidas",
-												"type": "String"
+												"type": "Int32"
 											},
 											"sink": {
 												"name": "Recebidas",
@@ -1681,7 +1681,7 @@
 										{
 											"source": {
 												"name": "Internas Recebidas",
-												"type": "String"
+												"type": "Int32"
 											},
 											"sink": {
 												"name": "Internas_Recebidas",
@@ -1691,7 +1691,7 @@
 										{
 											"source": {
 												"name": "Transferencias",
-												"type": "String"
+												"type": "Int32"
 											},
 											"sink": {
 												"name": "Transferencias",
@@ -1701,7 +1701,7 @@
 										{
 											"source": {
 												"name": "Efetuadas",
-												"type": "String"
+												"type": "Int32"
 											},
 											"sink": {
 												"name": "Efetuadas",
