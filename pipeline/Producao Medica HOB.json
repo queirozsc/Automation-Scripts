@@ -1,0 +1,235 @@
+{
+    "name": "Producao Medica HOB",
+    "properties": {
+        "activities": [
+            {
+                "name": "Wait1",
+                "type": "Wait",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "waitTimeInSeconds": 1
+                }
+            },
+            {
+                "name": "Producao Procedimentos Sadalla",
+                "type": "Copy",
+                "dependsOn": [
+                    {
+                        "activity": "Wait1",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "source": {
+                        "type": "OracleSource",
+                        "oracleReaderQuery": "select p.dt_procedimento,\n       p.nr_atendimento,\n       p.nr_interno_conta,\n       p.cd_convenio,\n       p.cd_medico_executor,\n       p.cd_setor_atendimento,\n       p.cd_procedimento,\n       substr(pr.ds_procedimento,1,1000) as ds_procedimento,\n       p.qt_procedimento,\n       p.vl_procedimento,\n       p.vl_medico,\n       c.vl_conta,\n       c.ie_status_acerto as status_conta,\n       es.cd_cgc as cnpj,\n       substr(c.nr_protocolo,1,100) as nr_protocolo,\n       pr.nr_seq_grupo_rec,\n       ' ' as sigla_unidade,\n       ' ' as marca\nfrom  conta_paciente c,\n      procedimento_paciente p,\n      procedimento pr,\n      estabelecimento es\nwhere p.nr_atendimento = c.nr_atendimento\nand p.nr_interno_conta = c.nr_interno_conta\nand p.cd_procedimento = pr.cd_procedimento\nand p.ie_origem_proced = pr.ie_origem_proced\nand c.cd_estabelecimento = es.cd_estabelecimento\nand p.cd_motivo_exc_conta is null\nand p.dt_procedimento between inicio_dia(sysdate - 1065) and (sysdate)",
+                        "partitionOption": "None"
+                    },
+                    "sink": {
+                        "type": "AzureSqlSink"
+                    },
+                    "enableStaging": false
+                },
+                "inputs": [
+                    {
+                        "referenceName": "CloudTasyPrdDataSet",
+                        "type": "DatasetReference"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "referenceName": "AZ_SQL_TB_Procedimento_Paciente",
+                        "type": "DatasetReference"
+                    }
+                ]
+            },
+            {
+                "name": "Producao Materiais Sadalla",
+                "type": "Copy",
+                "dependsOn": [
+                    {
+                        "activity": "Wait1",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "source": {
+                        "type": "OracleSource",
+                        "oracleReaderQuery": "select mp.dt_atualizacao,\n       mp.nr_atendimento,\n       mp.nr_interno_conta,\n       mp.cd_convenio,\n       mp.cd_setor_atendimento,\n       mp.cd_material,\n       substr(m.ds_material,1,1000) as ds_material,\n       mp.qt_material,\n       mp.vl_material,\n       mp.vl_unitario,\n       c.vl_conta,\n       c.ie_status_acerto as status_conta,\n       e.cd_cgc as cnpj,\n       substr(c.nr_protocolo,1,100) as nr_protocolo,\n       ' ' as sigla_unidade,\n       ' ' as marca\nfrom  conta_paciente c,\n      material_atend_paciente mp,\n      material m,\n      estabelecimento e\nwhere c.nr_atendimento = mp.nr_atendimento\nand c.nr_interno_conta = mp.nr_interno_conta\nand mp.cd_material = m.cd_material\nand c.cd_estabelecimento = e.cd_estabelecimento\nand mp.dt_atualizacao between inicio_dia(sysdate - 1065) and (sysdate)",
+                        "partitionOption": "None"
+                    },
+                    "sink": {
+                        "type": "AzureSqlSink"
+                    },
+                    "enableStaging": false
+                },
+                "inputs": [
+                    {
+                        "referenceName": "CloudTasyPrdDataSet",
+                        "type": "DatasetReference"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "referenceName": "AZ_SQL_TB_Material_Paciente",
+                        "type": "DatasetReference"
+                    }
+                ]
+            },
+            {
+                "name": "Convenios",
+                "type": "Copy",
+                "dependsOn": [
+                    {
+                        "activity": "Wait1",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "source": {
+                        "type": "OracleSource",
+                        "oracleReaderQuery": "select cn.cd_convenio, cn.ds_convenio, e.cd_estabelecimento, e.cd_cgc as cnpj\nfrom convenio cn,\n     convenio_estabelecimento ce,\n     estabelecimento e\nwhere cn.cd_convenio = ce.cd_convenio\nand ce.cd_estabelecimento = e.cd_estabelecimento\norder by 2",
+                        "partitionOption": "None"
+                    },
+                    "sink": {
+                        "type": "AzureSqlSink"
+                    },
+                    "enableStaging": false
+                },
+                "inputs": [
+                    {
+                        "referenceName": "CloudTasyPrdDataSet",
+                        "type": "DatasetReference"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "referenceName": "AZ_SQL_TB_Convenio",
+                        "type": "DatasetReference"
+                    }
+                ]
+            },
+            {
+                "name": "Estabelecimento",
+                "type": "Copy",
+                "dependsOn": [
+                    {
+                        "activity": "Wait1",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "source": {
+                        "type": "OracleSource",
+                        "oracleReaderQuery": "select e.cd_cgc as cnpj, e.nm_fantasia_estab as ds_estabelecimento, em.nm_razao_social as ds_empresa\nfrom estabelecimento e,\n             empresa em\nwhere e.cd_empresa = em.cd_empresa\nand e.ie_situacao = 'A'",
+                        "partitionOption": "None"
+                    },
+                    "sink": {
+                        "type": "AzureSqlSink"
+                    },
+                    "enableStaging": false
+                },
+                "inputs": [
+                    {
+                        "referenceName": "CloudTasyPrdDataSet",
+                        "type": "DatasetReference"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "referenceName": "AZ_SQL_TB_Estabelecimento",
+                        "type": "DatasetReference"
+                    }
+                ]
+            },
+            {
+                "name": "Setor",
+                "type": "Copy",
+                "dependsOn": [
+                    {
+                        "activity": "Wait1",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "source": {
+                        "type": "OracleSource",
+                        "oracleReaderQuery": "select a.cd_setor_atendimento, a.ds_setor_atendimento, e.cd_cgc as cnpj\nfrom setor_atendimento a,\nestabelecimento e\nwhere a.cd_estabelecimento = e.cd_estabelecimento\nand e.ie_situacao = 'A'",
+                        "partitionOption": "None"
+                    },
+                    "sink": {
+                        "type": "AzureSqlSink"
+                    },
+                    "enableStaging": false
+                },
+                "inputs": [
+                    {
+                        "referenceName": "CloudTasyPrdDataSet",
+                        "type": "DatasetReference"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "referenceName": "AZ_SQL_TB_Setor",
+                        "type": "DatasetReference"
+                    }
+                ]
+            }
+        ],
+        "folder": {
+            "name": "Produção Médica CSI"
+        },
+        "annotations": []
+    }
+}

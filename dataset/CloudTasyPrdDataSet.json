@@ -12,79 +12,19 @@
 		"type": "OracleTable",
 		"structure": [
 			{
-				"name": "DT_PROCEDIMENTO",
-				"type": "DateTime"
-			},
-			{
-				"name": "NR_ATENDIMENTO",
-				"type": "Decimal"
-			},
-			{
-				"name": "NR_INTERNO_CONTA",
-				"type": "Decimal"
-			},
-			{
-				"name": "CD_CONVENIO",
-				"type": "Decimal"
-			},
-			{
-				"name": "DS_CONVENIO",
-				"type": "String"
-			},
-			{
-				"name": "NM_PACIENTE",
-				"type": "String"
-			},
-			{
-				"name": "NM_MEDICO",
-				"type": "String"
-			},
-			{
-				"name": "DS_SETOR",
-				"type": "String"
-			},
-			{
-				"name": "IE_IDENTIFICADOR",
-				"type": "String"
-			},
-			{
-				"name": "CD_PROCEDIMENTO",
-				"type": "Decimal"
-			},
-			{
-				"name": "DS_PROCEDIMENTO",
-				"type": "String"
-			},
-			{
-				"name": "QT_PROCEDIMENTO",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_MEDICO",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_PROCEDIMENTO",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_CONTA",
-				"type": "Double"
-			},
-			{
-				"name": "STATUS_CONTA",
-				"type": "String"
-			},
-			{
 				"name": "CNPJ",
 				"type": "String"
 			},
 			{
-				"name": "NR_PROTOCOLO",
+				"name": "DATA_AGENDA",
 				"type": "String"
 			},
 			{
-				"name": "NR_SEQ_GRUPO_REC",
+				"name": "HORA_AGENDA",
+				"type": "String"
+			},
+			{
+				"name": "TIPO_AGENDA",
 				"type": "String"
 			},
 			{
@@ -94,6 +34,38 @@
 			{
 				"name": "MARCA",
 				"type": "String"
+			},
+			{
+				"name": "STATUS_AGENDA",
+				"type": "String"
+			},
+			{
+				"name": "NR_SEQUENCIA",
+				"type": "Decimal"
+			},
+			{
+				"name": "DIA",
+				"type": "String"
+			},
+			{
+				"name": "MES",
+				"type": "String"
+			},
+			{
+				"name": "ANO",
+				"type": "String"
+			},
+			{
+				"name": "DS_CLASSIFICACAO",
+				"type": "String"
+			},
+			{
+				"name": "DS_AGRUPAMENTO",
+				"type": "String"
+			},
+			{
+				"name": "CD_AGENDA",
+				"type": "Decimal"
 			}
 		]
 	},

@@ -125,8 +125,8 @@
 											"source": {
 												"name": "Data",
 												"type": "DateTime",
-												"format": "dd/mm/yyyy",
-												"culture": "pt-br"
+												"format": "dd/MM/yyyy",
+												"culture": ""
 											},
 											"sink": {
 												"name": "DATA",
@@ -405,8 +405,8 @@
 											"source": {
 												"name": "Data",
 												"type": "DateTime",
-												"format": "dd/mm/yyyy",
-												"culture": "pt-br"
+												"format": "dd/MM/yyyy",
+												"culture": ""
 											},
 											"sink": {
 												"name": "DATA",
@@ -685,8 +685,8 @@
 											"source": {
 												"name": "Data",
 												"type": "DateTime",
-												"format": "dd/mm/yyyy",
-												"culture": "pt-br"
+												"format": "dd/MM/yyyy",
+												"culture": ""
 											},
 											"sink": {
 												"name": "DATA",
@@ -965,8 +965,8 @@
 											"source": {
 												"name": "Data",
 												"type": "DateTime",
-												"format": "dd/mm/yyyy",
-												"culture": "pt-br"
+												"format": "dd/MM/yyyy",
+												"culture": ""
 											},
 											"sink": {
 												"name": "DATA",
@@ -1245,8 +1245,8 @@
 											"source": {
 												"name": "Data",
 												"type": "DateTime",
-												"format": "dd/mm/yyyy",
-												"culture": "pt-br"
+												"format": "dd/MM/yyyy",
+												"culture": ""
 											},
 											"sink": {
 												"name": "DATA",
@@ -1525,8 +1525,8 @@
 											"source": {
 												"name": "Data",
 												"type": "DateTime",
-												"format": "dd/mm/yyyy",
-												"culture": "pt-br"
+												"format": "dd/MM/yyyy",
+												"culture": ""
 											},
 											"sink": {
 												"name": "DATA",
@@ -1694,7 +1694,7 @@
 			}
 		],
 		"folder": {
-			"name": "Atendimento"
+			"name": "Atendimento/Nexcore"
 		},
 		"annotations": []
 	},

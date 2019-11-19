@@ -12,39 +12,19 @@
 		"type": "OracleTable",
 		"structure": [
 			{
-				"name": "CD_PESSOA_FISICA",
-				"type": "String"
-			},
-			{
-				"name": "NM_PESSOA_FISICA",
-				"type": "String"
-			},
-			{
-				"name": "DT_ENTRADA",
-				"type": "String"
-			},
-			{
-				"name": "HR_ENTRADA",
-				"type": "String"
-			},
-			{
-				"name": "NM_MEDICO",
-				"type": "String"
-			},
-			{
-				"name": "CD_CONVENIO",
-				"type": "Decimal"
-			},
-			{
-				"name": "DS_CONVENIO",
-				"type": "String"
-			},
-			{
-				"name": "NR_ATENDIMENTO",
-				"type": "Decimal"
-			},
-			{
 				"name": "CNPJ",
+				"type": "String"
+			},
+			{
+				"name": "DATA_AGENDA",
+				"type": "String"
+			},
+			{
+				"name": "HORA_AGENDA",
+				"type": "String"
+			},
+			{
+				"name": "TIPO_AGENDA",
 				"type": "String"
 			},
 			{
@@ -56,16 +36,12 @@
 				"type": "String"
 			},
 			{
-				"name": "CD_PROCEDENCIA",
+				"name": "STATUS_AGENDA",
+				"type": "String"
+			},
+			{
+				"name": "NR_SEQUENCIA",
 				"type": "Decimal"
-			},
-			{
-				"name": "DS_PROCEDENCIA",
-				"type": "String"
-			},
-			{
-				"name": "ID",
-				"type": "String"
 			},
 			{
 				"name": "DIA",
@@ -80,8 +56,16 @@
 				"type": "String"
 			},
 			{
-				"name": "DT_CANCELAMENTO",
-				"type": "DateTime"
+				"name": "DS_CLASSIFICACAO",
+				"type": "String"
+			},
+			{
+				"name": "DS_AGRUPAMENTO",
+				"type": "String"
+			},
+			{
+				"name": "CD_AGENDA",
+				"type": "Decimal"
 			}
 		]
 	},
