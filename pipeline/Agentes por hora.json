@@ -1248,6 +1248,7 @@
 									"type": "AzureSqlSink"
 								},
 								"enableStaging": false,
+								"enableSkipIncompatibleRow": false,
 								"translator": {
 									"type": "TabularTranslator",
 									"mappings": [
@@ -1625,6 +1626,7 @@
 									"type": "AzureSqlSink"
 								},
 								"enableStaging": false,
+								"enableSkipIncompatibleRow": true,
 								"translator": {
 									"type": "TabularTranslator",
 									"mappings": [
