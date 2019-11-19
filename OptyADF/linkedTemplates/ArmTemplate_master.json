@@ -7,81 +7,21 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "OptyADF"
 		},
-		"SadallaTasyProd_connectionString": {
+		"AzureSQL_DB_Procedimentos_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SadallaTasyProd'"
-		},
-		"SadallaTasyTeste_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SadallaTasyTeste'"
-		},
-		"SadallaSeniorProd_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SadallaSeniorProd'"
-		},
-		"SadallaSeniorTeste_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SadallaSeniorTeste'"
-		},
-		"CloudTasyProd_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'CloudTasyProd'"
+			"metadata": "Secure string for 'connectionString' of 'AzureSQL_DB_Procedimentos'"
 		},
 		"AzureSqlDatabase_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase'"
 		},
-		"SMARTProd_connectionString": {
+		"CloudTasyProd_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SMARTProd'"
-		},
-		"SMART_ITABUNA_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SMART_ITABUNA'"
-		},
-		"SMART_HOSL_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SMART_HOSL'"
-		},
-		"SMART_INOB_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SMART_INOB'"
-		},
-		"AzureSQL_DB_Procedimentos_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureSQL_DB_Procedimentos'"
-		},
-		"SMART_IOF_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SMART_IOF'"
-		},
-		"SMART_HOSL_NEW_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SMART_HOSL_NEW'"
-		},
-		"SMART_INOB_NEW_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SMART_INOB_NEW'"
-		},
-		"SMART_IOF_NEW_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SMART_IOF_NEW'"
-		},
-		"SMART_ITABUNA_NEW_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SMART_ITABUNA_NEW'"
-		},
-		"SMART_ITAIGARA_NEW_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SMART_ITAIGARA_NEW'"
+			"metadata": "Secure string for 'connectionString' of 'CloudTasyProd'"
 		},
 		"CloudTasyProd_NEW_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'CloudTasyProd_NEW'"
-		},
-		"SadallaTasyProd_NEW_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SadallaTasyProd_NEW'"
 		},
 		"Folder_Nexcore_Consolidado_password": {
 			"type": "secureString",
@@ -90,6 +30,54 @@
 		"Folder_Requestia_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'Folder_Requestia'"
+		},
+		"Historicos_AgentesPorDia_CSI_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Historicos_AgentesPorDia_CSI'"
+		},
+		"Historicos_AgentesPorDia_DAYHORC_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Historicos_AgentesPorDia_DAYHORC'"
+		},
+		"Historicos_AgentesPorDia_HOBL2_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Historicos_AgentesPorDia_HOBL2'"
+		},
+		"Historicos_AgentesPorDia_HOSL_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Historicos_AgentesPorDia_HOSL'"
+		},
+		"Historicos_AgentesPorDia_INOB_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Historicos_AgentesPorDia_INOB'"
+		},
+		"Historicos_AgentesPorDia_SADALLA_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Historicos_AgentesPorDia_SADALLA'"
+		},
+		"Historicos_AgentesPorHora_CSI_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Historicos_AgentesPorHora_CSI'"
+		},
+		"Historicos_AgentesPorHora_DAYHORC_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Historicos_AgentesPorHora_DAYHORC'"
+		},
+		"Historicos_AgentesPorHora_HOBL2_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Historicos_AgentesPorHora_HOBL2'"
+		},
+		"Historicos_AgentesPorHora_HOSL_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Historicos_AgentesPorHora_HOSL'"
+		},
+		"Historicos_AgentesPorHora_INOB_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Historicos_AgentesPorHora_INOB'"
+		},
+		"Historicos_AgentesPorHora_SADALLA_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Historicos_AgentesPorHora_SADALLA'"
 		},
 		"Historicos_Bilhetes_CSI_password": {
 			"type": "secureString",
@@ -139,53 +127,65 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'Historicos_FIlasPorHoras_SADALLA'"
 		},
-		"Historicos_AgentesPorHora_CSI_password": {
+		"SMARTProd_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Historicos_AgentesPorHora_CSI'"
+			"metadata": "Secure string for 'connectionString' of 'SMARTProd'"
 		},
-		"Historicos_AgentesPorHora_DAYHORC_password": {
+		"SMART_HOSL_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Historicos_AgentesPorHora_DAYHORC'"
+			"metadata": "Secure string for 'connectionString' of 'SMART_HOSL'"
 		},
-		"Historicos_AgentesPorHora_HOBL2_password": {
+		"SMART_HOSL_NEW_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Historicos_AgentesPorHora_HOBL2'"
+			"metadata": "Secure string for 'connectionString' of 'SMART_HOSL_NEW'"
 		},
-		"Historicos_AgentesPorHora_HOSL_password": {
+		"SMART_INOB_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Historicos_AgentesPorHora_HOSL'"
+			"metadata": "Secure string for 'connectionString' of 'SMART_INOB'"
 		},
-		"Historicos_AgentesPorHora_INOB_password": {
+		"SMART_INOB_NEW_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Historicos_AgentesPorHora_INOB'"
+			"metadata": "Secure string for 'connectionString' of 'SMART_INOB_NEW'"
 		},
-		"Historicos_AgentesPorHora_SADALLA_password": {
+		"SMART_IOF_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Historicos_AgentesPorHora_SADALLA'"
+			"metadata": "Secure string for 'connectionString' of 'SMART_IOF'"
 		},
-		"Historicos_AgentesPorDia_SADALLA_password": {
+		"SMART_IOF_NEW_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Historicos_AgentesPorDia_SADALLA'"
+			"metadata": "Secure string for 'connectionString' of 'SMART_IOF_NEW'"
 		},
-		"Historicos_AgentesPorDia_CSI_password": {
+		"SMART_ITABUNA_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Historicos_AgentesPorDia_CSI'"
+			"metadata": "Secure string for 'connectionString' of 'SMART_ITABUNA'"
 		},
-		"Historicos_AgentesPorDia_DAYHORC_password": {
+		"SMART_ITABUNA_NEW_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Historicos_AgentesPorDia_DAYHORC'"
+			"metadata": "Secure string for 'connectionString' of 'SMART_ITABUNA_NEW'"
 		},
-		"Historicos_AgentesPorDia_HOSL_password": {
+		"SMART_ITAIGARA_NEW_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Historicos_AgentesPorDia_HOSL'"
+			"metadata": "Secure string for 'connectionString' of 'SMART_ITAIGARA_NEW'"
 		},
-		"Historicos_AgentesPorDia_INOB_password": {
+		"SadallaSeniorProd_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Historicos_AgentesPorDia_INOB'"
+			"metadata": "Secure string for 'connectionString' of 'SadallaSeniorProd'"
 		},
-		"Historicos_AgentesPorDia_HOBL2_password": {
+		"SadallaSeniorTeste_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Historicos_AgentesPorDia_HOBL2'"
+			"metadata": "Secure string for 'connectionString' of 'SadallaSeniorTeste'"
+		},
+		"SadallaTasyProd_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SadallaTasyProd'"
+		},
+		"SadallaTasyProd_NEW_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SadallaTasyProd_NEW'"
+		},
+		"SadallaTasyTeste_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SadallaTasyTeste'"
 		},
 		"Folder_Nexcore_Consolidado_properties_typeProperties_host": {
 			"type": "string",
@@ -200,6 +200,102 @@
 			"defaultValue": "C:\\Power BI Gateway Files\\Requestia"
 		},
 		"Folder_Requestia_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "hobrasil\\sa.automation"
+		},
+		"Historicos_AgentesPorDia_CSI_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\CSI\\AgentesPorDia"
+		},
+		"Historicos_AgentesPorDia_CSI_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "hobrasil\\sa.automation"
+		},
+		"Historicos_AgentesPorDia_DAYHORC_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\DAYHORC\\AgentesPorDia"
+		},
+		"Historicos_AgentesPorDia_DAYHORC_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "hobrasil\\sa.automation"
+		},
+		"Historicos_AgentesPorDia_HOBL2_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\HOBL2\\AgentesPorDia"
+		},
+		"Historicos_AgentesPorDia_HOBL2_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "hobrasil\\sa.automation"
+		},
+		"Historicos_AgentesPorDia_HOSL_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\HOSL\\AgentesPorDia"
+		},
+		"Historicos_AgentesPorDia_HOSL_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "hobrasil\\sa.automation"
+		},
+		"Historicos_AgentesPorDia_INOB_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\INOB\\AgentesPorDia"
+		},
+		"Historicos_AgentesPorDia_INOB_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "hobrasil\\sa.automation"
+		},
+		"Historicos_AgentesPorDia_SADALLA_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\SADALLA\\AgentesPorDia"
+		},
+		"Historicos_AgentesPorDia_SADALLA_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "hobrasil\\sa.automation"
+		},
+		"Historicos_AgentesPorHora_CSI_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\CSI\\AgentesPorHora"
+		},
+		"Historicos_AgentesPorHora_CSI_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "hobrasil\\sa.automation"
+		},
+		"Historicos_AgentesPorHora_DAYHORC_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\DAYHORC\\AgentesPorHora"
+		},
+		"Historicos_AgentesPorHora_DAYHORC_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "hobrasil\\sa.automation"
+		},
+		"Historicos_AgentesPorHora_HOBL2_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\HOBL2\\AgentesPorHora"
+		},
+		"Historicos_AgentesPorHora_HOBL2_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "hobrasil\\sa.automation"
+		},
+		"Historicos_AgentesPorHora_HOSL_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\HOSL\\AgentesPorHora"
+		},
+		"Historicos_AgentesPorHora_HOSL_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "hobrasil\\sa.automation"
+		},
+		"Historicos_AgentesPorHora_INOB_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\INOB\\AgentesPorHora"
+		},
+		"Historicos_AgentesPorHora_INOB_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "hobrasil\\sa.automation"
+		},
+		"Historicos_AgentesPorHora_SADALLA_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\SADALLA\\AgentesPorHora"
+		},
+		"Historicos_AgentesPorHora_SADALLA_properties_typeProperties_userId": {
 			"type": "string",
 			"defaultValue": "hobrasil\\sa.automation"
 		},
@@ -299,102 +395,6 @@
 			"type": "string",
 			"defaultValue": "hobrasil\\sa.automation"
 		},
-		"Historicos_AgentesPorHora_CSI_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\CSI\\AgentesPorHora"
-		},
-		"Historicos_AgentesPorHora_CSI_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "hobrasil\\sa.automation"
-		},
-		"Historicos_AgentesPorHora_DAYHORC_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\DAYHORC\\AgentesPorHora"
-		},
-		"Historicos_AgentesPorHora_DAYHORC_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "hobrasil\\sa.automation"
-		},
-		"Historicos_AgentesPorHora_HOBL2_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\HOBL2\\AgentesPorHora"
-		},
-		"Historicos_AgentesPorHora_HOBL2_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "hobrasil\\sa.automation"
-		},
-		"Historicos_AgentesPorHora_HOSL_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\HOSL\\AgentesPorHora"
-		},
-		"Historicos_AgentesPorHora_HOSL_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "hobrasil\\sa.automation"
-		},
-		"Historicos_AgentesPorHora_INOB_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\INOB\\AgentesPorHora"
-		},
-		"Historicos_AgentesPorHora_INOB_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "hobrasil\\sa.automation"
-		},
-		"Historicos_AgentesPorHora_SADALLA_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\SADALLA\\AgentesPorHora"
-		},
-		"Historicos_AgentesPorHora_SADALLA_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "hobrasil\\sa.automation"
-		},
-		"Historicos_AgentesPorDia_SADALLA_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\SADALLA\\AgentesPorDia"
-		},
-		"Historicos_AgentesPorDia_SADALLA_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "hobrasil\\sa.automation"
-		},
-		"Historicos_AgentesPorDia_CSI_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\CSI\\AgentesPorDia"
-		},
-		"Historicos_AgentesPorDia_CSI_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "hobrasil\\sa.automation"
-		},
-		"Historicos_AgentesPorDia_DAYHORC_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\DAYHORC\\AgentesPorDia"
-		},
-		"Historicos_AgentesPorDia_DAYHORC_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "hobrasil\\sa.automation"
-		},
-		"Historicos_AgentesPorDia_HOSL_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\HOSL\\AgentesPorDia"
-		},
-		"Historicos_AgentesPorDia_HOSL_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "hobrasil\\sa.automation"
-		},
-		"Historicos_AgentesPorDia_INOB_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\INOB\\AgentesPorDia"
-		},
-		"Historicos_AgentesPorDia_INOB_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "hobrasil\\sa.automation"
-		},
-		"Historicos_AgentesPorDia_HOBL2_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\HOBL2\\AgentesPorDia"
-		},
-		"Historicos_AgentesPorDia_HOBL2_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "hobrasil\\sa.automation"
-		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -422,56 +422,11 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
-					"AzureSqlDatabase_connectionString": {
-						"value": "[parameters('AzureSqlDatabase_connectionString')]"
-					},
 					"AzureSQL_DB_Procedimentos_connectionString": {
 						"value": "[parameters('AzureSQL_DB_Procedimentos_connectionString')]"
 					},
-					"SadallaTasyProd_connectionString": {
-						"value": "[parameters('SadallaTasyProd_connectionString')]"
-					},
-					"SadallaTasyTeste_connectionString": {
-						"value": "[parameters('SadallaTasyTeste_connectionString')]"
-					},
-					"SadallaSeniorProd_connectionString": {
-						"value": "[parameters('SadallaSeniorProd_connectionString')]"
-					},
-					"SadallaSeniorTeste_connectionString": {
-						"value": "[parameters('SadallaSeniorTeste_connectionString')]"
-					},
-					"CloudTasyProd_connectionString": {
-						"value": "[parameters('CloudTasyProd_connectionString')]"
-					},
-					"SMARTProd_connectionString": {
-						"value": "[parameters('SMARTProd_connectionString')]"
-					},
-					"SMART_ITABUNA_connectionString": {
-						"value": "[parameters('SMART_ITABUNA_connectionString')]"
-					},
-					"SMART_HOSL_connectionString": {
-						"value": "[parameters('SMART_HOSL_connectionString')]"
-					},
-					"SMART_INOB_connectionString": {
-						"value": "[parameters('SMART_INOB_connectionString')]"
-					},
-					"SMART_IOF_connectionString": {
-						"value": "[parameters('SMART_IOF_connectionString')]"
-					},
-					"SMART_HOSL_NEW_connectionString": {
-						"value": "[parameters('SMART_HOSL_NEW_connectionString')]"
-					},
-					"SMART_INOB_NEW_connectionString": {
-						"value": "[parameters('SMART_INOB_NEW_connectionString')]"
-					},
-					"SMART_IOF_NEW_connectionString": {
-						"value": "[parameters('SMART_IOF_NEW_connectionString')]"
-					},
-					"SMART_ITABUNA_NEW_connectionString": {
-						"value": "[parameters('SMART_ITABUNA_NEW_connectionString')]"
-					},
-					"SMART_ITAIGARA_NEW_connectionString": {
-						"value": "[parameters('SMART_ITAIGARA_NEW_connectionString')]"
+					"AzureSqlDatabase_connectionString": {
+						"value": "[parameters('AzureSqlDatabase_connectionString')]"
 					}
 				}
 			},
@@ -490,18 +445,166 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"CloudTasyProd_connectionString": {
+						"value": "[parameters('CloudTasyProd_connectionString')]"
 					},
 					"CloudTasyProd_NEW_connectionString": {
 						"value": "[parameters('CloudTasyProd_NEW_connectionString')]"
-					},
-					"SadallaTasyProd_NEW_connectionString": {
-						"value": "[parameters('SadallaTasyProd_NEW_connectionString')]"
 					},
 					"Folder_Nexcore_Consolidado_password": {
 						"value": "[parameters('Folder_Nexcore_Consolidado_password')]"
 					},
 					"Folder_Requestia_password": {
 						"value": "[parameters('Folder_Requestia_password')]"
+					},
+					"Historicos_AgentesPorDia_CSI_password": {
+						"value": "[parameters('Historicos_AgentesPorDia_CSI_password')]"
+					},
+					"Historicos_AgentesPorDia_DAYHORC_password": {
+						"value": "[parameters('Historicos_AgentesPorDia_DAYHORC_password')]"
+					},
+					"Historicos_AgentesPorDia_HOBL2_password": {
+						"value": "[parameters('Historicos_AgentesPorDia_HOBL2_password')]"
+					},
+					"Historicos_AgentesPorDia_HOSL_password": {
+						"value": "[parameters('Historicos_AgentesPorDia_HOSL_password')]"
+					},
+					"Historicos_AgentesPorDia_INOB_password": {
+						"value": "[parameters('Historicos_AgentesPorDia_INOB_password')]"
+					},
+					"Historicos_AgentesPorDia_SADALLA_password": {
+						"value": "[parameters('Historicos_AgentesPorDia_SADALLA_password')]"
+					},
+					"Historicos_AgentesPorHora_CSI_password": {
+						"value": "[parameters('Historicos_AgentesPorHora_CSI_password')]"
+					},
+					"Historicos_AgentesPorHora_DAYHORC_password": {
+						"value": "[parameters('Historicos_AgentesPorHora_DAYHORC_password')]"
+					},
+					"Historicos_AgentesPorHora_HOBL2_password": {
+						"value": "[parameters('Historicos_AgentesPorHora_HOBL2_password')]"
+					},
+					"Historicos_AgentesPorHora_HOSL_password": {
+						"value": "[parameters('Historicos_AgentesPorHora_HOSL_password')]"
+					},
+					"Folder_Nexcore_Consolidado_properties_typeProperties_host": {
+						"value": "[parameters('Folder_Nexcore_Consolidado_properties_typeProperties_host')]"
+					},
+					"Folder_Nexcore_Consolidado_properties_typeProperties_userId": {
+						"value": "[parameters('Folder_Nexcore_Consolidado_properties_typeProperties_userId')]"
+					},
+					"Folder_Requestia_properties_typeProperties_host": {
+						"value": "[parameters('Folder_Requestia_properties_typeProperties_host')]"
+					},
+					"Folder_Requestia_properties_typeProperties_userId": {
+						"value": "[parameters('Folder_Requestia_properties_typeProperties_userId')]"
+					},
+					"Historicos_AgentesPorDia_CSI_properties_typeProperties_host": {
+						"value": "[parameters('Historicos_AgentesPorDia_CSI_properties_typeProperties_host')]"
+					},
+					"Historicos_AgentesPorDia_CSI_properties_typeProperties_userId": {
+						"value": "[parameters('Historicos_AgentesPorDia_CSI_properties_typeProperties_userId')]"
+					},
+					"Historicos_AgentesPorDia_DAYHORC_properties_typeProperties_host": {
+						"value": "[parameters('Historicos_AgentesPorDia_DAYHORC_properties_typeProperties_host')]"
+					},
+					"Historicos_AgentesPorDia_DAYHORC_properties_typeProperties_userId": {
+						"value": "[parameters('Historicos_AgentesPorDia_DAYHORC_properties_typeProperties_userId')]"
+					},
+					"Historicos_AgentesPorDia_HOBL2_properties_typeProperties_host": {
+						"value": "[parameters('Historicos_AgentesPorDia_HOBL2_properties_typeProperties_host')]"
+					},
+					"Historicos_AgentesPorDia_HOBL2_properties_typeProperties_userId": {
+						"value": "[parameters('Historicos_AgentesPorDia_HOBL2_properties_typeProperties_userId')]"
+					},
+					"Historicos_AgentesPorDia_HOSL_properties_typeProperties_host": {
+						"value": "[parameters('Historicos_AgentesPorDia_HOSL_properties_typeProperties_host')]"
+					},
+					"Historicos_AgentesPorDia_HOSL_properties_typeProperties_userId": {
+						"value": "[parameters('Historicos_AgentesPorDia_HOSL_properties_typeProperties_userId')]"
+					},
+					"Historicos_AgentesPorDia_INOB_properties_typeProperties_host": {
+						"value": "[parameters('Historicos_AgentesPorDia_INOB_properties_typeProperties_host')]"
+					},
+					"Historicos_AgentesPorDia_INOB_properties_typeProperties_userId": {
+						"value": "[parameters('Historicos_AgentesPorDia_INOB_properties_typeProperties_userId')]"
+					},
+					"Historicos_AgentesPorDia_SADALLA_properties_typeProperties_host": {
+						"value": "[parameters('Historicos_AgentesPorDia_SADALLA_properties_typeProperties_host')]"
+					},
+					"Historicos_AgentesPorDia_SADALLA_properties_typeProperties_userId": {
+						"value": "[parameters('Historicos_AgentesPorDia_SADALLA_properties_typeProperties_userId')]"
+					},
+					"Historicos_AgentesPorHora_CSI_properties_typeProperties_host": {
+						"value": "[parameters('Historicos_AgentesPorHora_CSI_properties_typeProperties_host')]"
+					},
+					"Historicos_AgentesPorHora_CSI_properties_typeProperties_userId": {
+						"value": "[parameters('Historicos_AgentesPorHora_CSI_properties_typeProperties_userId')]"
+					},
+					"Historicos_AgentesPorHora_DAYHORC_properties_typeProperties_host": {
+						"value": "[parameters('Historicos_AgentesPorHora_DAYHORC_properties_typeProperties_host')]"
+					},
+					"Historicos_AgentesPorHora_DAYHORC_properties_typeProperties_userId": {
+						"value": "[parameters('Historicos_AgentesPorHora_DAYHORC_properties_typeProperties_userId')]"
+					},
+					"Historicos_AgentesPorHora_HOBL2_properties_typeProperties_host": {
+						"value": "[parameters('Historicos_AgentesPorHora_HOBL2_properties_typeProperties_host')]"
+					},
+					"Historicos_AgentesPorHora_HOBL2_properties_typeProperties_userId": {
+						"value": "[parameters('Historicos_AgentesPorHora_HOBL2_properties_typeProperties_userId')]"
+					},
+					"Historicos_AgentesPorHora_HOSL_properties_typeProperties_host": {
+						"value": "[parameters('Historicos_AgentesPorHora_HOSL_properties_typeProperties_host')]"
+					},
+					"Historicos_AgentesPorHora_HOSL_properties_typeProperties_userId": {
+						"value": "[parameters('Historicos_AgentesPorHora_HOSL_properties_typeProperties_userId')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"Historicos_AgentesPorHora_INOB_password": {
+						"value": "[parameters('Historicos_AgentesPorHora_INOB_password')]"
+					},
+					"Historicos_AgentesPorHora_SADALLA_password": {
+						"value": "[parameters('Historicos_AgentesPorHora_SADALLA_password')]"
 					},
 					"Historicos_Bilhetes_CSI_password": {
 						"value": "[parameters('Historicos_Bilhetes_CSI_password')]"
@@ -539,29 +642,35 @@
 					"Historicos_FIlasPorHoras_SADALLA_password": {
 						"value": "[parameters('Historicos_FIlasPorHoras_SADALLA_password')]"
 					},
-					"Historicos_AgentesPorHora_CSI_password": {
-						"value": "[parameters('Historicos_AgentesPorHora_CSI_password')]"
+					"SMARTProd_connectionString": {
+						"value": "[parameters('SMARTProd_connectionString')]"
 					},
-					"Historicos_AgentesPorHora_DAYHORC_password": {
-						"value": "[parameters('Historicos_AgentesPorHora_DAYHORC_password')]"
+					"SMART_HOSL_connectionString": {
+						"value": "[parameters('SMART_HOSL_connectionString')]"
 					},
-					"Historicos_AgentesPorHora_HOBL2_password": {
-						"value": "[parameters('Historicos_AgentesPorHora_HOBL2_password')]"
+					"SMART_HOSL_NEW_connectionString": {
+						"value": "[parameters('SMART_HOSL_NEW_connectionString')]"
 					},
-					"Historicos_AgentesPorHora_HOSL_password": {
-						"value": "[parameters('Historicos_AgentesPorHora_HOSL_password')]"
+					"SMART_INOB_connectionString": {
+						"value": "[parameters('SMART_INOB_connectionString')]"
 					},
-					"Folder_Nexcore_Consolidado_properties_typeProperties_host": {
-						"value": "[parameters('Folder_Nexcore_Consolidado_properties_typeProperties_host')]"
+					"SMART_INOB_NEW_connectionString": {
+						"value": "[parameters('SMART_INOB_NEW_connectionString')]"
 					},
-					"Folder_Nexcore_Consolidado_properties_typeProperties_userId": {
-						"value": "[parameters('Folder_Nexcore_Consolidado_properties_typeProperties_userId')]"
+					"SMART_IOF_connectionString": {
+						"value": "[parameters('SMART_IOF_connectionString')]"
 					},
-					"Folder_Requestia_properties_typeProperties_host": {
-						"value": "[parameters('Folder_Requestia_properties_typeProperties_host')]"
+					"Historicos_AgentesPorHora_INOB_properties_typeProperties_host": {
+						"value": "[parameters('Historicos_AgentesPorHora_INOB_properties_typeProperties_host')]"
 					},
-					"Folder_Requestia_properties_typeProperties_userId": {
-						"value": "[parameters('Folder_Requestia_properties_typeProperties_userId')]"
+					"Historicos_AgentesPorHora_INOB_properties_typeProperties_userId": {
+						"value": "[parameters('Historicos_AgentesPorHora_INOB_properties_typeProperties_userId')]"
+					},
+					"Historicos_AgentesPorHora_SADALLA_properties_typeProperties_host": {
+						"value": "[parameters('Historicos_AgentesPorHora_SADALLA_properties_typeProperties_host')]"
+					},
+					"Historicos_AgentesPorHora_SADALLA_properties_typeProperties_userId": {
+						"value": "[parameters('Historicos_AgentesPorHora_SADALLA_properties_typeProperties_userId')]"
 					},
 					"Historicos_Bilhetes_CSI_properties_typeProperties_host": {
 						"value": "[parameters('Historicos_Bilhetes_CSI_properties_typeProperties_host')]"
@@ -634,142 +743,6 @@
 					},
 					"Historicos_FIlasPorHoras_SADALLA_properties_typeProperties_userId": {
 						"value": "[parameters('Historicos_FIlasPorHoras_SADALLA_properties_typeProperties_userId')]"
-					},
-					"Historicos_AgentesPorHora_CSI_properties_typeProperties_host": {
-						"value": "[parameters('Historicos_AgentesPorHora_CSI_properties_typeProperties_host')]"
-					},
-					"Historicos_AgentesPorHora_CSI_properties_typeProperties_userId": {
-						"value": "[parameters('Historicos_AgentesPorHora_CSI_properties_typeProperties_userId')]"
-					},
-					"Historicos_AgentesPorHora_DAYHORC_properties_typeProperties_host": {
-						"value": "[parameters('Historicos_AgentesPorHora_DAYHORC_properties_typeProperties_host')]"
-					},
-					"Historicos_AgentesPorHora_DAYHORC_properties_typeProperties_userId": {
-						"value": "[parameters('Historicos_AgentesPorHora_DAYHORC_properties_typeProperties_userId')]"
-					},
-					"Historicos_AgentesPorHora_HOBL2_properties_typeProperties_host": {
-						"value": "[parameters('Historicos_AgentesPorHora_HOBL2_properties_typeProperties_host')]"
-					},
-					"Historicos_AgentesPorHora_HOBL2_properties_typeProperties_userId": {
-						"value": "[parameters('Historicos_AgentesPorHora_HOBL2_properties_typeProperties_userId')]"
-					},
-					"Historicos_AgentesPorHora_HOSL_properties_typeProperties_host": {
-						"value": "[parameters('Historicos_AgentesPorHora_HOSL_properties_typeProperties_host')]"
-					},
-					"Historicos_AgentesPorHora_HOSL_properties_typeProperties_userId": {
-						"value": "[parameters('Historicos_AgentesPorHora_HOSL_properties_typeProperties_userId')]"
-					}
-				}
-			},
-			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_0')]"
-			]
-		},
-		{
-			"name": "ArmTemplate_2",
-			"type": "Microsoft.Resources/deployments",
-			"apiVersion": "2018-02-01",
-			"properties": {
-				"mode": "incremental",
-				"templateLink": {
-					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
-					"contentVersion": "1.0.0.0"
-				},
-				"parameters": {
-					"factoryName": {
-						"value": "[parameters('factoryName')]"
-					},
-					"Historicos_AgentesPorHora_INOB_password": {
-						"value": "[parameters('Historicos_AgentesPorHora_INOB_password')]"
-					},
-					"Historicos_AgentesPorHora_SADALLA_password": {
-						"value": "[parameters('Historicos_AgentesPorHora_SADALLA_password')]"
-					},
-					"Historicos_AgentesPorDia_SADALLA_password": {
-						"value": "[parameters('Historicos_AgentesPorDia_SADALLA_password')]"
-					},
-					"Historicos_AgentesPorDia_CSI_password": {
-						"value": "[parameters('Historicos_AgentesPorDia_CSI_password')]"
-					},
-					"Historicos_AgentesPorDia_DAYHORC_password": {
-						"value": "[parameters('Historicos_AgentesPorDia_DAYHORC_password')]"
-					},
-					"Historicos_AgentesPorDia_HOSL_password": {
-						"value": "[parameters('Historicos_AgentesPorDia_HOSL_password')]"
-					},
-					"Historicos_AgentesPorDia_INOB_password": {
-						"value": "[parameters('Historicos_AgentesPorDia_INOB_password')]"
-					},
-					"Historicos_AgentesPorDia_HOBL2_password": {
-						"value": "[parameters('Historicos_AgentesPorDia_HOBL2_password')]"
-					},
-					"Historicos_AgentesPorHora_INOB_properties_typeProperties_host": {
-						"value": "[parameters('Historicos_AgentesPorHora_INOB_properties_typeProperties_host')]"
-					},
-					"Historicos_AgentesPorHora_INOB_properties_typeProperties_userId": {
-						"value": "[parameters('Historicos_AgentesPorHora_INOB_properties_typeProperties_userId')]"
-					},
-					"Historicos_AgentesPorHora_SADALLA_properties_typeProperties_host": {
-						"value": "[parameters('Historicos_AgentesPorHora_SADALLA_properties_typeProperties_host')]"
-					},
-					"Historicos_AgentesPorHora_SADALLA_properties_typeProperties_userId": {
-						"value": "[parameters('Historicos_AgentesPorHora_SADALLA_properties_typeProperties_userId')]"
-					},
-					"Historicos_AgentesPorDia_SADALLA_properties_typeProperties_host": {
-						"value": "[parameters('Historicos_AgentesPorDia_SADALLA_properties_typeProperties_host')]"
-					},
-					"Historicos_AgentesPorDia_SADALLA_properties_typeProperties_userId": {
-						"value": "[parameters('Historicos_AgentesPorDia_SADALLA_properties_typeProperties_userId')]"
-					},
-					"Historicos_AgentesPorDia_CSI_properties_typeProperties_host": {
-						"value": "[parameters('Historicos_AgentesPorDia_CSI_properties_typeProperties_host')]"
-					},
-					"Historicos_AgentesPorDia_CSI_properties_typeProperties_userId": {
-						"value": "[parameters('Historicos_AgentesPorDia_CSI_properties_typeProperties_userId')]"
-					},
-					"Historicos_AgentesPorDia_DAYHORC_properties_typeProperties_host": {
-						"value": "[parameters('Historicos_AgentesPorDia_DAYHORC_properties_typeProperties_host')]"
-					},
-					"Historicos_AgentesPorDia_DAYHORC_properties_typeProperties_userId": {
-						"value": "[parameters('Historicos_AgentesPorDia_DAYHORC_properties_typeProperties_userId')]"
-					},
-					"Historicos_AgentesPorDia_HOSL_properties_typeProperties_host": {
-						"value": "[parameters('Historicos_AgentesPorDia_HOSL_properties_typeProperties_host')]"
-					},
-					"Historicos_AgentesPorDia_HOSL_properties_typeProperties_userId": {
-						"value": "[parameters('Historicos_AgentesPorDia_HOSL_properties_typeProperties_userId')]"
-					},
-					"Historicos_AgentesPorDia_INOB_properties_typeProperties_host": {
-						"value": "[parameters('Historicos_AgentesPorDia_INOB_properties_typeProperties_host')]"
-					},
-					"Historicos_AgentesPorDia_INOB_properties_typeProperties_userId": {
-						"value": "[parameters('Historicos_AgentesPorDia_INOB_properties_typeProperties_userId')]"
-					},
-					"Historicos_AgentesPorDia_HOBL2_properties_typeProperties_host": {
-						"value": "[parameters('Historicos_AgentesPorDia_HOBL2_properties_typeProperties_host')]"
-					},
-					"Historicos_AgentesPorDia_HOBL2_properties_typeProperties_userId": {
-						"value": "[parameters('Historicos_AgentesPorDia_HOBL2_properties_typeProperties_userId')]"
-					}
-				}
-			},
-			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_1')]"
-			]
-		},
-		{
-			"name": "ArmTemplate_3",
-			"type": "Microsoft.Resources/deployments",
-			"apiVersion": "2018-02-01",
-			"properties": {
-				"mode": "incremental",
-				"templateLink": {
-					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
-					"contentVersion": "1.0.0.0"
-				},
-				"parameters": {
-					"factoryName": {
-						"value": "[parameters('factoryName')]"
 					}
 				}
 			},
@@ -790,6 +763,33 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"SMART_IOF_NEW_connectionString": {
+						"value": "[parameters('SMART_IOF_NEW_connectionString')]"
+					},
+					"SMART_ITABUNA_connectionString": {
+						"value": "[parameters('SMART_ITABUNA_connectionString')]"
+					},
+					"SMART_ITABUNA_NEW_connectionString": {
+						"value": "[parameters('SMART_ITABUNA_NEW_connectionString')]"
+					},
+					"SMART_ITAIGARA_NEW_connectionString": {
+						"value": "[parameters('SMART_ITAIGARA_NEW_connectionString')]"
+					},
+					"SadallaSeniorProd_connectionString": {
+						"value": "[parameters('SadallaSeniorProd_connectionString')]"
+					},
+					"SadallaSeniorTeste_connectionString": {
+						"value": "[parameters('SadallaSeniorTeste_connectionString')]"
+					},
+					"SadallaTasyProd_connectionString": {
+						"value": "[parameters('SadallaTasyProd_connectionString')]"
+					},
+					"SadallaTasyProd_NEW_connectionString": {
+						"value": "[parameters('SadallaTasyProd_NEW_connectionString')]"
+					},
+					"SadallaTasyTeste_connectionString": {
+						"value": "[parameters('SadallaTasyTeste_connectionString')]"
 					}
 				}
 			},
