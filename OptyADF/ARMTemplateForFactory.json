@@ -8059,6 +8059,33 @@
 										"referenceName": "AzureSQL_DB_Procedimentos",
 										"type": "LinkedServiceReference"
 									}
+								},
+								{
+									"name": "Altera chamado em pausa",
+									"type": "SqlServerStoredProcedure",
+									"dependsOn": [
+										{
+											"activity": "Calculate fields",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"storedProcedureName": "[[dbo].[sp_ALTERACHAMADOSPAUSADOS]"
+									},
+									"linkedServiceName": {
+										"referenceName": "AzureSQL_DB_Procedimentos",
+										"type": "LinkedServiceReference"
+									}
 								}
 							]
 						}
