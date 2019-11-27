@@ -12,7 +12,7 @@
 		"type": "OracleTable",
 		"structure": [
 			{
-				"name": "CD_CNPJ",
+				"name": "CNPJ",
 				"type": "String"
 			},
 			{
@@ -72,11 +72,11 @@
 				"type": "String"
 			},
 			{
-				"name": "MARCA",
+				"name": "SIGLA_UNIDADE",
 				"type": "String"
 			},
 			{
-				"name": "SIGLA_UNIDADE",
+				"name": "MARCA",
 				"type": "String"
 			}
 		]
