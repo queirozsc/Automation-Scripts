@@ -16,15 +16,59 @@
 				"type": "String"
 			},
 			{
-				"name": "DATA_AGENDA",
+				"name": "NM_RAZAOSOCIAL",
 				"type": "String"
 			},
 			{
-				"name": "HORA_AGENDA",
+				"name": "NM_FANTASIA",
 				"type": "String"
 			},
 			{
-				"name": "TIPO_AGENDA",
+				"name": "NR_TITULO",
+				"type": "Decimal"
+			},
+			{
+				"name": "NR_NOTA_FISCAL",
+				"type": "String"
+			},
+			{
+				"name": "DT_EMISSAO",
+				"type": "DateTime"
+			},
+			{
+				"name": "DT_VENCIMENTO_ORIGINAL",
+				"type": "DateTime"
+			},
+			{
+				"name": "DT_VENCIMENTO_PRORROGADO",
+				"type": "DateTime"
+			},
+			{
+				"name": "VL_BRUTO",
+				"type": "Decimal"
+			},
+			{
+				"name": "VL_SALDO_JUROS",
+				"type": "Decimal"
+			},
+			{
+				"name": "VL_SALDO_MULTA",
+				"type": "Decimal"
+			},
+			{
+				"name": "VL_LIQUIDO",
+				"type": "String"
+			},
+			{
+				"name": "VL_SALDO_TITULO",
+				"type": "Decimal"
+			},
+			{
+				"name": "VL_AMENOR",
+				"type": "Double"
+			},
+			{
+				"name": "SITUACAO",
 				"type": "String"
 			},
 			{
@@ -34,38 +78,6 @@
 			{
 				"name": "MARCA",
 				"type": "String"
-			},
-			{
-				"name": "STATUS_AGENDA",
-				"type": "String"
-			},
-			{
-				"name": "NR_SEQUENCIA",
-				"type": "Decimal"
-			},
-			{
-				"name": "DIA",
-				"type": "String"
-			},
-			{
-				"name": "MES",
-				"type": "String"
-			},
-			{
-				"name": "ANO",
-				"type": "String"
-			},
-			{
-				"name": "DS_CLASSIFICACAO",
-				"type": "String"
-			},
-			{
-				"name": "DS_AGRUPAMENTO",
-				"type": "String"
-			},
-			{
-				"name": "CD_AGENDA",
-				"type": "Decimal"
 			}
 		]
 	},
