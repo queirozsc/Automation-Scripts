@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT  \n        A.CD_CGC CD_CNPJ,\n        B.DS_RAZAO_SOCIAL NM_RAZAOSOCIAL,\n        B.NM_FANTASIA,\n        A.NR_TITULO,\n        A.NR_NOTA_FISCAL,\n        A.DT_EMISSAO,\n        A.DT_VENCIMENTO DT_VENCIMENTO_ORIGINAL,\n        A.DT_PAGAMENTO_PREVISTO DT_VENCIMENTO_PRORROGADO,\n        A.VL_TITULO VL_BRUTO,\n        A.VL_SALDO_JUROS,\n        A.VL_SALDO_MULTA,\n        OBTER_DADOS_TITULO_RECEBER(A.NR_TITULO, 'VLL') VL_LIQUIDO,\n        A.VL_SALDO_TITULO,\n        OBTER_VL_AMENOR_TIT(A.NR_TITULO,'A',A.DT_ATUALIZACAO) as VL_AMENOR,\n        Obter_valor_dominio(710, a.ie_situacao) as situacao,\n        EM.NM_RAZAO_SOCIAL as MARCA,\n        E.NM_FANTASIA_ESTAB AS SIGLA_UNIDADE\nFROM    TITULO_RECEBER A, PESSOA_JURIDICA B,\n        ESTABELECIMENTO E,\n        EMPRESA EM  -- TITULO_RECEBER_LIQ L\nwhere   b.cd_cgc = a.cd_cgc\nand     a.vl_saldo_titulo <> 0\nAND     a.CD_ESTABELECIMENTO = E.CD_ESTABELECIMENTO\nAND     E.CD_EMPRESA = EM.CD_EMPRESA",
+						"oracleReaderQuery": "SELECT  \n        A.CD_CGC CNPJ,\n        B.DS_RAZAO_SOCIAL NM_RAZAOSOCIAL,\n        B.NM_FANTASIA,\n        A.NR_TITULO,\n        A.NR_NOTA_FISCAL,\n        A.DT_EMISSAO,\n        A.DT_VENCIMENTO DT_VENCIMENTO_ORIGINAL,\n        A.DT_PAGAMENTO_PREVISTO DT_VENCIMENTO_PRORROGADO,\n        A.VL_TITULO VL_BRUTO,\n        A.VL_SALDO_JUROS,\n        A.VL_SALDO_MULTA,\n        OBTER_DADOS_TITULO_RECEBER(A.NR_TITULO, 'VLL') VL_LIQUIDO,\n        A.VL_SALDO_TITULO,\n        OBTER_VL_AMENOR_TIT(A.NR_TITULO,'A',A.DT_ATUALIZACAO) as VL_AMENOR,\n        Obter_valor_dominio(710, a.ie_situacao) as situacao,\n        E.NM_FANTASIA_ESTAB AS SIGLA_UNIDADE,\n        EM.NM_RAZAO_SOCIAL as MARCA\nFROM    TITULO_RECEBER A, PESSOA_JURIDICA B,\n        ESTABELECIMENTO E,\n        EMPRESA EM  -- TITULO_RECEBER_LIQ L\nwhere   b.cd_cgc = a.cd_cgc\nand     a.vl_saldo_titulo <> 0\nAND     a.CD_ESTABELECIMENTO = E.CD_ESTABELECIMENTO\nAND     E.CD_EMPRESA = EM.CD_EMPRESA",
 						"partitionOption": "None"
 					},
 					"sink": {
@@ -53,13 +53,177 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT  \n        A.CD_CGC CD_CNPJ,\n        B.DS_RAZAO_SOCIAL NM_RAZAOSOCIAL,\n        B.NM_FANTASIA,\n        A.NR_TITULO,\n        A.NR_NOTA_FISCAL,\n        A.DT_EMISSAO,\n        A.DT_VENCIMENTO DT_VENCIMENTO_ORIGINAL,\n        A.DT_PAGAMENTO_PREVISTO DT_VENCIMENTO_PRORROGADO,\n        A.VL_TITULO VL_BRUTO,\n        A.VL_SALDO_JUROS,\n        A.VL_SALDO_MULTA,\n        OBTER_DADOS_TITULO_RECEBER(A.NR_TITULO, 'VLL') VL_LIQUIDO,\n        A.VL_SALDO_TITULO,\n        OBTER_VL_AMENOR_TIT(A.NR_TITULO,'A',A.DT_ATUALIZACAO) as VL_AMENOR,\n        Obter_valor_dominio(710, a.ie_situacao) as situacao,\n        EM.NM_RAZAO_SOCIAL as MARCA,\n        E.NM_FANTASIA_ESTAB AS SIGLA_UNIDADE\nFROM    TITULO_RECEBER A, PESSOA_JURIDICA B,\n        ESTABELECIMENTO E,\n        EMPRESA EM  -- TITULO_RECEBER_LIQ L\nwhere   b.cd_cgc = a.cd_cgc\nand     a.vl_saldo_titulo <> 0\nAND     a.CD_ESTABELECIMENTO = E.CD_ESTABELECIMENTO\nAND     E.CD_EMPRESA = EM.CD_EMPRESA",
+						"oracleReaderQuery": "SELECT  \n        A.CD_CGC CNPJ,\n        B.DS_RAZAO_SOCIAL NM_RAZAOSOCIAL,\n        B.NM_FANTASIA,\n        A.NR_TITULO,\n        A.NR_NOTA_FISCAL,\n        A.DT_EMISSAO,\n        A.DT_VENCIMENTO DT_VENCIMENTO_ORIGINAL,\n        A.DT_PAGAMENTO_PREVISTO DT_VENCIMENTO_PRORROGADO,\n        A.VL_TITULO VL_BRUTO,\n        A.VL_SALDO_JUROS,\n        A.VL_SALDO_MULTA,\n        OBTER_DADOS_TITULO_RECEBER(A.NR_TITULO, 'VLL') VL_LIQUIDO,\n        A.VL_SALDO_TITULO,\n        OBTER_VL_AMENOR_TIT(A.NR_TITULO,'A',A.DT_ATUALIZACAO) as VL_AMENOR,\n        Obter_valor_dominio(710, a.ie_situacao) as situacao,\n        E.NM_FANTASIA_ESTAB AS SIGLA_UNIDADE,\n        EM.NM_RAZAO_SOCIAL as MARCA\nFROM    TITULO_RECEBER A, PESSOA_JURIDICA B,\n        ESTABELECIMENTO E,\n        EMPRESA EM  -- TITULO_RECEBER_LIQ L\nwhere   b.cd_cgc = a.cd_cgc\nand     a.vl_saldo_titulo <> 0\nAND     a.CD_ESTABELECIMENTO = E.CD_ESTABELECIMENTO\nAND     E.CD_EMPRESA = EM.CD_EMPRESA",
 						"partitionOption": "None"
 					},
 					"sink": {
 						"type": "AzureSqlSink"
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"sink": {
+									"name": "ESTABELECIMENTO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CD_CNPJ"
+								},
+								"sink": {
+									"name": "CD_CNPJ",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NM_RAZAOSOCIAL"
+								},
+								"sink": {
+									"name": "NM_RAZAOSOCIAL",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NM_FANTASIA"
+								},
+								"sink": {
+									"name": "NM_FANTASIA",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NR_TITULO"
+								},
+								"sink": {
+									"name": "NR_TITULO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "NR_NOTA_FISCAL"
+								},
+								"sink": {
+									"name": "NR_NOTA_FISCAL",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "DT_EMISSAO"
+								},
+								"sink": {
+									"name": "DT_EMISSAO",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "DT_VENCIMENTO_ORIGINAL"
+								},
+								"sink": {
+									"name": "DT_VENCIMENTO_ORIGINAL",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "DT_VENCIMENTO_PRORROGADO"
+								},
+								"sink": {
+									"name": "DT_VENCIMENTO_PRORROGADO",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_BRUTO"
+								},
+								"sink": {
+									"name": "VL_BRUTO",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_SALDO_JUROS"
+								},
+								"sink": {
+									"name": "VL_SALDO_JUROS",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_SALDO_MULTA"
+								},
+								"sink": {
+									"name": "VL_SALDO_MULTA",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_LIQUIDO"
+								},
+								"sink": {
+									"name": "VL_LIQUIDO",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_SALDO_TITULO"
+								},
+								"sink": {
+									"name": "VL_SALDO_TITULO",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_AMENOR"
+								},
+								"sink": {
+									"name": "VL_AMENOR",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "SITUACAO"
+								},
+								"sink": {
+									"name": "SITUACAO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SIGLA_UNIDADE"
+								},
+								"sink": {
+									"name": "SIGLA_UNIDADE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "MARCA"
+								},
+								"sink": {
+									"name": "MARCA",
+									"type": "String"
+								}
+							}
+						]
+					}
 				},
 				"inputs": [
 					{
