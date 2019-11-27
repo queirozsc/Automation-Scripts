@@ -44,15 +44,13 @@
 						"inputs": [
 							{
 								"referenceName": "CloudTasyPrdDataSet",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "AZ_SQL_TB_Titulos_Receber",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -82,15 +80,13 @@
 						"inputs": [
 							{
 								"referenceName": "SadallaTasyPrdDataSet",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "AZ_SQL_TB_Titulos_Receber",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -119,15 +115,13 @@
 						"inputs": [
 							{
 								"referenceName": "SMART_ITAIGARA_PrdDataSet",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "AZ_SQL_TB_Titulos_Receber",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -156,15 +150,13 @@
 						"inputs": [
 							{
 								"referenceName": "SMART_HOSL_PrdDataSet",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "AZ_SQL_TB_Titulos_Receber",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					}
@@ -174,239 +166,182 @@
 				},
 				"annotations": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/CloudTasyPrdDataSet')]",
+				"[concat(variables('factoryId'), '/datasets/SadallaTasyPrdDataSet')]"
+			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Titulos_Pagar')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
+			"name": "[concat(parameters('factoryName'), '/CloudTasyPrdDataSet')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"activities": [
-					{
-						"name": "Titulos_Pagar",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "OracleSource",
-								"oracleReaderQuery": "select obter_nome_estab(t.cd_estabelecimento) as estabelecimento,\n       t.cd_cgc,\n       obter_razao_social(t.cd_cgc) as nm_razaosocial,\n       obter_nome_fantasia_pj(t.cd_cgc) nm_fantasia,\n       t.nr_titulo,\n       t.nr_seq_nota_fiscal,\n       t.dt_emissao,\n       t.dt_vencimento_original,\n       t.dt_vencimento_atual,\n       t.vl_titulo,\n       t.vl_saldo_titulo,\n       t.vl_saldo_juros,\n       t.vl_saldo_multa,\n       t.vl_dia_antecipacao,\n       t.vl_bordero,\n       t.vl_juros_bordero,\n       t.vl_multa_bordero,\n       t.vl_desconto_bordero,\n       t.vl_ir,\n       t.vl_imposto_munic,\n       t.vl_inss,\n       t.vl_out_desp_bordero,\n       t.vl_titulo_estrang,\n       t.vl_cotacao,\n       obter_valor_dominio(501,t.ie_situacao) as situacao\nfrom titulo_pagar t",
-								"partitionOption": "None"
-							},
-							"sink": {
-								"type": "AzureSqlSink"
-							},
-							"enableStaging": false
-						},
-						"inputs": [
-							{
-								"referenceName": "CloudTasyPrdDataSet",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "AZ_SQL_TB_Titulos_Pagar",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"folder": {
-					"name": "Contas a Pagar"
+				"linkedServiceName": {
+					"referenceName": "CloudTasyProd_NEW",
+					"type": "LinkedServiceReference"
 				},
-				"annotations": []
+				"folder": {
+					"name": "Power BI"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"structure": [
+					{
+						"name": "CNPJ",
+						"type": "String"
+					},
+					{
+						"name": "NM_RAZAOSOCIAL",
+						"type": "String"
+					},
+					{
+						"name": "NM_FANTASIA",
+						"type": "String"
+					},
+					{
+						"name": "NR_TITULO",
+						"type": "Decimal"
+					},
+					{
+						"name": "NR_NOTA_FISCAL",
+						"type": "String"
+					},
+					{
+						"name": "DT_EMISSAO",
+						"type": "DateTime"
+					},
+					{
+						"name": "DT_VENCIMENTO_ORIGINAL",
+						"type": "DateTime"
+					},
+					{
+						"name": "DT_VENCIMENTO_PRORROGADO",
+						"type": "DateTime"
+					},
+					{
+						"name": "VL_BRUTO",
+						"type": "Decimal"
+					},
+					{
+						"name": "VL_SALDO_JUROS",
+						"type": "Decimal"
+					},
+					{
+						"name": "VL_SALDO_MULTA",
+						"type": "Decimal"
+					},
+					{
+						"name": "VL_LIQUIDO",
+						"type": "String"
+					},
+					{
+						"name": "VL_SALDO_TITULO",
+						"type": "Decimal"
+					},
+					{
+						"name": "VL_AMENOR",
+						"type": "Double"
+					},
+					{
+						"name": "SITUACAO",
+						"type": "String"
+					},
+					{
+						"name": "SIGLA_UNIDADE",
+						"type": "String"
+					},
+					{
+						"name": "MARCA",
+						"type": "String"
+					}
+				]
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Daily 0200 AM')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
+			"name": "[concat(parameters('factoryName'), '/SadallaTasyPrdDataSet')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"description": "Criado para executar as consultas no HOSAG",
+				"linkedServiceName": {
+					"referenceName": "SadallaTasyProd_NEW",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Power BI"
+				},
 				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
+				"type": "OracleTable",
+				"structure": [
 					{
-						"pipelineReference": {
-							"referenceName": "Geral Atendimentos Sadalla V2",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Day",
-						"interval": 1,
-						"startTime": "2019-10-08T03:02:00.000Z",
-						"timeZone": "UTC",
-						"schedule": {
-							"minutes": [
-								0
-							],
-							"hours": [
-								5
-							]
-						}
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Daily 0630 AM')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Execução de pipeline para atualização das informações dos indicadores de Call Center",
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "Agendas Projesi",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
+						"name": "CNPJ",
+						"type": "String"
 					},
 					{
-						"pipelineReference": {
-							"referenceName": "Chamados Requestia",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
+						"name": "NM_RAZAOSOCIAL",
+						"type": "String"
 					},
 					{
-						"pipelineReference": {
-							"referenceName": "Geral Atendimentos HOB V2",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Day",
-						"interval": 1,
-						"startTime": "2019-08-20T15:22:00.000Z",
-						"timeZone": "UTC",
-						"schedule": {
-							"minutes": [
-								30
-							],
-							"hours": [
-								9
-							]
-						}
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Daily 0800 AM')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "Chamados Philips",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Day",
-						"interval": 1,
-						"startTime": "2019-09-27T11:00:00.000Z",
-						"timeZone": "UTC",
-						"schedule": {
-							"minutes": [
-								0
-							],
-							"hours": [
-								11
-							]
-						}
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Daily 0830 AM')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Trigger para a execução do pipeline diariamente (Importante: 11h30 UTC = 08h30 horário de Brasília)",
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "Agentes por dia",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
+						"name": "NM_FANTASIA",
+						"type": "String"
 					},
 					{
-						"pipelineReference": {
-							"referenceName": "Agentes por hora",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
+						"name": "NR_TITULO",
+						"type": "Decimal"
 					},
 					{
-						"pipelineReference": {
-							"referenceName": "Filas por hora",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
+						"name": "NR_NOTA_FISCAL",
+						"type": "String"
 					},
 					{
-						"pipelineReference": {
-							"referenceName": "Bilhete Ligacoes",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
+						"name": "DT_EMISSAO",
+						"type": "DateTime"
+					},
+					{
+						"name": "DT_VENCIMENTO_ORIGINAL",
+						"type": "DateTime"
+					},
+					{
+						"name": "DT_VENCIMENTO_PRORROGADO",
+						"type": "DateTime"
+					},
+					{
+						"name": "VL_BRUTO",
+						"type": "Decimal"
+					},
+					{
+						"name": "VL_SALDO_JUROS",
+						"type": "Decimal"
+					},
+					{
+						"name": "VL_SALDO_MULTA",
+						"type": "Decimal"
+					},
+					{
+						"name": "VL_LIQUIDO",
+						"type": "String"
+					},
+					{
+						"name": "VL_SALDO_TITULO",
+						"type": "Decimal"
+					},
+					{
+						"name": "VL_AMENOR",
+						"type": "Double"
+					},
+					{
+						"name": "SITUACAO",
+						"type": "String"
+					},
+					{
+						"name": "SIGLA_UNIDADE",
+						"type": "String"
+					},
+					{
+						"name": "MARCA",
+						"type": "String"
 					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Day",
-						"interval": 1,
-						"startTime": "2019-06-17T20:00:00.000Z",
-						"timeZone": "UTC",
-						"schedule": {
-							"minutes": [
-								30
-							],
-							"hours": [
-								11
-							]
-						}
-					}
-				}
+				]
 			},
 			"dependsOn": []
 		}

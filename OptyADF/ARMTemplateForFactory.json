@@ -33276,7 +33276,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "        SELECT  \n        obter_cnpj_estabelecimento(A.CD_ESTABELECIMENTO) as cd_cgc_estab,\n        SUBSTR(OBTER_NOME_ESTABELECIMENTO(A.CD_ESTABELECIMENTO),1,255) ESTABELECIMENTO,\n        A.CD_CGC CD_CNPJ,\n        B.DS_RAZAO_SOCIAL NM_RAZAOSOCIAL,\n        B.NM_FANTASIA,\n        A.NR_TITULO,\n        A.NR_NOTA_FISCAL,\n        A.DT_EMISSAO,\n        A.DT_VENCIMENTO DT_VENCIMENTO_ORIGINAL,\n        A.DT_PAGAMENTO_PREVISTO DT_VENCIMENTO_PRORROGADO,\n        A.VL_TITULO VL_BRUTO,\n        A.VL_SALDO_JUROS,\n        A.VL_SALDO_MULTA,\n        OBTER_DADOS_TITULO_RECEBER(A.NR_TITULO, 'VLL') VL_LIQUIDO,\n        A.VL_SALDO_TITULO,\n        OBTER_VL_AMENOR_TIT(A.NR_TITULO,'A',A.DT_ATUALIZACAO) as VL_AMENOR,\n        Obter_valor_dominio(710, a.ie_situacao) as situacao,\n        '' as MARCA,\n        '' AS SIGLA_UNIDADE\nFROM    TITULO_RECEBER A, PESSOA_JURIDICA B -- TITULO_RECEBER_LIQ L\nwhere     b.cd_cgc = a.cd_cgc\nand     a.vl_saldo_titulo <> 0",
+								"oracleReaderQuery": "SELECT  \n        A.CD_CGC CNPJ,\n        B.DS_RAZAO_SOCIAL NM_RAZAOSOCIAL,\n        B.NM_FANTASIA,\n        A.NR_TITULO,\n        A.NR_NOTA_FISCAL,\n        A.DT_EMISSAO,\n        A.DT_VENCIMENTO DT_VENCIMENTO_ORIGINAL,\n        A.DT_PAGAMENTO_PREVISTO DT_VENCIMENTO_PRORROGADO,\n        A.VL_TITULO VL_BRUTO,\n        --A.VL_SALDO_JUROS,\n        A.VL_SALDO_MULTA,\n        OBTER_DADOS_TITULO_RECEBER(A.NR_TITULO, 'VLL') VL_LIQUIDO,\n        A.VL_SALDO_TITULO,\n        OBTER_VL_AMENOR_TIT(A.NR_TITULO,'A',A.DT_ATUALIZACAO) as VL_AMENOR,\n        Obter_valor_dominio(710, a.ie_situacao) as situacao,\n        E.NM_FANTASIA_ESTAB AS SIGLA_UNIDADE,\n        EM.NM_RAZAO_SOCIAL as MARCA,\n        E.CD_CGC\nFROM    TITULO_RECEBER A, \n        PESSOA_JURIDICA B,\n        ESTABELECIMENTO E,\n        EMPRESA EM \nwhere   b.cd_cgc = a.cd_cgc\nAND     a.CD_ESTABELECIMENTO = E.CD_ESTABELECIMENTO\nAND     E.CD_EMPRESA = EM.CD_EMPRESA",
 								"partitionOption": "None"
 							},
 							"sink": {
@@ -33314,7 +33314,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "SELECT  \n        obter_cnpj_estabelecimento(A.CD_ESTABELECIMENTO) as cd_cgc_estab,\n        SUBSTR(OBTER_NOME_ESTABELECIMENTO(A.CD_ESTABELECIMENTO),1,255) ESTABELECIMENTO,\n        A.CD_CGC CD_CNPJ,\n        B.DS_RAZAO_SOCIAL NM_RAZAOSOCIAL,\n        B.NM_FANTASIA,\n        A.NR_TITULO,\n        A.NR_NOTA_FISCAL,\n        A.DT_EMISSAO,\n        A.DT_VENCIMENTO DT_VENCIMENTO_ORIGINAL,\n        A.DT_PAGAMENTO_PREVISTO DT_VENCIMENTO_PRORROGADO,\n        A.VL_TITULO VL_BRUTO,\n        A.VL_SALDO_JUROS,\n        A.VL_SALDO_MULTA,\n        OBTER_DADOS_TITULO_RECEBER(A.NR_TITULO, 'VLL') VL_LIQUIDO,\n        A.VL_SALDO_TITULO,\n        OBTER_VL_AMENOR_TIT(A.NR_TITULO,'A',A.DT_ATUALIZACAO) as VL_AMENOR,\n        Obter_valor_dominio(710, a.ie_situacao) as situacao,\n        '' as MARCA,\n        '' AS SIGLA_UNIDADE\nFROM    TITULO_RECEBER A, PESSOA_JURIDICA B -- TITULO_RECEBER_LIQ L\nwhere   b.cd_cgc = a.cd_cgc\nand     a.vl_saldo_titulo <> 0\nand     a.cd_estabelecimento not in (11)",
+								"oracleReaderQuery": "SELECT  \n        A.CD_CGC CNPJ,\n        B.DS_RAZAO_SOCIAL NM_RAZAOSOCIAL,\n        B.NM_FANTASIA,\n        A.NR_TITULO,\n        A.NR_NOTA_FISCAL,\n        A.DT_EMISSAO,\n        A.DT_VENCIMENTO DT_VENCIMENTO_ORIGINAL,\n        A.DT_PAGAMENTO_PREVISTO DT_VENCIMENTO_PRORROGADO,\n        A.VL_TITULO VL_BRUTO,\n        --A.VL_SALDO_JUROS,\n        A.VL_SALDO_MULTA,\n        OBTER_DADOS_TITULO_RECEBER(A.NR_TITULO, 'VLL') VL_LIQUIDO,\n        A.VL_SALDO_TITULO,\n        OBTER_VL_AMENOR_TIT(A.NR_TITULO,'A',A.DT_ATUALIZACAO) as VL_AMENOR,\n        Obter_valor_dominio(710, a.ie_situacao) as situacao,\n        E.NM_FANTASIA_ESTAB AS SIGLA_UNIDADE,\n        EM.NM_RAZAO_SOCIAL as MARCA,\n        E.CD_CGC\nFROM    TITULO_RECEBER A, \n        PESSOA_JURIDICA B,\n        ESTABELECIMENTO E,\n        EMPRESA EM \nwhere   b.cd_cgc = a.cd_cgc\nAND     a.CD_ESTABELECIMENTO = E.CD_ESTABELECIMENTO\nAND     E.CD_EMPRESA = EM.CD_EMPRESA",
 								"partitionOption": "None"
 							},
 							"sink": {
@@ -33336,6 +33336,80 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "Titulos DH",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"sqlReaderQuery": "SELECT\n    (SELECT X.emp_cgc FROM EMP X WHERE X.emp_cod = NFS_EMP_COD) AS CNPJ,\n    (SELECT X.emp_raz_soc FROM EMP X WHERE X.emp_cod = NFS_EMP_COD) AS EMPRESA,\n    (SELECT X.emp_nome_fantasia FROM EMP X WHERE X.emp_cod = NFS_EMP_COD) AS NM_FANTASIA,\n    nfs_numero as NR_TITULO,\n    nfs_dt_emis as DT_EMISSAO,\n    nfs_dt_vcto as DT_VENCIMENTO_ORIGINAL,\n    nfs_dt_vcto as DT_VENCIMENTO_PRORROGADO,\n    nfs_valor as VL_BRUTO,\n    nfs_vlr_multa as VL_SALDO_MULTA,\n    nfs_valor - v_nfs_saldo.v_a_maior as VL_LIQUIDO,\n    CASE WHEN nfs_status = 'A' THEN nfs_valor\n    ELSE 0\n    END AS VL_SALDO_TITULO,\n    v_nfs_saldo.v_perda as VL_AMENOR,\n    nfs_status as SITUACAO,\n    emp.emp_raz_soc AS SIGLA_UNIDADE ,\n    emp.emp_nome_fantasia AS MARCA,\n    EMP.emp_cgc AS CNPJ_EMISSOR\nFROM NFS,\n     STR,\n     EMP,\n     v_nfs_saldo\nWHERE NFS.nfs_str_cod = str.str_str_cod\nand str_emp_cod = EMP_COD\nand nfs_numero = v_nfs_saldo.v_numero\nand nfs_serie = v_nfs_saldo.v_serie"
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "SMART_ITAIGARA_PrdDataSet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AZ_SQL_TB_Titulos_Receber",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Titulos HOSL",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"sqlReaderQuery": "SELECT\n    (SELECT X.emp_cgc FROM EMP X WHERE X.emp_cod = NFS_EMP_COD) AS CNPJ,\n    (SELECT X.emp_raz_soc FROM EMP X WHERE X.emp_cod = NFS_EMP_COD) AS EMPRESA,\n    (SELECT X.emp_nome_fantasia FROM EMP X WHERE X.emp_cod = NFS_EMP_COD) AS NM_FANTASIA,\n    nfs_numero as NR_TITULO,\n    nfs_dt_emis as DT_EMISSAO,\n    nfs_dt_vcto as DT_VENCIMENTO_ORIGINAL,\n    nfs_dt_vcto as DT_VENCIMENTO_PRORROGADO,\n    nfs_valor as VL_BRUTO,\n    nfs_vlr_multa as VL_SALDO_MULTA,\n    nfs_valor - v_nfs_saldo.v_a_maior as VL_LIQUIDO,\n    CASE WHEN nfs_status = 'A' THEN nfs_valor\n    ELSE 0\n    END AS VL_SALDO_TITULO,\n    v_nfs_saldo.v_perda as VL_AMENOR,\n    nfs_status as SITUACAO,\n    emp.emp_raz_soc AS SIGLA_UNIDADE ,\n    emp.emp_nome_fantasia AS MARCA,\n    EMP.emp_cgc AS CNPJ_EMISSOR\nFROM NFS,\n     STR,\n     EMP,\n     v_nfs_saldo\nWHERE NFS.nfs_str_cod = str.str_str_cod\nand str_emp_cod = EMP_COD\nand nfs_numero = v_nfs_saldo.v_numero\nand nfs_serie = v_nfs_saldo.v_serie"
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "SMART_HOSL_PrdDataSet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AZ_SQL_TB_Titulos_Receber",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
 					}
 				],
 				"folder": {
@@ -33346,7 +33420,9 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/CloudTasyPrdDataSet')]",
 				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Titulos_Receber')]",
-				"[concat(variables('factoryId'), '/datasets/SadallaTasyPrdDataSet')]"
+				"[concat(variables('factoryId'), '/datasets/SadallaTasyPrdDataSet')]",
+				"[concat(variables('factoryId'), '/datasets/SMART_ITAIGARA_PrdDataSet')]",
+				"[concat(variables('factoryId'), '/datasets/SMART_HOSL_PrdDataSet')]"
 			]
 		},
 		{
@@ -37237,51 +37313,63 @@
 				"type": "OracleTable",
 				"structure": [
 					{
-						"name": "CD_PESSOA_FISICA",
-						"type": "String"
-					},
-					{
-						"name": "CD_CONVENIO",
-						"type": "Decimal"
-					},
-					{
 						"name": "CNPJ",
 						"type": "String"
 					},
 					{
-						"name": "DATA_AGENDA",
+						"name": "NM_RAZAOSOCIAL",
 						"type": "String"
 					},
 					{
-						"name": "HORA_AGENDA",
+						"name": "NM_FANTASIA",
 						"type": "String"
 					},
 					{
-						"name": "TIPO_AGENDA",
+						"name": "NR_TITULO",
 						"type": "Decimal"
 					},
 					{
-						"name": "NM_PACIENTE",
+						"name": "NR_NOTA_FISCAL",
 						"type": "String"
 					},
 					{
-						"name": "DS_PROCEDIMENTO_PRINC",
+						"name": "DT_EMISSAO",
+						"type": "DateTime"
+					},
+					{
+						"name": "DT_VENCIMENTO_ORIGINAL",
+						"type": "DateTime"
+					},
+					{
+						"name": "DT_VENCIMENTO_PRORROGADO",
+						"type": "DateTime"
+					},
+					{
+						"name": "VL_BRUTO",
+						"type": "Decimal"
+					},
+					{
+						"name": "VL_SALDO_JUROS",
+						"type": "Decimal"
+					},
+					{
+						"name": "VL_SALDO_MULTA",
+						"type": "Decimal"
+					},
+					{
+						"name": "VL_LIQUIDO",
 						"type": "String"
 					},
 					{
-						"name": "DS_PROCEDIMENTO_ADIC",
-						"type": "String"
+						"name": "VL_SALDO_TITULO",
+						"type": "Decimal"
 					},
 					{
-						"name": "IE_QUANTIDADE",
+						"name": "VL_AMENOR",
 						"type": "Double"
 					},
 					{
-						"name": "NM_USUARIO",
-						"type": "String"
-					},
-					{
-						"name": "NM_MEDICO",
+						"name": "SITUACAO",
 						"type": "String"
 					},
 					{
@@ -37291,66 +37379,6 @@
 					{
 						"name": "MARCA",
 						"type": "String"
-					},
-					{
-						"name": "STATUS_AGENDA",
-						"type": "String"
-					},
-					{
-						"name": "NR_ATENDIMENTO",
-						"type": "Decimal"
-					},
-					{
-						"name": "NR_SEQUENCIA",
-						"type": "Decimal"
-					},
-					{
-						"name": "ID",
-						"type": "String"
-					},
-					{
-						"name": "CD_PROCEDENCIA",
-						"type": "Decimal"
-					},
-					{
-						"name": "DS_PROCEDENCIA",
-						"type": "String"
-					},
-					{
-						"name": "DT_AGENDAMENTO",
-						"type": "DateTime"
-					},
-					{
-						"name": "DIA",
-						"type": "String"
-					},
-					{
-						"name": "MES",
-						"type": "String"
-					},
-					{
-						"name": "ANO",
-						"type": "String"
-					},
-					{
-						"name": "DS_CLASSIFICACAO",
-						"type": "String"
-					},
-					{
-						"name": "DS_AGRUPAMENTO",
-						"type": "String"
-					},
-					{
-						"name": "CD_MOTIVO_CANCELAMENTO",
-						"type": "String"
-					},
-					{
-						"name": "DS_MOTIVO_CANCELAMENTO",
-						"type": "String"
-					},
-					{
-						"name": "CD_AGENDA",
-						"type": "Decimal"
 					}
 				],
 				"typeProperties": {}
@@ -43018,15 +43046,59 @@
 						"type": "String"
 					},
 					{
-						"name": "DATA_AGENDA",
+						"name": "NM_RAZAOSOCIAL",
 						"type": "String"
 					},
 					{
-						"name": "HORA_AGENDA",
+						"name": "NM_FANTASIA",
 						"type": "String"
 					},
 					{
-						"name": "TIPO_AGENDA",
+						"name": "NR_TITULO",
+						"type": "Decimal"
+					},
+					{
+						"name": "NR_NOTA_FISCAL",
+						"type": "String"
+					},
+					{
+						"name": "DT_EMISSAO",
+						"type": "DateTime"
+					},
+					{
+						"name": "DT_VENCIMENTO_ORIGINAL",
+						"type": "DateTime"
+					},
+					{
+						"name": "DT_VENCIMENTO_PRORROGADO",
+						"type": "DateTime"
+					},
+					{
+						"name": "VL_BRUTO",
+						"type": "Decimal"
+					},
+					{
+						"name": "VL_SALDO_JUROS",
+						"type": "Decimal"
+					},
+					{
+						"name": "VL_SALDO_MULTA",
+						"type": "Decimal"
+					},
+					{
+						"name": "VL_LIQUIDO",
+						"type": "String"
+					},
+					{
+						"name": "VL_SALDO_TITULO",
+						"type": "Decimal"
+					},
+					{
+						"name": "VL_AMENOR",
+						"type": "Double"
+					},
+					{
+						"name": "SITUACAO",
 						"type": "String"
 					},
 					{
@@ -43036,38 +43108,6 @@
 					{
 						"name": "MARCA",
 						"type": "String"
-					},
-					{
-						"name": "STATUS_AGENDA",
-						"type": "String"
-					},
-					{
-						"name": "NR_SEQUENCIA",
-						"type": "Decimal"
-					},
-					{
-						"name": "DIA",
-						"type": "String"
-					},
-					{
-						"name": "MES",
-						"type": "String"
-					},
-					{
-						"name": "ANO",
-						"type": "String"
-					},
-					{
-						"name": "DS_CLASSIFICACAO",
-						"type": "String"
-					},
-					{
-						"name": "DS_AGRUPAMENTO",
-						"type": "String"
-					},
-					{
-						"name": "CD_AGENDA",
-						"type": "Decimal"
 					}
 				],
 				"typeProperties": {}
