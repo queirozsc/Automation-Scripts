@@ -2348,7 +2348,7 @@
 											},
 											"sink": {
 												"name": "TOTALATTACHACT",
-												"type": "String"
+												"type": "Int32"
 											}
 										},
 										{
@@ -2358,7 +2358,7 @@
 											},
 											"sink": {
 												"name": "INSERTDATE",
-												"type": "String"
+												"type": "Int32"
 											}
 										},
 										{
