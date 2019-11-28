@@ -16,7 +16,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"storedProcedureName": "[dbo].[REQUESTIA_REQUEST_AUX]"
+					"storedProcedureName": "sp_TRUNCATEREQUESTS"
 				},
 				"linkedServiceName": {
 					"referenceName": "AzureSQL_DB_Procedimentos",
