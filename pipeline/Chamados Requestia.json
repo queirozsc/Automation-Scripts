@@ -1562,7 +1562,7 @@
 				}
 			},
 			{
-				"name": "Check request aux file ",
+				"name": "Check request aux file",
 				"type": "GetMetadata",
 				"dependsOn": [
 					{
@@ -1602,7 +1602,7 @@
 				"type": "IfCondition",
 				"dependsOn": [
 					{
-						"activity": "Check request aux file ",
+						"activity": "Check request aux file",
 						"dependencyConditions": [
 							"Succeeded"
 						]
