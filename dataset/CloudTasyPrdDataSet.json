@@ -33,7 +33,7 @@
 			},
 			{
 				"name": "TIPO_AGENDA",
-				"type": "Decimal"
+				"type": "String"
 			},
 			{
 				"name": "NM_PACIENTE",
