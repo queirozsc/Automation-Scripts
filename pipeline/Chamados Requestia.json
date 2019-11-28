@@ -1664,15 +1664,7 @@
 									}
 								},
 								"sink": {
-									"type": "DelimitedTextSink",
-									"storeSettings": {
-										"type": "FileServerWriteSettings"
-									},
-									"formatSettings": {
-										"type": "DelimitedTextWriteSettings",
-										"quoteAllText": true,
-										"fileExtension": ".txt"
-									}
+									"type": "AzureSqlSink"
 								},
 								"enableStaging": false,
 								"enableSkipIncompatibleRow": true,
@@ -2420,7 +2412,7 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "FILE_REQUEST_AUX",
+									"referenceName": "TABLE_REQUESTS_AUX",
 									"type": "DatasetReference"
 								}
 							]
