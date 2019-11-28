@@ -1611,7 +1611,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@equals(\nactivity('Check request aux file ').output.exists, \ntrue)",
+						"value": "@equals(\nactivity('Check request aux file').output.exists, \ntrue)",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
