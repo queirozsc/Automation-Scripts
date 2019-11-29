@@ -7383,946 +7383,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Chamados Requestia - Teste')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Clear tables",
-						"description": "Truncate all Requestia's tables",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[dbo].[sp_TRUNCATEREQUESTS]"
-						},
-						"linkedServiceName": {
-							"referenceName": "AzureSQL_DB_Procedimentos",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
-						"name": "Check request file exists",
-						"type": "GetMetadata",
-						"dependsOn": [
-							{
-								"activity": "Clear tables",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataset": {
-								"referenceName": "FILE_REQUESTS",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"fieldList": [
-								"exists"
-							],
-							"storeSettings": {
-								"type": "FileServerReadSettings",
-								"recursive": true
-							},
-							"formatSettings": {
-								"type": "DelimitedTextReadSettings"
-							}
-						}
-					},
-					{
-						"name": "Requests file exists",
-						"type": "IfCondition",
-						"dependsOn": [
-							{
-								"activity": "Check request file exists",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"expression": {
-								"value": "@equals(\nactivity('Check request file exists').output.exists, \ntrue)",
-								"type": "Expression"
-							},
-							"ifFalseActivities": [
-								{
-									"name": "Send requests failure",
-									"type": "ExecutePipeline",
-									"dependsOn": [],
-									"userProperties": [],
-									"typeProperties": {
-										"pipeline": {
-											"referenceName": "Send email",
-											"type": "PipelineReference"
-										},
-										"waitOnCompletion": true,
-										"parameters": {
-											"EmailTo": "sergio.queiroz@opty.com.br",
-											"Subject": "Arquivo Requestia\\REQUESTS não encontrado!",
-											"ErrorMessage": "O arquivo Requestia\\REQUESTS não foi encontrado",
-											"MasterPipeline": {
-												"value": "@{pipeline().Pipeline}",
-												"type": "Expression"
-											}
-										}
-									}
-								}
-							],
-							"ifTrueActivities": [
-								{
-									"name": "Copy requests",
-									"description": "Copy requests data from CSV (stored on Power BI Gateway VM) to Azure SQL",
-									"type": "Copy",
-									"dependsOn": [],
-									"policy": {
-										"timeout": "7.00:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"source": {
-											"type": "DelimitedTextSource",
-											"storeSettings": {
-												"type": "FileServerReadSettings",
-												"recursive": true
-											},
-											"formatSettings": {
-												"type": "DelimitedTextReadSettings"
-											}
-										},
-										"sink": {
-											"type": "AzureSqlSink"
-										},
-										"enableStaging": false,
-										"enableSkipIncompatibleRow": true,
-										"translator": {
-											"type": "TabularTranslator",
-											"mappings": [
-												{
-													"source": {
-														"name": "REQUEST",
-														"type": "String"
-													},
-													"sink": {
-														"name": "REQUEST",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "CLIENT",
-														"type": "String"
-													},
-													"sink": {
-														"name": "CLIENT",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "ORIGANAL",
-														"type": "String"
-													},
-													"sink": {
-														"name": "ORIGANAL",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "CURRANAL",
-														"type": "String"
-													},
-													"sink": {
-														"name": "CURRANAL",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "GROUPANAL",
-														"type": "String"
-													},
-													"sink": {
-														"name": "GROUPANAL",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "LASTANAL",
-														"type": "String"
-													},
-													"sink": {
-														"name": "LASTANAL",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "LASTANLGRP",
-														"type": "String"
-													},
-													"sink": {
-														"name": "LASTANLGRP",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "ORIGGROUP",
-														"type": "String"
-													},
-													"sink": {
-														"name": "ORIGGROUP",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "CURRGROUP",
-														"type": "String"
-													},
-													"sink": {
-														"name": "CURRGROUP",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "LASTGROUP",
-														"type": "String"
-													},
-													"sink": {
-														"name": "LASTGROUP",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "GRGROUP",
-														"type": "String"
-													},
-													"sink": {
-														"name": "GRGROUP",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "CATEGORY",
-														"type": "String"
-													},
-													"sink": {
-														"name": "CATEGORY",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "RPRIORITY",
-														"type": "String"
-													},
-													"sink": {
-														"name": "RPRIORITY",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "PRODUCT",
-														"type": "String"
-													},
-													"sink": {
-														"name": "PRODUCT",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "PROCESS",
-														"type": "String"
-													},
-													"sink": {
-														"name": "PROCESS",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "PROBLEM",
-														"type": "String"
-													},
-													"sink": {
-														"name": "PROBLEM",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "RSTATUS",
-														"type": "String"
-													},
-													"sink": {
-														"name": "RSTATUS",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "REQTYPE",
-														"type": "String"
-													},
-													"sink": {
-														"name": "REQTYPE",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "REQSOURCE",
-														"type": "String"
-													},
-													"sink": {
-														"name": "REQSOURCE",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "LOCATION",
-														"type": "String"
-													},
-													"sink": {
-														"name": "LOCATION",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "ORGUNIT",
-														"type": "String"
-													},
-													"sink": {
-														"name": "ORGUNIT",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "ORGUNIT_ROOT",
-														"type": "String"
-													},
-													"sink": {
-														"name": "ORGUNIT_ROOT",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "CHARGE",
-														"type": "String"
-													},
-													"sink": {
-														"name": "CHARGE",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "SLEVEL",
-														"type": "String"
-													},
-													"sink": {
-														"name": "SLEVEL",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "EQUIP",
-														"type": "String"
-													},
-													"sink": {
-														"name": "EQUIP",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "RESOURCEID",
-														"type": "String"
-													},
-													"sink": {
-														"name": "RESOURCEID",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "REQUESTOR",
-														"type": "String"
-													},
-													"sink": {
-														"name": "REQUESTOR",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "OPENDATE",
-														"type": "String"
-													},
-													"sink": {
-														"name": "OPENDATE",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "CLOSEDATE",
-														"type": "String"
-													},
-													"sink": {
-														"name": "CLOSEDATE",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "CLOSED",
-														"type": "String"
-													},
-													"sink": {
-														"name": "CLOSED",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "LASTACTION",
-														"type": "String"
-													},
-													"sink": {
-														"name": "LASTACTION",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "LASTANALYST",
-														"type": "String"
-													},
-													"sink": {
-														"name": "LASTANALYST",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "LASTSTATUS",
-														"type": "String"
-													},
-													"sink": {
-														"name": "LASTSTATUS",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "LASTPRIORITY",
-														"type": "String"
-													},
-													"sink": {
-														"name": "LASTPRIORITY",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "LASTREOPEN",
-														"type": "String"
-													},
-													"sink": {
-														"name": "LASTREOPEN",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "LASTACTIONATEND",
-														"type": "String"
-													},
-													"sink": {
-														"name": "LASTACTIONATEND",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "LASTACTTYPE",
-														"type": "String"
-													},
-													"sink": {
-														"name": "LASTACTTYPE",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "RESPDATE",
-														"type": "String"
-													},
-													"sink": {
-														"name": "RESPDATE",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "RESPTIME",
-														"type": "String"
-													},
-													"sink": {
-														"name": "RESPTIME",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "RESLTIME",
-														"type": "String"
-													},
-													"sink": {
-														"name": "RESLTIME",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "RESPMINS",
-														"type": "String"
-													},
-													"sink": {
-														"name": "RESPMINS",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "RESLMINS",
-														"type": "String"
-													},
-													"sink": {
-														"name": "RESLMINS",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "RESPREMAINS",
-														"type": "String"
-													},
-													"sink": {
-														"name": "RESPREMAINS",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "RESLREMAINS",
-														"type": "String"
-													},
-													"sink": {
-														"name": "RESLREMAINS",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "RESPMODE",
-														"type": "String"
-													},
-													"sink": {
-														"name": "RESPMODE",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "RESLMODE",
-														"type": "String"
-													},
-													"sink": {
-														"name": "RESLMODE",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "NOCOMPUTE",
-														"type": "String"
-													},
-													"sink": {
-														"name": "NOCOMPUTE",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "RLOCKED",
-														"type": "String"
-													},
-													"sink": {
-														"name": "RLOCKED",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "ESTIMCOST",
-														"type": "String"
-													},
-													"sink": {
-														"name": "ESTIMCOST",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "TOTALCOST",
-														"type": "String"
-													},
-													"sink": {
-														"name": "TOTALCOST",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "APROVANLTYPE",
-														"type": "String"
-													},
-													"sink": {
-														"name": "APROVANLTYPE",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "APROVANALYST",
-														"type": "String"
-													},
-													"sink": {
-														"name": "APROVANALYST",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "APROVCLITYPE",
-														"type": "String"
-													},
-													"sink": {
-														"name": "APROVCLITYPE",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "MLEVELAPROV",
-														"type": "String"
-													},
-													"sink": {
-														"name": "MLEVELAPROV",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "CLIENTAPROV",
-														"type": "String"
-													},
-													"sink": {
-														"name": "CLIENTAPROV",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "PACKAGE",
-														"type": "String"
-													},
-													"sink": {
-														"name": "PACKAGE",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "PROJECT",
-														"type": "String"
-													},
-													"sink": {
-														"name": "PROJECT",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "WORKFLOW",
-														"type": "String"
-													},
-													"sink": {
-														"name": "WORKFLOW",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "REQWORKFLOW",
-														"type": "String"
-													},
-													"sink": {
-														"name": "REQWORKFLOW",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "ORIGCATEGORY",
-														"type": "String"
-													},
-													"sink": {
-														"name": "ORIGCATEGORY",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "ORIGPRODUCT",
-														"type": "String"
-													},
-													"sink": {
-														"name": "ORIGPRODUCT",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "ORIGPROCESS",
-														"type": "String"
-													},
-													"sink": {
-														"name": "ORIGPROCESS",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "TOTALATTACH",
-														"type": "String"
-													},
-													"sink": {
-														"name": "TOTALATTACH",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "TOTALATTACHACT",
-														"type": "String"
-													},
-													"sink": {
-														"name": "TOTALATTACHACT",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "INSERTDATE",
-														"type": "String"
-													},
-													"sink": {
-														"name": "INSERTDATE",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "QFORM",
-														"type": "String"
-													},
-													"sink": {
-														"name": "QFORM",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "QSURVEY",
-														"type": "String"
-													},
-													"sink": {
-														"name": "QSURVEY",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "QSESSIONFORM",
-														"type": "String"
-													},
-													"sink": {
-														"name": "QSESSIONFORM",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "QSESSIONSURVEY",
-														"type": "String"
-													},
-													"sink": {
-														"name": "QSESSIONSURVEY",
-														"type": "String"
-													}
-												}
-											]
-										}
-									},
-									"inputs": [
-										{
-											"referenceName": "FILE_REQUESTS",
-											"type": "DatasetReference",
-											"parameters": {}
-										}
-									],
-									"outputs": [
-										{
-											"referenceName": "TABLE_REQUESTS",
-											"type": "DatasetReference",
-											"parameters": {}
-										}
-									]
-								},
-								{
-									"name": "Calculate fields",
-									"description": "Update calculated fields (for example, SLA formula, datetime conversions, business hours difference) for time saving in queries",
-									"type": "SqlServerStoredProcedure",
-									"dependsOn": [
-										{
-											"activity": "Copy requests",
-											"dependencyConditions": [
-												"Succeeded"
-											]
-										}
-									],
-									"policy": {
-										"timeout": "7.00:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"storedProcedureName": "[[dbo].[sp_CALCULATEREQUESTS]"
-									},
-									"linkedServiceName": {
-										"referenceName": "AzureSQL_DB_Procedimentos",
-										"type": "LinkedServiceReference"
-									}
-								},
-								{
-									"name": "Altera chamado em pausa",
-									"type": "SqlServerStoredProcedure",
-									"dependsOn": [
-										{
-											"activity": "Calculate fields",
-											"dependencyConditions": [
-												"Succeeded"
-											]
-										}
-									],
-									"policy": {
-										"timeout": "7.00:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"storedProcedureName": "[[dbo].[sp_ALTERACHAMADOSPAUSADOS]"
-									},
-									"linkedServiceName": {
-										"referenceName": "AzureSQL_DB_Procedimentos",
-										"type": "LinkedServiceReference"
-									}
-								},
-								{
-									"name": "Update clients",
-									"description": "Transport [UNIDADE ATENDIMENTO] field from answers table to requests table, for time saving in queries",
-									"type": "SqlServerStoredProcedure",
-									"dependsOn": [
-										{
-											"activity": "Altera chamado em pausa",
-											"dependencyConditions": [
-												"Succeeded"
-											]
-										}
-									],
-									"policy": {
-										"timeout": "7.00:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"storedProcedureName": "[[dbo].[sp_UPDATEREQUESTCLIENT]"
-									},
-									"linkedServiceName": {
-										"referenceName": "AzureSQL_DB_Procedimentos",
-										"type": "LinkedServiceReference"
-									}
-								}
-							]
-						}
-					}
-				],
-				"folder": {
-					"name": "Apoio"
-				},
-				"annotations": []
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/Chamados Requestia')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -9953,6 +9013,666 @@
 				],
 				"folder": {
 					"name": "Apoio"
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Desen_HTML5_Pipeline')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Processa Itens",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Copy_Materials",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Copy_Procedures",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[ProcessTempItems]"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureSqlDatabase",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Tabela Final",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Processa Itens",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "select * from TEMPTASY\nWhere Processed = 'Sim'"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBatchSize": 10000
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "NR_REGISTRO_UNICO",
+											"type": "String"
+										},
+										"sink": {
+											"name": "NR_REGISTRO_UNICO",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CD_MARCA",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "CD_MARCA",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "MARCA",
+											"type": "String"
+										},
+										"sink": {
+											"name": "DS_MARCA",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DT_ATUALIZACAO",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "DT_ATUALIZACAO",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "DT_ENTRADA",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "DT_ENTRADA",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "NR_ATENDIMENTO",
+											"type": "String"
+										},
+										"sink": {
+											"name": "NR_ATENDIMENTO",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "CD_ESTABELECIMENTO",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "CD_ESTABELECIMENTO",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_ESTABELECIMENTO",
+											"type": "String"
+										},
+										"sink": {
+											"name": "DS_ESTABELECIMENTO",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CD_PESSOA_FISICA",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "CD_PESSOA_FISICA",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "DT_NASCIMENTO",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "DT_NASCIMENTO",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "NR_CPF",
+											"type": "String"
+										},
+										"sink": {
+											"name": "NR_CPF",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "IE_SEXO",
+											"type": "String"
+										},
+										"sink": {
+											"name": "IE_SEXO",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "NR_CEP",
+											"type": "String"
+										},
+										"sink": {
+											"name": "NR_CEP",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_CIDADE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "DS_CIDADE",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_PESSOA_FISICA",
+											"type": "String"
+										},
+										"sink": {
+											"name": "DS_PESSOA_FISICA",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CD_CONVENIO",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CD_CONVENIO",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_CONVENIO",
+											"type": "String"
+										},
+										"sink": {
+											"name": "DS_CONVENIO",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CD_MEDICO_EXECUTOR",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CD_MEDICO_EXECUTOR",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_MEDICO_EXECUTOR",
+											"type": "String"
+										},
+										"sink": {
+											"name": "DS_MEDICO_EXECUTOR",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CD_MEDICO_REQUISITANTE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CD_MEDICO_REQUISITANTE",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_MEDICO_REQUISITANTE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "DS_MEDICO_REQUISITANTE",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "IE_ORIGEM_PROCED",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "IE_ORIGEM_PROCED",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "CD_PROCEDIMENTO",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CD_PROCEDIMENTO",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_PROCEDIMENTO",
+											"type": "String"
+										},
+										"sink": {
+											"name": "DS_PROCEDIMENTO",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CD_PROCED_PRINCIPAL",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CD_PROCEDIMENTO_PRINCIPAL",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_PROCED_PRINCIPAL",
+											"type": "String"
+										},
+										"sink": {
+											"name": "DS_PROCEDIMENTO_PRINCIPAL",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_PROCEDIMENTO_PRINCIPAL_FINAL",
+											"type": "String"
+										},
+										"sink": {
+											"name": "DS_PROCEDIMENTO_PRINCIPAL_FINAL",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CD_CATEGORIA_AUXILIAR",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "CD_CATEGORIA_AUXILIAR",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_CATEGORIA_AUXILIAR",
+											"type": "String"
+										},
+										"sink": {
+											"name": "DS_CATEGORIA_AUXILIAR",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CD_CATEGORIA",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "CD_CATEGORIA",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_CATEGORIA",
+											"type": "String"
+										},
+										"sink": {
+											"name": "DS_CATEGORIA",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CD_CLASSE",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "CD_CLASSE",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_CLASSE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "DS_CLASSE",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CD_CLASSIF_LIO",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "CD_CLASSIF_LIO",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_CLASSIF_LIO",
+											"type": "String"
+										},
+										"sink": {
+											"name": "DS_CLASSIF_LIO",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "QT_PROCEDIMENTO",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "QT_PROCEDIMENTO",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "QT_AJUSTADA",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "QT_AJUSTADA",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "VL_CONTA",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "VL_CONTA",
+											"type": "Single"
+										}
+									},
+									{
+										"source": {
+											"name": "VL_PROCEDIMENTO",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "VL_PROCEDIMENTO",
+											"type": "Single"
+										}
+									},
+									{
+										"source": {
+											"name": "IE_STATUS_ACERTO",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "IE_STATUS_ACERTO",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_STATUS_CONTA",
+											"type": "String"
+										},
+										"sink": {
+											"name": "DS_STATUS_CONTA",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CD_TUSS",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "CD_TUSS",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "TIPO_CONVENIO",
+											"type": "String"
+										},
+										"sink": {
+											"name": "TIPO_CONVENIO",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CRM",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CRM_EXECUTOR",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "MPE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "MPE_EXECUTOR",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "INTERCOMPANY",
+											"type": "String"
+										},
+										"sink": {
+											"name": "INTERCOMPANY_EXECUTOR",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "AzureSqlTEMPTable",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AzureSqlProcedimentosTable",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Truncate Temp Table",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Tabela Final",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[TRUNCATETEMPTABLE]"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureSqlDatabase",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Copy_Procedures",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "select \n\n'HTML5' as BASE,\n'' as cd_marca,\n'' as marca,\n'' as cd_estabelecimento,\np.nr_atendimento,\np.nr_atendimento as nr_registro_unico,\np.dt_atualizacao,\nat.dt_entrada,\np.nr_interno_conta,\nobter_nome_estab(c.cd_estabelecimento) as ds_estabelecimento,\npf.cd_pessoa_fisica,\npf.dt_nascimento,\npf.nr_cpf,\npf.ie_sexo,\nobter_compl_pf(pf.cd_pessoa_fisica,1,'CEP') as nr_cep,\nobter_compl_pf(pf.cd_pessoa_fisica,1,'CI') as ds_cidade,\nobter_nome_pf(at.cd_pessoa_fisica) as ds_pessoa_fisica,\np.cd_convenio as cd_convenio,\nobter_nome_convenio(c.cd_convenio_parametro) as ds_convenio,\np.cd_medico_executor,\nobter_nome_pf(p.cd_medico_executor) as ds_medico_executor,\np.cd_medico_req as cd_medico_requisitante,\nobter_nome_pf(p.cd_medico_req) as ds_medico_requisitante,\np.ie_origem_proced,\np.cd_procedimento,\nobter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced) as ds_procedimento, \nobter_valor_dominio(19,pr.ie_classificacao) as ds_classificacao,\n'' as ds_classif_procedimento,\n0 as cd_proced_principal,\n'' ds_proced_principal,\np.qt_procedimento,\nc.vl_conta,\np.vl_procedimento,\nc.ie_status_acerto,\ndecode(c.ie_status_acerto, 1,'Provisorio' , 2 ,'Definitivo') as status_conta,\n'' as cd_tuss,\n'' as ds_classif_lio\nfrom procedimento_paciente p,\natendimento_paciente at,\npessoa_fisica pf,\nprocedimento pr,\nconta_paciente c\nwhere p.nr_atendimento = at.nr_atendimento\nand at.cd_pessoa_fisica = pf.cd_pessoa_fisica\nand p.cd_procedimento = pr.cd_procedimento\nand p.ie_origem_proced = pr.ie_origem_proced\nand p.nr_interno_conta = c.nr_interno_conta\nand p.cd_motivo_exc_conta is null\nand c.ie_cancelamento is null\nand at.dt_entrada between sysdate - 1 and sysdate",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "CloudTasyPrdDataSet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AzureSqlTEMPTable",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Copy_Materials",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "select \n\n'HTML5' as BASE,\n'' as cd_marca,\n'' as marca,\n'' as cd_estabelecimento,\np.nr_atendimento,\n'' as nr_registro_unico,\np.dt_atualizacao,\nat.dt_entrada,\np.nr_interno_conta,\nobter_nome_estab(c.cd_estabelecimento) as ds_estabelecimento,\npf.cd_pessoa_fisica,\npf.dt_nascimento,\npf.nr_cpf,\npf.ie_sexo,\nobter_compl_pf(pf.cd_pessoa_fisica,1,'CEP') as nr_cep,\nobter_compl_pf(pf.cd_pessoa_fisica,1,'CI') as ds_cidade,\nobter_nome_pf(at.cd_pessoa_fisica) as ds_pessoa_fisica,\np.cd_convenio as cd_convenio,\nobter_nome_convenio(c.cd_convenio_parametro) as ds_convenio,\nci.cd_medico_cirurgiao as cd_medico_executor,\nobter_nome_pf(ci.cd_medico_cirurgiao) as ds_medico_executor,\nci.cd_medico_cirurgiao as cd_medico_requisitante,\nobter_nome_pf(ci.cd_medico_cirurgiao) as ds_medico_requisitante,\n'' as ie_origem_proced,\np.cd_material as cd_procedimento,\npr.ds_material as ds_procedimento, \n'Material' as ds_classificacao,\n'' as ds_classif_procedimento,\n0 as cd_proced_principal,\n'' ds_proced_principal,\np.qt_material as qt_procedimento,\nc.vl_conta,\np.vl_material as vl_procedimento,\nc.ie_status_acerto,\ndecode(c.ie_status_acerto, 1,'Provisorio' , 2 ,'Definitivo') as status_conta,\n0 as cd_tuss,\n'' as ds_classif_lio\nfrom material_atend_paciente p,\natendimento_paciente at,\npessoa_fisica pf,\nmaterial pr,\nconta_paciente c,\ncirurgia ci\nwhere p.nr_atendimento = at.nr_atendimento\nand at.cd_pessoa_fisica = pf.cd_pessoa_fisica\nand p.cd_material = pr.cd_material\nand p.nr_interno_conta = c.nr_interno_conta\nand p.nr_cirurgia = ci.nr_cirurgia\nand p.nr_atendimento = ci.nr_atendimento\nand p.cd_motivo_exc_conta is null\nand c.ie_cancelamento is null\nand at.dt_entrada between sysdate - 2 and sysdate - 1",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "CloudTasyPrdDataSet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AzureSqlTEMPTable",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"folder": {
+					"name": "Producao Medica/Desenvolvimento"
 				},
 				"annotations": []
 			},
