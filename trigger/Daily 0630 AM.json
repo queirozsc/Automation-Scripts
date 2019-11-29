@@ -16,6 +16,12 @@
 					"referenceName": "Chamados Requestia",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "Geral Atendimentos HOB V3",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
