@@ -7902,6 +7902,46 @@
 												},
 												{
 													"source": {
+														"name": "TEMPO_RESOLUCAO",
+														"type": "String"
+													},
+													"sink": {
+														"name": "TEMPO_RESOLUCAO",
+														"type": "String"
+													}
+												},
+												{
+													"source": {
+														"name": "PRAZO_RESL",
+														"type": "String"
+													},
+													"sink": {
+														"name": "PRAZO_RESL",
+														"type": "String"
+													}
+												},
+												{
+													"source": {
+														"name": "TEMPO_REPOSTA",
+														"type": "String"
+													},
+													"sink": {
+														"name": "TEMPO_REPOSTA",
+														"type": "String"
+													}
+												},
+												{
+													"source": {
+														"name": "PRAZO_RESP",
+														"type": "String"
+													},
+													"sink": {
+														"name": "PRAZO_RESP",
+														"type": "String"
+													}
+												},
+												{
+													"source": {
 														"name": "RESPTIME",
 														"type": "String"
 													},
@@ -8215,7 +8255,7 @@
 									},
 									"inputs": [
 										{
-											"referenceName": "FILE_REQUESTS",
+											"referenceName": "FILE_REQUEST_AUX",
 											"type": "DatasetReference",
 											"parameters": {}
 										}
