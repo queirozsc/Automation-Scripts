@@ -3478,7 +3478,7 @@
 				"pipelines": [
 					{
 						"pipelineReference": {
-							"referenceName": "Geral Atendimentos Sadalla V2",
+							"referenceName": "Geral Atendimentos Sadalla V3",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -3529,7 +3529,7 @@
 					},
 					{
 						"pipelineReference": {
-							"referenceName": "Geral Atendimentos HOB V2",
+							"referenceName": "Geral Atendimentos HOB V3",
 							"type": "PipelineReference"
 						},
 						"parameters": {}

@@ -46326,7 +46326,7 @@
 				"pipelines": [
 					{
 						"pipelineReference": {
-							"referenceName": "Geral Atendimentos Sadalla V2",
+							"referenceName": "Geral Atendimentos Sadalla V3",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -46351,7 +46351,7 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/Geral Atendimentos Sadalla V2')]"
+				"[concat(variables('factoryId'), '/pipelines/Geral Atendimentos Sadalla V3')]"
 			]
 		},
 		{
@@ -46379,7 +46379,7 @@
 					},
 					{
 						"pipelineReference": {
-							"referenceName": "Geral Atendimentos HOB V2",
+							"referenceName": "Geral Atendimentos HOB V3",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -46406,7 +46406,7 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/Agendas Projesi')]",
 				"[concat(variables('factoryId'), '/pipelines/Chamados Requestia')]",
-				"[concat(variables('factoryId'), '/pipelines/Geral Atendimentos HOB V2')]"
+				"[concat(variables('factoryId'), '/pipelines/Geral Atendimentos HOB V3')]"
 			]
 		},
 		{
