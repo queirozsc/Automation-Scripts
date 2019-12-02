@@ -12,63 +12,31 @@
 		"type": "OracleTable",
 		"structure": [
 			{
+				"name": "CD_PESSOA_FISICA",
+				"type": "String"
+			},
+			{
+				"name": "NM_PESSOA_FISICA",
+				"type": "String"
+			},
+			{
+				"name": "NR_CPF",
+				"type": "String"
+			},
+			{
+				"name": "DT_NASCIMENTO",
+				"type": "String"
+			},
+			{
+				"name": "NR_TELEFONE_CELULAR",
+				"type": "String"
+			},
+			{
+				"name": "NR_TELEFONE",
+				"type": "String"
+			},
+			{
 				"name": "CNPJ",
-				"type": "String"
-			},
-			{
-				"name": "NM_RAZAOSOCIAL",
-				"type": "String"
-			},
-			{
-				"name": "NM_FANTASIA",
-				"type": "String"
-			},
-			{
-				"name": "NR_TITULO",
-				"type": "Decimal"
-			},
-			{
-				"name": "NR_NOTA_FISCAL",
-				"type": "String"
-			},
-			{
-				"name": "DT_EMISSAO",
-				"type": "DateTime"
-			},
-			{
-				"name": "DT_VENCIMENTO_ORIGINAL",
-				"type": "DateTime"
-			},
-			{
-				"name": "DT_VENCIMENTO_PRORROGADO",
-				"type": "DateTime"
-			},
-			{
-				"name": "VL_BRUTO",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_SALDO_JUROS",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_SALDO_MULTA",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_LIQUIDO",
-				"type": "String"
-			},
-			{
-				"name": "VL_SALDO_TITULO",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_AMENOR",
-				"type": "Double"
-			},
-			{
-				"name": "SITUACAO",
 				"type": "String"
 			},
 			{
@@ -78,6 +46,14 @@
 			{
 				"name": "MARCA",
 				"type": "String"
+			},
+			{
+				"name": "NR_PRONTUARIO",
+				"type": "Decimal"
+			},
+			{
+				"name": "DT_CADASTRO_ORIGINAL",
+				"type": "DateTime"
 			}
 		]
 	},
