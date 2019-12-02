@@ -324,11 +324,11 @@
 				]
 			},
 			{
-				"name": "Agendas Sadalla_Cirurgias_Exames",
+				"name": "Agendamento Sadalla_Cirurgias_Exames",
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Wait1",
+						"activity": "Agendamento Sadalla",
 						"dependencyConditions": [
 							"Succeeded"
 						]
