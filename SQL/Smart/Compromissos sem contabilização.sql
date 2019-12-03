@@ -6,7 +6,7 @@ FROM    cpg, ipg
         --and cpg_serie = '119'
 WHERE   cpg_num = ipg_cpg_num
         AND cpg_serie = ipg_cpg_serie
-        AND cpg_dt_reg between '2019-10-01 00:00:00.000' AND '2019-10-31 00:00:00.000'
+        AND cpg_dt_reg between '2019-10-01 00:00:00.000' AND '2019-11-27 00:00:00.000'
         --and cpg_num = 3423
         AND cpg_tipo_compromisso not in ('I')
         AND ipg_status not in ('C')
@@ -21,3 +21,7 @@ WHERE   cpg_num = ipg_cpg_num
 
 
 SELECT * FROM LCT WHERE lct_cpg_serie = '1119' AND lct_cpg_num = '3239'
+
+
+
+select top 10 * from cpg where CPG_EXPORT_CONTAB like 'S'
