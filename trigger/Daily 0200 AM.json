@@ -10,6 +10,12 @@
 					"referenceName": "Geral Atendimentos Sadalla V3",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "Geral Atendimentos Sadalla V4",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
@@ -17,7 +23,7 @@
 			"recurrence": {
 				"frequency": "Day",
 				"interval": 1,
-				"startTime": "2019-10-08T03:02:00Z",
+				"startTime": "2019-10-08T03:02:00.000Z",
 				"timeZone": "UTC",
 				"schedule": {
 					"minutes": [
