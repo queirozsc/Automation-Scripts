@@ -7963,44 +7963,10 @@
 					{
 						"name": "Wait1",
 						"type": "Wait",
-						"dependsOn": [
-							{
-								"activity": "Clear_Base",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
+						"dependsOn": [],
 						"userProperties": [],
 						"typeProperties": {
 							"waitTimeInSeconds": 1
-						}
-					},
-					{
-						"name": "Altera_telefones",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [
-							{
-								"activity": "Paciente Sadalla",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[dbo].[sp_ALTERTELEPHONEMASKPACIENTES]"
-						},
-						"linkedServiceName": {
-							"referenceName": "AzureSQL_DB_Procedimentos",
-							"type": "LinkedServiceReference"
 						}
 					},
 					{
@@ -8047,26 +8013,6 @@
 								"parameters": {}
 							}
 						]
-					},
-					{
-						"name": "Clear_Base",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[dbo].[CLEARBASEATENDIMENTOUNIDADES]"
-						},
-						"linkedServiceName": {
-							"referenceName": "AzureSQL_DB_Procedimentos",
-							"type": "LinkedServiceReference"
-						}
 					},
 					{
 						"name": "Agendas Sadalla",
