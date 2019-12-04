@@ -12,7 +12,7 @@
 				}
 			},
 			{
-				"name": "Usuarios Sadalla",
+				"name": "Usuarios",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -43,7 +43,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SadallaTasyPrdDataSet",
+						"referenceName": "CloudTasyPrdDataSet",
 						"type": "DatasetReference"
 					}
 				],
@@ -55,7 +55,7 @@
 				]
 			},
 			{
-				"name": "Agendas Sadalla",
+				"name": "Agendas",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -86,7 +86,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SadallaTasyPrdDataSet",
+						"referenceName": "CloudTasyPrdDataSet",
 						"type": "DatasetReference"
 					}
 				],
