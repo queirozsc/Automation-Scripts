@@ -361,7 +361,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "AZ_SQL_TB_Agenda",
+						"referenceName": "AZ_SQL_TB_Agendamento",
 						"type": "DatasetReference"
 					}
 				]
