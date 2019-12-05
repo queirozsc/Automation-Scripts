@@ -17,7 +17,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Start",
+						"activity": "Set variable1",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -288,6 +288,15 @@
 								},
 								"sink": {
 									"name": "Falado_x_Logado"
+								}
+							},
+							{
+								"source": {
+									"name": "",
+									"type": "String"
+								},
+								"sink": {
+									"name": "MARCA"
 								}
 							}
 						]
@@ -1786,7 +1795,7 @@
 				"type": "SetVariable",
 				"dependsOn": [
 					{
-						"activity": "Agentes por Dia CSI",
+						"activity": "Start",
 						"dependencyConditions": [
 							"Succeeded"
 						]
