@@ -46,6 +46,7 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
+						"sqlWriterStoredProcedureName": "[dbo].[ALTERAMARCAAGPD]",
 						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
