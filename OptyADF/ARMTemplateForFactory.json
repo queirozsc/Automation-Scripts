@@ -15984,7 +15984,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "-- AGENDAMENTO HOB - Azure\n\nselect  a.cd_pessoa_fisica, \na.cd_convenio, \nobter_cnpj_estabelecimento(ag.cd_estabelecimento) as cnpj,\nto_char((a.hr_inicio) , 'dd/mm/yyyy') as data_agenda,\nto_char((a.hr_inicio) , 'hh24:mi:ss') as hora_agenda,\n'Consulta' as tipo_agenda,\npf.nm_pessoa_fisica as nm_paciente,\nsubstr(obter_desc_procedimento(a.cd_procedimento, a.ie_origem_proced),1,1000) as ds_procedimento_princ,\nsubstr((select Listagg(Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced), ' ;') within GROUP (ORDER BY Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced))  from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia),1,1000) as ds_procedimento_adic,\n1 + (select count(1)from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia) as ie_quantidade,\nobter_nome_usuario(a.nm_usuario_orig) as nm_usuario,\nobter_nome_pf(a.cd_medico_exec) as nm_medico,\ne.nm_fantasia_estab SIGLA_UNIDADE,\nem.nm_razao_social MARCA,\nobter_valor_dominio(83,a.ie_status_agenda) as status_agenda,\na.nr_atendimento,\na.nr_sequencia,\n\na.cd_pessoa_fisica||'-'||\nto_char(a.hr_inicio, 'yyyy-mm-dd')||' '||\nto_char(a.hr_inicio, 'hh24miss') as ID,\n\na.cd_procedencia,\np.ds_procedencia,\na.dt_agendamento,\n\nto_char(a.dt_agenda,'dd') dia,\nto_char(a.dt_agenda,'mm') mes,\nto_char(a.dt_agenda,'yyyy') ano,\nac.ds_classificacao,\naa.ds_agrupamento ds_agrupamento,\na.cd_motivo_cancelamento,\nsubstr(obter_ds_motivo_status(a.nr_sequencia, a.cd_agenda),1,200) as ds_motivo_cancelamento,\na.cd_agenda\n\nfrom agenda_paciente a,\n     agenda ag,\n     pessoa_fisica pf,\n     procedencia p,\n     agenda_paciente_classif ac,\n     agrupamento_agenda aa,\n     empresa em,\n     estabelecimento e\nwhere a.cd_agenda = ag.cd_agenda\nand a.cd_pessoa_fisica = pf.cd_pessoa_fisica (+)\nand a.cd_procedencia = p.cd_procedencia (+)\nand ac.nr_sequencia = a.nr_seq_classif_agenda (+)\nand ag.nr_seq_agrupamento = aa.nr_sequencia (+)\nand ag.cd_estabelecimento = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa\n\nand a.dt_agenda between sysdate - 30 and sysdate +180",
+								"oracleReaderQuery": "-- AGENDAMENTO HOB - Azure\n\nselect  a.cd_pessoa_fisica, \na.cd_convenio, \nobter_cnpj_estabelecimento(ag.cd_estabelecimento) as cnpj,\nto_char((a.hr_inicio) , 'dd/mm/yyyy') as data_agenda,\nto_char((a.hr_inicio) , 'hh24:mi:ss') as hora_agenda,\n'Consulta' as tipo_agenda,\npf.nm_pessoa_fisica as nm_paciente,\nsubstr(obter_desc_procedimento(a.cd_procedimento, a.ie_origem_proced),1,1000) as ds_procedimento_princ,\nsubstr((select Listagg(Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced), ' ;') within GROUP (ORDER BY Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced))  from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia),1,1000) as ds_procedimento_adic,\n1 + (select count(1)from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia) as ie_quantidade,\nobter_nome_usuario(a.nm_usuario_orig) as nm_usuario,\nobter_nome_pf(a.cd_medico_exec) as nm_medico,\ne.nm_fantasia_estab SIGLA_UNIDADE,\nem.nm_razao_social MARCA,\nobter_valor_dominio(83,a.ie_status_agenda) as status_agenda,\na.nr_atendimento,\na.nr_sequencia,\n\na.cd_pessoa_fisica||'-'||\nto_char(a.hr_inicio, 'yyyy-mm-dd')||' '||\nto_char(a.hr_inicio, 'hh24miss') as ID,\n\na.cd_procedencia,\np.ds_procedencia,\na.dt_agendamento,\n\nto_char(a.dt_agenda,'dd') dia,\nto_char(a.dt_agenda,'mm') mes,\nto_char(a.dt_agenda,'yyyy') ano,\nac.ds_classificacao,\naa.ds_agrupamento ds_agrupamento,\na.cd_motivo_cancelamento,\nsubstr(obter_ds_motivo_status(a.nr_sequencia, a.cd_agenda),1,200) as ds_motivo_cancelamento,\na.cd_agenda\n\nfrom agenda_paciente a,\n     agenda ag,\n     pessoa_fisica pf,\n     procedencia p,\n     agenda_paciente_classif ac,\n     agrupamento_agenda aa,\n     empresa em,\n     estabelecimento e\nwhere a.cd_agenda = ag.cd_agenda\nand a.cd_pessoa_fisica = pf.cd_pessoa_fisica (+)\nand a.cd_procedencia = p.cd_procedencia (+)\nand ac.nr_sequencia = a.nr_seq_classif_agenda (+)\nand ag.nr_seq_agrupamento = aa.nr_sequencia (+)\nand ag.cd_estabelecimento = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa\nand ag.cd_tipo_agenda = 2\nand ag.cd_pessoa_fisica is not null\n\nand a.dt_agenda between sysdate - 30 and sysdate + 180",
 								"partitionOption": "None"
 							},
 							"sink": {
@@ -16128,6 +16128,96 @@
 						"outputs": [
 							{
 								"referenceName": "AZ_SQL_TB_Agenda",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Agendamento HOB Exames",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Agendamento HOB",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "-- AGENDAMENTO HOB - Azure\n\nselect  a.cd_pessoa_fisica, \na.cd_convenio, \nobter_cnpj_estabelecimento(ag.cd_estabelecimento) as cnpj,\nto_char((a.hr_inicio) , 'dd/mm/yyyy') as data_agenda,\nto_char((a.hr_inicio) , 'hh24:mi:ss') as hora_agenda,\n'Exames' as tipo_agenda,\npf.nm_pessoa_fisica as nm_paciente,\nsubstr(obter_desc_procedimento(a.cd_procedimento, a.ie_origem_proced),1,1000) as ds_procedimento_princ,\nsubstr((select Listagg(Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced), ' ;') within GROUP (ORDER BY Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced))  from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia),1,1000) as ds_procedimento_adic,\n1 + (select count(1)from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia) as ie_quantidade,\nobter_nome_usuario(a.nm_usuario_orig) as nm_usuario,\nobter_nome_pf(a.cd_medico_exec) as nm_medico,\ne.nm_fantasia_estab SIGLA_UNIDADE,\nem.nm_razao_social MARCA,\nobter_valor_dominio(83,a.ie_status_agenda) as status_agenda,\na.nr_atendimento,\na.nr_sequencia,\n\na.cd_pessoa_fisica||'-'||\nto_char(a.hr_inicio, 'yyyy-mm-dd')||' '||\nto_char(a.hr_inicio, 'hh24miss') as ID,\n\na.cd_procedencia,\np.ds_procedencia,\na.dt_agendamento,\n\nto_char(a.dt_agenda,'dd') dia,\nto_char(a.dt_agenda,'mm') mes,\nto_char(a.dt_agenda,'yyyy') ano,\nac.ds_classificacao,\naa.ds_agrupamento ds_agrupamento,\na.cd_motivo_cancelamento,\nsubstr(obter_ds_motivo_status(a.nr_sequencia, a.cd_agenda),1,200) as ds_motivo_cancelamento,\na.cd_agenda\n\nfrom agenda_paciente a,\n     agenda ag,\n     pessoa_fisica pf,\n     procedencia p,\n     agenda_paciente_classif ac,\n     agrupamento_agenda aa,\n     empresa em,\n     estabelecimento e\nwhere a.cd_agenda = ag.cd_agenda\nand a.cd_pessoa_fisica = pf.cd_pessoa_fisica (+)\nand a.cd_procedencia = p.cd_procedencia (+)\nand ac.nr_sequencia = a.nr_seq_classif_agenda (+)\nand ag.nr_seq_agrupamento = aa.nr_sequencia (+)\nand ag.cd_estabelecimento = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa\nand ag.cd_tipo_agenda = 2\nand ag.cd_pessoa_fisica is null\n\nand a.dt_agenda between sysdate - 30 and sysdate + 180",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "CloudTasyPrdDataSet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AZ_SQL_TB_Agendamento",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Agendamento HOB Cirurgias",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Agendamento HOB",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "-- AGENDAMENTO HOB - Azure\n\nselect  a.cd_pessoa_fisica, \na.cd_convenio, \nobter_cnpj_estabelecimento(ag.cd_estabelecimento) as cnpj,\nto_char((a.hr_inicio) , 'dd/mm/yyyy') as data_agenda,\nto_char((a.hr_inicio) , 'hh24:mi:ss') as hora_agenda,\n'Cirurgias' as tipo_agenda,\npf.nm_pessoa_fisica as nm_paciente,\nsubstr(obter_desc_procedimento(a.cd_procedimento, a.ie_origem_proced),1,1000) as ds_procedimento_princ,\nsubstr((select Listagg(Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced), ' ;') within GROUP (ORDER BY Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced))  from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia),1,1000) as ds_procedimento_adic,\n1 + (select count(1)from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia) as ie_quantidade,\nobter_nome_usuario(a.nm_usuario_orig) as nm_usuario,\nobter_nome_pf(a.cd_medico_exec) as nm_medico,\ne.nm_fantasia_estab SIGLA_UNIDADE,\nem.nm_razao_social MARCA,\nobter_valor_dominio(83,a.ie_status_agenda) as status_agenda,\na.nr_atendimento,\na.nr_sequencia,\n\na.cd_pessoa_fisica||'-'||\nto_char(a.hr_inicio, 'yyyy-mm-dd')||' '||\nto_char(a.hr_inicio, 'hh24miss') as ID,\n\na.cd_procedencia,\np.ds_procedencia,\na.dt_agendamento,\n\nto_char(a.dt_agenda,'dd') dia,\nto_char(a.dt_agenda,'mm') mes,\nto_char(a.dt_agenda,'yyyy') ano,\nac.ds_classificacao,\naa.ds_agrupamento ds_agrupamento,\na.cd_motivo_cancelamento,\nsubstr(obter_ds_motivo_status(a.nr_sequencia, a.cd_agenda),1,200) as ds_motivo_cancelamento,\na.cd_agenda\n\nfrom agenda_paciente a,\n     agenda ag,\n     pessoa_fisica pf,\n     procedencia p,\n     agenda_paciente_classif ac,\n     agrupamento_agenda aa,\n     empresa em,\n     estabelecimento e\nwhere a.cd_agenda = ag.cd_agenda\nand a.cd_pessoa_fisica = pf.cd_pessoa_fisica (+)\nand a.cd_procedencia = p.cd_procedencia (+)\nand ac.nr_sequencia = a.nr_seq_classif_agenda (+)\nand ag.nr_seq_agrupamento = aa.nr_sequencia (+)\nand ag.cd_estabelecimento = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa\nand ag.cd_tipo_agenda = 1\nand ag.cd_pessoa_fisica is null\n\nand a.dt_agenda between sysdate - 30 and sysdate + 180",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "CloudTasyPrdDataSet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AZ_SQL_TB_Agendamento",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -17571,7 +17661,7 @@
 						]
 					},
 					{
-						"name": "Agendamento Sadalla",
+						"name": "Agendamento Consulta Sadalla",
 						"type": "Copy",
 						"dependsOn": [
 							{
@@ -17618,7 +17708,14 @@
 					{
 						"name": "Wait1",
 						"type": "Wait",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "Clear_Base",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"userProperties": [],
 						"typeProperties": {
 							"waitTimeInSeconds": 1
@@ -17715,11 +17812,11 @@
 						]
 					},
 					{
-						"name": "Agendamento Sadalla_Cirurgias_Exames",
+						"name": "Agendamento Exames",
 						"type": "Copy",
 						"dependsOn": [
 							{
-								"activity": "Agendamento Sadalla",
+								"activity": "Agendamento Consulta Sadalla",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -17736,7 +17833,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "-- Agendamento Sadalla Exames e Cirurgias - Azure\n\nselect  a.cd_pessoa_fisica, \na.cd_convenio, \nobter_cnpj_estabelecimento(ag.cd_estabelecimento) as cnpj,\nto_char((a.hr_inicio) , 'dd/mm/yyyy') as data_agenda,\nto_char((a.hr_inicio) , 'hh24:mi:ss') as hora_agenda,\n'Consulta' as tipo_agenda,\npf.nm_pessoa_fisica as nm_paciente,\nsubstr(obter_desc_procedimento(a.cd_procedimento, a.ie_origem_proced),1,1000) as ds_procedimento_princ,\nsubstr((select Listagg(Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced), ' ;') within GROUP (ORDER BY Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced))  from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia),1,1000) as ds_procedimento_adic,\n1 + (select count(1)from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia) as ie_quantidade,\nobter_nome_usuario(a.nm_usuario_orig) as nm_usuario,\nobter_nome_pf(a.cd_medico_exec) as nm_medico,\ne.nm_fantasia_estab SIGLA_UNIDADE,\nem.nm_razao_social MARCA,\nobter_valor_dominio(83,a.ie_status_agenda) as status_agenda,\na.nr_atendimento,\na.nr_sequencia,\n\na.cd_pessoa_fisica||'-'||\nto_char(a.hr_inicio, 'yyyy-mm-dd')||' '||\nto_char(a.hr_inicio, 'hh24miss') as ID,\n\na.cd_procedencia,\np.ds_procedencia,\na.dt_agendamento,\n\nto_char(a.dt_agenda,'dd') dia,\nto_char(a.dt_agenda,'mm') mes,\nto_char(a.dt_agenda,'yyyy') ano,\nac.ds_classificacao,\naa.ds_agrupamento ds_agrupamento,\na.cd_motivo_cancelamento,\nsubstr(obter_ds_motivo_status(a.nr_sequencia, a.cd_agenda),1,200) as ds_motivo_cancelamento,\na.cd_agenda\n\nfrom agenda_paciente a,\n     agenda ag,\n     pessoa_fisica pf,\n     procedencia p,\n     agenda_paciente_classif ac,\n     agrupamento_agenda aa,\n     empresa em,\n     estabelecimento e\nwhere a.cd_agenda = ag.cd_agenda\nand a.cd_pessoa_fisica = pf.cd_pessoa_fisica (+)\nand a.cd_procedencia = p.cd_procedencia (+)\nand ac.nr_sequencia = a.nr_seq_classif_agenda (+)\nand ag.nr_seq_agrupamento = aa.nr_sequencia (+)\nand ag.cd_estabelecimento = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa\n\nand a.dt_agenda between sysdate - 30 and sysdate + 180 ",
+								"oracleReaderQuery": "-- Agendamento Sadalla Exames\n\nselect  a.cd_pessoa_fisica, \na.cd_convenio, \nobter_cnpj_estabelecimento(ag.cd_estabelecimento) as cnpj,\nto_char((a.hr_inicio) , 'dd/mm/yyyy') as data_agenda,\nto_char((a.hr_inicio) , 'hh24:mi:ss') as hora_agenda,\n'Consulta' as tipo_agenda,\npf.nm_pessoa_fisica as nm_paciente,\nsubstr(obter_desc_procedimento(a.cd_procedimento, a.ie_origem_proced),1,1000) as ds_procedimento_princ,\nsubstr((select Listagg(Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced), ' ;') within GROUP (ORDER BY Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced))  from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia),1,1000) as ds_procedimento_adic,\n1 + (select count(1)from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia) as ie_quantidade,\nobter_nome_usuario(a.nm_usuario_orig) as nm_usuario,\nobter_nome_pf(a.cd_medico_exec) as nm_medico,\ne.nm_fantasia_estab SIGLA_UNIDADE,\nem.nm_razao_social MARCA,\nobter_valor_dominio(83,a.ie_status_agenda) as status_agenda,\na.nr_atendimento,\na.nr_sequencia,\n\na.cd_pessoa_fisica||'-'||\nto_char(a.hr_inicio, 'yyyy-mm-dd')||' '||\nto_char(a.hr_inicio, 'hh24miss') as ID,\n\na.cd_procedencia,\np.ds_procedencia,\na.dt_agendamento,\n\nto_char(a.dt_agenda,'dd') dia,\nto_char(a.dt_agenda,'mm') mes,\nto_char(a.dt_agenda,'yyyy') ano,\nac.ds_classificacao,\naa.ds_agrupamento ds_agrupamento,\na.cd_motivo_cancelamento,\nsubstr(obter_ds_motivo_status(a.nr_sequencia, a.cd_agenda),1,200) as ds_motivo_cancelamento,\na.cd_agenda\n\nfrom agenda_paciente a,\n     agenda ag,\n     pessoa_fisica pf,\n     procedencia p,\n     agenda_paciente_classif ac,\n     agrupamento_agenda aa,\n     empresa em,\n     estabelecimento e\nwhere a.cd_agenda = ag.cd_agenda\nand a.cd_pessoa_fisica = pf.cd_pessoa_fisica (+)\nand a.cd_procedencia = p.cd_procedencia (+)\nand ac.nr_sequencia = a.nr_seq_classif_agenda (+)\nand ag.nr_seq_agrupamento = aa.nr_sequencia (+)\nand ag.cd_estabelecimento = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa\nand ag.cd_tipo_agenda  = 2\n\nand a.dt_agenda between sysdate - 30 and sysdate + 180 ",
 								"partitionOption": "None"
 							},
 							"sink": {
@@ -17758,6 +17855,71 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "Agendamento Cirurgias Sadalla",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Agendamento Consulta Sadalla",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "-- Agendamento Sadalla Cirurgia\n\nselect  a.cd_pessoa_fisica, \na.cd_convenio, \nobter_cnpj_estabelecimento(ag.cd_estabelecimento) as cnpj,\nto_char((a.hr_inicio) , 'dd/mm/yyyy') as data_agenda,\nto_char((a.hr_inicio) , 'hh24:mi:ss') as hora_agenda,\n'Consulta' as tipo_agenda,\npf.nm_pessoa_fisica as nm_paciente,\nsubstr(obter_desc_procedimento(a.cd_procedimento, a.ie_origem_proced),1,1000) as ds_procedimento_princ,\nsubstr((select Listagg(Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced), ' ;') within GROUP (ORDER BY Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced))  from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia),1,1000) as ds_procedimento_adic,\n1 + (select count(1)from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia) as ie_quantidade,\nobter_nome_usuario(a.nm_usuario_orig) as nm_usuario,\nobter_nome_pf(a.cd_medico_exec) as nm_medico,\ne.nm_fantasia_estab SIGLA_UNIDADE,\nem.nm_razao_social MARCA,\nobter_valor_dominio(83,a.ie_status_agenda) as status_agenda,\na.nr_atendimento,\na.nr_sequencia,\n\na.cd_pessoa_fisica||'-'||\nto_char(a.hr_inicio, 'yyyy-mm-dd')||' '||\nto_char(a.hr_inicio, 'hh24miss') as ID,\n\na.cd_procedencia,\np.ds_procedencia,\na.dt_agendamento,\n\nto_char(a.dt_agenda,'dd') dia,\nto_char(a.dt_agenda,'mm') mes,\nto_char(a.dt_agenda,'yyyy') ano,\nac.ds_classificacao,\naa.ds_agrupamento ds_agrupamento,\na.cd_motivo_cancelamento,\nsubstr(obter_ds_motivo_status(a.nr_sequencia, a.cd_agenda),1,200) as ds_motivo_cancelamento,\na.cd_agenda\n\nfrom agenda_paciente a,\n     agenda ag,\n     pessoa_fisica pf,\n     procedencia p,\n     agenda_paciente_classif ac,\n     agrupamento_agenda aa,\n     empresa em,\n     estabelecimento e\nwhere a.cd_agenda = ag.cd_agenda\nand a.cd_pessoa_fisica = pf.cd_pessoa_fisica (+)\nand a.cd_procedencia = p.cd_procedencia (+)\nand ac.nr_sequencia = a.nr_seq_classif_agenda (+)\nand ag.nr_seq_agrupamento = aa.nr_sequencia (+)\nand ag.cd_estabelecimento = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa\nand ag.cd_tipo_agenda  = 1\n\nand a.dt_agenda between sysdate - 30 and sysdate + 180 ",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "SadallaTasyPrdDataSet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AZ_SQL_TB_Agendamento",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Clear_Base",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[CLEARBASEATENDIMENTOUNIDADES]"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureSQL_DB_Procedimentos",
+							"type": "LinkedServiceReference"
+						}
 					}
 				],
 				"folder": {
@@ -17772,7 +17934,8 @@
 				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Consulta')]",
 				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Agendamento')]",
 				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Usuario')]",
-				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Agenda')]"
+				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Agenda')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]"
 			]
 		},
 		{
@@ -18321,7 +18484,8 @@
 								}
 							},
 							"sink": {
-								"type": "AzureSqlSink"
+								"type": "AzureSqlSink",
+								"disableMetricsCollection": false
 							},
 							"enableStaging": false,
 							"translator": {
@@ -18563,8 +18727,7 @@
 											"type": "String"
 										},
 										"sink": {
-											"name": "Falado_x_Logado",
-											"type": "String"
+											"name": "Falado_x_Logado"
 										}
 									}
 								]
@@ -34746,7 +34909,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "SELECT  \n        A.CD_CGC CNPJ,\n        B.DS_RAZAO_SOCIAL NM_RAZAOSOCIAL,\n        B.NM_FANTASIA,\n        A.NR_TITULO,\n        A.NR_NOTA_FISCAL,\n        A.DT_EMISSAO,\n        A.DT_VENCIMENTO DT_VENCIMENTO_ORIGINAL,\n        A.DT_PAGAMENTO_PREVISTO DT_VENCIMENTO_PRORROGADO,\n        A.VL_TITULO VL_BRUTO,\n        --A.VL_SALDO_JUROS,\n        A.VL_SALDO_MULTA,\n        OBTER_DADOS_TITULO_RECEBER(A.NR_TITULO, 'VLL') VL_LIQUIDO,\n        A.VL_SALDO_TITULO,\n        OBTER_VL_AMENOR_TIT(A.NR_TITULO,'A',A.DT_ATUALIZACAO) as VL_AMENOR,\n        Obter_valor_dominio(710, a.ie_situacao) as situacao,\n        E.NM_FANTASIA_ESTAB AS SIGLA_UNIDADE,\n        EM.NM_RAZAO_SOCIAL as MARCA,\n        E.CD_CGC\nFROM    TITULO_RECEBER A, \n        PESSOA_JURIDICA B,\n        ESTABELECIMENTO E,\n        EMPRESA EM \nwhere   b.cd_cgc = a.cd_cgc\nAND     a.CD_ESTABELECIMENTO = E.CD_ESTABELECIMENTO\nAND     E.CD_EMPRESA = EM.CD_EMPRESA",
+								"oracleReaderQuery": "SELECT  \n        A.CD_CGC CNPJ,\n        B.DS_RAZAO_SOCIAL NM_RAZAOSOCIAL,\n        B.NM_FANTASIA,\n        A.NR_TITULO,\n        A.NR_NOTA_FISCAL,\n        A.DT_EMISSAO,\n        A.DT_VENCIMENTO DT_VENCIMENTO_ORIGINAL,\n        A.DT_PAGAMENTO_PREVISTO DT_VENCIMENTO_PRORROGADO,\n        A.VL_TITULO VL_BRUTO,\n        A.VL_SALDO_JUROS,\n        A.VL_SALDO_MULTA,\n        OBTER_DADOS_TITULO_RECEBER(A.NR_TITULO, 'VLL') VL_LIQUIDO,\n        A.VL_SALDO_TITULO,\n        OBTER_VL_AMENOR_TIT(A.NR_TITULO,'A',A.DT_ATUALIZACAO) as VL_AMENOR,\n        Obter_valor_dominio(710, a.ie_situacao) as situacao,\n        E.NM_FANTASIA_ESTAB AS SIGLA_UNIDADE,\n        EM.NM_RAZAO_SOCIAL as MARCA,\n        E.CD_CGC\nFROM    TITULO_RECEBER A, \n        PESSOA_JURIDICA B,\n        ESTABELECIMENTO E,\n        EMPRESA EM \nwhere   b.cd_cgc = a.cd_cgc\nAND     a.CD_ESTABELECIMENTO = E.CD_ESTABELECIMENTO\nAND     E.CD_EMPRESA = EM.CD_EMPRESA",
 								"partitionOption": "None"
 							},
 							"sink": {
@@ -34784,7 +34947,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "SELECT  \n        A.CD_CGC CNPJ,\n        B.DS_RAZAO_SOCIAL NM_RAZAOSOCIAL,\n        B.NM_FANTASIA,\n        A.NR_TITULO,\n        A.NR_NOTA_FISCAL,\n        A.DT_EMISSAO,\n        A.DT_VENCIMENTO DT_VENCIMENTO_ORIGINAL,\n        A.DT_PAGAMENTO_PREVISTO DT_VENCIMENTO_PRORROGADO,\n        A.VL_TITULO VL_BRUTO,\n        --A.VL_SALDO_JUROS,\n        A.VL_SALDO_MULTA,\n        OBTER_DADOS_TITULO_RECEBER(A.NR_TITULO, 'VLL') VL_LIQUIDO,\n        A.VL_SALDO_TITULO,\n        OBTER_VL_AMENOR_TIT(A.NR_TITULO,'A',A.DT_ATUALIZACAO) as VL_AMENOR,\n        Obter_valor_dominio(710, a.ie_situacao) as situacao,\n        E.NM_FANTASIA_ESTAB AS SIGLA_UNIDADE,\n        EM.NM_RAZAO_SOCIAL as MARCA,\n        E.CD_CGC\nFROM    TITULO_RECEBER A, \n        PESSOA_JURIDICA B,\n        ESTABELECIMENTO E,\n        EMPRESA EM \nwhere   b.cd_cgc = a.cd_cgc\nAND     a.CD_ESTABELECIMENTO = E.CD_ESTABELECIMENTO\nAND     E.CD_EMPRESA = EM.CD_EMPRESA",
+								"oracleReaderQuery": "SELECT  \n        A.CD_CGC CNPJ,\n        B.DS_RAZAO_SOCIAL NM_RAZAOSOCIAL,\n        B.NM_FANTASIA,\n        A.NR_TITULO,\n        A.NR_NOTA_FISCAL,\n        A.DT_EMISSAO,\n        A.DT_VENCIMENTO DT_VENCIMENTO_ORIGINAL,\n        A.DT_PAGAMENTO_PREVISTO DT_VENCIMENTO_PRORROGADO,\n        A.VL_TITULO VL_BRUTO,\n        A.VL_SALDO_JUROS,\n        A.VL_SALDO_MULTA,\n        OBTER_DADOS_TITULO_RECEBER(A.NR_TITULO, 'VLL') VL_LIQUIDO,\n        A.VL_SALDO_TITULO,\n        OBTER_VL_AMENOR_TIT(A.NR_TITULO,'A',A.DT_ATUALIZACAO) as VL_AMENOR,\n        Obter_valor_dominio(710, a.ie_situacao) as situacao,\n        E.NM_FANTASIA_ESTAB AS SIGLA_UNIDADE,\n        EM.NM_RAZAO_SOCIAL as MARCA,\n        E.CD_CGC\nFROM    TITULO_RECEBER A, \n        PESSOA_JURIDICA B,\n        ESTABELECIMENTO E,\n        EMPRESA EM \nwhere   b.cd_cgc = a.cd_cgc\nAND     a.CD_ESTABELECIMENTO = E.CD_ESTABELECIMENTO\nAND     E.CD_EMPRESA = EM.CD_EMPRESA",
 								"partitionOption": "None"
 							},
 							"sink": {
@@ -46979,7 +47142,7 @@
 				"pipelines": [
 					{
 						"pipelineReference": {
-							"referenceName": "Geral Atendimentos Sadalla V4",
+							"referenceName": "Geral Atendimentos Sadalla V2",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -47004,7 +47167,7 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/Geral Atendimentos Sadalla V4')]"
+				"[concat(variables('factoryId'), '/pipelines/Geral Atendimentos Sadalla V2')]"
 			]
 		},
 		{
@@ -47032,7 +47195,7 @@
 					},
 					{
 						"pipelineReference": {
-							"referenceName": "Geral Atendimentos HOB V4",
+							"referenceName": "Geral Atendimentos HOB V2",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -47059,7 +47222,7 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/Agendas Projesi')]",
 				"[concat(variables('factoryId'), '/pipelines/Chamados Requestia')]",
-				"[concat(variables('factoryId'), '/pipelines/Geral Atendimentos HOB V4')]"
+				"[concat(variables('factoryId'), '/pipelines/Geral Atendimentos HOB V2')]"
 			]
 		},
 		{
