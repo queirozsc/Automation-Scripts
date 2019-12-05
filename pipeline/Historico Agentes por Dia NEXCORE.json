@@ -1780,8 +1780,31 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Agentes por Dia CSI",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "MARCA",
+					"value": "CSI"
+				}
 			}
 		],
+		"variables": {
+			"MARCA": {
+				"type": "String",
+				"defaultValue": "CSI"
+			}
+		},
 		"folder": {
 			"name": "Atendimento/Nexcore/Históricos"
 		},
