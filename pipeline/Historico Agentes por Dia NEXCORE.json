@@ -287,8 +287,15 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "Falado_x_Logado",
-									"type": "String"
+									"name": "Falado_x_Logado"
+								}
+							},
+							{
+								"source": {
+									"name": ""
+								},
+								"sink": {
+									"name": "MARCA"
 								}
 							}
 						]
