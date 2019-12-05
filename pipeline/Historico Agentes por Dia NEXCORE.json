@@ -289,15 +289,6 @@
 								"sink": {
 									"name": "Falado_x_Logado"
 								}
-							},
-							{
-								"source": {
-									"name": "CSI",
-									"type": "String"
-								},
-								"sink": {
-									"name": "MARCA"
-								}
 							}
 						]
 					}
