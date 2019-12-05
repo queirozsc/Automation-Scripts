@@ -15428,51 +15428,6 @@
 								"parameters": {}
 							}
 						]
-					},
-					{
-						"name": "Agendamento Livre",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "Wait1",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "OracleSource",
-								"oracleReaderQuery": "-- Livres\n\nselect\nobter_cnpj_estabelecimento(ag.cd_estabelecimento) as cnpj,\nto_char((a.hr_inicio) , 'dd/mm/yyyy') as data_agenda,\nto_char((a.hr_inicio) , 'hh24:mi:ss') as hora_agenda,\n'Consulta' as tipo_agenda,\nnm_fantasia_estab SIGLA_UNIDADE,\nem.nm_razao_social MARCA,\nobter_valor_dominio(83,a.ie_status_agenda) as status_agenda,\na.nr_sequencia,\n\nto_char(a.dt_agenda,'dd') dia,\nto_char(a.dt_agenda,'mm') mes,\nto_char(a.dt_agenda,'yyyy') ano,\nac.ds_classificacao,\naa.ds_agrupamento ds_agrupamento,\na.cd_agenda\n\nfrom agenda_paciente a,\n     agenda ag,\n     agenda_paciente_classif ac,\n     agrupamento_agenda aa,\n     estabelecimento e,\n     empresa em\nwhere a.cd_agenda = ag.cd_agenda\nand ac.nr_sequencia = a.nr_seq_classif_agenda (+)\nand ag.nr_seq_agrupamento = aa.nr_sequencia (+)\nand ag.cd_estabelecimento = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa\nand a.cd_pessoa_fisica is null\nand ag.cd_tipo_agenda = 2",
-								"partitionOption": "None"
-							},
-							"sink": {
-								"type": "AzureSqlSink"
-							},
-							"enableStaging": false
-						},
-						"inputs": [
-							{
-								"referenceName": "CloudTasyPrdDataSet",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "AZ_SQL_TB_Agendamento_Livre",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
 					}
 				],
 				"folder": {
@@ -15488,8 +15443,7 @@
 				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Agendamento')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]",
 				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Usuario')]",
-				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Agenda')]",
-				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Agendamento_Livre')]"
+				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Agenda')]"
 			]
 		},
 		{
@@ -17081,51 +17035,6 @@
 								"parameters": {}
 							}
 						]
-					},
-					{
-						"name": "Agendamento Livre",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "Wait1",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "OracleSource",
-								"oracleReaderQuery": "-- Livres\nselect\ne.cd_cgc as cnpj,\nto_char((a.dt_agenda) , 'dd/mm/yyyy') as data_agenda,\nto_char((a.dt_agenda) , 'hh24:mi:ss') as hora_agenda,\n'Consulta' as tipo_agenda,\nnm_fantasia_estab SIGLA_UNIDADE,\nem.nm_razao_social MARCA,\nobter_valor_dominio(83,a.ie_status_agenda) as status_agenda,\na.nr_sequencia,\n\nto_char(a.dt_agenda,'dd') dia,\nto_char(a.dt_agenda,'mm') mes,\nto_char(a.dt_agenda,'yyyy') ano,\nac.ds_classificacao,\naa.ds_agrupamento ds_agrupamento,\na.cd_agenda\n\nfrom agenda_consulta a,\n     agenda ag,\n     agenda_classif ac,\n     agrupamento_agenda aa,\n     estabelecimento e,\n     empresa em\nwhere a.cd_agenda = ag.cd_agenda\nand a.ie_classif_agenda  = ac.cd_classificacao(+)\nand ag.nr_seq_agrupamento = aa.nr_sequencia (+)\nand ag.cd_estabelecimento = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa\nand a.cd_pessoa_fisica is null",
-								"partitionOption": "None"
-							},
-							"sink": {
-								"type": "AzureSqlSink"
-							},
-							"enableStaging": false
-						},
-						"inputs": [
-							{
-								"referenceName": "SadallaTasyPrdDataSet",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "AZ_SQL_TB_Agendamento_Livre",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
 					}
 				],
 				"folder": {
@@ -17141,8 +17050,7 @@
 				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Agendamento')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]",
 				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Usuario')]",
-				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Agenda')]",
-				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Agendamento_Livre')]"
+				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Agenda')]"
 			]
 		},
 		{
