@@ -30,7 +30,12 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [],
+				"userProperties": [
+					{
+						"name": "Marca",
+						"value": "CSI"
+					}
+				],
 				"typeProperties": {
 					"source": {
 						"type": "DelimitedTextSource",
@@ -45,7 +50,8 @@
 						}
 					},
 					"sink": {
-						"type": "AzureSqlSink"
+						"type": "AzureSqlSink",
+						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
 					"translator": {
@@ -289,8 +295,7 @@
 								"sink": {
 									"name": "Falado_x_Logado"
 								}
-							},
-							null
+							}
 						]
 					}
 				},
@@ -1783,12 +1788,6 @@
 				]
 			}
 		],
-		"variables": {
-			"MARCA": {
-				"type": "String",
-				"defaultValue": "CSI"
-			}
-		},
 		"folder": {
 			"name": "Atendimento/Nexcore/Históricos"
 		},
