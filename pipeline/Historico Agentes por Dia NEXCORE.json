@@ -17,7 +17,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Set variable1",
+						"activity": "Start",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -290,15 +290,7 @@
 									"name": "Falado_x_Logado"
 								}
 							},
-							{
-								"source": {
-									"name": "",
-									"type": "String"
-								},
-								"sink": {
-									"name": "MARCA"
-								}
-							}
+							null
 						]
 					}
 				},
@@ -1789,23 +1781,6 @@
 						"type": "DatasetReference"
 					}
 				]
-			},
-			{
-				"name": "Set variable1",
-				"type": "SetVariable",
-				"dependsOn": [
-					{
-						"activity": "Start",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "MARCA",
-					"value": "CSI"
-				}
 			}
 		],
 		"variables": {
