@@ -32,8 +32,12 @@
 				},
 				"userProperties": [
 					{
-						"name": "Marca",
+						"name": "Source",
 						"value": "CSI"
+					},
+					{
+						"name": "Destination",
+						"value": "MARCA"
 					}
 				],
 				"typeProperties": {
