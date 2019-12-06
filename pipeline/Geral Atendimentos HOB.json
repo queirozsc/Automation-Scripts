@@ -24,7 +24,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select pf.cd_pessoa_fisica,\n       pf.nm_pessoa_fisica,\n       pf.nr_cpf,\n       to_char((pf.dt_nascimento) , 'dd/mm/yyyy') as dt_nascimento,\n       substr(replace(LTRIM(translate(pf.nr_telefone_celular, translate(pf.nr_telefone_celular, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone_celular,\n       obter_compl_pf(pf.cd_pessoa_fisica,1,'T') as nr_telefone,\n       obter_cnpj_estabelecimento(decode(pf.cd_estabelecimento,null,1,pf.cd_estabelecimento)) as CNPJ,\n       'NAO ENCONTRADO' as SIGLA_UNIDADE,\n       'NAO ENCONTRADO' as MARCA,\n       PF.NR_PRONTUARIO\nfrom pessoa_fisica pf",
+						"oracleReaderQuery": "select pf.cd_pessoa_fisica,\n       pf.nm_pessoa_fisica,\n       pf.nr_cpf,\n       to_char((pf.dt_nascimento) , 'dd/mm/yyyy') as dt_nascimento,\n       pf.nr_ddd_celular||''||substr(replace(LTRIM(translate(pf.nr_telefone_celular, translate(pf.nr_telefone_celular, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone_celular,\n       obter_compl_pf(pf.cd_pessoa_fisica,1,'DDT')||''||obter_compl_pf(pf.cd_pessoa_fisica,1,'T') as nr_telefone,\n       obter_cnpj_estabelecimento(decode(pf.cd_estabelecimento,null,1,pf.cd_estabelecimento)) as CNPJ,\n       e.nm_fantasia_estab as SIGLA_UNIDADE,\n       em.nm_razao_social as MARCA,\n       pf.nr_prontuario\nfrom pessoa_fisica pf,\n     estabelecimento e,\n     empresa em\nwhere decode(pf.cd_estabelecimento,null,1,pf.cd_estabelecimento) = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa",
 						"partitionOption": "None"
 					},
 					"sink": {
@@ -67,7 +67,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "-- Atendimento HOB - Azure\n\nselect pf.cd_pessoa_fisica, pf.nm_pessoa_fisica, \n\nto_char(at.dt_entrada,'dd/mm/yyyy') as dt_entrada,\nto_char(at.dt_entrada,'hh24:mi:ss') as hr_entrada, \n\nobter_nome_pf(at.cd_medico_resp) as nm_medico, c.cd_convenio, obter_nome_convenio(c.cd_convenio) AS ds_convenio, \nat.nr_atendimento,\nobter_cgc_estabelecimento(at.cd_estabelecimento) as CNPJ,\n'NAO ENCONTRADO' as SIGLA_UNIDADE,\n'NAO ENCONTRADO' as MARCA,\n\nat.cd_procedencia,\np.ds_procedencia,\n'NAO ENCONTRADO' as ID,\n\nto_char(at.dt_entrada,'dd') dia,\nto_char(at.dt_entrada,'mm') mes,\nto_char(at.dt_entrada,'yyyy') ano,\nat.dt_cancelamento\n\nfrom \natendimento_paciente at, \npessoa_fisica pf,\natend_categoria_convenio c,\nprocedencia p\nwhere at.cd_pessoa_fisica = pf.cd_pessoa_fisica\nand at.cd_procedencia = p.cd_procedencia (+)\nand at.nr_atendimento = c.nr_atendimento",
+						"oracleReaderQuery": "select pf.cd_pessoa_fisica, pf.nm_pessoa_fisica, \n\nto_char(at.dt_entrada,'dd/mm/yyyy') as dt_entrada,\nto_char(at.dt_entrada,'hh24:mi:ss') as hr_entrada, \n\nobter_nome_pf(at.cd_medico_resp) as nm_medico, c.cd_convenio, obter_nome_convenio(c.cd_convenio) AS ds_convenio, \nat.nr_atendimento,\ne.cd_cgc as CNPJ,\nnm_fantasia_estab SIGLA_UNIDADE,\nem.nm_razao_social MARCA,\n\nat.cd_procedencia,\np.ds_procedencia,\n'NAO ENCONTRADO' as ID,\n\nto_char(at.dt_entrada,'dd') dia,\nto_char(at.dt_entrada,'mm') mes,\nto_char(at.dt_entrada,'yyyy') ano,\nat.dt_cancelamento\n\nfrom \natendimento_paciente at, \npessoa_fisica pf,\natend_categoria_convenio c,\nprocedencia p,\nestabelecimento e,\nempresa em\nwhere at.cd_pessoa_fisica = pf.cd_pessoa_fisica\nand at.cd_procedencia = p.cd_procedencia (+)\nand at.nr_atendimento = c.nr_atendimento\nand at.cd_estabelecimento = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa",
 						"partitionOption": "None"
 					},
 					"sink": {
@@ -153,7 +153,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select  a.cd_pessoa_fisica, a.cd_convenio, \nobter_cnpj_estabelecimento(ag.cd_estabelecimento) as cnpj,\nto_char((a.hr_inicio) , 'dd/mm/yyyy') as data_agenda,\nto_char((a.hr_inicio) , 'hh24:mi:ss') as hora_agenda,\nag.cd_tipo_agenda as tipo_agenda,\npf.nm_pessoa_fisica as nm_paciente,\nsubstr(obter_desc_procedimento(a.cd_procedimento, a.ie_origem_proced),1,1000) as ds_procedimento_princ,\nsubstr((select Listagg(Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced), ' ;') within GROUP (ORDER BY Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced))  from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia),1,1000) as ds_procedimento_adic,\n1 + (select count(1)from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia) as ie_quantidade,\nobter_nome_usuario(a.nm_usuario_orig) as nm_usuario,\nobter_nome_pf(a.cd_medico_exec) as nm_medico,\n'NAO ENCONTRADO' SIGLA_UNIDADE,\n'NAO ENCONTRADO' MARCA,\nobter_valor_dominio(83,a.ie_status_agenda) as status_agenda,\na.nr_atendimento,\na.nr_sequencia,\n'NAO ENCONTRADO' as ID,\na.cd_procedencia,\np.ds_procedencia,\na.dt_agendamento,\n\nto_char(a.dt_agenda,'dd') dia,\nto_char(a.dt_agenda,'mm') mes,\nto_char(a.dt_agenda,'yyyy') ano,\nac.ds_classificacao,\naa.ds_agrupamento ds_agrupamento,\na.cd_motivo_cancelamento,\nsubstr(obter_ds_motivo_status(a.nr_sequencia, a.cd_agenda),1,200) as ds_motivo_cancelamento,\na.cd_agenda\n\nfrom agenda_paciente a,\n     agenda ag,\n     pessoa_fisica pf,\n     procedencia p,\n     agenda_paciente_classif ac,\n     agrupamento_agenda aa\nwhere a.cd_agenda = ag.cd_agenda\nand a.cd_pessoa_fisica = pf.cd_pessoa_fisica \nand a.cd_procedencia = p.cd_procedencia (+)\nand ac.nr_sequencia = a.nr_seq_classif_agenda (+)\nand ag.nr_seq_agrupamento = aa.nr_sequencia (+)\nand a.cd_pessoa_fisica is not null\nand ag.cd_tipo_agenda = 2",
+						"oracleReaderQuery": "-- AGENDAMENTO HOB - Azure\n\nselect  a.cd_pessoa_fisica, \na.cd_convenio, \nobter_cnpj_estabelecimento(ag.cd_estabelecimento) as cnpj,\nto_char((a.hr_inicio) , 'dd/mm/yyyy') as data_agenda,\nto_char((a.hr_inicio) , 'hh24:mi:ss') as hora_agenda,\n'Consulta' as tipo_agenda,\npf.nm_pessoa_fisica as nm_paciente,\nsubstr(obter_desc_procedimento(a.cd_procedimento, a.ie_origem_proced),1,1000) as ds_procedimento_princ,\nsubstr((select Listagg(Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced), ' ;') within GROUP (ORDER BY Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced))  from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia),1,1000) as ds_procedimento_adic,\n1 + (select count(1)from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia) as ie_quantidade,\nobter_nome_usuario(a.nm_usuario_orig) as nm_usuario,\nobter_nome_pf(a.cd_medico_exec) as nm_medico,\ne.nm_fantasia_estab SIGLA_UNIDADE,\nem.nm_razao_social MARCA,\nobter_valor_dominio(83,a.ie_status_agenda) as status_agenda,\na.nr_atendimento,\na.nr_sequencia,\n'NAO ENCONTRADO' as ID,\na.cd_procedencia,\np.ds_procedencia,\na.dt_agendamento,\n\nto_char(a.dt_agenda,'dd') dia,\nto_char(a.dt_agenda,'mm') mes,\nto_char(a.dt_agenda,'yyyy') ano,\nac.ds_classificacao,\naa.ds_agrupamento ds_agrupamento,\na.cd_motivo_cancelamento,\nsubstr(obter_ds_motivo_status(a.nr_sequencia, a.cd_agenda),1,200) as ds_motivo_cancelamento,\na.cd_agenda\n\nfrom agenda_paciente a,\n     agenda ag,\n     pessoa_fisica pf,\n     procedencia p,\n     agenda_paciente_classif ac,\n     agrupamento_agenda aa,\n     empresa em,\n     estabelecimento e\nwhere a.cd_agenda = ag.cd_agenda\nand a.cd_pessoa_fisica = pf.cd_pessoa_fisica (+)\nand a.cd_procedencia = p.cd_procedencia (+)\nand ac.nr_sequencia = a.nr_seq_classif_agenda (+)\nand ag.nr_seq_agrupamento = aa.nr_sequencia (+)\nand ag.cd_estabelecimento = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa\nand a.cd_pessoa_fisica is not null\nand ag.cd_tipo_agenda = 2",
 						"partitionOption": "None"
 					},
 					"sink": {
@@ -184,60 +184,6 @@
 				}
 			},
 			{
-				"name": "Altera_tipo_agendas",
-				"type": "SqlServerStoredProcedure",
-				"dependsOn": [
-					{
-						"activity": "Agendamento HOB",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"storedProcedureName": "[dbo].[sp_ALTERTIPOAGENDASLOTE]"
-				},
-				"linkedServiceName": {
-					"referenceName": "AzureSQL_DB_Procedimentos",
-					"type": "LinkedServiceReference"
-				}
-			},
-			{
-				"name": "Altera_marca_Atendimento",
-				"type": "SqlServerStoredProcedure",
-				"dependsOn": [
-					{
-						"activity": "Atendimento HOB",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"storedProcedureName": "sp_UPDATETRADEMARKATENDIMENTO"
-				},
-				"linkedServiceName": {
-					"referenceName": "AzureSQL_DB_Procedimentos",
-					"type": "LinkedServiceReference"
-				}
-			},
-			{
 				"name": "Altera_telefones",
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
@@ -258,93 +204,6 @@
 				"userProperties": [],
 				"typeProperties": {
 					"storedProcedureName": "[dbo].[sp_ALTERTELEPHONEMASKPACIENTES]"
-				},
-				"linkedServiceName": {
-					"referenceName": "AzureSQL_DB_Procedimentos",
-					"type": "LinkedServiceReference"
-				}
-			},
-			{
-				"name": "Altera_marca_Pacientes",
-				"type": "SqlServerStoredProcedure",
-				"dependsOn": [
-					{
-						"activity": "Altera_telefones",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"storedProcedureName": "sp_UPDATETRADEMARKPACIENTES"
-				},
-				"linkedServiceName": {
-					"referenceName": "AzureSQL_DB_Procedimentos",
-					"type": "LinkedServiceReference"
-				}
-			},
-			{
-				"name": "Altera_marca_Agendamento",
-				"type": "SqlServerStoredProcedure",
-				"dependsOn": [
-					{
-						"activity": "Altera_tipo_agendas",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"storedProcedureName": "sp_UPDATETRADEMARKAGENDAMENTO"
-				},
-				"linkedServiceName": {
-					"referenceName": "AzureSQL_DB_Procedimentos",
-					"type": "LinkedServiceReference"
-				}
-			},
-			{
-				"name": "Insere ID",
-				"type": "SqlServerStoredProcedure",
-				"dependsOn": [
-					{
-						"activity": "Altera_marca_Atendimento",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "Altera_marca_Agendamento",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"storedProcedureName": "[dbo].[INSERTIDINAGEND]"
 				},
 				"linkedServiceName": {
 					"referenceName": "AzureSQL_DB_Procedimentos",
@@ -416,7 +275,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT A.CD_AGENDA, A.DS_AGENDA, A.CD_TIPO_AGENDA, A.CD_PESSOA_FISICA, E.CD_CGC as CNPJ, (SELECT X.DS_AREA_ATUACAO FROM AREA_ATUACAO_MEDICA X\nWHERE X.NR_SEQUENCIA = A.NR_SEQ_AREA_ATUACAO) AS DS_AREA_ATUACAO\nFROM AGENDA A,\n     ESTABELECIMENTO E\nWHERE A.CD_ESTABELECIMENTO = E.CD_ESTABELECIMENTO",
+						"oracleReaderQuery": "SELECT A.CD_AGENDA, A.DS_AGENDA, A.CD_TIPO_AGENDA, A.CD_PESSOA_FISICA, E.CD_CGC as CNPJ, (SELECT X.DS_AREA_ATUACAO FROM AREA_ATUACAO_MEDICA X\nWHERE X.NR_SEQUENCIA = A.NR_SEQ_AREA_ATUACAO) AS DS_AREA_ATUACAO, A.IE_SITUACAO\nFROM AGENDA A,\n     ESTABELECIMENTO E\nWHERE A.CD_ESTABELECIMENTO = E.CD_ESTABELECIMENTO",
 						"partitionOption": "None"
 					},
 					"sink": {

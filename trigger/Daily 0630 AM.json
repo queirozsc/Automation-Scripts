@@ -19,7 +19,7 @@
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "Geral Atendimentos HOB V2",
+					"referenceName": "Geral Atendimentos HOB",
 					"type": "PipelineReference"
 				}
 			}
