@@ -45,7 +45,8 @@
 						}
 					},
 					"sink": {
-						"type": "AzureSqlSink"
+						"type": "AzureSqlSink",
+						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
 					"translator": {
@@ -287,8 +288,7 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "Falado_x_Logado",
-									"type": "String"
+									"name": "Falado_x_Logado"
 								}
 							}
 						]

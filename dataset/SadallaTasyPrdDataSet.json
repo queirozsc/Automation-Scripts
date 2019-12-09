@@ -12,71 +12,31 @@
 		"type": "OracleTable",
 		"structure": [
 			{
+				"name": "CD_AGENDA",
+				"type": "Decimal"
+			},
+			{
+				"name": "DS_AGENDA",
+				"type": "String"
+			},
+			{
+				"name": "CD_TIPO_AGENDA",
+				"type": "Decimal"
+			},
+			{
+				"name": "CD_PESSOA_FISICA",
+				"type": "String"
+			},
+			{
 				"name": "CNPJ",
 				"type": "String"
 			},
 			{
-				"name": "NM_RAZAOSOCIAL",
+				"name": "DS_AREA_ATUACAO",
 				"type": "String"
 			},
 			{
-				"name": "NM_FANTASIA",
-				"type": "String"
-			},
-			{
-				"name": "NR_TITULO",
-				"type": "Decimal"
-			},
-			{
-				"name": "NR_NOTA_FISCAL",
-				"type": "String"
-			},
-			{
-				"name": "DT_EMISSAO",
-				"type": "DateTime"
-			},
-			{
-				"name": "DT_VENCIMENTO_ORIGINAL",
-				"type": "DateTime"
-			},
-			{
-				"name": "DT_VENCIMENTO_PRORROGADO",
-				"type": "DateTime"
-			},
-			{
-				"name": "VL_BRUTO",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_SALDO_JUROS",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_SALDO_MULTA",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_LIQUIDO",
-				"type": "String"
-			},
-			{
-				"name": "VL_SALDO_TITULO",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_AMENOR",
-				"type": "Double"
-			},
-			{
-				"name": "SITUACAO",
-				"type": "String"
-			},
-			{
-				"name": "SIGLA_UNIDADE",
-				"type": "String"
-			},
-			{
-				"name": "MARCA",
+				"name": "IE_SITUACAO",
 				"type": "String"
 			}
 		]
