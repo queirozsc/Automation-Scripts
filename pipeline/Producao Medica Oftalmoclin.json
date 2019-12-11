@@ -334,7 +334,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SMART_ITAIGARA_PrdDataSet",
+						"referenceName": "SMART_Oftalmoclin_Prd_DataSet",
 						"type": "DatasetReference"
 					}
 				],
