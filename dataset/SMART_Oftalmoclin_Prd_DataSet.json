@@ -2,7 +2,7 @@
 	"name": "SMART_Oftalmoclin_Prd_DataSet",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "SMART_ITAIGARA_NEW",
+			"referenceName": "SMART_Oftalmoclin",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
