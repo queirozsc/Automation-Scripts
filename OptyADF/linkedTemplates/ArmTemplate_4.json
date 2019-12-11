@@ -7,25 +7,13 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "OptyADF"
 		},
-		"SMART_IOF_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SMART_IOF'"
-		},
-		"SMART_IOF_NEW_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SMART_IOF_NEW'"
-		},
-		"SMART_ITABUNA_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SMART_ITABUNA'"
-		},
-		"SMART_ITABUNA_NEW_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SMART_ITABUNA_NEW'"
-		},
 		"SMART_ITAIGARA_NEW_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'SMART_ITAIGARA_NEW'"
+		},
+		"SMART_Oftalmoclin_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SMART_Oftalmoclin'"
 		},
 		"SadallaSeniorProd_connectionString": {
 			"type": "secureString",
@@ -53,74 +41,6 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/SMART_IOF')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('SMART_IOF_connectionString')]"
-				},
-				"connectVia": {
-					"referenceName": "integrationRuntime",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SMART_IOF_NEW')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('SMART_IOF_NEW_connectionString')]"
-				},
-				"connectVia": {
-					"referenceName": "ServidorArquivosBI",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SMART_ITABUNA')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('SMART_ITABUNA_connectionString')]"
-				},
-				"connectVia": {
-					"referenceName": "integrationRuntime",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SMART_ITABUNA_NEW')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('SMART_ITABUNA_NEW_connectionString')]"
-				},
-				"connectVia": {
-					"referenceName": "ServidorArquivosBI",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/SMART_ITAIGARA_NEW')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -129,6 +49,23 @@
 				"type": "SqlServer",
 				"typeProperties": {
 					"connectionString": "[parameters('SMART_ITAIGARA_NEW_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "ServidorArquivosBI",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SMART_Oftalmoclin')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('SMART_Oftalmoclin_connectionString')]"
 				},
 				"connectVia": {
 					"referenceName": "ServidorArquivosBI",
@@ -490,55 +427,11 @@
 				"type": "OracleTable",
 				"structure": [
 					{
-						"name": "CD_PESSOA_FISICA",
+						"name": "BASE",
 						"type": "String"
-					},
-					{
-						"name": "CD_CONVENIO",
-						"type": "Decimal"
 					},
 					{
 						"name": "CNPJ",
-						"type": "String"
-					},
-					{
-						"name": "DATA_AGENDA",
-						"type": "String"
-					},
-					{
-						"name": "HORA_AGENDA",
-						"type": "String"
-					},
-					{
-						"name": "TIPO_AGENDA",
-						"type": "String"
-					},
-					{
-						"name": "NM_PACIENTE",
-						"type": "String"
-					},
-					{
-						"name": "DS_PROCEDIMENTO_PRINC",
-						"type": "String"
-					},
-					{
-						"name": "DS_PROCEDIMENTO_ADIC",
-						"type": "String"
-					},
-					{
-						"name": "IE_QUANTIDADE",
-						"type": "Double"
-					},
-					{
-						"name": "NM_USUARIO",
-						"type": "String"
-					},
-					{
-						"name": "NM_MEDICO",
-						"type": "String"
-					},
-					{
-						"name": "SIGLA_UNIDADE",
 						"type": "String"
 					},
 					{
@@ -546,43 +439,83 @@
 						"type": "String"
 					},
 					{
-						"name": "STATUS_AGENDA",
-						"type": "String"
+						"name": "DT_ATUALIZACAO",
+						"type": "DateTime"
 					},
 					{
 						"name": "NR_ATENDIMENTO",
 						"type": "Decimal"
 					},
 					{
-						"name": "NR_SEQUENCIA",
-						"type": "Decimal"
-					},
-					{
-						"name": "ID",
-						"type": "String"
-					},
-					{
-						"name": "CD_PROCEDENCIA",
-						"type": "Decimal"
-					},
-					{
-						"name": "DS_PROCEDENCIA",
-						"type": "String"
-					},
-					{
-						"name": "DT_AGENDAMENTO",
+						"name": "DT_ENTRADA",
 						"type": "DateTime"
 					},
 					{
-						"name": "DIA",
+						"name": "NR_INTERNO_CONTA",
+						"type": "Decimal"
+					},
+					{
+						"name": "CD_PESSOA_FISICA",
 						"type": "String"
 					},
 					{
-						"name": "MES",
+						"name": "DT_NASCIMENTO",
+						"type": "DateTime"
+					},
+					{
+						"name": "NR_CPF",
 						"type": "String"
 					},
 					{
-						"name": "ANO",
+						"name": "IE_SEXO",
+						"type": "String"
+					},
+					{
+						"name": "NR_CEP",
+						"type": "String"
+					},
+					{
+						"name": "DS_CIDADE",
+						"type": "String"
+					},
+					{
+						"name": "DS_PESSOA_FISICA",
+						"type": "String"
+					},
+					{
+						"name": "CD_CONVENIO",
+						"type": "Decimal"
+					},
+					{
+						"name": "DS_CONVENIO",
+						"type": "String"
+					},
+					{
+						"name": "CD_MEDICO_EXECUTOR",
+						"type": "String"
+					},
+					{
+						"name": "DS_MEDICO_EXECUTOR",
+						"type": "String"
+					},
+					{
+						"name": "CD_MEDICO_REQUISITANTE",
+						"type": "String"
+					},
+					{
+						"name": "DS_MEDICO_REQUISITANTE",
+						"type": "String"
+					},
+					{
+						"name": "IE_ORIGEM_PROCED",
+						"type": "Decimal"
+					},
+					{
+						"name": "CD_PROCEDIMENTO",
+						"type": "Decimal"
+					},
+					{
+						"name": "DS_PROCEDIMENTO",
 						"type": "String"
 					},
 					{
@@ -590,20 +523,24 @@
 						"type": "String"
 					},
 					{
-						"name": "DS_AGRUPAMENTO",
-						"type": "String"
-					},
-					{
-						"name": "CD_MOTIVO_CANCELAMENTO",
-						"type": "String"
-					},
-					{
-						"name": "DS_MOTIVO_CANCELAMENTO",
-						"type": "String"
-					},
-					{
-						"name": "CD_AGENDA",
+						"name": "QT_PROCEDIMENTO",
 						"type": "Decimal"
+					},
+					{
+						"name": "VL_PROCEDIMENTO",
+						"type": "Decimal"
+					},
+					{
+						"name": "IE_STATUS_ACERTO",
+						"type": "Decimal"
+					},
+					{
+						"name": "STATUS_CONTA",
+						"type": "String"
+					},
+					{
+						"name": "CD_TUSS",
+						"type": "String"
 					}
 				],
 				"typeProperties": {}
@@ -736,6 +673,189 @@
 						"type": "String"
 					}
 				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DH_CSV_NC_AgentesPorDia_Temp')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Historicos_AgentesPorDia_DAYHORC",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Nexcore/DH/Históricos"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "FileServerLocation"
+					},
+					"columnDelimiter": ";",
+					"escapeChar": "",
+					"firstRowAsHeader": true,
+					"quoteChar": ""
+				},
+				"schema": [
+					{
+						"name": "Usuario",
+						"type": "String"
+					},
+					{
+						"name": "Intervalo",
+						"type": "String"
+					},
+					{
+						"name": "Atendidas",
+						"type": "String"
+					},
+					{
+						"name": "Recusas",
+						"type": "String"
+					},
+					{
+						"name": "Recebidas",
+						"type": "String"
+					},
+					{
+						"name": "Internas Recebidas",
+						"type": "String"
+					},
+					{
+						"name": "Transferencias",
+						"type": "String"
+					},
+					{
+						"name": "Efetuadas",
+						"type": "String"
+					},
+					{
+						"name": "Efetuadas Tratados",
+						"type": "String"
+					},
+					{
+						"name": "% Taxa de Contato",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Atendidas",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Internas Recebidas",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Efetuadas",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Medio Falado",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Total Falado",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Toque Agente",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Toque Cliente",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Pausa",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Estouro",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Dispon�vel",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Indispon�vel",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Logado",
+						"type": "String"
+					},
+					{
+						"name": "Tempo Deslogado",
+						"type": "String"
+					},
+					{
+						"name": "% Falado x Logado",
+						"type": "String"
+					},
+					{
+						"name": "Marca",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DH_CSV_NC_AgentesPorHora')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Folder_Nexcore_Consolidado",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Nexcore/DH"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "FileServerLocation",
+						"fileName": "AgentesPorHoraDAYHORC.csv"
+					},
+					"columnDelimiter": ";",
+					"escapeChar": "",
+					"firstRowAsHeader": true,
+					"quoteChar": ""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DH_CSV_NC_AgentesPorHora_Temp')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Historicos_AgentesPorHora_DAYHORC",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Nexcore/DH/Históricos"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "FileServerLocation"
+					},
+					"columnDelimiter": ";",
+					"escapeChar": "",
+					"firstRowAsHeader": true,
+					"quoteChar": ""
+				},
+				"schema": []
 			},
 			"dependsOn": []
 		}

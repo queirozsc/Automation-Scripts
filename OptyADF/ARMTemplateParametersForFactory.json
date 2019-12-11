@@ -95,34 +95,22 @@
 		"Historicos_FIlasPorHoras_SADALLA_password": {
 			"value": ""
 		},
-		"SMARTProd_connectionString": {
-			"value": ""
-		},
-		"SMART_HOSL_connectionString": {
-			"value": ""
-		},
 		"SMART_HOSL_NEW_connectionString": {
-			"value": ""
-		},
-		"SMART_INOB_connectionString": {
 			"value": ""
 		},
 		"SMART_INOB_NEW_connectionString": {
 			"value": ""
 		},
-		"SMART_IOF_connectionString": {
-			"value": ""
-		},
 		"SMART_IOF_NEW_connectionString": {
-			"value": ""
-		},
-		"SMART_ITABUNA_connectionString": {
 			"value": ""
 		},
 		"SMART_ITABUNA_NEW_connectionString": {
 			"value": ""
 		},
 		"SMART_ITAIGARA_NEW_connectionString": {
+			"value": ""
+		},
+		"SMART_Oftalmoclin_connectionString": {
 			"value": ""
 		},
 		"SadallaSeniorProd_connectionString": {
