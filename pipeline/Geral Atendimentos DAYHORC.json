@@ -33,7 +33,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "select top 100 pac_reg as CD_PESSOA_FISICA, \npac_nome AS NM_PESSOA_FISICA, \npac_numcpf AS NR_CPF, \nconvert(char(10),pac_nasc,121) as DT_NASCIMENTO, \npac_fone AS NR_TELEFONE_CELULAR,\npac_fone2 AS NR_TELEFONE, \n'13188370000227' as CNPJ ,\n'NAO ENCONTRADO' as SIGLA_UNIDADE,\n'NAO ENCONTRADO' as MARCA,\npac_pront as NR_PRONTUARIO,\npac_dreg as DT_CADASTRO_ORIGINAL\nfrom pac"
+						"sqlReaderQuery": "select top 100 pac_reg as CD_PESSOA_FISICA, \npac_nome AS NM_PESSOA_FISICA, \npac_numcpf AS NR_CPF, \nconvert(char(10),pac_nasc,121) as DT_NASCIMENTO, \npac_fone AS NR_TELEFONE_CELULAR,\npac_fone2 AS NR_TELEFONE, \n'13188370000227' as CNPJ ,\n'DayHORC - ITG' as SIGLA_UNIDADE,\n'DayHORC - ITG' as MARCA,\npac_pront as NR_PRONTUARIO,\npac_dreg as DT_CADASTRO_ORIGINAL\nfrom pac"
 					},
 					"sink": {
 						"type": "AzureSqlSink"
