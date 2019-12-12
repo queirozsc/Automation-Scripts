@@ -43,7 +43,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SMART_ITAIGARA_PrdDataSet",
+						"referenceName": "SMART_INOB_PrdDataSet",
 						"type": "DatasetReference"
 					}
 				],
@@ -86,7 +86,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SMART_ITAIGARA_PrdDataSet",
+						"referenceName": "SMART_INOB_PrdDataSet",
 						"type": "DatasetReference"
 					}
 				],
