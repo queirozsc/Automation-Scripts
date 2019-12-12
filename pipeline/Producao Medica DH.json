@@ -76,13 +76,58 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "select cnv_cod, cnv.cnv_nome, gcc.gcc_cod, emp.emp_cgc\nfrom cnv,\n     gcc,\n     str,\n     emp\nwhere gcc.gcc_str_cod = str_cod\nand str_emp_cod = emp_cod\nand emp_cgc <> '-'\nand cnv_cod <> '999'\nand cnv_stat = 'A'\norder by 2",
+						"sqlReaderQuery": "select cnv_cod AS CD_CONVENIO, cnv.cnv_nome AS DS_CONVENIO, gcc.gcc_cod AS CD_ESTABELECIMENTO, emp.emp_cgc AS CNPJ\nfrom cnv,\n     gcc,\n     str,\n     emp\nwhere gcc.gcc_str_cod = str_cod\nand str_emp_cod = emp_cod\nand emp_cgc <> '-'\nand cnv_cod <> '999'\nand cnv_stat = 'A'",
 						"queryTimeout": "02:00:00"
 					},
 					"sink": {
 						"type": "AzureSqlSink"
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "CD_CONVENIO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CD_CONVENIO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_CONVENIO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DS_CONVENIO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CD_ESTABELECIMENTO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CD_ESTABELECIMENTO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "CNPJ",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CNPJ",
+									"type": "String"
+								}
+							}
+						]
+					}
 				},
 				"inputs": [
 					{
@@ -119,13 +164,48 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "select cnv_cod AS CD_CONVENIO, cnv.cnv_nome AS DS_CONVENIO, gcc.gcc_cod AS CD_ESTABELECIMENTO, emp.emp_cgc AS CNPJ\nfrom cnv,\n     gcc,\n     str,\n     emp\nwhere gcc.gcc_str_cod = str_cod\nand str_emp_cod = emp_cod\nand emp_cgc <> '-'\nand cnv_cod <> '999'\nand cnv_stat = 'A'",
+						"sqlReaderQuery": "select gcc.GCC_COD as CNPJ, gcc.GCC_DESCR AS DS_ESTABELECIMENTO, emp_cgc AS DS_EMPRESA\nfrom \ngcc, \nstr, \nemp\nwhere GCC_STR_COD = STR_COD\nand STR_EMP_COD = emp_cod\nAND emp_cgc <> '-'",
 						"queryTimeout": "02:00:00"
 					},
 					"sink": {
 						"type": "AzureSqlSink"
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "CNPJ",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CNPJ",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_ESTABELECIMENTO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DS_ESTABELECIMENTO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_EMPRESA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DS_EMPRESA",
+									"type": "String"
+								}
+							}
+						]
+					}
 				},
 				"inputs": [
 					{
