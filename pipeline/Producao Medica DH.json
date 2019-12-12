@@ -96,6 +96,49 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Estabelecimento",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Wait1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": "select gcc.GCC_COD as CNPJ, gcc.GCC_DESCR AS DS_ESTABELECIMENTO, emp_cgc AS DS_EMPRESA\nfrom \ngcc, \nstr, \nemp\nwhere GCC_STR_COD = STR_COD\nand STR_EMP_COD = emp_cod\nAND emp_cgc <> '-'",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "SMART_ITAIGARA_PrdDataSet",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AZ_SQL_TB_Estabelecimento",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"folder": {
