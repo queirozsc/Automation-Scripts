@@ -82,52 +82,7 @@
 					"sink": {
 						"type": "AzureSqlSink"
 					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"name": "CD_CONVENIO",
-									"type": "String"
-								},
-								"sink": {
-									"name": "CD_CONVENIO",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"name": "DS_CONVENIO",
-									"type": "String"
-								},
-								"sink": {
-									"name": "DS_CONVENIO",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "CD_ESTABELECIMENTO",
-									"type": "String"
-								},
-								"sink": {
-									"name": "CD_ESTABELECIMENTO",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"name": "CNPJ",
-									"type": "String"
-								},
-								"sink": {
-									"name": "CNPJ",
-									"type": "String"
-								}
-							}
-						]
-					}
+					"enableStaging": false
 				},
 				"inputs": [
 					{
@@ -170,42 +125,7 @@
 					"sink": {
 						"type": "AzureSqlSink"
 					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"name": "CNPJ",
-									"type": "String"
-								},
-								"sink": {
-									"name": "CNPJ",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "DS_ESTABELECIMENTO",
-									"type": "String"
-								},
-								"sink": {
-									"name": "DS_ESTABELECIMENTO",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "DS_EMPRESA",
-									"type": "String"
-								},
-								"sink": {
-									"name": "DS_EMPRESA",
-									"type": "String"
-								}
-							}
-						]
-					}
+					"enableStaging": false
 				},
 				"inputs": [
 					{
