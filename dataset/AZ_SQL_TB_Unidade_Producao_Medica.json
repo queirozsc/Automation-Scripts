@@ -1,133 +1,143 @@
 {
-	"name": "CloudTasyPrdDataSet",
+	"name": "AZ_SQL_TB_Unidade_Producao_Medica",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "CloudTasyProd_NEW",
+			"referenceName": "AzureSQL_DB_Procedimentos",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "Power BI"
+			"name": "Produção Médica Unidades"
 		},
 		"annotations": [],
-		"type": "OracleTable",
-		"structure": [
+		"type": "AzureSqlTable",
+		"schema": [
 			{
 				"name": "BASE",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "CNPJ",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "MARCA",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "DT_ATUALIZACAO",
-				"type": "DateTime"
+				"type": "date"
 			},
 			{
 				"name": "NR_ATENDIMENTO",
-				"type": "Decimal"
+				"type": "int",
+				"precision": 10
 			},
 			{
 				"name": "DT_ENTRADA",
-				"type": "DateTime"
+				"type": "date"
 			},
 			{
 				"name": "NR_INTERNO_CONTA",
-				"type": "Decimal"
+				"type": "int",
+				"precision": 10
 			},
 			{
 				"name": "CD_PESSOA_FISICA",
-				"type": "String"
+				"type": "int",
+				"precision": 10
 			},
 			{
 				"name": "DT_NASCIMENTO",
-				"type": "DateTime"
+				"type": "date"
 			},
 			{
 				"name": "NR_CPF",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "IE_SEXO",
-				"type": "String"
+				"type": "char"
 			},
 			{
 				"name": "NR_CEP",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "DS_CIDADE",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "DS_PESSOA_FISICA",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "CD_CONVENIO",
-				"type": "Decimal"
+				"type": "varchar"
 			},
 			{
 				"name": "DS_CONVENIO",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "CD_MEDICO_EXECUTOR",
-				"type": "String"
+				"type": "int",
+				"precision": 10
 			},
 			{
 				"name": "DS_MEDICO_EXECUTOR",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "CD_MEDICO_REQUISITANTE",
-				"type": "String"
+				"type": "int",
+				"precision": 10
 			},
 			{
 				"name": "DS_MEDICO_REQUISITANTE",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "IE_ORIGEM_PROCED",
-				"type": "Decimal"
+				"type": "varchar"
 			},
 			{
 				"name": "CD_PROCEDIMENTO",
-				"type": "Decimal"
+				"type": "varchar"
 			},
 			{
 				"name": "DS_PROCEDIMENTO",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "DS_CLASSIFICACAO",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "QT_PROCEDIMENTO",
-				"type": "Decimal"
+				"type": "int",
+				"precision": 10
 			},
 			{
 				"name": "VL_PROCEDIMENTO",
-				"type": "Decimal"
+				"type": "float",
+				"precision": 15
 			},
 			{
 				"name": "IE_STATUS_ACERTO",
-				"type": "Decimal"
+				"type": "varchar"
 			},
 			{
 				"name": "STATUS_CONTA",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "CD_TUSS",
-				"type": "String"
+				"type": "varchar"
 			}
-		]
-	},
-	"type": "Microsoft.DataFactory/factories/datasets"
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Unidade_Producao_Medica"
+		}
+	}
 }

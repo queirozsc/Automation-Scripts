@@ -1,5 +1,5 @@
 {
-	"name": "Geral Atendimentos DAYHORC",
+	"name": "Geral Atendimentos HOSL",
 	"properties": {
 		"activities": [
 			{
@@ -12,7 +12,7 @@
 				}
 			},
 			{
-				"name": "Pacientes DayHorc",
+				"name": "Pacientes HOSL",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -42,7 +42,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SMART_ITAIGARA_PrdDataSet",
+						"referenceName": "SMART_HOSL_PrdDataSet",
 						"type": "DatasetReference"
 					}
 				],
