@@ -12,7 +12,7 @@
 				}
 			},
 			{
-				"name": "Pacientes DayHorc",
+				"name": "Pacientes DH",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -49,6 +49,49 @@
 				"outputs": [
 					{
 						"referenceName": "AZSQL_TB_Pacientes_Unidade",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Atendimento DH",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Wait1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": "select top 100\npac_reg as CD_PESSOA_FISICA,\npac_nome as NM_PESSOA_FISICA,\nconvert(date,osm_dthr) as DT_ENTRADA,\nosm_dthr as HR_ENTRADA,\npsv_nome as NM_MEDICO,\nosm_cnv as CD_CONVENIO,\ncnv_nome as DS_CONVENIO,\nconvert(varchar,osm_serie) + convert(varchar,osm_num) as NR_ATENDIMENTO,\nemp_cgc AS CNPJ,\nemp_nome_fantasia as SIGLA_UNIDADE,\n'NAO ENCONTRADO' as CD_PROCEDENCIA,\n'NAO ENCONTRADO' as DS_PROCEDENCIA,\n'NAO ENCONTRADO' as ID,\n\nDAY(osm_dthr) as DIA,\nMONTH(osm_dthr) as MES, \nYEAR(osm_dthr) as ANO\n\nfrom osm, pac, cnv, str, emp, psv\nwhere osm_pac = pac_reg\nand osm_cnv = cnv_cod\nand osm_str = str_cod\nand str_emp_cod = emp_cod\nand osm_mreq = psv_cod",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "SMART_ITAIGARA_PrdDataSet",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AZ_SQL_TB_Atendimento",
 						"type": "DatasetReference"
 					}
 				]
