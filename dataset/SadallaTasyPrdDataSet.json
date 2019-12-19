@@ -68,15 +68,15 @@
 				"type": "String"
 			},
 			{
-				"name": "VL_PERC_IR",
+				"name": "VL_PER_IR",
 				"type": "String"
 			},
 			{
-				"name": "VL_PERC_JUROS",
+				"name": "VL_PERC_MULTA",
 				"type": "Decimal"
 			},
 			{
-				"name": "VL_PERC_MULTA",
+				"name": "VL_PERC_JURO",
 				"type": "Decimal"
 			},
 			{
@@ -88,15 +88,15 @@
 				"type": "String"
 			},
 			{
-				"name": "NM_RAZAO_SOCIAL",
+				"name": "MARCA",
 				"type": "String"
 			},
 			{
-				"name": "NM_FANTASIA_ESTAB",
+				"name": "SIGLA_UNIDADE",
 				"type": "String"
 			},
 			{
-				"name": "CD_CGC",
+				"name": "CNPJ",
 				"type": "String"
 			}
 		]
