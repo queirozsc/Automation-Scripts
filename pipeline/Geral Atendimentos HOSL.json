@@ -118,7 +118,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "-- Construção tabela agenda Smart\n\nselect top 10\nAGM_PAC as CD_PESSOA_FISICA, \nagm.agm_cnv_cod as CD_CONVENIO,\nGCC_DESCR,\nCONVERT(DATE,AGM_HINI) AS DATA_AGENDA,\nCONVERT(TIME,AGM_HINI) AS HORA_AGENDA,\nAGM_ATEND,\npac.PAC_NOME,\nSMK_NOME AS DS_PROCEDIMENTO,\n' ' DS_PROCED_ADICIONAL,\n1 AS IE_QUANTIDADE,\nUSR_NOME as NM_USUARIO,\npsv_nome AS NM_MEDICO,\nAGM_STR_COD as SIGLA_UNIDADE,\nAGM_STR_COD as MARCA,\nCASE WHEN AGM_STAT = 'A' then 'Aberta'\n     WHEN AGM_STAT = 'E' then 'Executada'      \n     WHEN AGM_STAT = 'C' then 'Cancelada'     \n     WHEN AGM_STAT = 'B' then 'Bloqueada' END STATUS_AGENDA,\n\nconvert(varchar,AGM_OSM_SERIE) + convert(varchar,AGM_OSM_NUM) as NR_ATENDIMENTO,\nAGM_num as NR_SEQUENCIA,\n''ID,\n'' as CD_PROCEDENCIA,\nagm_proc as DS_PROCEDENCIA ,\nagm.AGM_DTMRC,\nDAY(AGM_HINI) as DIA,\nMONTH(AGM_HINI) as MES,\nYEAR(AGM_HINI) as ANO,\n' ' DS_CLASSIFICACAO,\n' ' DS_AGRUPAMENTO,\nagm.AGM_CANC_MOT_COD as CD_MOTIVO_CANCELAMENTO,\nagm.AGM_CANC_MOT_TIPO as DS_MOTIVO_CANCELAMENTO,\nagm_med as CD_AGENDA\nfrom \nagm, \npac,\ncnv,\nstr,\nsmk,\ngcc,\nusr,\npsv\nwhere agm.agm_pac = pac_reg\nand agm_cnv_cod = cnv_cod\nand agm_str_cod = str_cod\nand agm_smk = smk_cod\nand agm_str_cod = gcc_str_cod\nand AGM_USR_LOGIN = USR_LOGIN\nand agm_med = PSV_COD",
+						"sqlReaderQuery": "-- Construção tabela agenda Smart\n\nselect top 10\nAGM_PAC as CD_PESSOA_FISICA, \nagm.agm_cnv_cod as CD_CONVENIO,\nGCC_DESCR,\nCONVERT(DATE,AGM_HINI) AS DATA_AGENDA,\nCONVERT(TIME,AGM_HINI) AS HORA_AGENDA,\nAGM_ATEND AS TIPO_AGENDA,\npac.PAC_NOME AS NM_PACIENTE,\nSMK_NOME AS DS_PROCEDIMENTO_PRINC,\n' ' DS_PROCEDIMENTO_ADIC,\n1 AS IE_QUANTIDADE,\nUSR_NOME as NM_USUARIO,\npsv_nome AS NM_MEDICO,\nAGM_STR_COD as SIGLA_UNIDADE,\nAGM_STR_COD as MARCA,\nCASE WHEN AGM_STAT = 'A' then 'Aberta'\n     WHEN AGM_STAT = 'E' then 'Executada'      \n     WHEN AGM_STAT = 'C' then 'Cancelada'     \n     WHEN AGM_STAT = 'B' then 'Bloqueada' END STATUS_AGENDA,\n\nconvert(varchar,AGM_OSM_SERIE) + convert(varchar,AGM_OSM_NUM) as NR_ATENDIMENTO,\nAGM_num as NR_SEQUENCIA,\n''ID,\n'' as CD_PROCEDENCIA,\nagm_proc as DS_PROCEDENCIA ,\nagm.AGM_DTMRC as DT_AGENDAMENTO,\nDAY(AGM_HINI) as DIA,\nMONTH(AGM_HINI) as MES,\nYEAR(AGM_HINI) as ANO,\n' ' DS_CLASSIFICACAO,\n' ' DS_AGRUPAMENTO,\nagm.AGM_CANC_MOT_COD as CD_MOTIVO_CANCELAMENTO,\nagm.AGM_CANC_MOT_TIPO as DS_MOTIVO_CANCELAMENTO,\nagm_med as CD_AGENDA\nfrom \nagm, \npac,\ncnv,\nstr,\nsmk,\ngcc,\nusr,\npsv\nwhere agm.agm_pac = pac_reg\nand agm_cnv_cod = cnv_cod\nand agm_str_cod = str_cod\nand agm_smk = smk_cod\nand agm_str_cod = gcc_str_cod\nand AGM_USR_LOGIN = USR_LOGIN\nand agm_med = PSV_COD",
 						"queryTimeout": "02:00:00"
 					},
 					"sink": {
@@ -175,24 +175,40 @@
 								}
 							},
 							{
+								"source": {
+									"name": "TIPO_AGENDA",
+									"type": "String"
+								},
 								"sink": {
 									"name": "TIPO_AGENDA",
 									"type": "String"
 								}
 							},
 							{
+								"source": {
+									"name": "NM_PACIENTE",
+									"type": "String"
+								},
 								"sink": {
 									"name": "NM_PACIENTE",
 									"type": "String"
 								}
 							},
 							{
+								"source": {
+									"name": "DS_PROCEDIMENTO_PRINC",
+									"type": "String"
+								},
 								"sink": {
 									"name": "DS_PROCEDIMENTO_PRINC",
 									"type": "String"
 								}
 							},
 							{
+								"source": {
+									"name": "DS_PROCEDIMENTO_ADIC",
+									"type": "String"
+								},
 								"sink": {
 									"name": "DS_PROCEDIMENTO_ADIC",
 									"type": "String"
@@ -309,6 +325,10 @@
 								}
 							},
 							{
+								"source": {
+									"name": "DT_AGENDAMENTO",
+									"type": "DateTime"
+								},
 								"sink": {
 									"name": "DT_AGENDAMENTO",
 									"type": "DateTime"
