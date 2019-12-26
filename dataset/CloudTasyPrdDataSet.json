@@ -12,84 +12,20 @@
 		"type": "OracleTable",
 		"structure": [
 			{
-				"name": "NR_TIPO_TITULO",
+				"name": "NM_USUARIO",
 				"type": "String"
 			},
 			{
-				"name": "NR_SERIE_TITULO",
+				"name": "DS_USUARIO",
 				"type": "String"
 			},
 			{
-				"name": "NR_TITULO",
-				"type": "Decimal"
+				"name": "IE_SITUACAO",
+				"type": "String"
 			},
 			{
-				"name": "DT_EMISSAO_TITULO",
+				"name": "DT_ATUALIZACAO",
 				"type": "DateTime"
-			},
-			{
-				"name": "DT_VENCIMENTO_TITULO",
-				"type": "DateTime"
-			},
-			{
-				"name": "VL_TITULO",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_MULTA",
-				"type": "Decimal"
-			},
-			{
-				"name": "DS_CONVENIO",
-				"type": "String"
-			},
-			{
-				"name": "DS_EMPRESA_CONVENIO",
-				"type": "String"
-			},
-			{
-				"name": "CONV_CNPJ",
-				"type": "String"
-			},
-			{
-				"name": "VL_ISS",
-				"type": "String"
-			},
-			{
-				"name": "VL_IR",
-				"type": "String"
-			},
-			{
-				"name": "VL_FILME",
-				"type": "String"
-			},
-			{
-				"name": "VL_PERC_ISS",
-				"type": "String"
-			},
-			{
-				"name": "VL_PER_IR",
-				"type": "String"
-			},
-			{
-				"name": "VL_PERC_MULTA",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_PERC_JURO",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_OUTROS_IMP",
-				"type": "Decimal"
-			},
-			{
-				"name": "NR_REMESSA",
-				"type": "String"
-			},
-			{
-				"name": "MARCA",
-				"type": "String"
 			},
 			{
 				"name": "SIGLA_UNIDADE",
@@ -97,6 +33,10 @@
 			},
 			{
 				"name": "CNPJ",
+				"type": "String"
+			},
+			{
+				"name": "MARCA",
 				"type": "String"
 			}
 		]
