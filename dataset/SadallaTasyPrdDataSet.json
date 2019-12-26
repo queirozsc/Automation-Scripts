@@ -12,83 +12,43 @@
 		"type": "OracleTable",
 		"structure": [
 			{
-				"name": "NR_TIPO_TITULO",
-				"type": "String"
-			},
-			{
-				"name": "NR_SERIE_TITULO",
-				"type": "String"
-			},
-			{
-				"name": "NR_TITULO",
+				"name": "NR_SEQUENCIA",
 				"type": "Decimal"
 			},
 			{
-				"name": "DT_EMISSAO_TITULO",
-				"type": "DateTime"
+				"name": "DT_ATUALIZACAO",
+				"type": "String"
 			},
 			{
-				"name": "DT_VENCIMENTO_TITULO",
-				"type": "DateTime"
+				"name": "HR_ATUALIZACAO",
+				"type": "String"
 			},
 			{
-				"name": "VL_TITULO",
+				"name": "NR_ATENDIMENTO",
 				"type": "Decimal"
 			},
 			{
-				"name": "VL_MULTA",
-				"type": "Decimal"
-			},
-			{
-				"name": "DS_CONVENIO",
+				"name": "CD_MEDICO",
 				"type": "String"
 			},
 			{
-				"name": "DS_EMPRESA_CONVENIO",
+				"name": "NM_MEDICO",
 				"type": "String"
 			},
 			{
-				"name": "CONV_CNPJ",
+				"name": "DS_RETORNO",
 				"type": "String"
 			},
 			{
-				"name": "VL_ISS",
+				"name": "DS_CONDUTA",
 				"type": "String"
 			},
 			{
-				"name": "VL_IR",
+				"name": "CD_PESSOA_FISICA",
 				"type": "String"
 			},
 			{
-				"name": "VL_FILME",
-				"type": "String"
-			},
-			{
-				"name": "VL_PERC_ISS",
-				"type": "String"
-			},
-			{
-				"name": "VL_PER_IR",
-				"type": "String"
-			},
-			{
-				"name": "VL_PERC_MULTA",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_PERC_JURO",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_OUTROS_IMP",
-				"type": "Decimal"
-			},
-			{
-				"name": "NR_REMESSA",
-				"type": "String"
-			},
-			{
-				"name": "MARCA",
+				"name": "DS_DIAGNOSTICO",
 				"type": "String"
 			},
 			{
