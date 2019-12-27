@@ -42,7 +42,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SMART_ITAIGARA_PrdDataSet",
+						"referenceName": "SMART_Oftalmoclin_Prd_DataSet",
 						"type": "DatasetReference"
 					}
 				],
@@ -260,7 +260,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SMART_ITAIGARA_PrdDataSet",
+						"referenceName": "SMART_Oftalmoclin_Prd_DataSet",
 						"type": "DatasetReference"
 					}
 				],
@@ -303,7 +303,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SMART_ITAIGARA_PrdDataSet",
+						"referenceName": "SMART_Oftalmoclin_Prd_DataSet",
 						"type": "DatasetReference"
 					}
 				],
@@ -336,7 +336,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "select\nusr_login as NM_USUARIO,\nusr_nome as DS_USUARIO,\nusr_status as IE_SITUACAO,\nusr_dt_alter_senha as DT_ATUALIZACAO,\nEMP_NOME_FANTASIA as SIGLA_UNIDADE,\nEMP_CGC as CNPJ,\n'DH' as MARCA\nfrom usr\nINNER JOIN str ON str_cod = usr_str_cod\nINNER JOIN emp ON emp_cod = str_emp_cod",
+						"sqlReaderQuery": "select\nusr_login as NM_USUARIO,\nusr_nome as DS_USUARIO,\nusr_status as IE_SITUACAO,\nusr_dt_alter_senha as DT_ATUALIZACAO,\n'OFTALMOCLIN Hospital de Olhos da Bahia' as SIGLA_UNIDADE,\n'14307763000194' as CNPJ,\n'Oftalmoclin' as MARCA\nfrom usr\nINNER JOIN str ON str_cod = usr_str_cod",
 						"queryTimeout": "02:00:00"
 					},
 					"sink": {
@@ -346,7 +346,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SMART_ITAIGARA_PrdDataSet",
+						"referenceName": "SMART_Oftalmoclin_Prd_DataSet",
 						"type": "DatasetReference"
 					}
 				],
@@ -389,7 +389,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SMART_ITAIGARA_PrdDataSet",
+						"referenceName": "SMART_Oftalmoclin_Prd_DataSet",
 						"type": "DatasetReference"
 					}
 				],
@@ -527,7 +527,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SMART_ITAIGARA_PrdDataSet",
+						"referenceName": "SMART_Oftalmoclin_Prd_DataSet",
 						"type": "DatasetReference"
 					}
 				],
