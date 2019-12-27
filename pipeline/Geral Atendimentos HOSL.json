@@ -247,7 +247,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "",
+						"sqlReaderQuery": "-- Construção tabela agenda Smart\n\nselect --top 10\nagm_med as CD_AGENDA,\npsv_nome AS DS_AGENDA,\n' ' CD_TIPO_AGENDA,\npsv_cod as CD_PESSOA_FISICA,\n\nemp_cgc as CNPJ,\n'' as DS_AREA_ATUACAO, \n'A' as IE_SITUACAO,\nEMP_NOME_FANTASIA as SIGLA_UNIDADE,\n'HOSL' as MARCA\n\nfrom \nagm, \npac,\ncnv,\nstr,\nsmk,\ngcc,\nusr,\npsv,\nemp\nwhere agm.agm_pac = pac_reg\nand agm_cnv_cod = cnv_cod\nand agm_str_cod = str_cod\nand agm_smk = smk_cod\nand agm_str_cod = gcc_str_cod\nand AGM_USR_LOGIN = USR_LOGIN\nand agm_med = PSV_COD\nand str_emp_cod = emp_cod\n\ngroup by agm_med,\npsv_nome,\nemp_cgc,\npsv_cod,\nEMP_NOME_FANTASIA",
 						"queryTimeout": "02:00:00"
 					},
 					"sink": {
