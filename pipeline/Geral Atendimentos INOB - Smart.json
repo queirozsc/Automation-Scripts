@@ -75,7 +75,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "select top 10\npac_reg as CD_PESSOA_FISICA,\npac_nome as NM_PESSOA_FISICA,\nconvert(date,osm_dthr) as DT_ENTRADA,\nconvert(time,CONVERT(varchar,osm_dthr,108)) as HR_ENTRADA,\npsv_nome as NM_MEDICO,\nosm_cnv as CD_CONVENIO,\ncnv_nome as DS_CONVENIO,\nCONVERT(INT,convert(varchar,osm_serie) + convert(varchar,osm_num)) as NR_ATENDIMENTO,\n'00363702000130' AS CNPJ,\n'INOB' as SIGLA_UNIDADE,\n'INOB' as MARCA,\n0 as CD_PROCEDENCIA,\n'NAO ENCONTRADO' as DS_PROCEDENCIA,\n'NAO ENCONTRADO' as ID,\n\nDAY(osm_dthr) as DIA,\nMONTH(osm_dthr) as MES, \nYEAR(osm_dthr) as ANO\n\nfrom osm, pac, cnv, str, psv\nwhere osm_pac = pac_reg\nand osm_cnv = cnv_cod\nand osm_str = str_cod\nand osm_mreq = psv_cod",
+						"sqlReaderQuery": "select top 100\npac_reg as CD_PESSOA_FISICA,\npac_nome as NM_PESSOA_FISICA,\nconvert(date,osm_dthr) as DT_ENTRADA,\nconvert(time,CONVERT(varchar,osm_dthr,108)) as HR_ENTRADA,\npsv_nome as NM_MEDICO,\nosm_cnv as CD_CONVENIO,\ncnv_nome as DS_CONVENIO,\nCONVERT(INT,convert(varchar,osm_serie) + convert(varchar,osm_num)) as NR_ATENDIMENTO,\n'00363702000130' AS CNPJ,\n'INOB' as SIGLA_UNIDADE,\n'INOB' as MARCA,\n0 as CD_PROCEDENCIA,\n'NAO ENCONTRADO' as DS_PROCEDENCIA,\n'NAO ENCONTRADO' as ID,\n\nDAY(osm_dthr) as DIA,\nMONTH(osm_dthr) as MES, \nYEAR(osm_dthr) as ANO\n\nfrom osm, pac, cnv, str, psv\nwhere osm_pac = pac_reg\nand osm_cnv = cnv_cod\nand osm_str = str_cod\nand osm_mreq = psv_cod",
 						"queryTimeout": "02:00:00"
 					},
 					"sink": {
@@ -293,7 +293,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "-- Construção tabela agenda Smart\n\nselect top 10\nAGM_PAC as CD_PESSOA_FISICA, \nagm.agm_cnv_cod as CD_CONVENIO,\nemp_cgc as CNPJ,\nCONVERT(DATE,AGM_HINI) AS DATA_AGENDA,\nCONVERT(TIME,AGM_HINI) AS HORA_AGENDA,\nAGM_ATEND AS TIPO_AGENDA,\npac.PAC_NOME AS NM_PACIENTE,\nSMK_NOME AS DS_PROCEDIMENTO_PRINC,\n' ' DS_PROCEDIMENTO_ADIC,\n1 AS IE_QUANTIDADE,\nUSR_NOME as NM_USUARIO,\npsv_nome AS NM_MEDICO,\nEMP_NOME_FANTASIA as SIGLA_UNIDADE,\nEMP_NOME_FANTASIA as MARCA,\nCASE WHEN AGM_STAT = 'A' then 'Aberta'\n     WHEN AGM_STAT = 'E' then 'Executada'      \n     WHEN AGM_STAT = 'C' then 'Cancelada'     \n     WHEN AGM_STAT = 'B' then 'Bloqueada' END STATUS_AGENDA,\n\nconvert(varchar,AGM_OSM_SERIE) + convert(varchar,AGM_OSM_NUM) as NR_ATENDIMENTO,\nAGM_num as NR_SEQUENCIA,\n''ID,\n'' as CD_PROCEDENCIA,\nagm_proc as DS_PROCEDENCIA ,\nagm.AGM_DTMRC as DT_AGENDAMENTO,\nDAY(AGM_HINI) as DIA,\nMONTH(AGM_HINI) as MES,\nYEAR(AGM_HINI) as ANO,\n' ' DS_CLASSIFICACAO,\n' ' DS_AGRUPAMENTO,\nagm.AGM_CANC_MOT_COD as CD_MOTIVO_CANCELAMENTO,\nagm.AGM_CANC_MOT_TIPO as DS_MOTIVO_CANCELAMENTO,\nagm_med as CD_AGENDA\nfrom \nagm, \npac,\ncnv,\nstr,\nsmk,\ngcc,\nusr,\npsv,\nemp\nwhere agm.agm_pac = pac_reg\nand agm_cnv_cod = cnv_cod\nand agm_str_cod = str_cod\nand agm_smk = smk_cod\nand agm_str_cod = gcc_str_cod\nand AGM_USR_LOGIN = USR_LOGIN\nand agm_med = PSV_COD\nand str_emp_cod = emp_cod",
+						"sqlReaderQuery": "-- Construção tabela agenda Smart\n\nselect top 100\nAGM_PAC as CD_PESSOA_FISICA, \nagm.agm_cnv_cod as CD_CONVENIO,\nemp_cgc as CNPJ,\nCONVERT(DATE,AGM_HINI) AS DATA_AGENDA,\nCONVERT(TIME,AGM_HINI) AS HORA_AGENDA,\nAGM_ATEND AS TIPO_AGENDA,\npac.PAC_NOME AS NM_PACIENTE,\nSMK_NOME AS DS_PROCEDIMENTO_PRINC,\n' ' DS_PROCEDIMENTO_ADIC,\n1 AS IE_QUANTIDADE,\nUSR_NOME as NM_USUARIO,\npsv_nome AS NM_MEDICO,\nEMP_NOME_FANTASIA as SIGLA_UNIDADE,\nEMP_NOME_FANTASIA as MARCA,\nCASE WHEN AGM_STAT = 'A' then 'Aberta'\n     WHEN AGM_STAT = 'E' then 'Executada'      \n     WHEN AGM_STAT = 'C' then 'Cancelada'     \n     WHEN AGM_STAT = 'B' then 'Bloqueada' END STATUS_AGENDA,\n\nconvert(varchar,AGM_OSM_SERIE) + convert(varchar,AGM_OSM_NUM) as NR_ATENDIMENTO,\nAGM_num as NR_SEQUENCIA,\n''ID,\n'' as CD_PROCEDENCIA,\nagm_proc as DS_PROCEDENCIA ,\nagm.AGM_DTMRC as DT_AGENDAMENTO,\nDAY(AGM_HINI) as DIA,\nMONTH(AGM_HINI) as MES,\nYEAR(AGM_HINI) as ANO,\n' ' DS_CLASSIFICACAO,\n' ' DS_AGRUPAMENTO,\nagm.AGM_CANC_MOT_COD as CD_MOTIVO_CANCELAMENTO,\nagm.AGM_CANC_MOT_TIPO as DS_MOTIVO_CANCELAMENTO,\nagm_med as CD_AGENDA\nfrom \nagm, \npac,\ncnv,\nstr,\nsmk,\ngcc,\nusr,\npsv,\nemp\nwhere agm.agm_pac = pac_reg\nand agm_cnv_cod = cnv_cod\nand agm_str_cod = str_cod\nand agm_smk = smk_cod\nand agm_str_cod = gcc_str_cod\nand AGM_USR_LOGIN = USR_LOGIN\nand agm_med = PSV_COD\nand str_emp_cod = emp_cod",
 						"queryTimeout": "02:00:00"
 					},
 					"sink": {
@@ -336,7 +336,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "select\nusr_login as NM_USUARIO,\nusr_nome as DS_USUARIO,\nusr_status as IE_SITUACAO,\nusr_dt_alter_senha as DT_ATUALIZACAO,\n'INOB' AS SIGLA_UNIDADE,\n'00363702000130' as CNPJ,\n'INOB' as MARCA\nfrom usr\nINNER JOIN str ON str_cod = usr_str_cod",
+						"sqlReaderQuery": "select top 100\nusr_login as NM_USUARIO,\nusr_nome as DS_USUARIO,\nusr_status as IE_SITUACAO,\nusr_dt_alter_senha as DT_ATUALIZACAO,\n'INOB' AS SIGLA_UNIDADE,\n'00363702000130' as CNPJ,\n'INOB' as MARCA\nfrom usr\nINNER JOIN str ON str_cod = usr_str_cod",
 						"queryTimeout": "02:00:00"
 					},
 					"sink": {
@@ -379,7 +379,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "SELECT top 10 --RCL_COD\nRCL_SMM AS NR_SEQUENCIA,\nCONVERT(DATE,RCL_DTHR_ATUAL) AS DT_ATUALIZACAO,\nCONVERT(VARCHAR,RCL_DTHR_ATUAL,108) as HR_ATUALIZACAO,\n\nCONVERT(INT,CONVERT(VARCHAR,RCL_OSM_SERIE) + CONVERT(VARCHAR,RCL_OSM)) AS NR_ATENDIMENTO, \n\nRCL_MED AS CD_MEDICO,\nPSV_APEL AS NM_MEDICO,\n'' AS DS_RETORNO,\nCONVERT(VARCHAR,RCL_LAUDO_RTF) AS DS_CONDUTA,\nRCL_PAC AS CD_PESSOA_FISICA,\nCONVERT(VARCHAR,RCL_TXT) AS DS_DIAGNOSTICO,\n'INOB' AS SIGLA_UNIDADE,\n'00363702000130' as CNPJ,\n'INOB' AS MARCA\nFROM RCL\nINNER JOIN PSV ON PSV_COD = RCL_MED",
+						"sqlReaderQuery": "SELECT top 100\nRCL_SMM AS NR_SEQUENCIA,\nCONVERT(DATE,RCL_DTHR_ATUAL) AS DT_ATUALIZACAO,\nCONVERT(VARCHAR,RCL_DTHR_ATUAL,108) as HR_ATUALIZACAO,\n\nCONVERT(INT,CONVERT(VARCHAR,RCL_OSM_SERIE) + CONVERT(VARCHAR,RCL_OSM)) AS NR_ATENDIMENTO, \n\nRCL_MED AS CD_MEDICO,\nPSV_APEL AS NM_MEDICO,\n'' AS DS_RETORNO,\nCONVERT(VARCHAR,RCL_LAUDO_RTF) AS DS_CONDUTA,\nRCL_PAC AS CD_PESSOA_FISICA,\nCONVERT(VARCHAR,RCL_TXT) AS DS_DIAGNOSTICO,\n'INOB' AS SIGLA_UNIDADE,\n'00363702000130' as CNPJ,\n'INOB' AS MARCA\nFROM RCL\nINNER JOIN PSV ON PSV_COD = RCL_MED",
 						"queryTimeout": "02:00:00"
 					},
 					"sink": {
@@ -422,7 +422,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "select top 10\nagm_med as CD_AGENDA,\npsv_nome AS DS_AGENDA,\n0 CD_TIPO_AGENDA,\npsv_cod as CD_PESSOA_FISICA,\n\nemp_cgc as CNPJ,\n'' as DS_AREA_ATUACAO, \n'A' as IE_SITUACAO,\nEMP_NOME_FANTASIA as SIGLA_UNIDADE,\n'INOB' as MARCA\n\nfrom \nagm, \npac,\ncnv,\nstr,\nsmk,\ngcc,\nusr,\npsv,\nemp\nwhere agm.agm_pac = pac_reg\nand agm_cnv_cod = cnv_cod\nand agm_str_cod = str_cod\nand agm_smk = smk_cod\nand agm_str_cod = gcc_str_cod\nand AGM_USR_LOGIN = USR_LOGIN\nand agm_med = PSV_COD\nand str_emp_cod = emp_cod\n\ngroup by agm_med,\npsv_nome,\nemp_cgc,\npsv_cod,\nEMP_NOME_FANTASIA",
+						"sqlReaderQuery": "select top 100\nagm_med as CD_AGENDA,\npsv_nome AS DS_AGENDA,\n0 CD_TIPO_AGENDA,\npsv_cod as CD_PESSOA_FISICA,\n\nemp_cgc as CNPJ,\n'' as DS_AREA_ATUACAO, \n'A' as IE_SITUACAO,\nEMP_NOME_FANTASIA as SIGLA_UNIDADE,\n'INOB' as MARCA\n\nfrom \nagm, \npac,\ncnv,\nstr,\nsmk,\ngcc,\nusr,\npsv,\nemp\nwhere agm.agm_pac = pac_reg\nand agm_cnv_cod = cnv_cod\nand agm_str_cod = str_cod\nand agm_smk = smk_cod\nand agm_str_cod = gcc_str_cod\nand AGM_USR_LOGIN = USR_LOGIN\nand agm_med = PSV_COD\nand str_emp_cod = emp_cod\n\ngroup by agm_med,\npsv_nome,\nemp_cgc,\npsv_cod,\nEMP_NOME_FANTASIA",
 						"queryTimeout": "02:00:00"
 					},
 					"sink": {
