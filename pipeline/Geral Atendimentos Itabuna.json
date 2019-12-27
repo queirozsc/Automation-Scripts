@@ -336,7 +336,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "select\nusr_login as NM_USUARIO,\nusr_nome as DS_USUARIO,\nusr_status as IE_SITUACAO,\nusr_dt_alter_senha as DT_ATUALIZACAO,\n'OFTALMOCLIN Hospital de Olhos da Bahia' as SIGLA_UNIDADE,\n'14307763000194' as CNPJ,\n'Oftalmoclin' as MARCA\nfrom usr\nINNER JOIN str ON str_cod = usr_str_cod",
+						"sqlReaderQuery": "select\nusr_login as NM_USUARIO,\nusr_nome as DS_USUARIO,\nusr_status as IE_SITUACAO,\nusr_dt_alter_senha as DT_ATUALIZACAO,\n'Dayhorc ITB' AS SIGLA_UNIDADE,\n'13188370000146' as CNPJ,\n'DH' as MARCA\nfrom usr\nINNER JOIN str ON str_cod = usr_str_cod",
 						"queryTimeout": "02:00:00"
 					},
 					"sink": {
@@ -379,7 +379,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "SELECT top 10 --RCL_COD\nRCL_SMM AS NR_SEQUENCIA,\nCONVERT(DATE,RCL_DTHR_ATUAL) AS DT_ATUALIZACAO,\nCONVERT(VARCHAR,RCL_DTHR_ATUAL,108) as HR_ATUALIZACAO,\n\nCONVERT(INT,CONVERT(VARCHAR,RCL_OSM_SERIE) + CONVERT(VARCHAR,RCL_OSM)) AS NR_ATENDIMENTO, \n\nRCL_MED AS CD_MEDICO,\nPSV_APEL AS NM_MEDICO,\n'' AS DS_RETORNO,\nCONVERT(VARCHAR,RCL_LAUDO_RTF) AS DS_CONDUTA,\nRCL_PAC AS CD_PESSOA_FISICA,\nCONVERT(VARCHAR,RCL_TXT) AS DS_DIAGNOSTICO,\n'OFTALMOCLIN Hospital de Olhos da Bahia' AS SIGLA_UNIDADE,\n'14307763000194' as CNPJ,\n'Oftalmoclin' AS MARCA\nFROM RCL\nINNER JOIN PSV ON PSV_COD = RCL_MED",
+						"sqlReaderQuery": "SELECT top 10 --RCL_COD\nRCL_SMM AS NR_SEQUENCIA,\nCONVERT(DATE,RCL_DTHR_ATUAL) AS DT_ATUALIZACAO,\nCONVERT(VARCHAR,RCL_DTHR_ATUAL,108) as HR_ATUALIZACAO,\n\nCONVERT(INT,CONVERT(VARCHAR,RCL_OSM_SERIE) + CONVERT(VARCHAR,RCL_OSM)) AS NR_ATENDIMENTO, \n\nRCL_MED AS CD_MEDICO,\nPSV_APEL AS NM_MEDICO,\n'' AS DS_RETORNO,\nCONVERT(VARCHAR,RCL_LAUDO_RTF) AS DS_CONDUTA,\nRCL_PAC AS CD_PESSOA_FISICA,\nCONVERT(VARCHAR,RCL_TXT) AS DS_DIAGNOSTICO,\n'Dayhorc ITB' AS SIGLA_UNIDADE,\n'13188370000146' as CNPJ,\n'DH' AS MARCA\nFROM RCL\nINNER JOIN PSV ON PSV_COD = RCL_MED",
 						"queryTimeout": "02:00:00"
 					},
 					"sink": {
