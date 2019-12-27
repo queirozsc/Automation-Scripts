@@ -336,7 +336,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "select\nusr_login as NM_USUARIO,\nusr_nome as DS_USUARIO,\nusr_status as IE_SITUACAO,\nusr_dt_alter_senha as DT_ATUALIZACAO,\nEMP_NOME_FANTASIA as SIGLA_UNIDADE,\nEMP_CGC as CNPJ,\n'HOSL' as MARCA\nfrom usr\nINNER JOIN str ON str_cod = usr_str_cod\nINNER JOIN emp ON emp_cod = str_emp_cod",
+						"sqlReaderQuery": "select\nusr_login as NM_USUARIO,\nusr_nome as DS_USUARIO,\nusr_status as IE_SITUACAO,\nusr_dt_alter_senha as DT_ATUALIZACAO,\nEMP_NOME_FANTASIA as SIGLA_UNIDADE,\nEMP_CGC as CNPJ,\n'DH' as MARCA\nfrom usr\nINNER JOIN str ON str_cod = usr_str_cod\nINNER JOIN emp ON emp_cod = str_emp_cod",
 						"queryTimeout": "02:00:00"
 					},
 					"sink": {
