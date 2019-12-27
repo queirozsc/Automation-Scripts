@@ -42,7 +42,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SMART_IOF_PrdDataSet",
+						"referenceName": "SMART_ITABUNA_PrdDataSet",
 						"type": "DatasetReference"
 					}
 				],
@@ -260,7 +260,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SMART_IOF_PrdDataSet",
+						"referenceName": "SMART_ITABUNA_PrdDataSet",
 						"type": "DatasetReference"
 					}
 				],
@@ -303,7 +303,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SMART_IOF_PrdDataSet",
+						"referenceName": "SMART_ITABUNA_PrdDataSet",
 						"type": "DatasetReference"
 					}
 				],
@@ -346,7 +346,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SMART_IOF_PrdDataSet",
+						"referenceName": "SMART_ITABUNA_PrdDataSet",
 						"type": "DatasetReference"
 					}
 				],
@@ -389,7 +389,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SMART_IOF_PrdDataSet",
+						"referenceName": "SMART_ITABUNA_PrdDataSet",
 						"type": "DatasetReference"
 					}
 				],
@@ -527,7 +527,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SMART_IOF_PrdDataSet",
+						"referenceName": "SMART_ITABUNA_PrdDataSet",
 						"type": "DatasetReference"
 					}
 				],
