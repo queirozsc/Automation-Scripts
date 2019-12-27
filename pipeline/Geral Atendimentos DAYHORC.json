@@ -183,7 +183,7 @@
 				]
 			},
 			{
-				"name": "Consulta HOSL",
+				"name": "Consulta DH",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -221,6 +221,144 @@
 				"outputs": [
 					{
 						"referenceName": "AZ_SQL_TB_Consulta",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Agendas DH",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Wait1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": "select top 10\nagm_med as CD_AGENDA,\npsv_nome AS DS_AGENDA,\n0 CD_TIPO_AGENDA,\npsv_cod as CD_PESSOA_FISICA,\n\nemp_cgc as CNPJ,\n'' as DS_AREA_ATUACAO, \n'A' as IE_SITUACAO,\nEMP_NOME_FANTASIA as SIGLA_UNIDADE,\n'HOSL' as MARCA\n\nfrom \nagm, \npac,\ncnv,\nstr,\nsmk,\ngcc,\nusr,\npsv,\nemp\nwhere agm.agm_pac = pac_reg\nand agm_cnv_cod = cnv_cod\nand agm_str_cod = str_cod\nand agm_smk = smk_cod\nand agm_str_cod = gcc_str_cod\nand AGM_USR_LOGIN = USR_LOGIN\nand agm_med = PSV_COD\nand str_emp_cod = emp_cod\n\ngroup by agm_med,\npsv_nome,\nemp_cgc,\npsv_cod,\nEMP_NOME_FANTASIA",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "CD_AGENDA",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "CD_AGENDA",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_AGENDA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DS_AGENDA",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CD_TIPO_AGENDA",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "CD_TIPO_AGENDA",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "CD_PESSOA_FISICA",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "CD_PESSOA_FISICA",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "CNPJ",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CNPJ",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_AREA_ATUACAO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DS_AREA_ATUACAO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "IE_SITUACAO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "IE_SITUACAO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "MARCA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "MARCA",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SIGLA_UNIDADE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "SIGLA_UNIDADE",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SMART_ITAIGARA_PrdDataSet",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AZ_SQL_TB_Agenda",
 						"type": "DatasetReference"
 					}
 				]
