@@ -427,23 +427,7 @@
 				"type": "OracleTable",
 				"structure": [
 					{
-						"name": "NM_USUARIO",
-						"type": "String"
-					},
-					{
-						"name": "DS_USUARIO",
-						"type": "String"
-					},
-					{
-						"name": "IE_SITUACAO",
-						"type": "String"
-					},
-					{
-						"name": "DT_ATUALIZACAO",
-						"type": "DateTime"
-					},
-					{
-						"name": "SIGLA_UNIDADE",
+						"name": "BASE",
 						"type": "String"
 					},
 					{
@@ -452,6 +436,110 @@
 					},
 					{
 						"name": "MARCA",
+						"type": "String"
+					},
+					{
+						"name": "DT_ATUALIZACAO",
+						"type": "DateTime"
+					},
+					{
+						"name": "NR_ATENDIMENTO",
+						"type": "Decimal"
+					},
+					{
+						"name": "DT_ENTRADA",
+						"type": "DateTime"
+					},
+					{
+						"name": "NR_INTERNO_CONTA",
+						"type": "Decimal"
+					},
+					{
+						"name": "CD_PESSOA_FISICA",
+						"type": "String"
+					},
+					{
+						"name": "DT_NASCIMENTO",
+						"type": "DateTime"
+					},
+					{
+						"name": "NR_CPF",
+						"type": "String"
+					},
+					{
+						"name": "IE_SEXO",
+						"type": "String"
+					},
+					{
+						"name": "NR_CEP",
+						"type": "String"
+					},
+					{
+						"name": "DS_CIDADE",
+						"type": "String"
+					},
+					{
+						"name": "DS_PESSOA_FISICA",
+						"type": "String"
+					},
+					{
+						"name": "CD_CONVENIO",
+						"type": "Decimal"
+					},
+					{
+						"name": "DS_CONVENIO",
+						"type": "String"
+					},
+					{
+						"name": "CD_MEDICO_EXECUTOR",
+						"type": "String"
+					},
+					{
+						"name": "DS_MEDICO_EXECUTOR",
+						"type": "String"
+					},
+					{
+						"name": "CD_MEDICO_REQUISITANTE",
+						"type": "String"
+					},
+					{
+						"name": "DS_MEDICO_REQUISITANTE",
+						"type": "String"
+					},
+					{
+						"name": "IE_ORIGEM_PROCEDIMENTO",
+						"type": "Decimal"
+					},
+					{
+						"name": "CD_PROCEDIMENTO",
+						"type": "Decimal"
+					},
+					{
+						"name": "DS_PROCEDIMENTO",
+						"type": "String"
+					},
+					{
+						"name": "DS_CLASSIFICACAO",
+						"type": "String"
+					},
+					{
+						"name": "QT_PROCEDIMENTO",
+						"type": "Decimal"
+					},
+					{
+						"name": "VL_PROCEDIMENTO",
+						"type": "Decimal"
+					},
+					{
+						"name": "IE_STATUS_ACERTO",
+						"type": "Decimal"
+					},
+					{
+						"name": "STATUS_CONTA",
+						"type": "String"
+					},
+					{
+						"name": "CD_TUSS",
 						"type": "String"
 					}
 				],
