@@ -11,6 +11,7 @@ Get-MsolUser -UserPrincipalName 'renato.braz@inob.com.br' | `
     Sort-Object -Property DisplayName | `
     Export-Csv -Path "20181116 Emails.csv" -Encoding UTF8 -Delimiter ";" -NoTypeInformation
 
+
 ## Licenças   
 $Sku = @{
     "O365_BUSINESS_ESSENTIALS"           = "Office 365 Business Essentials"
@@ -130,14 +131,17 @@ $Sku = @{
     "FLOW_P2"                            = "Microsoft Flow Plan 2"
 }
 
-Connect-MsolService
+.\Connect-O365.ps1
 $CSVFileName = "Licencas Office 365 CSI.csv"
 Remove-Item -Path $CSVFileName
-Get-MsolUser -EnabledFilter EnabledOnly -Department "CENTRO DE SOLUÇÕES INTEGRADAS" | `
+#Get-MsolUser -EnabledFilter EnabledOnly -Department "CENTRO DE SOLUÇÕES INTEGRADAS" | `
+#Get-MsolUser -EnabledFilter 
+Get-MsolUser -EnabledFilter All -MaxResults 5000 | `
     Select-Object * | `
     Sort-Object -Property DisplayName | `
     ForEach-Object -Process {
     $User = $_
+    $ResultItem = @()
     $Licenses = $_.Licenses.AccountSkuId | `
         ForEach-Object -Process {
         $LicenseItem = $_ -split ":" | Select-Object -Last 1
@@ -147,6 +151,7 @@ Get-MsolUser -EnabledFilter EnabledOnly -Department "CENTRO DE SOLUÇÕES INTEGR
             Nome    = $User.DisplayName
             Cargo   = $User.Title
             Email   = $User.UserPrincipalName
+            Marca   = $User.Office
             Licença = $LicenseName
         }
         $ResultItem | Export-Csv -Path $CSVFileName -Encoding UTF8 -Delimiter ";" -NoTypeInformation -Append
