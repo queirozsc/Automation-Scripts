@@ -101,7 +101,7 @@ where (cpg.cpg_serie = ipg.ipg_cpg_serie)
 order by
 	LTRIM(left(cpg.cpg_credor,patindex('% %', cpg.cpg_credor))),gcc.gcc_descr,ipg.ipg_dt_vcto
 ------------------------------------------------------------------------------------------------------------------------------------------
-
+/*
 SELECT ltrim(left(cpg.cpg_credor, patindex('% %', cpg.cpg_credor))) AS cpg_imposto,
     ltrim(replace(cpg.cpg_credor, ltrim(left(cpg.cpg_credor, patindex('%-%', cpg.cpg_credor))), '')) AS cpg_empresa,
     cpg.cpg_gcc_cod,
@@ -138,7 +138,7 @@ WHERE (cpg.cpg_serie = ipg.ipg_cpg_serie)
     AND cpg.cpg_fis_jur = :PESSOA
 ORDER BY LTRIM(left(cpg.cpg_credor, patindex('% %', cpg.cpg_credor))),
     gcc.gcc_descr,
-    ipg.ipg_dt_vcto
+    ipg.ipg_dt_vcto*/
 ------------------------------------------------------------------------------------------------------------------------------------------
 
 /*
