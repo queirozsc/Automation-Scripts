@@ -36,7 +36,7 @@ ORDER BY LTRIM(LEFT(CPG.CPG_CREDOR, PATINDEX('% %', CPG.CPG_CREDOR))),
  OPTION ( LOOP JOIN, MAXDOP 1 ) 
 ------------------------------------------------------------------------------------------------------------------------------------------
 
- select 'A' as c1,'Aberto' as c2
+select 'A' as c1,'Aberto' as c2
 union
 select 'R' as c1,'Registrado' as c2
 union
