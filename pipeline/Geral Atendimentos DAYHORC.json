@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Wait1",
+				"name": "Wait1_copy1",
 				"type": "Wait",
 				"dependsOn": [],
 				"userProperties": [],
@@ -12,11 +12,11 @@
 				}
 			},
 			{
-				"name": "Pacientes DH",
+				"name": "Pacientes HOSL",
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Wait1",
+						"activity": "Wait1_copy1",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -33,7 +33,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "select top 100 pac_reg as CD_PESSOA_FISICA, \npac_nome AS NM_PESSOA_FISICA, \npac_numcpf AS NR_CPF, \nconvert(char(10),pac_nasc,121) as DT_NASCIMENTO, \npac_fone AS NR_TELEFONE_CELULAR,\npac_fone2 AS NR_TELEFONE, \nemp_cgc as CNPJ ,\nEMP_NOME_FANTASIA as SIGLA_UNIDADE,\nEMP_RAZ_SOC as MARCA,\npac_pront as NR_PRONTUARIO,\npac_dreg as DT_CADASTRO_ORIGINAL\nfrom pac,\nusr,\nstr,\nemp\nwhere PAC_USR_LOGIN_CAD = USR_LOGIN\nand USR_STR_COD = str_cod\nand STR_EMP_COD = EMP_COD"
+						"sqlReaderQuery": "select top 100 pac_reg as CD_PESSOA_FISICA, \nrtrim(ltrim(pac_nome)) AS NM_PESSOA_FISICA, \npac_numcpf AS NR_CPF, \nconvert(char(10),pac_nasc,121) as DT_NASCIMENTO, \nPAC_CELULAR AS NR_TELEFONE_CELULAR,\npac_fone AS NR_TELEFONE, \n'13188370000227' AS CNPJ,\n'DAYHORC -  UNIDADE ITAIGARA' as SIGLA_UNIDADE,\n'DH' as MARCA,\npac_reg as NR_PRONTUARIO,\npac_dreg as DT_CADASTRO_ORIGINAL,\npac_dult as DT_ATUALIZACAO\nfrom pac\ninner join usr on USR_LOGIN = PAC_USR_LOGIN_CAD"
 					},
 					"sink": {
 						"type": "AzureSqlSink"
@@ -42,7 +42,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SMART_ITAIGARA_PrdDataSet",
+						"referenceName": "SMART_HOSL_PrdDataSet",
 						"type": "DatasetReference"
 					}
 				],
@@ -58,7 +58,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Wait1",
+						"activity": "Wait1_copy1",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -75,188 +75,13 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "select top 100\npac_reg as CD_PESSOA_FISICA,\npac_nome as NM_PESSOA_FISICA,\nconvert(date,osm_dthr) as DT_ENTRADA,\nconvert(time,CONVERT(varchar,osm_dthr,108)) as HR_ENTRADA,\npsv_nome as NM_MEDICO,\nosm_cnv as CD_CONVENIO,\ncnv_nome as DS_CONVENIO,\nCONVERT(INT,convert(varchar,osm_serie) + convert(varchar,osm_num)) as NR_ATENDIMENTO,\nemp_cgc AS CNPJ,\nemp_nome_fantasia as SIGLA_UNIDADE,\nemp_nome_fantasia as MARCA,\n0 as CD_PROCEDENCIA,\n'NAO ENCONTRADO' as DS_PROCEDENCIA,\n'NAO ENCONTRADO' as ID,\n\nDAY(osm_dthr) as DIA,\nMONTH(osm_dthr) as MES, \nYEAR(osm_dthr) as ANO\n\nfrom osm, pac, cnv, str, emp, psv\nwhere osm_pac = pac_reg\nand osm_cnv = cnv_cod\nand osm_str = str_cod\nand str_emp_cod = emp_cod\nand osm_mreq = psv_cod",
+						"sqlReaderQuery": "SELECT DISTINCT top 100 pac_reg AS CD_PESSOA_FISICA\n    , rtrim(ltrim(pac_nome)) AS NM_PESSOA_FISICA\n    , convert(CHAR(10), osm_dthr, 121) AS DT_ENTRADA\n    , LEFT(CONVERT(VARCHAR(12), osm_dthr, 114),8) AS HR_ENTRADA\n    , smm_med AS NM_MEDICO\n    , osm_cnv AS CD_CONVENIO\n    , cnv_nome AS DS_CONVENIO\n    , convert(INT, (convert(VARCHAR, osm_serie) + convert(VARCHAR, osm_num))) AS NR_ATENDIMENTO\n    , emp_cgc AS CNPJ\n    , emp_nome_fantasia AS SIGLA_UNIDADE\n    , emp_nome_fantasia AS MARCA\n    , 0 AS CD_PROCEDENCIA\n    , 'NAO ENCONTRADO' AS DS_PROCEDENCIA\n    , 'NAO ENCONTRADO' AS ID\n    , CONVERT(INT, DAY(osm_dthr)) AS DIA\n    , CONVERT(INT, MONTH(osm_dthr)) AS MES\n    , CONVERT(INT, YEAR(osm_dthr)) AS ANO\nFROM osm\nINNER JOIN smm\n    ON smm_osm_serie = osm_serie\n        AND smm_osm = osm_num\nINNER JOIN pac\n    ON pac_reg = osm_pac\nINNER JOIN cnv\n    ON osm_cnv = cnv_cod\nINNER JOIN str\n    ON str_cod = osm_str\nINNER JOIN psv\n    ON psv_cod = osm_mreq\nLEFT OUTER JOIN str str_e\n    ON str.str_str_cod = str_e.str_cod\nLEFT OUTER JOIN emp\n    ON str_e.str_emp_cod = emp_cod\nWHERE 1 = 1\n    AND (\n        smm_pacote IS NULL\n        OR (smm_pacote = 'C')\n        )\n    AND smm_sfat NOT IN ('C')",
 						"queryTimeout": "02:00:00"
 					},
 					"sink": {
 						"type": "AzureSqlSink"
 					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"name": "CD_PESSOA_FISICA",
-									"type": "Int32"
-								},
-								"sink": {
-									"name": "CD_PESSOA_FISICA",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"name": "NM_PESSOA_FISICA",
-									"type": "String"
-								},
-								"sink": {
-									"name": "NM_PESSOA_FISICA",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "DT_ENTRADA",
-									"type": "DateTime"
-								},
-								"sink": {
-									"name": "DT_ENTRADA",
-									"type": "DateTime"
-								}
-							},
-							{
-								"source": {
-									"name": "HR_ENTRADA",
-									"type": "TimeSpan"
-								},
-								"sink": {
-									"name": "HR_ENTRADA",
-									"type": "TimeSpan"
-								}
-							},
-							{
-								"source": {
-									"name": "NM_MEDICO",
-									"type": "String"
-								},
-								"sink": {
-									"name": "NM_MEDICO",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "CD_CONVENIO",
-									"type": "String"
-								},
-								"sink": {
-									"name": "CD_CONVENIO",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "DS_CONVENIO",
-									"type": "String"
-								},
-								"sink": {
-									"name": "DS_CONVENIO",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "NR_ATENDIMENTO",
-									"type": "Int32"
-								},
-								"sink": {
-									"name": "NR_ATENDIMENTO",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"name": "CNPJ",
-									"type": "String"
-								},
-								"sink": {
-									"name": "CNPJ",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "SIGLA_UNIDADE",
-									"type": "String"
-								},
-								"sink": {
-									"name": "SIGLA_UNIDADE",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "MARCA",
-									"type": "String"
-								},
-								"sink": {
-									"name": "MARCA",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "CD_PROCEDENCIA",
-									"type": "Int32"
-								},
-								"sink": {
-									"name": "CD_PROCEDENCIA",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"name": "DS_PROCEDENCIA",
-									"type": "String"
-								},
-								"sink": {
-									"name": "DS_PROCEDENCIA",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "ID",
-									"type": "String"
-								},
-								"sink": {
-									"name": "ID",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "DIA",
-									"type": "Int32"
-								},
-								"sink": {
-									"name": "DIA",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"name": "MES",
-									"type": "Int32"
-								},
-								"sink": {
-									"name": "MES",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"name": "ANO",
-									"type": "Int32"
-								},
-								"sink": {
-									"name": "ANO",
-									"type": "Int32"
-								}
-							}
-						]
-					}
+					"enableStaging": false
 				},
 				"inputs": [
 					{
@@ -276,7 +101,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Wait1",
+						"activity": "Wait1_copy1",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -293,7 +118,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "-- Construção tabela agenda Smart\n\nselect top 100\nAGM_PAC as CD_PESSOA_FISICA, \nagm.agm_cnv_cod as CD_CONVENIO,\nemp_cgc as CNPJ,\nCONVERT(DATE,AGM_HINI) AS DATA_AGENDA,\nCONVERT(TIME,AGM_HINI) AS HORA_AGENDA,\nAGM_ATEND AS TIPO_AGENDA,\npac.PAC_NOME AS NM_PACIENTE,\nSMK_NOME AS DS_PROCEDIMENTO_PRINC,\n' ' DS_PROCEDIMENTO_ADIC,\n1 AS IE_QUANTIDADE,\nUSR_NOME as NM_USUARIO,\npsv_nome AS NM_MEDICO,\nEMP_NOME_FANTASIA as SIGLA_UNIDADE,\nEMP_NOME_FANTASIA as MARCA,\nCASE WHEN AGM_STAT = 'A' then 'Aberta'\n     WHEN AGM_STAT = 'E' then 'Executada'      \n     WHEN AGM_STAT = 'C' then 'Cancelada'     \n     WHEN AGM_STAT = 'B' then 'Bloqueada' END STATUS_AGENDA,\n\nconvert(varchar,AGM_OSM_SERIE) + convert(varchar,AGM_OSM_NUM) as NR_ATENDIMENTO,\nAGM_num as NR_SEQUENCIA,\n''ID,\n'' as CD_PROCEDENCIA,\nagm_proc as DS_PROCEDENCIA ,\nagm.AGM_DTMRC as DT_AGENDAMENTO,\nDAY(AGM_HINI) as DIA,\nMONTH(AGM_HINI) as MES,\nYEAR(AGM_HINI) as ANO,\n' ' DS_CLASSIFICACAO,\n' ' DS_AGRUPAMENTO,\nagm.AGM_CANC_MOT_COD as CD_MOTIVO_CANCELAMENTO,\nagm.AGM_CANC_MOT_TIPO as DS_MOTIVO_CANCELAMENTO,\nagm_med as CD_AGENDA\nfrom \nagm, \npac,\ncnv,\nstr,\nsmk,\ngcc,\nusr,\npsv,\nemp\nwhere agm.agm_pac = pac_reg\nand agm_cnv_cod = cnv_cod\nand agm_str_cod = str_cod\nand agm_smk = smk_cod\nand agm_str_cod = gcc_str_cod\nand AGM_USR_LOGIN = USR_LOGIN\nand agm_med = PSV_COD\nand str_emp_cod = emp_cod",
+						"sqlReaderQuery": "SELECT DISTINCT top 100 AGM_PAC AS CD_PESSOA_FISICA\n    , agm.agm_cnv_cod AS CD_CONVENIO\n    , emp_cgc AS CNPJ\n    , CONVERT(DATE, AGM_HINI) AS DATA_AGENDA\n    , LEFT(CONVERT(VARCHAR(12), agm_hini, 114), 8) AS HORA_AGENDA\n    , CASE AGM_ATEND\n        WHEN 'CRG'\n            THEN 'Cirurgia'\n        WHEN 'ASS'\n            THEN 'Consulta'\n        when '' then 'Consulta'\n        ELSE 'Outros'\n        END AS TIPO_AGENDA\n    , pac.PAC_NOME AS NM_PACIENTE\n    , smk.smk_nome AS DS_PROCEDIMENTO_PRINC\n    , ' ' DS_PROCEDIMENTO_ADIC\n    , 1 AS IE_QUANTIDADE\n    , USR_NOME AS NM_USUARIO\n    , psv_nome AS NM_MEDICO\n    , EMP_NOME_FANTASIA AS SIGLA_UNIDADE\n    , EMP_NOME_FANTASIA AS MARCA\n    , CASE \n        WHEN AGM_STAT = 'A'\n            THEN 'Aberta'\n        WHEN AGM_STAT = 'E'\n            THEN 'Executada'\n        WHEN AGM_STAT = 'C'\n            THEN 'Cancelada'\n        WHEN AGM_STAT = 'B'\n            THEN 'Bloqueada'\n        END STATUS_AGENDA\n    , CONVERT(INT, convert(VARCHAR, AGM_OSM_SERIE) + convert(VARCHAR, AGM_OSM_NUM)) AS NR_ATENDIMENTO\n    , AGM_num AS NR_SEQUENCIA\n    , '' ID\n    , '' AS CD_PROCEDENCIA\n    , agm_proc AS DS_PROCEDENCIA\n    , agm.AGM_DTMRC AS DT_AGENDAMENTO\n    , CONVERT(INT, DAY(AGM_HINI)) AS DIA\n    , CONVERT(INT, MONTH(AGM_HINI)) AS MES\n    , CONVERT(INT, YEAR(AGM_HINI)) AS ANO\n    , ' ' DS_CLASSIFICACAO\n    , ' ' DS_AGRUPAMENTO\n    , agm.AGM_CANC_MOT_COD AS CD_MOTIVO_CANCELAMENTO\n    , agm.AGM_CANC_MOT_TIPO AS DS_MOTIVO_CANCELAMENTO\n    , agm_med AS CD_AGENDA\nFROM agm\nINNER JOIN usr\n    ON (agm.agm_usr_login = usr.usr_login)\nINNER JOIN psv\n    ON (psv.psv_cod = agm.agm_med)\nINNER JOIN smk\n    ON (\n            agm_smk = smk_cod\n            AND agm_tpsmk = smk_tipo\n            )\nINNER JOIN pac\n    ON (pac_reg = agm_pac)\nINNER JOIN loc\n    ON (AGM_LOC = LOC_COD)\nINNER JOIN str\n    ON (LOC_STR = STR.STR_COD)\nINNER JOIN str str_e\n    ON (STR.STR_STR_COD = STR_E.STR_COD)\nINNER JOIN cnv\n    ON (CNV_COD = AGM_CNV_COD)\nLEFT OUTER JOIN ctf ct1\n    ON (\n            ct1.ctf_cod = smk_ctf\n            AND ct1.ctf_tipo = smk_tipo\n            )\nLEFT OUTER JOIN emp\n    ON emp_cod = str_e.str_emp_cod",
 						"queryTimeout": "02:00:00"
 					},
 					"sink": {
@@ -319,7 +144,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Wait1",
+						"activity": "Wait1_copy1",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -336,7 +161,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "select top 100\nusr_login as NM_USUARIO,\nusr_nome as DS_USUARIO,\nusr_status as IE_SITUACAO,\nusr_dt_alter_senha as DT_ATUALIZACAO,\nEMP_NOME_FANTASIA as SIGLA_UNIDADE,\nEMP_CGC as CNPJ,\n'IOF' as MARCA\nfrom usr\nINNER JOIN str ON str_cod = usr_str_cod\nINNER JOIN emp ON emp_cod = str_emp_cod",
+						"sqlReaderQuery": "select top 100\nusr_login as NM_USUARIO,\nusr_nome as DS_USUARIO,\nusr_status as IE_SITUACAO,\nusr_dt_alter_senha as DT_ATUALIZACAO,\n'DAYHORC -  UNIDADE ITAIGARA' AS SIGLA_UNIDADE,\n'13188370000227' as CNPJ,\n'DH' as MARCA\nfrom usr",
 						"queryTimeout": "02:00:00"
 					},
 					"sink": {
@@ -362,7 +187,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Wait1",
+						"activity": "Wait1_copy1",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -379,7 +204,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "SELECT top 100\nRCL_SMM AS NR_SEQUENCIA,\nCONVERT(DATE,RCL_DTHR_ATUAL) AS DT_ATUALIZACAO,\nCONVERT(VARCHAR,RCL_DTHR_ATUAL,108) as HR_ATUALIZACAO,\n\nCONVERT(INT,CONVERT(VARCHAR,RCL_OSM_SERIE) + CONVERT(VARCHAR,RCL_OSM)) AS NR_ATENDIMENTO, \n\nRCL_MED AS CD_MEDICO,\nPSV_APEL AS NM_MEDICO,\n'' AS DS_RETORNO,\nCONVERT(VARCHAR,RCL_LAUDO_RTF) AS DS_CONDUTA,\nRCL_PAC AS CD_PESSOA_FISICA,\nCONVERT(VARCHAR,RCL_TXT) AS DS_DIAGNOSTICO,\n'DAYHORC- HOSPITAL DA BAHIA' AS SIGLA_UNIDADE,\n'13188370000308' as CNPJ,\n'DH' AS MARCA\nFROM RCL\nINNER JOIN PSV ON PSV_COD = RCL_MED",
+						"sqlReaderQuery": "SELECT top 100\nRCL_SMM AS NR_SEQUENCIA,\nCONVERT(DATE,RCL_DTHR_ATUAL) AS DT_ATUALIZACAO,\nCONVERT(VARCHAR,RCL_DTHR_ATUAL,108) as HR_ATUALIZACAO,\n\nCONVERT(INT,CONVERT(VARCHAR,RCL_OSM_SERIE) + CONVERT(VARCHAR,RCL_OSM)) AS NR_ATENDIMENTO, \n\nRCL_MED AS CD_MEDICO,\nPSV_APEL AS NM_MEDICO,\n'' AS DS_RETORNO,\nCONVERT(VARCHAR,RCL_LAUDO_RTF) AS DS_CONDUTA,\nRCL_PAC AS CD_PESSOA_FISICA,\nCONVERT(VARCHAR,RCL_TXT) AS DS_DIAGNOSTICO,\n'DAYHORC -  UNIDADE ITAIGARA' AS SIGLA_UNIDADE,\n'13188370000227' as CNPJ,\n'DH' AS MARCA\nFROM RCL\nINNER JOIN PSV ON PSV_COD = RCL_MED",
 						"queryTimeout": "02:00:00"
 					},
 					"sink": {
@@ -405,7 +230,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Wait1",
+						"activity": "Wait1_copy1",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -422,108 +247,13 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "select top 100\nagm_med as CD_AGENDA,\npsv_nome AS DS_AGENDA,\n0 CD_TIPO_AGENDA,\npsv_cod as CD_PESSOA_FISICA,\n\nemp_cgc as CNPJ,\n'' as DS_AREA_ATUACAO, \n'A' as IE_SITUACAO,\nEMP_NOME_FANTASIA as SIGLA_UNIDADE,\n'DH' as MARCA\n\nfrom \nagm, \npac,\ncnv,\nstr,\nsmk,\ngcc,\nusr,\npsv,\nemp\nwhere agm.agm_pac = pac_reg\nand agm_cnv_cod = cnv_cod\nand agm_str_cod = str_cod\nand agm_smk = smk_cod\nand agm_str_cod = gcc_str_cod\nand AGM_USR_LOGIN = USR_LOGIN\nand agm_med = PSV_COD\nand str_emp_cod = emp_cod\n\ngroup by agm_med,\npsv_nome,\nemp_cgc,\npsv_cod,\nEMP_NOME_FANTASIA",
+						"sqlReaderQuery": "SELECT distinct top 100 agd_med AS CD_AGENDA \n    , 0 AS DS_AGENDA\n    , 0 CD_TIPO_AGENDA\n    , psv_cod AS CD_PESSOA_FISICA\n    , emp_cgc AS CNPJ\n    , '' AS DS_AREA_ATUACAO\n    , 'A' AS IE_SITUACAO\n    -- , CASE \n    --     WHEN (agd_dt_reconstr IS not NULL and AGD_DT_GERA is not null)\n    --         THEN agd_dt_reconstr\n    --     WHEN (agd_dt_reconstr IS NULL and AGD_DT_GERA is not null)\n    --         THEN agd_dt_gera\n    --     ELSE AGD_DT_GERA\n    --     END AS DT_ATUALIZACAO\nFROM agd\nINNER JOIN PSV\n    ON agd_med = psv_cod\nINNER JOIN loc\n    ON loc_cod = agd_loc\nINNER JOIN str\n    ON str_cod = loc_str\nLEFT OUTER JOIN str str_e\n    ON str_e.str_cod = str.str_str_cod\nLEFT OUTER JOIN emp\n    ON emp_cod = str_e.str_emp_cod",
 						"queryTimeout": "02:00:00"
 					},
 					"sink": {
 						"type": "AzureSqlSink"
 					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"name": "CD_AGENDA",
-									"type": "Int32"
-								},
-								"sink": {
-									"name": "CD_AGENDA",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"name": "DS_AGENDA",
-									"type": "String"
-								},
-								"sink": {
-									"name": "DS_AGENDA",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "CD_TIPO_AGENDA",
-									"type": "Int32"
-								},
-								"sink": {
-									"name": "CD_TIPO_AGENDA",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"name": "CD_PESSOA_FISICA",
-									"type": "Int32"
-								},
-								"sink": {
-									"name": "CD_PESSOA_FISICA",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"name": "CNPJ",
-									"type": "String"
-								},
-								"sink": {
-									"name": "CNPJ",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "DS_AREA_ATUACAO",
-									"type": "String"
-								},
-								"sink": {
-									"name": "DS_AREA_ATUACAO",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "IE_SITUACAO",
-									"type": "String"
-								},
-								"sink": {
-									"name": "IE_SITUACAO",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "MARCA",
-									"type": "String"
-								},
-								"sink": {
-									"name": "MARCA",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "SIGLA_UNIDADE",
-									"type": "String"
-								},
-								"sink": {
-									"name": "SIGLA_UNIDADE",
-									"type": "String"
-								}
-							}
-						]
-					}
+					"enableStaging": false
 				},
 				"inputs": [
 					{
