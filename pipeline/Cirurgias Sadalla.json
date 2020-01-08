@@ -51,7 +51,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "AZ_SQL_TB_Agendamento_Cirurgias",
+						"referenceName": "AZ_SQL_TB_Cirurgias",
 						"type": "DatasetReference"
 					}
 				]
