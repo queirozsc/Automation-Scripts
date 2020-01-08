@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Wait1_copy1",
+				"name": "Wait",
 				"type": "Wait",
 				"dependsOn": [],
 				"userProperties": [],
@@ -12,11 +12,11 @@
 				}
 			},
 			{
-				"name": "Pacientes HOSL",
+				"name": "Pacientes DH",
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Wait1_copy1",
+						"activity": "Wait",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -58,7 +58,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Wait1_copy1",
+						"activity": "Wait",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -101,7 +101,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Wait1_copy1",
+						"activity": "Wait",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -144,7 +144,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Wait1_copy1",
+						"activity": "Wait",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -187,7 +187,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Wait1_copy1",
+						"activity": "Wait",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -230,7 +230,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Wait1_copy1",
+						"activity": "Wait",
 						"dependencyConditions": [
 							"Succeeded"
 						]
