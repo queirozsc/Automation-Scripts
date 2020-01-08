@@ -12,7 +12,7 @@
 				}
 			},
 			{
-				"name": "Pacientes HOSL",
+				"name": "Pacientes IOF",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -54,7 +54,7 @@
 				]
 			},
 			{
-				"name": "Atendimento HOSL",
+				"name": "Atendimento IOF",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -97,7 +97,7 @@
 				]
 			},
 			{
-				"name": "Agendamentos HOSL",
+				"name": "Agendamentos IOF",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -140,7 +140,7 @@
 				]
 			},
 			{
-				"name": "Usuarios HOSL",
+				"name": "Usuarios IOF",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -183,7 +183,7 @@
 				]
 			},
 			{
-				"name": "Consulta HOSL",
+				"name": "Consulta IOF",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -226,7 +226,7 @@
 				]
 			},
 			{
-				"name": "Agendas HOSL",
+				"name": "Agendas IOF",
 				"type": "Copy",
 				"dependsOn": [
 					{
