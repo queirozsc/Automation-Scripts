@@ -33,7 +33,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "select top 100 pac_reg as CD_PESSOA_FISICA, \nrtrim(ltrim(pac_nome)) AS NM_PESSOA_FISICA, \npac_numcpf AS NR_CPF, \nconvert(char(10),pac_nasc,121) as DT_NASCIMENTO, \npac_fone AS NR_TELEFONE_CELULAR,\npac_fone2 AS NR_TELEFONE, \n-- incluir pac_celular,\n'12305371000160' AS CNPJ,\n'HOSPITAL DE OLHOS SANTA LUZIA SS LTDA' as SIGLA_UNIDADE,\n'HOSL' as MARCA,\npac_reg as NR_PRONTUARIO,\npac_dreg as DT_CADASTRO_ORIGINAL,\npac_dult as DT_ATUALIZACAO\nfrom pac\ninner join usr on USR_LOGIN = PAC_USR_LOGIN_CAD"
+						"sqlReaderQuery": "select top 100 pac_reg as CD_PESSOA_FISICA, \nrtrim(ltrim(pac_nome)) AS NM_PESSOA_FISICA, \npac_numcpf AS NR_CPF, \nconvert(char(10),pac_nasc,121) as DT_NASCIMENTO, \npac_celular AS NR_TELEFONE_CELULAR,\npac_fone AS NR_TELEFONE, \n'12305371000160' AS CNPJ,\n'HOSPITAL DE OLHOS SANTA LUZIA SS LTDA' as SIGLA_UNIDADE,\n'HOSL' as MARCA,\npac_reg as NR_PRONTUARIO,\npac_dreg as DT_CADASTRO_ORIGINAL,\npac_dult as DT_ATUALIZACAO\nfrom pac\ninner join usr on USR_LOGIN = PAC_USR_LOGIN_CAD"
 					},
 					"sink": {
 						"type": "AzureSqlSink"
