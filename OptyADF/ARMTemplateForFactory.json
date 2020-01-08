@@ -9216,6 +9216,79 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Cirurgias Sadalla')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Alimentação da Tabela Cirurgias do Sadalla",
+				"activities": [
+					{
+						"name": "Wait1",
+						"type": "Wait",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"waitTimeInSeconds": 1
+						}
+					},
+					{
+						"name": "Cirurgias Sadalla",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Wait1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "select a.nr_cirurgia,\na.dt_inicio_prevista,\na.cd_pessoa_fisica,\nobter_nome_pf(a.cd_pessoa_fisica) as nm_paciente,\nobter_desc_procedimento(a.cd_procedimento_princ,a.ie_origem_proced)as ds_procedimento,\na.cd_medico_cirurgiao as cd_medico,\nobter_nome_pf(a.cd_medico_cirurgiao) as nm_medico,\ne.cd_cgc as CNPJ,\ne.nm_fantasia_estab as ds_unidade,\nem.nm_razao_social as marca,\na.dt_atualizacao\nfrom cirurgia a,\n     estabelecimento e,\n     empresa em\nwhere a.cd_estabelecimento = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa\nand a.dt_cancelamento is null",
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "SadallaTasyPrdDataSet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AZ_SQL_TB_Cirurgias",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"folder": {
+					"name": "Atendimento"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/SadallaTasyPrdDataSet')]",
+				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Cirurgias')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Contas a receber HOB')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -39425,6 +39498,78 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Cirurgias')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Geral Atendimentos Unidades"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "NR_CIRURGIA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DT_INICIO_PREVISTA",
+						"type": "date"
+					},
+					{
+						"name": "CD_PESSOA_FISICA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "NM_PACIENTE",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_PROCEDIMENTO",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_MEDICO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "NM_MEDICO",
+						"type": "varchar"
+					},
+					{
+						"name": "CNPJ",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_UNIDADE",
+						"type": "varchar"
+					},
+					{
+						"name": "MARCA",
+						"type": "varchar"
+					},
+					{
+						"name": "DT_ATUALIZACAO",
+						"type": "date"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Cirurgia_Unidade"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Consulta')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -47189,19 +47334,31 @@
 				"type": "OracleTable",
 				"structure": [
 					{
-						"name": "CD_AGENDA",
+						"name": "NR_CIRURGIA",
 						"type": "Decimal"
 					},
 					{
-						"name": "DS_AGENDA",
-						"type": "String"
-					},
-					{
-						"name": "CD_TIPO_AGENDA",
-						"type": "Decimal"
+						"name": "DT_INICIO_PREVISTA",
+						"type": "DateTime"
 					},
 					{
 						"name": "CD_PESSOA_FISICA",
+						"type": "String"
+					},
+					{
+						"name": "NM_PACIENTE",
+						"type": "String"
+					},
+					{
+						"name": "DS_PROCEDIMENTO",
+						"type": "String"
+					},
+					{
+						"name": "CD_MEDICO",
+						"type": "String"
+					},
+					{
+						"name": "NM_MEDICO",
 						"type": "String"
 					},
 					{
@@ -47209,11 +47366,11 @@
 						"type": "String"
 					},
 					{
-						"name": "DS_AREA_ATUACAO",
+						"name": "DS_UNIDADE",
 						"type": "String"
 					},
 					{
-						"name": "IE_SITUACAO",
+						"name": "MARCA",
 						"type": "String"
 					},
 					{
