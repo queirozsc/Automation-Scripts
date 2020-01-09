@@ -34,7 +34,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select a.nr_cirurgia,\na.dt_inicio_prevista,\na.cd_pessoa_fisica,\nobter_nome_pf(a.cd_pessoa_fisica) as nm_paciente,\nto_char(cd_procedimento_princ) as cd_procedimento,\nobter_desc_procedimento(a.cd_procedimento_princ,a.ie_origem_proced)as ds_procedimento,\na.cd_medico_cirurgiao as cd_medico,\nobter_nome_pf(a.cd_medico_cirurgiao) as nm_medico,\ne.cd_cgc as CNPJ,\ne.nm_fantasia_estab as ds_unidade,\nem.nm_razao_social as marca,\na.dt_atualizacao\nfrom cirurgia a,\n     estabelecimento e,\n     empresa em\nwhere a.cd_estabelecimento = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa\nand a.dt_cancelamento is null",
+						"oracleReaderQuery": "select a.nr_cirurgia,\na.dt_inicio_prevista,\na.cd_pessoa_fisica,\nobter_nome_pf(a.cd_pessoa_fisica) as nm_paciente,\nto_char(cd_procedimento_princ) as cd_procedimento,\na.nr_seq_proc_interno as cd_procedimento_int,\nobter_desc_procedimento(a.cd_procedimento_princ,a.ie_origem_proced)as ds_procedimento,\na.cd_medico_cirurgiao as cd_medico,\nobter_nome_pf(a.cd_medico_cirurgiao) as nm_medico,\ne.cd_cgc as CNPJ,\ne.nm_fantasia_estab as ds_unidade,\nem.nm_razao_social as marca,\na.dt_atualizacao\nfrom cirurgia a,\n     estabelecimento e,\n     empresa em\nwhere a.cd_estabelecimento = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa\nand a.dt_cancelamento is null",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
