@@ -1,5 +1,5 @@
 {
-	"name": "FILE_CUIDADO_PLANEJADO_SADALLA",
+	"name": "FILE_Padrao_Retornos_Cirurgias",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "LINK_PASTA_BI",
