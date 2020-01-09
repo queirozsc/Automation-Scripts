@@ -639,6 +639,10 @@
 						"type": "String"
 					},
 					{
+						"name": "CD_PROCEDIMENTO_INT",
+						"type": "Decimal"
+					},
+					{
 						"name": "DS_PROCEDIMENTO",
 						"type": "String"
 					},
