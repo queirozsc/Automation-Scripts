@@ -29,7 +29,7 @@
 			},
 			{
 				"name": "CD_PROCEDIMENTO",
-				"type": "Decimal"
+				"type": "String"
 			},
 			{
 				"name": "DS_PROCEDIMENTO",
