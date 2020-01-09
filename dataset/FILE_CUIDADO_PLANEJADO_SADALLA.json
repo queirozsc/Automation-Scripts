@@ -12,8 +12,9 @@
 				"type": "FileServerLocation",
 				"fileName": "codigoscuidadoplanejado.csv"
 			},
-			"columnDelimiter": ",",
+			"columnDelimiter": ";",
 			"escapeChar": "\\",
+			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
 		"schema": [
