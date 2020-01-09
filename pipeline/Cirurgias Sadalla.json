@@ -86,11 +86,20 @@
 							"type": "DelimitedTextReadSettings"
 						}
 					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
 					"enableStaging": false
 				},
 				"inputs": [
 					{
 						"referenceName": "FILE_CUIDADO_PLANEJADO_SADALLA",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AZ_SQL_TB_Padrao_Retorno_Cir_Sadalla",
 						"type": "DatasetReference"
 					}
 				]
