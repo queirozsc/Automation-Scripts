@@ -127,6 +127,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'Historicos_FIlasPorHoras_SADALLA'"
 		},
+		"LINK_PASTA_BI_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LINK_PASTA_BI'"
+		},
 		"SMART_HOSL_NEW_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'SMART_HOSL_NEW'"
@@ -379,6 +383,14 @@
 			"type": "string",
 			"defaultValue": "hobrasil\\sa.automation"
 		},
+		"LINK_PASTA_BI_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "C:\\Power BI Gateway Files"
+		},
+		"LINK_PASTA_BI_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "hobrasil\\sa.automation"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -480,9 +492,6 @@
 					"Historicos_AgentesPorDia_SADALLA_password": {
 						"value": "[parameters('Historicos_AgentesPorDia_SADALLA_password')]"
 					},
-					"Historicos_AgentesPorHora_CSI_password": {
-						"value": "[parameters('Historicos_AgentesPorHora_CSI_password')]"
-					},
 					"Folder_Nexcore_Consolidado_properties_typeProperties_host": {
 						"value": "[parameters('Folder_Nexcore_Consolidado_properties_typeProperties_host')]"
 					},
@@ -530,12 +539,6 @@
 					},
 					"Historicos_AgentesPorDia_SADALLA_properties_typeProperties_userId": {
 						"value": "[parameters('Historicos_AgentesPorDia_SADALLA_properties_typeProperties_userId')]"
-					},
-					"Historicos_AgentesPorHora_CSI_properties_typeProperties_host": {
-						"value": "[parameters('Historicos_AgentesPorHora_CSI_properties_typeProperties_host')]"
-					},
-					"Historicos_AgentesPorHora_CSI_properties_typeProperties_userId": {
-						"value": "[parameters('Historicos_AgentesPorHora_CSI_properties_typeProperties_userId')]"
 					}
 				}
 			},
@@ -556,6 +559,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"Historicos_AgentesPorHora_CSI_password": {
+						"value": "[parameters('Historicos_AgentesPorHora_CSI_password')]"
 					},
 					"Historicos_AgentesPorHora_DAYHORC_password": {
 						"value": "[parameters('Historicos_AgentesPorHora_DAYHORC_password')]"
@@ -608,14 +614,17 @@
 					"Historicos_FIlasPorHoras_SADALLA_password": {
 						"value": "[parameters('Historicos_FIlasPorHoras_SADALLA_password')]"
 					},
+					"LINK_PASTA_BI_password": {
+						"value": "[parameters('LINK_PASTA_BI_password')]"
+					},
 					"SMART_HOSL_NEW_connectionString": {
 						"value": "[parameters('SMART_HOSL_NEW_connectionString')]"
 					},
-					"SMART_INOB_NEW_connectionString": {
-						"value": "[parameters('SMART_INOB_NEW_connectionString')]"
+					"Historicos_AgentesPorHora_CSI_properties_typeProperties_host": {
+						"value": "[parameters('Historicos_AgentesPorHora_CSI_properties_typeProperties_host')]"
 					},
-					"SMART_IOF_NEW_connectionString": {
-						"value": "[parameters('SMART_IOF_NEW_connectionString')]"
+					"Historicos_AgentesPorHora_CSI_properties_typeProperties_userId": {
+						"value": "[parameters('Historicos_AgentesPorHora_CSI_properties_typeProperties_userId')]"
 					},
 					"Historicos_AgentesPorHora_DAYHORC_properties_typeProperties_host": {
 						"value": "[parameters('Historicos_AgentesPorHora_DAYHORC_properties_typeProperties_host')]"
@@ -718,6 +727,12 @@
 					},
 					"Historicos_FIlasPorHoras_SADALLA_properties_typeProperties_userId": {
 						"value": "[parameters('Historicos_FIlasPorHoras_SADALLA_properties_typeProperties_userId')]"
+					},
+					"LINK_PASTA_BI_properties_typeProperties_host": {
+						"value": "[parameters('LINK_PASTA_BI_properties_typeProperties_host')]"
+					},
+					"LINK_PASTA_BI_properties_typeProperties_userId": {
+						"value": "[parameters('LINK_PASTA_BI_properties_typeProperties_userId')]"
 					}
 				}
 			},
@@ -738,6 +753,12 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"SMART_INOB_NEW_connectionString": {
+						"value": "[parameters('SMART_INOB_NEW_connectionString')]"
+					},
+					"SMART_IOF_NEW_connectionString": {
+						"value": "[parameters('SMART_IOF_NEW_connectionString')]"
 					},
 					"SMART_ITABUNA_NEW_connectionString": {
 						"value": "[parameters('SMART_ITABUNA_NEW_connectionString')]"

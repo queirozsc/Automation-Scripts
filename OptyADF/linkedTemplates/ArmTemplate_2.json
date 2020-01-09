@@ -47,10 +47,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'Historicos_AgentesPorDia_SADALLA'"
 		},
-		"Historicos_AgentesPorHora_CSI_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Historicos_AgentesPorHora_CSI'"
-		},
 		"Folder_Nexcore_Consolidado_properties_typeProperties_host": {
 			"type": "string",
 			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Consolidado"
@@ -114,20 +110,107 @@
 		"Historicos_AgentesPorDia_SADALLA_properties_typeProperties_userId": {
 			"type": "string",
 			"defaultValue": "hobrasil\\sa.automation"
-		},
-		"Historicos_AgentesPorHora_CSI_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\CSI\\AgentesPorHora"
-		},
-		"Historicos_AgentesPorHora_CSI_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "hobrasil\\sa.automation"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Titulos_Receber')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Contas a Receber"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ESTABELECIMENTO",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_CNPJ",
+						"type": "varchar"
+					},
+					{
+						"name": "NM_RAZAOSOCIAL",
+						"type": "varchar"
+					},
+					{
+						"name": "NM_FANTASIA",
+						"type": "varchar"
+					},
+					{
+						"name": "NR_TITULO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "NR_NOTA_FISCAL",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DT_EMISSAO",
+						"type": "date"
+					},
+					{
+						"name": "DT_VENCIMENTO_ORIGINAL",
+						"type": "date"
+					},
+					{
+						"name": "DT_VENCIMENTO_PRORROGADO",
+						"type": "date"
+					},
+					{
+						"name": "VL_BRUTO",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "VL_SALDO_JUROS",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "VL_SALDO_MULTA",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "VL_LIQUIDO",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "VL_SALDO_TITULO",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "VL_AMENOR",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "SITUACAO",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Unidade_Titulos_Receber"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Unidade_Producao_Medica')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
@@ -1933,29 +2016,6 @@
 					"password": {
 						"type": "SecureString",
 						"value": "[parameters('Historicos_AgentesPorDia_SADALLA_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "ServidorArquivosBI",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Historicos_AgentesPorHora_CSI')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Historicos_AgentesPorHora_CSI",
-				"annotations": [],
-				"type": "FileServer",
-				"typeProperties": {
-					"host": "[parameters('Historicos_AgentesPorHora_CSI_properties_typeProperties_host')]",
-					"userId": "[parameters('Historicos_AgentesPorHora_CSI_properties_typeProperties_userId')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('Historicos_AgentesPorHora_CSI_password')]"
 					}
 				},
 				"connectVia": {

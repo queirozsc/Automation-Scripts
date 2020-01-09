@@ -127,6 +127,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'Historicos_FIlasPorHoras_SADALLA'"
 		},
+		"LINK_PASTA_BI_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LINK_PASTA_BI'"
+		},
 		"SMART_HOSL_NEW_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'SMART_HOSL_NEW'"
@@ -376,6 +380,14 @@
 			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\SADALLA\\FilasPorHoras"
 		},
 		"Historicos_FIlasPorHoras_SADALLA_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "hobrasil\\sa.automation"
+		},
+		"LINK_PASTA_BI_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "C:\\Power BI Gateway Files"
+		},
+		"LINK_PASTA_BI_properties_typeProperties_userId": {
 			"type": "string",
 			"defaultValue": "hobrasil\\sa.automation"
 		}
@@ -9253,7 +9265,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "select a.nr_cirurgia,\na.dt_inicio_prevista,\na.cd_pessoa_fisica,\nobter_nome_pf(a.cd_pessoa_fisica) as nm_paciente,\nobter_desc_procedimento(a.cd_procedimento_princ,a.ie_origem_proced)as ds_procedimento,\na.cd_medico_cirurgiao as cd_medico,\nobter_nome_pf(a.cd_medico_cirurgiao) as nm_medico,\ne.cd_cgc as CNPJ,\ne.nm_fantasia_estab as ds_unidade,\nem.nm_razao_social as marca,\na.dt_atualizacao\nfrom cirurgia a,\n     estabelecimento e,\n     empresa em\nwhere a.cd_estabelecimento = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa\nand a.dt_cancelamento is null",
+								"oracleReaderQuery": "select a.nr_cirurgia,\na.dt_inicio_prevista,\na.cd_pessoa_fisica,\nobter_nome_pf(a.cd_pessoa_fisica) as nm_paciente,\nto_char(cd_procedimento_princ) as cd_procedimento,\nobter_desc_procedimento(a.cd_procedimento_princ,a.ie_origem_proced)as ds_procedimento,\na.cd_medico_cirurgiao as cd_medico,\nobter_nome_pf(a.cd_medico_cirurgiao) as nm_medico,\ne.cd_cgc as CNPJ,\ne.nm_fantasia_estab as ds_unidade,\nem.nm_razao_social as marca,\na.dt_atualizacao\nfrom cirurgia a,\n     estabelecimento e,\n     empresa em\nwhere a.cd_estabelecimento = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa\nand a.dt_cancelamento is null",
 								"partitionOption": "None",
 								"queryTimeout": "02:00:00"
 							},
@@ -9276,6 +9288,56 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "Prazos de retorno",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Wait1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "FileServerReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "FILE_CUIDADO_PLANEJADO_SADALLA",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AZ_SQL_TB_Padrao_Retorno_Cir_Sadalla",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
 					}
 				],
 				"folder": {
@@ -9285,7 +9347,9 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/SadallaTasyPrdDataSet')]",
-				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Cirurgias')]"
+				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Cirurgias')]",
+				"[concat(variables('factoryId'), '/datasets/FILE_CUIDADO_PLANEJADO_SADALLA')]",
+				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Padrao_Retorno_Cir_Sadalla')]"
 			]
 		},
 		{
@@ -16450,7 +16514,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "select pf.cd_pessoa_fisica,\n       pf.nm_pessoa_fisica,\n       pf.nr_cpf,\n       to_char((pf.dt_nascimento) , 'dd/mm/yyyy') as dt_nascimento,\n       pf.nr_ddd_celular||''||substr(replace(LTRIM(translate(pf.nr_telefone_celular, translate(pf.nr_telefone_celular, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone_celular,\n       obter_compl_pf(pf.cd_pessoa_fisica,1,'DDT')||''||obter_compl_pf(pf.cd_pessoa_fisica,1,'T') as nr_telefone,\n       obter_cnpj_estabelecimento(decode(pf.cd_estabelecimento,null,1,pf.cd_estabelecimento)) as CNPJ,\n       e.nm_fantasia_estab as SIGLA_UNIDADE,\n       em.nm_razao_social as MARCA,\n       pf.nr_prontuario,\n       pf.dt_atualizacao\nfrom pessoa_fisica pf,\n     estabelecimento e,\n     empresa em\nwhere decode(pf.cd_estabelecimento,null,1,pf.cd_estabelecimento) = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa",
+								"oracleReaderQuery": "select pf.cd_pessoa_fisica,\n       pf.nm_pessoa_fisica,\n       pf.nr_cpf,\n       to_char((pf.dt_nascimento) , 'dd/mm/yyyy') as dt_nascimento,\n       pf.nr_ddd_celular||''||substr(replace(LTRIM(translate(pf.nr_telefone_celular, translate(pf.nr_telefone_celular, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone_celular,\n       obter_compl_pf(pf.cd_pessoa_fisica,1,'DDT')||''||obter_compl_pf(pf.cd_pessoa_fisica,1,'T') as nr_telefone,\n       obter_cnpj_estabelecimento(decode(pf.cd_estabelecimento,null,1,pf.cd_estabelecimento)) as CNPJ,\n       e.nm_fantasia_estab as DS_UNIDADE,\n       em.nm_razao_social as MARCA,\n       pf.nr_prontuario,\n       pf.dt_cadastro_original ,\n       pf.dt_atualizacao\nfrom pessoa_fisica pf,\n     estabelecimento e,\n     empresa em\nwhere decode(pf.cd_estabelecimento,null,1,pf.cd_estabelecimento) = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa",
 								"partitionOption": "None"
 							},
 							"sink": {
@@ -16495,7 +16559,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "select pf.cd_pessoa_fisica, pf.nm_pessoa_fisica, \n\nto_char(at.dt_entrada,'dd/mm/yyyy') as dt_entrada,\nto_char(at.dt_entrada,'hh24:mi:ss') as hr_entrada, \n\nobter_nome_pf(at.cd_medico_resp) as nm_medico, c.cd_convenio, obter_nome_convenio(c.cd_convenio) AS ds_convenio, \nat.nr_atendimento,\ne.cd_cgc as CNPJ,\nnm_fantasia_estab SIGLA_UNIDADE,\nem.nm_razao_social MARCA,\n\nat.cd_procedencia,\np.ds_procedencia,\n'NAO ENCONTRADO' as ID,\n\nto_char(at.dt_entrada,'dd') dia,\nto_char(at.dt_entrada,'mm') mes,\nto_char(at.dt_entrada,'yyyy') ano,\nat.dt_cancelamento,\nat.dt_atualizacao\n\nfrom \natendimento_paciente at, \npessoa_fisica pf,\natend_categoria_convenio c,\nprocedencia p,\nestabelecimento e,\nempresa em\nwhere at.cd_pessoa_fisica = pf.cd_pessoa_fisica\nand at.cd_procedencia = p.cd_procedencia (+)\nand at.nr_atendimento = c.nr_atendimento\nand at.cd_estabelecimento = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa",
+								"oracleReaderQuery": "select pf.cd_pessoa_fisica, pf.nm_pessoa_fisica, \n\nto_char(at.dt_entrada,'dd/mm/yyyy') as dt_entrada,\nto_char(at.dt_entrada,'hh24:mi:ss') as hr_entrada, \n\nobter_nome_pf(at.cd_medico_resp) as nm_medico, c.cd_convenio, obter_nome_convenio(c.cd_convenio) AS ds_convenio, \nat.nr_atendimento,\ne.cd_cgc as CNPJ,\nnm_fantasia_estab DS_UNIDADE,\nem.nm_razao_social MARCA,\n\nat.cd_procedencia,\np.ds_procedencia,\n'NAO ENCONTRADO' as ID,\n\nto_char(at.dt_entrada,'dd') dia,\nto_char(at.dt_entrada,'mm') mes,\nto_char(at.dt_entrada,'yyyy') ano,\nat.dt_cancelamento,\nat.dt_atualizacao\n\nfrom \natendimento_paciente at, \npessoa_fisica pf,\natend_categoria_convenio c,\nprocedencia p,\nestabelecimento e,\nempresa em\nwhere at.cd_pessoa_fisica = pf.cd_pessoa_fisica\nand at.cd_procedencia = p.cd_procedencia (+)\nand at.nr_atendimento = c.nr_atendimento\nand at.cd_estabelecimento = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa",
 								"partitionOption": "None"
 							},
 							"sink": {
@@ -16540,7 +16604,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "-- Consulta HOB - Azure\n\nselect o.nr_sequencia as nr_sequencia, \nto_char(o.dt_atualizacao,'dd/mm/yyyy') as dt_atualizacao,\nto_char(o.dt_atualizacao,'hh24:mi:ss') as hr_atualizacao, \no.nr_atendimento, \no.cd_medico as cd_medico ,\nobter_nome_pf(o.cd_medico) as nm_medico, \nc.qt_periodo||' '||c.ie_periodo as ds_retorno,  \nsubstr(z.conduta,1,1000) as ds_conduta,\nobter_pessoa_atendimento(o.nr_atendimento, 'C') as cd_pessoa_fisica,\n\n(select unique d.cd_doenca ||' - '|| a.ds_doenca_cid\nfrom diagnostico_doenca d, \n     cid_doenca a\nwhere a.cd_doenca_cid = d.cd_doenca\nand d.nr_atendimento = o.nr_atendimento\nand d.nr_seq_interno = (select max(x.nr_seq_interno) from diagnostico_doenca x where x.nr_atendimento = d.nr_atendimento)) as ds_diagnostico,\n\nobter_nome_estab(obter_estab_atendimento(o.nr_atendimento)) as sigla_unidade,\n\ne.cd_cgc as cnpj,\n\n'HOB' as MARCA\n\nfrom oft_consulta o,\n     (SELECT a.nr_seq_consulta, b.ds_resultado as conduta\n      FROM   med_avaliacao_paciente a \n      inner join med_avaliacao_result b ON b.nr_seq_avaliacao = a.nr_sequencia \n      WHERE  a.nr_seq_tipo_avaliacao = 34 \n      and  b.nr_seq_item = 457 --456, 458 ) \n      GROUP  BY a.nr_seq_consulta, b.ds_resultado) z,\n      oft_conduta c,\n      estabelecimento e\nwhere o.nr_sequencia = z.nr_seq_consulta\nand o.nr_sequencia = c.nr_seq_consulta\nand o.nr_atendimento is not null\nand obter_estab_atendimento(o.nr_atendimento) = e.cd_estabelecimento",
+								"oracleReaderQuery": "-- Consulta HOB - Azure\n\nselect o.nr_sequencia as nr_sequencia, \nto_char(o.dt_atualizacao,'dd/mm/yyyy') as dt_atualizacao,\nto_char(o.dt_atualizacao,'hh24:mi:ss') as hr_atualizacao, \no.nr_atendimento, \no.cd_medico as cd_medico ,\nobter_nome_pf(o.cd_medico) as nm_medico, \nc.qt_periodo||' '||c.ie_periodo as ds_retorno,  \nsubstr(z.conduta,1,1000) as ds_conduta,\nobter_pessoa_atendimento(o.nr_atendimento, 'C') as cd_pessoa_fisica,\n\n(select unique d.cd_doenca ||' - '|| a.ds_doenca_cid\nfrom diagnostico_doenca d, \n     cid_doenca a\nwhere a.cd_doenca_cid = d.cd_doenca\nand d.nr_atendimento = o.nr_atendimento\nand d.nr_seq_interno = (select max(x.nr_seq_interno) from diagnostico_doenca x where x.nr_atendimento = d.nr_atendimento)) as ds_diagnostico,\n\nobter_nome_estab(obter_estab_atendimento(o.nr_atendimento)) as DS_UNIDADE,\n\ne.cd_cgc as cnpj,\n\n'HOB' as MARCA\n\nfrom oft_consulta o,\n     (SELECT a.nr_seq_consulta, b.ds_resultado as conduta\n      FROM   med_avaliacao_paciente a \n      inner join med_avaliacao_result b ON b.nr_seq_avaliacao = a.nr_sequencia \n      WHERE  a.nr_seq_tipo_avaliacao = 34 \n      and  b.nr_seq_item = 457 --456, 458 ) \n      GROUP  BY a.nr_seq_consulta, b.ds_resultado) z,\n      oft_conduta c,\n      estabelecimento e\nwhere o.nr_sequencia = z.nr_seq_consulta\nand o.nr_sequencia = c.nr_seq_consulta\nand o.nr_atendimento is not null\nand obter_estab_atendimento(o.nr_atendimento) = e.cd_estabelecimento",
 								"partitionOption": "None"
 							},
 							"sink": {
@@ -16585,7 +16649,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "-- AGENDAMENTO HOB - Azure\n\nselect  a.cd_pessoa_fisica, \na.cd_convenio, \nobter_cnpj_estabelecimento(ag.cd_estabelecimento) as cnpj,\nto_char((a.hr_inicio) , 'dd/mm/yyyy') as data_agenda,\nto_char((a.hr_inicio) , 'hh24:mi:ss') as hora_agenda,\n'Consulta' as tipo_agenda,\npf.nm_pessoa_fisica as nm_paciente,\nsubstr(obter_desc_procedimento(a.cd_procedimento, a.ie_origem_proced),1,1000) as ds_procedimento_princ,\nsubstr((select Listagg(Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced), ' ;') within GROUP (ORDER BY Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced))  from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia),1,1000) as ds_procedimento_adic,\n1 + (select count(1)from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia) as ie_quantidade,\nobter_nome_usuario(a.nm_usuario_orig) as nm_usuario,\nobter_nome_pf(a.cd_medico_exec) as nm_medico,\ne.nm_fantasia_estab SIGLA_UNIDADE,\nem.nm_razao_social MARCA,\nobter_valor_dominio(83,a.ie_status_agenda) as status_agenda,\na.nr_atendimento,\na.nr_sequencia,\n'NAO ENCONTRADO' as ID,\na.cd_procedencia,\np.ds_procedencia,\na.dt_agendamento,\n\nto_char(a.dt_agenda,'dd') dia,\nto_char(a.dt_agenda,'mm') mes,\nto_char(a.dt_agenda,'yyyy') ano,\nac.ds_classificacao,\naa.ds_agrupamento ds_agrupamento,\na.cd_motivo_cancelamento,\nsubstr(obter_ds_motivo_status(a.nr_sequencia, a.cd_agenda),1,200) as ds_motivo_cancelamento,\na.cd_agenda,\na.dt_atualizacao\n\nfrom agenda_paciente a,\n     agenda ag,\n     pessoa_fisica pf,\n     procedencia p,\n     agenda_paciente_classif ac,\n     agrupamento_agenda aa,\n     empresa em,\n     estabelecimento e\nwhere a.cd_agenda = ag.cd_agenda\nand a.cd_pessoa_fisica = pf.cd_pessoa_fisica (+)\nand a.cd_procedencia = p.cd_procedencia (+)\nand a.nr_seq_classif_agenda = ac.nr_sequencia (+)\nand ag.nr_seq_agrupamento = aa.nr_sequencia (+)\nand ag.cd_estabelecimento = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa\nand a.cd_pessoa_fisica is not null\nand ag.cd_tipo_agenda = 2",
+								"oracleReaderQuery": "-- AGENDAMENTO HOB - Azure\n\nselect  a.cd_pessoa_fisica, \na.cd_convenio, \nobter_cnpj_estabelecimento(ag.cd_estabelecimento) as cnpj,\nto_char((a.hr_inicio) , 'dd/mm/yyyy') as data_agenda,\nto_char((a.hr_inicio) , 'hh24:mi:ss') as hora_agenda,\n'Consulta' as tipo_agenda,\npf.nm_pessoa_fisica as nm_paciente,\nsubstr(obter_desc_procedimento(a.cd_procedimento, a.ie_origem_proced),1,1000) as ds_procedimento_princ,\nsubstr((select Listagg(Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced), ' ;') within GROUP (ORDER BY Obter_desc_procedimento(p.cd_procedimento, p.ie_origem_proced))  from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia),1,1000) as ds_procedimento_adic,\n1 + (select count(1)from AGENDA_PACIENTE_PROC p where p.nr_sequencia = a.nr_sequencia) as ie_quantidade,\nobter_nome_usuario(a.nm_usuario_orig) as nm_usuario,\nobter_nome_pf(a.cd_medico_exec) as nm_medico,\ne.nm_fantasia_estab DS_UNIDADE,\nem.nm_razao_social MARCA,\nobter_valor_dominio(83,a.ie_status_agenda) as status_agenda,\na.nr_atendimento,\na.nr_sequencia,\n'NAO ENCONTRADO' as ID,\na.cd_procedencia,\np.ds_procedencia,\na.dt_agendamento,\n\nto_char(a.dt_agenda,'dd') dia,\nto_char(a.dt_agenda,'mm') mes,\nto_char(a.dt_agenda,'yyyy') ano,\nac.ds_classificacao,\naa.ds_agrupamento ds_agrupamento,\na.cd_motivo_cancelamento,\nsubstr(obter_ds_motivo_status(a.nr_sequencia, a.cd_agenda),1,200) as ds_motivo_cancelamento,\na.cd_agenda,\na.dt_atualizacao\n\nfrom agenda_paciente a,\n     agenda ag,\n     pessoa_fisica pf,\n     procedencia p,\n     agenda_paciente_classif ac,\n     agrupamento_agenda aa,\n     empresa em,\n     estabelecimento e\nwhere a.cd_agenda = ag.cd_agenda\nand a.cd_pessoa_fisica = pf.cd_pessoa_fisica (+)\nand a.cd_procedencia = p.cd_procedencia (+)\nand a.nr_seq_classif_agenda = ac.nr_sequencia (+)\nand ag.nr_seq_agrupamento = aa.nr_sequencia (+)\nand ag.cd_estabelecimento = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa\nand a.cd_pessoa_fisica is not null\nand ag.cd_tipo_agenda = 2",
 								"partitionOption": "None"
 							},
 							"sink": {
@@ -16639,7 +16703,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "select u.nm_usuario, \nu.ds_usuario, \nu.ie_situacao, \nu.dt_atualizacao,\nobter_nome_estabelecimento(u.cd_estabelecimento) as sigla_unidade,\ne.cd_cgc as CNPJ,\nobter_nome_empresa(obter_empresa_estab(u.cd_estabelecimento)) as Marca\nfrom usuario u,\n     empresa em,\n     estabelecimento e\nwhere u.cd_estabelecimento = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa",
+								"oracleReaderQuery": "select u.nm_usuario, \nu.ds_usuario, \nu.ie_situacao, \nu.dt_atualizacao,\nobter_nome_estabelecimento(u.cd_estabelecimento) as DS_UNIDADE,\ne.cd_cgc as CNPJ,\nobter_nome_empresa(obter_empresa_estab(u.cd_estabelecimento)) as Marca\nfrom usuario u,\n     empresa em,\n     estabelecimento e\nwhere u.cd_estabelecimento = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa",
 								"partitionOption": "None"
 							},
 							"sink": {
@@ -19089,7 +19153,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "select pf.cd_pessoa_fisica,\n       pf.nm_pessoa_fisica,\n       pf.nr_cpf,\n       to_char((pf.dt_nascimento) , 'dd/mm/yyyy') as dt_nascimento,\n       pf.nr_ddd_celular||''||substr(replace(LTRIM(translate(pf.nr_telefone_celular, translate(pf.nr_telefone_celular, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone_celular,\n       obter_compl_pf(pf.cd_pessoa_fisica,1,'DDT')||''||obter_compl_pf(pf.cd_pessoa_fisica,1,'T') as nr_telefone,\n       obter_cnpj_estabelecimento(decode(pf.cd_estabelecimento,null,1,pf.cd_estabelecimento)) as CNPJ,\n       e.nm_fantasia_estab as SIGLA_UNIDADE,\n       em.nm_razao_social as MARCA,\n       pf.nr_prontuario,\n       pf.dt_cadastro_original,\n       pf.dt_atualizacao\nfrom pessoa_fisica pf,\n     estabelecimento e,\n     empresa em\nwhere decode(pf.cd_estabelecimento,null,1,pf.cd_estabelecimento) = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa",
+								"oracleReaderQuery": "select pf.cd_pessoa_fisica,\n       pf.nm_pessoa_fisica,\n       pf.nr_cpf,\n       to_char((pf.dt_nascimento) , 'dd/mm/yyyy') as dt_nascimento,\n       pf.nr_ddd_celular||''||substr(replace(LTRIM(translate(pf.nr_telefone_celular, translate(pf.nr_telefone_celular, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone_celular,\n       obter_compl_pf(pf.cd_pessoa_fisica,1,'DDT')||''||obter_compl_pf(pf.cd_pessoa_fisica,1,'T') as nr_telefone,\n       obter_cnpj_estabelecimento(decode(pf.cd_estabelecimento,null,1,pf.cd_estabelecimento)) as CNPJ,\n       e.nm_fantasia_estab as DS_UNIDADE,\n       em.nm_razao_social as MARCA,\n       pf.nr_prontuario,\n       pf.dt_cadastro_original ,\n       pf.dt_atualizacao\nfrom pessoa_fisica pf,\n     estabelecimento e,\n     empresa em\nwhere decode(pf.cd_estabelecimento,null,1,pf.cd_estabelecimento) = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa",
 								"partitionOption": "None"
 							},
 							"sink": {
@@ -19134,7 +19198,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "select pf.cd_pessoa_fisica, pf.nm_pessoa_fisica, \n\nto_char(at.dt_entrada,'dd/mm/yyyy') as dt_entrada,\nto_char(at.dt_entrada,'hh24:mi:ss') as hr_entrada, \n\nobter_nome_pf(at.cd_medico_resp) as nm_medico, c.cd_convenio, obter_nome_convenio(c.cd_convenio) AS ds_convenio, \nat.nr_atendimento,\ne.cd_cgc as CNPJ,\nnm_fantasia_estab SIGLA_UNIDADE,\nem.nm_razao_social MARCA,\n\nat.cd_procedencia,\np.ds_procedencia,\n'NAO ENCONTRADO' as ID,\n\nto_char(at.dt_entrada,'dd') dia,\nto_char(at.dt_entrada,'mm') mes,\nto_char(at.dt_entrada,'yyyy') ano,\nat.dt_cancelamento,\nat.dt_atualizacao\n\nfrom \natendimento_paciente at, \npessoa_fisica pf,\natend_categoria_convenio c,\nprocedencia p,\nestabelecimento e,\nempresa em\nwhere at.cd_pessoa_fisica = pf.cd_pessoa_fisica\nand at.cd_procedencia = p.cd_procedencia (+)\nand at.nr_atendimento = c.nr_atendimento\nand at.cd_estabelecimento = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa",
+								"oracleReaderQuery": "select pf.cd_pessoa_fisica, pf.nm_pessoa_fisica, \n\nto_char(at.dt_entrada,'dd/mm/yyyy') as dt_entrada,\nto_char(at.dt_entrada,'hh24:mi:ss') as hr_entrada, \n\nobter_nome_pf(at.cd_medico_resp) as nm_medico, c.cd_convenio, obter_nome_convenio(c.cd_convenio) AS ds_convenio, \nat.nr_atendimento,\ne.cd_cgc as CNPJ,\nnm_fantasia_estab DS_UNIDADE,\nem.nm_razao_social MARCA,\n\nat.cd_procedencia,\np.ds_procedencia,\n'NAO ENCONTRADO' as ID,\n\nto_char(at.dt_entrada,'dd') dia,\nto_char(at.dt_entrada,'mm') mes,\nto_char(at.dt_entrada,'yyyy') ano,\nat.dt_cancelamento,\nat.dt_atualizacao\n\nfrom \natendimento_paciente at, \npessoa_fisica pf,\natend_categoria_convenio c,\nprocedencia p,\nestabelecimento e,\nempresa em\nwhere at.cd_pessoa_fisica = pf.cd_pessoa_fisica\nand at.cd_procedencia = p.cd_procedencia (+)\nand at.nr_atendimento = c.nr_atendimento\nand at.cd_estabelecimento = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa",
 								"partitionOption": "None"
 							},
 							"sink": {
@@ -19179,7 +19243,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "-- Consulta Sadalla - Azure\n\nselect o.nr_sequencia as nr_sequencia, to_char(o.dt_atualizacao,'dd/mm/yyyy') as dt_atualizacao,\nto_char(o.dt_atualizacao,'hh24:mi:ss') as hr_atualizacao, \no.nr_atendimento, o.cd_profissional as cd_medico ,obter_nome_pf(o.cd_profissional) as nm_medico, r.ds_retorno, substr(o.ds_conduta,1,1000) as ds_conduta,\nobter_pessoa_atendimento(o.nr_atendimento, 'C') as cd_pessoa_fisica,\n\n(select unique d.cd_doenca ||' - '|| a.ds_doenca_cid\nfrom diagnostico_doenca d, \n     cid_doenca a\nwhere a.cd_doenca_cid = d.cd_doenca\nand d.nr_atendimento = o.nr_atendimento\nand d.nr_seq_interno = (select max(x.nr_seq_interno) from diagnostico_doenca x where x.nr_atendimento = d.nr_atendimento)) as ds_diagnostico,\n\nobter_nome_estab(obter_estab_atendimento(o.nr_atendimento)) as sigla_unidade,\n\ne.cd_cgc as cnpj,\n\n'SADALLA' as marca \n\nfrom oft_consulta_medica o,\n     oft_retorno r,\n     estabelecimento e\nwhere o.nr_seq_retorno = r.nr_sequencia\nand o.nr_atendimento is not null\nand obter_estab_atendimento(o.nr_atendimento) = e.cd_estabelecimento",
+								"oracleReaderQuery": "-- Consulta Sadalla - Azure\n\nselect o.nr_sequencia as nr_sequencia, to_char(o.dt_atualizacao,'dd/mm/yyyy') as dt_atualizacao,\nto_char(o.dt_atualizacao,'hh24:mi:ss') as hr_atualizacao, \no.nr_atendimento, o.cd_profissional as cd_medico ,obter_nome_pf(o.cd_profissional) as nm_medico, r.ds_retorno, substr(o.ds_conduta,1,1000) as ds_conduta,\nobter_pessoa_atendimento(o.nr_atendimento, 'C') as cd_pessoa_fisica,\n\n(select unique d.cd_doenca ||' - '|| a.ds_doenca_cid\nfrom diagnostico_doenca d, \n     cid_doenca a\nwhere a.cd_doenca_cid = d.cd_doenca\nand d.nr_atendimento = o.nr_atendimento\nand d.nr_seq_interno = (select max(x.nr_seq_interno) from diagnostico_doenca x where x.nr_atendimento = d.nr_atendimento)) as ds_diagnostico,\n\nobter_nome_estab(obter_estab_atendimento(o.nr_atendimento)) as DS_UNIDADE,\n\ne.cd_cgc as cnpj,\n\n'SADALLA' as marca \n\nfrom oft_consulta_medica o,\n     oft_retorno r,\n     estabelecimento e\nwhere o.nr_seq_retorno = r.nr_sequencia\nand o.nr_atendimento is not null\nand obter_estab_atendimento(o.nr_atendimento) = e.cd_estabelecimento",
 								"partitionOption": "None"
 							},
 							"sink": {
@@ -19224,7 +19288,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "-- Agendamento Sadalla - Azure\n\nselect a.cd_pessoa_fisica, \na.cd_convenio, \nobter_cnpj_estabelecimento(ag.cd_estabelecimento) as cnpj,\nto_char(a.dt_agenda, 'dd/mm/yyyy') as data_agenda,\nto_char(a.dt_agenda, 'hh24:mi:ss') as hora_agenda,\n'Consulta' as tipo_agenda,\npf.nm_pessoa_fisica as nm_paciente,\nobter_desc_procedimento(10502, 1) as ds_procedimento_princ,\n'' ds_procedimento_adic,\n1 as ie_quantidade,\nobter_nome_usuario(a.nm_usuario_origem) as nm_usuario,\nobter_nome_pf(ag.cd_pessoa_fisica) as nm_medico,\nnm_fantasia_estab SIGLA_UNIDADE,\nem.nm_razao_social MARCA,\nobter_valor_dominio(83,a.ie_status_agenda) as status_agenda,\na.nr_atendimento,\na.nr_sequencia,\n'NAO ENCONTRADO' as ID,\na.cd_procedencia,\np.ds_procedencia,\na.dt_agendamento,\n\nto_char(a.dt_agenda,'dd') dia,\nto_char(a.dt_agenda,'mm') mes,\nto_char(a.dt_agenda,'yyyy') ano,\nac.ds_classificacao ,\naa.ds_agrupamento ds_agrupamento,\na.cd_motivo_cancelamento,\nsubstr(obter_ds_motivo_status(a.nr_sequencia, a.cd_agenda),1,200) as ds_motivo_cancelamento,\na.cd_agenda,\n\na.dt_atualizacao\n\nfrom agenda_consulta a,\n     agenda ag,\n     pessoa_fisica pf,\n     procedencia p,\n     agenda_classif ac,\n     agrupamento_agenda aa,\n     estabelecimento e,\n     empresa em\nwhere a.cd_agenda = ag.cd_agenda\nand a.cd_pessoa_fisica = pf.cd_pessoa_fisica (+)\nand a.cd_procedencia = p.cd_procedencia(+)\nand a.ie_classif_agenda  = ac.cd_classificacao(+)\nand ag.nr_seq_agrupamento = aa.nr_sequencia (+)\nand ag.cd_estabelecimento = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa\nand a.cd_pessoa_fisica is not null",
+								"oracleReaderQuery": "-- Agendamento Sadalla - Azure\n\nselect a.cd_pessoa_fisica, \na.cd_convenio, \nobter_cnpj_estabelecimento(ag.cd_estabelecimento) as cnpj,\nto_char(a.dt_agenda, 'dd/mm/yyyy') as data_agenda,\nto_char(a.dt_agenda, 'hh24:mi:ss') as hora_agenda,\n'Consulta' as tipo_agenda,\npf.nm_pessoa_fisica as nm_paciente,\nobter_desc_procedimento(10502, 1) as ds_procedimento_princ,\n'' ds_procedimento_adic,\n1 as ie_quantidade,\nobter_nome_usuario(a.nm_usuario_origem) as nm_usuario,\nobter_nome_pf(ag.cd_pessoa_fisica) as nm_medico,\nnm_fantasia_estab DS_UNIDADE,\nem.nm_razao_social MARCA,\nobter_valor_dominio(83,a.ie_status_agenda) as status_agenda,\na.nr_atendimento,\na.nr_sequencia,\n'NAO ENCONTRADO' as ID,\na.cd_procedencia,\np.ds_procedencia,\na.dt_agendamento,\n\nto_char(a.dt_agenda,'dd') dia,\nto_char(a.dt_agenda,'mm') mes,\nto_char(a.dt_agenda,'yyyy') ano,\nac.ds_classificacao ,\naa.ds_agrupamento ds_agrupamento,\na.cd_motivo_cancelamento,\nsubstr(obter_ds_motivo_status(a.nr_sequencia, a.cd_agenda),1,200) as ds_motivo_cancelamento,\na.cd_agenda,\n\na.dt_atualizacao\n\nfrom agenda_consulta a,\n     agenda ag,\n     pessoa_fisica pf,\n     procedencia p,\n     agenda_classif ac,\n     agrupamento_agenda aa,\n     estabelecimento e,\n     empresa em\nwhere a.cd_agenda = ag.cd_agenda\nand a.cd_pessoa_fisica = pf.cd_pessoa_fisica (+)\nand a.cd_procedencia = p.cd_procedencia(+)\nand a.ie_classif_agenda  = ac.cd_classificacao(+)\nand ag.nr_seq_agrupamento = aa.nr_sequencia (+)\nand ag.cd_estabelecimento = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa\nand a.cd_pessoa_fisica is not null",
 								"partitionOption": "None"
 							},
 							"sink": {
@@ -19285,7 +19349,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "select u.nm_usuario, \nu.ds_usuario, \nu.ie_situacao, \nu.dt_atualizacao,\nobter_nome_estabelecimento(u.cd_estabelecimento) as sigla_unidade,\ne.cd_cgc as CNPJ,\nobter_nome_empresa(obter_empresa_estab(u.cd_estabelecimento)) as Marca\nfrom usuario u,\n     empresa em,\n     estabelecimento e\nwhere u.cd_estabelecimento = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa",
+								"oracleReaderQuery": "select u.nm_usuario, \nu.ds_usuario, \nu.ie_situacao, \nu.dt_atualizacao,\nobter_nome_estabelecimento(u.cd_estabelecimento) as DS_UNIDADE,\ne.cd_cgc as CNPJ,\nobter_nome_empresa(obter_empresa_estab(u.cd_estabelecimento)) as Marca\nfrom usuario u,\n     empresa em,\n     estabelecimento e\nwhere u.cd_estabelecimento = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa",
 								"partitionOption": "None"
 							},
 							"sink": {
@@ -39836,6 +39900,90 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Padrao_Retorno_Cir_Sadalla')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Geral Atendimentos Unidades"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "CD_PROCEDIMENTO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CD_PROCED_RET_45_DIAS",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_PROCED_RET_45_DIAS",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_PROCED_RET_02_MES",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_PROCED_RET_02_MES",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_PROCED_RET_03_MES",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_PROCED_RET_03_MES",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_PROCED_RET_06_MES",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_PROCED_RET_06_MES",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_PROCED_RET_01_ANO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_PROCED_RET_01_ANO",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_PROCED_RET_ANUAL",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_PROCED_RET_ANUAL",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Padrao_Retorno_Cir_Sadalla"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Setor')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -41085,7 +41233,27 @@
 				"type": "OracleTable",
 				"structure": [
 					{
-						"name": "BASE",
+						"name": "CD_PESSOA_FISICA",
+						"type": "String"
+					},
+					{
+						"name": "NM_PESSOA_FISICA",
+						"type": "String"
+					},
+					{
+						"name": "NR_CPF",
+						"type": "String"
+					},
+					{
+						"name": "DT_NASCIMENTO",
+						"type": "String"
+					},
+					{
+						"name": "NR_TELEFONE_CELULAR",
+						"type": "String"
+					},
+					{
+						"name": "NR_TELEFONE",
 						"type": "String"
 					},
 					{
@@ -41093,112 +41261,24 @@
 						"type": "String"
 					},
 					{
+						"name": "DS_UNIDADE",
+						"type": "String"
+					},
+					{
 						"name": "MARCA",
 						"type": "String"
 					},
 					{
+						"name": "NR_PRONTUARIO",
+						"type": "Decimal"
+					},
+					{
+						"name": "DT_CADASTRO_ORIGINAL",
+						"type": "DateTime"
+					},
+					{
 						"name": "DT_ATUALIZACAO",
 						"type": "DateTime"
-					},
-					{
-						"name": "NR_ATENDIMENTO",
-						"type": "Decimal"
-					},
-					{
-						"name": "DT_ENTRADA",
-						"type": "DateTime"
-					},
-					{
-						"name": "NR_INTERNO_CONTA",
-						"type": "Decimal"
-					},
-					{
-						"name": "CD_PESSOA_FISICA",
-						"type": "String"
-					},
-					{
-						"name": "DT_NASCIMENTO",
-						"type": "DateTime"
-					},
-					{
-						"name": "NR_CPF",
-						"type": "String"
-					},
-					{
-						"name": "IE_SEXO",
-						"type": "String"
-					},
-					{
-						"name": "NR_CEP",
-						"type": "String"
-					},
-					{
-						"name": "DS_CIDADE",
-						"type": "String"
-					},
-					{
-						"name": "DS_PESSOA_FISICA",
-						"type": "String"
-					},
-					{
-						"name": "CD_CONVENIO",
-						"type": "Decimal"
-					},
-					{
-						"name": "DS_CONVENIO",
-						"type": "String"
-					},
-					{
-						"name": "CD_MEDICO_EXECUTOR",
-						"type": "String"
-					},
-					{
-						"name": "DS_MEDICO_EXECUTOR",
-						"type": "String"
-					},
-					{
-						"name": "CD_MEDICO_REQUISITANTE",
-						"type": "String"
-					},
-					{
-						"name": "DS_MEDICO_REQUISITANTE",
-						"type": "String"
-					},
-					{
-						"name": "IE_ORIGEM_PROCEDIMENTO",
-						"type": "Decimal"
-					},
-					{
-						"name": "CD_PROCEDIMENTO",
-						"type": "Decimal"
-					},
-					{
-						"name": "DS_PROCEDIMENTO",
-						"type": "String"
-					},
-					{
-						"name": "DS_CLASSIFICACAO",
-						"type": "String"
-					},
-					{
-						"name": "QT_PROCEDIMENTO",
-						"type": "Decimal"
-					},
-					{
-						"name": "VL_PROCEDIMENTO",
-						"type": "Decimal"
-					},
-					{
-						"name": "IE_STATUS_ACERTO",
-						"type": "Decimal"
-					},
-					{
-						"name": "STATUS_CONTA",
-						"type": "String"
-					},
-					{
-						"name": "CD_TUSS",
-						"type": "String"
 					}
 				],
 				"typeProperties": {}
@@ -42051,6 +42131,37 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/Historicos_FIlasPorHoras_DAYHORC')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/FILE_CUIDADO_PLANEJADO_SADALLA')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LINK_PASTA_BI",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "FileServerLocation",
+						"fileName": "codigoscuidadoplanejado.csv"
+					},
+					"columnDelimiter": ";",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LINK_PASTA_BI')]"
 			]
 		},
 		{
@@ -47350,6 +47461,10 @@
 						"type": "String"
 					},
 					{
+						"name": "CD_PROCEDIMENTO",
+						"type": "String"
+					},
+					{
 						"name": "DS_PROCEDIMENTO",
 						"type": "String"
 					},
@@ -49011,6 +49126,30 @@
 					"password": {
 						"type": "SecureString",
 						"value": "[parameters('Historicos_FIlasPorHoras_SADALLA_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "ServidorArquivosBI",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/ServidorArquivosBI')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LINK_PASTA_BI')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "FileServer",
+				"typeProperties": {
+					"host": "[parameters('LINK_PASTA_BI_properties_typeProperties_host')]",
+					"userId": "[parameters('LINK_PASTA_BI_properties_typeProperties_userId')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('LINK_PASTA_BI_password')]"
 					}
 				},
 				"connectVia": {

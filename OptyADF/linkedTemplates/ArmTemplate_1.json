@@ -1303,6 +1303,88 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Padrao_Retorno_Cir_Sadalla')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Geral Atendimentos Unidades"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "CD_PROCEDIMENTO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CD_PROCED_RET_45_DIAS",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_PROCED_RET_45_DIAS",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_PROCED_RET_02_MES",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_PROCED_RET_02_MES",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_PROCED_RET_03_MES",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_PROCED_RET_03_MES",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_PROCED_RET_06_MES",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_PROCED_RET_06_MES",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_PROCED_RET_01_ANO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_PROCED_RET_01_ANO",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_PROCED_RET_ANUAL",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_PROCED_RET_ANUAL",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Padrao_Retorno_Cir_Sadalla"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Setor')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1473,101 +1555,6 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "Aging_Titulo_Pagar"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Titulos_Receber')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSQL_DB_Procedimentos",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Contas a Receber"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ESTABELECIMENTO",
-						"type": "varchar"
-					},
-					{
-						"name": "CD_CNPJ",
-						"type": "varchar"
-					},
-					{
-						"name": "NM_RAZAOSOCIAL",
-						"type": "varchar"
-					},
-					{
-						"name": "NM_FANTASIA",
-						"type": "varchar"
-					},
-					{
-						"name": "NR_TITULO",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "NR_NOTA_FISCAL",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "DT_EMISSAO",
-						"type": "date"
-					},
-					{
-						"name": "DT_VENCIMENTO_ORIGINAL",
-						"type": "date"
-					},
-					{
-						"name": "DT_VENCIMENTO_PRORROGADO",
-						"type": "date"
-					},
-					{
-						"name": "VL_BRUTO",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "VL_SALDO_JUROS",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "VL_SALDO_MULTA",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "VL_LIQUIDO",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "VL_SALDO_TITULO",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "VL_AMENOR",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "SITUACAO",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Unidade_Titulos_Receber"
 				}
 			},
 			"dependsOn": []
