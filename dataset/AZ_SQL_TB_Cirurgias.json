@@ -1,61 +1,67 @@
 {
-	"name": "SadallaTasyPrdDataSet",
+	"name": "AZ_SQL_TB_Cirurgias",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "SadallaTasyProd_NEW",
+			"referenceName": "AzureSQL_DB_Procedimentos",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "Power BI"
+			"name": "Geral Atendimentos Unidades"
 		},
 		"annotations": [],
-		"type": "OracleTable",
-		"structure": [
+		"type": "AzureSqlTable",
+		"schema": [
 			{
 				"name": "NR_CIRURGIA",
-				"type": "Decimal"
+				"type": "int",
+				"precision": 10
 			},
 			{
 				"name": "DT_INICIO_PREVISTA",
-				"type": "DateTime"
+				"type": "date"
 			},
 			{
 				"name": "CD_PESSOA_FISICA",
-				"type": "String"
+				"type": "int",
+				"precision": 10
 			},
 			{
 				"name": "NM_PACIENTE",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "DS_PROCEDIMENTO",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "CD_MEDICO",
-				"type": "String"
+				"type": "int",
+				"precision": 10
 			},
 			{
 				"name": "NM_MEDICO",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "CNPJ",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "DS_UNIDADE",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "MARCA",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "DT_ATUALIZACAO",
-				"type": "DateTime"
+				"type": "date"
 			}
-		]
-	},
-	"type": "Microsoft.DataFactory/factories/datasets"
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Cirurgia_Unidade"
+		}
+	}
 }
