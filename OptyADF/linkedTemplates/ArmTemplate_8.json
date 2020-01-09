@@ -1912,7 +1912,7 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "FILE_CUIDADO_PLANEJADO_SADALLA",
+								"referenceName": "FILE_Padrao_Retornos_Cirurgias",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -1927,7 +1927,7 @@
 					}
 				],
 				"folder": {
-					"name": "Atendimento"
+					"name": "Cirurgias"
 				},
 				"annotations": []
 			},

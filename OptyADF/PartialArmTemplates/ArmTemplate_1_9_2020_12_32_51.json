@@ -13,176 +13,124 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/AZSQL_TB_Ret_Pacientes_unidade')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
+			"name": "[concat(parameters('factoryName'), '/Cirurgias Sadalla')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSQL_DB_Procedimentos",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Retornos"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
+				"description": "Alimentação da Tabela Cirurgias do Sadalla",
+				"activities": [
 					{
-						"name": "ULTIMO_ATENDIMENTO",
-						"type": "int",
-						"precision": 10
+						"name": "Wait1",
+						"type": "Wait",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"waitTimeInSeconds": 1
+						}
 					},
 					{
-						"name": "CD_PESSOA_FISICA",
-						"type": "int",
-						"precision": 10
+						"name": "Cirurgias Sadalla",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Wait1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "select a.nr_cirurgia,\na.dt_inicio_prevista,\na.cd_pessoa_fisica,\nobter_nome_pf(a.cd_pessoa_fisica) as nm_paciente,\nto_char(cd_procedimento_princ) as cd_procedimento,\nobter_desc_procedimento(a.cd_procedimento_princ,a.ie_origem_proced)as ds_procedimento,\na.cd_medico_cirurgiao as cd_medico,\nobter_nome_pf(a.cd_medico_cirurgiao) as nm_medico,\ne.cd_cgc as CNPJ,\ne.nm_fantasia_estab as ds_unidade,\nem.nm_razao_social as marca,\na.dt_atualizacao\nfrom cirurgia a,\n     estabelecimento e,\n     empresa em\nwhere a.cd_estabelecimento = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa\nand a.dt_cancelamento is null",
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "SadallaTasyPrdDataSet",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AZ_SQL_TB_Cirurgias",
+								"type": "DatasetReference"
+							}
+						]
 					},
 					{
-						"name": "NM_PESSOA_FISICA",
-						"type": "varchar"
-					},
-					{
-						"name": "NR_TELEFONE_CELULAR",
-						"type": "varchar"
-					},
-					{
-						"name": "NR_TELEFONE",
-						"type": "varchar"
-					},
-					{
-						"name": "DS_EMAIL",
-						"type": "varchar"
+						"name": "Prazos de retorno",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Wait1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "FileServerReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "FILE_Padrao_Retornos_Cirurgias",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AZ_SQL_TB_Padrao_Retorno_Cir_Sadalla",
+								"type": "DatasetReference"
+							}
+						]
 					}
 				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Ret_Pacientes_Unidade"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AZSQL_TB_Zero_Faltas')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSQL_DB_Procedimentos",
-					"type": "LinkedServiceReference"
-				},
 				"folder": {
-					"name": "Zero Faltas"
+					"name": "Cirurgias"
 				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "id_compromisso",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "id_cliente",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "nomepaciente",
-						"type": "varchar"
-					},
-					{
-						"name": "dtnascimento",
-						"type": "date"
-					},
-					{
-						"name": "celular",
-						"type": "varchar"
-					},
-					{
-						"name": "email",
-						"type": "varchar"
-					},
-					{
-						"name": "idconvenio",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "convenio",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "cd_plano",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ds_plano",
-						"type": "varchar"
-					},
-					{
-						"name": "datacompromisso",
-						"type": "date"
-					},
-					{
-						"name": "horacompromisso",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "id_status",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ds_status",
-						"type": "varchar"
-					},
-					{
-						"name": "cd_agenda",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "agenda",
-						"type": "varchar"
-					},
-					{
-						"name": "cd_procedimento",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "procedimento",
-						"type": "varchar"
-					},
-					{
-						"name": "id_empresa",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "empresa",
-						"type": "varchar"
-					},
-					{
-						"name": "id_unidade",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "unidade",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Projesi_Zero_Faltas"
-				}
+				"annotations": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Cirurgias')]",
+				"[concat(variables('factoryId'), '/datasets/FILE_Padrao_Retornos_Cirurgias')]",
+				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Padrao_Retorno_Cir_Sadalla')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Agenda')]",
@@ -846,139 +794,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Baixa_Titulos_Pagar')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSQL_DB_Procedimentos",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Contas a Pagar"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "nr_titulo",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "nr_sequencia",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "dt_baixa",
-						"type": "date"
-					},
-					{
-						"name": "vl_pago",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_descontos",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_juros",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_multa",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "dt_atualizacao",
-						"type": "date"
-					},
-					{
-						"name": "ds_tipo_baixa",
-						"type": "varchar"
-					},
-					{
-						"name": "ds_transacao",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Aging_Baixa_Titulo_Pagar"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Baixa_Titulos_Receber')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSQL_DB_Procedimentos",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Contas a Receber"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "nr_titulO",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "dt_recebimento",
-						"type": "date"
-					},
-					{
-						"name": "vl_recebido",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_descontos",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_juros",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_multa",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "dt_atualizacao",
-						"type": "date"
-					},
-					{
-						"name": "ds_tipo_recebimento",
-						"type": "varchar"
-					},
-					{
-						"name": "nr_seq_trans_fin",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Aging_Baixa_Titulo_Receber"
-				}
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Cirurgias')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1194,50 +1009,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Ordens_Servico_Hist')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSQL_DB_Procedimentos",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Ordens de Serviço"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Ordem_Servico_Terc_Hist"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Ordens_Servico_Terceiro')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSQL_DB_Procedimentos",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Ordens de Serviço"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Ordem_Servico_Terceiros"
-				}
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Pacientes')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1420,7 +1191,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Titulos_Pagar')]",
+			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Usuario')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -1429,133 +1200,72 @@
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
-					"name": "Contas a Pagar"
+					"name": "Atendimentos"
 				},
 				"annotations": [],
 				"type": "AzureSqlTable",
 				"schema": [
 					{
-						"name": "estabelecimento",
+						"name": "NM_USUARIO",
 						"type": "varchar"
 					},
 					{
-						"name": "cd_cgc",
+						"name": "DS_USUARIO",
 						"type": "varchar"
 					},
 					{
-						"name": "nm_razaosocial",
-						"type": "varchar"
+						"name": "IE_SITUACAO",
+						"type": "char"
 					},
 					{
-						"name": "nm_fantasia",
-						"type": "varchar"
-					},
-					{
-						"name": "nr_titulo",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "nr_seq_nota_fiscal",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "dt_emissao",
+						"name": "DT_ATUALIZACAO",
 						"type": "date"
 					},
 					{
-						"name": "dt_vencimento_original",
-						"type": "date"
+						"name": "SIGLA_UNIDADE",
+						"type": "varchar"
 					},
 					{
-						"name": "dt_vencimento_atual",
-						"type": "date"
-					},
-					{
-						"name": "vl_titulo",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_saldo_titulo",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_saldo_juros",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_saldo_multa",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_dia_antecipacao",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_bordero",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_juros_bordero",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_multa_bordero",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_desconto_bordero",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_ir",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_imposto_munic",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_inss",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_out_desp_bordero",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_titulo_estrang",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "vl_cotacao",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "situacao",
+						"name": "MARCA",
 						"type": "varchar"
 					}
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "Aging_Titulo_Pagar"
+					"table": "Usuario_Unidade"
 				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/FILE_Padrao_Retornos_Cirurgias')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LINK_PASTA_BI",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Cirurgias"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "FileServerLocation",
+						"fileName": "codigoscuidadoplanejado.csv"
+					},
+					"columnDelimiter": ";",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					}
+				]
 			},
 			"dependsOn": []
 		}

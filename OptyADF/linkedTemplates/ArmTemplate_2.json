@@ -367,7 +367,7 @@
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
-					"name": "Geral Atendimentos Unidades"
+					"name": "Atendimentos"
 				},
 				"annotations": [],
 				"type": "AzureSqlTable",
