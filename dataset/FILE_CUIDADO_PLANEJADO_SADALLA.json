@@ -1,0 +1,25 @@
+{
+	"name": "FILE_CUIDADO_PLANEJADO_SADALLA",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LINK_PASTA_BI",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "FileServerLocation",
+				"fileName": "codigoscuidadoplanejado.csv"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"type": "String"
+			}
+		]
+	}
+}
