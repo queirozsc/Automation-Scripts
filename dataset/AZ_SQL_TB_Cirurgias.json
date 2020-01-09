@@ -6,7 +6,7 @@
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "Geral Atendimentos Unidades"
+			"name": "Cirurgias"
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",

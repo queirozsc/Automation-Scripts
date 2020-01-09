@@ -5,6 +5,9 @@
 			"referenceName": "LINK_PASTA_BI",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "Cirurgias"
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
