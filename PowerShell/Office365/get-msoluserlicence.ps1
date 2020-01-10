@@ -3,7 +3,8 @@ $LogFile = "Office_365_Licenses.csv"
 
 # Connect to Microsoft Online
 Import-Module MSOnline
-Connect-MsolService -Credential $Office365credentials
+#Connect-MsolService -Credential $Office365credentials
+.\Connect-O365.ps1
 
 write-host "Connecting to Office 365..."
 
@@ -35,7 +36,7 @@ foreach ($license in $licensetype)
 
         $thislicense = $user.licenses | Where-Object {$_.accountskuid -eq $license.accountskuid}
 
-		$datastring = ($user.displayname + "," + $user.userprincipalname + "," + $license.SkuPartNumber)
+		$datastring = ($user.displayname + "," + $user.userprincipalname + "," + $license.SkuPartNumber + "," + $user.Office)
 		
 		foreach ($row in $($thislicense.servicestatus)) {
 			
