@@ -5,7 +5,14 @@
 			{
 				"name": "Titulos HOSL",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Wait1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -37,6 +44,49 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Baixas HOSL",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Wait1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": "select TOP 10 '' AS CD_CGC_ESTAB,\nMNS_NFS_NUMERO, \nMNS_DT_REG,\nMNS_VLR,\n0 AS VL_DESCONTOS,\n0 AS VL_JUROS,\n0 AS VL_MULTA,\nMNS_DT AS DT_ATUALIZACAO,\n'' AS DS_TIPO_RECEBIMENTO,\nMNS_CCR_COD,\n'' AS MARCA,\n'' AS DS_UNIDADE\nfrom mns",
+						"queryTimeout": "02:00:00"
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "SMART_HOSL_PrdDataSet",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Wait1",
+				"type": "Wait",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 1
+				}
 			}
 		],
 		"folder": {
