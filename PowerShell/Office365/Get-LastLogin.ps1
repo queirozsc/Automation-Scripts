@@ -7,6 +7,11 @@ Import-Module MSOnline
 write-host "Connecting to Office 365..."
 .\Connect-O365.ps1
 
+
+write-host "Connecting to Exchange..."
+.\Connect-Exchange.ps1
+
+
 # Get a list of all licences that exist within the tenant
 $licensetype = Get-MsolAccountSku | Where {$_.ConsumedUnits -ge 1}
 
@@ -34,10 +39,11 @@ foreach ($license in $licensetype)
 		
 		write-host ("Processing " + $user.displayname)
 
+		$UserLastLogon = Get-Mailbox -Identity $User.UserPrincipalName| Get-MailboxStatistics
 
         $thislicense = $user.licenses | Where-Object {$_.accountskuid -eq $license.accountskuid}
 
-		$datastring = ($user.displayname + "," + $user.userprincipalname + "," + $license.SkuPartNumber + "," + $user.Office)
+		$datastring = ($user.displayname + "," + $user.userprincipalname + "," + $license.SkuPartNumber + "," + $user.Office + "," + $UserLastLogon.LastLogonTime.ToString("dd/MM/yyyy"))
 		
 		foreach ($row in $($thislicense.servicestatus)) {
 			
