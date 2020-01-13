@@ -46,7 +46,7 @@ from (
 			and (mcc.mcc_tipo = 'r')
 			and (mcc.mcc_concilia = 's'))
 			and mcc.mcc_bcp_serie is null
-			and (mcc.mcc_dt_compensa >= :DATA_INICIAL and mcc.mcc_dt_compensa < :DATA_FINAL)
+			--and (mcc.mcc_dt_compensa >= :DATA_INICIAL and mcc.mcc_dt_compensa < :DATA_FINAL)
 			
 		union all
 
@@ -86,9 +86,9 @@ from (
 					mcc
                     inner join cfo on (cfo.cfo_cod = mcc.mcc_cfo_cod)
                     inner join ccr on (ccr.ccr_cod = mcc.mcc_ccr)
-				where 
-					 ((mcc.mcc_dt_compensa >= :DATA_INICIAL) and (mcc.mcc_dt_compensa < :DATA_FINAL) 
-					and (mcc.mcc_tipo = 'R')
+				where (
+					 /*((mcc.mcc_dt_compensa >= :DATA_INICIAL) and (mcc.mcc_dt_compensa < :DATA_FINAL) 
+					and */(mcc.mcc_tipo = 'R')
 					and ccr.ccr_tipo = 2 
 					and (mcc.mcc_concilia = 'S'))
 					and mcc.mcc_bcp_serie <> '') 
@@ -105,7 +105,7 @@ left outer join
 			and (mcc.mcc_tipo = 'r')
 			and (mcc.mcc_concilia = 's'))
 			and mcc.mcc_bcp_serie is not null
-			and (mcc.mcc_dt_compensa >= :DATA_INICIAL and mcc.mcc_dt_compensa < :DATA_FINAL)
+			--and (mcc.mcc_dt_compensa >= :DATA_INICIAL and mcc.mcc_dt_compensa < :DATA_FINAL)
 		) as tmp2 on (tmp1.baixa = tmp2.cfo_baixa)
 cross JOIN
 	   (select 
@@ -117,7 +117,7 @@ cross JOIN
 			((ccr_tipo = 2)
 			and (mcc.mcc_tipo = 'r')
 			and (mcc.mcc_concilia = 's'))
-			and (mcc.mcc_dt_compensa >= :DATA_INICIAL and mcc.mcc_dt_compensa < :DATA_FINAL)		
+			--and (mcc.mcc_dt_compensa >= :DATA_INICIAL and mcc.mcc_dt_compensa < :DATA_FINAL)		
 		) as chk
 cross join cfg
 order by
