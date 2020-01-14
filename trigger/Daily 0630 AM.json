@@ -22,6 +22,12 @@
 					"referenceName": "Geral Atendimentos HOB",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "Cirurgias e Exames Sadalla",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
