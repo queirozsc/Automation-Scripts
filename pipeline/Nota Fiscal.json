@@ -1,0 +1,35 @@
+{
+	"name": "Nota Fiscal",
+	"properties": {
+		"activities": [
+			{
+				"name": "Nota Fiscal Sadalla",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "SadallaTasyPrdDataSet",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}
