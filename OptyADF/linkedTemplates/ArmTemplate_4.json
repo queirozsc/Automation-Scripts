@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "OptyADF"
 		},
+		"SMART_HOSL_NEW_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SMART_HOSL_NEW'"
+		},
 		"SMART_INOB_NEW_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'SMART_INOB_NEW'"
@@ -52,6 +56,23 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/SMART_HOSL_NEW')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('SMART_HOSL_NEW_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "ServidorArquivosBI",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/SMART_INOB_NEW')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -490,30 +511,6 @@
 				"type": "OracleTable",
 				"structure": [
 					{
-						"name": "CD_PESSOA_FISICA",
-						"type": "String"
-					},
-					{
-						"name": "NM_PESSOA_FISICA",
-						"type": "String"
-					},
-					{
-						"name": "NR_CPF",
-						"type": "String"
-					},
-					{
-						"name": "DT_NASCIMENTO",
-						"type": "String"
-					},
-					{
-						"name": "NR_TELEFONE_CELULAR",
-						"type": "String"
-					},
-					{
-						"name": "NR_TELEFONE",
-						"type": "String"
-					},
-					{
 						"name": "CNPJ",
 						"type": "String"
 					},
@@ -522,152 +519,43 @@
 						"type": "String"
 					},
 					{
-						"name": "MARCA",
-						"type": "String"
+						"name": "DT_EMISSAO",
+						"type": "DateTime"
 					},
 					{
-						"name": "NR_PRONTUARIO",
+						"name": "DT_ENTRADA_SAIDA",
+						"type": "DateTime"
+					},
+					{
+						"name": "NR_SEQUENCIA",
 						"type": "Decimal"
 					},
 					{
-						"name": "DT_CADASTRO_ORIGINAL",
-						"type": "DateTime"
+						"name": "NR_NOTA_FISCAL",
+						"type": "String"
 					},
 					{
-						"name": "DT_ATUALIZACAO",
-						"type": "DateTime"
+						"name": "CD_CONTA_CONTABIL",
+						"type": "String"
+					},
+					{
+						"name": "DS_CONTA_CONTABIL",
+						"type": "String"
+					},
+					{
+						"name": "FORNECEDOR",
+						"type": "String"
+					},
+					{
+						"name": "VL_TOTAL_ITEM_NF",
+						"type": "Double"
+					},
+					{
+						"name": "DS_OBSERVACAO",
+						"type": "String"
 					}
 				],
 				"typeProperties": {}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DH_CSV_NC_AgentesPorDia')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Folder_Nexcore_Consolidado",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Nexcore/DH"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "FileServerLocation",
-						"fileName": "AgentesPorDiaDAYHORC.csv"
-					},
-					"columnDelimiter": ";",
-					"escapeChar": "",
-					"firstRowAsHeader": true,
-					"quoteChar": ""
-				},
-				"schema": [
-					{
-						"name": "Usuario",
-						"type": "String"
-					},
-					{
-						"name": "Intervalo",
-						"type": "String"
-					},
-					{
-						"name": "Atendidas",
-						"type": "String"
-					},
-					{
-						"name": "Recusas",
-						"type": "String"
-					},
-					{
-						"name": "Recebidas",
-						"type": "String"
-					},
-					{
-						"name": "Internas Recebidas",
-						"type": "String"
-					},
-					{
-						"name": "Transferencias",
-						"type": "String"
-					},
-					{
-						"name": "Efetuadas",
-						"type": "String"
-					},
-					{
-						"name": "Efetuadas Tratados",
-						"type": "String"
-					},
-					{
-						"name": "% Taxa de Contato",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Atendidas",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Internas Recebidas",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Efetuadas",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Medio Falado",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Total Falado",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Toque Agente",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Toque Cliente",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Pausa",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Estouro",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Dispon�vel",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Indispon�vel",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Logado",
-						"type": "String"
-					},
-					{
-						"name": "Tempo Deslogado",
-						"type": "String"
-					},
-					{
-						"name": "% Falado x Logado",
-						"type": "String"
-					},
-					{
-						"name": "Marca",
-						"type": "String"
-					}
-				]
 			},
 			"dependsOn": []
 		}

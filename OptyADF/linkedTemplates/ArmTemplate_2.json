@@ -43,10 +43,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'Historicos_AgentesPorDia_INOB'"
 		},
-		"Historicos_AgentesPorDia_SADALLA_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Historicos_AgentesPorDia_SADALLA'"
-		},
 		"Folder_Nexcore_Consolidado_properties_typeProperties_host": {
 			"type": "string",
 			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Consolidado"
@@ -102,20 +98,152 @@
 		"Historicos_AgentesPorDia_INOB_properties_typeProperties_userId": {
 			"type": "string",
 			"defaultValue": "hobrasil\\sa.automation"
-		},
-		"Historicos_AgentesPorDia_SADALLA_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\SADALLA\\AgentesPorDia"
-		},
-		"Historicos_AgentesPorDia_SADALLA_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "hobrasil\\sa.automation"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Titulos_Pagar')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Contas a Pagar"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "estabelecimento",
+						"type": "varchar"
+					},
+					{
+						"name": "cd_cgc",
+						"type": "varchar"
+					},
+					{
+						"name": "nm_razaosocial",
+						"type": "varchar"
+					},
+					{
+						"name": "nm_fantasia",
+						"type": "varchar"
+					},
+					{
+						"name": "nr_titulo",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "nr_seq_nota_fiscal",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "dt_emissao",
+						"type": "date"
+					},
+					{
+						"name": "dt_vencimento_original",
+						"type": "date"
+					},
+					{
+						"name": "dt_vencimento_atual",
+						"type": "date"
+					},
+					{
+						"name": "vl_titulo",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_saldo_titulo",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_saldo_juros",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_saldo_multa",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_dia_antecipacao",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_bordero",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_juros_bordero",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_multa_bordero",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_desconto_bordero",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_ir",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_imposto_munic",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_inss",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_out_desp_bordero",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_titulo_estrang",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "vl_cotacao",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "situacao",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Aging_Titulo_Pagar"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Titulos_Receber')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
@@ -1993,29 +2121,6 @@
 					"password": {
 						"type": "SecureString",
 						"value": "[parameters('Historicos_AgentesPorDia_INOB_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "ServidorArquivosBI",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Historicos_AgentesPorDia_SADALLA')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Historicos_AgentesPorDia_SADALLA",
-				"annotations": [],
-				"type": "FileServer",
-				"typeProperties": {
-					"host": "[parameters('Historicos_AgentesPorDia_SADALLA_properties_typeProperties_host')]",
-					"userId": "[parameters('Historicos_AgentesPorDia_SADALLA_properties_typeProperties_userId')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('Historicos_AgentesPorDia_SADALLA_password')]"
 					}
 				},
 				"connectVia": {
