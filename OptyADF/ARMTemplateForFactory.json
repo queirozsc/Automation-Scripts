@@ -9237,7 +9237,14 @@
 					{
 						"name": "Wait1",
 						"type": "Wait",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "Truncate base",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"userProperties": [],
 						"typeProperties": {
 							"waitTimeInSeconds": 1
@@ -9384,6 +9391,26 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "Truncate base",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[CLEARBASECIRURGIAEXAMES]"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureSQL_DB_Procedimentos",
+							"type": "LinkedServiceReference"
+						}
 					}
 				],
 				"folder": {
@@ -9396,7 +9423,8 @@
 				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Agendamento_Exames')]",
 				"[concat(variables('factoryId'), '/datasets/FILE_Padrao_Retornos_Cirurgias')]",
 				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Padrao_Retorno_Cir_Sadalla')]",
-				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Cirurgias')]"
+				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Cirurgias')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]"
 			]
 		},
 		{
@@ -9593,11 +9621,21 @@
 								"sqlReaderQuery": "select TOP 10 '' AS CD_CGC_ESTAB,\nMNS_NFS_NUMERO, \nMNS_DT_REG,\nMNS_VLR,\n0 AS VL_DESCONTOS,\n0 AS VL_JUROS,\n0 AS VL_MULTA,\nMNS_DT AS DT_ATUALIZACAO,\n'' AS DS_TIPO_RECEBIMENTO,\nMNS_CCR_COD,\n'' AS MARCA,\n'' AS DS_UNIDADE\nfrom mns",
 								"queryTimeout": "02:00:00"
 							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
 							"enableStaging": false
 						},
 						"inputs": [
 							{
 								"referenceName": "SMART_HOSL_PrdDataSet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AZ_SQL_TB_Baixa_Titulos_Pagar",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -9620,7 +9658,8 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/SMART_HOSL_PrdDataSet')]",
-				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Titulos_Receber')]"
+				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Titulos_Receber')]",
+				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Baixa_Titulos_Pagar')]"
 			]
 		},
 		{
@@ -19536,7 +19575,14 @@
 					{
 						"name": "Wait1",
 						"type": "Wait",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "Clear Base",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"userProperties": [],
 						"typeProperties": {
 							"waitTimeInSeconds": 1
@@ -19631,6 +19677,26 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "Clear Base",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[CLEARBASEATENDIMENTOUNIDADES]"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureSQL_DB_Procedimentos",
+							"type": "LinkedServiceReference"
+						}
 					}
 				],
 				"folder": {
@@ -19645,7 +19711,8 @@
 				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Consulta')]",
 				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Agendamento')]",
 				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Usuario')]",
-				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Agenda')]"
+				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Agenda')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]"
 			]
 		},
 		{
@@ -47642,27 +47709,15 @@
 				"type": "OracleTable",
 				"structure": [
 					{
-						"name": "CD_PESSOA_FISICA",
-						"type": "String"
-					},
-					{
-						"name": "CD_CONVENIO",
+						"name": "NR_CIRURGIA",
 						"type": "Decimal"
 					},
 					{
-						"name": "CNPJ",
-						"type": "String"
+						"name": "DT_INICIO_PREVISTA",
+						"type": "DateTime"
 					},
 					{
-						"name": "DATA_AGENDA",
-						"type": "String"
-					},
-					{
-						"name": "HORA_AGENDA",
-						"type": "String"
-					},
-					{
-						"name": "TIPO_AGENDA",
+						"name": "CD_PESSOA_FISICA",
 						"type": "String"
 					},
 					{
@@ -47670,23 +47725,27 @@
 						"type": "String"
 					},
 					{
-						"name": "DS_PROCEDIMENTO_PRINC",
+						"name": "CD_PROCEDIMENTO",
 						"type": "String"
 					},
 					{
-						"name": "DS_PROCEDIMENTO_ADIC",
+						"name": "CD_PROCEDIMENTO_INT",
+						"type": "Decimal"
+					},
+					{
+						"name": "DS_PROCEDIMENTO",
 						"type": "String"
 					},
 					{
-						"name": "IE_QUANTIDADE",
-						"type": "Double"
-					},
-					{
-						"name": "NM_USUARIO",
+						"name": "CD_MEDICO",
 						"type": "String"
 					},
 					{
 						"name": "NM_MEDICO",
+						"type": "String"
+					},
+					{
+						"name": "CNPJ",
 						"type": "String"
 					},
 					{
@@ -47698,64 +47757,8 @@
 						"type": "String"
 					},
 					{
-						"name": "STATUS_AGENDA",
-						"type": "String"
-					},
-					{
-						"name": "NR_ATENDIMENTO",
-						"type": "Decimal"
-					},
-					{
-						"name": "NR_SEQUENCIA",
-						"type": "Decimal"
-					},
-					{
-						"name": "ID",
-						"type": "String"
-					},
-					{
-						"name": "CD_PROCEDENCIA",
-						"type": "Decimal"
-					},
-					{
-						"name": "DS_PROCEDENCIA",
-						"type": "String"
-					},
-					{
-						"name": "DT_AGENDAMENTO",
+						"name": "DT_ATUALIZACAO",
 						"type": "DateTime"
-					},
-					{
-						"name": "DIA",
-						"type": "String"
-					},
-					{
-						"name": "MES",
-						"type": "String"
-					},
-					{
-						"name": "ANO",
-						"type": "String"
-					},
-					{
-						"name": "DS_CLASSIFICACAO",
-						"type": "String"
-					},
-					{
-						"name": "DS_AGRUPAMENTO",
-						"type": "String"
-					},
-					{
-						"name": "CD_MOTIVO_CANCELAMENTO",
-						"type": "String"
-					},
-					{
-						"name": "DS_MOTIVO_CANCELAMENTO",
-						"type": "String"
-					},
-					{
-						"name": "CD_AGENDA",
-						"type": "Decimal"
 					}
 				],
 				"typeProperties": {}
@@ -49703,6 +49706,13 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "Cirurgias e Exames Sadalla",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -49726,7 +49736,8 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/Agendas Projesi')]",
 				"[concat(variables('factoryId'), '/pipelines/Chamados Requestia')]",
-				"[concat(variables('factoryId'), '/pipelines/Geral Atendimentos HOB')]"
+				"[concat(variables('factoryId'), '/pipelines/Geral Atendimentos HOB')]",
+				"[concat(variables('factoryId'), '/pipelines/Cirurgias e Exames Sadalla')]"
 			]
 		},
 		{

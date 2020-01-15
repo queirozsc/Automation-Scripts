@@ -619,27 +619,15 @@
 				"type": "OracleTable",
 				"structure": [
 					{
-						"name": "CD_PESSOA_FISICA",
-						"type": "String"
-					},
-					{
-						"name": "CD_CONVENIO",
+						"name": "NR_CIRURGIA",
 						"type": "Decimal"
 					},
 					{
-						"name": "CNPJ",
-						"type": "String"
+						"name": "DT_INICIO_PREVISTA",
+						"type": "DateTime"
 					},
 					{
-						"name": "DATA_AGENDA",
-						"type": "String"
-					},
-					{
-						"name": "HORA_AGENDA",
-						"type": "String"
-					},
-					{
-						"name": "TIPO_AGENDA",
+						"name": "CD_PESSOA_FISICA",
 						"type": "String"
 					},
 					{
@@ -647,23 +635,27 @@
 						"type": "String"
 					},
 					{
-						"name": "DS_PROCEDIMENTO_PRINC",
+						"name": "CD_PROCEDIMENTO",
 						"type": "String"
 					},
 					{
-						"name": "DS_PROCEDIMENTO_ADIC",
+						"name": "CD_PROCEDIMENTO_INT",
+						"type": "Decimal"
+					},
+					{
+						"name": "DS_PROCEDIMENTO",
 						"type": "String"
 					},
 					{
-						"name": "IE_QUANTIDADE",
-						"type": "Double"
-					},
-					{
-						"name": "NM_USUARIO",
+						"name": "CD_MEDICO",
 						"type": "String"
 					},
 					{
 						"name": "NM_MEDICO",
+						"type": "String"
+					},
+					{
+						"name": "CNPJ",
 						"type": "String"
 					},
 					{
@@ -675,64 +667,8 @@
 						"type": "String"
 					},
 					{
-						"name": "STATUS_AGENDA",
-						"type": "String"
-					},
-					{
-						"name": "NR_ATENDIMENTO",
-						"type": "Decimal"
-					},
-					{
-						"name": "NR_SEQUENCIA",
-						"type": "Decimal"
-					},
-					{
-						"name": "ID",
-						"type": "String"
-					},
-					{
-						"name": "CD_PROCEDENCIA",
-						"type": "Decimal"
-					},
-					{
-						"name": "DS_PROCEDENCIA",
-						"type": "String"
-					},
-					{
-						"name": "DT_AGENDAMENTO",
+						"name": "DT_ATUALIZACAO",
 						"type": "DateTime"
-					},
-					{
-						"name": "DIA",
-						"type": "String"
-					},
-					{
-						"name": "MES",
-						"type": "String"
-					},
-					{
-						"name": "ANO",
-						"type": "String"
-					},
-					{
-						"name": "DS_CLASSIFICACAO",
-						"type": "String"
-					},
-					{
-						"name": "DS_AGRUPAMENTO",
-						"type": "String"
-					},
-					{
-						"name": "CD_MOTIVO_CANCELAMENTO",
-						"type": "String"
-					},
-					{
-						"name": "DS_MOTIVO_CANCELAMENTO",
-						"type": "String"
-					},
-					{
-						"name": "CD_AGENDA",
-						"type": "Decimal"
 					}
 				],
 				"typeProperties": {}

@@ -1823,7 +1823,14 @@
 					{
 						"name": "Wait1",
 						"type": "Wait",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "Truncate base",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"userProperties": [],
 						"typeProperties": {
 							"waitTimeInSeconds": 1
@@ -1970,6 +1977,26 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "Truncate base",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[CLEARBASECIRURGIAEXAMES]"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureSQL_DB_Procedimentos",
+							"type": "LinkedServiceReference"
+						}
 					}
 				],
 				"folder": {
@@ -2169,11 +2196,21 @@
 								"sqlReaderQuery": "select TOP 10 '' AS CD_CGC_ESTAB,\nMNS_NFS_NUMERO, \nMNS_DT_REG,\nMNS_VLR,\n0 AS VL_DESCONTOS,\n0 AS VL_JUROS,\n0 AS VL_MULTA,\nMNS_DT AS DT_ATUALIZACAO,\n'' AS DS_TIPO_RECEBIMENTO,\nMNS_CCR_COD,\n'' AS MARCA,\n'' AS DS_UNIDADE\nfrom mns",
 								"queryTimeout": "02:00:00"
 							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
 							"enableStaging": false
 						},
 						"inputs": [
 							{
 								"referenceName": "SMART_HOSL_PrdDataSet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AZ_SQL_TB_Baixa_Titulos_Pagar",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
