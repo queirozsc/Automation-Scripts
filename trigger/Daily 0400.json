@@ -3,7 +3,7 @@
 	"properties": {
 		"description": "Criado para execução das rotinas as 07:00",
 		"annotations": [],
-		"runtimeState": "Stopped",
+		"runtimeState": "Started",
 		"pipelines": [],
 		"type": "ScheduleTrigger",
 		"typeProperties": {
