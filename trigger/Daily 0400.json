@@ -1,7 +1,7 @@
 {
 	"name": "Daily 0400",
 	"properties": {
-		"description": "Criado para execução das rotinas as 04:00",
+		"description": "Criado para execução das rotinas as 07:00",
 		"annotations": [],
 		"runtimeState": "Stopped",
 		"pipelines": [],
@@ -11,7 +11,15 @@
 				"frequency": "Day",
 				"interval": 1,
 				"startTime": "2020-01-15T18:27:00.000Z",
-				"timeZone": "UTC"
+				"timeZone": "UTC",
+				"schedule": {
+					"minutes": [
+						0
+					],
+					"hours": [
+						4
+					]
+				}
 			}
 		}
 	}
