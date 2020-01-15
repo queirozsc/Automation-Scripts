@@ -12,30 +12,6 @@
 		"type": "OracleTable",
 		"structure": [
 			{
-				"name": "CD_PESSOA_FISICA",
-				"type": "String"
-			},
-			{
-				"name": "NM_PESSOA_FISICA",
-				"type": "String"
-			},
-			{
-				"name": "NR_CPF",
-				"type": "String"
-			},
-			{
-				"name": "DT_NASCIMENTO",
-				"type": "String"
-			},
-			{
-				"name": "NR_TELEFONE_CELULAR",
-				"type": "String"
-			},
-			{
-				"name": "NR_TELEFONE",
-				"type": "String"
-			},
-			{
 				"name": "CNPJ",
 				"type": "String"
 			},
@@ -44,20 +20,40 @@
 				"type": "String"
 			},
 			{
-				"name": "MARCA",
-				"type": "String"
+				"name": "DT_EMISSAO",
+				"type": "DateTime"
 			},
 			{
-				"name": "NR_PRONTUARIO",
+				"name": "DT_ENTRADA_SAIDA",
+				"type": "DateTime"
+			},
+			{
+				"name": "NR_SEQUENCIA",
 				"type": "Decimal"
 			},
 			{
-				"name": "DT_CADASTRO_ORIGINAL",
-				"type": "DateTime"
+				"name": "NR_NOTA_FISCAL",
+				"type": "String"
 			},
 			{
-				"name": "DT_ATUALIZACAO",
-				"type": "DateTime"
+				"name": "CD_CONTA_CONTABIL",
+				"type": "String"
+			},
+			{
+				"name": "DS_CONTA_CONTABIL",
+				"type": "String"
+			},
+			{
+				"name": "FORNECEDOR",
+				"type": "String"
+			},
+			{
+				"name": "VL_TOTAL_ITEM_NF",
+				"type": "Double"
+			},
+			{
+				"name": "DS_OBSERVACAO",
+				"type": "String"
 			}
 		]
 	},
