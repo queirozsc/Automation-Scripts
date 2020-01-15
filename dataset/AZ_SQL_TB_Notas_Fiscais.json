@@ -1,61 +1,67 @@
 {
-	"name": "CloudTasyPrdDataSet",
+	"name": "AZ_SQL_TB_Notas_Fiscais",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "CloudTasyProd_NEW",
+			"referenceName": "AzureSQL_DB_Procedimentos",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "Power BI"
+			"name": "Nota Fiscal"
 		},
 		"annotations": [],
-		"type": "OracleTable",
-		"structure": [
+		"type": "AzureSqlTable",
+		"schema": [
 			{
 				"name": "CNPJ",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "DS_UNIDADE",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "DT_EMISSAO",
-				"type": "DateTime"
+				"type": "date"
 			},
 			{
 				"name": "DT_ENTRADA_SAIDA",
-				"type": "DateTime"
+				"type": "date"
 			},
 			{
 				"name": "NR_SEQUENCIA",
-				"type": "Decimal"
+				"type": "int",
+				"precision": 10
 			},
 			{
 				"name": "NR_NOTA_FISCAL",
-				"type": "String"
+				"type": "int",
+				"precision": 10
 			},
 			{
 				"name": "CD_CONTA_CONTABIL",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "DS_CONTA_CONTABIL",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "FORNECEDOR",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "VL_TOTAL_ITEM_NF",
-				"type": "Double"
+				"type": "float",
+				"precision": 15
 			},
 			{
 				"name": "DS_OBSERVACAO",
-				"type": "String"
+				"type": "varchar"
 			}
-		]
-	},
-	"type": "Microsoft.DataFactory/factories/datasets"
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Nota_Fiscal_Unidade"
+		}
+	}
 }
