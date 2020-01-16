@@ -12,7 +12,7 @@
 				}
 			},
 			{
-				"name": "Pacientes IOF",
+				"name": "Pacientes INOB",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -54,7 +54,7 @@
 				]
 			},
 			{
-				"name": "Atendimento IOF",
+				"name": "Atendimento INOB",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -97,7 +97,7 @@
 				]
 			},
 			{
-				"name": "Agendamentos IOF",
+				"name": "Agendamentos INOB",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -140,7 +140,7 @@
 				]
 			},
 			{
-				"name": "Usuarios IOF",
+				"name": "Usuarios INOB",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -183,7 +183,7 @@
 				]
 			},
 			{
-				"name": "Consulta IOF",
+				"name": "Consulta INOB",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -226,7 +226,7 @@
 				]
 			},
 			{
-				"name": "Agendas IOF",
+				"name": "Agendas INOB",
 				"type": "Copy",
 				"dependsOn": [
 					{
