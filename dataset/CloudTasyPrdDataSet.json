@@ -12,7 +12,83 @@
 		"type": "OracleTable",
 		"structure": [
 			{
-				"name": "CNPJ",
+				"name": "NR_TIPO_TITULO",
+				"type": "String"
+			},
+			{
+				"name": "NR_SERIE_TITULO",
+				"type": "String"
+			},
+			{
+				"name": "NR_TITULO",
+				"type": "Decimal"
+			},
+			{
+				"name": "DT_EMISSAO_TITULO",
+				"type": "DateTime"
+			},
+			{
+				"name": "DT_VENCIMENTO_TITULO",
+				"type": "DateTime"
+			},
+			{
+				"name": "VL_TITULO",
+				"type": "Decimal"
+			},
+			{
+				"name": "VL_MULTA",
+				"type": "Decimal"
+			},
+			{
+				"name": "DS_CONVENIO",
+				"type": "String"
+			},
+			{
+				"name": "DS_EMPRESA_CONVENIO",
+				"type": "String"
+			},
+			{
+				"name": "CONV_CNPJ",
+				"type": "String"
+			},
+			{
+				"name": "VL_ISS",
+				"type": "Double"
+			},
+			{
+				"name": "VL_IR",
+				"type": "Double"
+			},
+			{
+				"name": "VL_FILME",
+				"type": "Double"
+			},
+			{
+				"name": "VL_PERC_ISS",
+				"type": "Double"
+			},
+			{
+				"name": "VL_PER_IR",
+				"type": "Double"
+			},
+			{
+				"name": "VL_PERC_MULTA",
+				"type": "Decimal"
+			},
+			{
+				"name": "VL_PERC_JURO",
+				"type": "Decimal"
+			},
+			{
+				"name": "VL_OUTROS_IMP",
+				"type": "Decimal"
+			},
+			{
+				"name": "NR_REMESSA",
+				"type": "Double"
+			},
+			{
+				"name": "MARCA",
 				"type": "String"
 			},
 			{
@@ -20,39 +96,7 @@
 				"type": "String"
 			},
 			{
-				"name": "DT_EMISSAO",
-				"type": "DateTime"
-			},
-			{
-				"name": "DT_ENTRADA_SAIDA",
-				"type": "DateTime"
-			},
-			{
-				"name": "NR_SEQUENCIA",
-				"type": "Decimal"
-			},
-			{
-				"name": "NR_NOTA_FISCAL",
-				"type": "String"
-			},
-			{
-				"name": "CD_CONTA_CONTABIL",
-				"type": "String"
-			},
-			{
-				"name": "DS_CONTA_CONTABIL",
-				"type": "String"
-			},
-			{
-				"name": "FORNECEDOR",
-				"type": "String"
-			},
-			{
-				"name": "VL_TOTAL_ITEM_NF",
-				"type": "Double"
-			},
-			{
-				"name": "DS_OBSERVACAO",
+				"name": "CNPJ",
 				"type": "String"
 			}
 		]
