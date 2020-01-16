@@ -31,210 +31,7 @@
 					"sink": {
 						"type": "AzureSqlSink"
 					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"name": "NR_TIPO_TITULO"
-								},
-								"sink": {
-									"name": "NR_TIPO_TITULO",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "NR_SERIE_TITULO"
-								},
-								"sink": {
-									"name": "NR_SERIE_TITULO",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "NR_TITULO"
-								},
-								"sink": {
-									"name": "NR_TITULO",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"name": "DT_EMISSAO_TITULO"
-								},
-								"sink": {
-									"name": "DT_EMISSAO_TITULO",
-									"type": "DateTime"
-								}
-							},
-							{
-								"source": {
-									"name": "DT_VENCIMENTO_TITULO"
-								},
-								"sink": {
-									"name": "DT_VENCIMENTO_TITULO",
-									"type": "DateTime"
-								}
-							},
-							{
-								"source": {
-									"name": "VL_TITULO"
-								},
-								"sink": {
-									"name": "VL_TITULO",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"name": "VL_MULTA"
-								},
-								"sink": {
-									"name": "VL_MULTA",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"name": "DS_CONVENIO"
-								},
-								"sink": {
-									"name": "DS_CONVENIO",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "DS_EMPRESA_CONVENIO"
-								},
-								"sink": {
-									"name": "DS_EMPRESA_CONVENIO",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "CONV_CNPJ"
-								},
-								"sink": {
-									"name": "CONV_CNPJ",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "VL_ISS"
-								},
-								"sink": {
-									"name": "VL_ISS",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"name": "VL_IR"
-								},
-								"sink": {
-									"name": "VL_IR",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"name": "VL_FILME"
-								},
-								"sink": {
-									"name": "VL_FILME",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"name": "VL_PERC_ISS"
-								},
-								"sink": {
-									"name": "VL_PERC_ISS",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"name": "VL_PER_IR"
-								},
-								"sink": {
-									"name": "VL_PER_IR",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"name": "VL_PERC_MULTA"
-								},
-								"sink": {
-									"name": "VL_PERC_MULTA",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"name": "VL_PERC_JURO"
-								},
-								"sink": {
-									"name": "VL_PERC_JURO",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"name": "VL_OUTROS_IMP"
-								},
-								"sink": {
-									"name": "VL_OUTROS_IMP",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"name": "NR_REMESSA"
-								},
-								"sink": {
-									"name": "NR_REMESSA",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"name": "MARCA"
-								},
-								"sink": {
-									"name": "MARCA",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "DS_UNIDADE"
-								},
-								"sink": {
-									"name": "DS_UNIDADE",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "CNPJ"
-								},
-								"sink": {
-									"name": "CNPJ",
-									"type": "String"
-								}
-							}
-						]
-					}
+					"enableStaging": false
 				},
 				"inputs": [
 					{
@@ -271,13 +68,96 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select obter_cgc_estabelecimento(R.CD_ESTABELECIMENTO) AS CD_CGC_ESTAB, \nl.nr_titulo, \nl.dt_recebimento, \nl.vl_recebido, \nl.vl_descontos, \nl.vl_juros, \nl.vl_multa, \nl.dt_atualizacao, \nt.ds_tipo_recebimento,\nx.DS_TRANSACAO\nfrom titulo_receber r,\n     TITULO_RECEBER_LIQ L,\n     tipo_recebimento t,\n     TRANSACAO_FINANCEIRA X\nwhere r.nr_titulo = l.nr_titulo \nand l.cd_tipo_recebimento = t.cd_tipo_recebimento\nAND l.nr_seq_trans_fin = X.NR_SEQUENCIA\nand rownum < 100",
+						"oracleReaderQuery": "select '' nr_tipo_titulo,\nobter_cgc_estabelecimento(R.CD_ESTABELECIMENTO) AS CNPJ, \n'' AS NR_SERIE_TITULO,\nl.nr_titulo, \nl.dt_recebimento, \nl.vl_recebido, \nl.vl_descontos, \nl.vl_juros, \nl.vl_multa, \nl.dt_atualizacao, \nt.ds_tipo_recebimento,\nx.DS_TRANSACAO\nfrom titulo_receber r,\n     TITULO_RECEBER_LIQ L,\n     tipo_recebimento t,\n     TRANSACAO_FINANCEIRA X\nwhere r.nr_titulo = l.nr_titulo \nand l.cd_tipo_recebimento = t.cd_tipo_recebimento\nAND l.nr_seq_trans_fin = X.NR_SEQUENCIA\nand rownum < 100",
 						"partitionOption": "None"
 					},
 					"sink": {
 						"type": "AzureSqlSink"
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"sink": {
+									"name": "cd_cgc_estab",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NR_TITULO"
+								},
+								"sink": {
+									"name": "nr_titulo",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "DT_RECEBIMENTO"
+								},
+								"sink": {
+									"name": "dt_recebimento",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_RECEBIDO"
+								},
+								"sink": {
+									"name": "vl_recebido",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_DESCONTOS"
+								},
+								"sink": {
+									"name": "vl_descontos",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_JUROS"
+								},
+								"sink": {
+									"name": "vl_juros",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "VL_MULTA"
+								},
+								"sink": {
+									"name": "vl_multa",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "DT_ATUALIZACAO"
+								},
+								"sink": {
+									"name": "dt_atualizacao",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_TIPO_RECEBIMENTO"
+								},
+								"sink": {
+									"name": "ds_tipo_recebimento",
+									"type": "String"
+								}
+							}
+						]
+					}
 				},
 				"inputs": [
 					{

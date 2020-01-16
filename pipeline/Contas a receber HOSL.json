@@ -67,94 +67,13 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "select TOP 100 '' AS CD_CGC_ESTAB,\nMNS_NFS_NUMERO, \nMNS_DT_REG,\nMNS_VLR,\n0 AS VL_DESCONTOS,\n0 AS VL_JUROS,\n0 AS VL_MULTA,\nMNS_DT AS DT_ATUALIZACAO,\n'' AS DS_TIPO_RECEBIMENTO,\nMNS_CCR_COD,\n'' AS MARCA,\n'' AS DS_UNIDADE\nfrom mns",
+						"sqlReaderQuery": "  SELECT  top 100\n  nfs.nfs_tipo  as NR_TIPO_TITULO,\n  cfg.cfg_cgc as CNPJ,\n\n  nfs.nfs_serie as NR_SERIE_TITULO,   \n  nfs.nfs_numero as NR_TITULO,  \n  MNS_DT as DT_RECEBIMENTO,\n  MNS_VLR AS VL_RECEBIDO,\n  ' ' AS VL_DESCONTOS,\n  ' ' AS VL_JUROS, \n  NFS_VLR_MULTA AS VL_MULTA,\n  MNS_DT AS DT_ATUALIZACAO,\n  MNS_TIPO AS DS_TIPO_RECEBIMENTO,\n  ' ' AS DS_TRANSACAO\n   FROM mns ,           \n   cfg ,           \n   nfs  \n   WHERE ( nfs.nfs_serie = mns.mns_nfs_serie ) \n   and ( nfs.nfs_numero = mns.mns_nfs_numero ) \n   and ( nfs.nfs_tipo = mns.mns_nfs_tipo ) \n   and ( mns.mns_mns_serie is null ) ",
 						"queryTimeout": "02:00:00"
 					},
 					"sink": {
 						"type": "AzureSqlSink"
 					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"sink": {
-									"name": "nr_titulo",
-									"type": "Int32"
-								}
-							},
-							{
-								"sink": {
-									"name": "nr_sequencia",
-									"type": "Int32"
-								}
-							},
-							{
-								"sink": {
-									"name": "dt_baixa",
-									"type": "DateTime"
-								}
-							},
-							{
-								"sink": {
-									"name": "vl_pago",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"name": "VL_DESCONTOS",
-									"type": "Int32"
-								},
-								"sink": {
-									"name": "vl_descontos",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"name": "VL_JUROS",
-									"type": "Int32"
-								},
-								"sink": {
-									"name": "vl_juros",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"name": "VL_MULTA",
-									"type": "Int32"
-								},
-								"sink": {
-									"name": "vl_multa",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"name": "DT_ATUALIZACAO",
-									"type": "DateTime"
-								},
-								"sink": {
-									"name": "dt_atualizacao",
-									"type": "DateTime"
-								}
-							},
-							{
-								"sink": {
-									"name": "ds_tipo_baixa",
-									"type": "String"
-								}
-							},
-							{
-								"sink": {
-									"name": "ds_transacao",
-									"type": "String"
-								}
-							}
-						]
-					}
+					"enableStaging": false
 				},
 				"inputs": [
 					{
@@ -164,7 +83,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "AZ_SQL_TB_Baixa_Titulos_Pagar",
+						"referenceName": "AZ_SQL_TB_Baixa_Titulos_Receber",
 						"type": "DatasetReference"
 					}
 				]
