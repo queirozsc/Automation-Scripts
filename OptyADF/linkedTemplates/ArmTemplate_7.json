@@ -748,43 +748,83 @@
 				"type": "OracleTable",
 				"structure": [
 					{
-						"name": "NR_CIRURGIA",
+						"name": "NR_TIPO_TITULO",
+						"type": "String"
+					},
+					{
+						"name": "NR_SERIE_TITULO",
+						"type": "String"
+					},
+					{
+						"name": "NR_TITULO",
 						"type": "Decimal"
 					},
 					{
-						"name": "DT_INICIO_PREVISTA",
+						"name": "DT_EMISSAO_TITULO",
 						"type": "DateTime"
 					},
 					{
-						"name": "CD_PESSOA_FISICA",
-						"type": "String"
+						"name": "DT_VENCIMENTO_TITULO",
+						"type": "DateTime"
 					},
 					{
-						"name": "NM_PACIENTE",
-						"type": "String"
-					},
-					{
-						"name": "CD_PROCEDIMENTO",
-						"type": "String"
-					},
-					{
-						"name": "CD_PROCEDIMENTO_INT",
+						"name": "VL_TITULO",
 						"type": "Decimal"
 					},
 					{
-						"name": "DS_PROCEDIMENTO",
+						"name": "VL_MULTA",
+						"type": "Decimal"
+					},
+					{
+						"name": "DS_CONVENIO",
 						"type": "String"
 					},
 					{
-						"name": "CD_MEDICO",
+						"name": "DS_EMPRESA_CONVENIO",
 						"type": "String"
 					},
 					{
-						"name": "NM_MEDICO",
+						"name": "CONV_CNPJ",
 						"type": "String"
 					},
 					{
-						"name": "CNPJ",
+						"name": "VL_ISS",
+						"type": "Double"
+					},
+					{
+						"name": "VL_IR",
+						"type": "Double"
+					},
+					{
+						"name": "VL_FILME",
+						"type": "Double"
+					},
+					{
+						"name": "VL_PERC_ISS",
+						"type": "Double"
+					},
+					{
+						"name": "VL_PER_IR",
+						"type": "Double"
+					},
+					{
+						"name": "VL_PERC_MULTA",
+						"type": "Decimal"
+					},
+					{
+						"name": "VL_PERC_JURO",
+						"type": "Decimal"
+					},
+					{
+						"name": "VL_OUTROS_IMP",
+						"type": "Decimal"
+					},
+					{
+						"name": "NR_REMESSA",
+						"type": "Double"
+					},
+					{
+						"name": "MARCA",
 						"type": "String"
 					},
 					{
@@ -792,12 +832,8 @@
 						"type": "String"
 					},
 					{
-						"name": "MARCA",
+						"name": "CNPJ",
 						"type": "String"
-					},
-					{
-						"name": "DT_ATUALIZACAO",
-						"type": "DateTime"
 					}
 				],
 				"typeProperties": {}

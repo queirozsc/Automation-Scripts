@@ -973,7 +973,7 @@
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "Aging_Baixa_Titulo_Receber"
+					"table": "Baixa_Titulo_Receber"
 				}
 			},
 			"dependsOn": []
