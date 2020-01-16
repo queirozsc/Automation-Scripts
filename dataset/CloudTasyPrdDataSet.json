@@ -12,47 +12,51 @@
 		"type": "OracleTable",
 		"structure": [
 			{
+				"name": "NR_TIPO_TITULO",
+				"type": "String"
+			},
+			{
 				"name": "CNPJ",
 				"type": "String"
 			},
 			{
-				"name": "DS_UNIDADE",
+				"name": "NR_SERIE_TITULO",
 				"type": "String"
 			},
 			{
-				"name": "DT_EMISSAO",
-				"type": "DateTime"
-			},
-			{
-				"name": "DT_ENTRADA_SAIDA",
-				"type": "DateTime"
-			},
-			{
-				"name": "NR_SEQUENCIA",
+				"name": "NR_TITULO",
 				"type": "Decimal"
 			},
 			{
-				"name": "NR_NOTA_FISCAL",
+				"name": "DT_RECEBIMENTO",
+				"type": "DateTime"
+			},
+			{
+				"name": "VL_RECEBIDO",
+				"type": "Decimal"
+			},
+			{
+				"name": "VL_DESCONTOS",
+				"type": "Decimal"
+			},
+			{
+				"name": "VL_JUROS",
+				"type": "Decimal"
+			},
+			{
+				"name": "VL_MULTA",
+				"type": "Decimal"
+			},
+			{
+				"name": "DT_ATUALIZACAO",
+				"type": "DateTime"
+			},
+			{
+				"name": "DS_TIPO_RECEBIMENTO",
 				"type": "String"
 			},
 			{
-				"name": "CD_CONTA_CONTABIL",
-				"type": "String"
-			},
-			{
-				"name": "DS_CONTA_CONTABIL",
-				"type": "String"
-			},
-			{
-				"name": "FORNECEDOR",
-				"type": "String"
-			},
-			{
-				"name": "VL_TOTAL_ITEM_NF",
-				"type": "Double"
-			},
-			{
-				"name": "DS_OBSERVACAO",
+				"name": "DS_TRANSACAO",
 				"type": "String"
 			}
 		]
