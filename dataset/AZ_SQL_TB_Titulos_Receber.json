@@ -86,7 +86,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "Unidade_Titulos_Receber"
+			"table": "Titulos_Receber"
 		}
 	}
 }
