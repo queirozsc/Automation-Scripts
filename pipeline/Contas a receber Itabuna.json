@@ -292,7 +292,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "  SELECT\n  nfs.nfs_tipo  as NR_TIPO_TITULO,\n  cfg.cfg_cgc as CNPJ,\n\n  nfs.nfs_serie as NR_SERIE_TITULO,   \n  nfs.nfs_numero as NR_TITULO,  \n  MNS_DT as DT_RECEBIMENTO,\n  MNS_VLR AS VL_RECEBIDO,\n  ' ' AS VL_DESCONTOS,\n  ' ' AS VL_JUROS, \n  NFS_VLR_MULTA AS VL_MULTA,\n  MNS_DT AS DT_ATUALIZACAO,\n  MNS_TIPO AS DS_TIPO_RECEBIMENTO,\n  ' ' AS DS_TRANSACAO\n   FROM mns ,           \n   cfg ,           \n   nfs  \n   WHERE ( nfs.nfs_serie = mns.mns_nfs_serie ) \n   and ( nfs.nfs_numero = mns.mns_nfs_numero ) \n   and ( nfs.nfs_tipo = mns.mns_nfs_tipo ) \n   and ( mns.mns_mns_serie is null ) ",
+						"sqlReaderQuery": "  SELECT  top 100\n  nfs.nfs_tipo  as NR_TIPO_TITULO,\n  cfg.cfg_cgc as CNPJ,\n\n  nfs.nfs_serie as NR_SERIE_TITULO,   \n  nfs.nfs_numero as NR_TITULO,  \n  MNS_DT as DT_RECEBIMENTO,\n  MNS_VLR AS VL_RECEBIDO,\n  0.00 AS VL_DESCONTOS,\n  0.00 AS VL_JUROS, \n  NFS_VLR_MULTA AS VL_MULTA,\n  MNS_DT AS DT_ATUALIZACAO,\n  MNS_TIPO AS DS_TIPO_RECEBIMENTO,\n  ' ' AS DS_TRANSACAO\n   FROM mns ,           \n   cfg ,           \n   nfs  \n   WHERE ( nfs.nfs_serie = mns.mns_nfs_serie ) \n   and ( nfs.nfs_numero = mns.mns_nfs_numero ) \n   and ( nfs.nfs_tipo = mns.mns_nfs_tipo ) \n   and ( mns.mns_mns_serie is null ) ",
 						"queryTimeout": "02:00:00"
 					},
 					"sink": {
