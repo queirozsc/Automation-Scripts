@@ -8,7 +8,7 @@
 		"typeProperties": {
 			"host": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\HOBL2\\AgentesPorDia",
 			"userId": "hobrasil\\sa.automation",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJkYjgyZDVkMS1iYjcxLTQ0YjItOTY0MC1lMDQ3ZTJmNTMwNDIiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIzNzQ5YzZlYy1iZjgyLTQwYmYtYWQxZC04YmUwNjRkZTEzMzkiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
 			"referenceName": "ServidorArquivosBI",
