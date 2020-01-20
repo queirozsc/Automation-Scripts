@@ -28004,7 +28004,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "-- Relatório de Conta Contabil por Itens da NF\n\nselect obter_cgc_estabelecimento(n.cd_estabelecimento) as CNPJ,\nobter_nome_estab(n.cd_estabelecimento) as DS_UNIDADE ,\nn.DT_EMISSAO,\ndt_entrada_saida as dt_entrada_saida,\nn.nr_sequencia, \nn.nr_nota_fiscal, \ni.cd_conta_contabil, \nc.ds_conta_contabil, \nobter_nome_pj(n.cd_cgc) as fornecedor,\t\nsum(i.vl_total_item_nf) as vl_total_item_nf,\nSUBSTR(n.ds_observacao,1,100) AS ds_observacao\nfrom nota_fiscal n,\nnota_fiscal_item i,\nconta_contabil c,\noperacao_nota a\nwhere n.nr_sequencia = i.nr_sequencia\nand i.cd_conta_contabil = c.cd_conta_contabil (+)\nand n.cd_operacao_nf = a.cd_operacao_nf (+)\nand a.ie_operacao_fiscal = 'E'\nand ((n.cd_estabelecimento = 1) or (1 = 0))\nand n.ie_situacao = 1\ngroup by n.cd_estabelecimento,\nn.cd_estabelecimento ,\nn.DT_EMISSAO,\ndt_entrada_saida,\nn.nr_sequencia, \nn.nr_nota_fiscal, \ni.cd_conta_contabil, \nc.ds_conta_contabil, \nn.cd_cgc,\t\nn.ds_observacao\norder by 5",
+								"oracleReaderQuery": "select obter_cgc_estabelecimento(n.cd_estabelecimento) as CNPJ,\nobter_nome_estab(n.cd_estabelecimento) as DS_UNIDADE ,\nn.DT_EMISSAO,\ndt_entrada_saida as dt_entrada_saida,\nn.nr_sequencia, \nn.nr_nota_fiscal, \ni.cd_conta_contabil, \nc.ds_conta_contabil, \nobter_nome_pj(n.cd_cgc) as fornecedor,\t\nsum(i.vl_total_item_nf) as vl_total_item_nf,\nSUBSTR(n.ds_observacao,1,100) AS ds_observacao\nfrom nota_fiscal n,\nnota_fiscal_item i,\nconta_contabil c,\noperacao_nota a\nwhere n.nr_sequencia = i.nr_sequencia\nand i.cd_conta_contabil = c.cd_conta_contabil (+)\nand n.cd_operacao_nf = a.cd_operacao_nf (+)\nand a.ie_operacao_fiscal = 'E'\nand n.ie_situacao = 1\ngroup by n.cd_estabelecimento,\nn.cd_estabelecimento ,\nn.DT_EMISSAO,\ndt_entrada_saida,\nn.nr_sequencia, \nn.nr_nota_fiscal, \ni.cd_conta_contabil, \nc.ds_conta_contabil, \nn.cd_cgc,\t\nn.ds_observacao\norder by 5",
 								"partitionOption": "None",
 								"queryTimeout": "02:00:00"
 							},
@@ -28050,7 +28050,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "-- Relatório de Conta Contabil por Itens da NF\n\nselect obter_cgc_estabelecimento(n.cd_estabelecimento) as CNPJ,\nobter_nome_estab(n.cd_estabelecimento) as DS_UNIDADE ,\nn.DT_EMISSAO,\ndt_entrada_saida as dt_entrada_saida,\nn.nr_sequencia, \nn.nr_nota_fiscal, \ni.cd_conta_contabil, \nc.ds_conta_contabil, \nobter_nome_pj(n.cd_cgc) as fornecedor,\t\nsum(i.vl_total_item_nf) as vl_total_item_nf,\nSUBSTR(n.ds_observacao,1,100) AS ds_observacao\nfrom nota_fiscal n,\nnota_fiscal_item i,\nconta_contabil c,\noperacao_nota a\nwhere n.nr_sequencia = i.nr_sequencia\nand i.cd_conta_contabil = c.cd_conta_contabil (+)\nand n.cd_operacao_nf = a.cd_operacao_nf (+)\nand a.ie_operacao_fiscal = 'E'\nand ((n.cd_estabelecimento = 1) or (1 = 0))\nand n.ie_situacao = 1\ngroup by n.cd_estabelecimento,\nn.cd_estabelecimento ,\nn.DT_EMISSAO,\ndt_entrada_saida,\nn.nr_sequencia, \nn.nr_nota_fiscal, \ni.cd_conta_contabil, \nc.ds_conta_contabil, \nn.cd_cgc,\t\nn.ds_observacao\norder by 5",
+								"oracleReaderQuery": "select obter_cgc_estabelecimento(n.cd_estabelecimento) as CNPJ,\nobter_nome_estab(n.cd_estabelecimento) as DS_UNIDADE ,\nn.DT_EMISSAO,\ndt_entrada_saida as dt_entrada_saida,\nn.nr_sequencia, \nn.nr_nota_fiscal, \ni.cd_conta_contabil, \nc.ds_conta_contabil, \nobter_nome_pj(n.cd_cgc) as fornecedor,\t\nsum(i.vl_total_item_nf) as vl_total_item_nf,\nSUBSTR(n.ds_observacao,1,100) AS ds_observacao\nfrom nota_fiscal n,\nnota_fiscal_item i,\nconta_contabil c,\noperacao_nota a\nwhere n.nr_sequencia = i.nr_sequencia\nand i.cd_conta_contabil = c.cd_conta_contabil (+)\nand n.cd_operacao_nf = a.cd_operacao_nf (+)\nand a.ie_operacao_fiscal = 'E'\nand n.ie_situacao = 1\ngroup by n.cd_estabelecimento,\nn.cd_estabelecimento ,\nn.DT_EMISSAO,\ndt_entrada_saida,\nn.nr_sequencia, \nn.nr_nota_fiscal, \ni.cd_conta_contabil, \nc.ds_conta_contabil, \nn.cd_cgc,\t\nn.ds_observacao\norder by 5",
 								"partitionOption": "None",
 								"queryTimeout": "02:00:00"
 							},
@@ -28365,6 +28365,387 @@
 				"[concat(variables('factoryId'), '/datasets/SMART_ITABUNA_PrdDataSet')]",
 				"[concat(variables('factoryId'), '/datasets/SMART_INOB_PrdDataSet')]",
 				"[concat(variables('factoryId'), '/datasets/SMART_IOF_PrdDataSet')]",
+				"[concat(variables('factoryId'), '/datasets/SMART_Oftalmoclin_Prd_DataSet')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Pacientes Smart')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Wait1",
+						"type": "Wait",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"waitTimeInSeconds": 1
+						}
+					},
+					{
+						"name": "Pacientes DH",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Wait1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"sqlReaderQuery": "select pac_reg as CD_PESSOA_FISICA, \nrtrim(ltrim(pac_nome)) AS NM_PESSOA_FISICA, \npac_numcpf AS NR_CPF, \nconvert(char(10),pac_nasc,121) as DT_NASCIMENTO, \nPAC_CELULAR AS NR_TELEFONE_CELULAR,\npac_fone AS NR_TELEFONE, \n'13188370000227' AS CNPJ,\n'DAYHORC -  UNIDADE ITAIGARA' as DS_UNIDADE,\n'DH' as MARCA,\npac_reg as NR_PRONTUARIO,\npac_dreg as DT_CADASTRO_ORIGINAL,\npac_dult as DT_ATUALIZACAO,\nPAC_SEXO as IE_SEXO,\npac_cep as CD_CEP\nfrom pac\ninner join usr on USR_LOGIN = PAC_USR_LOGIN_CAD"
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "CD_PESSOA_FISICA",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "CD_PESSOA_FISICA",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "NM_PESSOA_FISICA",
+											"type": "String"
+										},
+										"sink": {
+											"name": "NM_PESSOA_FISICA",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "NR_CPF",
+											"type": "String"
+										},
+										"sink": {
+											"name": "NR_CPF",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DT_NASCIMENTO",
+											"type": "String"
+										},
+										"sink": {
+											"name": "DT_NASCIMENTO",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "NR_TELEFONE_CELULAR",
+											"type": "String"
+										},
+										"sink": {
+											"name": "NR_TELEFONE_CELULAR",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "NR_TELEFONE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "NR_TELEFONE",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CNPJ",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CNPJ",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DS_UNIDADE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "DS_UNIDADE",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "MARCA",
+											"type": "String"
+										},
+										"sink": {
+											"name": "MARCA",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "NR_PRONTUARIO",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "NR_PRONTUARIO",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "DT_CADASTRO_ORIGINAL",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "DT_CADASTRO_ORIGINAL",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "DT_ATUALIZACAO",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "DT_ATUALIZACAO",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "IE_SEXO",
+											"type": "String"
+										},
+										"sink": {
+											"name": "IE_SEXO",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SMART_HOSL_PrdDataSet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AZSQL_TB_Pacientes_Unidade",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Pacientes INOB",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Wait1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"sqlReaderQuery": "select pac_reg as CD_PESSOA_FISICA, \nrtrim(ltrim(pac_nome)) AS NM_PESSOA_FISICA, \npac_numcpf AS NR_CPF, \nconvert(char(10),pac_nasc,121) as DT_NASCIMENTO, \npac_celular AS NR_TELEFONE_CELULAR,\npac_fone AS NR_TELEFONE, \n'00363702000130' AS CNPJ,\n'INOB' as DS_UNIDADE,\n'INOB' as MARCA,\npac_reg as NR_PRONTUARIO,\npac_dreg as DT_CADASTRO_ORIGINAL,\npac_dult as DT_ATUALIZACAO,\nPAC_SEXO as IE_SEXO,\npac_cep as CD_CEP\nfrom pac\ninner join usr on USR_LOGIN = PAC_USR_LOGIN_CAD"
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "SMART_HOSL_PrdDataSet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AZSQL_TB_Pacientes_Unidade",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Pacientes IOF",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Wait1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"sqlReaderQuery": "select pac_reg as CD_PESSOA_FISICA, \nrtrim(ltrim(pac_nome)) AS NM_PESSOA_FISICA, \npac_numcpf AS NR_CPF, \nconvert(char(10),pac_nasc,121) as DT_NASCIMENTO, \npac_celular AS NR_TELEFONE_CELULAR,\npac_fone AS NR_TELEFONE, \n'40514432000305' AS CNPJ,\n'INSTITUTO DE OLHOS FREITAS LF' as DS_UNIDADE,\n'INSTITUTO DE OLHOS FREITAS LF' as MARCA,\npac_reg as NR_PRONTUARIO,\npac_dreg as DT_CADASTRO_ORIGINAL,\npac_dult as DT_ATUALIZACAO,\nPAC_SEXO as IE_SEXO,\npac_cep as CD_CEP\nfrom pac\ninner join usr on USR_LOGIN = PAC_USR_LOGIN_CAD"
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "SMART_IOF_PrdDataSet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AZSQL_TB_Pacientes_Unidade",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Pacientes Itabuna",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Wait1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"sqlReaderQuery": "select pac_reg as CD_PESSOA_FISICA, \nrtrim(ltrim(pac_nome)) AS NM_PESSOA_FISICA, \npac_numcpf AS NR_CPF, \nconvert(char(10),pac_nasc,121) as DT_NASCIMENTO, \npac_celular AS NR_TELEFONE_CELULAR,\npac_fone AS NR_TELEFONE, \n'13188370000146' AS CNPJ,\n'DayHORC ITABUNA' as DS_UNIDADE,\n'DayHORC' as MARCA,\npac_reg as NR_PRONTUARIO,\npac_dreg as DT_CADASTRO_ORIGINAL,\npac_dult as DT_ATUALIZACAO,\nPAC_SEXO as IE_SEXO,\npac_cep as CD_CEP\nfrom pac\ninner join usr on USR_LOGIN = PAC_USR_LOGIN_CAD"
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "SMART_ITABUNA_PrdDataSet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AZSQL_TB_Pacientes_Unidade",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Pacientes Oftalmoclin",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Wait1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"sqlReaderQuery": "select pac_reg as CD_PESSOA_FISICA, \nrtrim(ltrim(pac_nome)) AS NM_PESSOA_FISICA, \npac_numcpf AS NR_CPF, \nconvert(char(10),pac_nasc,121) as DT_NASCIMENTO, \npac_celular AS NR_TELEFONE_CELULAR,\npac_fone AS NR_TELEFONE, \n'OFTALMOCLIN Hospital de Olhos da Bahia' AS CNPJ,\n'OFTALMOCLIN' as DS_UNIDADE,\n'OFTALMOCLIN' as MARCA,\npac_reg as NR_PRONTUARIO,\npac_dreg as DT_CADASTRO_ORIGINAL,\npac_dult as DT_ATUALIZACAO,\nPAC_SEXO as IE_SEXO,\npac_cep as CD_CEP\nfrom pac\ninner join usr on USR_LOGIN = PAC_USR_LOGIN_CAD"
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "SMART_Oftalmoclin_Prd_DataSet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AZSQL_TB_Pacientes_Unidade",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/SMART_HOSL_PrdDataSet')]",
+				"[concat(variables('factoryId'), '/datasets/AZSQL_TB_Pacientes_Unidade')]",
+				"[concat(variables('factoryId'), '/datasets/SMART_IOF_PrdDataSet')]",
+				"[concat(variables('factoryId'), '/datasets/SMART_ITABUNA_PrdDataSet')]",
 				"[concat(variables('factoryId'), '/datasets/SMART_Oftalmoclin_Prd_DataSet')]"
 			]
 		},
