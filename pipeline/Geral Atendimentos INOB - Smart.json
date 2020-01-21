@@ -12,48 +12,6 @@
 				}
 			},
 			{
-				"name": "Pacientes INOB",
-				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "Wait1",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "SqlServerSource",
-						"sqlReaderQuery": "select pac_reg as CD_PESSOA_FISICA, \nrtrim(ltrim(pac_nome)) AS NM_PESSOA_FISICA, \npac_numcpf AS NR_CPF, \nconvert(char(10),pac_nasc,121) as DT_NASCIMENTO, \npac_celular AS NR_TELEFONE_CELULAR,\npac_fone AS NR_TELEFONE, \n'00363702000130' AS CNPJ,\n'INOB' as DS_UNIDADE,\n'INOB' as MARCA,\npac_reg as NR_PRONTUARIO,\npac_dreg as DT_CADASTRO_ORIGINAL,\npac_dult as DT_ATUALIZACAO,\nPAC_SEXO as IE_SEXO,\npac_cep as CD_CEP\nfrom pac\ninner join usr on USR_LOGIN = PAC_USR_LOGIN_CAD"
-					},
-					"sink": {
-						"type": "AzureSqlSink"
-					},
-					"enableStaging": false
-				},
-				"inputs": [
-					{
-						"referenceName": "SMART_HOSL_PrdDataSet",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "AZSQL_TB_Pacientes_Unidade",
-						"type": "DatasetReference"
-					}
-				]
-			},
-			{
 				"name": "Atendimento INOB",
 				"type": "Copy",
 				"dependsOn": [

@@ -3,49 +3,6 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Paciente Sadalla",
-				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "Wait1",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "OracleSource",
-						"oracleReaderQuery": "select pf.cd_pessoa_fisica,\n       pf.nm_pessoa_fisica,\n       pf.nr_cpf,\n       to_char((pf.dt_nascimento) , 'dd/mm/yyyy') as dt_nascimento,\n       pf.nr_ddd_celular||''||substr(replace(LTRIM(translate(pf.nr_telefone_celular, translate(pf.nr_telefone_celular, '1234567890', ' ') , ' ')),' ',''),1,100) as nr_telefone_celular,\n       obter_compl_pf(pf.cd_pessoa_fisica,1,'DDT')||''||obter_compl_pf(pf.cd_pessoa_fisica,1,'T') as nr_telefone,\n       obter_cnpj_estabelecimento(decode(pf.cd_estabelecimento,null,1,pf.cd_estabelecimento)) as CNPJ,\n       e.nm_fantasia_estab as DS_UNIDADE,\n       em.nm_razao_social as MARCA,\n       pf.nr_prontuario,\n       pf.dt_cadastro_original ,\n       pf.dt_atualizacao,\n       pf.ie_sexo,\n       obter_compl_pf(pf.cd_pessoa_fisica, 1, 'CEP') as cd_cep\nfrom pessoa_fisica pf,\n     estabelecimento e,\n     empresa em\nwhere decode(pf.cd_estabelecimento,null,1,pf.cd_estabelecimento) = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa",
-						"partitionOption": "None"
-					},
-					"sink": {
-						"type": "AzureSqlSink"
-					},
-					"enableStaging": false
-				},
-				"inputs": [
-					{
-						"referenceName": "SadallaTasyPrdDataSet",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "AZ_SQL_TB_Pacientes",
-						"type": "DatasetReference"
-					}
-				]
-			},
-			{
 				"name": "Atendimento Sadalla",
 				"type": "Copy",
 				"dependsOn": [
@@ -300,12 +257,6 @@
 				"name": "Pipeline HOSL",
 				"type": "ExecutePipeline",
 				"dependsOn": [
-					{
-						"activity": "Paciente Sadalla",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
 					{
 						"activity": "Atendimento Sadalla",
 						"dependencyConditions": [
