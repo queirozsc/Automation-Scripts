@@ -7,10 +7,6 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "OptyADF"
 		},
-		"Historicos_AgentesPorDia_DAYHORC_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Historicos_AgentesPorDia_DAYHORC'"
-		},
 		"Historicos_AgentesPorDia_HOBL2_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'Historicos_AgentesPorDia_HOBL2'"
@@ -87,13 +83,9 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'Historicos_FIlasPorHoras_HOBL2'"
 		},
-		"Historicos_AgentesPorDia_DAYHORC_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\DAYHORC\\AgentesPorDia"
-		},
-		"Historicos_AgentesPorDia_DAYHORC_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "hobrasil\\sa.automation"
+		"Historicos_FIlasPorHoras_HOSL_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Historicos_FIlasPorHoras_HOSL'"
 		},
 		"Historicos_AgentesPorDia_HOBL2_properties_typeProperties_host": {
 			"type": "string",
@@ -246,35 +238,20 @@
 		"Historicos_FIlasPorHoras_HOBL2_properties_typeProperties_userId": {
 			"type": "string",
 			"defaultValue": "hobrasil\\sa.automation"
+		},
+		"Historicos_FIlasPorHoras_HOSL_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\HOSL\\FilasPorHoras"
+		},
+		"Historicos_FIlasPorHoras_HOSL_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "hobrasil\\sa.automation"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
-		{
-			"name": "[concat(parameters('factoryName'), '/Historicos_AgentesPorDia_DAYHORC')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Historicos_AgentesPorDia_DAYHORC",
-				"annotations": [],
-				"type": "FileServer",
-				"typeProperties": {
-					"host": "[parameters('Historicos_AgentesPorDia_DAYHORC_properties_typeProperties_host')]",
-					"userId": "[parameters('Historicos_AgentesPorDia_DAYHORC_properties_typeProperties_userId')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('Historicos_AgentesPorDia_DAYHORC_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "ServidorArquivosBI",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Historicos_AgentesPorDia_HOBL2')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -703,6 +680,29 @@
 					"password": {
 						"type": "SecureString",
 						"value": "[parameters('Historicos_FIlasPorHoras_HOBL2_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "ServidorArquivosBI",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Historicos_FIlasPorHoras_HOSL')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Historicos_FIlasPorHoras_HOSL",
+				"annotations": [],
+				"type": "FileServer",
+				"typeProperties": {
+					"host": "[parameters('Historicos_FIlasPorHoras_HOSL_properties_typeProperties_host')]",
+					"userId": "[parameters('Historicos_FIlasPorHoras_HOSL_properties_typeProperties_userId')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('Historicos_FIlasPorHoras_HOSL_password')]"
 					}
 				},
 				"connectVia": {

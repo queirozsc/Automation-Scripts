@@ -477,6 +477,9 @@
 					"Historicos_AgentesPorDia_CSI_password": {
 						"value": "[parameters('Historicos_AgentesPorDia_CSI_password')]"
 					},
+					"Historicos_AgentesPorDia_DAYHORC_password": {
+						"value": "[parameters('Historicos_AgentesPorDia_DAYHORC_password')]"
+					},
 					"Folder_Nexcore_Consolidado_properties_typeProperties_host": {
 						"value": "[parameters('Folder_Nexcore_Consolidado_properties_typeProperties_host')]"
 					},
@@ -494,6 +497,12 @@
 					},
 					"Historicos_AgentesPorDia_CSI_properties_typeProperties_userId": {
 						"value": "[parameters('Historicos_AgentesPorDia_CSI_properties_typeProperties_userId')]"
+					},
+					"Historicos_AgentesPorDia_DAYHORC_properties_typeProperties_host": {
+						"value": "[parameters('Historicos_AgentesPorDia_DAYHORC_properties_typeProperties_host')]"
+					},
+					"Historicos_AgentesPorDia_DAYHORC_properties_typeProperties_userId": {
+						"value": "[parameters('Historicos_AgentesPorDia_DAYHORC_properties_typeProperties_userId')]"
 					}
 				}
 			},
@@ -514,9 +523,6 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
-					},
-					"Historicos_AgentesPorDia_DAYHORC_password": {
-						"value": "[parameters('Historicos_AgentesPorDia_DAYHORC_password')]"
 					},
 					"Historicos_AgentesPorDia_HOBL2_password": {
 						"value": "[parameters('Historicos_AgentesPorDia_HOBL2_password')]"
@@ -575,11 +581,8 @@
 					"Historicos_FIlasPorHoras_HOBL2_password": {
 						"value": "[parameters('Historicos_FIlasPorHoras_HOBL2_password')]"
 					},
-					"Historicos_AgentesPorDia_DAYHORC_properties_typeProperties_host": {
-						"value": "[parameters('Historicos_AgentesPorDia_DAYHORC_properties_typeProperties_host')]"
-					},
-					"Historicos_AgentesPorDia_DAYHORC_properties_typeProperties_userId": {
-						"value": "[parameters('Historicos_AgentesPorDia_DAYHORC_properties_typeProperties_userId')]"
+					"Historicos_FIlasPorHoras_HOSL_password": {
+						"value": "[parameters('Historicos_FIlasPorHoras_HOSL_password')]"
 					},
 					"Historicos_AgentesPorDia_HOBL2_properties_typeProperties_host": {
 						"value": "[parameters('Historicos_AgentesPorDia_HOBL2_properties_typeProperties_host')]"
@@ -694,6 +697,12 @@
 					},
 					"Historicos_FIlasPorHoras_HOBL2_properties_typeProperties_userId": {
 						"value": "[parameters('Historicos_FIlasPorHoras_HOBL2_properties_typeProperties_userId')]"
+					},
+					"Historicos_FIlasPorHoras_HOSL_properties_typeProperties_host": {
+						"value": "[parameters('Historicos_FIlasPorHoras_HOSL_properties_typeProperties_host')]"
+					},
+					"Historicos_FIlasPorHoras_HOSL_properties_typeProperties_userId": {
+						"value": "[parameters('Historicos_FIlasPorHoras_HOSL_properties_typeProperties_userId')]"
 					}
 				}
 			},
@@ -714,9 +723,6 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
-					},
-					"Historicos_FIlasPorHoras_HOSL_password": {
-						"value": "[parameters('Historicos_FIlasPorHoras_HOSL_password')]"
 					},
 					"Historicos_FIlasPorHoras_INOB_password": {
 						"value": "[parameters('Historicos_FIlasPorHoras_INOB_password')]"
@@ -759,12 +765,6 @@
 					},
 					"SadallaTasyTeste_connectionString": {
 						"value": "[parameters('SadallaTasyTeste_connectionString')]"
-					},
-					"Historicos_FIlasPorHoras_HOSL_properties_typeProperties_host": {
-						"value": "[parameters('Historicos_FIlasPorHoras_HOSL_properties_typeProperties_host')]"
-					},
-					"Historicos_FIlasPorHoras_HOSL_properties_typeProperties_userId": {
-						"value": "[parameters('Historicos_FIlasPorHoras_HOSL_properties_typeProperties_userId')]"
 					},
 					"Historicos_FIlasPorHoras_INOB_properties_typeProperties_host": {
 						"value": "[parameters('Historicos_FIlasPorHoras_INOB_properties_typeProperties_host')]"
