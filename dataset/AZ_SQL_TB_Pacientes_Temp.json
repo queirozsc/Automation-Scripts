@@ -56,7 +56,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "Pacientes_Unidade"
+			"table": "Pacientes_Unidade_Temp"
 		}
 	}
 }
