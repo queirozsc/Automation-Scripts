@@ -22,6 +22,12 @@
 					"referenceName": "Geral Atendimentos INOB - Smart",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "Geral Atendimentos IOF",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
