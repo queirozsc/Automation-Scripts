@@ -28,6 +28,12 @@
 					"referenceName": "Geral Atendimentos IOF",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "Geral Atendimentos Itabuna",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
