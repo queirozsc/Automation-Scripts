@@ -295,6 +295,56 @@
 					"referenceName": "AzureSQL_DB_Procedimentos",
 					"type": "LinkedServiceReference"
 				}
+			},
+			{
+				"name": "Pipeline HOSL",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Paciente Sadalla",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Atendimento Sadalla",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Consulta Sadalla",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Agendamento Sadalla",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Usuarios Sadalla",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Agendas Sadalla",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Geral Atendimentos HOSL",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
 			}
 		],
 		"folder": {
