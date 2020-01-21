@@ -477,18 +477,6 @@
 					"Historicos_AgentesPorDia_CSI_password": {
 						"value": "[parameters('Historicos_AgentesPorDia_CSI_password')]"
 					},
-					"Historicos_AgentesPorDia_DAYHORC_password": {
-						"value": "[parameters('Historicos_AgentesPorDia_DAYHORC_password')]"
-					},
-					"Historicos_AgentesPorDia_HOBL2_password": {
-						"value": "[parameters('Historicos_AgentesPorDia_HOBL2_password')]"
-					},
-					"Historicos_AgentesPorDia_HOSL_password": {
-						"value": "[parameters('Historicos_AgentesPorDia_HOSL_password')]"
-					},
-					"Historicos_AgentesPorDia_INOB_password": {
-						"value": "[parameters('Historicos_AgentesPorDia_INOB_password')]"
-					},
 					"Folder_Nexcore_Consolidado_properties_typeProperties_host": {
 						"value": "[parameters('Folder_Nexcore_Consolidado_properties_typeProperties_host')]"
 					},
@@ -506,30 +494,6 @@
 					},
 					"Historicos_AgentesPorDia_CSI_properties_typeProperties_userId": {
 						"value": "[parameters('Historicos_AgentesPorDia_CSI_properties_typeProperties_userId')]"
-					},
-					"Historicos_AgentesPorDia_DAYHORC_properties_typeProperties_host": {
-						"value": "[parameters('Historicos_AgentesPorDia_DAYHORC_properties_typeProperties_host')]"
-					},
-					"Historicos_AgentesPorDia_DAYHORC_properties_typeProperties_userId": {
-						"value": "[parameters('Historicos_AgentesPorDia_DAYHORC_properties_typeProperties_userId')]"
-					},
-					"Historicos_AgentesPorDia_HOBL2_properties_typeProperties_host": {
-						"value": "[parameters('Historicos_AgentesPorDia_HOBL2_properties_typeProperties_host')]"
-					},
-					"Historicos_AgentesPorDia_HOBL2_properties_typeProperties_userId": {
-						"value": "[parameters('Historicos_AgentesPorDia_HOBL2_properties_typeProperties_userId')]"
-					},
-					"Historicos_AgentesPorDia_HOSL_properties_typeProperties_host": {
-						"value": "[parameters('Historicos_AgentesPorDia_HOSL_properties_typeProperties_host')]"
-					},
-					"Historicos_AgentesPorDia_HOSL_properties_typeProperties_userId": {
-						"value": "[parameters('Historicos_AgentesPorDia_HOSL_properties_typeProperties_userId')]"
-					},
-					"Historicos_AgentesPorDia_INOB_properties_typeProperties_host": {
-						"value": "[parameters('Historicos_AgentesPorDia_INOB_properties_typeProperties_host')]"
-					},
-					"Historicos_AgentesPorDia_INOB_properties_typeProperties_userId": {
-						"value": "[parameters('Historicos_AgentesPorDia_INOB_properties_typeProperties_userId')]"
 					}
 				}
 			},
@@ -550,6 +514,18 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"Historicos_AgentesPorDia_DAYHORC_password": {
+						"value": "[parameters('Historicos_AgentesPorDia_DAYHORC_password')]"
+					},
+					"Historicos_AgentesPorDia_HOBL2_password": {
+						"value": "[parameters('Historicos_AgentesPorDia_HOBL2_password')]"
+					},
+					"Historicos_AgentesPorDia_HOSL_password": {
+						"value": "[parameters('Historicos_AgentesPorDia_HOSL_password')]"
+					},
+					"Historicos_AgentesPorDia_INOB_password": {
+						"value": "[parameters('Historicos_AgentesPorDia_INOB_password')]"
 					},
 					"Historicos_AgentesPorDia_SADALLA_password": {
 						"value": "[parameters('Historicos_AgentesPorDia_SADALLA_password')]"
@@ -599,17 +575,29 @@
 					"Historicos_FIlasPorHoras_HOBL2_password": {
 						"value": "[parameters('Historicos_FIlasPorHoras_HOBL2_password')]"
 					},
-					"Historicos_FIlasPorHoras_HOSL_password": {
-						"value": "[parameters('Historicos_FIlasPorHoras_HOSL_password')]"
+					"Historicos_AgentesPorDia_DAYHORC_properties_typeProperties_host": {
+						"value": "[parameters('Historicos_AgentesPorDia_DAYHORC_properties_typeProperties_host')]"
 					},
-					"Historicos_FIlasPorHoras_INOB_password": {
-						"value": "[parameters('Historicos_FIlasPorHoras_INOB_password')]"
+					"Historicos_AgentesPorDia_DAYHORC_properties_typeProperties_userId": {
+						"value": "[parameters('Historicos_AgentesPorDia_DAYHORC_properties_typeProperties_userId')]"
 					},
-					"Historicos_FIlasPorHoras_SADALLA_password": {
-						"value": "[parameters('Historicos_FIlasPorHoras_SADALLA_password')]"
+					"Historicos_AgentesPorDia_HOBL2_properties_typeProperties_host": {
+						"value": "[parameters('Historicos_AgentesPorDia_HOBL2_properties_typeProperties_host')]"
 					},
-					"LINK_PASTA_BI_password": {
-						"value": "[parameters('LINK_PASTA_BI_password')]"
+					"Historicos_AgentesPorDia_HOBL2_properties_typeProperties_userId": {
+						"value": "[parameters('Historicos_AgentesPorDia_HOBL2_properties_typeProperties_userId')]"
+					},
+					"Historicos_AgentesPorDia_HOSL_properties_typeProperties_host": {
+						"value": "[parameters('Historicos_AgentesPorDia_HOSL_properties_typeProperties_host')]"
+					},
+					"Historicos_AgentesPorDia_HOSL_properties_typeProperties_userId": {
+						"value": "[parameters('Historicos_AgentesPorDia_HOSL_properties_typeProperties_userId')]"
+					},
+					"Historicos_AgentesPorDia_INOB_properties_typeProperties_host": {
+						"value": "[parameters('Historicos_AgentesPorDia_INOB_properties_typeProperties_host')]"
+					},
+					"Historicos_AgentesPorDia_INOB_properties_typeProperties_userId": {
+						"value": "[parameters('Historicos_AgentesPorDia_INOB_properties_typeProperties_userId')]"
 					},
 					"Historicos_AgentesPorDia_SADALLA_properties_typeProperties_host": {
 						"value": "[parameters('Historicos_AgentesPorDia_SADALLA_properties_typeProperties_host')]"
@@ -706,30 +694,6 @@
 					},
 					"Historicos_FIlasPorHoras_HOBL2_properties_typeProperties_userId": {
 						"value": "[parameters('Historicos_FIlasPorHoras_HOBL2_properties_typeProperties_userId')]"
-					},
-					"Historicos_FIlasPorHoras_HOSL_properties_typeProperties_host": {
-						"value": "[parameters('Historicos_FIlasPorHoras_HOSL_properties_typeProperties_host')]"
-					},
-					"Historicos_FIlasPorHoras_HOSL_properties_typeProperties_userId": {
-						"value": "[parameters('Historicos_FIlasPorHoras_HOSL_properties_typeProperties_userId')]"
-					},
-					"Historicos_FIlasPorHoras_INOB_properties_typeProperties_host": {
-						"value": "[parameters('Historicos_FIlasPorHoras_INOB_properties_typeProperties_host')]"
-					},
-					"Historicos_FIlasPorHoras_INOB_properties_typeProperties_userId": {
-						"value": "[parameters('Historicos_FIlasPorHoras_INOB_properties_typeProperties_userId')]"
-					},
-					"Historicos_FIlasPorHoras_SADALLA_properties_typeProperties_host": {
-						"value": "[parameters('Historicos_FIlasPorHoras_SADALLA_properties_typeProperties_host')]"
-					},
-					"Historicos_FIlasPorHoras_SADALLA_properties_typeProperties_userId": {
-						"value": "[parameters('Historicos_FIlasPorHoras_SADALLA_properties_typeProperties_userId')]"
-					},
-					"LINK_PASTA_BI_properties_typeProperties_host": {
-						"value": "[parameters('LINK_PASTA_BI_properties_typeProperties_host')]"
-					},
-					"LINK_PASTA_BI_properties_typeProperties_userId": {
-						"value": "[parameters('LINK_PASTA_BI_properties_typeProperties_userId')]"
 					}
 				}
 			},
@@ -750,6 +714,18 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"Historicos_FIlasPorHoras_HOSL_password": {
+						"value": "[parameters('Historicos_FIlasPorHoras_HOSL_password')]"
+					},
+					"Historicos_FIlasPorHoras_INOB_password": {
+						"value": "[parameters('Historicos_FIlasPorHoras_INOB_password')]"
+					},
+					"Historicos_FIlasPorHoras_SADALLA_password": {
+						"value": "[parameters('Historicos_FIlasPorHoras_SADALLA_password')]"
+					},
+					"LINK_PASTA_BI_password": {
+						"value": "[parameters('LINK_PASTA_BI_password')]"
 					},
 					"SMART_HOSL_NEW_connectionString": {
 						"value": "[parameters('SMART_HOSL_NEW_connectionString')]"
@@ -783,6 +759,30 @@
 					},
 					"SadallaTasyTeste_connectionString": {
 						"value": "[parameters('SadallaTasyTeste_connectionString')]"
+					},
+					"Historicos_FIlasPorHoras_HOSL_properties_typeProperties_host": {
+						"value": "[parameters('Historicos_FIlasPorHoras_HOSL_properties_typeProperties_host')]"
+					},
+					"Historicos_FIlasPorHoras_HOSL_properties_typeProperties_userId": {
+						"value": "[parameters('Historicos_FIlasPorHoras_HOSL_properties_typeProperties_userId')]"
+					},
+					"Historicos_FIlasPorHoras_INOB_properties_typeProperties_host": {
+						"value": "[parameters('Historicos_FIlasPorHoras_INOB_properties_typeProperties_host')]"
+					},
+					"Historicos_FIlasPorHoras_INOB_properties_typeProperties_userId": {
+						"value": "[parameters('Historicos_FIlasPorHoras_INOB_properties_typeProperties_userId')]"
+					},
+					"Historicos_FIlasPorHoras_SADALLA_properties_typeProperties_host": {
+						"value": "[parameters('Historicos_FIlasPorHoras_SADALLA_properties_typeProperties_host')]"
+					},
+					"Historicos_FIlasPorHoras_SADALLA_properties_typeProperties_userId": {
+						"value": "[parameters('Historicos_FIlasPorHoras_SADALLA_properties_typeProperties_userId')]"
+					},
+					"LINK_PASTA_BI_properties_typeProperties_host": {
+						"value": "[parameters('LINK_PASTA_BI_properties_typeProperties_host')]"
+					},
+					"LINK_PASTA_BI_properties_typeProperties_userId": {
+						"value": "[parameters('LINK_PASTA_BI_properties_typeProperties_userId')]"
 					}
 				}
 			},

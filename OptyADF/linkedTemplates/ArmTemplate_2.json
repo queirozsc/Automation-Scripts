@@ -27,22 +27,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'Historicos_AgentesPorDia_CSI'"
 		},
-		"Historicos_AgentesPorDia_DAYHORC_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Historicos_AgentesPorDia_DAYHORC'"
-		},
-		"Historicos_AgentesPorDia_HOBL2_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Historicos_AgentesPorDia_HOBL2'"
-		},
-		"Historicos_AgentesPorDia_HOSL_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Historicos_AgentesPorDia_HOSL'"
-		},
-		"Historicos_AgentesPorDia_INOB_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Historicos_AgentesPorDia_INOB'"
-		},
 		"Folder_Nexcore_Consolidado_properties_typeProperties_host": {
 			"type": "string",
 			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Consolidado"
@@ -66,44 +50,259 @@
 		"Historicos_AgentesPorDia_CSI_properties_typeProperties_userId": {
 			"type": "string",
 			"defaultValue": "hobrasil\\sa.automation"
-		},
-		"Historicos_AgentesPorDia_DAYHORC_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\DAYHORC\\AgentesPorDia"
-		},
-		"Historicos_AgentesPorDia_DAYHORC_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "hobrasil\\sa.automation"
-		},
-		"Historicos_AgentesPorDia_HOBL2_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\HOBL2\\AgentesPorDia"
-		},
-		"Historicos_AgentesPorDia_HOBL2_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "hobrasil\\sa.automation"
-		},
-		"Historicos_AgentesPorDia_HOSL_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\HOSL\\AgentesPorDia"
-		},
-		"Historicos_AgentesPorDia_HOSL_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "hobrasil\\sa.automation"
-		},
-		"Historicos_AgentesPorDia_INOB_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\INOB\\AgentesPorDia"
-		},
-		"Historicos_AgentesPorDia_INOB_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "hobrasil\\sa.automation"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Pacientes')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Atendimentos"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "CD_PESSOA_FISICA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "NM_PESSOA_FISICA",
+						"type": "varchar"
+					},
+					{
+						"name": "NR_CPF",
+						"type": "varchar"
+					},
+					{
+						"name": "DT_NASCIMENTO",
+						"type": "date"
+					},
+					{
+						"name": "NR_TELEFONE_CELULAR",
+						"type": "varchar"
+					},
+					{
+						"name": "NR_TELEFONE",
+						"type": "varchar"
+					},
+					{
+						"name": "CNPJ",
+						"type": "varchar"
+					},
+					{
+						"name": "SIGLA_UNIDADE",
+						"type": "varchar"
+					},
+					{
+						"name": "MARCA",
+						"type": "varchar"
+					},
+					{
+						"name": "NR_PRONTUARIO",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Pacientes_Unidade"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Pacientes_Temp')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Atendimentos"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "CD_PESSOA_FISICA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "NM_PESSOA_FISICA",
+						"type": "varchar"
+					},
+					{
+						"name": "NR_CPF",
+						"type": "varchar"
+					},
+					{
+						"name": "DT_NASCIMENTO",
+						"type": "date"
+					},
+					{
+						"name": "NR_TELEFONE_CELULAR",
+						"type": "varchar"
+					},
+					{
+						"name": "NR_TELEFONE",
+						"type": "varchar"
+					},
+					{
+						"name": "CNPJ",
+						"type": "varchar"
+					},
+					{
+						"name": "SIGLA_UNIDADE",
+						"type": "varchar"
+					},
+					{
+						"name": "MARCA",
+						"type": "varchar"
+					},
+					{
+						"name": "NR_PRONTUARIO",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Pacientes_Unidade_Temp"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Padrao_Retorno_Cir_Sadalla')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Atendimentos"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "CD_PROCEDIMENTO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CD_PROCED_RET_45_DIAS",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_PROCED_RET_45_DIAS",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_PROCED_RET_02_MES",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_PROCED_RET_02_MES",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_PROCED_RET_03_MES",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_PROCED_RET_03_MES",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_PROCED_RET_06_MES",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_PROCED_RET_06_MES",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_PROCED_RET_01_ANO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_PROCED_RET_01_ANO",
+						"type": "varchar"
+					},
+					{
+						"name": "CD_PROCED_RET_ANUAL",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DS_PROCED_RET_ANUAL",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Padrao_Retorno_Cir_Sadalla"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Setor')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Atendimentos"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "CD_SETOR_ATENDIMENTO",
+						"type": "varchar"
+					},
+					{
+						"name": "DS_SETOR_ATENDIMENTO",
+						"type": "varchar"
+					},
+					{
+						"name": "CNPJ",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Setor_Unidade"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Titulos_Pagar')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
@@ -2029,98 +2228,6 @@
 					"password": {
 						"type": "SecureString",
 						"value": "[parameters('Historicos_AgentesPorDia_CSI_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "ServidorArquivosBI",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Historicos_AgentesPorDia_DAYHORC')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Historicos_AgentesPorDia_DAYHORC",
-				"annotations": [],
-				"type": "FileServer",
-				"typeProperties": {
-					"host": "[parameters('Historicos_AgentesPorDia_DAYHORC_properties_typeProperties_host')]",
-					"userId": "[parameters('Historicos_AgentesPorDia_DAYHORC_properties_typeProperties_userId')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('Historicos_AgentesPorDia_DAYHORC_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "ServidorArquivosBI",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Historicos_AgentesPorDia_HOBL2')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Historicos_AgentesPorDia_HOBL2",
-				"annotations": [],
-				"type": "FileServer",
-				"typeProperties": {
-					"host": "[parameters('Historicos_AgentesPorDia_HOBL2_properties_typeProperties_host')]",
-					"userId": "[parameters('Historicos_AgentesPorDia_HOBL2_properties_typeProperties_userId')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('Historicos_AgentesPorDia_HOBL2_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "ServidorArquivosBI",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Historicos_AgentesPorDia_HOSL')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Historicos_AgentesPorDia_HOSL",
-				"annotations": [],
-				"type": "FileServer",
-				"typeProperties": {
-					"host": "[parameters('Historicos_AgentesPorDia_HOSL_properties_typeProperties_host')]",
-					"userId": "[parameters('Historicos_AgentesPorDia_HOSL_properties_typeProperties_userId')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('Historicos_AgentesPorDia_HOSL_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "ServidorArquivosBI",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Historicos_AgentesPorDia_INOB')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Historicos_AgentesPorDia_INOB",
-				"annotations": [],
-				"type": "FileServer",
-				"typeProperties": {
-					"host": "[parameters('Historicos_AgentesPorDia_INOB_properties_typeProperties_host')]",
-					"userId": "[parameters('Historicos_AgentesPorDia_INOB_properties_typeProperties_userId')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('Historicos_AgentesPorDia_INOB_password')]"
 					}
 				},
 				"connectVia": {
