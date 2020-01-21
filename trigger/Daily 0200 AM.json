@@ -3,7 +3,7 @@
 	"properties": {
 		"description": "Criado para executar as consultas no HOSAG",
 		"annotations": [],
-		"runtimeState": "Stopped",
+		"runtimeState": "Started",
 		"pipelines": [],
 		"type": "ScheduleTrigger",
 		"typeProperties": {
