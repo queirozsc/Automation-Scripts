@@ -22,6 +22,12 @@
 					"referenceName": "Cirurgias e Exames Sadalla",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "Pacientes",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
