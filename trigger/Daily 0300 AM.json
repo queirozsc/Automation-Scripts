@@ -1,37 +1,43 @@
 {
-	"name": "Daily 0630 AM",
+	"name": "Daily 0300 AM",
 	"properties": {
-		"description": "Execução de pipeline para atualização das informações dos indicadores de Call Center",
+		"description": "Execução de pipelines as 03:00",
 		"annotations": [],
 		"runtimeState": "Started",
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "Agendas Projesi",
+					"referenceName": "Geral Atendimentos DAYHORC",
 					"type": "PipelineReference"
 				}
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "Chamados Requestia",
+					"referenceName": "Geral Atendimentos HOSL",
 					"type": "PipelineReference"
 				}
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "Cirurgias e Exames Sadalla",
+					"referenceName": "Geral Atendimentos INOB - Smart",
 					"type": "PipelineReference"
 				}
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "Pacientes",
+					"referenceName": "Geral Atendimentos IOF",
 					"type": "PipelineReference"
 				}
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "Geral Atendimentos HOB",
+					"referenceName": "Geral Atendimentos Itabuna",
+					"type": "PipelineReference"
+				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "Geral Atendimentos Oftalmoclin",
 					"type": "PipelineReference"
 				}
 			}
@@ -41,14 +47,14 @@
 			"recurrence": {
 				"frequency": "Day",
 				"interval": 1,
-				"startTime": "2019-08-20T15:22:00.000Z",
+				"startTime": "2020-01-21T22:31:00.000Z",
 				"timeZone": "UTC",
 				"schedule": {
 					"minutes": [
-						30
+						0
 					],
 					"hours": [
-						9
+						6
 					]
 				}
 			}
