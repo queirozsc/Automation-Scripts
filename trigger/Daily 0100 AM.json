@@ -3,7 +3,7 @@
 	"properties": {
 		"description": "Execução de pipelines as 01:00",
 		"annotations": [],
-		"runtimeState": "Stopped",
+		"runtimeState": "Started",
 		"pipelines": [],
 		"type": "ScheduleTrigger",
 		"typeProperties": {
