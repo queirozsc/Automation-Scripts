@@ -10,12 +10,6 @@
 					"referenceName": "Geral Atendimentos DAYHORC",
 					"type": "PipelineReference"
 				}
-			},
-			{
-				"pipelineReference": {
-					"referenceName": "Geral Atendimentos Oftalmoclin",
-					"type": "PipelineReference"
-				}
 			}
 		],
 		"type": "ScheduleTrigger",
