@@ -7,6 +7,14 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "OptyADF"
 		},
+		"Historicos_FIlasPorHoras_HOBL2_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Historicos_FIlasPorHoras_HOBL2'"
+		},
+		"Historicos_FIlasPorHoras_HOSL_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Historicos_FIlasPorHoras_HOSL'"
+		},
 		"Historicos_FIlasPorHoras_INOB_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'Historicos_FIlasPorHoras_INOB'"
@@ -63,6 +71,22 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'SadallaTasyTeste'"
 		},
+		"Historicos_FIlasPorHoras_HOBL2_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\HOBL2\\FilasPorHoras"
+		},
+		"Historicos_FIlasPorHoras_HOBL2_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "hobrasil\\sa.automation"
+		},
+		"Historicos_FIlasPorHoras_HOSL_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\HOSL\\FilasPorHoras"
+		},
+		"Historicos_FIlasPorHoras_HOSL_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "hobrasil\\sa.automation"
+		},
 		"Historicos_FIlasPorHoras_INOB_properties_typeProperties_host": {
 			"type": "string",
 			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\INOB\\FilasPorHoras"
@@ -92,6 +116,52 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/Historicos_FIlasPorHoras_HOBL2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Historicos_FIlasPorHoras_HOBL2",
+				"annotations": [],
+				"type": "FileServer",
+				"typeProperties": {
+					"host": "[parameters('Historicos_FIlasPorHoras_HOBL2_properties_typeProperties_host')]",
+					"userId": "[parameters('Historicos_FIlasPorHoras_HOBL2_properties_typeProperties_userId')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('Historicos_FIlasPorHoras_HOBL2_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "ServidorArquivosBI",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Historicos_FIlasPorHoras_HOSL')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Historicos_FIlasPorHoras_HOSL",
+				"annotations": [],
+				"type": "FileServer",
+				"typeProperties": {
+					"host": "[parameters('Historicos_FIlasPorHoras_HOSL_properties_typeProperties_host')]",
+					"userId": "[parameters('Historicos_FIlasPorHoras_HOSL_properties_typeProperties_userId')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('Historicos_FIlasPorHoras_HOSL_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "ServidorArquivosBI",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Historicos_FIlasPorHoras_INOB')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -459,69 +529,6 @@
 				"typeProperties": {
 					"location": {
 						"type": "FileServerLocation"
-					},
-					"columnDelimiter": ";",
-					"escapeChar": "",
-					"firstRowAsHeader": true,
-					"quoteChar": ""
-				},
-				"schema": [
-					{
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/CSI_CSV_NC_Bilhete_Ligacoes_Temp')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Historicos_Bilhetes_CSI",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Nexcore/CSI/Históricos"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "FileServerLocation"
-					},
-					"columnDelimiter": ";",
-					"escapeChar": "",
-					"firstRowAsHeader": true,
-					"quoteChar": ""
-				},
-				"schema": [
-					{
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/CSI_CSV_NC_BilhetesLigacoes')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Folder_Nexcore_Consolidado",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Nexcore/CSI"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "FileServerLocation",
-						"fileName": "BilheteLigacoesCSI.csv"
 					},
 					"columnDelimiter": ";",
 					"escapeChar": "",
