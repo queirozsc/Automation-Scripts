@@ -13,12 +13,6 @@
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "Geral Atendimentos HOSL",
-					"type": "PipelineReference"
-				}
-			},
-			{
-				"pipelineReference": {
 					"referenceName": "Geral Atendimentos INOB - Smart",
 					"type": "PipelineReference"
 				}
