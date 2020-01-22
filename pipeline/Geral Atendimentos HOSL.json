@@ -230,7 +230,7 @@
 				]
 			},
 			{
-				"name": "Execute Pipeline1",
+				"name": "Execute Pipeline INOB",
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
@@ -266,6 +266,10 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Geral Atendimentos INOB - Smart",
+						"type": "PipelineReference"
+					},
 					"waitOnCompletion": true
 				}
 			}
