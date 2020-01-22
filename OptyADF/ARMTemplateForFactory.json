@@ -19324,6 +19324,51 @@
 							"referenceName": "AzureSQL_DB_Procedimentos",
 							"type": "LinkedServiceReference"
 						}
+					},
+					{
+						"name": "Execute Pipeline HOSL",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "Atendimento Sadalla",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Consulta Sadalla",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Agendamento Sadalla",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Usuarios Sadalla",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Agendas Sadalla",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "Geral Atendimentos HOSL",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
 					}
 				],
 				"folder": {
@@ -19338,7 +19383,8 @@
 				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Agendamento')]",
 				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Usuario')]",
 				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Agenda')]",
-				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]"
+				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]",
+				"[concat(variables('factoryId'), '/pipelines/Geral Atendimentos HOSL')]"
 			]
 		},
 		{
@@ -50636,16 +50682,8 @@
 			"properties": {
 				"description": "Criado para executar as consultas no HOSAG",
 				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "Geral Atendimentos Sadalla",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
+				"runtimeState": "Stopped",
+				"pipelines": [],
 				"type": "ScheduleTrigger",
 				"typeProperties": {
 					"recurrence": {
@@ -50664,9 +50702,7 @@
 					}
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/Geral Atendimentos Sadalla')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Daily 0300 AM')]",
@@ -50894,6 +50930,13 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "Geral Atendimentos Sadalla",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -50915,7 +50958,8 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/Geral Atendimentos DAYHORC')]"
+				"[concat(variables('factoryId'), '/pipelines/Geral Atendimentos DAYHORC')]",
+				"[concat(variables('factoryId'), '/pipelines/Geral Atendimentos Sadalla')]"
 			]
 		},
 		{

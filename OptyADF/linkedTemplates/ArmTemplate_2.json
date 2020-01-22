@@ -19,23 +19,11 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'Folder_Nexcore_Consolidado'"
 		},
-		"Folder_Requestia_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Folder_Requestia'"
-		},
 		"Folder_Nexcore_Consolidado_properties_typeProperties_host": {
 			"type": "string",
 			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Consolidado"
 		},
 		"Folder_Nexcore_Consolidado_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "hobrasil\\sa.automation"
-		},
-		"Folder_Requestia_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "C:\\Power BI Gateway Files\\Requestia"
-		},
-		"Folder_Requestia_properties_typeProperties_userId": {
 			"type": "string",
 			"defaultValue": "hobrasil\\sa.automation"
 		}
@@ -44,6 +32,28 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Ordens_Servico_Hist')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSQL_DB_Procedimentos",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Ordens de Serviço"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Ordem_Servico_Terc_Hist"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AZ_SQL_TB_Ordens_Servico_Terceiro')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
@@ -2193,28 +2203,6 @@
 					"password": {
 						"type": "SecureString",
 						"value": "[parameters('Folder_Nexcore_Consolidado_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "ServidorArquivosBI",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Folder_Requestia')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "FileServer",
-				"typeProperties": {
-					"host": "[parameters('Folder_Requestia_properties_typeProperties_host')]",
-					"userId": "[parameters('Folder_Requestia_properties_typeProperties_userId')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('Folder_Requestia_password')]"
 					}
 				},
 				"connectVia": {
