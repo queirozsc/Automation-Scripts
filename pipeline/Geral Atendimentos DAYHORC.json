@@ -162,7 +162,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "SELECT\nRCL_SMM AS NR_SEQUENCIA,\nCONVERT(DATE,RCL_DTHR_ATUAL) AS DT_ATUALIZACAO,\nCONVERT(VARCHAR,RCL_DTHR_ATUAL,108) as HR_ATUALIZACAO,\n\nCONVERT(INT,CONVERT(VARCHAR,RCL_OSM_SERIE) + CONVERT(VARCHAR,RCL_OSM)) AS NR_ATENDIMENTO, \n\nRCL_MED AS CD_MEDICO,\nPSV_APEL AS NM_MEDICO,\n'' AS DS_RETORNO,\nCONVERT(VARCHAR,RCL_LAUDO_RTF) AS DS_CONDUTA,\nRCL_PAC AS CD_PESSOA_FISICA,\nCONVERT(VARCHAR,RCL_TXT) AS DS_DIAGNOSTICO,\n'DAYHORC -  UNIDADE ITAIGARA' AS DS_UNIDADE,\n'13188370000227' as CNPJ,\n'DH' AS MARCA\nFROM RCL\nINNER JOIN PSV ON PSV_COD = RCL_MED\n\nWHERE RCL_DTHR_ATUAL BETWEEN GETDATE() - 730 AND GETDATE()",
+						"sqlReaderQuery": "SELECT\nRCL_SMM AS NR_SEQUENCIA,\nCONVERT(DATE,RCL_DTHR_ATUAL) AS DT_ATUALIZACAO,\nCONVERT(VARCHAR,RCL_DTHR_ATUAL,108) as HR_ATUALIZACAO,\n\nCONVERT(VARCHAR,CONVERT(VARCHAR,RCL_OSM_SERIE) + CONVERT(VARCHAR,RCL_OSM)) AS NR_ATENDIMENTO, \n\nRCL_MED AS CD_MEDICO,\nPSV_APEL AS NM_MEDICO,\n'' AS DS_RETORNO,\nCONVERT(VARCHAR,RCL_LAUDO_RTF) AS DS_CONDUTA,\nRCL_PAC AS CD_PESSOA_FISICA,\nCONVERT(VARCHAR,RCL_TXT) AS DS_DIAGNOSTICO,\n'DAYHORC -  UNIDADE ITAIGARA' AS DS_UNIDADE,\n'13188370000227' as CNPJ,\n'DH' AS MARCA\nFROM RCL\nINNER JOIN PSV ON PSV_COD = RCL_MED\n\nWHERE RCL_DTHR_ATUAL BETWEEN GETDATE() - 730 AND GETDATE()",
 						"queryTimeout": "02:00:00"
 					},
 					"sink": {
@@ -225,6 +225,50 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Execute Pipeline HOSL",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Atendimento DH",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Agendamentos DH",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Usuarios DH",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Consulta DH",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Agendas DH",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Geral Atendimentos HOSL",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
 			}
 		],
 		"folder": {

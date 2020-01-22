@@ -1,7 +1,7 @@
 {
-	"name": "Daily 0300 AM",
+	"name": "Daily 0900 PM",
 	"properties": {
-		"description": "Execução de pipelines as 03:00",
+		"description": "Execução de pipelines as 2100",
 		"annotations": [],
 		"runtimeState": "Started",
 		"pipelines": [
@@ -17,14 +17,14 @@
 			"recurrence": {
 				"frequency": "Day",
 				"interval": 1,
-				"startTime": "2020-01-21T22:31:00.000Z",
+				"startTime": "2020-01-22T12:57:00.000Z",
 				"timeZone": "UTC",
 				"schedule": {
 					"minutes": [
 						0
 					],
 					"hours": [
-						6
+						0
 					]
 				}
 			}
