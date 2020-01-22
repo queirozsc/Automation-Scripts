@@ -10,6 +10,12 @@
 					"referenceName": "Geral Atendimentos DAYHORC",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "Geral Atendimentos Sadalla",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
