@@ -19202,7 +19202,14 @@
 					{
 						"name": "Wait1",
 						"type": "Wait",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "Clear base",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"userProperties": [],
 						"typeProperties": {
 							"waitTimeInSeconds": 1
@@ -19342,6 +19349,26 @@
 							"waitOnCompletion": true,
 							"parameters": {}
 						}
+					},
+					{
+						"name": "Clear base",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[CLEARBASEATENDIMENTOUNIDADES]"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureSQL_DB_Procedimentos",
+							"type": "LinkedServiceReference"
+						}
 					}
 				],
 				"folder": {
@@ -19356,7 +19383,8 @@
 				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Agendamento')]",
 				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Usuario')]",
 				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Agenda')]",
-				"[concat(variables('factoryId'), '/pipelines/Geral Atendimentos HOSL')]"
+				"[concat(variables('factoryId'), '/pipelines/Geral Atendimentos HOSL')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]"
 			]
 		},
 		{
