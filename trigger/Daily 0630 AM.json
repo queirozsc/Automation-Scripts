@@ -19,13 +19,19 @@
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "Geral Atendimentos HOB",
+					"referenceName": "Cirurgias e Exames Sadalla",
 					"type": "PipelineReference"
 				}
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "Cirurgias e Exames Sadalla",
+					"referenceName": "Pacientes",
+					"type": "PipelineReference"
+				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "Geral Atendimentos HOB",
 					"type": "PipelineReference"
 				}
 			}
