@@ -12,7 +12,7 @@
 		"type": "OracleTable",
 		"structure": [
 			{
-				"name": "ESTABELECIMENTO",
+				"name": "NR_TIPO_TITULO",
 				"type": "String"
 			},
 			{
@@ -20,95 +20,43 @@
 				"type": "String"
 			},
 			{
-				"name": "NR_ATENDIMENTO",
+				"name": "NR_SERIE_TITULO",
+				"type": "String"
+			},
+			{
+				"name": "NR_TITULO",
 				"type": "Decimal"
 			},
 			{
-				"name": "NR_PRONTUARIO",
+				"name": "DT_RECEBIMENTO",
+				"type": "DateTime"
+			},
+			{
+				"name": "VL_RECEBIDO",
 				"type": "Decimal"
 			},
 			{
-				"name": "CD_PESSOA_FISICA",
-				"type": "String"
-			},
-			{
-				"name": "NM_PACIENTE",
-				"type": "String"
-			},
-			{
-				"name": "NR_TEL",
-				"type": "String"
-			},
-			{
-				"name": "NR_CEL",
-				"type": "String"
-			},
-			{
-				"name": "NR_CEL2",
-				"type": "String"
-			},
-			{
-				"name": "CD_MEDICO",
-				"type": "String"
-			},
-			{
-				"name": "NM_MEDICO",
-				"type": "String"
-			},
-			{
-				"name": "DS_EMAIL",
-				"type": "String"
-			},
-			{
-				"name": "NR_SEQ_CONSULTA",
+				"name": "VL_DESCONTOS",
 				"type": "Decimal"
 			},
 			{
-				"name": "HORA",
+				"name": "VL_JUROS",
+				"type": "Decimal"
+			},
+			{
+				"name": "VL_MULTA",
+				"type": "Decimal"
+			},
+			{
+				"name": "DT_ATUALIZACAO",
+				"type": "DateTime"
+			},
+			{
+				"name": "DS_TIPO_RECEBIMENTO",
 				"type": "String"
 			},
 			{
-				"name": "DATA_ATENDIMENTO",
-				"type": "String"
-			},
-			{
-				"name": "TIPO_ATENDIMENTO",
-				"type": "String"
-			},
-			{
-				"name": "AGENDADO_PARA_DIA",
-				"type": "String"
-			},
-			{
-				"name": "AGENDADO_PARA_HORA",
-				"type": "String"
-			},
-			{
-				"name": "TIPO_AGENDA",
-				"type": "Double"
-			},
-			{
-				"name": "RETORNO_EM",
-				"type": "String"
-			},
-			{
-				"name": "USUARIO",
-				"type": "String"
-			},
-			{
-				"name": "PROCEDIMENTOS",
-				"type": "String"
-			},
-			{
-				"name": "SIGLA_UNIDADE",
-				"type": "String"
-			},
-			{
-				"name": "MARCA",
-				"type": "String"
-			},
-			{
-				"name": "CONDUTA",
+				"name": "DS_TRANSACAO",
 				"type": "String"
 			}
 		]

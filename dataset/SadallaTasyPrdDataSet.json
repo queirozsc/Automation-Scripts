@@ -12,103 +12,91 @@
 		"type": "OracleTable",
 		"structure": [
 			{
-				"name": "ESTABELECIMENTO",
+				"name": "NR_TIPO_TITULO",
 				"type": "String"
 			},
 			{
-				"name": "CNPJ",
+				"name": "NR_SERIE_TITULO",
 				"type": "String"
 			},
 			{
-				"name": "NR_ATENDIMENTO",
+				"name": "NR_TITULO",
 				"type": "Decimal"
 			},
 			{
-				"name": "NR_PRONTUARIO",
+				"name": "DT_EMISSAO_TITULO",
+				"type": "DateTime"
+			},
+			{
+				"name": "DT_VENCIMENTO_TITULO",
+				"type": "DateTime"
+			},
+			{
+				"name": "VL_TITULO",
 				"type": "Decimal"
 			},
 			{
-				"name": "CD_PESSOA_FISICA",
-				"type": "String"
-			},
-			{
-				"name": "NM_PACIENTE",
-				"type": "String"
-			},
-			{
-				"name": "NR_TEL",
-				"type": "String"
-			},
-			{
-				"name": "NR_CEL",
-				"type": "String"
-			},
-			{
-				"name": "NR_CEL2",
-				"type": "String"
-			},
-			{
-				"name": "CD_MEDICO",
-				"type": "String"
-			},
-			{
-				"name": "NM_MEDICO",
-				"type": "String"
-			},
-			{
-				"name": "DS_EMAIL",
-				"type": "String"
-			},
-			{
-				"name": "NR_SEQ_CONSULTA",
+				"name": "VL_MULTA",
 				"type": "Decimal"
 			},
 			{
-				"name": "HORA",
+				"name": "DS_CONVENIO",
 				"type": "String"
 			},
 			{
-				"name": "DATA_ATENDIMENTO",
+				"name": "DS_EMPRESA_CONVENIO",
 				"type": "String"
 			},
 			{
-				"name": "TIPO_ATENDIMENTO",
+				"name": "CONV_CNPJ",
 				"type": "String"
 			},
 			{
-				"name": "AGENDADO_PARA_HORA",
-				"type": "String"
-			},
-			{
-				"name": "AGENDADO_PARA_DIA",
-				"type": "String"
-			},
-			{
-				"name": "TIPO_AGENDA",
+				"name": "VL_ISS",
 				"type": "Double"
 			},
 			{
-				"name": "RETORNO_EM",
-				"type": "String"
+				"name": "VL_IR",
+				"type": "Double"
 			},
 			{
-				"name": "USUARIO",
-				"type": "String"
+				"name": "VL_FILME",
+				"type": "Double"
 			},
 			{
-				"name": "PROCEDIMENTOS",
-				"type": "String"
+				"name": "VL_PERC_ISS",
+				"type": "Double"
 			},
 			{
-				"name": "SIGLA_UNIDADE",
-				"type": "String"
+				"name": "VL_PER_IR",
+				"type": "Double"
+			},
+			{
+				"name": "VL_PERC_MULTA",
+				"type": "Decimal"
+			},
+			{
+				"name": "VL_PERC_JURO",
+				"type": "Decimal"
+			},
+			{
+				"name": "VL_OUTROS_IMP",
+				"type": "Decimal"
+			},
+			{
+				"name": "NR_REMESSA",
+				"type": "Double"
 			},
 			{
 				"name": "MARCA",
 				"type": "String"
 			},
 			{
-				"name": "CONDUTA",
+				"name": "DS_UNIDADE",
+				"type": "String"
+			},
+			{
+				"name": "CNPJ",
 				"type": "String"
 			}
 		]
