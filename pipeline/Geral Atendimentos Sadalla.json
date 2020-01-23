@@ -136,7 +136,7 @@
 				"type": "Wait",
 				"dependsOn": [
 					{
-						"activity": "Stored Procedure1",
+						"activity": "Clear base",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -278,7 +278,7 @@
 				}
 			},
 			{
-				"name": "Stored Procedure1",
+				"name": "Clear base",
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [],
 				"policy": {
