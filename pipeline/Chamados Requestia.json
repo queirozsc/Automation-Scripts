@@ -284,6 +284,36 @@
 												"name": "LASTANLGRP",
 												"type": "String"
 											}
+										},
+										{
+											"source": {
+												"name": "ORIGGROUP",
+												"type": "String"
+											},
+											"sink": {
+												"name": "ORIGGROUP",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"name": "CURRGROUP",
+												"type": "String"
+											},
+											"sink": {
+												"name": "CURRGROUP",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"name": "LASTGROUP",
+												"type": "String"
+											},
+											"sink": {
+												"name": "LASTGROUP",
+												"type": "String"
+											}
 										}
 									]
 								}
