@@ -464,9 +464,6 @@
 					},
 					"CloudTasyProd_connectionString": {
 						"value": "[parameters('CloudTasyProd_connectionString')]"
-					},
-					"CloudTasyProd_NEW_connectionString": {
-						"value": "[parameters('CloudTasyProd_NEW_connectionString')]"
 					}
 				}
 			},
@@ -487,6 +484,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"CloudTasyProd_NEW_connectionString": {
+						"value": "[parameters('CloudTasyProd_NEW_connectionString')]"
 					},
 					"Folder_Nexcore_Consolidado_password": {
 						"value": "[parameters('Folder_Nexcore_Consolidado_password')]"
@@ -544,9 +544,6 @@
 					},
 					"Historicos_Bilhetes_INOB_password": {
 						"value": "[parameters('Historicos_Bilhetes_INOB_password')]"
-					},
-					"Historicos_Bilhetes_SADALLA_password": {
-						"value": "[parameters('Historicos_Bilhetes_SADALLA_password')]"
 					},
 					"Folder_Nexcore_Consolidado_properties_typeProperties_host": {
 						"value": "[parameters('Folder_Nexcore_Consolidado_properties_typeProperties_host')]"
@@ -661,12 +658,6 @@
 					},
 					"Historicos_Bilhetes_INOB_properties_typeProperties_userId": {
 						"value": "[parameters('Historicos_Bilhetes_INOB_properties_typeProperties_userId')]"
-					},
-					"Historicos_Bilhetes_SADALLA_properties_typeProperties_host": {
-						"value": "[parameters('Historicos_Bilhetes_SADALLA_properties_typeProperties_host')]"
-					},
-					"Historicos_Bilhetes_SADALLA_properties_typeProperties_userId": {
-						"value": "[parameters('Historicos_Bilhetes_SADALLA_properties_typeProperties_userId')]"
 					}
 				}
 			},
@@ -687,6 +678,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"Historicos_Bilhetes_SADALLA_password": {
+						"value": "[parameters('Historicos_Bilhetes_SADALLA_password')]"
 					},
 					"Historicos_FIlasPorHoras_CSI_password": {
 						"value": "[parameters('Historicos_FIlasPorHoras_CSI_password')]"
@@ -741,6 +735,12 @@
 					},
 					"SadallaTasyTeste_connectionString": {
 						"value": "[parameters('SadallaTasyTeste_connectionString')]"
+					},
+					"Historicos_Bilhetes_SADALLA_properties_typeProperties_host": {
+						"value": "[parameters('Historicos_Bilhetes_SADALLA_properties_typeProperties_host')]"
+					},
+					"Historicos_Bilhetes_SADALLA_properties_typeProperties_userId": {
+						"value": "[parameters('Historicos_Bilhetes_SADALLA_properties_typeProperties_userId')]"
 					},
 					"Historicos_FIlasPorHoras_CSI_properties_typeProperties_host": {
 						"value": "[parameters('Historicos_FIlasPorHoras_CSI_properties_typeProperties_host')]"

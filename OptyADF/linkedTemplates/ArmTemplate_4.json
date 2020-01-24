@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "OptyADF"
 		},
+		"Historicos_Bilhetes_SADALLA_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Historicos_Bilhetes_SADALLA'"
+		},
 		"Historicos_FIlasPorHoras_CSI_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'Historicos_FIlasPorHoras_CSI'"
@@ -79,6 +83,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'SadallaTasyTeste'"
 		},
+		"Historicos_Bilhetes_SADALLA_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\SADALLA\\BilheteLigacoes\\Novo"
+		},
+		"Historicos_Bilhetes_SADALLA_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "hobrasil\\sa.automation"
+		},
 		"Historicos_FIlasPorHoras_CSI_properties_typeProperties_host": {
 			"type": "string",
 			"defaultValue": "C:\\Power BI Gateway Files\\Nexcore\\Historicos NEXCORE\\CSI\\FilasPorHoras"
@@ -140,6 +152,29 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/Historicos_Bilhetes_SADALLA')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Historicos_Bilhetes_SADALLA",
+				"annotations": [],
+				"type": "FileServer",
+				"typeProperties": {
+					"host": "[parameters('Historicos_Bilhetes_SADALLA_properties_typeProperties_host')]",
+					"userId": "[parameters('Historicos_Bilhetes_SADALLA_properties_typeProperties_userId')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('Historicos_Bilhetes_SADALLA_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "ServidorArquivosBI",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Historicos_FIlasPorHoras_CSI')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -505,37 +540,6 @@
 					"location": {
 						"type": "FileServerLocation",
 						"fileName": "AgentesPorDiaCSI.csv"
-					},
-					"columnDelimiter": ";",
-					"escapeChar": "",
-					"firstRowAsHeader": true,
-					"quoteChar": ""
-				},
-				"schema": [
-					{
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/CSI_CSV_NC_AgentesPorDia_Temp')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Historicos_AgentesPorDia_CSI",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Nexcore/CSI/Históricos"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "FileServerLocation"
 					},
 					"columnDelimiter": ";",
 					"escapeChar": "",

@@ -7987,7 +7987,7 @@
 														"type": "String"
 													},
 													"sink": {
-														"name": "LOCATION",
+														"name": "REQLOCATION",
 														"type": "String"
 													}
 												},
@@ -8173,46 +8173,6 @@
 												},
 												{
 													"source": {
-														"name": "TEMPO_RESOLUCAO",
-														"type": "String"
-													},
-													"sink": {
-														"name": "TEMPO_RESOLUCAO",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "PRAZO_RESL",
-														"type": "String"
-													},
-													"sink": {
-														"name": "PRAZO_RESL",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "TEMPO_REPOSTA",
-														"type": "String"
-													},
-													"sink": {
-														"name": "TEMPO_REPOSTA",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "PRAZO_RESP",
-														"type": "String"
-													},
-													"sink": {
-														"name": "PRAZO_RESP",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
 														"name": "RESPTIME",
 														"type": "String"
 													},
@@ -8338,16 +8298,6 @@
 													},
 													"sink": {
 														"name": "APROVANLTYPE",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "APROVANALYST",
-														"type": "String"
-													},
-													"sink": {
-														"name": "APROVANALYST",
 														"type": "String"
 													}
 												},
@@ -19202,14 +19152,7 @@
 					{
 						"name": "Wait1",
 						"type": "Wait",
-						"dependsOn": [
-							{
-								"activity": "Clear base",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
+						"dependsOn": [],
 						"userProperties": [],
 						"typeProperties": {
 							"waitTimeInSeconds": 1
@@ -19349,26 +19292,6 @@
 							"waitOnCompletion": true,
 							"parameters": {}
 						}
-					},
-					{
-						"name": "Clear base",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[dbo].[CLEARBASEATENDIMENTOUNIDADES]"
-						},
-						"linkedServiceName": {
-							"referenceName": "AzureSQL_DB_Procedimentos",
-							"type": "LinkedServiceReference"
-						}
 					}
 				],
 				"folder": {
@@ -19383,8 +19306,7 @@
 				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Agendamento')]",
 				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Usuario')]",
 				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Agenda')]",
-				"[concat(variables('factoryId'), '/pipelines/Geral Atendimentos HOSL')]",
-				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]"
+				"[concat(variables('factoryId'), '/pipelines/Geral Atendimentos HOSL')]"
 			]
 		},
 		{
@@ -50766,13 +50688,6 @@
 					},
 					{
 						"pipelineReference": {
-							"referenceName": "Pacientes",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
-					{
-						"pipelineReference": {
 							"referenceName": "Geral Atendimentos HOB",
 							"type": "PipelineReference"
 						},
@@ -50801,7 +50716,6 @@
 				"[concat(variables('factoryId'), '/pipelines/Agendas Projesi')]",
 				"[concat(variables('factoryId'), '/pipelines/Chamados Requestia')]",
 				"[concat(variables('factoryId'), '/pipelines/Cirurgias e Exames Sadalla')]",
-				"[concat(variables('factoryId'), '/pipelines/Pacientes')]",
 				"[concat(variables('factoryId'), '/pipelines/Geral Atendimentos HOB')]"
 			]
 		},
@@ -51014,6 +50928,38 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/Workflows Requestia')]"
 			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Weekly Tuesday')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Execução de pipelines toda terça-feira",
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Week",
+						"interval": 1,
+						"startTime": "2020-01-24T12:41:00.000Z",
+						"timeZone": "UTC",
+						"schedule": {
+							"minutes": [
+								0
+							],
+							"hours": [
+								15
+							],
+							"weekDays": [
+								"Tuesday"
+							]
+						}
+					}
+				}
+			},
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/ServidorArquivosBI')]",
