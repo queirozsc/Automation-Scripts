@@ -294,7 +294,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@equals(\nactivity('Check sessions file exists').output.exists, \ntrue)",
+						"value": "@equals(\nactivity('Check sessions file exists').output.exists, \nfalse)",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
@@ -533,7 +533,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@equals(\nactivity('Check answers file exists').output.exists, \ntrue)",
+						"value": "@equals(\nactivity('Check answers file exists').output.exists, \nfalse)",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
@@ -742,7 +742,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@equals(\nactivity('Check table answers file exists').output.exists, \ntrue)",
+						"value": "@equals(\nactivity('Check table answers file exists').output.exists, \nfalse)",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
