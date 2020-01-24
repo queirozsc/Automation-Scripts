@@ -314,6 +314,36 @@
 												"name": "LASTGROUP",
 												"type": "String"
 											}
+										},
+										{
+											"source": {
+												"name": "GRGROUP",
+												"type": "String"
+											},
+											"sink": {
+												"name": "GRGROUP",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"name": "CATEGORY",
+												"type": "String"
+											},
+											"sink": {
+												"name": "CATEGORY",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"name": "RPRIORITY",
+												"type": "String"
+											},
+											"sink": {
+												"name": "RPRIORITY",
+												"type": "String"
+											}
 										}
 									]
 								}
