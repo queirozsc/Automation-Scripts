@@ -105,7 +105,14 @@
 							"name": "Calculate fields",
 							"description": "Update calculated fields (for example, SLA formula, datetime conversions, business hours difference) for time saving in queries",
 							"type": "SqlServerStoredProcedure",
-							"dependsOn": [],
+							"dependsOn": [
+								{
+									"activity": "Copy requests",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
 							"policy": {
 								"timeout": "7.00:00:00",
 								"retry": 0,
