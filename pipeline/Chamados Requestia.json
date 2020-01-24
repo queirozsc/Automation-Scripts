@@ -791,7 +791,7 @@
 												"type": "String"
 											},
 											"sink": {
-												"name": "REQWORKFLOW",
+												"name": "WORKFLOW",
 												"type": "String"
 											}
 										},
