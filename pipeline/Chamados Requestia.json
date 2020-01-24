@@ -254,6 +254,36 @@
 												"name": "CURRANAL",
 												"type": "String"
 											}
+										},
+										{
+											"source": {
+												"name": "GROUPANAL",
+												"type": "String"
+											},
+											"sink": {
+												"name": "GROUPANAL",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"name": "LASTANAL",
+												"type": "String"
+											},
+											"sink": {
+												"name": "LASTANAL",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"name": "LASTANLGRP",
+												"type": "String"
+											},
+											"sink": {
+												"name": "LASTANLGRP",
+												"type": "String"
+											}
 										}
 									]
 								}
