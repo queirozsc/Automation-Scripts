@@ -344,6 +344,36 @@
 												"name": "RPRIORITY",
 												"type": "String"
 											}
+										},
+										{
+											"source": {
+												"name": "PRODUCT",
+												"type": "String"
+											},
+											"sink": {
+												"name": "PRODUCT",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"name": "PROCESS",
+												"type": "String"
+											},
+											"sink": {
+												"name": "PROCESS",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"name": "PROBLEM",
+												"type": "String"
+											},
+											"sink": {
+												"name": "PROBLEM",
+												"type": "String"
+											}
 										}
 									]
 								}
