@@ -50712,16 +50712,8 @@
 			"properties": {
 				"description": "Execução de pipelines as 03:00",
 				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "Geral Atendimentos DAYHORC",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
+				"runtimeState": "Stopped",
+				"pipelines": [],
 				"type": "ScheduleTrigger",
 				"typeProperties": {
 					"recurrence": {
@@ -50740,9 +50732,7 @@
 					}
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/Geral Atendimentos DAYHORC')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Daily 0630 AM')]",
@@ -50927,13 +50917,6 @@
 				"pipelines": [
 					{
 						"pipelineReference": {
-							"referenceName": "Geral Atendimentos DAYHORC",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
-					{
-						"pipelineReference": {
 							"referenceName": "Geral Atendimentos Sadalla",
 							"type": "PipelineReference"
 						},
@@ -50959,7 +50942,6 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/Geral Atendimentos DAYHORC')]",
 				"[concat(variables('factoryId'), '/pipelines/Geral Atendimentos Sadalla')]"
 			]
 		},

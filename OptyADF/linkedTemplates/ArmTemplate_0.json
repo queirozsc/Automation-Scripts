@@ -162,6 +162,35 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Daily 0300 AM')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Execução de pipelines as 03:00",
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Day",
+						"interval": 1,
+						"startTime": "2020-01-21T22:31:00.000Z",
+						"timeZone": "UTC",
+						"schedule": {
+							"minutes": [
+								0
+							],
+							"hours": [
+								6
+							]
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Daily 1000 PM')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
@@ -1602,56 +1631,6 @@
 				],
 				"typeProperties": {
 					"tableName": "[[dbo].[Nexcore_FilasPorHoras_temp]"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AZSQL_TB_Pacientes_Unidade')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSQL_DB_Procedimentos",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Retornos"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "cd_pessoa_fisica",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "nm_pessoa_fisica",
-						"type": "varchar"
-					},
-					{
-						"name": "nr_cpf",
-						"type": "varchar"
-					},
-					{
-						"name": "dt_nascimento",
-						"type": "date"
-					},
-					{
-						"name": "nr_telefone_celular",
-						"type": "varchar"
-					},
-					{
-						"name": "nr_telefone",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Pacientes_Unidade"
 				}
 			},
 			"dependsOn": [
