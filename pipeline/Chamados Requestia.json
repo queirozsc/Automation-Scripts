@@ -787,11 +787,11 @@
 										},
 										{
 											"source": {
-												"name": "WORKFLOW",
+												"name": "REQWORKFLOW",
 												"type": "String"
 											},
 											"sink": {
-												"name": "WORKFLOW",
+												"name": "REQWORKFLOW",
 												"type": "String"
 											}
 										},
