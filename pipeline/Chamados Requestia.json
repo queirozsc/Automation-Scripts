@@ -224,6 +224,36 @@
 												"name": "REQUEST",
 												"type": "String"
 											}
+										},
+										{
+											"source": {
+												"name": "CLIENT",
+												"type": "String"
+											},
+											"sink": {
+												"name": "CLIENT",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"name": "ORIGANAL",
+												"type": "String"
+											},
+											"sink": {
+												"name": "ORIGANAL",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"name": "CURRANAL",
+												"type": "String"
+											},
+											"sink": {
+												"name": "CURRANAL",
+												"type": "String"
+											}
 										}
 									]
 								}
