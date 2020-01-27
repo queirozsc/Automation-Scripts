@@ -536,6 +536,9 @@
 											}
 										},
 										{
+											"source": {
+												"name": "LASTACTTYPE"
+											},
 											"sink": {
 												"name": "LASTACTTYPE"
 											}
