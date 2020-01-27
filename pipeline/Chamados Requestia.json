@@ -642,6 +642,182 @@
 										{
 											"source": {
 												"name": "TOTALCOST"
+											},
+											"sink": {
+												"name": "TOTALCOST"
+											}
+										},
+										{
+											"source": {
+												"name": "APROVANLTYPE"
+											},
+											"sink": {
+												"name": "APROVANLTYPE"
+											}
+										},
+										{
+											"source": {
+												"name": "APROVCLITYPE"
+											},
+											"sink": {
+												"name": "APROVCLITYPE"
+											}
+										},
+										{
+											"source": {
+												"name": "MLEVELAPROV"
+											},
+											"sink": {
+												"name": "MLEVELAPROV"
+											}
+										},
+										{
+											"source": {
+												"name": "CLIENTAPROV"
+											},
+											"sink": {
+												"name": "CLIENTAPROV"
+											}
+										},
+										{
+											"source": {
+												"name": "PACKAGE"
+											},
+											"sink": {
+												"name": "PACKAGE"
+											}
+										},
+										{
+											"source": {
+												"name": "PROJECT"
+											},
+											"sink": {
+												"name": "PROJECT"
+											}
+										},
+										{
+											"source": {
+												"name": "WORKFLOW"
+											},
+											"sink": {
+												"name": "WORKFLOW"
+											}
+										},
+										{
+											"source": {
+												"name": "REQWORKFLOW"
+											},
+											"sink": {
+												"name": "REQWORKFLOW"
+											}
+										},
+										{
+											"source": {
+												"name": "ORIGCATEGORY"
+											},
+											"sink": {
+												"name": "ORIGCATEGORY"
+											}
+										},
+										{
+											"source": {
+												"name": "ORIGPRODUCT"
+											},
+											"sink": {
+												"name": "ORIGPRODUCT"
+											}
+										},
+										{
+											"source": {
+												"name": "ORIGPROCESS"
+											},
+											"sink": {
+												"name": "ORIGPROCESS"
+											}
+										},
+										{
+											"source": {
+												"name": "TOTALATTACH"
+											},
+											"sink": {
+												"name": "TOTALATTACH"
+											}
+										},
+										{
+											"source": {
+												"name": "TOTALATTACHACT"
+											},
+											"sink": {
+												"name": "TOTALATTACHACT"
+											}
+										},
+										{
+											"source": {
+												"name": "INSERTDATE"
+											},
+											"sink": {
+												"name": "INSERTDATE"
+											}
+										},
+										{
+											"source": {
+												"name": "QFORM"
+											},
+											"sink": {
+												"name": "QFORM"
+											}
+										},
+										{
+											"source": {
+												"name": "QSURVEY"
+											},
+											"sink": {
+												"name": "QSURVEY"
+											}
+										},
+										{
+											"source": {
+												"name": "QSESSIONFORM"
+											},
+											"sink": {
+												"name": "QSESSIONFORM"
+											}
+										},
+										{
+											"source": {
+												"name": "QSESSIONSURVEY"
+											},
+											"sink": {
+												"name": "QSESSIONSURVEY"
+											}
+										},
+										{
+											"source": {
+												"name": "TEMPO_RESOLUCAO"
+											},
+											"sink": {
+												"name": "TEMPO_RESOLUCAO"
+											}
+										},
+										{
+											"source": {
+												"name": "PRAZO_RESL"
+											},
+											"sink": {
+												"name": "PRAZO_RESL"
+											}
+										},
+										{
+											"source": {
+												"name": "TEMPO_REPOSTA"
+											},
+											"sink": {
+												"name": "TEMPO_REPOSTA"
+											}
+										},
+										{
+											"source": {
+												"name": "PRAZO_RESP"
 											}
 										}
 									]
