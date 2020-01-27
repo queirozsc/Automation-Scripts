@@ -542,6 +542,107 @@
 											"sink": {
 												"name": "LASTACTTYPE"
 											}
+										},
+										{
+											"source": {
+												"name": "RESPDATE"
+											},
+											"sink": {
+												"name": "RESPDATE"
+											}
+										},
+										{
+											"source": {
+												"name": "RESPTIME"
+											},
+											"sink": {
+												"name": "RESPTIME"
+											}
+										},
+										{
+											"source": {
+												"name": "RESLTIME"
+											},
+											"sink": {
+												"name": "RESLTIME"
+											}
+										},
+										{
+											"source": {
+												"name": "RESPMINS"
+											},
+											"sink": {
+												"name": "RESPMINS"
+											}
+										},
+										{
+											"source": {
+												"name": "RESLMINS"
+											},
+											"sink": {
+												"name": "RESLMINS"
+											}
+										},
+										{
+											"source": {
+												"name": "RESPREMAINS"
+											},
+											"sink": {
+												"name": "RESPREMAINS"
+											}
+										},
+										{
+											"source": {
+												"name": "RESLREMAINS"
+											},
+											"sink": {
+												"name": "RESLREMAINS"
+											}
+										},
+										{
+											"source": {
+												"name": "RESPMODE"
+											},
+											"sink": {
+												"name": "RESPMODE"
+											}
+										},
+										{
+											"source": {
+												"name": "RESLMODE"
+											},
+											"sink": {
+												"name": "RESLMODE"
+											}
+										},
+										{
+											"source": {
+												"name": "NOCOMPUTE"
+											},
+											"sink": {
+												"name": "NOCOMPUTE"
+											}
+										},
+										{
+											"source": {
+												"name": "RLOCKED"
+											},
+											"sink": {
+												"name": "RLOCKED"
+											}
+										},
+										{
+											"source": {
+												"name": "ESTIMCOST"
+											},
+											"sink": {
+												"name": "ESTIMCOST"
+											}
+										},
+										{
+											"source": {
+												"name": "TOTALCOST"
+											}
 										}
 									]
 								}
