@@ -818,6 +818,9 @@
 										{
 											"source": {
 												"name": "PRAZO_RESP"
+											},
+											"sink": {
+												"name": "PRAZO_RESP"
 											}
 										}
 									]
@@ -889,7 +892,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@equals(\nactivity('Check sessions file exists').output.exists, \nfalse)",
+						"value": "@equals(\nactivity('Check sessions file exists').output.exists, \ntrue)",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
@@ -1128,7 +1131,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@equals(\nactivity('Check answers file exists').output.exists, \nfalse)",
+						"value": "@equals(\nactivity('Check answers file exists').output.exists, \ntrue)",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
@@ -1337,7 +1340,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@equals(\nactivity('Check table answers file exists').output.exists, \nfalse)",
+						"value": "@equals(\nactivity('Check table answers file exists').output.exists, \ntrue)",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
