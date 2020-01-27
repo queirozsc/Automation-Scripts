@@ -518,6 +518,22 @@
 											"sink": {
 												"name": "LASTPRIORITY"
 											}
+										},
+										{
+											"source": {
+												"name": "LASTREOPEN"
+											},
+											"sink": {
+												"name": "LASTREOPEN"
+											}
+										},
+										{
+											"source": {
+												"name": "LASTACTIONATEND"
+											},
+											"sink": {
+												"name": "LASTACTIONATEND"
+											}
 										}
 									]
 								}
