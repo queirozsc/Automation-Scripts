@@ -398,6 +398,27 @@
 											"sink": {
 												"name": "REQSOURCE"
 											}
+										},
+										{
+											"source": {
+												"name": "LOCATION"
+											},
+											"sink": {
+												"name": "REQLOCATION"
+											}
+										},
+										{
+											"source": {
+												"name": "ORGUNIT"
+											},
+											"sink": {
+												"name": "ORGUNIT"
+											}
+										},
+										{
+											"sink": {
+												"name": "ORGUNIT_ROOT"
+											}
 										}
 									]
 								}
