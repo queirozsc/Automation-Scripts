@@ -374,6 +374,30 @@
 												"name": "PROBLEM",
 												"type": "String"
 											}
+										},
+										{
+											"source": {
+												"name": "RSTATUS"
+											},
+											"sink": {
+												"name": "RSTATUS"
+											}
+										},
+										{
+											"source": {
+												"name": "REQTYPE"
+											},
+											"sink": {
+												"name": "REQTYPE"
+											}
+										},
+										{
+											"source": {
+												"name": "REQSOURCE"
+											},
+											"sink": {
+												"name": "REQSOURCE"
+											}
 										}
 									]
 								}
