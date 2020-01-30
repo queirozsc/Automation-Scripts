@@ -1,23 +1,26 @@
 {
-	"name": "Daily 0300 AM",
+	"name": "Weekly Tuesday",
 	"properties": {
-		"description": "Execução de pipelines as 03:00",
+		"description": "Execução de pipelines toda terça-feira",
 		"annotations": [],
 		"runtimeState": "Stopped",
 		"pipelines": [],
 		"type": "ScheduleTrigger",
 		"typeProperties": {
 			"recurrence": {
-				"frequency": "Day",
+				"frequency": "Week",
 				"interval": 1,
-				"startTime": "2020-01-21T22:31:00.000Z",
+				"startTime": "2020-01-24T12:41:00.000Z",
 				"timeZone": "UTC",
 				"schedule": {
 					"minutes": [
 						0
 					],
 					"hours": [
-						6
+						15
+					],
+					"weekDays": [
+						"Tuesday"
 					]
 				}
 			}
