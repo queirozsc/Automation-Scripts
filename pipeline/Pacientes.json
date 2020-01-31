@@ -503,6 +503,9 @@
 					"secureInput": false
 				},
 				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[CLEARBASEPACIENTES]"
+				},
 				"linkedServiceName": {
 					"referenceName": "AzureSQL_DB_Procedimentos",
 					"type": "LinkedServiceReference"
