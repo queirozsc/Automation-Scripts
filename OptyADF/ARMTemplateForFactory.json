@@ -9218,7 +9218,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Cirurgias e Exames Sadalla')]",
+			"name": "[concat(parameters('factoryName'), '/Cirurgias e Exames Sadalla e HOB')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -9401,6 +9401,52 @@
 							"referenceName": "AzureSQL_DB_Procedimentos",
 							"type": "LinkedServiceReference"
 						}
+					},
+					{
+						"name": "Cirurgias HOB",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Wait1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "select a.nr_cirurgia,\na.dt_inicio_prevista,\na.cd_pessoa_fisica,\nobter_nome_pf(a.cd_pessoa_fisica) as nm_paciente,\nto_char(cd_procedimento_princ) as cd_procedimento,\na.nr_seq_proc_interno as cd_procedimento_int,\nobter_desc_procedimento(a.cd_procedimento_princ,a.ie_origem_proced)as ds_procedimento,\na.cd_medico_cirurgiao as cd_medico,\nobter_nome_pf(a.cd_medico_cirurgiao) as nm_medico,\ne.cd_cgc as CNPJ,\ne.nm_fantasia_estab as ds_unidade,\nem.nm_razao_social as marca,\na.dt_atualizacao\nfrom cirurgia a,\n     estabelecimento e,\n     empresa em\nwhere a.cd_estabelecimento = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa\nand a.dt_cancelamento is null",
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "CloudTasyPrdDataSet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AZ_SQL_TB_Cirurgias",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
 					}
 				],
 				"folder": {
@@ -9414,7 +9460,8 @@
 				"[concat(variables('factoryId'), '/datasets/FILE_Padrao_Retornos_Cirurgias')]",
 				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Padrao_Retorno_Cir_Sadalla')]",
 				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Cirurgias')]",
-				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]"
+				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]",
+				"[concat(variables('factoryId'), '/datasets/CloudTasyPrdDataSet')]"
 			]
 		},
 		{
@@ -27446,7 +27493,14 @@
 					{
 						"name": "Wait1",
 						"type": "Wait",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "Clear Base",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"userProperties": [],
 						"typeProperties": {
 							"waitTimeInSeconds": 1
@@ -27940,6 +27994,26 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "Clear Base",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[CLEARBASEPACIENTES]"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureSQL_DB_Procedimentos",
+							"type": "LinkedServiceReference"
+						}
 					}
 				],
 				"annotations": []
@@ -27952,7 +28026,8 @@
 				"[concat(variables('factoryId'), '/datasets/SMART_Oftalmoclin_Prd_DataSet')]",
 				"[concat(variables('factoryId'), '/datasets/SadallaTasyPrdDataSet')]",
 				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Pacientes')]",
-				"[concat(variables('factoryId'), '/datasets/CloudTasyPrdDataSet')]"
+				"[concat(variables('factoryId'), '/datasets/CloudTasyPrdDataSet')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_DB_Procedimentos')]"
 			]
 		},
 		{
@@ -50635,7 +50710,7 @@
 					},
 					{
 						"pipelineReference": {
-							"referenceName": "Cirurgias e Exames Sadalla",
+							"referenceName": "Cirurgias e Exames Sadalla e HOB",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -50669,7 +50744,7 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/Agendas Projesi')]",
 				"[concat(variables('factoryId'), '/pipelines/Chamados Requestia')]",
-				"[concat(variables('factoryId'), '/pipelines/Cirurgias e Exames Sadalla')]",
+				"[concat(variables('factoryId'), '/pipelines/Cirurgias e Exames Sadalla e HOB')]",
 				"[concat(variables('factoryId'), '/pipelines/Geral Atendimentos HOB')]"
 			]
 		},

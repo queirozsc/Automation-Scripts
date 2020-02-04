@@ -6989,7 +6989,7 @@
 					},
 					{
 						"pipelineReference": {
-							"referenceName": "Cirurgias e Exames Sadalla",
+							"referenceName": "Cirurgias e Exames Sadalla e HOB",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
