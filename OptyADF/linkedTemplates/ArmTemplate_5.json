@@ -248,35 +248,31 @@
 				"type": "OracleTable",
 				"structure": [
 					{
-						"name": "NR_TIPO_TITULO",
+						"name": "CD_PESSOA_FISICA",
 						"type": "String"
 					},
 					{
-						"name": "CNPJ",
+						"name": "NM_PESSOA_FISICA",
 						"type": "String"
 					},
 					{
-						"name": "NR_SERIE_TITULO",
+						"name": "NR_CPF",
 						"type": "String"
 					},
 					{
-						"name": "NR_TITULO",
-						"type": "Decimal"
+						"name": "DT_NASCIMENTO",
+						"type": "String"
 					},
 					{
-						"name": "DT_RECEBIMENTO",
+						"name": "DT_EMISSAO_TITULO",
 						"type": "DateTime"
 					},
 					{
-						"name": "VL_RECEBIDO",
-						"type": "Decimal"
+						"name": "DT_VENCIMENTO_TITULO",
+						"type": "DateTime"
 					},
 					{
-						"name": "VL_DESCONTOS",
-						"type": "Decimal"
-					},
-					{
-						"name": "VL_JUROS",
+						"name": "VL_TITULO",
 						"type": "Decimal"
 					},
 					{
@@ -284,16 +280,72 @@
 						"type": "Decimal"
 					},
 					{
-						"name": "DT_ATUALIZACAO",
+						"name": "DS_CONVENIO",
+						"type": "String"
+					},
+					{
+						"name": "DS_EMPRESA_CONVENIO",
+						"type": "String"
+					},
+					{
+						"name": "CONV_CNPJ",
+						"type": "String"
+					},
+					{
+						"name": "VL_ISS",
+						"type": "Double"
+					},
+					{
+						"name": "VL_IR",
+						"type": "Double"
+					},
+					{
+						"name": "VL_FILME",
+						"type": "Double"
+					},
+					{
+						"name": "VL_PERC_ISS",
+						"type": "Double"
+					},
+					{
+						"name": "VL_PER_IR",
+						"type": "Double"
+					},
+					{
+						"name": "VL_PERC_MULTA",
+						"type": "Decimal"
+					},
+					{
+						"name": "VL_PERC_JURO",
+						"type": "Decimal"
+					},
+					{
+						"name": "VL_OUTROS_IMP",
+						"type": "Decimal"
+					},
+					{
+						"name": "NR_REMESSA",
+						"type": "Double"
+					},
+					{
+						"name": "MARCA",
+						"type": "String"
+					},
+					{
+						"name": "DS_UNIDADE",
+						"type": "String"
+					},
+					{
+						"name": "CNPJ",
+						"type": "String"
+					},
+					{
+						"name": "BASE",
+						"type": "String"
+					},
+					{
+						"name": "DT_CARGA",
 						"type": "DateTime"
-					},
-					{
-						"name": "DS_TIPO_RECEBIMENTO",
-						"type": "String"
-					},
-					{
-						"name": "DS_TRANSACAO",
-						"type": "String"
 					}
 				],
 				"typeProperties": {}
