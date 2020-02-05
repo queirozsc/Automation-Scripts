@@ -12,7 +12,27 @@
 		"type": "OracleTable",
 		"structure": [
 			{
-				"name": "NR_TIPO_TITULO",
+				"name": "CD_PESSOA_FISICA",
+				"type": "String"
+			},
+			{
+				"name": "NM_PESSOA_FISICA",
+				"type": "String"
+			},
+			{
+				"name": "NR_CPF",
+				"type": "String"
+			},
+			{
+				"name": "DT_NASCIMENTO",
+				"type": "String"
+			},
+			{
+				"name": "NR_TELEFONE_CELULAR",
+				"type": "String"
+			},
+			{
+				"name": "NR_TELEFONE",
 				"type": "String"
 			},
 			{
@@ -20,43 +40,35 @@
 				"type": "String"
 			},
 			{
-				"name": "NR_SERIE_TITULO",
+				"name": "DS_UNIDADE",
 				"type": "String"
 			},
 			{
-				"name": "NR_TITULO",
+				"name": "MARCA",
+				"type": "String"
+			},
+			{
+				"name": "NR_PRONTUARIO",
 				"type": "Decimal"
 			},
 			{
-				"name": "DT_RECEBIMENTO",
+				"name": "DT_CADASTRO_ORIGINAL",
 				"type": "DateTime"
-			},
-			{
-				"name": "VL_RECEBIDO",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_DESCONTOS",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_JUROS",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_MULTA",
-				"type": "Decimal"
 			},
 			{
 				"name": "DT_ATUALIZACAO",
 				"type": "DateTime"
 			},
 			{
-				"name": "DS_TIPO_RECEBIMENTO",
+				"name": "IE_SEXO",
 				"type": "String"
 			},
 			{
-				"name": "DS_TRANSACAO",
+				"name": "CD_CEP",
+				"type": "String"
+			},
+			{
+				"name": "BASE",
 				"type": "String"
 			}
 		]
