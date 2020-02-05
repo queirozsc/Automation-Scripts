@@ -12,31 +12,83 @@
 		"type": "OracleTable",
 		"structure": [
 			{
-				"name": "CD_PESSOA_FISICA",
+				"name": "NR_TIPO_TITULO",
 				"type": "String"
 			},
 			{
-				"name": "NM_PESSOA_FISICA",
+				"name": "NR_SERIE_TITULO",
 				"type": "String"
 			},
 			{
-				"name": "NR_CPF",
+				"name": "NR_TITULO",
+				"type": "Decimal"
+			},
+			{
+				"name": "DT_EMISSAO_TITULO",
+				"type": "DateTime"
+			},
+			{
+				"name": "DT_VENCIMENTO_TITULO",
+				"type": "DateTime"
+			},
+			{
+				"name": "VL_TITULO",
+				"type": "Decimal"
+			},
+			{
+				"name": "VL_MULTA",
+				"type": "Decimal"
+			},
+			{
+				"name": "DS_CONVENIO",
 				"type": "String"
 			},
 			{
-				"name": "DT_NASCIMENTO",
+				"name": "DS_EMPRESA_CONVENIO",
 				"type": "String"
 			},
 			{
-				"name": "NR_TELEFONE_CELULAR",
+				"name": "CONV_CNPJ",
 				"type": "String"
 			},
 			{
-				"name": "NR_TELEFONE",
-				"type": "String"
+				"name": "VL_ISS",
+				"type": "Double"
 			},
 			{
-				"name": "CNPJ",
+				"name": "VL_IR",
+				"type": "Double"
+			},
+			{
+				"name": "VL_FILME",
+				"type": "Double"
+			},
+			{
+				"name": "VL_PERC_ISS",
+				"type": "Double"
+			},
+			{
+				"name": "VL_PER_IR",
+				"type": "Double"
+			},
+			{
+				"name": "VL_PERC_MULTA",
+				"type": "Decimal"
+			},
+			{
+				"name": "VL_PERC_JURO",
+				"type": "Decimal"
+			},
+			{
+				"name": "VL_OUTROS_IMP",
+				"type": "Decimal"
+			},
+			{
+				"name": "NR_REMESSA",
+				"type": "Double"
+			},
+			{
+				"name": "MARCA",
 				"type": "String"
 			},
 			{
@@ -44,32 +96,16 @@
 				"type": "String"
 			},
 			{
-				"name": "MARCA",
-				"type": "String"
-			},
-			{
-				"name": "NR_PRONTUARIO",
-				"type": "Decimal"
-			},
-			{
-				"name": "DT_CADASTRO_ORIGINAL",
-				"type": "DateTime"
-			},
-			{
-				"name": "DT_ATUALIZACAO",
-				"type": "DateTime"
-			},
-			{
-				"name": "IE_SEXO",
-				"type": "String"
-			},
-			{
-				"name": "CD_CEP",
+				"name": "CNPJ",
 				"type": "String"
 			},
 			{
 				"name": "BASE",
 				"type": "String"
+			},
+			{
+				"name": "DT_CARGA",
+				"type": "DateTime"
 			}
 		]
 	},
