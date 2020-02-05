@@ -28,83 +28,43 @@
 				"type": "OracleTable",
 				"structure": [
 					{
-						"name": "NR_TIPO_TITULO",
-						"type": "String"
-					},
-					{
-						"name": "NR_SERIE_TITULO",
-						"type": "String"
-					},
-					{
-						"name": "NR_TITULO",
+						"name": "NR_CIRURGIA",
 						"type": "Decimal"
 					},
 					{
-						"name": "DT_EMISSAO_TITULO",
+						"name": "DT_INICIO_PREVISTA",
 						"type": "DateTime"
 					},
 					{
-						"name": "DT_VENCIMENTO_TITULO",
-						"type": "DateTime"
-					},
-					{
-						"name": "VL_TITULO",
-						"type": "Decimal"
-					},
-					{
-						"name": "VL_MULTA",
-						"type": "Decimal"
-					},
-					{
-						"name": "DS_CONVENIO",
+						"name": "CD_PESSOA_FISICA",
 						"type": "String"
 					},
 					{
-						"name": "DS_EMPRESA_CONVENIO",
+						"name": "NM_PACIENTE",
 						"type": "String"
 					},
 					{
-						"name": "CONV_CNPJ",
+						"name": "CD_PROCEDIMENTO",
 						"type": "String"
 					},
 					{
-						"name": "VL_ISS",
-						"type": "Double"
-					},
-					{
-						"name": "VL_IR",
-						"type": "Double"
-					},
-					{
-						"name": "VL_FILME",
-						"type": "Double"
-					},
-					{
-						"name": "VL_PERC_ISS",
-						"type": "Double"
-					},
-					{
-						"name": "VL_PER_IR",
-						"type": "Double"
-					},
-					{
-						"name": "VL_PERC_MULTA",
+						"name": "CD_PROCEDIMENTO_INT",
 						"type": "Decimal"
 					},
 					{
-						"name": "VL_PERC_JURO",
-						"type": "Decimal"
+						"name": "DS_PROCEDIMENTO",
+						"type": "String"
 					},
 					{
-						"name": "VL_OUTROS_IMP",
-						"type": "Decimal"
+						"name": "CD_MEDICO",
+						"type": "String"
 					},
 					{
-						"name": "NR_REMESSA",
-						"type": "Double"
+						"name": "NM_MEDICO",
+						"type": "String"
 					},
 					{
-						"name": "MARCA",
+						"name": "CNPJ",
 						"type": "String"
 					},
 					{
@@ -112,7 +72,19 @@
 						"type": "String"
 					},
 					{
-						"name": "CNPJ",
+						"name": "MARCA",
+						"type": "String"
+					},
+					{
+						"name": "DT_ATUALIZACAO",
+						"type": "DateTime"
+					},
+					{
+						"name": "NR_ATENDIMENTO",
+						"type": "Decimal"
+					},
+					{
+						"name": "BASE",
 						"type": "String"
 					}
 				],
@@ -9064,7 +9036,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "select a.nr_cirurgia,\na.dt_inicio_prevista,\na.cd_pessoa_fisica,\nobter_nome_pf(a.cd_pessoa_fisica) as nm_paciente,\nto_char(cd_procedimento_princ) as cd_procedimento,\na.nr_seq_proc_interno as cd_procedimento_int,\nobter_desc_procedimento(a.cd_procedimento_princ,a.ie_origem_proced)as ds_procedimento,\na.cd_medico_cirurgiao as cd_medico,\nobter_nome_pf(a.cd_medico_cirurgiao) as nm_medico,\ne.cd_cgc as CNPJ,\ne.nm_fantasia_estab as ds_unidade,\nem.nm_razao_social as marca,\na.dt_atualizacao\nfrom cirurgia a,\n     estabelecimento e,\n     empresa em\nwhere a.cd_estabelecimento = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa\nand a.dt_cancelamento is null",
+								"oracleReaderQuery": "select a.nr_cirurgia,\na.dt_inicio_prevista,\na.cd_pessoa_fisica,\nobter_nome_pf(a.cd_pessoa_fisica) as nm_paciente,\nto_char(cd_procedimento_princ) as cd_procedimento,\na.nr_seq_proc_interno as cd_procedimento_int,\nobter_desc_procedimento(a.cd_procedimento_princ,a.ie_origem_proced)as ds_procedimento,\na.cd_medico_cirurgiao as cd_medico,\nobter_nome_pf(a.cd_medico_cirurgiao) as nm_medico,\ne.cd_cgc as CNPJ,\ne.nm_fantasia_estab as ds_unidade,\nem.nm_razao_social as marca,\na.dt_atualizacao,\na.nr_atendimento, \n'Tasy Delphi' as base\nfrom cirurgia a,\n     estabelecimento e,\n     empresa em\nwhere a.cd_estabelecimento = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa\nand a.dt_cancelamento is null",
 								"partitionOption": "None",
 								"queryTimeout": "02:00:00"
 							},
@@ -9130,7 +9102,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "OracleSource",
-								"oracleReaderQuery": "select a.nr_cirurgia,\na.dt_inicio_prevista,\na.cd_pessoa_fisica,\nobter_nome_pf(a.cd_pessoa_fisica) as nm_paciente,\nto_char(cd_procedimento_princ) as cd_procedimento,\na.nr_seq_proc_interno as cd_procedimento_int,\nobter_desc_procedimento(a.cd_procedimento_princ,a.ie_origem_proced)as ds_procedimento,\na.cd_medico_cirurgiao as cd_medico,\nobter_nome_pf(a.cd_medico_cirurgiao) as nm_medico,\ne.cd_cgc as CNPJ,\ne.nm_fantasia_estab as ds_unidade,\nem.nm_razao_social as marca,\na.dt_atualizacao\nfrom cirurgia a,\n     estabelecimento e,\n     empresa em\nwhere a.cd_estabelecimento = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa\nand a.dt_cancelamento is null",
+								"oracleReaderQuery": "select a.nr_cirurgia,\na.dt_inicio_prevista,\na.cd_pessoa_fisica,\nobter_nome_pf(a.cd_pessoa_fisica) as nm_paciente,\nto_char(cd_procedimento_princ) as cd_procedimento,\na.nr_seq_proc_interno as cd_procedimento_int,\nobter_desc_procedimento(a.cd_procedimento_princ,a.ie_origem_proced)as ds_procedimento,\na.cd_medico_cirurgiao as cd_medico,\nobter_nome_pf(a.cd_medico_cirurgiao) as nm_medico,\ne.cd_cgc as CNPJ,\ne.nm_fantasia_estab as ds_unidade,\nem.nm_razao_social as marca,\na.dt_atualizacao,\na.nr_atendimento, \n'Tasy HTML' as base\nfrom cirurgia a,\n     estabelecimento e,\n     empresa em\nwhere a.cd_estabelecimento = e.cd_estabelecimento\nand e.cd_empresa = em.cd_empresa\nand a.dt_cancelamento is null",
 								"partitionOption": "None",
 								"queryTimeout": "02:00:00"
 							},
