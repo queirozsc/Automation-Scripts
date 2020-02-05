@@ -102,6 +102,61 @@
 					],
 					"ifTrueActivities": [
 						{
+							"name": "Calculate fields",
+							"description": "Update calculated fields (for example, SLA formula, datetime conversions, business hours difference) for time saving in queries",
+							"type": "SqlServerStoredProcedure",
+							"dependsOn": [
+								{
+									"activity": "Copy requests",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"storedProcedureName": "[dbo].[sp_CALCULATEREQUESTS]"
+							},
+							"linkedServiceName": {
+								"referenceName": "AzureSQL_DB_Procedimentos",
+								"type": "LinkedServiceReference"
+							}
+						},
+						{
+							"name": "Altera chamado em pausa",
+							"type": "SqlServerStoredProcedure",
+							"dependsOn": [
+								{
+									"activity": "Calculate fields",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"storedProcedureName": "[dbo].[sp_ALTERACHAMADOSPAUSADOS]"
+							},
+							"linkedServiceName": {
+								"referenceName": "AzureSQL_DB_Procedimentos",
+								"type": "LinkedServiceReference"
+							}
+						},
+						{
 							"name": "Copy requests",
 							"description": "Copy requests data from CSV (stored on Power BI Gateway VM) to Azure SQL",
 							"type": "Copy",
@@ -129,7 +184,6 @@
 									"type": "AzureSqlSink"
 								},
 								"enableStaging": false,
-								"enableSkipIncompatibleRow": true,
 								"translator": {
 									"type": "TabularTranslator",
 									"mappings": [
@@ -295,572 +349,450 @@
 										},
 										{
 											"source": {
-												"name": "RSTATUS",
-												"type": "String"
+												"name": "RSTATUS"
 											},
 											"sink": {
-												"name": "RSTATUS",
-												"type": "String"
+												"name": "RSTATUS"
 											}
 										},
 										{
 											"source": {
-												"name": "REQTYPE",
-												"type": "String"
+												"name": "REQTYPE"
 											},
 											"sink": {
-												"name": "REQTYPE",
-												"type": "String"
+												"name": "REQTYPE"
 											}
 										},
 										{
 											"source": {
-												"name": "REQSOURCE",
-												"type": "String"
+												"name": "REQSOURCE"
 											},
 											"sink": {
-												"name": "REQSOURCE",
-												"type": "String"
+												"name": "REQSOURCE"
 											}
 										},
 										{
 											"source": {
-												"name": "LOCATION",
-												"type": "String"
+												"name": "LOCATION"
 											},
 											"sink": {
-												"name": "LOCATION",
-												"type": "String"
+												"name": "REQLOCATION"
 											}
 										},
 										{
 											"source": {
-												"name": "ORGUNIT",
-												"type": "String"
+												"name": "ORGUNIT"
 											},
 											"sink": {
-												"name": "ORGUNIT",
-												"type": "String"
+												"name": "ORGUNIT"
 											}
 										},
 										{
 											"source": {
-												"name": "ORGUNIT_ROOT",
-												"type": "String"
+												"name": "ORGUNIT_ROOT"
 											},
 											"sink": {
-												"name": "ORGUNIT_ROOT",
-												"type": "String"
+												"name": "ORGUNIT_ROOT"
 											}
 										},
 										{
 											"source": {
-												"name": "CHARGE",
-												"type": "String"
+												"name": "CHARGE"
 											},
 											"sink": {
-												"name": "CHARGE",
-												"type": "String"
+												"name": "CHARGE"
 											}
 										},
 										{
 											"source": {
-												"name": "SLEVEL",
-												"type": "String"
+												"name": "SLEVEL"
 											},
 											"sink": {
-												"name": "SLEVEL",
-												"type": "String"
+												"name": "SLEVEL"
 											}
 										},
 										{
 											"source": {
-												"name": "EQUIP",
-												"type": "String"
+												"name": "EQUIP"
 											},
 											"sink": {
-												"name": "EQUIP",
-												"type": "String"
+												"name": "EQUIP"
 											}
 										},
 										{
 											"source": {
-												"name": "RESOURCEID",
-												"type": "String"
+												"name": "RESOURCEID"
 											},
 											"sink": {
-												"name": "RESOURCEID",
-												"type": "String"
+												"name": "RESOURCEID"
 											}
 										},
 										{
 											"source": {
-												"name": "REQUESTOR",
-												"type": "String"
+												"name": "REQUESTOR"
 											},
 											"sink": {
-												"name": "REQUESTOR",
-												"type": "String"
+												"name": "REQUESTOR"
 											}
 										},
 										{
 											"source": {
-												"name": "OPENDATE",
-												"type": "String"
+												"name": "OPENDATE"
 											},
 											"sink": {
-												"name": "OPENDATE",
-												"type": "String"
+												"name": "OPENDATE"
 											}
 										},
 										{
 											"source": {
-												"name": "CLOSEDATE",
-												"type": "String"
+												"name": "CLOSEDATE"
 											},
 											"sink": {
-												"name": "CLOSEDATE",
-												"type": "String"
+												"name": "CLOSEDATE"
 											}
 										},
 										{
 											"source": {
-												"name": "CLOSED",
-												"type": "String"
+												"name": "CLOSED"
 											},
 											"sink": {
-												"name": "CLOSED",
-												"type": "String"
+												"name": "CLOSED"
 											}
 										},
 										{
 											"source": {
-												"name": "LASTACTION",
-												"type": "String"
+												"name": "LASTACTION"
 											},
 											"sink": {
-												"name": "LASTACTION",
-												"type": "String"
+												"name": "LASTACTION"
 											}
 										},
 										{
 											"source": {
-												"name": "LASTANALYST",
-												"type": "String"
+												"name": "LASTANALYST"
 											},
 											"sink": {
-												"name": "LASTANALYST",
-												"type": "String"
+												"name": "LASTANALYST"
 											}
 										},
 										{
 											"source": {
-												"name": "LASTSTATUS",
-												"type": "String"
+												"name": "LASTSTATUS"
 											},
 											"sink": {
-												"name": "LASTSTATUS",
-												"type": "String"
+												"name": "LASTSTATUS"
 											}
 										},
 										{
 											"source": {
-												"name": "LASTPRIORITY",
-												"type": "String"
+												"name": "LASTPRIORITY"
 											},
 											"sink": {
-												"name": "LASTPRIORITY",
-												"type": "String"
+												"name": "LASTPRIORITY"
 											}
 										},
 										{
 											"source": {
-												"name": "LASTREOPEN",
-												"type": "String"
+												"name": "LASTREOPEN"
 											},
 											"sink": {
-												"name": "LASTREOPEN",
-												"type": "String"
+												"name": "LASTREOPEN"
 											}
 										},
 										{
 											"source": {
-												"name": "LASTACTIONATEND",
-												"type": "String"
+												"name": "LASTACTIONATEND"
 											},
 											"sink": {
-												"name": "LASTACTIONATEND",
-												"type": "String"
+												"name": "LASTACTIONATEND"
 											}
 										},
 										{
 											"source": {
-												"name": "LASTACTTYPE",
-												"type": "String"
+												"name": "LASTACTTYPE"
 											},
 											"sink": {
-												"name": "LASTACTTYPE",
-												"type": "String"
+												"name": "LASTACTTYPE"
 											}
 										},
 										{
 											"source": {
-												"name": "RESPDATE",
-												"type": "String"
+												"name": "RESPDATE"
 											},
 											"sink": {
-												"name": "RESPDATE",
-												"type": "String"
+												"name": "RESPDATE"
 											}
 										},
 										{
 											"source": {
-												"name": "TEMPO_RESOLUCAO",
-												"type": "String"
+												"name": "RESPTIME"
 											},
 											"sink": {
-												"name": "TEMPO_RESOLUCAO",
-												"type": "String"
+												"name": "RESPTIME"
 											}
 										},
 										{
 											"source": {
-												"name": "PRAZO_RESL",
-												"type": "String"
+												"name": "RESLTIME"
 											},
 											"sink": {
-												"name": "PRAZO_RESL",
-												"type": "String"
+												"name": "RESLTIME"
 											}
 										},
 										{
 											"source": {
-												"name": "TEMPO_REPOSTA",
-												"type": "String"
+												"name": "RESPMINS"
 											},
 											"sink": {
-												"name": "TEMPO_REPOSTA",
-												"type": "String"
+												"name": "RESPMINS"
 											}
 										},
 										{
 											"source": {
-												"name": "PRAZO_RESP",
-												"type": "String"
+												"name": "RESLMINS"
 											},
 											"sink": {
-												"name": "PRAZO_RESP",
-												"type": "String"
+												"name": "RESLMINS"
 											}
 										},
 										{
 											"source": {
-												"name": "RESPTIME",
-												"type": "String"
+												"name": "RESPREMAINS"
 											},
 											"sink": {
-												"name": "RESPTIME",
-												"type": "String"
+												"name": "RESPREMAINS"
 											}
 										},
 										{
 											"source": {
-												"name": "RESLTIME",
-												"type": "String"
+												"name": "RESLREMAINS"
 											},
 											"sink": {
-												"name": "RESLTIME",
-												"type": "String"
+												"name": "RESLREMAINS"
 											}
 										},
 										{
 											"source": {
-												"name": "RESPMINS",
-												"type": "String"
+												"name": "RESPMODE"
 											},
 											"sink": {
-												"name": "RESPMINS",
-												"type": "String"
+												"name": "RESPMODE"
 											}
 										},
 										{
 											"source": {
-												"name": "RESLMINS",
-												"type": "String"
+												"name": "RESLMODE"
 											},
 											"sink": {
-												"name": "RESLMINS",
-												"type": "String"
+												"name": "RESLMODE"
 											}
 										},
 										{
 											"source": {
-												"name": "RESPREMAINS",
-												"type": "String"
+												"name": "NOCOMPUTE"
 											},
 											"sink": {
-												"name": "RESPREMAINS",
-												"type": "String"
+												"name": "NOCOMPUTE"
 											}
 										},
 										{
 											"source": {
-												"name": "RESLREMAINS",
-												"type": "String"
+												"name": "RLOCKED"
 											},
 											"sink": {
-												"name": "RESLREMAINS",
-												"type": "String"
+												"name": "RLOCKED"
 											}
 										},
 										{
 											"source": {
-												"name": "RESPMODE",
-												"type": "String"
+												"name": "ESTIMCOST"
 											},
 											"sink": {
-												"name": "RESPMODE",
-												"type": "String"
+												"name": "ESTIMCOST"
 											}
 										},
 										{
 											"source": {
-												"name": "RESLMODE",
-												"type": "String"
+												"name": "TOTALCOST"
 											},
 											"sink": {
-												"name": "RESLMODE",
-												"type": "String"
+												"name": "TOTALCOST"
 											}
 										},
 										{
 											"source": {
-												"name": "NOCOMPUTE",
-												"type": "String"
+												"name": "APROVANLTYPE"
 											},
 											"sink": {
-												"name": "NOCOMPUTE",
-												"type": "String"
+												"name": "APROVANLTYPE"
 											}
 										},
 										{
 											"source": {
-												"name": "RLOCKED",
-												"type": "String"
+												"name": "APROVCLITYPE"
 											},
 											"sink": {
-												"name": "RLOCKED",
-												"type": "String"
+												"name": "APROVCLITYPE"
 											}
 										},
 										{
 											"source": {
-												"name": "ESTIMCOST",
-												"type": "String"
+												"name": "MLEVELAPROV"
 											},
 											"sink": {
-												"name": "ESTIMCOST",
-												"type": "String"
+												"name": "MLEVELAPROV"
 											}
 										},
 										{
 											"source": {
-												"name": "TOTALCOST",
-												"type": "String"
+												"name": "CLIENTAPROV"
 											},
 											"sink": {
-												"name": "TOTALCOST",
-												"type": "String"
+												"name": "CLIENTAPROV"
 											}
 										},
 										{
 											"source": {
-												"name": "APROVANLTYPE",
-												"type": "String"
+												"name": "PACKAGE"
 											},
 											"sink": {
-												"name": "APROVANLTYPE",
-												"type": "String"
+												"name": "PACKAGE"
 											}
 										},
 										{
 											"source": {
-												"name": "APROVANALYST",
-												"type": "String"
+												"name": "PROJECT"
 											},
 											"sink": {
-												"name": "APROVANALYST",
-												"type": "String"
+												"name": "PROJECT"
 											}
 										},
 										{
 											"source": {
-												"name": "APROVCLITYPE",
-												"type": "String"
+												"name": "WORKFLOW"
 											},
 											"sink": {
-												"name": "APROVCLITYPE",
-												"type": "String"
+												"name": "WORKFLOW"
 											}
 										},
 										{
 											"source": {
-												"name": "MLEVELAPROV",
-												"type": "String"
+												"name": "REQWORKFLOW"
 											},
 											"sink": {
-												"name": "MLEVELAPROV",
-												"type": "String"
+												"name": "REQWORKFLOW"
 											}
 										},
 										{
 											"source": {
-												"name": "CLIENTAPROV",
-												"type": "String"
+												"name": "ORIGCATEGORY"
 											},
 											"sink": {
-												"name": "CLIENTAPROV",
-												"type": "String"
+												"name": "ORIGCATEGORY"
 											}
 										},
 										{
 											"source": {
-												"name": "PACKAGE",
-												"type": "String"
+												"name": "ORIGPRODUCT"
 											},
 											"sink": {
-												"name": "PACKAGE",
-												"type": "String"
+												"name": "ORIGPRODUCT"
 											}
 										},
 										{
 											"source": {
-												"name": "PROJECT",
-												"type": "String"
+												"name": "ORIGPROCESS"
 											},
 											"sink": {
-												"name": "PROJECT",
-												"type": "String"
+												"name": "ORIGPROCESS"
 											}
 										},
 										{
 											"source": {
-												"name": "WORKFLOW",
-												"type": "String"
+												"name": "TOTALATTACH"
 											},
 											"sink": {
-												"name": "WORKFLOW",
-												"type": "String"
+												"name": "TOTALATTACH"
 											}
 										},
 										{
 											"source": {
-												"name": "REQWORKFLOW",
-												"type": "String"
+												"name": "TOTALATTACHACT"
 											},
 											"sink": {
-												"name": "REQWORKFLOW",
-												"type": "String"
+												"name": "TOTALATTACHACT"
 											}
 										},
 										{
 											"source": {
-												"name": "ORIGCATEGORY",
-												"type": "String"
+												"name": "INSERTDATE"
 											},
 											"sink": {
-												"name": "ORIGCATEGORY",
-												"type": "String"
+												"name": "INSERTDATE"
 											}
 										},
 										{
 											"source": {
-												"name": "ORIGPRODUCT",
-												"type": "String"
+												"name": "QFORM"
 											},
 											"sink": {
-												"name": "ORIGPRODUCT",
-												"type": "String"
+												"name": "QFORM"
 											}
 										},
 										{
 											"source": {
-												"name": "ORIGPROCESS",
-												"type": "String"
+												"name": "QSURVEY"
 											},
 											"sink": {
-												"name": "ORIGPROCESS",
-												"type": "String"
+												"name": "QSURVEY"
 											}
 										},
 										{
 											"source": {
-												"name": "TOTALATTACH",
-												"type": "String"
+												"name": "QSESSIONFORM"
 											},
 											"sink": {
-												"name": "TOTALATTACH",
-												"type": "String"
+												"name": "QSESSIONFORM"
 											}
 										},
 										{
 											"source": {
-												"name": "TOTALATTACHACT",
-												"type": "String"
+												"name": "QSESSIONSURVEY"
 											},
 											"sink": {
-												"name": "TOTALATTACHACT",
-												"type": "String"
+												"name": "QSESSIONSURVEY"
 											}
 										},
 										{
 											"source": {
-												"name": "INSERTDATE",
-												"type": "String"
+												"name": "TEMPO_RESOLUCAO"
 											},
 											"sink": {
-												"name": "INSERTDATE",
-												"type": "String"
+												"name": "TEMPO_RESOLUCAO"
 											}
 										},
 										{
 											"source": {
-												"name": "QFORM",
-												"type": "String"
+												"name": "PRAZO_RESL"
 											},
 											"sink": {
-												"name": "QFORM",
-												"type": "String"
+												"name": "PRAZO_RESL"
 											}
 										},
 										{
 											"source": {
-												"name": "QSURVEY",
-												"type": "String"
+												"name": "TEMPO_REPOSTA"
 											},
 											"sink": {
-												"name": "QSURVEY",
-												"type": "String"
+												"name": "TEMPO_REPOSTA"
 											}
 										},
 										{
 											"source": {
-												"name": "QSESSIONFORM",
-												"type": "String"
+												"name": "PRAZO_RESP"
 											},
 											"sink": {
-												"name": "QSESSIONFORM",
-												"type": "String"
-											}
-										},
-										{
-											"source": {
-												"name": "QSESSIONSURVEY",
-												"type": "String"
-											},
-											"sink": {
-												"name": "QSESSIONSURVEY",
-												"type": "String"
+												"name": "PRAZO_RESP"
 											}
 										}
 									]
@@ -868,7 +800,7 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "FILE_REQUEST_AUX",
+									"referenceName": "FILE_REQUESTS",
 									"type": "DatasetReference"
 								}
 							],
@@ -878,89 +810,6 @@
 									"type": "DatasetReference"
 								}
 							]
-						},
-						{
-							"name": "Calculate fields",
-							"description": "Update calculated fields (for example, SLA formula, datetime conversions, business hours difference) for time saving in queries",
-							"type": "SqlServerStoredProcedure",
-							"dependsOn": [
-								{
-									"activity": "Copy requests",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
-							"policy": {
-								"timeout": "7.00:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"storedProcedureName": "[dbo].[sp_CALCULATEREQUESTS]"
-							},
-							"linkedServiceName": {
-								"referenceName": "AzureSQL_DB_Procedimentos",
-								"type": "LinkedServiceReference"
-							}
-						},
-						{
-							"name": "Altera chamado em pausa",
-							"type": "SqlServerStoredProcedure",
-							"dependsOn": [
-								{
-									"activity": "Calculate fields",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
-							"policy": {
-								"timeout": "7.00:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"storedProcedureName": "[dbo].[sp_ALTERACHAMADOSPAUSADOS]"
-							},
-							"linkedServiceName": {
-								"referenceName": "AzureSQL_DB_Procedimentos",
-								"type": "LinkedServiceReference"
-							}
-						},
-						{
-							"name": "Update clients",
-							"description": "Transport [UNIDADE ATENDIMENTO] field from answers table to requests table, for time saving in queries",
-							"type": "SqlServerStoredProcedure",
-							"dependsOn": [
-								{
-									"activity": "Altera chamado em pausa",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
-							"policy": {
-								"timeout": "7.00:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"storedProcedureName": "[dbo].[sp_UPDATEREQUESTCLIENT]"
-							},
-							"linkedServiceName": {
-								"referenceName": "AzureSQL_DB_Procedimentos",
-								"type": "LinkedServiceReference"
-							}
 						}
 					]
 				}
@@ -1409,6 +1258,34 @@
 									"type": "DatasetReference"
 								}
 							]
+						},
+						{
+							"name": "Update clients",
+							"description": "Transport [UNIDADE ATENDIMENTO] field from answers table to requests table, for time saving in queries",
+							"type": "SqlServerStoredProcedure",
+							"dependsOn": [
+								{
+									"activity": "Copy answers",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"storedProcedureName": "[dbo].[sp_UPDATEREQUESTCLIENT]"
+							},
+							"linkedServiceName": {
+								"referenceName": "AzureSQL_DB_Procedimentos",
+								"type": "LinkedServiceReference"
+							}
 						}
 					]
 				}

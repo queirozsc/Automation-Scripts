@@ -1,23 +1,26 @@
 {
-	"name": "Daily 0200 AM",
+	"name": "Weekly Tuesday",
 	"properties": {
-		"description": "Criado para executar as consultas no HOSAG",
+		"description": "Execução de pipelines toda terça-feira",
 		"annotations": [],
 		"runtimeState": "Stopped",
 		"pipelines": [],
 		"type": "ScheduleTrigger",
 		"typeProperties": {
 			"recurrence": {
-				"frequency": "Day",
+				"frequency": "Week",
 				"interval": 1,
-				"startTime": "2019-10-08T03:02:00.000Z",
+				"startTime": "2020-01-24T12:41:00.000Z",
 				"timeZone": "UTC",
 				"schedule": {
 					"minutes": [
 						0
 					],
 					"hours": [
-						5
+						15
+					],
+					"weekDays": [
+						"Tuesday"
 					]
 				}
 			}
