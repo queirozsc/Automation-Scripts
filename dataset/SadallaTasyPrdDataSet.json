@@ -12,83 +12,43 @@
 		"type": "OracleTable",
 		"structure": [
 			{
-				"name": "NR_TIPO_TITULO",
-				"type": "String"
-			},
-			{
-				"name": "NR_SERIE_TITULO",
-				"type": "String"
-			},
-			{
-				"name": "NR_TITULO",
+				"name": "NR_CIRURGIA",
 				"type": "Decimal"
 			},
 			{
-				"name": "DT_EMISSAO_TITULO",
+				"name": "DT_INICIO_PREVISTA",
 				"type": "DateTime"
 			},
 			{
-				"name": "DT_VENCIMENTO_TITULO",
-				"type": "DateTime"
-			},
-			{
-				"name": "VL_TITULO",
-				"type": "Decimal"
-			},
-			{
-				"name": "VL_MULTA",
-				"type": "Decimal"
-			},
-			{
-				"name": "DS_CONVENIO",
+				"name": "CD_PESSOA_FISICA",
 				"type": "String"
 			},
 			{
-				"name": "DS_EMPRESA_CONVENIO",
+				"name": "NM_PACIENTE",
 				"type": "String"
 			},
 			{
-				"name": "CONV_CNPJ",
+				"name": "CD_PROCEDIMENTO",
 				"type": "String"
 			},
 			{
-				"name": "VL_ISS",
-				"type": "Double"
-			},
-			{
-				"name": "VL_IR",
-				"type": "Double"
-			},
-			{
-				"name": "VL_FILME",
-				"type": "Double"
-			},
-			{
-				"name": "VL_PERC_ISS",
-				"type": "Double"
-			},
-			{
-				"name": "VL_PER_IR",
-				"type": "Double"
-			},
-			{
-				"name": "VL_PERC_MULTA",
+				"name": "CD_PROCEDIMENTO_INT",
 				"type": "Decimal"
 			},
 			{
-				"name": "VL_PERC_JURO",
-				"type": "Decimal"
+				"name": "DS_PROCEDIMENTO",
+				"type": "String"
 			},
 			{
-				"name": "VL_OUTROS_IMP",
-				"type": "Decimal"
+				"name": "CD_MEDICO",
+				"type": "String"
 			},
 			{
-				"name": "NR_REMESSA",
-				"type": "Double"
+				"name": "NM_MEDICO",
+				"type": "String"
 			},
 			{
-				"name": "MARCA",
+				"name": "CNPJ",
 				"type": "String"
 			},
 			{
@@ -96,7 +56,19 @@
 				"type": "String"
 			},
 			{
-				"name": "CNPJ",
+				"name": "MARCA",
+				"type": "String"
+			},
+			{
+				"name": "DT_ATUALIZACAO",
+				"type": "DateTime"
+			},
+			{
+				"name": "NR_ATENDIMENTO",
+				"type": "Decimal"
+			},
+			{
+				"name": "BASE",
 				"type": "String"
 			}
 		]
