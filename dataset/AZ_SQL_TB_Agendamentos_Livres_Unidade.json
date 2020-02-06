@@ -1,141 +1,152 @@
 {
-	"name": "CloudTasyPrdDataSet",
+	"name": "AZ_SQL_TB_Agendamentos_Livres_Unidade",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "CloudTasyProd_NEW",
+			"referenceName": "AzureSQL_DB_Procedimentos",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "Power BI"
+			"name": "Atendimentos"
 		},
 		"annotations": [],
-		"type": "OracleTable",
-		"structure": [
+		"type": "AzureSqlTable",
+		"schema": [
 			{
 				"name": "CD_PESSOA_FISICA",
-				"type": "String"
+				"type": "int",
+				"precision": 10
 			},
 			{
 				"name": "CD_CONVENIO",
-				"type": "Decimal"
+				"type": "varchar"
 			},
 			{
 				"name": "CNPJ",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "DATA_AGENDA",
-				"type": "String"
+				"type": "date"
 			},
 			{
 				"name": "HORA_AGENDA",
-				"type": "String"
+				"type": "time",
+				"scale": 7
 			},
 			{
 				"name": "TIPO_AGENDA",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "NM_PACIENTE",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "DS_PROCEDIMENTO_PRINC",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "DS_PROCEDIMENTO_ADIC",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "IE_QUANTIDADE",
-				"type": "Double"
+				"type": "int",
+				"precision": 10
 			},
 			{
 				"name": "NM_USUARIO",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "NM_MEDICO",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "DS_UNIDADE",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "MARCA",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "STATUS_AGENDA",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "NR_ATENDIMENTO",
-				"type": "Decimal"
+				"type": "varchar"
 			},
 			{
 				"name": "NR_SEQUENCIA",
-				"type": "Decimal"
+				"type": "int",
+				"precision": 10
 			},
 			{
 				"name": "ID",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "CD_PROCEDENCIA",
-				"type": "Decimal"
+				"type": "varchar"
 			},
 			{
 				"name": "DS_PROCEDENCIA",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "DT_AGENDAMENTO",
-				"type": "DateTime"
+				"type": "date"
 			},
 			{
 				"name": "DIA",
-				"type": "String"
+				"type": "int",
+				"precision": 10
 			},
 			{
 				"name": "MES",
-				"type": "String"
+				"type": "int",
+				"precision": 10
 			},
 			{
 				"name": "ANO",
-				"type": "String"
+				"type": "int",
+				"precision": 10
 			},
 			{
 				"name": "DS_CLASSIFICACAO",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "DS_AGRUPAMENTO",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "CD_MOTIVO_CANCELAMENTO",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "DS_MOTIVO_CANCELAMENTO",
-				"type": "String"
+				"type": "varchar"
 			},
 			{
 				"name": "CD_AGENDA",
-				"type": "Decimal"
+				"type": "int",
+				"precision": 10
 			},
 			{
 				"name": "DT_ATUALIZACAO",
-				"type": "DateTime"
+				"type": "date"
 			},
 			{
 				"name": "BASE",
-				"type": "String"
+				"type": "varchar"
 			}
-		]
-	},
-	"type": "Microsoft.DataFactory/factories/datasets"
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Agendamento_Livres_Unidade"
+		}
+	}
 }
