@@ -47,7 +47,7 @@
 				]
 			},
 			{
-				"name": "Copy data1",
+				"name": "Agendamento Cirurgico",
 				"type": "Copy",
 				"dependsOn": [
 					{
