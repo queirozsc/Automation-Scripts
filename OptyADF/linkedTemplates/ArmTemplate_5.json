@@ -6,12 +6,86 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "OptyADF"
+		},
+		"SadallaTasyProd_NEW_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SadallaTasyProd_NEW'"
+		},
+		"SadallaTasyTeste_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SadallaTasyTeste'"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/SadallaTasyProd_NEW')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "Oracle",
+				"typeProperties": {
+					"connectionString": "[parameters('SadallaTasyProd_NEW_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "ServidorArquivosBI",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SadallaTasyTeste')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "Oracle",
+				"typeProperties": {
+					"connectionString": "[parameters('SadallaTasyTeste_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "ServidorArquivosBI",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CSI_CSV_NC_AgentesPorDia')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Folder_Nexcore_Consolidado",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Nexcore/CSI"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "FileServerLocation",
+						"fileName": "AgentesPorDiaCSI.csv"
+					},
+					"columnDelimiter": ";",
+					"escapeChar": "",
+					"firstRowAsHeader": true,
+					"quoteChar": ""
+				},
+				"schema": [
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/CSI_CSV_NC_AgentesPorDia_Temp')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
@@ -248,83 +322,51 @@
 				"type": "OracleTable",
 				"structure": [
 					{
-						"name": "NR_TIPO_TITULO",
+						"name": "CD_PESSOA_FISICA",
 						"type": "String"
 					},
 					{
-						"name": "NR_SERIE_TITULO",
+						"name": "CD_CONVENIO",
+						"type": "Decimal"
+					},
+					{
+						"name": "CNPJ",
 						"type": "String"
 					},
 					{
-						"name": "NR_TITULO",
-						"type": "Decimal"
-					},
-					{
-						"name": "DT_EMISSAO_TITULO",
-						"type": "DateTime"
-					},
-					{
-						"name": "DT_VENCIMENTO_TITULO",
-						"type": "DateTime"
-					},
-					{
-						"name": "VL_TITULO",
-						"type": "Decimal"
-					},
-					{
-						"name": "VL_MULTA",
-						"type": "Decimal"
-					},
-					{
-						"name": "DS_CONVENIO",
+						"name": "DATA_AGENDA",
 						"type": "String"
 					},
 					{
-						"name": "DS_EMPRESA_CONVENIO",
+						"name": "HORA_AGENDA",
 						"type": "String"
 					},
 					{
-						"name": "CONV_CNPJ",
+						"name": "TIPO_AGENDA",
 						"type": "String"
 					},
 					{
-						"name": "VL_ISS",
+						"name": "NM_PACIENTE",
+						"type": "String"
+					},
+					{
+						"name": "DS_PROCEDIMENTO_PRINC",
+						"type": "String"
+					},
+					{
+						"name": "DS_PROCEDIMENTO_ADIC",
+						"type": "String"
+					},
+					{
+						"name": "IE_QUANTIDADE",
 						"type": "Double"
 					},
 					{
-						"name": "VL_IR",
-						"type": "Double"
+						"name": "NM_USUARIO",
+						"type": "String"
 					},
 					{
-						"name": "VL_FILME",
-						"type": "Double"
-					},
-					{
-						"name": "VL_PERC_ISS",
-						"type": "Double"
-					},
-					{
-						"name": "VL_PER_IR",
-						"type": "Double"
-					},
-					{
-						"name": "VL_PERC_MULTA",
-						"type": "Decimal"
-					},
-					{
-						"name": "VL_PERC_JURO",
-						"type": "Decimal"
-					},
-					{
-						"name": "VL_OUTROS_IMP",
-						"type": "Decimal"
-					},
-					{
-						"name": "NR_REMESSA",
-						"type": "Double"
-					},
-					{
-						"name": "MARCA",
+						"name": "NM_MEDICO",
 						"type": "String"
 					},
 					{
@@ -332,16 +374,76 @@
 						"type": "String"
 					},
 					{
-						"name": "CNPJ",
+						"name": "MARCA",
 						"type": "String"
+					},
+					{
+						"name": "STATUS_AGENDA",
+						"type": "String"
+					},
+					{
+						"name": "NR_ATENDIMENTO",
+						"type": "Decimal"
+					},
+					{
+						"name": "NR_SEQUENCIA",
+						"type": "Decimal"
+					},
+					{
+						"name": "ID",
+						"type": "String"
+					},
+					{
+						"name": "CD_PROCEDENCIA",
+						"type": "Decimal"
+					},
+					{
+						"name": "DS_PROCEDENCIA",
+						"type": "String"
+					},
+					{
+						"name": "DT_AGENDAMENTO",
+						"type": "DateTime"
+					},
+					{
+						"name": "DIA",
+						"type": "String"
+					},
+					{
+						"name": "MES",
+						"type": "String"
+					},
+					{
+						"name": "ANO",
+						"type": "String"
+					},
+					{
+						"name": "DS_CLASSIFICACAO",
+						"type": "String"
+					},
+					{
+						"name": "DS_AGRUPAMENTO",
+						"type": "String"
+					},
+					{
+						"name": "CD_MOTIVO_CANCELAMENTO",
+						"type": "String"
+					},
+					{
+						"name": "DS_MOTIVO_CANCELAMENTO",
+						"type": "String"
+					},
+					{
+						"name": "CD_AGENDA",
+						"type": "Decimal"
+					},
+					{
+						"name": "DT_ATUALIZACAO",
+						"type": "DateTime"
 					},
 					{
 						"name": "BASE",
 						"type": "String"
-					},
-					{
-						"name": "DT_CARGA",
-						"type": "DateTime"
 					}
 				],
 				"typeProperties": {}
@@ -1204,210 +1306,6 @@
 				},
 				"schema": [
 					{
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/FILE_QANSWER')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Folder_Requestia",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Requestia"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "FileServerLocation",
-						"fileName": "qanswer.csv"
-					},
-					"columnDelimiter": ";",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "QSESSION",
-						"type": "String"
-					},
-					{
-						"name": "QUESTION",
-						"type": "String"
-					},
-					{
-						"name": "QANSWER",
-						"type": "String"
-					},
-					{
-						"name": "QANSWERED",
-						"type": "String"
-					},
-					{
-						"name": "QANSWERDATE",
-						"type": "String"
-					},
-					{
-						"name": "QSHOW",
-						"type": "String"
-					},
-					{
-						"name": "QORDER",
-						"type": "String"
-					},
-					{
-						"name": "QUPDATED",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/FILE_QSESSION')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Folder_Requestia",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Requestia"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "FileServerLocation",
-						"fileName": "qsession.csv"
-					},
-					"columnDelimiter": ";",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "QSESSION",
-						"type": "String"
-					},
-					{
-						"name": "QSESSIONTITLE",
-						"type": "String"
-					},
-					{
-						"name": "QCLIENT",
-						"type": "String"
-					},
-					{
-						"name": "QFORM",
-						"type": "String"
-					},
-					{
-						"name": "QVERSION",
-						"type": "String"
-					},
-					{
-						"name": "QSTATUS",
-						"type": "String"
-					},
-					{
-						"name": "QANSWERDATE",
-						"type": "String"
-					},
-					{
-						"name": "QEXPDATE",
-						"type": "String"
-					},
-					{
-						"name": "QAPPLICATION",
-						"type": "String"
-					},
-					{
-						"name": "QSURVEYTYPE",
-						"type": "String"
-					},
-					{
-						"name": "REQLOCATION",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/FILE_QTABLEANSWER')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Folder_Requestia",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "FileServerLocation",
-						"fileName": "qtableanswer.csv"
-					},
-					"columnDelimiter": ";",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "QSESSION",
-						"type": "String"
-					},
-					{
-						"name": "TABLE_NAME",
-						"type": "String"
-					},
-					{
-						"name": "TABLE_ROWID",
-						"type": "String"
-					},
-					{
-						"name": "TABLE_ROWNUM",
-						"type": "String"
-					},
-					{
-						"name": "COLUMN_NAME",
-						"type": "String"
-					},
-					{
-						"name": "COLUMN_VALUE",
-						"type": "String"
-					},
-					{
-						"name": "COLUMN_POSITION",
-						"type": "String"
-					},
-					{
-						"name": "COLUMN_ANSWERED",
-						"type": "String"
-					},
-					{
-						"name": "COLUMN_ANSWERDATE",
-						"type": "String"
-					},
-					{
-						"name": "COLUMN_UPDATED",
-						"type": "String"
-					},
-					{
-						"name": "COLUMN_VISIBLE",
 						"type": "String"
 					}
 				]
