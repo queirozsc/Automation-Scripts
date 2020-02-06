@@ -12,20 +12,16 @@
 		"type": "OracleTable",
 		"structure": [
 			{
-				"name": "CD_PESSOA_FISICA",
+				"name": "NR_TIPO_TITULO",
 				"type": "String"
 			},
 			{
-				"name": "NM_PESSOA_FISICA",
+				"name": "NR_SERIE_TITULO",
 				"type": "String"
 			},
 			{
-				"name": "NR_CPF",
-				"type": "String"
-			},
-			{
-				"name": "DT_NASCIMENTO",
-				"type": "String"
+				"name": "NR_TITULO",
+				"type": "Decimal"
 			},
 			{
 				"name": "DT_EMISSAO_TITULO",
