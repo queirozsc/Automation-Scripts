@@ -125,48 +125,7 @@
 					"sink": {
 						"type": "AzureSqlSink"
 					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"name": "CD_CONVENIO"
-								},
-								"sink": {
-									"name": "CD_CONVENIO",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "DS_CONVENIO"
-								},
-								"sink": {
-									"name": "DS_CONVENIO",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "CNPJ"
-								},
-								"sink": {
-									"name": "CNPJ",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "CD_ESTABELECIMENTO"
-								},
-								"sink": {
-									"name": "CD_ESTABELECIMENTO",
-									"type": "String"
-								}
-							}
-						]
-					}
+					"enableStaging": false
 				},
 				"inputs": [
 					{
