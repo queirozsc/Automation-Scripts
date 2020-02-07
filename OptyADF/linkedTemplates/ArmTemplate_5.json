@@ -322,51 +322,35 @@
 				"type": "OracleTable",
 				"structure": [
 					{
+						"name": "DT_AGENDA",
+						"type": "DateTime"
+					},
+					{
+						"name": "CD_AGENDA",
+						"type": "Decimal"
+					},
+					{
 						"name": "CD_PESSOA_FISICA",
 						"type": "String"
 					},
 					{
-						"name": "CD_CONVENIO",
-						"type": "Decimal"
+						"name": "NM_PESSOA_FISICA",
+						"type": "String"
+					},
+					{
+						"name": "IE_LADO",
+						"type": "String"
+					},
+					{
+						"name": "DS_AUTORIZACAO",
+						"type": "String"
+					},
+					{
+						"name": "PROCEDIMENTO",
+						"type": "String"
 					},
 					{
 						"name": "CNPJ",
-						"type": "String"
-					},
-					{
-						"name": "DATA_AGENDA",
-						"type": "String"
-					},
-					{
-						"name": "HORA_AGENDA",
-						"type": "String"
-					},
-					{
-						"name": "TIPO_AGENDA",
-						"type": "String"
-					},
-					{
-						"name": "NM_PACIENTE",
-						"type": "String"
-					},
-					{
-						"name": "DS_PROCEDIMENTO_PRINC",
-						"type": "String"
-					},
-					{
-						"name": "DS_PROCEDIMENTO_ADIC",
-						"type": "String"
-					},
-					{
-						"name": "IE_QUANTIDADE",
-						"type": "Double"
-					},
-					{
-						"name": "NM_USUARIO",
-						"type": "String"
-					},
-					{
-						"name": "NM_MEDICO",
 						"type": "String"
 					},
 					{
@@ -374,76 +358,16 @@
 						"type": "String"
 					},
 					{
-						"name": "MARCA",
-						"type": "String"
-					},
-					{
-						"name": "STATUS_AGENDA",
-						"type": "String"
-					},
-					{
-						"name": "NR_ATENDIMENTO",
-						"type": "Decimal"
-					},
-					{
-						"name": "NR_SEQUENCIA",
-						"type": "Decimal"
-					},
-					{
-						"name": "ID",
-						"type": "String"
-					},
-					{
-						"name": "CD_PROCEDENCIA",
-						"type": "Decimal"
-					},
-					{
-						"name": "DS_PROCEDENCIA",
-						"type": "String"
-					},
-					{
-						"name": "DT_AGENDAMENTO",
-						"type": "DateTime"
-					},
-					{
-						"name": "DIA",
-						"type": "String"
-					},
-					{
-						"name": "MES",
-						"type": "String"
-					},
-					{
-						"name": "ANO",
-						"type": "String"
-					},
-					{
-						"name": "DS_CLASSIFICACAO",
-						"type": "String"
-					},
-					{
-						"name": "DS_AGRUPAMENTO",
-						"type": "String"
-					},
-					{
-						"name": "CD_MOTIVO_CANCELAMENTO",
-						"type": "String"
-					},
-					{
-						"name": "DS_MOTIVO_CANCELAMENTO",
-						"type": "String"
-					},
-					{
-						"name": "CD_AGENDA",
-						"type": "Decimal"
-					},
-					{
-						"name": "DT_ATUALIZACAO",
-						"type": "DateTime"
-					},
-					{
 						"name": "BASE",
 						"type": "String"
+					},
+					{
+						"name": "NR_SEQ_PROC_INTERNO",
+						"type": "Decimal"
+					},
+					{
+						"name": "INDICADOR_CIRURGIA",
+						"type": "Double"
 					}
 				],
 				"typeProperties": {}
