@@ -182,6 +182,44 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Execute HOSL",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Producao Procedimentos HOB",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Producao Materiais HOB",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Convenios",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Setor",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Producao Medica HOSL",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
 			}
 		],
 		"folder": {
