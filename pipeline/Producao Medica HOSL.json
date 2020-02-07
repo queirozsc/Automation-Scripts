@@ -139,6 +139,38 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Execute INOB",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Producao Procedimentos HOSL",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Convenios",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Setor",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Producao Medica INOB",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
 			}
 		],
 		"folder": {

@@ -12,7 +12,7 @@
 				}
 			},
 			{
-				"name": "Producao Procedimentos INOB",
+				"name": "Producao Procedimentos Itabuna",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -139,6 +139,38 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Execute Itaigara",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Producao Procedimentos Itabuna",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Convenios",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Setor",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Producao Medica Itaigara",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
 			}
 		],
 		"folder": {
