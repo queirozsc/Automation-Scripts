@@ -125,7 +125,48 @@
 					"sink": {
 						"type": "AzureSqlSink"
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "CD_CONVENIO"
+								},
+								"sink": {
+									"name": "CD_CONVENIO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DS_CONVENIO"
+								},
+								"sink": {
+									"name": "DS_CONVENIO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CNPJ"
+								},
+								"sink": {
+									"name": "CNPJ",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CD_ESTABELECIMENTO"
+								},
+								"sink": {
+									"name": "CD_ESTABELECIMENTO",
+									"type": "String"
+								}
+							}
+						]
+					}
 				},
 				"inputs": [
 					{
@@ -182,44 +223,6 @@
 						"type": "DatasetReference"
 					}
 				]
-			},
-			{
-				"name": "Execute HOSL",
-				"type": "ExecutePipeline",
-				"dependsOn": [
-					{
-						"activity": "Producao Procedimentos HOB",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "Producao Materiais HOB",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "Convenios",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "Setor",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"pipeline": {
-						"referenceName": "Producao Medica HOSL",
-						"type": "PipelineReference"
-					},
-					"waitOnCompletion": true
-				}
 			}
 		],
 		"folder": {
