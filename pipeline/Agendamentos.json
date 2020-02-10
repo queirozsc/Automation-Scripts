@@ -98,6 +98,9 @@
 				}
 			}
 		],
+		"folder": {
+			"name": "Atendimento"
+		},
 		"annotations": []
 	}
 }
