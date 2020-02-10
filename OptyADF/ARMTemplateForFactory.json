@@ -574,6 +574,9 @@
 						}
 					}
 				],
+				"folder": {
+					"name": "Atendimento"
+				},
 				"annotations": []
 			},
 			"dependsOn": [
@@ -5414,6 +5417,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Pipeline em testes para alimentar informações de exames e cirurgias das unidades Smart e Tasy.",
 				"activities": [
 					{
 						"name": "Wait1",
@@ -10760,6 +10764,9 @@
 						]
 					}
 				],
+				"folder": {
+					"name": "Cadastros Gerais"
+				},
 				"annotations": []
 			},
 			"dependsOn": [
@@ -13537,6 +13544,9 @@
 						]
 					}
 				],
+				"folder": {
+					"name": "Cadastros Gerais"
+				},
 				"annotations": []
 			},
 			"dependsOn": [
@@ -16945,6 +16955,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Alimenta as informações das tabelas:\n\nAtendimento_ Unidade \nAgendamento_Unidade\nUsuarios_Unidade\nConsultas_Unidade\nAgendas Unidade\n\nPara extração de relatórios do call center.",
 				"activities": [
 					{
 						"name": "Wait",
@@ -17246,6 +17257,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Alimenta as informações das tabelas:\n\nAtendimento_ Unidade \nAgendamento_Unidade\nUsuarios_Unidade\nConsultas_Unidade\nAgendas Unidade\n\nPara extração de relatórios do call center.",
 				"activities": [
 					{
 						"name": "Atendimento HOB",
@@ -17501,6 +17513,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Alimenta as informações das tabelas:\n\nAtendimento_ Unidade \nAgendamento_Unidade\nUsuarios_Unidade\nConsultas_Unidade\nAgendas Unidade\n\nPara extração de relatórios do call center.",
 				"activities": [
 					{
 						"name": "Wait1",
@@ -17805,6 +17818,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Alimenta as informações das tabelas:\n\nAtendimento_ Unidade \nAgendamento_Unidade\nUsuarios_Unidade\nConsultas_Unidade\nAgendas Unidade\n\nPara extração de relatórios do call center.",
 				"activities": [
 					{
 						"name": "Wait1",
@@ -18106,6 +18120,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Alimenta as informações das tabelas:\n\nAtendimento_ Unidade \nAgendamento_Unidade\nUsuarios_Unidade\nConsultas_Unidade\nAgendas Unidade\n\nPara extração de relatórios do call center.",
 				"activities": [
 					{
 						"name": "Wait1",
@@ -18407,6 +18422,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Alimenta as informações das tabelas:\n\nAtendimento_ Unidade \nAgendamento_Unidade\nUsuarios_Unidade\nConsultas_Unidade\nAgendas Unidade\n\nPara extração de relatórios do call center.",
 				"activities": [
 					{
 						"name": "Wait1",
@@ -18709,6 +18725,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Alimenta as informações das tabelas:\n\nAtendimento_ Unidade \nAgendamento_Unidade\nUsuarios_Unidade\nConsultas_Unidade\nAgendas Unidade\n\nPara extração de relatórios do call center.",
 				"activities": [
 					{
 						"name": "Wait1",
@@ -18964,6 +18981,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Alimenta as informações das tabelas:\n\nAtendimento_ Unidade \nAgendamento_Unidade\nUsuarios_Unidade\nConsultas_Unidade\nAgendas Unidade\n\nPara extração de relatórios do call center.",
 				"activities": [
 					{
 						"name": "Atendimento Sadalla",
@@ -27448,6 +27466,9 @@
 						}
 					}
 				],
+				"folder": {
+					"name": "Fiscal"
+				},
 				"annotations": []
 			},
 			"dependsOn": [
@@ -28310,6 +28331,9 @@
 						}
 					}
 				],
+				"folder": {
+					"name": "Clientes"
+				},
 				"annotations": []
 			},
 			"dependsOn": [

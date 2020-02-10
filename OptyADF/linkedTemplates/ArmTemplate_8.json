@@ -347,6 +347,9 @@
 						}
 					}
 				],
+				"folder": {
+					"name": "Atendimento"
+				},
 				"annotations": []
 			},
 			"dependsOn": [
@@ -5164,6 +5167,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Pipeline em testes para alimentar informações de exames e cirurgias das unidades Smart e Tasy.",
 				"activities": [
 					{
 						"name": "Wait1",
