@@ -1,6 +1,7 @@
 {
 	"name": "Atendimentos Exames e Cirurgias 90 Dias",
 	"properties": {
+		"description": "Pipeline em testes para alimentar informações de exames e cirurgias das unidades Smart e Tasy.",
 		"activities": [
 			{
 				"name": "Wait1",
