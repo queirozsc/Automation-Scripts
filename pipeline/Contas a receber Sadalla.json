@@ -1,6 +1,7 @@
 {
 	"name": "Contas a receber Sadalla",
 	"properties": {
+		"description": "Pipeline desenvolvido para alimentar as tableas:\n\nTitulos_receber e Baixa_Titulos_Receber\n\nIniciado conferencia pelo setor de Contas a Receber das informações alimentadas por Tasy e Smart.",
 		"activities": [
 			{
 				"name": "Wait1",

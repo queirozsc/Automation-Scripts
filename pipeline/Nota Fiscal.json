@@ -1,6 +1,7 @@
 {
 	"name": "Nota Fiscal",
 	"properties": {
+		"description": "Pipeline que extrai informações de notas fiscais das unidades para compor relatório ao setor de FP&A.",
 		"activities": [
 			{
 				"name": "Nota Fiscal Sadalla",

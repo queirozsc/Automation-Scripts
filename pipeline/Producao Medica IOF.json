@@ -1,6 +1,7 @@
 {
 	"name": "Producao Medica IOF",
 	"properties": {
+		"description": "Pipeline desenvolvido para extração de informações de produção medica das unidades com o sistema Tasy e Smart.",
 		"activities": [
 			{
 				"name": "Wait1",
