@@ -1,6 +1,7 @@
 {
 	"name": "SMART - HOSL",
 	"properties": {
+		"description": "Pipelines desenvolvidos em conjunto com a empresa Class para a extração das informações de produção. Atualmente desativado.",
 		"activities": [
 			{
 				"name": "SMART_HOSL_CopyData",
