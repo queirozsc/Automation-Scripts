@@ -1,6 +1,7 @@
 {
 	"name": "Empresas",
 	"properties": {
+		"description": "Alimenta tabela:\n\nEmpresa_Unidade para o cadastro da tabela unica.",
 		"activities": [
 			{
 				"name": "Estabelecimento HOSL",

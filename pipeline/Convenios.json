@@ -1,6 +1,7 @@
 {
 	"name": "Convenios",
 	"properties": {
+		"description": "Alimenta tabela:\n\nConvenio_Unidade para o cadastro da tabela unica.",
 		"activities": [
 			{
 				"name": "Wait1",
