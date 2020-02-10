@@ -1,6 +1,7 @@
 {
 	"name": "Pacientes",
 	"properties": {
+		"description": "Carregamento das informações de pacientes de todas as unidades do sistema Tasy e Smart.",
 		"activities": [
 			{
 				"name": "Wait1",
