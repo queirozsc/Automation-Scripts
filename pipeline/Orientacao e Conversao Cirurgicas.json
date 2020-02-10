@@ -1,6 +1,7 @@
 {
 	"name": "Orientacao e Conversao Cirurgicas",
 	"properties": {
+		"description": "Pipeline utilizado para alimentar tabelas do SMC:\n\n",
 		"activities": [
 			{
 				"name": "Wait1",
