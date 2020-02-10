@@ -5377,6 +5377,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Pipeline em desenvolvimento com informações de baixa de titulos a pagar.",
 				"activities": [
 					{
 						"name": "Baixa_Titulos_Pagar",
@@ -9162,6 +9163,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Pipeline desenvolvido para alimentar as tableas:\n\nTitulos_receber e Baixa_Titulos_Receber\n\nIniciado conferencia pelo setor de Contas a Receber das informações alimentadas por Tasy e Smart.",
 				"activities": [
 					{
 						"name": "Titulos HOB",
@@ -9276,6 +9278,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Pipeline desenvolvido para alimentar as tableas:\n\nTitulos_receber e Baixa_Titulos_Receber\n\nIniciado conferencia pelo setor de Contas a Receber das informações alimentadas por Tasy e Smart.",
 				"activities": [
 					{
 						"name": "Titulos HOSL",
@@ -9389,6 +9392,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Pipeline desenvolvido para alimentar as tableas:\n\nTitulos_receber e Baixa_Titulos_Receber\n\nIniciado conferencia pelo setor de Contas a Receber das informações alimentadas por Tasy e Smart.",
 				"activities": [
 					{
 						"name": "Titulos INOB",

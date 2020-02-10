@@ -17,6 +17,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Pipeline desenvolvido para alimentar as tableas:\n\nTitulos_receber e Baixa_Titulos_Receber\n\nIniciado conferencia pelo setor de Contas a Receber das informações alimentadas por Tasy e Smart.",
 				"activities": [
 					{
 						"name": "Titulos IOF",
@@ -130,6 +131,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Pipeline desenvolvido para alimentar as tableas:\n\nTitulos_receber e Baixa_Titulos_Receber\n\nIniciado conferencia pelo setor de Contas a Receber das informações alimentadas por Tasy e Smart.",
 				"activities": [
 					{
 						"name": "Titulos Itabuna",
@@ -243,6 +245,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Pipeline desenvolvido para alimentar as tableas:\n\nTitulos_receber e Baixa_Titulos_Receber\n\nIniciado conferencia pelo setor de Contas a Receber das informações alimentadas por Tasy e Smart.",
 				"activities": [
 					{
 						"name": "Titulos Itaigara",
@@ -356,6 +359,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Pipeline desenvolvido para alimentar as tableas:\n\nTitulos_receber e Baixa_Titulos_Receber\n\nIniciado conferencia pelo setor de Contas a Receber das informações alimentadas por Tasy e Smart.",
 				"activities": [
 					{
 						"name": "Titulos Oftalmoclin",
@@ -469,6 +473,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Pipeline desenvolvido para alimentar as tableas:\n\nTitulos_receber e Baixa_Titulos_Receber\n\nIniciado conferencia pelo setor de Contas a Receber das informações alimentadas por Tasy e Smart.",
 				"activities": [
 					{
 						"name": "Wait1",
@@ -584,6 +589,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Alimenta tabela:\n\nConvenio_Unidade para o cadastro da tabela unica.",
 				"activities": [
 					{
 						"name": "Wait1",
@@ -969,6 +975,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Pipelines desenvolvidos em conjunto com a empresa Class para a extração das informações de produção. Atualmente desativado.",
 				"activities": [
 					{
 						"name": "Processa Itens",
@@ -1629,6 +1636,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Pipelines desenvolvidos em conjunto com a empresa Class para a extração das informações de produção. Atualmente desativado.",
 				"activities": [
 					{
 						"name": "SMART_HOSL_CopyData",
@@ -3597,6 +3605,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Alimenta tabela:\n\nEmpresa_Unidade para o cadastro da tabela unica.",
 				"activities": [
 					{
 						"name": "Estabelecimento HOSL",
@@ -15358,6 +15367,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Pipeline que extrai informações de notas fiscais das unidades para compor relatório ao setor de FP&A.",
 				"activities": [
 					{
 						"name": "Nota Fiscal Sadalla",
@@ -15743,6 +15753,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Pipeline utilizado para alimentar tabelas do SMC:\n\n",
 				"activities": [
 					{
 						"name": "Wait1",
@@ -16054,6 +16065,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Carregamento das informações de pacientes de todas as unidades do sistema Tasy e Smart.",
 				"activities": [
 					{
 						"name": "Wait1",
@@ -16593,6 +16605,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Pipelines desenvolvidos em conjunto com a empresa Class para a extração das informações de produção. Atualmente desativado.",
 				"activities": [
 					{
 						"name": "Sadalla_Tasy_CopyData",

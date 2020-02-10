@@ -17,6 +17,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Pipeline desenvolvido para extração de informações de produção medica das unidades com o sistema Tasy e Smart.",
 				"activities": [
 					{
 						"name": "Wait1",
@@ -946,6 +947,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Pipelines desenvolvidos em conjunto com a empresa Class para a extração das informações de produção. Atualmente desativado.",
 				"activities": [
 					{
 						"name": "SMART_HOSL_CopyData",
@@ -1923,6 +1925,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Pipelines desenvolvidos em conjunto com a empresa Class para a extração das informações de produção. Atualmente desativado.",
 				"activities": [
 					{
 						"name": "Processa Itens",
@@ -2904,6 +2907,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Pipelines desenvolvidos em conjunto com a empresa Class para a extração das informações de produção. Atualmente desativado.",
 				"activities": [
 					{
 						"name": "Processa Itens",
@@ -3883,6 +3887,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Pipelines desenvolvidos em conjunto com a empresa Class para a extração das informações de produção. Atualmente desativado.",
 				"activities": [
 					{
 						"name": "Processa Itens",
@@ -4864,6 +4869,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Pipelines desenvolvidos em conjunto com a empresa Class para a extração das informações de produção. Atualmente desativado.",
 				"activities": [
 					{
 						"name": "Processa Itens",
@@ -5481,6 +5487,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Pipelines desenvolvidos em conjunto com a empresa Class para a extração das informações de produção. Atualmente desativado.",
 				"activities": [
 					{
 						"name": "Copy procedures",
@@ -6307,6 +6314,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Pipeline em desenvolvimento com informações de titulos a pagar.",
 				"activities": [
 					{
 						"name": "Titulos_Pagar",
@@ -6654,6 +6662,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Pipeline desenvolvido para extração de informações de produção medica das unidades com o sistema Tasy e Smart.",
 				"activities": [
 					{
 						"name": "Wait1",
@@ -7295,6 +7304,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Pipeline desenvolvido para extração de informações de produção medica das unidades com o sistema Tasy e Smart.",
 				"activities": [
 					{
 						"name": "Wait1",
@@ -7784,6 +7794,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Pipeline desenvolvido para extração de informações de produção medica das unidades com o sistema Tasy e Smart.",
 				"activities": [
 					{
 						"name": "Wait1",
