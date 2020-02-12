@@ -12,31 +12,39 @@
 		"type": "OracleTable",
 		"structure": [
 			{
-				"name": "DT_AGENDA",
-				"type": "DateTime"
+				"name": "NR_CIRURGIA",
+				"type": "Decimal"
 			},
 			{
-				"name": "CD_AGENDA",
-				"type": "Decimal"
+				"name": "DT_INICIO_PREVISTA",
+				"type": "DateTime"
 			},
 			{
 				"name": "CD_PESSOA_FISICA",
 				"type": "String"
 			},
 			{
-				"name": "NM_PESSOA_FISICA",
+				"name": "NM_PACIENTE",
 				"type": "String"
 			},
 			{
-				"name": "IE_LADO",
+				"name": "CD_PROCEDIMENTO",
 				"type": "String"
 			},
 			{
-				"name": "DS_AUTORIZACAO",
+				"name": "CD_PROCEDIMENTO_INT",
+				"type": "Decimal"
+			},
+			{
+				"name": "DS_PROCEDIMENTO",
 				"type": "String"
 			},
 			{
-				"name": "PROCEDIMENTO",
+				"name": "CD_MEDICO",
+				"type": "String"
+			},
+			{
+				"name": "NM_MEDICO",
 				"type": "String"
 			},
 			{
@@ -48,12 +56,20 @@
 				"type": "String"
 			},
 			{
-				"name": "BASE",
+				"name": "MARCA",
 				"type": "String"
 			},
 			{
-				"name": "INDICADOR_CIRURGIA",
-				"type": "Double"
+				"name": "DT_ATUALIZACAO",
+				"type": "DateTime"
+			},
+			{
+				"name": "NR_ATENDIMENTO",
+				"type": "Decimal"
+			},
+			{
+				"name": "BASE",
+				"type": "String"
 			}
 		]
 	},
