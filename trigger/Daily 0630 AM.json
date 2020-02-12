@@ -28,6 +28,12 @@
 					"referenceName": "Geral Atendimentos HOB",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "Agendamentos Livres",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
