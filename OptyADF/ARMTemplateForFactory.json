@@ -27756,7 +27756,7 @@
 						]
 					},
 					{
-						"name": "Agendamento Cirurgico Sadalla_copy1",
+						"name": "Agendamento Cirurgico HOB",
 						"type": "Copy",
 						"dependsOn": [
 							{
@@ -51576,6 +51576,13 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "Agendamentos Livres",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -51600,7 +51607,8 @@
 				"[concat(variables('factoryId'), '/pipelines/Agendas Projesi')]",
 				"[concat(variables('factoryId'), '/pipelines/Chamados Requestia')]",
 				"[concat(variables('factoryId'), '/pipelines/Cirurgias e Exames Sadalla e HOB')]",
-				"[concat(variables('factoryId'), '/pipelines/Geral Atendimentos HOB')]"
+				"[concat(variables('factoryId'), '/pipelines/Geral Atendimentos HOB')]",
+				"[concat(variables('factoryId'), '/pipelines/Agendamentos Livres')]"
 			]
 		},
 		{
