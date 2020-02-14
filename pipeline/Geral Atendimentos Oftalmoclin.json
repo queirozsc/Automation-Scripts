@@ -1,6 +1,7 @@
 {
 	"name": "Geral Atendimentos Oftalmoclin",
 	"properties": {
+		"description": "Alimenta as informações das tabelas:\n\nAtendimento_ Unidade \nAgendamento_Unidade\nUsuarios_Unidade\nConsultas_Unidade\nAgendas Unidade\n\nPara extração de relatórios do call center.",
 		"activities": [
 			{
 				"name": "Wait1",
