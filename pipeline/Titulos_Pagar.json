@@ -1,6 +1,7 @@
 {
 	"name": "Titulos_Pagar",
 	"properties": {
+		"description": "Pipeline em desenvolvimento com informações de titulos a pagar.",
 		"activities": [
 			{
 				"name": "Titulos_Pagar",

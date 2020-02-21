@@ -1,6 +1,7 @@
 {
 	"name": "Baixa_Titulos_Pagar",
 	"properties": {
+		"description": "Pipeline em desenvolvimento com informações de baixa de titulos a pagar.",
 		"activities": [
 			{
 				"name": "Baixa_Titulos_Pagar",

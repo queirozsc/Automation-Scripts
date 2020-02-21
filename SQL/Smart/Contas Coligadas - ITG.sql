@@ -1,3 +1,5 @@
+EXECUTE DePara_ContaColigada
+
 --Consulta para verificar as contas e as coligações
 --select * from gcc_colig
 ---------------------------------------------------------------------------------
@@ -35,7 +37,7 @@ EXEC msdb.dbo.sp_add_jobschedule
 @active_end_time=190000 -- Intervalo active_start_date e active_end_date para para a execução do job
 */
 ---------------------------------------------------------------------------------
-EXECUTE DePara_ContaColigada
+
 ---------------------------------------------------------------------------------
 /*CREATE PROCEDURE DePara_ContaColigada
 AS
