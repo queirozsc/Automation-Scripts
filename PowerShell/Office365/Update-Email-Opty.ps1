@@ -1,7 +1,5 @@
 . ".\Connect-O365.ps1"
 
-
-
 #importa CSV
 $Contatos = Import-Csv -Path C:\csv\Email.csv -Delimiter ";"
 
