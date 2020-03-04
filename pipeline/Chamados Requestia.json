@@ -102,6 +102,61 @@
 					],
 					"ifTrueActivities": [
 						{
+							"name": "Calculate fields",
+							"description": "Update calculated fields (for example, SLA formula, datetime conversions, business hours difference) for time saving in queries",
+							"type": "SqlServerStoredProcedure",
+							"dependsOn": [
+								{
+									"activity": "Copy requests",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"storedProcedureName": "[dbo].[sp_CALCULATEREQUESTS]"
+							},
+							"linkedServiceName": {
+								"referenceName": "AzureSQL_DB_Procedimentos",
+								"type": "LinkedServiceReference"
+							}
+						},
+						{
+							"name": "Altera chamado em pausa",
+							"type": "SqlServerStoredProcedure",
+							"dependsOn": [
+								{
+									"activity": "Calculate fields",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"storedProcedureName": "[dbo].[sp_ALTERACHAMADOSPAUSADOS]"
+							},
+							"linkedServiceName": {
+								"referenceName": "AzureSQL_DB_Procedimentos",
+								"type": "LinkedServiceReference"
+							}
+						},
+						{
 							"name": "Copy requests",
 							"description": "Copy requests data from CSV (stored on Power BI Gateway VM) to Azure SQL",
 							"type": "Copy",
@@ -129,7 +184,6 @@
 									"type": "AzureSqlSink"
 								},
 								"enableStaging": false,
-								"enableSkipIncompatibleRow": true,
 								"translator": {
 									"type": "TabularTranslator",
 									"mappings": [
@@ -149,88 +203,8 @@
 												"type": "String"
 											},
 											"sink": {
-												"name": "CLIENT"
-											}
-										},
-										{
-											"source": {
-												"name": "OPENDATE",
+												"name": "CLIENT",
 												"type": "String"
-											},
-											"sink": {
-												"name": "OPENDATE"
-											}
-										},
-										{
-											"source": {
-												"name": "CLOSEDATE",
-												"type": "String"
-											},
-											"sink": {
-												"name": "CLOSEDATE"
-											}
-										},
-										{
-											"source": {
-												"name": "LASTACTION",
-												"type": "String"
-											},
-											"sink": {
-												"name": "LASTACTION"
-											}
-										},
-										{
-											"source": {
-												"name": "LASTANALYST",
-												"type": "String"
-											},
-											"sink": {
-												"name": "LASTANALYST"
-											}
-										},
-										{
-											"source": {
-												"name": "LASTREOPEN",
-												"type": "String"
-											},
-											"sink": {
-												"name": "LASTREOPEN"
-											}
-										},
-										{
-											"source": {
-												"name": "RESLREMAINS",
-												"type": "String"
-											},
-											"sink": {
-												"name": "RESLREMAINS"
-											}
-										},
-										{
-											"source": {
-												"name": "RESPMINS",
-												"type": "String"
-											},
-											"sink": {
-												"name": "RESPMINS"
-											}
-										},
-										{
-											"source": {
-												"name": "RESLMINS",
-												"type": "String"
-											},
-											"sink": {
-												"name": "RESLMINS"
-											}
-										},
-										{
-											"source": {
-												"name": "CLOSED",
-												"type": "String"
-											},
-											"sink": {
-												"name": "CLOSED"
 											}
 										},
 										{
@@ -239,7 +213,8 @@
 												"type": "String"
 											},
 											"sink": {
-												"name": "ORIGANAL"
+												"name": "ORIGANAL",
+												"type": "String"
 											}
 										},
 										{
@@ -248,7 +223,8 @@
 												"type": "String"
 											},
 											"sink": {
-												"name": "CURRANAL"
+												"name": "CURRANAL",
+												"type": "String"
 											}
 										},
 										{
@@ -257,7 +233,8 @@
 												"type": "String"
 											},
 											"sink": {
-												"name": "GROUPANAL"
+												"name": "GROUPANAL",
+												"type": "String"
 											}
 										},
 										{
@@ -266,7 +243,8 @@
 												"type": "String"
 											},
 											"sink": {
-												"name": "LASTANAL"
+												"name": "LASTANAL",
+												"type": "String"
 											}
 										},
 										{
@@ -275,7 +253,8 @@
 												"type": "String"
 											},
 											"sink": {
-												"name": "LASTANLGRP"
+												"name": "LASTANLGRP",
+												"type": "String"
 											}
 										},
 										{
@@ -284,7 +263,8 @@
 												"type": "String"
 											},
 											"sink": {
-												"name": "ORIGGROUP"
+												"name": "ORIGGROUP",
+												"type": "String"
 											}
 										},
 										{
@@ -293,7 +273,8 @@
 												"type": "String"
 											},
 											"sink": {
-												"name": "CURRGROUP"
+												"name": "CURRGROUP",
+												"type": "String"
 											}
 										},
 										{
@@ -302,7 +283,18 @@
 												"type": "String"
 											},
 											"sink": {
-												"name": "LASTGROUP"
+												"name": "LASTGROUP",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"name": "GRGROUP",
+												"type": "String"
+											},
+											"sink": {
+												"name": "GRGROUP",
+												"type": "String"
 											}
 										},
 										{
@@ -311,34 +303,8 @@
 												"type": "String"
 											},
 											"sink": {
-												"name": "CATEGORY"
-											}
-										},
-										{
-											"source": {
-												"name": "PRODUCT",
+												"name": "CATEGORY",
 												"type": "String"
-											},
-											"sink": {
-												"name": "PRODUCT"
-											}
-										},
-										{
-											"source": {
-												"name": "PROCESS",
-												"type": "String"
-											},
-											"sink": {
-												"name": "PROCESS"
-											}
-										},
-										{
-											"source": {
-												"name": "RSTATUS",
-												"type": "String"
-											},
-											"sink": {
-												"name": "RSTATUS"
 											}
 										},
 										{
@@ -347,13 +313,51 @@
 												"type": "String"
 											},
 											"sink": {
-												"name": "RPRIORITY"
+												"name": "RPRIORITY",
+												"type": "String"
 											}
 										},
 										{
 											"source": {
-												"name": "REQTYPE",
+												"name": "PRODUCT",
 												"type": "String"
+											},
+											"sink": {
+												"name": "PRODUCT",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"name": "PROCESS",
+												"type": "String"
+											},
+											"sink": {
+												"name": "PROCESS",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"name": "PROBLEM",
+												"type": "String"
+											},
+											"sink": {
+												"name": "PROBLEM",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"name": "RSTATUS"
+											},
+											"sink": {
+												"name": "RSTATUS"
+											}
+										},
+										{
+											"source": {
+												"name": "REQTYPE"
 											},
 											"sink": {
 												"name": "REQTYPE"
@@ -361,8 +365,7 @@
 										},
 										{
 											"source": {
-												"name": "REQSOURCE",
-												"type": "String"
+												"name": "REQSOURCE"
 											},
 											"sink": {
 												"name": "REQSOURCE"
@@ -370,8 +373,7 @@
 										},
 										{
 											"source": {
-												"name": "LOCATION",
-												"type": "String"
+												"name": "LOCATION"
 											},
 											"sink": {
 												"name": "REQLOCATION"
@@ -379,8 +381,7 @@
 										},
 										{
 											"source": {
-												"name": "ORGUNIT",
-												"type": "String"
+												"name": "ORGUNIT"
 											},
 											"sink": {
 												"name": "ORGUNIT"
@@ -388,8 +389,7 @@
 										},
 										{
 											"source": {
-												"name": "ORGUNIT_ROOT",
-												"type": "String"
+												"name": "ORGUNIT_ROOT"
 											},
 											"sink": {
 												"name": "ORGUNIT_ROOT"
@@ -397,26 +397,87 @@
 										},
 										{
 											"source": {
-												"name": "ABSTRACT",
-												"type": "String"
+												"name": "CHARGE"
 											},
 											"sink": {
-												"name": "ABSTRACT"
+												"name": "CHARGE"
 											}
 										},
 										{
 											"source": {
-												"name": "DESCRIPT",
-												"type": "String"
+												"name": "SLEVEL"
 											},
 											"sink": {
-												"name": "DESCRIPT"
+												"name": "SLEVEL"
 											}
 										},
 										{
 											"source": {
-												"name": "LASTSTATUS",
-												"type": "String"
+												"name": "EQUIP"
+											},
+											"sink": {
+												"name": "EQUIP"
+											}
+										},
+										{
+											"source": {
+												"name": "RESOURCEID"
+											},
+											"sink": {
+												"name": "RESOURCEID"
+											}
+										},
+										{
+											"source": {
+												"name": "REQUESTOR"
+											},
+											"sink": {
+												"name": "REQUESTOR"
+											}
+										},
+										{
+											"source": {
+												"name": "OPENDATE"
+											},
+											"sink": {
+												"name": "OPENDATE"
+											}
+										},
+										{
+											"source": {
+												"name": "CLOSEDATE"
+											},
+											"sink": {
+												"name": "CLOSEDATE"
+											}
+										},
+										{
+											"source": {
+												"name": "CLOSED"
+											},
+											"sink": {
+												"name": "CLOSED"
+											}
+										},
+										{
+											"source": {
+												"name": "LASTACTION"
+											},
+											"sink": {
+												"name": "LASTACTION"
+											}
+										},
+										{
+											"source": {
+												"name": "LASTANALYST"
+											},
+											"sink": {
+												"name": "LASTANALYST"
+											}
+										},
+										{
+											"source": {
+												"name": "LASTSTATUS"
 											},
 											"sink": {
 												"name": "LASTSTATUS"
@@ -424,8 +485,7 @@
 										},
 										{
 											"source": {
-												"name": "LASTPRIORITY",
-												"type": "String"
+												"name": "LASTPRIORITY"
 											},
 											"sink": {
 												"name": "LASTPRIORITY"
@@ -433,8 +493,15 @@
 										},
 										{
 											"source": {
-												"name": "LASTACTIONATEND",
-												"type": "String"
+												"name": "LASTREOPEN"
+											},
+											"sink": {
+												"name": "LASTREOPEN"
+											}
+										},
+										{
+											"source": {
+												"name": "LASTACTIONATEND"
 											},
 											"sink": {
 												"name": "LASTACTIONATEND"
@@ -442,8 +509,15 @@
 										},
 										{
 											"source": {
-												"name": "RESPDATE",
-												"type": "String"
+												"name": "LASTACTTYPE"
+											},
+											"sink": {
+												"name": "LASTACTTYPE"
+											}
+										},
+										{
+											"source": {
+												"name": "RESPDATE"
 											},
 											"sink": {
 												"name": "RESPDATE"
@@ -451,8 +525,7 @@
 										},
 										{
 											"source": {
-												"name": "RESPTIME",
-												"type": "String"
+												"name": "RESPTIME"
 											},
 											"sink": {
 												"name": "RESPTIME"
@@ -460,8 +533,7 @@
 										},
 										{
 											"source": {
-												"name": "RESLTIME",
-												"type": "String"
+												"name": "RESLTIME"
 											},
 											"sink": {
 												"name": "RESLTIME"
@@ -469,6 +541,22 @@
 										},
 										{
 											"source": {
+												"name": "RESPMINS"
+											},
+											"sink": {
+												"name": "RESPMINS"
+											}
+										},
+										{
+											"source": {
+												"name": "RESLMINS"
+											},
+											"sink": {
+												"name": "RESLMINS"
+											}
+										},
+										{
+											"source": {
 												"name": "RESPREMAINS"
 											},
 											"sink": {
@@ -477,8 +565,15 @@
 										},
 										{
 											"source": {
-												"name": "RESPMODE",
-												"type": "String"
+												"name": "RESLREMAINS"
+											},
+											"sink": {
+												"name": "RESLREMAINS"
+											}
+										},
+										{
+											"source": {
+												"name": "RESPMODE"
 											},
 											"sink": {
 												"name": "RESPMODE"
@@ -486,8 +581,7 @@
 										},
 										{
 											"source": {
-												"name": "RESLMODE",
-												"type": "String"
+												"name": "RESLMODE"
 											},
 											"sink": {
 												"name": "RESLMODE"
@@ -495,8 +589,7 @@
 										},
 										{
 											"source": {
-												"name": "NOCOMPUTE",
-												"type": "String"
+												"name": "NOCOMPUTE"
 											},
 											"sink": {
 												"name": "NOCOMPUTE"
@@ -504,8 +597,31 @@
 										},
 										{
 											"source": {
-												"name": "APROVANLTYPE",
-												"type": "String"
+												"name": "RLOCKED"
+											},
+											"sink": {
+												"name": "RLOCKED"
+											}
+										},
+										{
+											"source": {
+												"name": "ESTIMCOST"
+											},
+											"sink": {
+												"name": "ESTIMCOST"
+											}
+										},
+										{
+											"source": {
+												"name": "TOTALCOST"
+											},
+											"sink": {
+												"name": "TOTALCOST"
+											}
+										},
+										{
+											"source": {
+												"name": "APROVANLTYPE"
 											},
 											"sink": {
 												"name": "APROVANLTYPE"
@@ -513,8 +629,7 @@
 										},
 										{
 											"source": {
-												"name": "APROVCLITYPE",
-												"type": "String"
+												"name": "APROVCLITYPE"
 											},
 											"sink": {
 												"name": "APROVCLITYPE"
@@ -522,8 +637,7 @@
 										},
 										{
 											"source": {
-												"name": "MLEVELAPROV",
-												"type": "String"
+												"name": "MLEVELAPROV"
 											},
 											"sink": {
 												"name": "MLEVELAPROV"
@@ -531,8 +645,7 @@
 										},
 										{
 											"source": {
-												"name": "CLIENTAPROV",
-												"type": "String"
+												"name": "CLIENTAPROV"
 											},
 											"sink": {
 												"name": "CLIENTAPROV"
@@ -540,8 +653,7 @@
 										},
 										{
 											"source": {
-												"name": "PACKAGE",
-												"type": "String"
+												"name": "PACKAGE"
 											},
 											"sink": {
 												"name": "PACKAGE"
@@ -549,8 +661,15 @@
 										},
 										{
 											"source": {
-												"name": "WORKFLOW",
-												"type": "String"
+												"name": "PROJECT"
+											},
+											"sink": {
+												"name": "PROJECT"
+											}
+										},
+										{
+											"source": {
+												"name": "WORKFLOW"
 											},
 											"sink": {
 												"name": "WORKFLOW"
@@ -558,17 +677,7 @@
 										},
 										{
 											"source": {
-												"name": "LASTSEVENT",
-												"type": "String"
-											},
-											"sink": {
-												"name": "LASTSEVENT"
-											}
-										},
-										{
-											"source": {
-												"name": "REQWORKFLOW",
-												"type": "String"
+												"name": "REQWORKFLOW"
 											},
 											"sink": {
 												"name": "REQWORKFLOW"
@@ -576,8 +685,7 @@
 										},
 										{
 											"source": {
-												"name": "ORIGCATEGORY",
-												"type": "String"
+												"name": "ORIGCATEGORY"
 											},
 											"sink": {
 												"name": "ORIGCATEGORY"
@@ -585,8 +693,7 @@
 										},
 										{
 											"source": {
-												"name": "ORIGPRODUCT",
-												"type": "String"
+												"name": "ORIGPRODUCT"
 											},
 											"sink": {
 												"name": "ORIGPRODUCT"
@@ -594,8 +701,7 @@
 										},
 										{
 											"source": {
-												"name": "ORIGPROCESS",
-												"type": "String"
+												"name": "ORIGPROCESS"
 											},
 											"sink": {
 												"name": "ORIGPROCESS"
@@ -603,8 +709,7 @@
 										},
 										{
 											"source": {
-												"name": "TOTALATTACH",
-												"type": "String"
+												"name": "TOTALATTACH"
 											},
 											"sink": {
 												"name": "TOTALATTACH"
@@ -612,8 +717,7 @@
 										},
 										{
 											"source": {
-												"name": "TOTALATTACHACT",
-												"type": "String"
+												"name": "TOTALATTACHACT"
 											},
 											"sink": {
 												"name": "TOTALATTACHACT"
@@ -621,8 +725,7 @@
 										},
 										{
 											"source": {
-												"name": "INSERTDATE",
-												"type": "String"
+												"name": "INSERTDATE"
 											},
 											"sink": {
 												"name": "INSERTDATE"
@@ -630,8 +733,7 @@
 										},
 										{
 											"source": {
-												"name": "QFORM",
-												"type": "String"
+												"name": "QFORM"
 											},
 											"sink": {
 												"name": "QFORM"
@@ -639,8 +741,7 @@
 										},
 										{
 											"source": {
-												"name": "QSURVEY",
-												"type": "String"
+												"name": "QSURVEY"
 											},
 											"sink": {
 												"name": "QSURVEY"
@@ -648,8 +749,7 @@
 										},
 										{
 											"source": {
-												"name": "QSESSIONFORM",
-												"type": "String"
+												"name": "QSESSIONFORM"
 											},
 											"sink": {
 												"name": "QSESSIONFORM"
@@ -657,8 +757,7 @@
 										},
 										{
 											"source": {
-												"name": "QSESSIONSURVEY",
-												"type": "String"
+												"name": "QSESSIONSURVEY"
 											},
 											"sink": {
 												"name": "QSESSIONSURVEY"
@@ -666,110 +765,34 @@
 										},
 										{
 											"source": {
-												"name": "REQUESTFLAGS",
-												"type": "String"
+												"name": "TEMPO_RESOLUCAO"
 											},
 											"sink": {
-												"name": "REQUESTFLAGS"
+												"name": "TEMPO_RESOLUCAO"
 											}
 										},
 										{
 											"source": {
-												"name": "V_ASSOCIATION",
-												"type": "String"
+												"name": "PRAZO_RESL"
 											},
 											"sink": {
-												"name": "V_ASSOCIATION"
+												"name": "PRAZO_RESL"
 											}
 										},
 										{
 											"source": {
-												"name": "V_HAS_APPROVER",
-												"type": "String"
+												"name": "TEMPO_REPOSTA"
 											},
 											"sink": {
-												"name": "V_HAS_APPROVER"
+												"name": "TEMPO_REPOSTA"
 											}
 										},
 										{
 											"source": {
-												"name": "LASTSEQUENCE",
-												"type": "String"
+												"name": "PRAZO_RESP"
 											},
 											"sink": {
-												"name": "LASTSEQUENCE"
-											}
-										},
-										{
-											"source": {
-												"name": "LASTRECALCDATE",
-												"type": "String"
-											},
-											"sink": {
-												"name": "LASTRECALCDATE"
-											}
-										},
-										{
-											"source": {
-												"name": "LASTAPPROVCNTX",
-												"type": "String"
-											},
-											"sink": {
-												"name": "LASTAPPROVCNTX"
-											}
-										},
-										{
-											"source": {
-												"name": "LASTAPPROVUSER",
-												"type": "String"
-											},
-											"sink": {
-												"name": "LASTAPPROVUSER"
-											}
-										},
-										{
-											"source": {
-												"name": "LASTAPPROVCODE",
-												"type": "String"
-											},
-											"sink": {
-												"name": "LASTAPPROVCODE"
-											}
-										},
-										{
-											"source": {
-												"name": "CURRAPPROVCODE",
-												"type": "String"
-											},
-											"sink": {
-												"name": "CURRAPPROVCODE"
-											}
-										},
-										{
-											"source": {
-												"name": "ORIGNOCOMPUTE",
-												"type": "String"
-											},
-											"sink": {
-												"name": "ORIGNOCOMPUTE"
-											}
-										},
-										{
-											"source": {
-												"name": "ORIGRSTATUS",
-												"type": "String"
-											},
-											"sink": {
-												"name": "ORIGRSTATUS"
-											}
-										},
-										{
-											"source": {
-												"name": "ORIGRPRIORITY",
-												"type": "String"
-											},
-											"sink": {
-												"name": "ORIGRPRIORITY"
+												"name": "PRAZO_RESP"
 											}
 										}
 									]
@@ -787,34 +810,6 @@
 									"type": "DatasetReference"
 								}
 							]
-						},
-						{
-							"name": "Calculate fields",
-							"description": "Update calculated fields (for example, SLA formula, datetime conversions, business hours difference) for time saving in queries",
-							"type": "SqlServerStoredProcedure",
-							"dependsOn": [
-								{
-									"activity": "Copy requests",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
-							"policy": {
-								"timeout": "7.00:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"storedProcedureName": "[dbo].[sp_CALCULATEREQUESTS]"
-							},
-							"linkedServiceName": {
-								"referenceName": "AzureSQL_DB_Procedimentos",
-								"type": "LinkedServiceReference"
-							}
 						}
 					]
 				}

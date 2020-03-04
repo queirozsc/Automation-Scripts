@@ -42,13 +42,13 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "AZ_SQL_TB_Atendimento",
+						"referenceName": "AZ_SQL_TB_Consulta",
 						"type": "DatasetReference"
 					}
 				]
 			},
 			{
-				"name": "Consulta HOB",
+				"name": "Agendamento HOB",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -86,13 +86,22 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "AZ_SQL_TB_Consulta",
+						"referenceName": "AZ_SQL_TB_Agendamento",
 						"type": "DatasetReference"
 					}
 				]
 			},
 			{
-				"name": "Agendamento HOB",
+				"name": "Wait1",
+				"type": "Wait",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 1
+				}
+			},
+			{
+				"name": "Usuarios HOB",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -130,7 +139,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "AZ_SQL_TB_Agendamento",
+						"referenceName": "AZ_SQL_TB_Usuario",
 						"type": "DatasetReference"
 					}
 				]

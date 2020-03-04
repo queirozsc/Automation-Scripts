@@ -114,6 +114,18 @@ function Include-Enterprise { # Inclui o nome da empresa no conteudo do arquivo
     Remove-Item -Path $FileName.FullName
     Move-Item -Path $($FileName.FullName + ".tmp") -Destination $FileName.FullName
 }
+function Include-Header{ # Inclui a coluna URA nos arquivos antigos
+    param(
+        [System.IO.FileInfo] $FileName
+    )
+    # Le o cabecalho do arquivo
+    $Header = Get-Content $FileName -TotalCount 1
+    # Cabecalho nao contem a coluna URA?
+    if (-Not ($Header -Like '*URA*')) {
+        $NewHeader = 'Data;Hora;Usuário;Tipo;Origem;Destino;Status;Centro de Custo;Tempo Tarifado;Tempo Decorrido;URA;Campanha;Fila;Tabulacao;Unique ID;Linked ID'
+        $Content = Get-Content $FileName | Select-Object -Skip 1
+    }
+}
 function Move-TodayFiles { # Move o arquivo do dia para o diretorio de consolidacao, especificado no Azure DataFactory
     param (
         [System.IO.FileInfo] $StagePath,

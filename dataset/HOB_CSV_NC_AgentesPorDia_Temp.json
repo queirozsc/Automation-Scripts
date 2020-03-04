@@ -6,7 +6,7 @@
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "Nexcore/HOB"
+			"name": "Nexcore/HOB/Históricos"
 		},
 		"annotations": [],
 		"type": "DelimitedText",

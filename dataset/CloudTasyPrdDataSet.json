@@ -12,51 +12,27 @@
 		"type": "OracleTable",
 		"structure": [
 			{
-				"name": "CD_PESSOA_FISICA",
-				"type": "String"
-			},
-			{
-				"name": "CD_CONVENIO",
-				"type": "Decimal"
-			},
-			{
-				"name": "CNPJ",
-				"type": "String"
-			},
-			{
-				"name": "DATA_AGENDA",
-				"type": "String"
-			},
-			{
-				"name": "HORA_AGENDA",
-				"type": "String"
+				"name": "DT_AGENDA",
+				"type": "DateTime"
 			},
 			{
 				"name": "TIPO_AGENDA",
 				"type": "String"
 			},
 			{
-				"name": "NM_PACIENTE",
+				"name": "CD_PESSOA_FISICA",
 				"type": "String"
 			},
 			{
-				"name": "DS_PROCEDIMENTO_PRINC",
+				"name": "NM_PESSOA_FISICA",
 				"type": "String"
 			},
 			{
-				"name": "DS_PROCEDIMENTO_ADIC",
+				"name": "IE_LADO",
 				"type": "String"
 			},
 			{
-				"name": "IE_QUANTIDADE",
-				"type": "Double"
-			},
-			{
-				"name": "NM_USUARIO",
-				"type": "String"
-			},
-			{
-				"name": "NM_MEDICO",
+				"name": "DS_AUTORIZACAO",
 				"type": "String"
 			},
 			{
@@ -64,30 +40,23 @@
 				"type": "String"
 			},
 			{
-				"name": "MARCA",
+				"name": "CNPJ",
 				"type": "String"
 			},
 			{
-				"name": "STATUS_AGENDA",
+				"name": "DS_UNIDADE",
 				"type": "String"
 			},
 			{
-				"name": "NR_ATENDIMENTO",
-				"type": "Decimal"
-			},
-			{
-				"name": "NR_SEQUENCIA",
-				"type": "Decimal"
-			},
-			{
-				"name": "ID",
+				"name": "BASE",
 				"type": "String"
 			},
 			{
-				"name": "CD_PROCEDENCIA",
+				"name": "NR_SEQ_PROC_INTERNO",
 				"type": "Decimal"
 			},
 			{
+
 				"name": "DS_PROCEDENCIA",
 				"type": "String"
 			},

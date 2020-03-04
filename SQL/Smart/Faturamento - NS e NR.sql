@@ -21,7 +21,7 @@ DELETE
 FROM nfs_lote
 WHERE (nfs_lote.nfs_l_nfs_tipo = 'NS')
     AND (nfs_lote.nfs_l_nfs_serie = 'U')
-    AND (nfs_lote.nfs_l_nfs_numero =  )
+    AND (nfs_lote.nfs_l_nfs_numero =  '')
 
 --ROLLBACK
 --COMMIT

@@ -6,10 +6,10 @@
 		"type": "Oracle",
 		"typeProperties": {
 			"connectionString": "host=10.102.0.21;port=1521;servicename=desen;user id=vetorh",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJiOGUyMjAzNi1kZTYzLTQxMTctYjMyZi01Yjk5MWUxM2U0ZDMiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIxZTMzZTQzNy1lMjE4LTRjMTEtODcxZC04MjRkYTRmMWI4MGIiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
-			"referenceName": "integrationRuntime",
+			"referenceName": "ServidorArquivosBI",
 			"type": "IntegrationRuntimeReference"
 		}
 	}

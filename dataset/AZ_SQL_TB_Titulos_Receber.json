@@ -86,7 +86,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "Aging_Titulo_Receber"
+			"table": "Titulos_Receber"
 		}
 	}
 }

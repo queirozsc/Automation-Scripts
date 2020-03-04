@@ -863,7 +863,8 @@
 									"type": "DelimitedTextSource",
 									"storeSettings": {
 										"type": "FileServerReadSettings",
-										"recursive": true
+										"recursive": true,
+										"enablePartitionDiscovery": false
 									},
 									"formatSettings": {
 										"type": "DelimitedTextReadSettings"
@@ -2280,7 +2281,7 @@
 			}
 		],
 		"folder": {
-			"name": "Atendimento"
+			"name": "Atendimento/Nexcore"
 		},
 		"annotations": []
 	},
