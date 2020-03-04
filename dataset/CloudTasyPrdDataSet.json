@@ -16,8 +16,8 @@
 				"type": "DateTime"
 			},
 			{
-				"name": "CD_AGENDA",
-				"type": "Decimal"
+				"name": "TIPO_AGENDA",
+				"type": "String"
 			},
 			{
 				"name": "CD_PESSOA_FISICA",
@@ -36,7 +36,7 @@
 				"type": "String"
 			},
 			{
-				"name": "PROCEDIMENTO",
+				"name": "DS_UNIDADE",
 				"type": "String"
 			},
 			{
@@ -56,8 +56,53 @@
 				"type": "Decimal"
 			},
 			{
-				"name": "INDICADOR_CIRURGIA",
-				"type": "Double"
+
+				"name": "DS_PROCEDENCIA",
+				"type": "String"
+			},
+			{
+				"name": "DT_AGENDAMENTO",
+				"type": "String"
+			},
+			{
+				"name": "DIA",
+				"type": "String"
+			},
+			{
+				"name": "MES",
+				"type": "String"
+			},
+			{
+				"name": "ANO",
+				"type": "String"
+			},
+			{
+				"name": "DS_CLASSIFICACAO",
+				"type": "String"
+			},
+			{
+				"name": "DS_AGRUPAMENTO",
+				"type": "String"
+			},
+			{
+				"name": "CD_MOTIVO_CANCELAMENTO",
+				"type": "String"
+			},
+			{
+				"name": "DS_MOTIVO_CANCELAMENTO",
+				"type": "String"
+			},
+			{
+				"name": "CD_AGENDA",
+				"type": "Decimal"
+			},
+			{
+				"name": "DT_ATUALIZACAO",
+				"type": "DateTime"
+			},
+			{
+				"name": "BASE",
+				"type": "String"
 			}
 		]
 	},
