@@ -33,7 +33,7 @@
 			},
 			{
 				"name": "TIPO_AGENDA",
-				"type": "Decimal"
+				"type": "String"
 			},
 			{
 				"name": "NM_PACIENTE",
@@ -60,7 +60,7 @@
 				"type": "String"
 			},
 			{
-				"name": "SIGLA_UNIDADE",
+				"name": "DS_UNIDADE",
 				"type": "String"
 			},
 			{
@@ -93,7 +93,7 @@
 			},
 			{
 				"name": "DT_AGENDAMENTO",
-				"type": "DateTime"
+				"type": "String"
 			},
 			{
 				"name": "DIA",
@@ -121,6 +121,18 @@
 			},
 			{
 				"name": "DS_MOTIVO_CANCELAMENTO",
+				"type": "String"
+			},
+			{
+				"name": "CD_AGENDA",
+				"type": "Decimal"
+			},
+			{
+				"name": "DT_ATUALIZACAO",
+				"type": "DateTime"
+			},
+			{
+				"name": "BASE",
 				"type": "String"
 			}
 		]
