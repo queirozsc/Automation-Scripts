@@ -44,10 +44,6 @@
 				"type": "String"
 			},
 			{
-				"name": "DS_UNIDADE",
-				"type": "String"
-			},
-			{
 				"name": "BASE",
 				"type": "String"
 			},
@@ -56,7 +52,6 @@
 				"type": "Decimal"
 			},
 			{
-
 				"name": "DS_PROCEDENCIA",
 				"type": "String"
 			},
@@ -99,10 +94,6 @@
 			{
 				"name": "DT_ATUALIZACAO",
 				"type": "DateTime"
-			},
-			{
-				"name": "BASE",
-				"type": "String"
 			}
 		]
 	},
