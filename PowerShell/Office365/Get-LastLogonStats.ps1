@@ -29,8 +29,10 @@ Param(
     [string] $UserIDFile
 )
 
-$Office365Username = 'sergio.queiroz@opty.com.br'
-$Office365Password = 'uW%8C7Ot'
+.\Connect-O365.ps1
+.\Connect-Exchange.ps1
+# $Office365Username = 'sergio.queiroz@opty.com.br'
+# $Office365Password = 'uW%8C7Ot'
 #Constant Variables
 $OutputFile = "LastLogonDate.csv"   #The CSV Output file that is created, change for your purposes
 
