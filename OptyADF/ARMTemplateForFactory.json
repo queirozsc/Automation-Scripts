@@ -7644,7 +7644,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Clear tables",
+						"name": "Clear all tables",
 						"description": "Truncate all Requestia's tables",
 						"type": "SqlServerStoredProcedure",
 						"dependsOn": [],
@@ -7669,7 +7669,7 @@
 						"type": "GetMetadata",
 						"dependsOn": [
 							{
-								"activity": "Clear tables",
+								"activity": "Clear all tables",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -8463,7 +8463,7 @@
 						"type": "GetMetadata",
 						"dependsOn": [
 							{
-								"activity": "Clear tables",
+								"activity": "Clear all tables",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -8705,7 +8705,7 @@
 						"type": "GetMetadata",
 						"dependsOn": [
 							{
-								"activity": "Clear tables",
+								"activity": "Clear all tables",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -8945,7 +8945,7 @@
 						"type": "GetMetadata",
 						"dependsOn": [
 							{
-								"activity": "Clear tables",
+								"activity": "Clear all tables",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -51604,13 +51604,6 @@
 					},
 					{
 						"pipelineReference": {
-							"referenceName": "Chamados Requestia",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
-					{
-						"pipelineReference": {
 							"referenceName": "Cirurgias e Exames Sadalla e HOB",
 							"type": "PipelineReference"
 						},
@@ -51651,7 +51644,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/Agendas Projesi')]",
-				"[concat(variables('factoryId'), '/pipelines/Chamados Requestia')]",
 				"[concat(variables('factoryId'), '/pipelines/Cirurgias e Exames Sadalla e HOB')]",
 				"[concat(variables('factoryId'), '/pipelines/Geral Atendimentos HOB')]",
 				"[concat(variables('factoryId'), '/pipelines/Agendamentos Livres')]"

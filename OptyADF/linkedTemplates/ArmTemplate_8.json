@@ -7372,7 +7372,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Clear tables",
+						"name": "Clear all tables",
 						"description": "Truncate all Requestia's tables",
 						"type": "SqlServerStoredProcedure",
 						"dependsOn": [],
@@ -7397,7 +7397,7 @@
 						"type": "GetMetadata",
 						"dependsOn": [
 							{
-								"activity": "Clear tables",
+								"activity": "Clear all tables",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -8191,7 +8191,7 @@
 						"type": "GetMetadata",
 						"dependsOn": [
 							{
-								"activity": "Clear tables",
+								"activity": "Clear all tables",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -8433,7 +8433,7 @@
 						"type": "GetMetadata",
 						"dependsOn": [
 							{
-								"activity": "Clear tables",
+								"activity": "Clear all tables",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -8673,7 +8673,7 @@
 						"type": "GetMetadata",
 						"dependsOn": [
 							{
-								"activity": "Clear tables",
+								"activity": "Clear all tables",
 								"dependencyConditions": [
 									"Succeeded"
 								]
