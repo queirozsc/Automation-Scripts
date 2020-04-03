@@ -1,76 +1,27 @@
 --Consulta para selecionar os lançamento que será alterado o status, seja para cancelado ou ativo
 SELECT * 
 FROM LCT
-WHERE LCT_LOTE = 21932
-    AND LCT_SEQ IN (5)
+WHERE LCT_LOTE = 37433
+    AND LCT_SEQ IN (6)
 
 --Update para mudança de status do lançamento, seja para cancelado ou ativo
 UPDATE LCT
-SET LCT_DEL_LOGICA = 'N'
-WHERE LCT_LOTE = 21932
-    AND LCT_SEQ IN (5)
+SET LCT_DEL_LOGICA = 'S'
+WHERE LCT_LOTE = 37433
+    AND LCT_SEQ IN (6)
 
 --Consulta para descobrir o nnúmero do lote
-SELECT * FROM LCT WHERE lct_cpg_num = 647 AND lct_cpg_serie = 120
+SELECT * FROM LCT WHERE lct_cpg_num = 783 AND lct_cpg_serie = 120
 
---119.10891 HOSL LCT 81172
---119.11673 HOSL LCT 83999
---119.3808 OFTALMOLCIN
-
-DELETE 
-FROM LCT
-WHERE LCT_LOTE = 30787
-    AND LCT_SEQ IN (1,2,3,5,6)
-
-
-/*
-WHERE LCT_LOTE = 116238
-    AND LCT_SEQ IN (6)
-*/
-
---IOF
-UPDATE LCT
-SET LCT_DEL_LOGICA = 'S'
-WHERE LCT_LOTE = 34129
-    AND LCT_SEQ IN (5)
-
-UPDATE LCT
-SET LCT_DEL_LOGICA = 'S'
-WHERE LCT_LOTE = 35904
-    AND LCT_SEQ IN (3)
-
-UPDATE LCT
-SET LCT_DEL_LOGICA = 'S'
-WHERE LCT_LOTE = 32688
-    AND LCT_SEQ IN (3)
-
-UPDATE LCT
-SET LCT_DEL_LOGICA = 'S'
-WHERE LCT_LOTE = 36408
-    AND LCT_SEQ IN (3)
-----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
 --Oftalmoclin
-UPDATE LCT
-SET LCT_DEL_LOGICA = 'S'
-WHERE LCT_LOTE = 20239
-    AND LCT_SEQ IN (3)
 
 UPDATE LCT
 SET LCT_DEL_LOGICA = 'S'
-WHERE LCT_LOTE = 21214
+WHERE LCT_LOTE = 23248
     AND LCT_SEQ IN (6)
 
 UPDATE LCT
 SET LCT_DEL_LOGICA = 'S'
-WHERE LCT_LOTE = 20245
+WHERE LCT_LOTE = 24794
     AND LCT_SEQ IN (3)
-
-UPDATE LCT
-SET LCT_DEL_LOGICA = 'S'
-WHERE LCT_LOTE = 20437
-    AND LCT_SEQ IN (6)
-
-UPDATE LCT
-SET LCT_DEL_LOGICA = 'S'
-WHERE LCT_LOTE = 21932
-    AND LCT_SEQ IN (5)

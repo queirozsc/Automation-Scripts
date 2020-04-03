@@ -2,13 +2,13 @@
 
 SELECT CPG_CCT_COD_PASSIVO,*
 FROM CPG
-WHERE (CPG.CPG_NUM = 3394) 
+WHERE (CPG.CPG_NUM = 3809) 
     AND (CPG_SERIE = 119)
 
 
 UPDATE CPG
-SET CPG_CCT_COD_PASSIVO = 20040
-WHERE (CPG.CPG_NUM = 3395) 
+SET CPG_CCT_COD_PASSIVO = 20050
+WHERE (CPG.CPG_NUM = 3809) 
     AND (CPG_SERIE = 119)
 
 -------------------------------------------------------------------------
