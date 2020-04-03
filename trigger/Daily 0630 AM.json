@@ -13,12 +13,6 @@
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "Chamados Requestia",
-					"type": "PipelineReference"
-				}
-			},
-			{
-				"pipelineReference": {
 					"referenceName": "Cirurgias e Exames Sadalla e HOB",
 					"type": "PipelineReference"
 				}
