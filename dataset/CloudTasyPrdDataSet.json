@@ -2,7 +2,7 @@
 	"name": "CloudTasyPrdDataSet",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "CloudTasyProd_NEW",
+			"referenceName": "CloudTasyProd",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
