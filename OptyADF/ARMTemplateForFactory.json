@@ -43316,7 +43316,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "CloudTasyProd_NEW",
+					"referenceName": "CloudTasyProd",
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
@@ -43413,7 +43413,7 @@
 				"typeProperties": {}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/CloudTasyProd_NEW')]"
+				"[concat(variables('factoryId'), '/linkedServices/CloudTasyProd')]"
 			]
 		},
 		{
@@ -49568,7 +49568,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "SadallaTasyProd_NEW",
+					"referenceName": "CloudTasyProd",
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
@@ -49625,7 +49625,7 @@
 				"typeProperties": {}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/SadallaTasyProd_NEW')]"
+				"[concat(variables('factoryId'), '/linkedServices/CloudTasyProd')]"
 			]
 		},
 		{
