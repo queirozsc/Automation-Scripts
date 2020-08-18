@@ -6,7 +6,7 @@
 		"type": "Oracle",
 		"typeProperties": {
 			"connectionString": "host=copy-dbprod.c6brmxjjnc63.sa-east-1.rds.amazonaws.com;port=1521;servicename=dbprod;user id=fast_ops",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIxZGRiOGY5MS1kNDQwLTQyODgtYjk4Zi1jMTZmYTVkYzNlYmQiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI1ZGEwMDFlZS1mYWIzLTRmNTQtOTU3Zi1iMjBiZGQ2ZmRjYmIiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
 			"referenceName": "integrationRuntime",
