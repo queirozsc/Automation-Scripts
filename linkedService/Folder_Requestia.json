@@ -7,7 +7,7 @@
 		"typeProperties": {
 			"host": "C:\\Power BI Gateway Files\\Requestia",
 			"userId": "hobrasil\\sa.automation",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJhYmFkYjkxMS1lZDcxLTRhZTYtODQ5OC02ZjM2ODBmNGM0NzMiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIzMTgxM2FhMC0yZWZmLTQ5N2ItYTcwZi1hOGUwNTg5MTA5NGYiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
 			"referenceName": "ServidorArquivosBI",
