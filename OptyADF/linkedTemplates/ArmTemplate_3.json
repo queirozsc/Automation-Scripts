@@ -949,7 +949,7 @@
 					"connectionString": "[parameters('CloudTasyProd_connectionString')]"
 				},
 				"connectVia": {
-					"referenceName": "integrationRuntime",
+					"referenceName": "ServidorArquivosBI",
 					"type": "IntegrationRuntimeReference"
 				}
 			},

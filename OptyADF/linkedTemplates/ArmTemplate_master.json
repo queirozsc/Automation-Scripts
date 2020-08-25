@@ -405,7 +405,7 @@
 	},
 	"resources": [
 		{
-			"name": "ArmTemplate_0",
+			"name": "OptyADF_ArmTemplate_0",
 			"type": "Microsoft.Resources/deployments",
 			"apiVersion": "2018-02-01",
 			"properties": {
@@ -429,7 +429,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "ArmTemplate_1",
+			"name": "OptyADF_ArmTemplate_1",
 			"type": "Microsoft.Resources/deployments",
 			"apiVersion": "2018-02-01",
 			"properties": {
@@ -445,11 +445,11 @@
 				}
 			},
 			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_0')]"
+				"[resourceId('Microsoft.Resources/deployments', 'OptyADF_ArmTemplate_0')]"
 			]
 		},
 		{
-			"name": "ArmTemplate_2",
+			"name": "OptyADF_ArmTemplate_2",
 			"type": "Microsoft.Resources/deployments",
 			"apiVersion": "2018-02-01",
 			"properties": {
@@ -465,11 +465,11 @@
 				}
 			},
 			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_1')]"
+				"[resourceId('Microsoft.Resources/deployments', 'OptyADF_ArmTemplate_1')]"
 			]
 		},
 		{
-			"name": "ArmTemplate_3",
+			"name": "OptyADF_ArmTemplate_3",
 			"type": "Microsoft.Resources/deployments",
 			"apiVersion": "2018-02-01",
 			"properties": {
@@ -635,11 +635,11 @@
 				}
 			},
 			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_2')]"
+				"[resourceId('Microsoft.Resources/deployments', 'OptyADF_ArmTemplate_2')]"
 			]
 		},
 		{
-			"name": "ArmTemplate_4",
+			"name": "OptyADF_ArmTemplate_4",
 			"type": "Microsoft.Resources/deployments",
 			"apiVersion": "2018-02-01",
 			"properties": {
@@ -781,11 +781,11 @@
 				}
 			},
 			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_3')]"
+				"[resourceId('Microsoft.Resources/deployments', 'OptyADF_ArmTemplate_3')]"
 			]
 		},
 		{
-			"name": "ArmTemplate_5",
+			"name": "OptyADF_ArmTemplate_5",
 			"type": "Microsoft.Resources/deployments",
 			"apiVersion": "2018-02-01",
 			"properties": {
@@ -807,11 +807,11 @@
 				}
 			},
 			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_4')]"
+				"[resourceId('Microsoft.Resources/deployments', 'OptyADF_ArmTemplate_4')]"
 			]
 		},
 		{
-			"name": "ArmTemplate_6",
+			"name": "OptyADF_ArmTemplate_6",
 			"type": "Microsoft.Resources/deployments",
 			"apiVersion": "2018-02-01",
 			"properties": {
@@ -827,11 +827,11 @@
 				}
 			},
 			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_5')]"
+				"[resourceId('Microsoft.Resources/deployments', 'OptyADF_ArmTemplate_5')]"
 			]
 		},
 		{
-			"name": "ArmTemplate_7",
+			"name": "OptyADF_ArmTemplate_7",
 			"type": "Microsoft.Resources/deployments",
 			"apiVersion": "2018-02-01",
 			"properties": {
@@ -847,11 +847,11 @@
 				}
 			},
 			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_6')]"
+				"[resourceId('Microsoft.Resources/deployments', 'OptyADF_ArmTemplate_6')]"
 			]
 		},
 		{
-			"name": "ArmTemplate_8",
+			"name": "OptyADF_ArmTemplate_8",
 			"type": "Microsoft.Resources/deployments",
 			"apiVersion": "2018-02-01",
 			"properties": {
@@ -867,11 +867,11 @@
 				}
 			},
 			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_7')]"
+				"[resourceId('Microsoft.Resources/deployments', 'OptyADF_ArmTemplate_7')]"
 			]
 		},
 		{
-			"name": "ArmTemplate_9",
+			"name": "OptyADF_ArmTemplate_9",
 			"type": "Microsoft.Resources/deployments",
 			"apiVersion": "2018-02-01",
 			"properties": {
@@ -887,11 +887,11 @@
 				}
 			},
 			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_8')]"
+				"[resourceId('Microsoft.Resources/deployments', 'OptyADF_ArmTemplate_8')]"
 			]
 		},
 		{
-			"name": "ArmTemplate_10",
+			"name": "OptyADF_ArmTemplate_10",
 			"type": "Microsoft.Resources/deployments",
 			"apiVersion": "2018-02-01",
 			"properties": {
@@ -907,11 +907,11 @@
 				}
 			},
 			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_9')]"
+				"[resourceId('Microsoft.Resources/deployments', 'OptyADF_ArmTemplate_9')]"
 			]
 		},
 		{
-			"name": "ArmTemplate_11",
+			"name": "OptyADF_ArmTemplate_11",
 			"type": "Microsoft.Resources/deployments",
 			"apiVersion": "2018-02-01",
 			"properties": {
@@ -927,7 +927,7 @@
 				}
 			},
 			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_10')]"
+				"[resourceId('Microsoft.Resources/deployments', 'OptyADF_ArmTemplate_10')]"
 			]
 		}
 	]
