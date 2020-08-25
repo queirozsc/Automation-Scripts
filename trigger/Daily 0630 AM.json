@@ -28,6 +28,12 @@
 					"referenceName": "Agendamentos Livres",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "Agendas Projesi V2",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
@@ -35,7 +41,7 @@
 			"recurrence": {
 				"frequency": "Day",
 				"interval": 1,
-				"startTime": "2019-08-20T15:22:00.000Z",
+				"startTime": "2020-08-25T20:22:00.000Z",
 				"timeZone": "UTC",
 				"schedule": {
 					"minutes": [
