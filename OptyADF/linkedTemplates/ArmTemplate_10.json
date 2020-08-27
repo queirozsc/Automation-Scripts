@@ -8961,13 +8961,6 @@
 				"pipelines": [
 					{
 						"pipelineReference": {
-							"referenceName": "Agendas Projesi",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
-					{
-						"pipelineReference": {
 							"referenceName": "Cirurgias e Exames Sadalla e HOB",
 							"type": "PipelineReference"
 						},
@@ -9007,7 +9000,7 @@
 								0
 							],
 							"hours": [
-								7
+								8
 							]
 						}
 					}

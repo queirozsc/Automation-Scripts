@@ -51939,13 +51939,6 @@
 				"pipelines": [
 					{
 						"pipelineReference": {
-							"referenceName": "Agendas Projesi",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
-					{
-						"pipelineReference": {
 							"referenceName": "Cirurgias e Exames Sadalla e HOB",
 							"type": "PipelineReference"
 						},
@@ -51985,14 +51978,13 @@
 								0
 							],
 							"hours": [
-								7
+								8
 							]
 						}
 					}
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/Agendas Projesi')]",
 				"[concat(variables('factoryId'), '/pipelines/Cirurgias e Exames Sadalla e HOB')]",
 				"[concat(variables('factoryId'), '/pipelines/Geral Atendimentos HOB')]",
 				"[concat(variables('factoryId'), '/pipelines/Agendamentos Livres')]",
