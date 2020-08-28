@@ -49910,7 +49910,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "CloudTasyProd",
+					"referenceName": "SadallaTasyProd",
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
@@ -49967,7 +49967,7 @@
 				"typeProperties": {}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/CloudTasyProd')]"
+				"[concat(variables('factoryId'), '/linkedServices/SadallaTasyProd')]"
 			]
 		},
 		{

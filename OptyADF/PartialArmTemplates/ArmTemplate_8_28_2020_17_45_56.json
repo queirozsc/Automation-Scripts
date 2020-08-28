@@ -1,0 +1,79 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "OptyADF"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/SadallaTasyPrdDataSet')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SadallaTasyProd",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Power BI"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"structure": [
+					{
+						"name": "DT_AGENDA",
+						"type": "DateTime"
+					},
+					{
+						"name": "CD_AGENDA",
+						"type": "Decimal"
+					},
+					{
+						"name": "CD_PESSOA_FISICA",
+						"type": "String"
+					},
+					{
+						"name": "NM_PESSOA_FISICA",
+						"type": "String"
+					},
+					{
+						"name": "IE_LADO",
+						"type": "String"
+					},
+					{
+						"name": "DS_AUTORIZACAO",
+						"type": "String"
+					},
+					{
+						"name": "PROCEDIMENTO",
+						"type": "String"
+					},
+					{
+						"name": "CNPJ",
+						"type": "String"
+					},
+					{
+						"name": "DS_UNIDADE",
+						"type": "String"
+					},
+					{
+						"name": "BASE",
+						"type": "String"
+					},
+					{
+						"name": "INDICADOR_CIRURGIA",
+						"type": "Double"
+					}
+				]
+			},
+			"dependsOn": []
+		}
+	]
+}
