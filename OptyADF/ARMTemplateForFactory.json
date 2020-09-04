@@ -5702,7 +5702,7 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "SadallaTasyPrdDataSet",
+								"referenceName": "CloudTasyPrdDataSet",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -5860,10 +5860,10 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/SadallaTasyPrdDataSet')]",
-				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Agendamento_Exames')]",
 				"[concat(variables('factoryId'), '/datasets/CloudTasyPrdDataSet')]",
-				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Agendamento_Cirurgias')]"
+				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Agendamento_Exames')]",
+				"[concat(variables('factoryId'), '/datasets/AZ_SQL_TB_Agendamento_Cirurgias')]",
+				"[concat(variables('factoryId'), '/datasets/SadallaTasyPrdDataSet')]"
 			]
 		},
 		{
@@ -51964,6 +51964,13 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "Chamados Requestia",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -51975,10 +51982,10 @@
 						"timeZone": "UTC",
 						"schedule": {
 							"minutes": [
-								0
+								40
 							],
 							"hours": [
-								8
+								6
 							]
 						}
 					}
@@ -51988,7 +51995,8 @@
 				"[concat(variables('factoryId'), '/pipelines/Cirurgias e Exames Sadalla e HOB')]",
 				"[concat(variables('factoryId'), '/pipelines/Geral Atendimentos HOB')]",
 				"[concat(variables('factoryId'), '/pipelines/Agendamentos Livres')]",
-				"[concat(variables('factoryId'), '/pipelines/Agendas Projesi V2')]"
+				"[concat(variables('factoryId'), '/pipelines/Agendas Projesi V2')]",
+				"[concat(variables('factoryId'), '/pipelines/Chamados Requestia')]"
 			]
 		},
 		{
