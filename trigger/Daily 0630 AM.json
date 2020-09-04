@@ -28,6 +28,12 @@
 					"referenceName": "Agendas Projesi V2",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "Chamados Requestia",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
@@ -39,10 +45,10 @@
 				"timeZone": "UTC",
 				"schedule": {
 					"minutes": [
-						0
+						40
 					],
 					"hours": [
-						8
+						6
 					]
 				}
 			}
