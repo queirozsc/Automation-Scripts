@@ -51982,10 +51982,10 @@
 						"timeZone": "UTC",
 						"schedule": {
 							"minutes": [
-								40
+								0
 							],
 							"hours": [
-								6
+								7
 							]
 						}
 					}
