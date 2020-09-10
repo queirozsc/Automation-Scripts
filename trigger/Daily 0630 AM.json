@@ -19,12 +19,6 @@
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "Agendamentos Livres",
-					"type": "PipelineReference"
-				}
-			},
-			{
-				"pipelineReference": {
 					"referenceName": "Chamados Requestia",
 					"type": "PipelineReference"
 				}
