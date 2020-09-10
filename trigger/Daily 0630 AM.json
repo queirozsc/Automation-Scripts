@@ -25,12 +25,6 @@
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "Agendas Projesi V2",
-					"type": "PipelineReference"
-				}
-			},
-			{
-				"pipelineReference": {
 					"referenceName": "Chamados Requestia",
 					"type": "PipelineReference"
 				}
