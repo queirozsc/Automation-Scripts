@@ -536,9 +536,6 @@
 					"Historicos_Bilhetes_DAYHORC_password": {
 						"value": "[parameters('Historicos_Bilhetes_DAYHORC_password')]"
 					},
-					"Historicos_Bilhetes_HOBL2_password": {
-						"value": "[parameters('Historicos_Bilhetes_HOBL2_password')]"
-					},
 					"Folder_Nexcore_Consolidado_properties_typeProperties_host": {
 						"value": "[parameters('Folder_Nexcore_Consolidado_properties_typeProperties_host')]"
 					},
@@ -634,12 +631,6 @@
 					},
 					"Historicos_Bilhetes_DAYHORC_properties_typeProperties_userId": {
 						"value": "[parameters('Historicos_Bilhetes_DAYHORC_properties_typeProperties_userId')]"
-					},
-					"Historicos_Bilhetes_HOBL2_properties_typeProperties_host": {
-						"value": "[parameters('Historicos_Bilhetes_HOBL2_properties_typeProperties_host')]"
-					},
-					"Historicos_Bilhetes_HOBL2_properties_typeProperties_userId": {
-						"value": "[parameters('Historicos_Bilhetes_HOBL2_properties_typeProperties_userId')]"
 					}
 				}
 			},
@@ -660,6 +651,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"Historicos_Bilhetes_HOBL2_password": {
+						"value": "[parameters('Historicos_Bilhetes_HOBL2_password')]"
 					},
 					"Historicos_Bilhetes_HOSL_password": {
 						"value": "[parameters('Historicos_Bilhetes_HOSL_password')]"
@@ -718,8 +712,11 @@
 					"SadallaTasyProd_connectionString": {
 						"value": "[parameters('SadallaTasyProd_connectionString')]"
 					},
-					"SadallaTasyProd_NEW_connectionString": {
-						"value": "[parameters('SadallaTasyProd_NEW_connectionString')]"
+					"Historicos_Bilhetes_HOBL2_properties_typeProperties_host": {
+						"value": "[parameters('Historicos_Bilhetes_HOBL2_properties_typeProperties_host')]"
+					},
+					"Historicos_Bilhetes_HOBL2_properties_typeProperties_userId": {
+						"value": "[parameters('Historicos_Bilhetes_HOBL2_properties_typeProperties_userId')]"
 					},
 					"Historicos_Bilhetes_HOSL_properties_typeProperties_host": {
 						"value": "[parameters('Historicos_Bilhetes_HOSL_properties_typeProperties_host')]"
@@ -800,6 +797,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"SadallaTasyProd_NEW_connectionString": {
+						"value": "[parameters('SadallaTasyProd_NEW_connectionString')]"
 					},
 					"SadallaTasyTeste_connectionString": {
 						"value": "[parameters('SadallaTasyTeste_connectionString')]"
