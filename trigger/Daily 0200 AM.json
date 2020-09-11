@@ -10,12 +10,6 @@
 					"referenceName": "Agendas Projesi V2",
 					"type": "PipelineReference"
 				}
-			},
-			{
-				"pipelineReference": {
-					"referenceName": "Geral Atendimentos HOB",
-					"type": "PipelineReference"
-				}
 			}
 		],
 		"type": "ScheduleTrigger",
