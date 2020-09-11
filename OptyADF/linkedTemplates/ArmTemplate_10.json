@@ -6886,6 +6886,13 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "Geral Atendimentos HOB",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -6920,20 +6927,6 @@
 					{
 						"pipelineReference": {
 							"referenceName": "Cirurgias e Exames Sadalla e HOB",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
-					{
-						"pipelineReference": {
-							"referenceName": "Geral Atendimentos HOB",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
-					{
-						"pipelineReference": {
-							"referenceName": "Agendamentos Livres",
 							"type": "PipelineReference"
 						},
 						"parameters": {}

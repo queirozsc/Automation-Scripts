@@ -51885,6 +51885,13 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "Geral Atendimentos HOB",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -51906,7 +51913,8 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/Agendas Projesi V2')]"
+				"[concat(variables('factoryId'), '/pipelines/Agendas Projesi V2')]",
+				"[concat(variables('factoryId'), '/pipelines/Geral Atendimentos HOB')]"
 			]
 		},
 		{
@@ -51956,20 +51964,6 @@
 					},
 					{
 						"pipelineReference": {
-							"referenceName": "Geral Atendimentos HOB",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
-					{
-						"pipelineReference": {
-							"referenceName": "Agendamentos Livres",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
-					{
-						"pipelineReference": {
 							"referenceName": "Chamados Requestia",
 							"type": "PipelineReference"
 						},
@@ -51996,8 +51990,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/Cirurgias e Exames Sadalla e HOB')]",
-				"[concat(variables('factoryId'), '/pipelines/Geral Atendimentos HOB')]",
-				"[concat(variables('factoryId'), '/pipelines/Agendamentos Livres')]",
 				"[concat(variables('factoryId'), '/pipelines/Chamados Requestia')]"
 			]
 		},
