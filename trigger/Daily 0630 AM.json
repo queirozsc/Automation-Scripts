@@ -25,12 +25,6 @@
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "Pacientes",
-					"type": "PipelineReference"
-				}
-			},
-			{
-				"pipelineReference": {
 					"referenceName": "Geral Atendimentos HOB",
 					"type": "PipelineReference"
 				}
