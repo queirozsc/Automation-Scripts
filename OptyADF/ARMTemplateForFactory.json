@@ -51946,21 +51946,7 @@
 					},
 					{
 						"pipelineReference": {
-							"referenceName": "Chamados Requestia",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
-					{
-						"pipelineReference": {
 							"referenceName": "Geral Atendimentos HOB",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
-					{
-						"pipelineReference": {
-							"referenceName": "Agendas Projesi V2",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -51986,9 +51972,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/Cirurgias e Exames Sadalla e HOB')]",
-				"[concat(variables('factoryId'), '/pipelines/Chamados Requestia')]",
-				"[concat(variables('factoryId'), '/pipelines/Geral Atendimentos HOB')]",
-				"[concat(variables('factoryId'), '/pipelines/Agendas Projesi V2')]"
+				"[concat(variables('factoryId'), '/pipelines/Geral Atendimentos HOB')]"
 			]
 		},
 		{
@@ -52002,6 +51986,20 @@
 					{
 						"pipelineReference": {
 							"referenceName": "Chamados Philips",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "Chamados Requestia",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "Agendas Projesi V2",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -52026,7 +52024,9 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/Chamados Philips')]"
+				"[concat(variables('factoryId'), '/pipelines/Chamados Philips')]",
+				"[concat(variables('factoryId'), '/pipelines/Chamados Requestia')]",
+				"[concat(variables('factoryId'), '/pipelines/Agendas Projesi V2')]"
 			]
 		},
 		{

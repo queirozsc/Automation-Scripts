@@ -8968,21 +8968,7 @@
 					},
 					{
 						"pipelineReference": {
-							"referenceName": "Chamados Requestia",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
-					{
-						"pipelineReference": {
 							"referenceName": "Geral Atendimentos HOB",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
-					{
-						"pipelineReference": {
-							"referenceName": "Agendas Projesi V2",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -9019,6 +9005,20 @@
 					{
 						"pipelineReference": {
 							"referenceName": "Chamados Philips",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "Chamados Requestia",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "Agendas Projesi V2",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
