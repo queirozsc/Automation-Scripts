@@ -13,12 +13,6 @@
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "Chamados Requestia",
-					"type": "PipelineReference"
-				}
-			},
-			{
-				"pipelineReference": {
 					"referenceName": "Geral Atendimentos HOB",
 					"type": "PipelineReference"
 				}
