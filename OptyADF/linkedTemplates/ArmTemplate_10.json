@@ -8972,6 +8972,13 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "Chamados Requestia",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -8983,10 +8990,10 @@
 						"timeZone": "UTC",
 						"schedule": {
 							"minutes": [
-								0
+								30
 							],
 							"hours": [
-								8
+								9
 							]
 						}
 					}
@@ -9002,13 +9009,6 @@
 				"annotations": [],
 				"runtimeState": "Started",
 				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "Chamados Requestia",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
 					{
 						"pipelineReference": {
 							"referenceName": "Agendas Projesi V2",
