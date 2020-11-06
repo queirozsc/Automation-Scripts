@@ -82,7 +82,7 @@
 						]
 					},
 					{
-						"activity": "Data_ZFaltas_Visclin",
+						"activity": "Data_ZFaltas_SP",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -175,7 +175,7 @@
 				}
 			},
 			{
-				"name": "Data_ZFaltas_Visclin",
+				"name": "Data_ZFaltas_SP",
 				"type": "Copy",
 				"dependsOn": [
 					{
