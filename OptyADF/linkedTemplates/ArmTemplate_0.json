@@ -117,7 +117,7 @@
 					"recurrence": {
 						"frequency": "Day",
 						"interval": 1,
-						"startTime": "2020-01-22T12:54:00.000Z",
+						"startTime": "2020-01-22T12:54:00Z",
 						"timeZone": "UTC",
 						"schedule": {
 							"minutes": [
@@ -146,7 +146,7 @@
 					"recurrence": {
 						"frequency": "Day",
 						"interval": 1,
-						"startTime": "2019-10-08T03:02:00.000Z",
+						"startTime": "2019-10-08T03:02:00Z",
 						"timeZone": "UTC",
 						"schedule": {
 							"minutes": [
@@ -175,7 +175,7 @@
 					"recurrence": {
 						"frequency": "Day",
 						"interval": 1,
-						"startTime": "2020-01-21T22:31:00.000Z",
+						"startTime": "2020-01-21T22:31:00Z",
 						"timeZone": "UTC",
 						"schedule": {
 							"minutes": [
@@ -204,7 +204,7 @@
 					"recurrence": {
 						"frequency": "Day",
 						"interval": 1,
-						"startTime": "2020-01-22T12:56:00.000Z",
+						"startTime": "2020-01-22T12:56:00Z",
 						"timeZone": "UTC",
 						"schedule": {
 							"minutes": [
@@ -233,7 +233,7 @@
 					"recurrence": {
 						"frequency": "Week",
 						"interval": 1,
-						"startTime": "2020-01-24T12:41:00.000Z",
+						"startTime": "2020-01-24T12:41:00Z",
 						"timeZone": "UTC",
 						"schedule": {
 							"minutes": [

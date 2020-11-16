@@ -8986,7 +8986,7 @@
 					"recurrence": {
 						"frequency": "Day",
 						"interval": 1,
-						"startTime": "2020-08-25T20:22:00.000Z",
+						"startTime": "2020-08-25T20:22:00Z",
 						"timeZone": "UTC",
 						"schedule": {
 							"minutes": [
@@ -9022,7 +9022,7 @@
 					"recurrence": {
 						"frequency": "Day",
 						"interval": 1,
-						"startTime": "2019-09-27T11:00:00.000Z",
+						"startTime": "2019-09-27T11:00:00Z",
 						"timeZone": "UTC",
 						"schedule": {
 							"minutes": [
@@ -9080,7 +9080,7 @@
 					"recurrence": {
 						"frequency": "Day",
 						"interval": 1,
-						"startTime": "2019-06-17T20:00:00.000Z",
+						"startTime": "2019-06-17T20:00:00Z",
 						"timeZone": "UTC",
 						"schedule": {
 							"minutes": [
