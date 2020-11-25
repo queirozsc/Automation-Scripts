@@ -16,12 +16,6 @@
 					"referenceName": "Geral Atendimentos HOB",
 					"type": "PipelineReference"
 				}
-			},
-			{
-				"pipelineReference": {
-					"referenceName": "Chamados Requestia",
-					"type": "PipelineReference"
-				}
 			}
 		],
 		"type": "ScheduleTrigger",
@@ -29,7 +23,7 @@
 			"recurrence": {
 				"frequency": "Day",
 				"interval": 1,
-				"startTime": "2020-08-25T20:22:00.000Z",
+				"startTime": "2020-08-25T20:22:00Z",
 				"timeZone": "UTC",
 				"schedule": {
 					"minutes": [
