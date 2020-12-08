@@ -1,5 +1,9 @@
 --Consulta para verificar as contas e as coligações
 --select * from gcc_colig
+EXECUTE DePara_ContaColigada_HOSL
+/*
+CREATE PROCEDURE DePara_ContaColigada_HOSL
+AS
 ---------------------------------------------------------------------------------
  
 update ipg
@@ -76,4 +80,4 @@ and ipg.ipg_cpg_num =
 from cpg
 where cpg.cpg_serie = ipg_cpg_serie
 and cpg.cpg_num = ipg_cpg_num
-and cpg_gcc_cod = '991') --Código de Origem
+and cpg_gcc_cod = '991') --Código de Origem*/

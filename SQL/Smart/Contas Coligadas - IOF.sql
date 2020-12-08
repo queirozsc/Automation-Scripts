@@ -1,7 +1,10 @@
 --Consulta para verificar as contas e as coligações
 --select * from gcc_colig
+EXECUTE DePara_ContaColigada_IOF
 ---------------------------------------------------------------------------------
- 
+/*
+CREATE PROCEDURE DePara_ContaColigada_IOF
+AS
 update ipg
 set IPG_GCC_COD_COLIG = 'IOF' --Conta Pagante
 where ipg.ipg_cpg_serie in (119, 120)

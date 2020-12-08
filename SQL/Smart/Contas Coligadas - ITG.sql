@@ -1,5 +1,5 @@
-EXECUTE DePara_ContaColigada
-
+EXECUTE DePara_ContaColigada_Itaigara
+--drop procedure DePara_ContaColigada
 --Consulta para verificar as contas e as coligações
 --select * from gcc_colig
 ---------------------------------------------------------------------------------
@@ -37,12 +37,12 @@ EXEC msdb.dbo.sp_add_jobschedule
 @active_end_time=190000 -- Intervalo active_start_date e active_end_date para para a execução do job
 */
 ---------------------------------------------------------------------------------
-
----------------------------------------------------------------------------------
-/*CREATE PROCEDURE DePara_ContaColigada
-AS
-*/
 /*
+---------------------------------------------------------------------------------
+CREATE PROCEDURE DePara_ContaColigada_Itaigara
+AS
+
+
 update ipg
 set IPG_GCC_COD_COLIG = 'DHI' --Conta Pagante
 where ipg.ipg_cpg_serie in (120, 1120, 119, 1119)
