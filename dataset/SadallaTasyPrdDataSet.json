@@ -2,7 +2,7 @@
 	"name": "SadallaTasyPrdDataSet",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "SadallaTasyProd_NEW",
+			"referenceName": "SadallaTasyProd",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {

@@ -6,7 +6,7 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "Chamados Philips",
+					"referenceName": "Agendas Projesi V2",
 					"type": "PipelineReference"
 				}
 			}

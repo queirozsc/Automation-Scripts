@@ -1,19 +1,13 @@
 {
-	"name": "Daily 0630 AM",
+	"name": "Daily 0500 AM",
 	"properties": {
-		"description": "Execução de pipeline para atualização das informações dos indicadores de Call Center",
+		"description": "Execução de pipelines as 05:00",
 		"annotations": [],
 		"runtimeState": "Started",
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "Cirurgias e Exames Sadalla e HOB",
-					"type": "PipelineReference"
-				}
-			},
-			{
-				"pipelineReference": {
-					"referenceName": "Geral Atendimentos HOB",
+					"referenceName": "Chamados Requestia",
 					"type": "PipelineReference"
 				}
 			}
@@ -23,14 +17,14 @@
 			"recurrence": {
 				"frequency": "Day",
 				"interval": 1,
-				"startTime": "2020-08-25T20:22:00Z",
+				"startTime": "2020-01-21T22:31:00Z",
 				"timeZone": "UTC",
 				"schedule": {
 					"minutes": [
-						30
+						0
 					],
 					"hours": [
-						9
+						8
 					]
 				}
 			}
