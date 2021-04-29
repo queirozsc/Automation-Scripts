@@ -6,11 +6,9 @@ WHERE LCT_LOTE = 55177
 
 --Update para mudança de status do lançamento, seja para cancelado ou ativo
 UPDATE LCT
-SET LCT_DEL_LOGICA = 'S'
-WHERE LCT_LOTE = 54060
-    AND LCT_SEQ IN (3)
+SET LCT_DEL_LOGICA = 'N'
+WHERE LCT_LOTE = 197768
+    AND LCT_SEQ IN (6)
 
 --Consulta para descobrir o nnúmero do lote
-SELECT * FROM LCT WHERE lct_cpg_num = 3536 AND lct_cpg_serie = 120
-
-
+SELECT * FROM LCT WHERE lct_cpg_num = 1034 AND lct_cpg_serie = 121

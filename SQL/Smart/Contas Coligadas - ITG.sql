@@ -39,13 +39,13 @@ EXEC msdb.dbo.sp_add_jobschedule
 ---------------------------------------------------------------------------------
 /*
 ---------------------------------------------------------------------------------
-CREATE PROCEDURE DePara_ContaColigada_Itaigara
+ALTER PROCEDURE DePara_ContaColigada_Itaigara
 AS
 
 
 update ipg
 set IPG_GCC_COD_COLIG = 'DHI' --Conta Pagante
-where ipg.ipg_cpg_serie in (120, 1120, 119, 1119)
+where ipg.ipg_cpg_serie in (120, 1120, 119, 1119, 121, 1121)
 and ipg.ipg_cpg_num =
 (select cpg_num
 from cpg
@@ -57,7 +57,7 @@ and cpg_gcc_cod = '1') --Código de Origem
  
 update ipg
 set IPG_GCC_COD_COLIG = '4' --Conta Pagante
-where ipg.ipg_cpg_serie in (120, 1120, 119, 1119)
+where ipg.ipg_cpg_serie in (120, 1120, 119, 1119, 121, 1121)
 and ipg.ipg_cpg_num = 
 (select cpg_num
 from cpg
@@ -69,7 +69,7 @@ and cpg_gcc_cod = '16') --Código de Origem
  
 update ipg
 set IPG_GCC_COD_COLIG = 'DHI' --Conta Pagante
-where ipg.ipg_cpg_serie in (120, 1120, 119, 1119)
+where ipg.ipg_cpg_serie in (120, 1120, 119, 1119, 121, 1121)
 and ipg.ipg_cpg_num = 
 (select cpg_num
 from cpg
@@ -81,7 +81,7 @@ and cpg_gcc_cod = '3') --Código de Origem
  
 update ipg
 set IPG_GCC_COD_COLIG = '4' --Conta Pagante
-where ipg.ipg_cpg_serie in (120, 1120, 119, 1119)
+where ipg.ipg_cpg_serie in (120, 1120, 119, 1119, 121, 1121)
 and ipg.ipg_cpg_num = 
 (select cpg_num
 from cpg
@@ -93,7 +93,7 @@ and cpg_gcc_cod = '4') --Código de Origem
  
 update ipg
 set IPG_GCC_COD_COLIG = 'DHI' --Conta Pagante
-where ipg.ipg_cpg_serie in (120, 1120, 119, 1119)
+where ipg.ipg_cpg_serie in (120, 1120, 119, 1119, 121, 1121)
 and ipg.ipg_cpg_num = 
 (select cpg_num
 from cpg
@@ -105,7 +105,7 @@ and cpg_gcc_cod = '9') --Código de Origem
 
 update ipg
 set IPG_GCC_COD_COLIG = 'DHI' --Conta Pagante
-where ipg.ipg_cpg_serie in (120, 1120, 119, 1119)
+where ipg.ipg_cpg_serie in (120, 1120, 119, 1119, 121, 1121)
 and ipg.ipg_cpg_num = 
 (select cpg_num
 from cpg
@@ -117,7 +117,7 @@ and cpg_gcc_cod = 'DH4') --Código de Origem
  
 update ipg
 set IPG_GCC_COD_COLIG = 'DHI' --Conta Pagante
-where ipg.ipg_cpg_serie in (120, 1120, 119, 1119)
+where ipg.ipg_cpg_serie in (120, 1120, 119, 1119, 121, 1121)
 and ipg.ipg_cpg_num = 
 (select cpg_num
 from cpg
